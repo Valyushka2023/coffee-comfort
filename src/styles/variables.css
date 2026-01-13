@@ -47,166 +47,176 @@
 
   /******************************************************  */
 
-  /* Палітра кольорів */
+  /* Palette colors COFFEE COMFORT */
 
   /* Primary colors */
-  --color-black: #000; /* чорний колір */
-  --color-white: #fff; /* білий колір */
-  --color-gray: #6c7178; /* сірий  колір */
-  --color-red: #e60000; /* червоний колір */
-  --color-blue: #1e40ff; /* синій  колір */
+  --color-white: #fff; /* Білий колір, rgb(255 255 255 / 100%) */
+  --color-black: #000; /* Чорний колір, rgb(0 0 0 / 100%) */
+  --color-brown: #1a1512; /* Коричневий колір як дуже темна кава, rgb(26 21 18 / 100%) */
+  --color-gold: #d49d65; /*Золотистий колір, rgb(212 157 101 / 100%) */
+  --color-gray: #4a4a4a; /*Сірий колір як графіт, rgb(74 74 74 / 100%) */
+  --color-beige: #f4f1ea; /* Бежевий колір, rgb(244 241 234 / 100%) */
 
-  /* Special colors */
-  --color-yellow: #ffc107; /* помаранчевий колір */
-  --color-green: #0f0; /* зелений  колір */
+  /* Shades */
+  --color-light-brown: #5c3d2e; /*Глибокий коричневий як шоколад, rgb(92 61 46 / 100%) */
+  --color-dark-brown: #141110; /* Вугільний з теплим підтоном  як еспресо, rgb(20 17 16 / 100%) */
+  --color-dark-brown1: #121212; /* Глибокий матовий темний як чорна кава, rgb(18 18 18 / 100%) */
+  --color-latte-coffee: #d4a373; /* Світло-золотистий як мускатний горіх, rgb(212 163 115 / 100%) */
+  --color-amber: #ffcc33; /*Бурштиновий колір як сонячне сяйво*/
+  --color-light-beige: #fdfaf5; /*Світло-бежевий як топлене молоко,rgb(253 250 245 / 100%)  */
+  --color-dark-beige: #f8f4ec; /*Темно-бежевий як пісок, rgb(248 244 236 / 100%)  */
+  --color-latte-coffee-50: rgb(212 163 115 / 50%);
+  --color-light-gray-50: rgb(244 241 234 / 50%); /*світло-сірий на 50% */
+  --color-light-gray-80: rgb(244 241 234 / 80%); /*світло-сірий на 50% */
+  --color-light-gray-100: rgb(244 241 234 / 100%); /*світло-сірий на 100% */
+  --color-dark-gray-50: rgb(107 105 101 / 50%); /* темно-сірий на 50% */
+  --color-dark-gray-80: rgb(107 105 101 / 80%); /* темно-сірий на 50% */
+  --color-dark-gray-100: rgb(
+    107 105 101 / 100%
+  ); /* темно-сірий на 100% 
 
-  /* Shades of gray */
-  --color-dark-gray: #3f3b3f;
-  --color-light-gray: #f2f4f7;
-  --color-light-gray-2: #dadbdc;
-  --color-light-gray-3: #9ea0a0;
-  --color-light-gray-4: #948f8fff;
+  --color-terracotta-50: rgb(212 157 101 / 50%); /*теракотовий на 50%*/
 
-  /* Shades of green */
-  --color-dark-green: #05a820;
+  --color-white-50: rgb(255 255 255 / 50%); /*Білий на 50%*/
+  --color-black-50: rgb(0 0 0 / 50%); /*Чорний на 50%*/
 
-  /* Shades of white */
-  --color-off-white: #f7f7f7;
+  --color-white-20: rgb(255 255 255 / 20%); /*Біли1 на 20%*/
+  --color-black-20: rgb(0 0 0 / 20%); /*Чорний на 20%*/
 
-  /* Shades ofblack */
-  --color-soft-black: #121212;
-  --color-gunmetal-black: #2a2a2a;
+  --color-muted-white: 150 150 150;
+  --color-pure-white: 255 255 255;
 
   /*************************************  */
 
   /* Elements whose colors do not change */
 
-  /* unchanging bg */
-  --hover-bg-color: var(--color-blue);
-  --active-bg-color: var(--color-red);
-  --button-primary-bg-color: var(--color-red);
-  --button-disabled-bg-color: var(--color-light-gray-2);
+  --hover-bg-color: #d4a373;
+  --hover-color: #d4a373;
+  --active-color: #d4a373;
 
-  /* unchanging  color */
-  --hover-color: var(--color-blue);
-  --active-color: var(--color-red);
-  --input-color: var(--color-blue);
-  --highlight-color: var(--color-blue);
-  --error-color: var(--color-red);
-  --warning-color: var(--color-red);
-  --avatar-color: var(--color-red);
-  --star-gold-color: var(--color-yellow);
-  --star-empty-color: var(--color-light-gray-4);
-  --shapes-color: var(--color-white);
-  --button-primary-text-color: var(--color-white);
-  --button-secondary-text-color: var(--color-dark-gray);
-  --button-disabled-text-color: var(--color-dark-gray);
-  --char-count-color: var(--color-light-gray-4);
-  --modal-image-bg-color: var(--color-white);
+  /************************************* */
+  /* LIGHT THEME  */
 
-  /**********************************************  */
-
-  /* light theme */
-
-  /* bg color */
-  --header-bg-color: var(--color-light-gray-2);
-  --body-bg-color: var(--color-off-white);
-  --footer-bg-color: var(--color-dark-gray);
-  --avatar-bg-color: var(--color-light-gray-2);
-  --blok-details-bg-color: var(--color-light-gray);
-  --blok-feature-icon-bg-color: var(--color-light-gray-2);
-  --blok-location-bg-color: var(--color-light-gray-2);
-  --blok-description-bg-color: var(--color-light-gray-2);
-  --blok-field-form-bg-color: var(--color-light-gray-2);
-  --blok-field-input-area-bg-color-1: var(--color-off-white);
-  --scrollbar-track-bg-color: var(--color-light-gray);
-  --scrollbar-thumb-bg-color: var(--color-light-gray-4);
+  /*bg color*/
+  --header-footer-bg-color: var(--color-dark-beige);
+  --body-bg-color: var(--color-light-beige);
+  --underline-bg-color: var(--color-light-brown);
+  --underline-bg-filter-btn-color: var(--color-light-brown);
+  --modal-content-bg-color: var(--color-light-beige);
+  --contact-form-bg-color: var(--color-light-brown);
 
   /* color */
-  --primary-color: var(--color-black);
-  --primary-color-1: var(--color-white);
-  --secondary-color: var(--color-soft-black);
-  --tertiary-color: var(--color-dark-gray);
-  --tertiary-color-2: var(--color-light-gray);
-  --button-default-text-color: var(--color-dark-gray);
+  --primary-color: var(--color-light-brown);
+  --secondary-color: var(--color-gold);
+  --tertiary-color: var(--color-gray);
+  --quaternary-color: var(--color-latte-coffee);
+  --quinary-color: var(--color-light-brown);
 
-  /* logo color */
-  --logo-primary-color: var(--color-dark-gray);
-  --logo-secondary-color: var(--color-gray);
+  /*logo color*/
+  --logo-primary-color: var(--color-light-brown);
+  --logo-secondary-color: var(--color-latte-coffee);
+  --steam-color: var(--color-muted-white);
 
-  /* button color */
-  --toggle-theme-icon-color: var(--color-dark-gray);
-  --button-burger-icon-color: var(--color-dark-gray);
-  --button-close-icon-color: var(--color-dark-gray);
+  /* button, button-icon color */
+  --toggle-theme-icon-color: var(--color-light-brown);
+  --button-burger-icon-color: var(--color-light-brown);
+  --button-close-icon-color: var(--color-light-brown);
+  --button-cta-bg-color: var(--color-latte-coffee);
+  --button-cta-color: var(--color-white);
+  --filter-btn-bg-color: var(--color-latte-coffee);
+  --filter-btn-color: var(--color-light-brown);
+  --top-badge-bg-color: var(--color-latte-coffee);
+  --top-badge-color: var(--color-light-brown);
+  --item-description-color: var(--color-dark-gray-80);
+  --contact-submit-btn-bg-color: var(--color-latte-coffee);
+  --contact-input-texarea-bg-color: var(--color-latte-coffee);
+  --text-form-color: var(--color-brown);
 
-  /* icon color */
-  --home-phone-icon-color: var(--color-green);
-  --contact-phone-icon-color: var(--color-dark-green);
-  --contact-email-icon-color: var(--color-dark-green);
-  --social-icon-color: var(--color-white);
-  --icon-primary-color: var(--color-dark-gray);
-  --star-icon-filled-color: var(--color-light-gray-2);
+  /* icon, label color */
+  --icon-circle-bg-color: var(--color-light-brown);
+  --icon-circle-color: var(--color-white);
+  --circle-label-bg-color: var(--color-gold);
+  --circle-label-color: var(--color-white);
+  --reviews-card-bg-color: var(--color-light-brown);
+  --reviews-text-color: var(--color-white);
 
-  /* placeholder color */
-  --placeholder-form-booking-reviews-color: var(--color-gray);
-
-  /* boorder color */
-  --border-color: var(--color-light-gray-2);
-  --border-secondary-color: var(--color-gray);
-  --border-tertiary-color: var(--color-light-gray-2);
+  /* border color */
+  --section-border-bottom-color: var(--color-latte-coffee-50);
+  --circle-big-border-color: var(--color-white);
+  --circle-medium-border-color: var(--color-light-gray-50);
+  --circle-small-border-color: var(--color-dark-gray-50);
+  --input-textarea-border-color: var(--color-light-brown);
 
   /* box-shadow color */
-  --box-shadow: 0 0.125rem 0.625rem rgb(0 0 0 / 15%);
+  --shadow-icon-circle: var(--color-black-50);
+  --shadow-circle: var(--color-black-50);
+  /* --shadow-menu: var(--color-black-50); */
+  --shadom-image-wrapper: var(--color-black-20);
+  --shadom-modal-content: var(--color-white-20);
+  --shadow-reviews-card: var(--color-black-20);
+  --shadow-contacts-map-form: var(--color-black-50);
 }
 
 .dark-theme {
-  /* bg color */
-  --header-bg-color: var(--color-dark-gray);
-  --body-bg-color: var(--color-soft-black);
-  --footer-bg-color: var(--color-light-gray-2);
-  --avatar-bg-color: var(--color-dark-gray);
-  --blok-details-bg-color: var(--color-gunmetal-black);
-  --blok-feature-icon-bg-color: var(--color-dark-gray);
-  --blok-location-bg-color: var(--color-dark-gray);
-  --blok-description-bg-color: var(--color-dark-gray);
-  --blok-field-form-bg-color: var(--color-dark-gray);
-  --blok-field-input-area-bg-color-1: var(--color-soft-black);
-  --scrollbar-track-bg-color: var(--color-dark-gray);
-  --scrollbar-thumb-bg-color: var(--color-light-gray-2);
+  /************************************* */
+  /* DARK THEME */
+
+  /*bg color*/
+  --header-footer-bg-color: var(--color-dark-brown1);
+  --body-bg-color: var(--color-dark-brown);
+  --underline-bg-color: var(--color-gold);
+  --underline-bg-filter-btn-color: var(--color-light-brown);
+  --modal-content-bg-color: var(--color-light-beige);
+  --contact-form-bg-color: var(--color-latte-coffee);
 
   /* color */
-  --primary-color: var(--color-white);
-  --primary-color-1: var(--color-black);
-  --secondary-color: var(--color-off-white);
-  --tertiary-color: var(--color-light-gray);
-  --tretiary-color-2: var(--color-dark-gray);
-  --button-default-text-color: var(--color-white);
+  --primary-color: var(--color-gold);
+  --secondary-color: var(--color-light-brown);
+  --tertiary-color: var(--color-light-beige);
+  --quaternary-color: var(--color-latte-coffee);
+  --quinary-color: var(--color-latte-coffee);
 
-  /* logo color */
-  --logo-primary-color: var(--color-white);
-  --logo-secondary-color: var(--color-light-gray-2);
+  /*logo color*/
+  --logo-primary-color: var(--color-beige);
+  --logo-secondary-color: var(--color-latte-coffee);
+  --steam-color: var(--color-pure-white);
 
-  /* button color */
-  --toggle-theme-icon-color: var(--color-white);
-  --button-burger-icon-color: var(--color-white);
-  --button-close-icon-color: var(--color-white);
+  /*button, button-icon color */
+  --toggle-theme-icon-color: var(--color-amber);
+  --button-burger-icon-color: var(--color-beige);
+  --button-close-icon-color: var(--color-beige);
+  --button-cta-bg-color: var(--color-latte-coffee);
+  --button-cta-color: var(--color-dark-brown1);
+  --filter-btn-bg-color: var(--color-latte-coffee);
+  --filter-btn-color: var(--color-light-brown);
+  --top-badge-bg-color: var(--color-latte-coffee);
+  --top-badge-color: var(--color-light-brown);
+  --item-description-color: var(--color-light-gray-80);
+  --contact-submit-btn-bg-color: var(--color-light-brown);
+  --contact-input-texarea-bg-color: var(--color-light-brown);
+  --text-form-color: var(--color-white);
 
-  /* icon color */
-  --home-phone-icon-color: var(--color-dark-green);
-  --contact-phone-icon-color: var(--color-green);
-  --contact-email-icon-color: var(--color-green);
-  --social-icon-color: var(--color-black);
-  --icon-primary-color: var(--color-light-gray);
-  --star-icon-filled-color: var(--color-gray);
-
-  /* placeholder color */
-  --placeholder-form-booking-reviews-color: var(--color-gray);
+  /* icon, label color */
+  --icon-circle-bg-color: var(--color-gold);
+  --icon-circle-color: var(--color-black);
+  --circle-label-bg-color: var(--color-gold);
+  --circle-label-color: var(--color-black);
+  --reviews-card-bg-color: var(--color-gold);
+  --reviews-text-color: var(--color-black);
 
   /* border color */
-  --border-color: var(--color-gray);
-  --border-secondary-color: var(--color-light-gray-2);
-  --border-tertiary-color: var(--color-dark-gray);
+  --section-border-bottom-color: var(--color-latte-coffee-50);
+  --circle-big-border-color: var(--color-white);
+  --circle-medium-border-color: var(--color-light-gray-50);
+  --circle-small-border-color: var(--color-dark-gray-50);
+  --input-textarea-border-color: var(--color-light-brown);
 
   /* box-shadow color */
-  --box-shadow: 0 0.125rem 0.625rem rgb(255 255 255 / 15%);
+  --shadow-icon-circle: var(--color-white-50);
+  --shadow-circle: var(--color-white-50);
+  /* --shadow-menu: var(--color-white-50); */
+  --shadom-image-wrapper: var(--color-white-20);
+  --shadom-modal-content: var(--color-white-20);
+  --shadow-reviews-card: var(--color-white-20);
+  --shadow-contacts-map-form: var(--color-white-50);
 }

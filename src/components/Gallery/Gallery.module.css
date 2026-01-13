@@ -1,0 +1,159 @@
+.gallery-section {
+  position: relative;
+  max-width: 68.75rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  background-color: var(--body-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
+    var(--section-border-bottom-color);
+  font-family: Inter, sans-serif;
+  animation: fadeIn 1s ease both;
+}
+
+.gallery-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.gallery-title {
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+
+.title-underline {
+  width: 5rem;
+  height: 0.25rem;
+  margin: 0 auto 1.5rem;
+  background-color: var(--primary-color);
+}
+
+.gallery-subtitle {
+  margin: 0 auto;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--tertiary-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));
+  gap: 1.5rem;
+}
+
+.image-wrapper {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadom-image-wrapper);
+  aspect-ratio: 1 / 1;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  object-fit: cover;
+}
+
+.image-wrapper:hover .image {
+  transform: scale(1.08);
+}
+
+/* МОДАЛЬНЕ ВІКНО */
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 90%);
+}
+
+.modal-content {
+  position: relative;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  max-width: 90%;
+  padding: 2rem;
+  background-color: var(--modal-content-bg-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.625rem 2.5rem var(--shadom-modal-content);
+  transform: translateY(-50%);
+}
+
+.modal-image {
+  display: block;
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.3125rem;
+  right: 0.3125rem;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--color-gray);
+  transition: color 0.3s ease;
+}
+
+.close-text {
+  justify-content: center;
+  align-items: center;
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.0625rem;
+}
+
+.close-icon {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: var(--color-latte-coffee);
+}
+
+@keyframes fade-in {
+  from {
+    transform: translateY(1.25rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (width <= 30rem) {
+  .modal-content {
+    padding: 2.1875rem 0.9375rem 0.9375rem;
+  }
+}

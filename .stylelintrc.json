@@ -134,6 +134,6 @@
       }
     ],
 
-    "unit-disallowed-list": ["px"]
+    "unit-disallowed-list": ["em"]
   }
 }

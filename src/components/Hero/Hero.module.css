@@ -1,0 +1,60 @@
+.hero {
+  position: relative;
+  display: flex;
+  max-width: 68.75rem;
+  min-height: 28.125rem;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  background-image: url('/images/Hero.jpg');
+  background-position: center;
+  background-size: cover;
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  /* box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color);  */
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
+    var(--section-border-bottom-color);
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: inherit;
+  background-color: rgb(0 0 0 / 50%);
+}
+
+.container {
+  max-width: 68.75rem;
+  padding: 0 1.5rem;
+}
+
+.content {
+  max-width: 50rem;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--color-beige);
+}
+
+.title {
+  margin-bottom: 1.25rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0.9;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

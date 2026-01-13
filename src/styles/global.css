@@ -1,5 +1,7 @@
 /* Базові стилі всього додатка */
-
+* {
+  box-sizing: border-box;
+}
 *,
 *::before,
 *::after {

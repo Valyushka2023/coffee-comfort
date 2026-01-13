@@ -1,0 +1,29 @@
+{
+  "menu_title": "Our menu",
+  "menu_subtitle": "Every sip is a ritual that unites people",
+  "categories": {
+    "all": "All",
+    "drinks": "Drinks",
+    "bakery": "Baking"
+  },
+  "items": {
+    "cappuccino": {
+      "name": "Cappuccino",
+      "desc": "A classic espresso-based coffee drink with the addition of whipped milk.",
+      "price": "65 UAN"
+    },
+    "flatWhite": {
+      "name": "Flat White",
+      "desc": "A rich taste of double espresso with velvety milk.",
+      "price": "75 UAN"
+    },
+    "croissant": {
+      "name": "Croissant",
+      "desc": "Classic French pastries with a crispy crust.",
+      "price": "55 UAN"
+    }
+  },
+  "ui": {
+    "top": "TOP"
+  }
+}

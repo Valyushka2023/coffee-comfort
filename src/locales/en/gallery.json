@@ -1,0 +1,13 @@
+{
+  "title": "Gallery of our comfort",
+  "subtitle": "Every detail is created for your inspiration",
+  "close_label": "Close",
+  "images": {
+    "interior1": "Cozy corner",
+    "coffee": "Fresh cappuccino",
+    "interior2": "Seat by the window",
+    "pastry": "Freshly baked croissant",
+    "barista": "Barista at work",
+    "details": "Coffee shop details"
+  }
+}

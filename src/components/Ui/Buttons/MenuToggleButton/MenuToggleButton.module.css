@@ -1,52 +1,60 @@
 .burger-button {
-  z-index: 1001;
+  position: relative;
+  z-index: 2501;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin: 0;
-  padding: 0;
   background: none;
   border: none;
-  font-size: 1.3rem;
-  line-height: 1;
   color: var(--button-burger-icon-color);
-  vertical-align: middle;
   transition:
-    color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s ease;
+}
+
+.icon {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.is-active {
+  position: fixed;
+  top: 0.9375rem;
+  right: 1.5rem;
+  transform: rotate(180deg);
 }
 
 .burger-button:hover {
   color: var(--hover-color);
-  transform: scale(1.05);
+  transform: scale(1.1);
+}
+
+.is-active:hover {
+  transform: rotate(180deg) scale(1.1);
 }
 
 .burger-button:active {
-  color: var(--active-color);
-  transform: scale(0.95);
-}
-
-@media (width <= 74.9375rem) {
-  .burger-button {
-    font-size: 1.2rem;
-  }
-}
-
-@media (width <= 61.9375rem) {
-  .burger-button {
-    font-size: 1.1rem;
-  }
+  transform: scale(0.9);
 }
 
 @media (width <= 47.9375rem) {
-  .burger-button {
-    font-size: 1rem;
+  .icon {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 }
 
 @media (width <= 29.9375rem) {
-  .burger-button {
-    font-size: 0.9rem;
+  .icon {
+    width: 1.625rem;
+    height: 1.625rem;
+  }
+
+  .is-active {
+    top: 0.75rem;
+    right: 1.25rem;
   }
 }

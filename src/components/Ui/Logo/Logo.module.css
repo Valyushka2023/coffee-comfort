@@ -1,41 +1,112 @@
 .logo {
   display: flex;
   align-items: center;
-  font-size: 1.3rem;
-  font-weight: 800;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
   color: var(--logo-primary-color);
+
+  /* Початкова невидима тінь, щоб браузер не створював її "з нуля" при ховері */
+  text-shadow: 0 0 0.9375rem rgb(212 163 115 / 0%);
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+  transform: translateZ(0);
+
+  /* ФІКС: Запобігаємо стрибкам тексту */
+  will-change: text-shadow, color;
+  -webkit-font-smoothing: antialiased;
 }
 
 .logo-secondary {
-  display: flex;
+  display: inline-block;
+  color: var(--logo-secondary-color);
+}
+
+.logo-coffee-cap {
+  position: relative;
+  display: inline-flex;
+
+  /* Фіксуємо розмір контейнера іконки */
+  flex-shrink: 0;
   align-items: center;
-  color: var(--modal-logo-secondary-color, var(--logo-secondary-color));
 }
 
-@media (width <= 74.9375rem) {
-  .logo {
-    font-size: 1.2rem;
-    font-weight: 800;
+/* Іконка кави */
+.logo-coffee-cap img {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  box-shadow: 0 0 0.75rem rgb(212 163 115 / 0%);
+  transition: box-shadow 0.3s ease;
+  aspect-ratio: 1 / 1;
+
+  /* Оптимізація для іконки */
+  will-change: box-shadow;
+}
+
+/* Анімація пари (Steam) */
+.logo-coffee-cap::before,
+.logo-coffee-cap::after {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  width: 0.625rem;
+  height: 1.375rem;
+  background: linear-gradient(
+    to top,
+    rgb(var(--steam-color) / 0%) 0%,
+    rgb(var(--steam-color) / 80%) 50%,
+    rgb(var(--steam-color) / 0%) 100%
+  );
+  border-radius: 50%;
+  animation: steam 2.5s infinite ease-in-out;
+  pointer-events: none;
+  filter: blur(0.1875rem);
+  content: '';
+
+  /* Використовуємо transform для плавності */
+  will-change: transform, opacity;
+}
+
+.logo-coffee-cap::after {
+  left: 75%;
+  width: 0.5rem;
+  height: 1.125rem;
+  animation-duration: 3s;
+  animation-delay: 1.2s;
+}
+
+/* ОНОВЛЕНО: Тільки рух без зміни масштабу (scale), щоб не рухати сусідні елементи */
+@keyframes steam {
+  0% {
+    transform: translate(-50%, 0.3125rem);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translate(-30%, -2.1875rem);
+    opacity: 0;
   }
 }
 
-@media (width <= 61.9375rem) {
-  .logo {
-    font-size: 1.1rem;
-    font-weight: 800;
-  }
+/* Hover effects */
+.logo:hover {
+  /* Якщо все одно скаче, зменште розмиття з 0.9375rem до 0.5rem */
+  text-shadow: 0 0 0.5rem rgb(212 163 115 / 40%);
 }
 
-@media (width <= 47.9375rem) {
-  .logo {
-    font-size: 1rem;
-    font-weight: 800;
-  }
+.logo:hover .logo-coffee-cap img {
+  box-shadow: 0 0 0.75rem rgb(212 163 115 / 50%);
 }
 
-@media (width <= 29.9375rem) {
+@media (width <= 48rem) {
   .logo {
-    font-size: 0.9rem;
-    font-weight: 800;
+    font-size: 1.25rem;
   }
 }

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0;
+  gap: 0.25rem;
 }
 
 .language-en,
@@ -11,66 +11,58 @@
   padding: 0;
   background: none;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: var(--primary-color);
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease;
-}
-
-.language-en:not(.active):hover,
-.language-uk:not(.active):hover {
-  text-decoration: underline;
-  color: var(--hover-color);
-  transform: scale(1.05);
-  opacity: 0.7;
-}
-
-.language-en:not(.active):active,
-.language-uk:not(.active):active {
-  color: var(--active-color);
-  transform: scale(0.95);
-}
-
-.separator {
-  cursor: default;
-  margin: 0 0.5rem;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: var(--primary-color);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--tertiary-color);
+  transition: all 0.3s ease;
 }
 
 .active {
   cursor: default;
-  color: var(--active-color);
+  font-weight: 700;
+  color: var(--active-color) !important;
+  text-shadow: 0 0 0.625rem rgb(212 163 115 / 30%);
 }
 
-@media (width <= 74.9375rem) {
-  .language-en,
-  .language-uk,
-  .separator {
-    font-size: 1.2rem;
-  }
+.separator {
+  cursor: default;
+  margin: 0 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--primary-color);
 }
 
-@media (width <= 61.9375rem) {
-  .language-en,
-  .language-uk,
-  .separator {
-    font-size: 1.1rem;
-  }
+.language-en:not(.active):hover,
+.language-uk:not(.active):hover {
+  /* color: var(--color-gray-muted); */
+  color: var(--hover-color);
+  transform: translateY(-0.0625rem);
 }
 
-@media (width <= 47.9375rem) {
-  .language-en,
-  .language-uk,
-  .separator {
-    font-size: 1rem;
-  }
+.language-en:not(.active)::after,
+.language-uk:not(.active)::after {
+  position: absolute;
+  bottom: -0.25rem;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background-color: var(--quaternary-color);
+  transition: width 0.3s ease;
+  content: '';
+}
+.language-en:not(.active)::after,
+.language-uk:not(.active)::after {
+  width: 100%;
 }
 
-@media (width <= 29.9375rem) {
+.language-en:not(.active):active,
+.language-uk:not(.active):active {
+  transform: scale(0.95);
+}
+
+@media (width <= 3rem) {
   .language-en,
   .language-uk,
   .separator {

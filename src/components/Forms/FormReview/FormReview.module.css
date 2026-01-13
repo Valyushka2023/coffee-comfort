@@ -1,4 +1,4 @@
-.form {
+/* .form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,8 +125,7 @@
   font-weight: bold;
   color: var(--warning-color);
 }
-
-.field-area-and-field-error {
+*/ .field-area-and-field-error {
   position: relative;
   display: flex;
   flex-direction: column;

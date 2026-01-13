@@ -1,6 +1,7 @@
 {
-  "nav_home": "Головна",
-  "nav_catalog": "Каталог",
-  "menu_open_label": "Відкрити навігаційне меню",
-  "menu_close_label": "Закрити навігаційне меню"
+  "nav_menu": "Меню",
+  "nav_about": "Про нас",
+  "nav_gallery": "Галерея",
+  "nav_contacts": "Контакти",
+  "cta_booking": "Забронювати стіл"
 }

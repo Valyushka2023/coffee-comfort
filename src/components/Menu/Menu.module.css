@@ -1,0 +1,205 @@
+.menu-section {
+  max-width: 68.75rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  background-color: var(--body-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  font-family: Inter, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
+    var(--section-border-bottom-color);
+}
+
+.menu-container {
+  max-width: 68.75rem;
+  margin: 0 auto;
+  /* padding: 0 1.5rem; */
+}
+
+.menu-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.menu-title {
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+
+.title-underline {
+  width: 5rem;
+  height: 0.25rem;
+  margin: 0 auto 1.5rem;
+  background-color: var(--primary-color);
+  /* border-radius: 0.125rem; */
+}
+
+.menu-subtitle {
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--tertiary-color);
+}
+
+.menu-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.625rem 1.5rem;
+  background-color: var(--filter-btn-bg-color);
+  border: 0.125rem solid var(--border-color);
+  border-radius: 6.2494rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--filter-btn-color);
+  transition: all 0.3s ease;
+}
+
+.filter-btn::after {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 0.5rem;
+  left: 1.5rem;
+  z-index: 2;
+  height: 0.125rem;
+  background-color: var(--underline-bg-filter-btn-color);
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+
+  /* Анімація появи */
+  opacity: 0;
+  content: '';
+}
+
+/* Ефект при наведенні */
+.filter-btn:hover {
+  border-color: var(--hover-color);
+  color: var(--filter-btn-color);
+}
+
+/* Лінія  при наведенні розтягується на всю довжину тексту  */
+.filter-btn:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Стиль для активної кнопки */
+.filter-btn.active {
+  border-color: var(--primary-color);
+  color: var(--filter-btn-color);
+}
+
+/* Лінія зафіксована для активної кнопки */
+.filter-btn.active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* --- СІТКА КАТЕГОРІЙ --- */
+.menu-category-block {
+  margin-bottom: 4rem;
+}
+
+.category-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.category-line {
+  flex-grow: 1;
+  height: 0.0625rem;
+  background-color: var(--border-color);
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem 3rem;
+}
+
+@media (width >= 40rem) {
+  .items-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- СТИЛІ КАРТОК СТРАВ --- */
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem dashed var(--border-color);
+  transition: border-color 0.3s ease;
+}
+
+.menu-item:hover {
+  border-color: chocolate;
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.item-name {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--tertiary-color);
+}
+
+.top-badge {
+  padding: 0.125rem 0.5rem;
+  background-color: var(--top-badge-bg-color);
+  border-radius: 6.2494rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: var(--top-badge-color);
+}
+
+.item-description {
+  display: -webkit-box;
+  min-height: 2.5em;
+  overflow: hidden;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--item-description-color);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+.item-price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--primary-color);
+}

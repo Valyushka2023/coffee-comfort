@@ -1,4 +1,4 @@
-.backdrop {
+/* .backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -154,4 +154,4 @@ body.modal-open {
     padding: var(--padding-xs);
     font-size: 0.9rem;
   }
-}
+} */

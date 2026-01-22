@@ -20,13 +20,13 @@ import aboutModalEN from '../locales/en/about_modal.json';
 import servicesModalEN from '../locales/en/services_modal.json';
 import pricesModalEN from '../locales/en/prices_modal.json';
 import contactsModalEN from '../locales/en/contacts_modal.json';
-import tabsEN from '../locales/en/tabs.json';
-import vechicleDetailsEN from '../locales/en/vechicle_details.json';
+// import tabsEN from '../locales/en/tabs.json';
+// import vechicleDetailsEN from '../locales/en/vechicle_details.json';
 import filterLocationEN from '../locales/en/filter_location.json';
-import filterVehicleTypeEN from '../locales/en/filter_vehicle_type.json';
-import filterVehicleEquipmentEN from '../locales/en/filter_vehicle_equipment.json';
-import thankYouBookingPageEN from '../locales/en/thank_you_booking_page.json';
-import thankYouReviewsPageEN from '../locales/en/thank_you_reviews.page.json';
+// import filterVehicleTypeEN from '../locales/en/filter_vehicle_type.json';
+// import filterVehicleEquipmentEN from '../locales/en/filter_vehicle_equipment.json';
+// import thankYouBookingPageEN from '../locales/en/thank_you_booking_page.json';
+// import thankYouReviewsPageEN from '../locales/en/thank_you_reviews.page.json';
 import starRatingEN from '../locales/en/star_rating.json';
 import cardEN from '../locales/en/card.json';
 import featureIconEN from '../locales/en/feature_icon.json';
@@ -62,13 +62,13 @@ import aboutModalUK from '../locales/uk/about_modal.json';
 import servicesModalUK from '../locales/uk/services_modal.json';
 import pricesModalUK from '../locales/uk/prices_modal.json';
 import contactsModalUK from '../locales/uk/contacts_modal.json';
-import tabsUK from '../locales/uk/tabs.json';
-import vechicleDetailsUK from '../locales/uk/vechicle_details.json';
+// import tabsUK from '../locales/uk/tabs.json';
+// import vechicleDetailsUK from '../locales/uk/vechicle_details.json';
 import filterLocationUK from '../locales/uk/filter_location.json';
-import filterVehicleTypeUK from '../locales/uk/filter_vehicle_type.json';
-import filterVehicleEquipmentUK from '../locales/uk/filter_vehicle_equipment.json';
-import thankYouBookingPageUK from '../locales/uk/thank_you_booking_page.json';
-import thankYouReviewsPageUK from '../locales/uk/thank_you_reviews_page.json';
+// import filterVehicleTypeUK from '../locales/uk/filter_vehicle_type.json';
+// import filterVehicleEquipmentUK from '../locales/uk/filter_vehicle_equipment.json';
+// import thankYouBookingPageUK from '../locales/uk/thank_you_booking_page.json';
+// import thankYouReviewsPageUK from '../locales/uk/thank_you_reviews_page.json';
 import starRatingUK from '../locales/uk/star_rating.json';
 import cardUK from '../locales/uk/card.json';
 import featureIconUK from '../locales/uk/feature_icon.json';
@@ -106,13 +106,13 @@ const resources = {
     services_modal: servicesModalEN,
     prices_modal: pricesModalEN,
     contacts_modal: contactsModalEN,
-    tabs: tabsEN,
-    vechicle_details: vechicleDetailsEN,
+    // tabs: tabsEN,
+    // vechicle_details: vechicleDetailsEN,
     filter_location: filterLocationEN,
-    filter_vehicle_type: filterVehicleTypeEN,
-    filter_vehicle_equipment: filterVehicleEquipmentEN,
-    thank_you_booking_page: thankYouBookingPageEN,
-    thank_you_reviews_page: thankYouReviewsPageEN,
+    // filter_vehicle_type: filterVehicleTypeEN,
+    // filter_vehicle_equipment: filterVehicleEquipmentEN,
+    // thank_you_booking_page: thankYouBookingPageEN,
+    // thank_you_reviews_page: thankYouReviewsPageEN,
     star_rating: starRatingEN,
     card: cardEN,
     feature_icon: featureIconEN,
@@ -141,13 +141,13 @@ const resources = {
     services_modal: servicesModalUK,
     prices_modal: pricesModalUK,
     contacts_modal: contactsModalUK,
-    tabs: tabsUK,
-    vechicle_details: vechicleDetailsUK,
+    // tabs: tabsUK,
+    // vechicle_details: vechicleDetailsUK,
     filter_location: filterLocationUK,
-    filter_vehicle_type: filterVehicleTypeUK,
-    filter_vehicle_equipment: filterVehicleEquipmentUK,
-    thank_you_booking_page: thankYouBookingPageUK,
-    thank_you_reviews_page: thankYouReviewsPageUK,
+    // filter_vehicle_type: filterVehicleTypeUK,
+    // filter_vehicle_equipment: filterVehicleEquipmentUK,
+    // thank_you_booking_page: thankYouBookingPageUK,
+    // thank_you_reviews_page: thankYouReviewsPageUK,
     star_rating: starRatingUK,
     card: cardUK,
     feature_icon: featureIconUK,
@@ -191,10 +191,10 @@ i18n.use(initReactI18next).init({
     'tabs',
     'vechicle_details',
     'filter_location',
-    'filter_vehicle_type',
-    'filter_vehicle_equipment',
-    'thank_you_booking_page',
-    'thank_you_reviews_page',
+    // 'filter_vehicle_type',
+    // 'filter_vehicle_equipment',
+    // 'thank_you_booking_page',
+    // 'thank_you_reviews_page',
     'star_rating',
     'card',
     'feature_icon',

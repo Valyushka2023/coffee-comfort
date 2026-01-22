@@ -26,6 +26,14 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      {/* <div className={css['scroll-indicator']} aria-hidden="true">
+        <span className={css['arrow']}></span>
+      </div> */}
+      <div className={css['scroll-indicator']} aria-hidden="true">
+        <span className={css['arrow-wrapper']}>
+          <span className={css['arrow']}></span>
+        </span>
+      </div>
     </section>
   );
 };

@@ -74,12 +74,12 @@ import { useTranslation } from 'react-i18next';
 import css from './Gallery.module.css';
 
 const images = [
-  { id: 1, src: '/images/interior.jpg', alt: 'Cozy corner' },
-  { id: 2, src: '/images/cappuccino1.jpg', alt: 'Fresh cappuccino' },
-  { id: 3, src: '/images/interior1.jpg', alt: 'Window seat' },
-  { id: 4, src: '/images/croissant3.jpg', alt: 'Freshly baked croissant' },
-  { id: 5, src: '/images/barista.jpg', alt: 'Barista at work' },
-  { id: 6, src: '/images/details.jpg', alt: 'Coffee shop details' },
+  { id: 1, src: '/images/interior.webp', alt: 'Cozy corner' },
+  { id: 2, src: '/images/cappuccino1.webp', alt: 'Fresh cappuccino' },
+  { id: 3, src: '/images/interior1.webp', alt: 'Window seat' },
+  { id: 4, src: '/images/croissant3.webp', alt: 'Freshly baked croissant' },
+  { id: 5, src: '/images/barista.webp', alt: 'Barista at work' },
+  { id: 6, src: '/images/details.webp', alt: 'Coffee shop details' },
 ];
 
 const Gallery = () => {
@@ -104,7 +104,27 @@ const Gallery = () => {
           <h2 className={css['gallery-title']}>
             {t('title', 'Gallery of our comfort')}
           </h2>
-          <div className={css['title-underline']}></div>
+          <div className={css['title-divider']}>
+            <div className={css['line']}></div>
+            <div className={css['ornament']}>
+              <svg
+                width="80"
+                height="40"
+                viewBox="0 0 100 50"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 25C30 5 70 45 90 25M10 25C30 45 70 5 90 25"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                <circle cx="50" cy="25" r="3" fill="currentColor" />
+              </svg>
+            </div>
+            <div className={css['line']}></div>
+          </div>
           <p className={css['gallery-subtitle']}>
             {t('subtitle', 'Every detail is designed to inspire you')}
           </p>

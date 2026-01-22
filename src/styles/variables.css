@@ -71,11 +71,9 @@
   --color-light-gray-100: rgb(244 241 234 / 100%); /*світло-сірий на 100% */
   --color-dark-gray-50: rgb(107 105 101 / 50%); /* темно-сірий на 50% */
   --color-dark-gray-80: rgb(107 105 101 / 80%); /* темно-сірий на 50% */
-  --color-dark-gray-100: rgb(
-    107 105 101 / 100%
-  ); /* темно-сірий на 100% 
+  --color-dark-gray-100: rgb(107 105 101 / 100%);
 
-  --color-terracotta-50: rgb(212 157 101 / 50%); /*теракотовий на 50%*/
+  --color-terracotta-15: rgb(212 157 101 / 15%);
 
   --color-white-50: rgb(255 255 255 / 50%); /*Білий на 50%*/
   --color-black-50: rgb(0 0 0 / 50%); /*Чорний на 50%*/
@@ -104,7 +102,7 @@
   --underline-bg-filter-btn-color: var(--color-light-brown);
   --modal-content-bg-color: var(--color-light-beige);
   --contact-form-bg-color: var(--color-light-brown);
-
+  --reviews-card-bg-color: var(--color-light-brown);
   /* color */
   --primary-color: var(--color-light-brown);
   --secondary-color: var(--color-gold);
@@ -131,6 +129,8 @@
   --contact-submit-btn-bg-color: var(--color-latte-coffee);
   --contact-input-texarea-bg-color: var(--color-latte-coffee);
   --text-form-color: var(--color-brown);
+  --text-alt-color: var(--color-brown);
+  --text-reviews-color: var(--color-white);
 
   /* icon, label color */
   --icon-circle-bg-color: var(--color-light-brown);
@@ -168,7 +168,7 @@
   --underline-bg-filter-btn-color: var(--color-light-brown);
   --modal-content-bg-color: var(--color-light-beige);
   --contact-form-bg-color: var(--color-latte-coffee);
-
+  --reviews-card-bg-color: var(--color-latte-coffee);
   /* color */
   --primary-color: var(--color-gold);
   --secondary-color: var(--color-light-brown);
@@ -195,6 +195,8 @@
   --contact-submit-btn-bg-color: var(--color-light-brown);
   --contact-input-texarea-bg-color: var(--color-light-brown);
   --text-form-color: var(--color-white);
+  --text-alt-color: var(--color-white);
+  --text-reviews-color: var(--color-dark-brown1);
 
   /* icon, label color */
   --icon-circle-bg-color: var(--color-gold);

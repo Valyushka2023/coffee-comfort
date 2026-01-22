@@ -7,20 +7,35 @@
     "bakery": "Baking"
   },
   "items": {
-    "cappuccino": {
-      "name": "Cappuccino",
-      "desc": "A classic espresso-based coffee drink with the addition of whipped milk.",
-      "price": "65 UAN"
+    "americano": {
+      "name": "Americano",
+      "desc": "Classic black coffee based on espresso.",
+      "price": "45 UAN"
     },
     "flatWhite": {
       "name": "Flat White",
       "desc": "A rich taste of double espresso with velvety milk.",
       "price": "75 UAN"
     },
+    "cappuccino": {
+      "name": "Cappuccino",
+      "desc": "A classic espresso-based coffee drink with the addition of steamed milk.",
+      "price": "70 UAN"
+    },
     "croissant": {
       "name": "Croissant",
       "desc": "Classic French pastries with a crispy crust.",
       "price": "55 UAN"
+    },
+    "cheesecake": {
+      "name": "Cheesecake",
+      "desc": "An exquisite dessert with a crispy biscuit base and a delicate cream cheese filling.",
+      "price": "75 UAN"
+    },
+    "pancakes": {
+      "name": "Pancakes",
+      "desc": "Golden shortcrust pastry, fried in a hot pan.",
+      "price": "65 UAN"
     }
   },
   "ui": {

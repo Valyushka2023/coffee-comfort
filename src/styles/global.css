@@ -68,3 +68,29 @@ h5 {
 p {
   font-size: 1rem;
 }
+html {
+  scroll-behavior: smooth;
+}
+
+/* Додатково: щоб при скролі до секції заголовок її не перекривав */
+section {
+  scroll-margin-top: 80px; /* Налаштуйте під фактичну висоту вашого хедера */
+}
+/* Робимо стрілки видимими та більшими */
+.react-datepicker__navigation {
+  top: 10px !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #5d4037 !important; /* Кавовий колір для стрілок */
+  border-width: 2px 2px 0 0 !important;
+}
+
+/* Якщо стрілки все одно ховаються */
+.react-datepicker__navigation--previous {
+  left: 10px !important;
+}
+
+.react-datepicker__navigation--next {
+  right: 10px !important;
+}

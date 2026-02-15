@@ -16,6 +16,10 @@
     transform 0.3s ease;
 }
 
+/* .button:hover {
+  border: 0.0625rem solid var(--hover-button-color);
+} */
+
 .small,
 .medium,
 .large {
@@ -39,11 +43,23 @@
   color: var(--button-default-text-color);
 }
 
+/* .primary {
+  background-color: var(--button-form-bg-color);
+  color: var(--button-form--color);
+} */
 .primary {
-  background-color: var(--button-primary-bg-color);
-  color: var(--button-primary-text-color);
+  background-color: var(--button-form-bg-color);
+  color: var(--button-form--color);
+  border: 0.0625rem solid transparent; /* Рамка є, але її не видно */
+  transition: border-color 0.3s ease; /* Плавна поява рамки */
 }
 
+.primary:hover {
+  background-color: var(
+    --button-form-bg-color
+  ) !important; /* Не даємо змінювати фон */
+  border-color: #ffffff; /* Робимо рамку білою */
+}
 .secondary {
   background: var(--button-secondary-bg-color);
   color: var(--button-secondary-text-color);

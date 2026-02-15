@@ -1,15 +1,16 @@
 {
-  "title": "Book a motorhome now",
+  "title": "Book a table now",
   "text": " We are always in touch, ready to help you!",
   "name_label": "Name",
+  "name_placeholder": "Your name",
   "email_label": "Email",
+  "email_placeholder": "example@gmail.com",
   "phone_label": "Phone",
-  "from_date-time_label": "From (date,time)",
-  "to_date_time_label": "To (date,time)",
+  "phone_placeholder": "+380XXXXXXXXX",
+  "date_label": "Reservation Date",
   "booking_start_date_placeholder": "Start date, time",
-  "booking_end_date_placeholder": "End date, time",
   "comment_label": "Comment",
-  "comment_placeholder": "Your message",
+  "comment_placeholder": "Your wishes",
   "errors": {
     "required": "Please fill in the field.",
     "name_length": "The name must be between 2 and 20 characters.",
@@ -17,6 +18,7 @@
     "email_too_long": "Email is too long.",
     "invalid_phone": "Incorrect phone number format.",
     "invalid_end_date": "End date and time must be after the start date and time.",
-    "comment_too_long": "The comment must be up to 250 characters long."
+    "comment_too_long": "The comment must be up to 150 characters long.",
+    "send": "Send"
   }
 }

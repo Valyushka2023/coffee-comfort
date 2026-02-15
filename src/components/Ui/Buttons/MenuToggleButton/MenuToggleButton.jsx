@@ -1,5 +1,5 @@
-import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import PropTypes from 'prop-types';
+import { MenuIcon, CloseIcon } from '../../../Icons/index.js';
 import useWindowWidth from '../../../../hooks/useWindowWiidth.js';
 import clsx from 'clsx';
 import css from './MenuToggleButton.module.css';
@@ -18,9 +18,9 @@ const MenuToggleButton = ({ isOpen, onClick, ariaLabel = 'Toggle menu' }) => {
       aria-label={isOpen ? 'Close menu' : ariaLabel}
     >
       {isOpen ? (
-        <HiX className={css.icon} />
+        <CloseIcon className={css['icon']} aria-hidden="true" />
       ) : (
-        <HiMenuAlt3 className={css.icon} />
+        <MenuIcon className={css['icon']} aria-hidden="true" />
       )}
     </button>
   );

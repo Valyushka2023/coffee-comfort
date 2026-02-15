@@ -17,9 +17,9 @@
   display: block;
   width: 2rem;
   height: 2rem;
+  stroke: currentColor;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .is-active {
   position: fixed;
   top: 0.9375rem;

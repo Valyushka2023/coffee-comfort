@@ -12,7 +12,7 @@
       "desc": "Classic black coffee based on espresso.",
       "price": "45 UAN"
     },
-    "flatWhite": {
+    "flat_white": {
       "name": "Flat White",
       "desc": "A rich taste of double espresso with velvety milk.",
       "price": "75 UAN"

@@ -4,7 +4,7 @@ import { Coffee, Flame, Home } from 'lucide-react';
 import css from './AboutUs.module.css';
 
 const AboutUs = () => {
-  const { t } = useTranslation('about_Us');
+  const { t } = useTranslation('about_us');
   const sectionRef = useRef(null);
 
   useEffect(() => {

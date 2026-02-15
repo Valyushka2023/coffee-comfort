@@ -1,60 +1,82 @@
 import Booking from '../models/BookingModel.js';
-import Camper from '../models/CamperModel.js';
 import { sendEmail } from '../config/sendEmail.js';
 import { generateBookingEmailHtml } from '../utils/emailTemplates.js';
-import logger from '../utils/logger.js';
 
-export const createBooking = async (req, res, next) => {
+// Створюємо logger вручну
+const logger = {
+  info: (msg, data) => console.log(msg, data || ''),
+  error: (msg, err) => console.error(msg, err || ''),
+};
+
+export const createBooking = async (req, res) => {
   try {
-    logger.info('[BOOKING] Отримано новий запит на бронювання: %o', req.body);
-    const {
-      camperId,
-      name,
-      email,
-      bookingStartDate,
-      bookingEndDate,
-      comment,
-      phone,
-    } = req.body;
+    logger.info('[BOOKING] Отримано дані з фронтенду:', req.body);
+    const { name, email, bookingStartDate, comment, phone } = req.body;
 
-    if (!camperId || !name || !email || !bookingStartDate || !bookingEndDate) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Missing required fields.' });
+    // Валідація полів
+    if (!name || !email || !bookingStartDate) {
+      return res.status(400).json({
+        success: false,
+        message: 'Заповніть обовʼязкові поля (імʼя, email та дата)',
+      });
     }
 
+    // 1. ЗАПИС У МОНГО (Зберігаємо в базу оригінальний об'єкт дати)
     const booking = await Booking.create({
-      camperId,
       name,
       email,
       bookingStartDate,
-      bookingEndDate,
       comment,
       phone,
     });
 
-    logger.info('[BOOKING] Запис про бронювання успішно створено: %o', booking);
+    console.log('🎉 ПЕРЕМОГА! Дані в MongoDB з ID:', booking._id);
 
-    const camper = await Camper.findById(camperId);
-    if (!camper) {
-      logger.warn('[BOOKING] Camper з id %s не знайдено', camperId);
+    // 2. ФОРМАТУВАННЯ ЧАСУ ДЛЯ ЛИСТА
+    // Перетворюємо ISO рядок у зрозумілий формат "день.місяць.рік, години:хвилини"
+    const readableDate = new Date(bookingStartDate).toLocaleString('uk-UA', {
+      timeZone: 'Europe/Kyiv',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    // 3. ВІДПОВІДЬ ФРОНТЕНДУ (Миттєва)
+    res.status(201).json({
+      success: true,
+      message: 'Booking created successfully',
+      data: booking,
+    });
+
+    // 4. EMAIL У ФОНІ
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (adminEmail) {
+      // Створюємо копію даних для шаблону, замінюючи дату на відформатований рядок
+      const emailData = {
+        ...booking.toObject(), // Перетворюємо документ Mongoose у звичайний об'єкт
+        bookingStartDate: readableDate, // Замінюємо дату на текст "18.02.2026, 22:30"
+      };
+
+      sendEmail({
+        to: adminEmail,
+        subject: '☕️ Нова заявка CoffeeComfort',
+        html: generateBookingEmailHtml(emailData),
+      })
+        .then(() => logger.info('[EMAIL] Успішно надіслано адміністратору'))
+        .catch(err =>
+          logger.error('[EMAIL] Помилка відправки листа:', err.message)
+        );
     }
-
-    try {
-      const adminEmail = process.env.ADMIN_EMAIL;
-      const subject = '🚛 Нова заявка на бронювання кемпера';
-      const html = generateBookingEmailHtml(booking, camper);
-
-      await sendEmail({ to: adminEmail, subject, html });
-
-      logger.info('[EMAIL] Успішно надіслано email про бронювання');
-    } catch (emailError) {
-      logger.error('[EMAIL] Помилка при надсиланні email: %o', emailError);
-    }
-
-    res.status(201).json({ success: true, message: 'Booking created' });
   } catch (error) {
-    logger.error('[BOOKING] Помилка при створенні бронювання: %o', error);
-    next(error);
+    logger.error('[BOOKING] Критична помилка контролера:', error.message);
+    if (!res.headersSent) {
+      res.status(500).json({
+        success: false,
+        message: 'Помилка при збереженні в базу даних',
+        error: error.message,
+      });
+    }
   }
 };

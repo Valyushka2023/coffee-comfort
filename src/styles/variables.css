@@ -66,6 +66,7 @@
   --color-light-beige: #fdfaf5; /*Світло-бежевий як топлене молоко,rgb(253 250 245 / 100%)  */
   --color-dark-beige: #f8f4ec; /*Темно-бежевий як пісок, rgb(248 244 236 / 100%)  */
   --color-latte-coffee-50: rgb(212 163 115 / 50%);
+  --color-light-brown-80: rgb(92 61 46 / 80%);
   --color-light-gray-50: rgb(244 241 234 / 50%); /*світло-сірий на 50% */
   --color-light-gray-80: rgb(244 241 234 / 80%); /*світло-сірий на 50% */
   --color-light-gray-100: rgb(244 241 234 / 100%); /*світло-сірий на 100% */
@@ -90,8 +91,11 @@
 
   --hover-bg-color: #d4a373;
   --hover-color: #d4a373;
+  --hover-input-area-color: #fff;
+  --hover-button-color: #fff;
   --active-color: #d4a373;
-
+  --error-color: #ff4d4f; /* Класичний червоний для помилок */
+  --warning-color: #ff9800; /* Помаранчевий для попереджень */
   /************************************* */
   /* LIGHT THEME  */
 
@@ -103,12 +107,14 @@
   --modal-content-bg-color: var(--color-light-beige);
   --contact-form-bg-color: var(--color-light-brown);
   --reviews-card-bg-color: var(--color-light-brown);
+
   /* color */
   --primary-color: var(--color-light-brown);
   --secondary-color: var(--color-gold);
   --tertiary-color: var(--color-gray);
   --quaternary-color: var(--color-latte-coffee);
   --quinary-color: var(--color-light-brown);
+  --placeholder-color: var(--color-light-gray-50);
 
   /*logo color*/
   --logo-primary-color: var(--color-light-brown);
@@ -120,14 +126,18 @@
   --button-burger-icon-color: var(--color-light-brown);
   --button-close-icon-color: var(--color-light-brown);
   --button-cta-bg-color: var(--color-latte-coffee);
+  --button-form-bg-color: var(--color-latte-coffee);
+  --button-form-color: var(--color-light-brown);
   --button-cta-color: var(--color-white);
+  --button-up-bg-color: var(--color-latte-coffee);
+  --button-up-color: var(--color-light-brown);
   --filter-btn-bg-color: var(--color-latte-coffee);
   --filter-btn-color: var(--color-light-brown);
   --top-badge-bg-color: var(--color-latte-coffee);
   --top-badge-color: var(--color-light-brown);
   --item-description-color: var(--color-dark-gray-80);
   --contact-submit-btn-bg-color: var(--color-latte-coffee);
-  --contact-input-texarea-bg-color: var(--color-latte-coffee);
+  --contact-input-textarea-bg-color: var(--color-latte-coffee);
   --text-form-color: var(--color-brown);
   --text-alt-color: var(--color-brown);
   --text-reviews-color: var(--color-white);
@@ -139,17 +149,31 @@
   --circle-label-color: var(--color-white);
   --reviews-card-bg-color: var(--color-light-brown);
   --reviews-text-color: var(--color-white);
-
+  /* --icon-map-color: #e63946;  */
+  /* Темніший червоний */
+  /* --icon-clock-color: #d4a017; */
+  /*Глибокий золотистий*/
+  /* --icon-map-color: #ef4444; */
+  /* Яскравий червоний */
+  /* --icon-clock-color: #f59e0b; */
+  /* Насичений бурштиновий */
+  /* --icon-map-color: #c2410c;  */
+  /* Теракотовий */
+  /* --icon-clock-color: #b45309;  */
+  /* Глибокий коричнево-золотий */
+  --icon-map-color: #dc2626; /* Насичений червоний */
+  --icon-clock-color: #ca8a04; /* Колір "Охра" */
   /* border color */
   --section-border-bottom-color: var(--color-latte-coffee-50);
   --circle-big-border-color: var(--color-white);
   --circle-medium-border-color: var(--color-light-gray-50);
   --circle-small-border-color: var(--color-dark-gray-50);
   --input-textarea-border-color: var(--color-light-brown);
-
+  --button--border-color: var(--color-white);
   /* box-shadow color */
   --shadow-icon-circle: var(--color-black-50);
   --shadow-circle: var(--color-black-50);
+  --shadow-up-button: var(--color-black-50);
   /* --shadow-menu: var(--color-black-50); */
   --shadom-image-wrapper: var(--color-black-20);
   --shadom-modal-content: var(--color-white-20);
@@ -175,6 +199,7 @@
   --tertiary-color: var(--color-light-beige);
   --quaternary-color: var(--color-latte-coffee);
   --quinary-color: var(--color-latte-coffee);
+  --placeholder-color: var(--color-light-brown-80);
 
   /*logo color*/
   --logo-primary-color: var(--color-beige);
@@ -187,13 +212,15 @@
   --button-close-icon-color: var(--color-beige);
   --button-cta-bg-color: var(--color-latte-coffee);
   --button-cta-color: var(--color-dark-brown1);
+  --button-form-bg-color: var(--color-light-brown);
+  --button-form--color: var(--color-white);
   --filter-btn-bg-color: var(--color-latte-coffee);
   --filter-btn-color: var(--color-light-brown);
   --top-badge-bg-color: var(--color-latte-coffee);
   --top-badge-color: var(--color-light-brown);
   --item-description-color: var(--color-light-gray-80);
   --contact-submit-btn-bg-color: var(--color-light-brown);
-  --contact-input-texarea-bg-color: var(--color-light-brown);
+  --contact-input-textarea-bg-color: var(--color-light-brown);
   --text-form-color: var(--color-white);
   --text-alt-color: var(--color-white);
   --text-reviews-color: var(--color-dark-brown1);
@@ -205,6 +232,18 @@
   --circle-label-color: var(--color-black);
   --reviews-card-bg-color: var(--color-gold);
   --reviews-text-color: var(--color-black);
+  /* --icon-map-color: #ff6b6b;
+  --icon-clock-color: #ffcc33; */
+  /* --icon-map-color: #f87171; */
+  /* Пастельно-червоний */
+  /* --icon-clock-color: #fbbf24; */
+  /* Світло-жовтий */
+  /* --icon-map-color: #fb923c;  */
+  /* Оранжевий "захід сонця" */
+  /* --icon-clock-color: #fcd34d;  */
+  /* Ніжний кремовий жовтий */
+  --icon-map-color: #ff5555; /* Неоновий червоний */
+  --icon-clock-color: #ffd700; /* Чисте золото */
 
   /* border color */
   --section-border-bottom-color: var(--color-latte-coffee-50);
@@ -212,10 +251,12 @@
   --circle-medium-border-color: var(--color-light-gray-50);
   --circle-small-border-color: var(--color-dark-gray-50);
   --input-textarea-border-color: var(--color-light-brown);
+  --button--border-color: var(--color-white);
 
   /* box-shadow color */
   --shadow-icon-circle: var(--color-white-50);
   --shadow-circle: var(--color-white-50);
+  --shadow-up-button: var(--color-black-50);
   /* --shadow-menu: var(--color-white-50); */
   --shadom-image-wrapper: var(--color-white-20);
   --shadom-modal-content: var(--color-white-20);

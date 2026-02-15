@@ -1,106 +1,56 @@
-import { useState, useCallback, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 const useForm = (initialState, validationRules, onSubmit) => {
-  // 1. Стан
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [submissionError, setSubmissionError] = useState(null);
 
-  // 2. Доступ до i18n
-  const { i18n } = useTranslation();
-  const currentLanguage = i18n.language; // Поточна мова, яка буде залежністю
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
 
-  // 3. Функції валідації (без змін, оскільки вони коректно залежать від formData)
-  const validateField = useCallback(
-    (name, value) => {
-      if (validationRules[name]) {
-        // validationRules[name] отримує t() від батьківського компонента
-        return validationRules[name](value, formData);
-      }
-      return null;
-    },
-    [validationRules, formData]
-  );
-
-  const validateForm = useCallback(() => {
-    const newErrors = {};
-    Object.keys(initialState).forEach(key => {
-      // Викликаємо validateField, який залежить від validationRules,
-      // що оновлюється при зміні мови.
-      const error = validateField(key, formData[key]);
-      if (error) {
-        newErrors[key] = error;
-      }
-    });
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  }, [formData, validateField, initialState]);
-
-  // 4. ✅ ЕФЕКТ: Повторна валідація при зміні мови
-  useEffect(() => {
-    // Цей ефект спрацьовує при зміні мови (currentLanguage) або при першій спробі відправки
-    if (hasAttemptedSubmit) {
-      // Якщо помилки вже відображаються, перевіряємо всю форму заново.
-      // Це змусить t() всередині FormBooking.jsx перекласти повідомлення.
-      validateForm();
+    if (validationRules[name]) {
+      setErrors(prev => ({ ...prev, [name]: validationRules[name](value) }));
     }
-  }, [currentLanguage, hasAttemptedSubmit, validateForm]);
-  // validateForm додається як залежність, але оскільки він використовує useCallback,
-  // він не буде викликати нескінченний цикл.
+  };
 
-  // 5. Обробники вводу (без змін)
-  const handleInputChange = useCallback(
-    e => {
-      const { name, value } = e.target;
-      setFormData(prev => ({ ...prev, [name]: value }));
-      setSubmissionError(null);
+  // Метод спеціально для DatePicker
+  const handleDateChange = (date, name) => {
+    setFormData(prev => ({ ...prev, [name]: date }));
 
-      if (hasAttemptedSubmit) {
-        const fieldError = validateField(name, value);
-        setErrors(prev => ({ ...prev, [name]: fieldError }));
-      }
-    },
-    [validateField, hasAttemptedSubmit]
-  );
-
-  const handleDateChange = useCallback(
-    (date, name) => {
-      setFormData(prev => ({ ...prev, [name]: date }));
-      setSubmissionError(null);
-
-      if (hasAttemptedSubmit) {
-        const fieldError = validateField(name, date);
-        setErrors(prev => ({ ...prev, [name]: fieldError }));
-      }
-    },
-    [validateField, hasAttemptedSubmit]
-  );
+    if (validationRules[name]) {
+      setErrors(prev => ({ ...prev, [name]: validationRules[name](date) }));
+    }
+  };
 
   const handleSubmit = async e => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     setHasAttemptedSubmit(true);
 
-    const formIsValid = validateForm();
-    if (!formIsValid) return;
+    const newErrors = {};
+    Object.keys(validationRules).forEach(key => {
+      const error = validationRules[key](formData[key]);
+      if (error) newErrors[key] = error;
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmissionError(null);
-
     try {
       await onSubmit(formData);
     } catch (err) {
-      setSubmissionError(
-        err.message || 'Something went wrong. Please try again.'
-      );
+      setSubmissionError(err.message || 'Something went wrong');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // 6. Повернення
   return {
     formData,
     errors,
@@ -114,3 +64,74 @@ const useForm = (initialState, validationRules, onSubmit) => {
 };
 
 export default useForm;
+
+/*****/
+// import { useState, useCallback } from 'react';
+
+// const useForm = (initialState, validationRules, onSubmit) => {
+//   const [formData, setFormData] = useState(initialState);
+//   const [errors, setErrors] = useState({});
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
+//   const [submissionError, setSubmissionError] = useState(null);
+
+//   // Стабільна функція валідації
+//   const validate = useCallback(
+//     data => {
+//       const newErrors = {};
+//       Object.keys(validationRules).forEach(field => {
+//         const error = validationRules[field](data[field]);
+//         if (error) newErrors[field] = error;
+//       });
+//       return newErrors;
+//     },
+//     [validationRules]
+//   );
+
+//   const handleInputChange = e => {
+//     const { name, value } = e.target;
+//     setFormData(prev => ({ ...prev, [name]: value }));
+
+//     // Валідуємо тільки якщо вже була спроба відправки
+//     if (hasAttemptedSubmit) {
+//       const fieldError = validationRules[name](value);
+//       setErrors(prev => ({ ...prev, [name]: fieldError }));
+//     }
+//   };
+
+//   const handleSubmit = async e => {
+//     if (e) e.preventDefault();
+//     setHasAttemptedSubmit(true);
+
+//     const validationErrors = validate(formData);
+//     const hasErrors = Object.values(validationErrors).some(
+//       error => error !== null
+//     );
+
+//     setErrors(validationErrors);
+
+//     if (!hasErrors) {
+//       setIsSubmitting(true);
+//       setSubmissionError(null);
+//       try {
+//         await onSubmit(formData);
+//       } catch (err) {
+//         setSubmissionError(err.message || 'Помилка при відправці');
+//       } finally {
+//         setIsSubmitting(false);
+//       }
+//     }
+//   };
+
+//   return {
+//     formData,
+//     errors,
+//     isSubmitting,
+//     hasAttemptedSubmit,
+//     submissionError,
+//     handleInputChange,
+//     handleSubmit,
+//   };
+// };
+
+// export default useForm;

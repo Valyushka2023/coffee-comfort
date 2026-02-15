@@ -1,38 +1,54 @@
-.base-scroll-to-top-button {
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 3.5rem;
-  height: 3.5rem;
-  background-color: var(--button-primary-bg-color);
-  border: none;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  color: var(--button-primary-text-color);
-  transition:
-    opacity 0.3s ease,
-    transform 0.2s ease,
-    background-color 0.3s ease;
-  opacity: 0.8;
-}
-
-.base-scroll-to-top-button:hover {
-  background-color: var(--hover-bg-color);
-  transform: scale(1.05);
-  opacity: 1;
-}
-
-.base-sroll-to-top-button:active {
-  background-color: var(--active-bg-color);
-  transform: scale(0.95);
-  opacity: 0.7;
-}
-
-.fixed-position {
+.scroll-to-top-button {
   position: fixed;
   right: 1.25rem;
   bottom: 1.25rem;
   z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 3.5rem;
+  height: 3.5rem;
+
+  border-radius: 50%;
+  border: none;
+
+  background-color: var(--button-up-bg-color);
+  color: var(--button-up-color);
+
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-up-button);
+
+  cursor: pointer;
+
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-to-top-button:hover {
+  background-color: var(--hover-bg-color);
+  transform: translateY(0) scale(1.05);
+}
+
+.scroll-to-top-button:active {
+  background-color: var(--active-bg-color);
+  transform: translateY(0) scale(0.95);
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  stroke: currentColor;
 }

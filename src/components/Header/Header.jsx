@@ -16,21 +16,25 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
+  const closeMenu = () => setIsMenuOpen(false);
 
-  // Закриття меню при зміні сторінки
+  // Закриття меню при зміні сторінки (якщо будуть інші роути)
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
   // Блокування скролу фону при відкритому меню
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
     return () => {
       document.body.style.overflow = '';
     };
   }, [isMenuOpen]);
 
-  // Виправлення помилок ESLint: обробка клавіш для доступності
   const handleKeyDown = e => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -64,14 +68,13 @@ const Header = () => {
         </nav>
 
         <div className={css['toggle-icons']}>
-          <a href="#booking" className={css['button-cta']}>
+          <a href="#contacts" className={css['button-cta']}>
             {t('cta_booking', 'Book a table')}
           </a>
 
           <ThemeToggle />
           <LanguageSwitcher />
 
-          {/* Кнопка-хрестик */}
           <MenuToggleButton
             isOpen={isMenuOpen}
             onClick={toggleMenu}
@@ -86,53 +89,32 @@ const Header = () => {
         aria-hidden={!isMenuOpen}
       >
         <nav className={css['mobile-nav']}>
-          <Link
-            to="/menu"
-            className={clsx(
-              css.link,
-              location.pathname === '/menu' && css.active
-            )}
-            onClick={() => setIsMenuOpen(false)}
-          >
+          <a href="#menu" className={css.link} onClick={closeMenu}>
             {t('nav_menu', 'Menu')}
-          </Link>
-          <Link
-            to="/about"
-            className={clsx(
-              css.link,
-              location.pathname === '/about' && css.active
-            )}
-            onClick={() => setIsMenuOpen(false)}
-          >
+          </a>
+          <a href="#about" className={css.link} onClick={closeMenu}>
             {t('nav_about', 'About us')}
-          </Link>
-          <Link
-            to="/gallery"
-            className={clsx(
-              css.link,
-              location.pathname === '/gallery' && css.active
-            )}
-            onClick={() => setIsMenuOpen(false)}
-          >
+          </a>
+          <a href="#gallery" className={css.link} onClick={closeMenu}>
             {t('nav_gallery', 'Gallery')}
-          </Link>
-          <Link
-            to="/contacts"
-            className={clsx(
-              css.link,
-              location.pathname === '/contacts' && css.active
-            )}
-            onClick={() => setIsMenuOpen(false)}
-          >
+          </a>
+          <a href="#contacts" className={css.link} onClick={closeMenu}>
             {t('nav_contacts', 'Contacts')}
-          </Link>
+          </a>
+          <a
+            href="#contacts"
+            className={clsx(css.link, css['mobile-cta'])}
+            onClick={closeMenu}
+          >
+            {t('cta_booking', 'Book a table')}
+          </a>
         </nav>
       </div>
 
       {/* Бекдроп (фон) */}
       <div
         className={clsx(css['menu-backdrop'], isMenuOpen && css['is-visible'])}
-        onClick={toggleMenu}
+        onClick={closeMenu}
         onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}

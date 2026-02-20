@@ -1,6 +1,12 @@
 {
-  "socials_instagram": "Інстаграм",
-  "socials_fasebook": "Фейсбук",
-  "copy": "Будинок кави.",
-  "rights": "Усі права захищено."
+  "title_address": "Наша адреса",
+  "address": "вул. Кавова, 12, Київ",
+  "hours": "Пн-Нд: 08:00 - 21:00",
+  "title_callback": "Зворотный зв'язок",
+  "request_call": "Замовити дзвінок",
+  "title_socials": "Ми в соцмережах",
+  "leave_review": "Залишити відгук",
+  "title_review": "Ваша думка",
+  "copy": "Кав'ярня.",
+  "rights": "Усі права захищені."
 }

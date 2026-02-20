@@ -12,7 +12,7 @@ import css from './Header.module.css';
 
 const Header = () => {
   const location = useLocation();
-  const { t } = useTranslation('header');
+  const { t, i18n: _i18n } = useTranslation('header');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const Clock = ({ size = 24, color = '#FFd700', ...props }) => (
+export const Facebook = ({ size = 24, color = 'currentColor', ...props }) => (
   <svg
     width={size}
     height={size}
@@ -12,12 +12,12 @@ export const Clock = ({ size = 24, color = '#FFd700', ...props }) => (
     strokeLinejoin="round"
     {...props}
   >
-    <circle cx="12" cy="12" r="10" />
-    <polyline points="12 6 12 12 16 14" />
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
   </svg>
 );
 
-Clock.propTypes = {
+Facebook.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
+  className: PropTypes.string,
 };

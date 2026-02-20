@@ -1,6 +1,12 @@
 {
-  "socials_instagram": "Instagram",
-  "socials_fasebook": "Facebook",
+  "title_address": "Our address",
+  "address": "12 Coffee St, Kyiv",
+  "hours": "Mon-Sun: 08:00 - 21:00",
+  "title_callback": "Feedback",
+  "request_call": "Request a call",
+  "title_socials": "We are on social media",
+  "leave_review": "Leave a review",
+  "title_review": "Your opinion",
   "copy": "Coffee House.",
   "rights": "All rights reserved."
 }

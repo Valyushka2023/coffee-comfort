@@ -273,7 +273,7 @@ function FormBooking() {
         </div>
       </div>
 
-      <div className={css['element-send']}>
+      <div className={css['element-sending']}>
         <Button variant="primary" type="submit" disabled={isSubmitting}>
           {isSubmitting
             ? t('sending_button', 'Sending...')

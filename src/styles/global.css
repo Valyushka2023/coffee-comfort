@@ -94,3 +94,35 @@ section {
 .react-datepicker__navigation--next {
   right: 10px !important;
 }
+/* Анімація для всього тексту на сайті */
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+a,
+button,
+li {
+  /* Анімація спрацьовуватиме при кожній зміні вмісту */
+  animation: languageFade 0.4s ease-out;
+}
+
+@keyframes languageFade {
+  0% {
+    opacity: 0.5;
+    filter: blur(1px); /* Легке розмиття додає преміальності */
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Захист від зсуву вбік (якщо з'являється скролбар) */
+html {
+  scrollbar-gutter: stable;
+}
+html {
+  scroll-behavior: smooth;
+}

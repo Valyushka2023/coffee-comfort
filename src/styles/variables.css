@@ -92,7 +92,7 @@
   --hover-bg-color: #d4a373;
   --hover-color: #d4a373;
   --hover-input-area-color: #fff;
-  --hover-button-color: #fff;
+  /* --hover-button-color: #fff; */
   --active-color: #d4a373;
   --error-color: #ff4d4f; /* Класичний червоний для помилок */
   --warning-color: #ff9800; /* Помаранчевий для попереджень */
@@ -123,6 +123,7 @@
 
   /* button, button-icon color */
   --toggle-theme-icon-color: var(--color-light-brown);
+
   --button-burger-icon-color: var(--color-light-brown);
   --button-close-icon-color: var(--color-light-brown);
   --button-cta-bg-color: var(--color-latte-coffee);
@@ -131,13 +132,23 @@
   --button-cta-color: var(--color-white);
   --button-up-bg-color: var(--color-latte-coffee);
   --button-up-color: var(--color-light-brown);
+
+  --button-google-bg-color: var(--color-light-brown);
+  --button-google-color: var(--color-beige);
+  --button-review-bg-color: var(--color-latte-coffee);
+  --button-review-color: var(--color-dark-brown1);
   --filter-btn-bg-color: var(--color-latte-coffee);
   --filter-btn-color: var(--color-light-brown);
   --top-badge-bg-color: var(--color-latte-coffee);
+
   --top-badge-color: var(--color-light-brown);
+
   --item-description-color: var(--color-dark-gray-80);
+
   --contact-submit-btn-bg-color: var(--color-latte-coffee);
+
   --contact-input-textarea-bg-color: var(--color-latte-coffee);
+
   --text-form-color: var(--color-brown);
   --text-alt-color: var(--color-brown);
   --text-reviews-color: var(--color-white);
@@ -163,17 +174,25 @@
   /* Глибокий коричнево-золотий */
   --icon-map-color: #dc2626; /* Насичений червоний */
   --icon-clock-color: #ca8a04; /* Колір "Охра" */
-  /* border color */
+  --icon-social-color: var(--color-light-brown);
+  --avatar-bg-color: var(--color-latte-coffee);
+  --avatar-color: var(--color-dark-brown);
+
+  /* divider.  border color */
+  --divider-color: var(--color-black-20);
   --section-border-bottom-color: var(--color-latte-coffee-50);
   --circle-big-border-color: var(--color-white);
   --circle-medium-border-color: var(--color-light-gray-50);
   --circle-small-border-color: var(--color-dark-gray-50);
   --input-textarea-border-color: var(--color-light-brown);
   --button--border-color: var(--color-white);
+
   /* box-shadow color */
   --shadow-icon-circle: var(--color-black-50);
   --shadow-circle: var(--color-black-50);
   --shadow-up-button: var(--color-black-50);
+  --shadow-footer-divider: var(--color-black-50);
+
   /* --shadow-menu: var(--color-black-50); */
   --shadom-image-wrapper: var(--color-black-20);
   --shadom-modal-content: var(--color-white-20);
@@ -193,6 +212,7 @@
   --modal-content-bg-color: var(--color-light-beige);
   --contact-form-bg-color: var(--color-latte-coffee);
   --reviews-card-bg-color: var(--color-latte-coffee);
+
   /* color */
   --primary-color: var(--color-gold);
   --secondary-color: var(--color-light-brown);
@@ -216,6 +236,12 @@
   --button-form--color: var(--color-white);
   --filter-btn-bg-color: var(--color-latte-coffee);
   --filter-btn-color: var(--color-light-brown);
+  --button-google-bg-color: var(--color-latte-coffee);
+  --button-google-color: var(--color-brown);
+
+  --button-review-bg-color: var(--color-light-brown);
+
+  --button-review-color: var(--color-white);
   --top-badge-bg-color: var(--color-latte-coffee);
   --top-badge-color: var(--color-light-brown);
   --item-description-color: var(--color-light-gray-80);
@@ -242,10 +268,14 @@
   /* Оранжевий "захід сонця" */
   /* --icon-clock-color: #fcd34d;  */
   /* Ніжний кремовий жовтий */
-  --icon-map-color: #ff5555; /* Неоновий червоний */
+  --icon-map-color: #ff6b6b; /*  Червоний */
   --icon-clock-color: #ffd700; /* Чисте золото */
+  --icon-social-color: var(--color-latte-coffee);
+  --avatar-bg-color: var(--color-light-brown);
+  --avatar-color: var(--color-latte-coffee);
 
-  /* border color */
+  /* divider, border color */
+  --divider-color: var(--color-white-20);
   --section-border-bottom-color: var(--color-latte-coffee-50);
   --circle-big-border-color: var(--color-white);
   --circle-medium-border-color: var(--color-light-gray-50);

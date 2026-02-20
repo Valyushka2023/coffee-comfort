@@ -46,7 +46,7 @@
 .nav-links a {
   position: relative;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.05rem;

@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import bookingRouters from './src/routes/bookingRouters.js';
 import menuRouters from './src/routes/menuRouters.js'; // Імпортуємо новий роутер меню
 import campersRouters from './src/routes/campersRouters.js';
+import reviewsRouters from './src/routes/reviewsRouters.js';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use('/api/bookings', bookingRouters);
 app.use('/api/menu', menuRouters); // Запити на меню тепер йдуть сюди
 app.use('/api', campersRouters);
+app.use('/api/reviews', reviewsRouters);
 
 const port = process.env.PORT || 5001;
 

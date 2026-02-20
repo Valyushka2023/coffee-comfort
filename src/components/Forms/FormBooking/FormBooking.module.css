@@ -1,3 +1,47 @@
+/* Глобальні стилі для внутрішніх компонентів бібліотеки всередині твого класу */
+.datepicker-wrapper :global(.react-datepicker-wrapper) {
+  display: block;
+  width: 100%;
+}
+
+.datepicker-wrapper :global(.react-datepicker__input-container) {
+  display: block;
+  width: 100%;
+}
+
+/* Стилізація самого інпуту всередині дейтпікера */
+.datepicker-wrapper :global(.react-datepicker__input-container) input {
+  /* Копіюємо поведінку твого .field-input */
+  width: 100%;
+  display: block;
+  min-height: 2.5rem;
+  padding: 0.2rem 1.125rem 0.3rem;
+  box-sizing: border-box;
+  background-color: var(--contact-form-bg-color);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  color: var(--text-reviews-color);
+  border: 0.0625rem solid transparent;
+  outline: none;
+  transition: border-color 0.3s ease;
+  cursor: text;
+}
+
+/* Ховер та фокус для інпуту дейтпікера */
+.datepicker-wrapper :global(.react-datepicker__input-container) input:hover {
+  border: 0.0625rem solid var(--hover-input-area-color);
+}
+
+.datepicker-wrapper :global(.react-datepicker__input-container) input:focus {
+  border-color: var(--hover-input-area-color);
+}
+
+/* Стиль для помилки саме в DatePicker */
+.datepicker-wrapper
+  :global(.react-datepicker__input-container)
+  :global(.field-error) {
+  border-color: var(--error-color) !important;
+}
 .form {
   display: flex;
   flex: 1;
@@ -81,7 +125,7 @@
   }
 }
 
-.element-send {
+.element-sending {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,7 +245,7 @@
   width: 100%;
   cursor: text;
   min-height: 5.5rem;
-  padding: 0.0625rem 1.125rem;
+  padding: 0.3125rem 1.125rem;
   box-sizing: border-box;
   background-color: var(--contact-form-bg-color);
   border-radius: var(--radius-sm);
@@ -214,7 +258,7 @@
 }
 
 .field-area::placeholder {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--placeholder-color);
   opacity: 1;
 }
@@ -297,6 +341,7 @@
   .label-input-wrapper {
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
   }
 
   .label {

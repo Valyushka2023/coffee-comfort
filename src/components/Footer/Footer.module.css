@@ -1,70 +1,183 @@
+/* ГОЛОВНА СЕКЦІЯ */
 .footer-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3125rem;
   max-width: 68.75rem;
   margin: 0 auto;
-  padding: 1.25rem;
   background-color: var(--header-footer-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
-  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color);
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
   animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color);
+  color: var(--tertiary-color);
+  line-height: 1.5;
 }
 
-.footer-socials {
+/* КОНТЕЙНЕР ДЛЯ 4-Х БЛОКІВ */
+.footer-container {
   display: flex;
-  gap: 1.5625rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.875rem;
+  max-width: 68.75rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 0.5rem 1.5rem;
 }
 
-.footer-socials a {
-  position: relative;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  font-weight: 700;
+/* СТИЛЬ ДЛЯ КОЖНОЇ З 4-Х КОЛОНОК */
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+/* ЗАГОЛОВКИ БЛОКІВ */
+.column-title {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  line-height: 1.2;
   letter-spacing: 0.05rem;
-  color: var(--quinary-color);
-  transition: color 0.3s ease;
 }
 
-.footer-socials a:hover {
+.first-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.first-row:hover {
+  transform: translateY(-3px);
   color: var(--hover-color);
 }
 
-.footer-socials a::after {
-  position: absolute;
-  bottom: -0.25rem;
-  left: 0;
-  width: 0;
-  height: 0.125rem;
-  background-color: var(--quaternary-color);
-  transition: width 0.3s ease;
-  content: '';
+.first-row:hover svg {
+  transform: translateY(-3px);
+  color: var(--hover-color);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
-.footer-socials a:hover::after {
-  width: 100%;
+.location-anchor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease;
 }
 
-.footer-copy {
-  margin: 0;
-  font-size: 0.9rem;
+.location-anchor:hover {
+  transform: translateY(-3px);
+  color: var(--hover-color);
+}
+
+/* ЕЛЕМЕНТИ ІНФОРМАЦІЇ */
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  min-height: 24px;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* ТРИГЕРИ ДЛЯ ДЗВІНКА ТА ВІДГУКУ */
+.callback-link,
+.review-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: inherit;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.trigger-icon {
+  color: var(--color-latte-coffee);
+}
+
+.callback-link:hover,
+.review-trigger:hover {
+  transform: translateY(-3px);
+  color: var(--hover-color);
+}
+
+.review-trigger:hover .trigger-icon {
+  transform: translateY(-3px);
+  color: var(--hover-color);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.callback-link:hover {
+  transform: translateY(-3px);
+  color: var(--hover-color);
+}
+/* СОЦМЕРЕЖІ */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.social-icons a {
+  color: var(--icon-social-color);
+  display: flex;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+  color: var(--hover-color);
+}
+
+/* РОЗДІЛЬНИК */
+.footer-divider {
+  width: calc(100% - 60px);
+  height: 1px;
+  background-color: var(--divider-color, #444);
+  margin: 20px auto;
+}
+
+/* НИЖНЯ ЧАСТИНА */
+.footer-bottom {
   text-align: center;
-  color: var(--tertiary-color);
+  font-size: 0.8rem;
+  opacity: 0.7;
+  padding-bottom: 10px;
 }
 
-@media (width <= 29.875rem) {
-  .footer-section {
-    padding: 1.875rem 0.9375rem;
+/* АДАПТИВНІСТЬ */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
   }
-
-  .footer-socials {
-    gap: 0.9375rem;
+  .first-row,
+  .info-item,
+  .callback-link,
+  .review-trigger {
+    justify-content: center;
   }
 }

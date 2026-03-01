@@ -80,16 +80,35 @@
 }
 
 .button-cta {
-  padding: 0.5rem 1.25rem;
-  background-color: var(--button-cta-bg-color);
-  border-radius: 3.125rem;
-  font-size: 0.75rem;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  height: var(--btn-height);
+  padding: 0 1.5rem;
+
+  background-color: var(--button-review-bg-color);
+  color: var(--tertiary-color);
+  border: 1px solid var(--button-border-color);
+  border-radius: var(--btn-radius);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+
+  font-weight: 600;
+  font-size: var(--btn-font-size);
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.0625rem;
-  color: var(--button-cta-color);
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition:
+    transform 0.4s ease,
+    background-color 0.4s ease,
+    filter 0.4s ease;
+}
+
+.button-cta:hover {
+  background-color: var(--button-hover-bg-color) !important;
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+  color: var(--button-hover-color) !important;
 }
 
 .menu {

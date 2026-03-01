@@ -12,7 +12,6 @@ const Menu = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        // Звертаємося до нашого нового маршруту
         const response = await axios.get('http://localhost:5001/api/menu');
         setMenuItems(response.data);
       } catch (err) {
@@ -24,7 +23,7 @@ const Menu = () => {
     fetchMenu();
   }, []);
 
-  // Логіка категорій
+  // Використовуємо categoryKey, як у вашій таблиці
   const categoriesInDb = [
     ...new Set(menuItems.map(item => item.categoryKey).filter(Boolean)),
   ];
@@ -40,16 +39,22 @@ const Menu = () => {
       ? groupedMenu
       : groupedMenu.filter(section => section.categoryKey === activeCategory);
 
-  if (loading) return <div className={css.loading}>Loading...</div>;
+  if (loading) return <div className={css.loading}>Завантаження...</div>;
 
   return (
     <section className={css['menu-section']}>
       {/* {' '} */}
+
       {/* Декоративні зерна */}
+
       <div className={`${css['bean']} ${css['coffee-bean1']}`}></div>
+
       <div className={`${css['bean']} ${css['coffee-bean2']}`}></div>
+
       <div className={`${css['bean']} ${css['coffee-bean3']}`}></div>
+
       <div className={`${css['bean']} ${css['coffee-bean4']}`}></div>
+
       <div className={`${css['bean']} ${css['coffee-bean5']}`}></div>
       <div className={css['menu-container']}>
         <header className={css['menu-header']}>
@@ -63,7 +68,9 @@ const Menu = () => {
               onClick={() => setActiveCategory(catKey)}
               className={`${css['filter-btn']} ${activeCategory === catKey ? css.active : ''}`}
             >
-              {t(`categories.${catKey}`)}
+              {catKey === 'all'
+                ? t('categories.all')
+                : t(`categories.${catKey}`)}
             </button>
           ))}
         </nav>
@@ -80,37 +87,47 @@ const Menu = () => {
                 </h3>
 
                 <div className={css['items-grid']}>
-                  {section.items.map(item => (
-                    <div key={item._id} className={css['menu-item']}>
-                      <div className={css['item-photo-wrapper']}>
-                        <img
-                          src={item.img}
-                          alt={item.key}
-                          className={css['item-photo']}
-                        />
-                      </div>
-                      <div className={css['item-content']}>
-                        <div className={css['item-header-row']}>
-                          <h4 className={css['item-name']}>
-                            {t(`items.${item.key}.name`)}
-                          </h4>
-                          <span className={css['item-price']}>
-                            {item.price} ₴
-                          </span>
+                  {section.items.map(item => {
+                    // ВАЖЛИВО: Використовуємо item.Key з великої літери
+                    const itemKey = item.Key || item.key;
+
+                    return (
+                      <div key={item._id} className={css['menu-item']}>
+                        <div className={css['item-photo-wrapper']}>
+                          <img
+                            src={item.img || 'https://via.placeholder.com/150'}
+                            alt={itemKey}
+                            className={css['item-photo']}
+                          />
                         </div>
-                        <p className={css['item-description']}>
-                          {t(`items.${item.key}.desc`)}
-                        </p>
+                        <div className={css['item-content']}>
+                          <div className={css['item-header-row']}>
+                            <h4 className={css['item-name']}>
+                              {/* Якщо t() поверне шлях, виведемо сам ключ для зручності */}
+                              {t(`items.${itemKey}.name`) !==
+                              `items.${itemKey}.name`
+                                ? t(`items.${itemKey}.name`)
+                                : itemKey}
+                            </h4>
+                            <span className={css['item-price']}>
+                              {item.price} ₴
+                            </span>
+                          </div>
+                          <p className={css['item-description']}>
+                            {t(`items.${itemKey}.desc`) !==
+                            `items.${itemKey}.desc`
+                              ? t(`items.${itemKey}.desc`)
+                              : ''}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ))
           ) : (
-            <div className={css['no-data']}>
-              Меню порожнє. Перевірте базу даних Compass!
-            </div>
+            <div className={css['no-data']}>Меню порожнє.</div>
           )}
         </div>
       </div>

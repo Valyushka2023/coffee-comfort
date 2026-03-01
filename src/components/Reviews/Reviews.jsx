@@ -1,79 +1,58 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StarIcon } from '../Icons';
+import PropTypes from 'prop-types';
+import StarRating from '../StarRating/StarRating.jsx';
 import Avatar from '../Ui/Avatars/Avatar.jsx';
+import Button from '../Ui/Buttons/BaseButton/Button.jsx';
+import { fetchReviewsRequest } from '../../services/api.js';
 import css from './Reviews.module.css';
 
-// 1. ПРИБРАЛИ імпорт FormReview звідси, бо він тепер в App.jsx
-
-const Reviews = () => {
+const Reviews = ({ refreshTrigger }) => {
   const { t, i18n } = useTranslation('reviews');
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(3);
 
-  const currentLang = i18n.language;
-
-  const fetchReviews = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch('http://localhost:5001/api/reviews');
-      if (!response.ok) throw new Error(`Server error: ${response.status}`);
-      const data = await response.json();
-      setReviews(data);
-    } catch (err) {
-      console.error('Помилка при завантаженні відгуків:', err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const currentLang = i18n.language || 'uk';
 
   useEffect(() => {
-    fetchReviews();
-  }, [fetchReviews]);
+    const loadReviews = async () => {
+      try {
+        const data = await fetchReviewsRequest();
+        const sortedData = data.sort(
+          (a, b) =>
+            new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date)
+        );
+        setReviews(sortedData);
+      } catch (err) {
+        console.error('Помилка завантаження відгуків:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadReviews();
+  }, [refreshTrigger]);
 
-  const renderStars = useCallback(rating => {
-    return [...Array(5)].map((_, i) => (
-      <StarIcon
-        key={i}
-        size={18}
-        color="var(--color-latte-coffee)"
-        fill={i < rating ? 'var(--color-amber)' : 'none'}
-      />
-    ));
-  }, []);
-
-  const getLocalizedField = (field, lang) => {
-    if (!field) return '';
-    return field[lang] || field.en || field.uk || '';
-  };
-
-  const formatDate = (dateString, lang) => {
+  const formatDate = dateString => {
     if (!dateString) return '';
-    try {
-      const date = new Date(dateString);
-      return new Intl.DateTimeFormat(lang === 'uk' ? 'uk-UA' : 'en-US', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      }).format(date);
-    } catch {
-      return dateString;
-    }
+    const date = new Date(dateString);
+    return date.toLocaleDateString(currentLang === 'uk' ? 'uk-UA' : 'en-US', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
   };
 
   return (
-    <section className={css['reviews-section']}>
-      {[1, 2, 3, 4, 5].map(n => (
-        <div
-          key={n}
-          className={`${css['bean']} ${css[`coffee-bean${n}`]}`}
-        ></div>
-      ))}
+    <section id="reviews" className={css['reviews-section']}>
+      {/* Декоративні елементи */}
+      <div className={`${css['bean']} ${css['coffee-bean1']}`}></div>
+      <div className={`${css['bean']} ${css['coffee-bean2']}`}></div>
+      <div className={`${css['bean']} ${css['coffee-bean3']}`}></div>
+      <div className={`${css['bean']} ${css['coffee-bean4']}`}></div>
+      <div className={`${css['bean']} ${css['coffee-bean5']}`}></div>
 
       <div className={css['reviews-container']}>
-        {/* --- 2. ПРИБРАЛИ "АДМІН-ЗОНУ" З ФОРМОЮ ЗВІДСИ --- */}
-        {/* Форма тепер викликається з футера і рендериться в App.jsx */}
-
         <div className={css['reviews-header']}>
           <h2 className={css['reviews-title']}>
             {t('title', 'What Customers Say')}
@@ -97,61 +76,108 @@ const Reviews = () => {
 
         <div className={css['reviews-grid']}>
           {isLoading ? (
-            <div className={css['loading-container']}>
-              <p className={css['loading-text']}>
-                {t('loading', 'Loading reviews...')}
-              </p>
-            </div>
+            <p className={css['loading-text']}>
+              {t('loading', 'Завантаження...')}
+            </p>
           ) : reviews.length > 0 ? (
-            reviews.map(rev => (
-              <div key={rev._id || rev.id} className={css['reviews-card']}>
-                <div className={css['card-glow']}></div>
-                <div className={css['rating-row']}>
-                  <div className={css['rating']}>{renderStars(rev.rating)}</div>
-                  <span className={css['reviews-date']}>
-                    {formatDate(rev.date, currentLang)}
-                  </span>
-                </div>
-                <p className={css['reviews-text']}>
-                  {getLocalizedField(rev.text, currentLang)}
-                </p>
-                <div className={css['user-footer']}>
-                  <div className={css['user-info']}>
-                    <Avatar
-                      name={getLocalizedField(rev.name, currentLang)}
-                      src={rev.avatar}
-                      lang={currentLang}
+            reviews.slice(0, visibleCount).map(rev => {
+              const reviewText =
+                typeof rev.text === 'object'
+                  ? rev.text[currentLang] || rev.text.uk || ''
+                  : rev.text;
+              const reviewName =
+                typeof rev.name === 'object'
+                  ? rev.name[currentLang] || rev.name.uk || 'Guest'
+                  : rev.name;
+
+              return (
+                <div key={rev._id} className={css['reviews-card']}>
+                  {/* Новий блок з використанням StarRating */}
+                  <div className={css['rating-wrapper']}>
+                    <StarRating
+                      value={rev.rating}
+                      readOnly={true}
+                      size={20}
+                      accessible={false}
                     />
-                    <span className={css['reviews-name']}>
-                      {getLocalizedField(rev.name, currentLang)}
-                    </span>
+                  </div>
+
+                  <p className={css['reviews-text']}>{reviewText}</p>
+
+                  <div className={css['user-footer']}>
+                    <div className={css['user-info']}>
+                      <Avatar
+                        name={reviewName}
+                        src={rev.avatar}
+                        lang={currentLang}
+                      />
+                      <div className={css['user-data']}>
+                        <span className={css['reviews-name']}>
+                          {reviewName}
+                        </span>
+                        <span className={css['reviews-date']}>
+                          {formatDate(rev.createdAt || rev.date)}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
-            <p className={css['no-data']}>
-              {t('no_reviews', 'No reviews yet.')}
+            <p className={css['no-reviews']}>
+              {t('no_reviews', 'Відгуків немає.')}
             </p>
           )}
         </div>
 
+        {!isLoading && (
+          <div className={css['more-btn-container']}>
+            {visibleCount < reviews.length && (
+              <Button
+                className={css['google-button']}
+                onClick={() => setVisibleCount(prev => prev + 3)}
+              >
+                {t('show_more', 'ПОКАЗАТИ ЩЕ')}
+              </Button>
+            )}
+
+            {visibleCount > 3 && (
+              <Button
+                className={`${css['google-button']} ${css['collapse-btn-fix']}`}
+                onClick={() => {
+                  setVisibleCount(3);
+                  document
+                    .getElementById('reviews')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {t('show_less', 'ЗГОРНУТИ')}
+              </Button>
+            )}
+          </div>
+        )}
+
         <div className={css['reviews-external']}>
           <p className={css['external-text']}>
-            {t('google_cta', 'Want to see more reviews?')}
+            {t('google_cta', 'Хочете побачити більше відгуків?')}
           </p>
           <a
-            href="https://maps.google.com"
+            href="https://maps.app.goo.gl/16xy81HUaZzXno4s9"
             target="_blank"
             rel="noopener noreferrer"
             className={css['google-button']}
           >
-            <span>{t('read_on_google', 'Read all reviews on Google')}</span>
+            {t('read_on_google', 'Читати всі відгуки в Google')}
           </a>
         </div>
       </div>
     </section>
   );
+};
+
+Reviews.propTypes = {
+  refreshTrigger: PropTypes.number.isRequired,
 };
 
 export default Reviews;

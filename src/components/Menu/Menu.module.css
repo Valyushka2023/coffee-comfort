@@ -96,16 +96,6 @@
   transform: rotate(-45deg);
 }
 
-/* .dark-theme .bean {
-  opacity: 0.3;
-  filter: brightness(1.2) contrast(1.1);
-} */
-
-/* .dark-theme .bean {
-  opacity: 0.8; 
-  filter: brightness(1.5) contrast(1.2); 
-} */
-
 .dark-theme .bean {
   opacity: 0.9;
   filter: brightness(2) contrast(1.1)
@@ -115,10 +105,7 @@
   opacity: 0.2;
   filter: blur(0.1875rem) brightness(1.8);
 }
-/* .dark-theme .coffee-bean3 {
-  opacity: 0.6;
-  filter: blur(0.05rem) brightness(2);
-} */
+
 .menu-container {
   position: relative;
   z-index: 1;
@@ -144,7 +131,6 @@
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  /* color: var(--primary-color); */
 }
 
 .line {
@@ -424,13 +410,3 @@
     opacity: 0.03;
   }
 }
-
-/* .dark-theme .bean {
-  opacity: 0.3;
-  filter: brightness(1.2) contrast(1.1);
-}
-
-.dark-theme .coffee-bean3 {
-  opacity: 0.2;
-  filter: blur(3px) brightness(1.8);
-} */

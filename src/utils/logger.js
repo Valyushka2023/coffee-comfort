@@ -1,15 +1,53 @@
-import pino from 'pino';
+// const isBrowser = typeof window !== 'undefined';
 
-const logger = pino({
-  level: process.env.LOG_LEVEL || 'info',
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      colorize: true,
-      translateTime: 'SYS:yyyy-mm-dd HH:MM:ss Z',
-      ignore: 'pid,hostname',
-    },
-  },
-});
+// const getLogLevel = () => {
+//   try {
+//     if (isBrowser) {
+//       return import.meta.env.VITE_LOG_LEVEL || 'info';
+//     }
+//     return process.env.VITE_LOG_LEVEL || 'info';
+//   } catch {
+//     return 'info';
+//   }
+// };
+
+// const LOG_LEVEL = getLogLevel();
+
+// const logger = {
+//   info: (msg, ...args) =>
+//     LOG_LEVEL === 'info' && console.log(`ℹ️ [INFO]: ${msg}`, ...args),
+//   error: (msg, ...args) => console.error(`❌ [ERROR]: ${msg}`, ...args),
+// };
+
+// export default logger;
+/**/
+const isBrowser = typeof window !== 'undefined';
+
+const getLogLevel = () => {
+  // 1. Якщо ми в браузері (Vite)
+  if (isBrowser) {
+    try {
+      // Використовуємо рядок для доступу, щоб Node.js не аналізував це
+      return import.meta.env?.VITE_LOG_LEVEL || 'info';
+    } catch {
+      return 'info';
+    }
+  }
+
+  // 2. Якщо ми на сервері (Node.js)
+  try {
+    return process.env?.VITE_LOG_LEVEL || 'info';
+  } catch {
+    return 'info';
+  }
+};
+
+const LOG_LEVEL = getLogLevel();
+
+const logger = {
+  info: (msg, ...args) =>
+    LOG_LEVEL === 'info' && console.log(`ℹ️ [INFO]: ${msg}`, ...args),
+  error: (msg, ...args) => console.error(`❌ [ERROR]: ${msg}`, ...args),
+};
 
 export default logger;

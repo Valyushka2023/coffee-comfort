@@ -1,1 +1,101 @@
-/* 
+/* 1. Основний контейнер */
+.wrapper,
+.label-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  /* margin-bottom: 10px; */
+}
+
+/* 2. Заголовок (Label) */
+.label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-form-review-color);
+  text-transform: none;
+}
+
+/* Специфічний селектор для глобальних стилів форми, якщо потрібно */
+/* .form :global([class*='label']) {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  
+} */
+
+/* 3. Контейнер для зірок та інпуту */
+.field-input-and-field-error {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+  /* padding: 5px 0; */
+  width: max-content;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+/* Стан помилки (рамка знизу) */
+.field-error,
+.stars.field-error {
+  border-bottom-color: var(--error-color, #ff4d4d);
+}
+
+/* 4. Стилі окремої зірки */
+.star {
+  display: inline-flex;
+  line-height: 0;
+  outline: none;
+  border-radius: 4px;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+
+  /* Базовий стан (порожня зірка) */
+  color: var(--star-inactive-default, #948f8f);
+  opacity: 0.65;
+}
+
+/* Стан заповненої зірки */
+.star.filled {
+  color: var(--star-active-default, #ffcc33);
+  opacity: 1;
+}
+
+/* 5. Інтерактивні стани (тільки якщо НЕ readOnly) */
+.wrapper:not(.readOnly) .star:hover {
+  transform: scale(1.18);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.wrapper:not(.readOnly) .star:focus-visible {
+  box-shadow: 0 0 0 2px var(--star-active-default, #ffcc33);
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* 6. Повідомлення про помилку (Popup) */
+.error-popup {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 10;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--error-color, #ff4d4d);
+  background-color: var(--body-bg-color, #1a1a1a);
+  border: 1px solid var(--error-color, #ff4d4d);
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  margin-top: 4px;
+}

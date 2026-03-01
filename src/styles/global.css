@@ -1,7 +1,8 @@
 /* Базові стилі всього додатка */
-* {
-  box-sizing: border-box;
-}
+@import './variables.css';
+@import './reset.css';
+
+/* Скидання стилів (Reset) */
 *,
 *::before,
 *::after {
@@ -11,118 +12,114 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Inter, sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
-  letter-spacing: normal;
+  color: #333; /* Базовий колір тексту */
+  background-color: #fff;
 }
 
-/* .inputWrapper {
-  position: relative;
-  width: 100%;
-} */
-.input-wrapper {
-  position: relative;
-  width: 100%;
+/* --- ТИПОГРАФІКА --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin-top: 0; /* Прибираємо верхні відступи для передбачуваності */
 }
 
-/* Посилання */
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Кнопки */
-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
-/* Заголовки */
 h1 {
   margin-bottom: 1rem;
   font-size: 3rem;
   font-weight: 600;
 }
-
 h2 {
   font-size: 1.5rem;
   font-weight: 600;
 }
-
 h3 {
   font-size: 1.25rem;
   font-weight: 600;
 }
-
 h4 {
   font-size: 1rem;
   font-weight: 500;
 }
-
-h5 {
-  font-size: 1rem;
-}
-
-/* Текст */
 p {
   font-size: 1rem;
 }
-html {
-  scroll-behavior: smooth;
+
+/* --- ПОСИЛАННЯ ТА КНОПКИ --- */
+a,
+button {
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease; /* Трохи швидша анімація зазвичай приємніша */
 }
 
-/* Додатково: щоб при скролі до секції заголовок її не перекривав */
-section {
-  scroll-margin-top: 80px; /* Налаштуйте під фактичну висоту вашого хедера */
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
 }
-/* Робимо стрілки видимими та більшими */
+
+.btn-global-style {
+  height: var(--btn-height);
+  min-width: var(--btn-min-width);
+  padding: 0 1.5rem;
+  border-radius: var(--btn-radius);
+  font-size: var(--btn-font-size);
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background-color: var(--color-amber); /* Приклад застосування кольору */
+}
+
+/* --- ДОПОМІЖНІ КЛАСИ --- */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+/* --- DATEPICKER СТИЛІ --- */
+/* Тут я залишив ваші стилі, вони специфічні для бібліотеки */
 .react-datepicker__navigation {
   top: 10px !important;
 }
-
 .react-datepicker__navigation-icon::before {
-  border-color: #5d4037 !important; /* Кавовий колір для стрілок */
+  border-color: #5d4037 !important;
   border-width: 2px 2px 0 0 !important;
 }
 
-/* Якщо стрілки все одно ховаються */
-.react-datepicker__navigation--previous {
-  left: 10px !important;
-}
-
-.react-datepicker__navigation--next {
-  right: 10px !important;
-}
-/* Анімація для всього тексту на сайті */
-p,
-span,
-h1,
-h2,
-h3,
-h4,
-a,
-button,
-li {
-  /* Анімація спрацьовуватиме при кожній зміні вмісту */
+/* --- АНІМАЦІЯ ПРИ ЗМІНІ МОВИ --- */
+/* Обмежимо анімацію, щоб вона не спрацьовувала на кожен клік, 
+   а лише коли змінюється контент (це працюватиме через React key) */
+.language-transition {
   animation: languageFade 0.4s ease-out;
 }
 
 @keyframes languageFade {
   0% {
     opacity: 0.5;
-    filter: blur(1px); /* Легке розмиття додає преміальності */
+    filter: blur(1px);
   }
   100% {
     opacity: 1;
     filter: blur(0);
   }
-}
-
-/* Захист від зсуву вбік (якщо з'являється скролбар) */
-html {
-  scrollbar-gutter: stable;
-}
-html {
-  scroll-behavior: smooth;
 }

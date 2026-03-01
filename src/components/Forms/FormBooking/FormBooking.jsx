@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import useForm from '../../../hooks/useForm.js';
 import clsx from 'clsx';
@@ -8,60 +8,50 @@ import uk from 'date-fns/locale/uk';
 import en from 'date-fns/locale/en-US';
 import { sendBookingRequest } from '../../../services/api.js';
 import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
+import {
+  validateName,
+  validateEmail,
+  validatePhone,
+  validateRequired,
+  validateComment,
+} from '../../../utils/index.js';
 import css from './FormBooking.module.css';
 
 registerLocale('uk', uk);
 registerLocale('en', en);
 
-function FormBooking() {
+const initialState = {
+  name: '',
+  email: '',
+  phone: '',
+  bookingStartDate: null,
+  comment: '',
+};
+
+const FormBooking = () => {
+  // const { t, i18n } = useTranslation();
   const { t, i18n } = useTranslation('form_booking');
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const initialState = {
-    name: '',
-    email: '',
-    bookingStartDate: null,
-    comment: '',
-    phone: '',
-  };
-
-  const validationRules = {
-    name: value =>
-      !value.trim()
-        ? t('errors.required', 'Field is required')
-        : value.length < 2 || value.length > 20
-          ? t('errors.name_length', 'Name must be 2-20 characters')
-          : null,
-    email: value =>
-      !value.trim()
-        ? t('errors.required', 'Field is required')
-        : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-          ? t('errors.invalid_email', 'Invalid email')
-          : null,
-    phone: value =>
-      !value.trim()
-        ? t('errors.required', 'Field is required')
-        : !/^\+?\d{10,15}$/.test(value)
-          ? t('errors.invalid_phone', 'Invalid phone')
-          : null,
-    bookingStartDate: value =>
-      !value ? t('errors.required', 'Field is required') : null,
-    comment: value =>
-      !value || !value.trim()
-        ? t('errors.required', 'Field is required')
-        : value.length > 150
-          ? t('errors.comment_too_long', 'Comment too long')
-          : null,
-  };
+  // Описуємо правила валідації всередині компонента, щоб мати доступ до 't'
+  const validationRules = useMemo(
+    () => ({
+      name: v => validateName(v, t),
+      email: v => validateEmail(v, t),
+      phone: v => validatePhone(v, t),
+      bookingStartDate: v => validateRequired(v, t),
+      comment: v => validateComment(v, t, true),
+    }),
+    [t]
+  );
 
   const onSubmit = async formData => {
     const bookingData = {
-      camperId: '64f1a2b3c4d5e6f7a8b9c0d1',
+      camperId: '64f1a2b3c4d5e6f7a8b9c0d1', // Замініть на реальний ID, якщо потрібно
       name: formData.name.trim(),
       email: formData.email.trim(),
       phone: formData.phone.trim(),
       comment: formData.comment.trim(),
-      // Використовуємо .toISOString() для гарантованої валідації на бекенді
       bookingStartDate: formData.bookingStartDate
         ? formData.bookingStartDate.toISOString()
         : null,
@@ -77,6 +67,7 @@ function FormBooking() {
         'Деталі помилки від сервера:',
         error.response?.data || error.message
       );
+      throw error; // Передаємо помилку в useForm для відображення submissionError
     }
   };
 
@@ -95,18 +86,14 @@ function FormBooking() {
   const getMinTime = selectedDate => {
     const date = selectedDate || new Date();
     const min = new Date(date);
-
-    // Якщо вибрано сьогодні — обмежуємо поточним часом, але не раніше 09:00
     if (date.toDateString() === new Date().toDateString()) {
       const now = new Date();
       if (now.getHours() < 9) {
         min.setHours(9, 0, 0);
       } else {
-        // Дозволяємо вибирати час на 15-30 хв вперед від поточного
         min.setHours(now.getHours(), now.getMinutes(), 0);
       }
     } else {
-      // Для майбутніх днів — завжди з 09:00
       min.setHours(9, 0, 0);
     }
     return min;
@@ -115,7 +102,7 @@ function FormBooking() {
   const getMaxTime = selectedDate => {
     const date = selectedDate || new Date();
     const max = new Date(date);
-    max.setHours(23, 0, 0); // Ресторан працює до 23:00
+    max.setHours(23, 0, 0);
     return max;
   };
 
@@ -201,7 +188,6 @@ function FormBooking() {
           </div>
         ))}
 
-        {/* Date Picker */}
         <div className={css['label-input-wrapper']}>
           <label htmlFor="booking-start-date" className={css['label']}>
             {t('date_label')}*
@@ -216,7 +202,9 @@ function FormBooking() {
               id="booking-start-date"
               selected={formData.bookingStartDate}
               onChange={date => handleDateChange(date, 'bookingStartDate')}
-              locale={i18n.language === 'ua' ? 'uk' : 'en'}
+              locale={
+                i18n.language === 'ua' || i18n.language === 'uk' ? 'uk' : 'en'
+              }
               showTimeSelect
               minTime={getMinTime(formData.bookingStartDate)}
               maxTime={getMaxTime(formData.bookingStartDate)}
@@ -239,7 +227,6 @@ function FormBooking() {
           </div>
         </div>
 
-        {/* Comment Block */}
         <div className={css['label-area-wrapper']}>
           <div className={css['label-and-counter-wrapper']}>
             <label htmlFor="user-comment" className={css['label']}>
@@ -275,9 +262,7 @@ function FormBooking() {
 
       <div className={css['element-sending']}>
         <Button variant="primary" type="submit" disabled={isSubmitting}>
-          {isSubmitting
-            ? t('sending_button', 'Sending...')
-            : t('errors.send', 'Send')}
+          {isSubmitting ? t('sending', 'Sending...') : t('send_button', 'Send')}
         </Button>
         {submissionError && (
           <p className={clsx(css['error-popup'], css['general-error-popup'])}>
@@ -287,186 +272,6 @@ function FormBooking() {
       </div>
     </form>
   );
-}
+};
 
 export default FormBooking;
-
-/**/
-// import { useState } from 'react';
-// import { useTranslation } from 'react-i18next';
-// import useForm from '../../../hooks/useForm.js';
-// import clsx from 'clsx';
-// import { format } from 'date-fns';
-// import { sendBookingRequest } from '../../../services/api.js';
-// import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
-// import css from './FormBooking.module.css';
-
-// function FormBooking() {
-//   const { t } = useTranslation('form_booking');
-//   const [isSuccess, setIsSuccess] = useState(false);
-
-//   const initialState = {
-//     name: '',
-//     email: '',
-//     bookingStartDate: '',
-//     comment: '',
-//     phone: '',
-//   };
-
-//   const validationRules = {
-//     name: value =>
-//       !value?.trim()
-//         ? t('errors.required')
-//         : value.length < 2
-//           ? t('errors.name_length')
-//           : null,
-//     email: value =>
-//       !value?.trim()
-//         ? t('errors.required')
-//         : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-//           ? t('errors.invalid_email')
-//           : null,
-//     phone: value =>
-//       !value?.trim()
-//         ? t('errors.required')
-//         : !/^\+?\d{10,15}$/.test(value)
-//           ? t('errors.invalid_phone')
-//           : null,
-//     bookingStartDate: value => (!value ? t('errors.required') : null),
-//     comment: value =>
-//       !value?.trim()
-//         ? t('errors.required')
-//         : value.length > 150
-//           ? t('errors.comment_too_long')
-//           : null,
-//   };
-
-//   const onSubmit = async formData => {
-//     const formattedDate = formData.bookingStartDate
-//       ? format(new Date(formData.bookingStartDate), 'yyyy-MM-dd HH:mm')
-//       : '';
-
-//     const bookingData = {
-//       camperId: '64f1a2b3c4d5e6f7a8b9c0d1', // Переконайтеся, що ID валідний
-//       name: formData.name.trim(),
-//       email: formData.email.trim(),
-//       phone: formData.phone.trim(),
-//       comment: formData.comment.trim(),
-//       bookingStartDate: formattedDate,
-//       bookingEndDate: formattedDate,
-//     };
-
-//     // Видалено непотрібний try/catch за порадою ESLint
-//     const response = await sendBookingRequest(bookingData);
-//     if (response) setIsSuccess(true);
-//   };
-
-//   const {
-//     formData,
-//     errors,
-//     isSubmitting,
-//     hasAttemptedSubmit,
-//     submissionError,
-//     handleInputChange,
-//     handleSubmit,
-//   } = useForm(initialState, validationRules, onSubmit);
-
-//   // Виправлення ESLint: використовуємо closingTime
-//   const getMinDateTime = () => {
-//     const now = new Date();
-//     const closingTime = new Date(new Date().setHours(23, 0, 0));
-
-//     // Якщо зараз пізніше за годину закриття, мінімум - завтра ранок
-//     return now > closingTime
-//       ? new Date(new Date().setDate(now.getDate() + 1))
-//           .toISOString()
-//           .slice(0, 16)
-//       : now.toISOString().slice(0, 16);
-//   };
-
-//   if (isSuccess) {
-//     return (
-//       <div className={css['success-container']}>
-//         <h3 className={css['title-form']}>{t('success_title')}</h3>
-//         <Button variant="primary" onClick={() => window.location.reload()}>
-//           {t('back_button')}
-//         </Button>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <form className={css['form']} onSubmit={handleSubmit} noValidate>
-//       <div className={css['title-text-form']}>
-//         <h3 className={css['title-form']}>{t('title')}</h3>
-//         <p className={css['text-form']}>{t('text')}</p>
-//       </div>
-
-//       <div className={css['inputs-area-form']}>
-//         {['name', 'email', 'phone'].map(name => (
-//           <div key={name} className={css['label-input-wrapper']}>
-//             <input
-//               name={name}
-//               placeholder={t(`${name}_placeholder`)}
-//               className={clsx(
-//                 css['field-input'],
-//                 hasAttemptedSubmit && errors[name] && css['field-error']
-//               )}
-//               value={formData[name]}
-//               onChange={handleInputChange}
-//             />
-//             {hasAttemptedSubmit && errors[name] && (
-//               <p className={css['error-popup']}>{errors[name]}</p>
-//             )}
-//           </div>
-//         ))}
-
-//         <div className={css['label-input-wrapper']}>
-//           <input
-//             name="bookingStartDate"
-//             type="datetime-local"
-//             min={getMinDateTime()}
-//             className={clsx(
-//               css['field-input'],
-//               hasAttemptedSubmit &&
-//                 errors.bookingStartDate &&
-//                 css['field-error']
-//             )}
-//             value={formData.bookingStartDate}
-//             onChange={handleInputChange}
-//           />
-//           {hasAttemptedSubmit && errors.bookingStartDate && (
-//             <p className={css['error-popup']}>{errors.bookingStartDate}</p>
-//           )}
-//         </div>
-
-//         <div className={css['label-area-wrapper']}>
-//           <textarea
-//             name="comment"
-//             placeholder={t('comment_placeholder')}
-//             className={clsx(
-//               css['field-area'],
-//               hasAttemptedSubmit && errors.comment && css['field-error']
-//             )}
-//             value={formData.comment}
-//             onChange={handleInputChange}
-//           />
-//           {hasAttemptedSubmit && errors.comment && (
-//             <p className={css['error-popup']}>{errors.comment}</p>
-//           )}
-//         </div>
-//       </div>
-
-//       <div className={css['element-send']}>
-//         <Button variant="primary" type="submit" disabled={isSubmitting}>
-//           {isSubmitting ? t('sending_button') : t('errors.send')}
-//         </Button>
-//         {submissionError && (
-//           <p className={css['error-popup']}>{submissionError}</p>
-//         )}
-//       </div>
-//     </form>
-//   );
-// }
-
-// export default FormBooking;

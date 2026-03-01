@@ -168,6 +168,7 @@ import heroEN from '../locales/en/hero.json';
 import menuEN from '../locales/en/menu.json';
 import galleryEN from '../locales/en/gallery.json';
 import reviewsEN from '../locales/en/reviews.json';
+import reviewModalEN from '../locales/en/review_modal.json';
 import contactsEN from '../locales/en/contacts.json';
 import footerEN from '../locales/en/footer.json';
 import aboutModalEN from '../locales/en/about_modal.json';
@@ -203,6 +204,7 @@ import heroUK from '../locales/uk/hero.json';
 import menuUK from '../locales/uk/menu.json';
 import galleryUK from '../locales/uk/gallery.json';
 import reviewsUK from '../locales/uk/reviews.json';
+import reviewModalUK from '../locales/uk/review_modal.json';
 import contactsUK from '../locales/uk/contacts.json';
 import footerUK from '../locales/uk/footer.json';
 import aboutModalUK from '../locales/uk/about_modal.json';
@@ -239,6 +241,7 @@ const resources = {
     menu: menuEN,
     gallery: galleryEN,
     reviews: reviewsEN,
+    review_modal: reviewModalEN,
     contacts: contactsEN,
     footer: footerEN,
     about_modal: aboutModalEN,
@@ -268,6 +271,7 @@ const resources = {
     menu: menuUK,
     gallery: galleryUK,
     reviews: reviewsUK,
+    review_modal: reviewModalUK,
     contacts: contactsUK,
     footer: footerUK,
     about_modal: aboutModalUK,

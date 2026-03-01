@@ -1,0 +1,70 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+.rating-field-container {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+
+.inputs-area-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  width: 100%;
+}
+
+.field-input-and-field-error {
+  position: relative;
+  width: 100%;
+}
+
+.field-input,
+.field-area {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background-color: var(--field-input-area-review-br-color);
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  color: var(--text-input-area-color);
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.field-input:focus,
+.field-area:focus {
+  outline: none;
+  border-color: var(--hover-input-area-color);
+}
+
+.field-error {
+  border-color: var(--error-color) !important;
+}
+
+.element-sending {
+  width: 100%;
+  max-width: 220px;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.error-popup {
+  position: absolute;
+  top: 100%;
+  left: 0.5rem;
+  z-index: 10;
+  color: var(--error-color);
+  font-size: 0.75rem;
+  background: var(--body-bg-color);
+  padding: 2px 8px;
+  border: 1px solid var(--error-color);
+  border-radius: 4px;
+  pointer-events: none;
+}

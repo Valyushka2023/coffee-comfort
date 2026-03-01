@@ -71,7 +71,7 @@
 }
 
 .text-form {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   color: var(--text-reviews-color);
   opacity: 0.8;
@@ -153,7 +153,7 @@
   font-size: 1rem;
   text-align: left;
   white-space: normal;
-  color: var(--text-form-color);
+  color: var(--text-form-booking-color);
   overflow-wrap: break-word;
 }
 
@@ -186,7 +186,7 @@
 
 .field-input::placeholder {
   font-size: 1rem;
-  color: var(--placeholder-color);
+  color: var(--placeholder-booking-color);
   opacity: 1;
 }
 
@@ -259,7 +259,7 @@
 
 .field-area::placeholder {
   font-size: 1rem;
-  color: var(--placeholder-color);
+  color: var(--placeholder-booking-color);
   opacity: 1;
 }
 

@@ -2,23 +2,19 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Loader from '../Ui/Loader/Loader.jsx';
 
+// Ліниве завантаження головної сторінки
 const Home = lazy(() => import('../../pages/Home/Home.jsx'));
 
 function App() {
-  const handleOpenReview = () => {
-    console.log('Відкриваємо відгуки');
-  };
-
   return (
     <Router>
-      {/* ПРИБИРАЄМО key={i18n.language} */}
       <main className="page-fade">
         <Suspense fallback={<Loader type="container" />}>
           <Routes>
-            <Route
-              path="/"
-              element={<Home onOpenReview={handleOpenReview} />}
-            />
+            {/* Home тепер сам керує модалками, 
+               тому пропси onOpenReview більше не потрібні 
+            */}
+            <Route path="/" element={<Home />} />
           </Routes>
         </Suspense>
       </main>

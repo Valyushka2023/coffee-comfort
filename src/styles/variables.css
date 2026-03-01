@@ -1,6 +1,26 @@
 /* CSS-змінні */
 
 :root {
+  /* Overlay */
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+  --overlay-blur: 4px;
+  /* --- ДИЗАЙН-СИСТЕМА КНОПОК --- */
+  --btn-height: 48px;
+  --btn-radius: 2rem;
+  --btn-font-size: 0.875rem;
+  --btn-min-width: 220px;
+
+  /* --- ПАЛІТРА КОЛЬОРІВ --- */
+  --color-amber: #d4a373;
+  --color-gray-dark: #4a4a4a;
+  --color-gray-light: #918989;
+  --color-star-active: #ffcc33; /* Глобальний колір зірок */
+
+  /* --- СЕМАНТИЧНІ ЗМІННІ РЕЙТИНГУ --- */
+  /* Ці змінні можна буде перевизначати в окремих файлах */
+  --star-active-default: var(--color-star-active);
+  --star-inactive-default: var(--color-gray-light);
+
   /* Dimensions */
 
   /* padding */
@@ -90,6 +110,7 @@
   /* Elements whose colors do not change */
 
   --hover-bg-color: #d4a373;
+
   --hover-color: #d4a373;
   --hover-input-area-color: #fff;
   /* --hover-button-color: #fff; */
@@ -106,6 +127,8 @@
   --underline-bg-filter-btn-color: var(--color-light-brown);
   --modal-content-bg-color: var(--color-light-beige);
   --contact-form-bg-color: var(--color-light-brown);
+  --field-input-booking-br-color: var(--color-light-brown);
+  --field-input-area-review-br-color: var(--color-latte-coffee);
   --reviews-card-bg-color: var(--color-light-brown);
 
   /* color */
@@ -114,21 +137,24 @@
   --tertiary-color: var(--color-gray);
   --quaternary-color: var(--color-latte-coffee);
   --quinary-color: var(--color-light-brown);
-  --placeholder-color: var(--color-light-gray-50);
-
+  --placeholder-booking-color: var(--color-light-gray-50);
+  --placeholder-review-color: var(--color-light-brown-80);
   /*logo color*/
   --logo-primary-color: var(--color-light-brown);
   --logo-secondary-color: var(--color-latte-coffee);
   --steam-color: var(--color-muted-white);
 
-  /* button, button-icon color */
+  /* button, button-icon color, button-hover */
   --toggle-theme-icon-color: var(--color-light-brown);
-
+  --button-hover-bg-color: var(--color-light-brown);
+  --button-hover-color: var(--color-white);
+  --button-hover-close-color: var(--color-latte-coffee);
   --button-burger-icon-color: var(--color-light-brown);
-  --button-close-icon-color: var(--color-light-brown);
+  --button-close-icon-color: var(--color-white);
+  --button-review-close-color: var(--color-white);
   --button-cta-bg-color: var(--color-latte-coffee);
   --button-form-bg-color: var(--color-latte-coffee);
-  --button-form-color: var(--color-light-brown);
+  --button-form-color: var(--color-brown);
   --button-cta-color: var(--color-white);
   --button-up-bg-color: var(--color-latte-coffee);
   --button-up-color: var(--color-light-brown);
@@ -136,7 +162,7 @@
   --button-google-bg-color: var(--color-light-brown);
   --button-google-color: var(--color-beige);
   --button-review-bg-color: var(--color-latte-coffee);
-  --button-review-color: var(--color-dark-brown1);
+  --button-review-color: var(--color-brown);
   --filter-btn-bg-color: var(--color-latte-coffee);
   --filter-btn-color: var(--color-light-brown);
   --top-badge-bg-color: var(--color-latte-coffee);
@@ -149,9 +175,11 @@
 
   --contact-input-textarea-bg-color: var(--color-latte-coffee);
 
-  --text-form-color: var(--color-brown);
+  --text-form-booking-color: var(--color-brown);
+  --text-form-review-color: var(--color-white);
   --text-alt-color: var(--color-brown);
   --text-reviews-color: var(--color-white);
+  --text-input-area-color: var(--color-brown);
 
   /* icon, label color */
   --icon-circle-bg-color: var(--color-light-brown);
@@ -160,18 +188,7 @@
   --circle-label-color: var(--color-white);
   --reviews-card-bg-color: var(--color-light-brown);
   --reviews-text-color: var(--color-white);
-  /* --icon-map-color: #e63946;  */
-  /* Темніший червоний */
-  /* --icon-clock-color: #d4a017; */
-  /*Глибокий золотистий*/
-  /* --icon-map-color: #ef4444; */
-  /* Яскравий червоний */
-  /* --icon-clock-color: #f59e0b; */
-  /* Насичений бурштиновий */
-  /* --icon-map-color: #c2410c;  */
-  /* Теракотовий */
-  /* --icon-clock-color: #b45309;  */
-  /* Глибокий коричнево-золотий */
+
   --icon-map-color: #dc2626; /* Насичений червоний */
   --icon-clock-color: #ca8a04; /* Колір "Охра" */
   --icon-social-color: var(--color-light-brown);
@@ -185,7 +202,7 @@
   --circle-medium-border-color: var(--color-light-gray-50);
   --circle-small-border-color: var(--color-dark-gray-50);
   --input-textarea-border-color: var(--color-light-brown);
-  --button--border-color: var(--color-white);
+  --button-border-color: var(--color-white);
 
   /* box-shadow color */
   --shadow-icon-circle: var(--color-black-50);
@@ -211,6 +228,8 @@
   --underline-bg-filter-btn-color: var(--color-light-brown);
   --modal-content-bg-color: var(--color-light-beige);
   --contact-form-bg-color: var(--color-latte-coffee);
+  --field-input-booking-br-color: var(--color-latte-coffee);
+  --field-input-area-review-br-color: var(--color-light-brown);
   --reviews-card-bg-color: var(--color-latte-coffee);
 
   /* color */
@@ -219,21 +238,25 @@
   --tertiary-color: var(--color-light-beige);
   --quaternary-color: var(--color-latte-coffee);
   --quinary-color: var(--color-latte-coffee);
-  --placeholder-color: var(--color-light-brown-80);
-
+  --placeholder-booking-color: var(--color-light-brown-80);
+  --placeholder-review-color: var(--color-light-gray-50);
   /*logo color*/
   --logo-primary-color: var(--color-beige);
   --logo-secondary-color: var(--color-latte-coffee);
   --steam-color: var(--color-pure-white);
 
-  /*button, button-icon color */
+  /*button, button-icon color, button-hover */
   --toggle-theme-icon-color: var(--color-amber);
+  --button-hover-bg-color: var(--color-latte-coffee);
+  --button-hover-color: var(--color-brown);
+  --button-hover-close-color: var(--color-white);
   --button-burger-icon-color: var(--color-beige);
-  --button-close-icon-color: var(--color-beige);
+  --button-close-icon-color: var(--color-brown);
+  --button-review-close-color: var(--color-light-brown);
   --button-cta-bg-color: var(--color-latte-coffee);
   --button-cta-color: var(--color-dark-brown1);
   --button-form-bg-color: var(--color-light-brown);
-  --button-form--color: var(--color-white);
+  --button-form-color: var(--color-white);
   --filter-btn-bg-color: var(--color-latte-coffee);
   --filter-btn-color: var(--color-light-brown);
   --button-google-bg-color: var(--color-latte-coffee);
@@ -247,10 +270,12 @@
   --item-description-color: var(--color-light-gray-80);
   --contact-submit-btn-bg-color: var(--color-light-brown);
   --contact-input-textarea-bg-color: var(--color-light-brown);
-  --text-form-color: var(--color-white);
+
+  --text-form-booking-color: var(--color-white);
+  --text-form-review-color: var(--color-brown);
   --text-alt-color: var(--color-white);
   --text-reviews-color: var(--color-dark-brown1);
-
+  --text-input-area-color: var(--color-white);
   /* icon, label color */
   --icon-circle-bg-color: var(--color-gold);
   --icon-circle-color: var(--color-black);
@@ -258,16 +283,7 @@
   --circle-label-color: var(--color-black);
   --reviews-card-bg-color: var(--color-gold);
   --reviews-text-color: var(--color-black);
-  /* --icon-map-color: #ff6b6b;
-  --icon-clock-color: #ffcc33; */
-  /* --icon-map-color: #f87171; */
-  /* Пастельно-червоний */
-  /* --icon-clock-color: #fbbf24; */
-  /* Світло-жовтий */
-  /* --icon-map-color: #fb923c;  */
-  /* Оранжевий "захід сонця" */
-  /* --icon-clock-color: #fcd34d;  */
-  /* Ніжний кремовий жовтий */
+
   --icon-map-color: #ff6b6b; /*  Червоний */
   --icon-clock-color: #ffd700; /* Чисте золото */
   --icon-social-color: var(--color-latte-coffee);

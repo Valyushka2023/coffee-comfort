@@ -1,6 +1,8 @@
 {
   "title": "What Customers Say",
-
+  "loading": "Loading",
+  "show_more": "Show more",
+  "show_less": "Collapse",
   "google_cta": "Want to see more reviews?",
   "read_on_google": "Read all reviews on Google"
 }

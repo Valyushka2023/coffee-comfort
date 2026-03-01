@@ -1,5 +1,4 @@
-/* ГОЛОВНА СЕКЦІЯ */
-.footer-section {
+/* .footer-section {
   max-width: 68.75rem;
   margin: 0 auto;
   background-color: var(--header-footer-bg-color);
@@ -13,18 +12,16 @@
   line-height: 1.5;
 }
 
-/* КОНТЕЙНЕР ДЛЯ 4-Х БЛОКІВ */
 .footer-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1.875rem;
+  gap: 4.8rem;
   max-width: 68.75rem;
   margin: 0 auto;
   padding: 1.75rem 1.5rem 0.5rem 1.5rem;
 }
 
-/* СТИЛЬ ДЛЯ КОЖНОЇ З 4-Х КОЛОНОК */
 .footer-column {
   flex: 1;
   min-width: 200px;
@@ -34,7 +31,6 @@
   gap: 10px;
 }
 
-/* ЗАГОЛОВКИ БЛОКІВ */
 .column-title {
   margin: 0 0 10px 0;
   font-weight: bold;
@@ -82,7 +78,6 @@
   color: var(--hover-color);
 }
 
-/* ЕЛЕМЕНТИ ІНФОРМАЦІЇ */
 .info-item {
   display: flex;
   align-items: center;
@@ -94,7 +89,6 @@
   text-decoration: none;
 }
 
-/* ТРИГЕРИ ДЛЯ ДЗВІНКА ТА ВІДГУКУ */
 .callback-link,
 .review-trigger {
   background: none;
@@ -134,7 +128,7 @@
   transform: translateY(-3px);
   color: var(--hover-color);
 }
-/* СОЦМЕРЕЖІ */
+
 .social-icons {
   display: flex;
   gap: 15px;
@@ -151,15 +145,13 @@
   color: var(--hover-color);
 }
 
-/* РОЗДІЛЬНИК */
 .footer-divider {
   width: calc(100% - 60px);
   height: 1px;
   background-color: var(--divider-color, #444);
-  margin: 20px auto;
+  margin: 25px auto;
 }
 
-/* НИЖНЯ ЧАСТИНА */
 .footer-bottom {
   text-align: center;
   font-size: 0.8rem;
@@ -167,7 +159,6 @@
   padding-bottom: 10px;
 }
 
-/* АДАПТИВНІСТЬ */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -178,6 +169,153 @@
   .info-item,
   .callback-link,
   .review-trigger {
+    justify-content: center;
+  }
+} */
+
+/*****/
+.footer-section {
+  max-width: 68.75rem;
+  margin: 0 auto;
+  background-color: var(--header-footer-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color);
+  color: var(--tertiary-color);
+  line-height: 1.5;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4.8rem;
+  max-width: 68.75rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 0.5rem 1.5rem;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.column-title {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  letter-spacing: 0.05rem;
+}
+
+/* Базовий клас для елементів з іконками */
+.first-row,
+.location-anchor,
+.info-item,
+.callback-link,
+.review-trigger {
+  display: flex;
+  align-items: center; /* Центрує іконку та текст по вертикалі */
+  gap: 10px;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.info-item {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  min-height: 24px;
+}
+
+.callback-link,
+.review-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.trigger-icon {
+  color: var(--color-latte-coffee);
+  display: flex; /* Прибирає зайвий простір inline-елементів */
+  align-items: center;
+}
+
+/* Ефекти наведення */
+.first-row:hover,
+.location-anchor:hover,
+.callback-link:hover,
+.review-trigger:hover,
+.social-icons a:hover {
+  transform: translateY(-3px); /* Рухаємо весь блок цілком */
+  color: var(--hover-color);
+}
+
+/* Змінюємо колір іконок при ховері на батьківський елемент */
+.review-trigger:hover .trigger-icon,
+.first-row:hover svg {
+  color: var(--hover-color);
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.social-icons a {
+  color: var(--icon-social-color);
+  display: flex;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.footer-divider {
+  width: calc(100% - 60px);
+  height: 1px;
+  background-color: var(--divider-color, #444);
+  margin: 25px auto;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  padding-bottom: 10px;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .first-row,
+  .info-item,
+  .callback-link,
+  .review-trigger,
+  .location-anchor {
     justify-content: center;
   }
 }

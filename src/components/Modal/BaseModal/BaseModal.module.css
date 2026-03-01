@@ -1,0 +1,63 @@
+/* BaseModal.module.css */
+.wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--overlay-bg);
+  backdrop-filter: blur(var(--overlay-blur));
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  z-index: 10;
+  pointer-events: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.25rem;
+  width: calc(100% - 2rem);
+  max-width: 26.25rem;
+  padding: 1.8125rem 1.375rem 1.375rem;
+  background-color: var(--contact-form-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  animation: slideInUpCenter 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-reviews-color);
+  text-transform: uppercase; /* Всі заголовки великими */
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.closeBtn {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+}
+
+@keyframes slideInUpCenter {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}

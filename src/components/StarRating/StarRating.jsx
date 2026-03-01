@@ -1,122 +1,88 @@
-// import { useTranslation } from 'react-i18next';
-// import PropTypes from 'prop-types';
-// import clsx from 'clsx';
-// import css from './StarRating.module.css';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { StarIcon } from '../Icons';
+import css from './StarRating.module.css';
 
-// const StarRating = ({
-//   value,
-//   onChange,
-//   name = 'rating',
-//   totalStars = 5,
-//   size = 20,
-//   colorActive = '#ffc107',
-//   colorInactive = '#948f8fff',
-//   error,
-//   accessible = true,
-//   readOnly = false,
-// }) => {
-//   const { t } = useTranslation('star_rating');
+const StarRating = ({
+  value,
+  onChange,
+  name = 'rating',
+  totalStars = 5,
+  size = 20,
+  error,
+  accessible = true,
+  readOnly = false,
+}) => {
+  const { t } = useTranslation('star_rating');
 
-//   const handleKeyDown = event => {
-//     if (!onChange || readOnly) return;
+  const handleClick = starValue => {
+    if (readOnly || !onChange) return;
+    onChange(starValue);
+  };
 
-//     if (event.key === 'ArrowRight' && value < totalStars) {
-//       event.preventDefault();
-//       onChange(value + 1);
-//     } else if (event.key === 'ArrowLeft' && value > 0) {
-//       event.preventDefault();
-//       onChange(value - 1);
-//     } else if (event.key === 'Backspace' || event.key === 'Delete') {
-//       event.preventDefault();
-//       onChange(0);
-//     }
-//   };
+  return (
+    <div className={clsx(css['wrapper'], { [css['readOnly']]: readOnly })}>
+      {!readOnly && (
+        <label htmlFor={name} className={css['label']}>
+          {t('rating', 'Rating')}*
+        </label>
+      )}
 
-//   const handleClick = starValue => {
-//     if (readOnly || !onChange) return;
-//     if (starValue === value) {
-//       onChange(0);
-//     } else {
-//       onChange(starValue);
-//     }
-//   };
+      <div className={css['field-container']}>
+        <div
+          id={name}
+          className={clsx(css.stars, { [css['field-error']]: error })}
+          role={accessible ? 'radiogroup' : undefined}
+        >
+          {[...Array(totalStars)].map((_, i) => {
+            const starValue = i + 1;
+            const isFilled = starValue <= value;
 
-//   return (
-//     <div className={css['label-input-wrapper']}>
-//       <label htmlFor={name} className={css.label}>
-//         {t('rating')}*
-//       </label>
+            return (
+              <span
+                key={starValue}
+                className={clsx(css['star'], {
+                  [css['filled']]: isFilled,
+                  [css['empty']]: !isFilled,
+                })}
+                style={{ cursor: readOnly ? 'default' : 'pointer' }}
+                onClick={() => handleClick(starValue)}
+                /* Виправлення ESLint: додаємо обробник клавіатури */
+                onKeyDown={e => {
+                  if (readOnly) return;
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleClick(starValue);
+                  }
+                }}
+                role={accessible ? 'radio' : undefined}
+                aria-checked={accessible ? isFilled : undefined}
+                tabIndex={readOnly || !accessible ? -1 : 0}
+              >
+                <StarIcon
+                  size={size}
+                  color="currentColor"
+                  fill="currentColor"
+                />
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-//       {/* Головний контейнер для поля та помилки */}
-//       <div className={css['field-input-and-field-error']}>
-//         {/* Контейнер для інпуту (зірок). Всі атрибути доступності та стилі перенесено сюди. */}
-//         <div
-//           id={name}
-//           className={clsx(css['field-input'], {
-//             [css['field-error']]: error,
-//           })}
-//           role={accessible ? 'radiogroup' : undefined}
-//           aria-label={accessible ? t('rating') : undefined}
-//           tabIndex={accessible ? 0 : undefined}
-//           onKeyDown={accessible ? handleKeyDown : undefined}
-//           style={{
-//             '--active-star-color': colorActive,
-//             '--inactive-star-color': colorInactive,
-//           }}
-//         >
-//           {/* Контейнер самих зірок */}
-//           <div className={css.stars}>
-//             {[...Array(totalStars)].map((_, i) => {
-//               const starValue = i + 1;
-//               const isFilled = starValue <= value;
+StarRating.propTypes = {
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
+  totalStars: PropTypes.number,
+  size: PropTypes.number,
+  error: PropTypes.any,
+  accessible: PropTypes.bool,
+  readOnly: PropTypes.bool,
+};
 
-//               return (
-//                 <span
-//                   key={starValue}
-//                   className={clsx(css.star, {
-//                     [css.filled]: isFilled,
-//                     [css.empty]: !isFilled,
-//                   })}
-//                   style={{
-//                     fontSize: `${size}px`,
-//                     cursor: readOnly ? 'default' : 'pointer',
-//                   }}
-//                   role={accessible ? 'radio' : undefined}
-//                   aria-checked={accessible ? starValue === value : undefined}
-//                   onClick={() => handleClick(starValue)}
-//                   onKeyDown={e => {
-//                     if (accessible && (e.key === 'Enter' || e.key === ' ')) {
-//                       e.preventDefault();
-//                       handleClick(starValue);
-//                     }
-//                   }}
-//                 >
-//                   ★
-//                 </span>
-//               );
-//             })}
-//           </div>
-//         </div>
-
-//         {/* Приховане поле та повідомлення про помилку */}
-//         {!readOnly && <input type="hidden" name={name} value={value} />}
-//         {error && <p className={css['error-popup']}>{error}</p>}
-//       </div>
-//     </div>
-//   );
-// };
-
-// StarRating.propTypes = {
-//   value: PropTypes.number.isRequired,
-//   onChange: PropTypes.func,
-//   name: PropTypes.string,
-//   totalStars: PropTypes.number,
-//   size: PropTypes.number,
-//   colorActive: PropTypes.string,
-//   colorInactive: PropTypes.string,
-//   error: PropTypes.string,
-//   accessible: PropTypes.bool,
-//   readOnly: PropTypes.bool,
-// };
-
-// export default StarRating;
+export default StarRating;

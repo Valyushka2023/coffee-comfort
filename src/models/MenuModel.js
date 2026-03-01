@@ -1,13 +1,20 @@
 import mongoose from 'mongoose';
 
-const menuSchema = new mongoose.Schema({
-  key: { type: String, required: true }, // напр. 'americano'
-  categoryKey: { type: String, required: true }, // напр. 'drinks'
-  price: { type: Number, required: true },
-  img: { type: String, required: true },
-  top: { type: Boolean, default: false },
-  name: { type: String }, // опціонально, якщо не хочете все тримати в i18n
-  desc: { type: String },
-});
+// Схема відповідає структурі вашої бази coffee_comfort
+const menuSchema = new mongoose.Schema(
+  {
+    name: {
+      ua: { type: String, required: true },
+      en: { type: String, required: true },
+    },
+    price: { type: Number, required: true },
+    category: { type: String, required: true },
+    image: { type: String },
+  },
+  {
+    collection: 'menu', // Явно вказуємо назву колекції зі скріншота
+  }
+);
 
-export default mongoose.model('Menu', menuSchema, 'menu'); // 'menu' - назва вашої колекції в Compass
+const Menu = mongoose.model('Menu', menuSchema);
+export default Menu;

@@ -108,7 +108,9 @@
   /*************************************  */
 
   /* Elements whose colors do not change */
-
+  --form-success-bg-color: #d4a373;
+  --form-icon-success-bg-color: #5c3d2e;
+  --form-button-success-bg-color: #5c3d2e;
   --hover-bg-color: #d4a373;
 
   --hover-color: #d4a373;

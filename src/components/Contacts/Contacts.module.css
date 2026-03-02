@@ -28,6 +28,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+
   min-height: 100%;
   margin: 0;
   padding: 0;
@@ -50,6 +51,7 @@
 /* Заголовок */
 .contacts-title {
   margin-top: -0.4375rem;
+  margin-bottom: 3.5rem;
   padding-top: 0;
   line-height: 1;
   font-family: 'Playfair Display', serif;
@@ -58,22 +60,27 @@
 }
 .contacts-item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 3rem;
   font-size: 1.1rem;
   color: var(--tertiary-color);
 
   transition: color 0.3s ease;
 }
-
+.item-map {
+  display: flex;
+}
 .info-icon {
   flex-shrink: 0;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   transition:
     transform 0.3s ease,
     filter 0.3s ease;
+  margin-right: 1rem;
 }
+
 /* Адреса та години */
 .contacts-adress,
 .contacts-hours {
@@ -85,7 +92,7 @@
 }
 /* Карта */
 .contacts-map {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   overflow: hidden;
   border-radius: 1rem;
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);

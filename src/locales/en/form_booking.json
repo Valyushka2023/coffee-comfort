@@ -11,6 +11,10 @@
   "booking_start_date_placeholder": "Start date, time",
   "comment_label": "Comment",
   "comment_placeholder": "Your wishes",
+  "success_title": "Success!",
+  "success_message": "Your table is booked. We will call you back soon.",
+
+  "send": "Send",
   "errors": {
     "required": "Please fill in the field.",
     "name_length": "The name must be between 2 and 20 characters.",
@@ -18,7 +22,6 @@
     "email_too_long": "Email is too long.",
     "invalid_phone": "Incorrect phone number format.",
     "invalid_end_date": "End date and time must be after the start date and time.",
-    "comment_too_long": "The comment must be up to 150 characters long.",
-    "send": "Send"
+    "comment_too_long": "The comment must be up to 150 characters long."
   }
 }

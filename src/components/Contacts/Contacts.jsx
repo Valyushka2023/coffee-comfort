@@ -11,25 +11,26 @@ const Contacts = () => {
         {/* ЛІВА ЧАСТИНА: Інформація та Карта */}
         <div className={css['contacts-info']}>
           <h2 className={css['contacts-title']}>{t('title', 'Visit Us')}</h2>
-          <p className={css['contacts-item']}>
-            <MapPinIcon
-              size={24}
-              color="var(--icon-map-color)"
-              /* Додаємо два класи: базовий і анімаційний */
-              className={`${css['info-icon']} ${css['map-pin-animated']}`}
-            />
-            <span>{t('address', '12 Kavova St., Kyiv')}</span>
-          </p>
+          <div className={css['contacts-item']}>
+            <p className={css['item-map']}>
+              <MapPinIcon
+                size={24}
+                color="var(--icon-map-color)"
+                /* Додаємо два класи: базовий і анімаційний */
+                className={`${css['info-icon']} ${css['map-pin-animated']}`}
+              />
+              <span>{t('address', '12 Kavova St., Kyiv')}</span>
+            </p>
 
-          <p className={css['contacts-item']}>
-            <ClockIcon
-              size={24}
-              color="var(--icon-clock-color)"
-              className={css['info-icon']}
-            />
-            <span>{t('hours', 'Mon-Sun: 08:00 - 21:00')}</span>
-          </p>
-
+            <p className={css['item-clock']}>
+              <ClockIcon
+                size={24}
+                color="var(--icon-clock-color)"
+                className={css['info-icon']}
+              />
+              <span>{t('hours', 'Mon-Sun: 08:00 - 21:00')}</span>
+            </p>
+          </div>
           <div className={css['contacts-map']}>
             <iframe
               title={t('mapTitle', 'Google Maps Location')}

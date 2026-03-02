@@ -1,4 +1,3 @@
-/* Глобальні стилі для внутрішніх компонентів бібліотеки всередині твого класу */
 .datepicker-wrapper :global(.react-datepicker-wrapper) {
   display: block;
   width: 100%;
@@ -9,9 +8,7 @@
   width: 100%;
 }
 
-/* Стилізація самого інпуту всередині дейтпікера */
 .datepicker-wrapper :global(.react-datepicker__input-container) input {
-  /* Копіюємо поведінку твого .field-input */
   width: 100%;
   display: block;
   min-height: 2.5rem;
@@ -27,7 +24,6 @@
   cursor: text;
 }
 
-/* Ховер та фокус для інпуту дейтпікера */
 .datepicker-wrapper :global(.react-datepicker__input-container) input:hover {
   border: 0.0625rem solid var(--hover-input-area-color);
 }
@@ -36,12 +32,12 @@
   border-color: var(--hover-input-area-color);
 }
 
-/* Стиль для помилки саме в DatePicker */
 .datepicker-wrapper
   :global(.react-datepicker__input-container)
   :global(.field-error) {
   border-color: var(--error-color) !important;
 }
+
 .form {
   display: flex;
   flex: 1;
@@ -78,7 +74,69 @@
   max-width: 400px;
   margin: 0 auto;
 }
+.zone-selection-wrapper {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
 
+.zone-title {
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.zone-scroll {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 5px;
+  justify-content: center;
+}
+
+.zone-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.zone-card:hover {
+  transform: translateY(-2px);
+}
+
+.zone-img-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.zone-card--active .zone-img-wrapper {
+  border-color: #d4a373; /* Колір вашої кнопки */
+  box-shadow: 0 0 10px rgba(212, 163, 115, 0.5);
+}
+
+.zone-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zone-label {
+  font-size: 12px;
+  color: #fff;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+.zone-card--active .zone-label {
+  font-weight: bold;
+  color: #d4a373;
+}
 .inputs-area-form {
   width: 100%;
   padding: 1rem;
@@ -90,21 +148,90 @@
   color: var(--text-form-color);
 }
 
+.success-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
+}
+
 .success-container {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 40px 20px;
-  min-height: 400px;
-  animation: fadeIn 0.5s ease;
+  height: 100%;
+  min-height: 100%;
+  flex: 1;
+  animation: fadeIn 0.5s ease forwards;
+  background-color: var(--form-success-bg-color);
+}
+
+.bean {
+  position: absolute;
+  z-index: 3;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.coffee-bean1 {
+  top: 5%;
+  left: 20%;
+  width: 80px;
+  height: 80px;
+  background-image: url('/images/coffee-bean.webp');
+  transform: rotate(15deg);
+}
+
+.coffee-bean2 {
+  top: 25%;
+  right: 3%;
+  width: 100px;
+  height: 100px;
+  background-image: url('/images/coffee-bean.webp');
+  transform: rotate(-25deg);
+}
+
+.coffee-bean3 {
+  top: 10%;
+  left: 20px;
+  width: 120px;
+  height: 120px;
+  background-image: url('/images/coffee-bean.webp');
+  transform: rotate(10deg);
+}
+
+.coffee-bean4 {
+  right: 7%;
+  bottom: 12%;
+  width: 70px;
+  height: 70px;
+  background-image: url('/images/coffee-bean.webp');
+  transform: rotate(110deg);
+}
+
+.coffee-bean5 {
+  bottom: 5%;
+  left: 15%;
+  width: 90px;
+  height: 90px;
+  background-image: url('/images/coffee-bean.webp');
+  transform: rotate(-45deg);
 }
 
 .success-icon {
   font-size: 40px;
-  color: #fff;
-  background-color: #4caf50;
+  color: var(--color-white);
+  background-color: var(--form-icon-success-bg-color);
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -112,6 +239,40 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
+  border: 1px solid var(--color-white) !important;
+}
+
+.title-success-form {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-light-brown);
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  display: block;
+}
+
+.text-success-form {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-light-brown);
+  opacity: 0.9;
+  max-width: 320px;
+  margin: 0 auto 2rem auto;
+  display: block;
+}
+.success-button {
+  background-color: var(--form-button-success-bg-color) !important;
+  color: var(--color-white) !important;
+  border: 1px solid var(--color-white) !important;
+  margin-top: 1rem;
+  transition: all 0.3s ease !important;
+}
+
+.success-button:hover {
+  background-color: transparent !important;
+  color: var(--color-light-brown) !important;
 }
 
 @keyframes fadeIn {
@@ -276,15 +437,14 @@
   background-color: var(--contact-form-bg-color);
 }
 
-/* ОБ'ЄДНАНИЙ СТИЛЬ ПОМИЛКИ */
 .error-popup {
   position: absolute;
-  top: calc(100% + 0.25rem); /* Твій бажаний відступ */
+  top: calc(100% + 0.25rem);
   left: 0;
   z-index: 100;
   margin: 0;
   padding: 0.25rem 0.5rem;
-  background-color: var(--body-bg-color); /* Твій бажаний фон */
+  background-color: var(--body-bg-color);
   border: 0.0625rem solid var(--error-color);
   border-radius: var(--radius-sm);
   box-shadow: var(--box-shadow);
@@ -311,7 +471,6 @@
   text-align: center;
 }
 
-/* MEDIA QUERIES */
 @media (width <= 74.9375rem) {
   .form {
     padding: var(--padding-form-lg);

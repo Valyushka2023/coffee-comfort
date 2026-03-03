@@ -1,6 +1,11 @@
 {
   "title": "Book a table now",
-  "text": " We are always in touch, ready to help you!",
+  "choose_atmosphere": "Choose an atmosphere zone",
+  "zones": {
+    "window": "View-zone",
+    "lounge": "Lounge-zone",
+    "work": "Work-zone"
+  },
   "name_label": "Name",
   "name_placeholder": "Your name",
   "email_label": "Email",

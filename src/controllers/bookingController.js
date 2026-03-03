@@ -90,15 +90,15 @@ const logger = {
 };
 
 export const createBooking = async (req, res) => {
-  try {
-    const { name, email, bookingStartDate, comment, phone } = req.body;
-    logger.info('[BOOKING] Спроба створення бронювання:', {
-      name,
-      email,
-      bookingStartDate,
-    });
+  // Лог для перевірки вхідних даних з фронтенду
+  console.log('1. [BACKEND] Отримано req.body:', req.body);
 
-    // 1. ПОКРАЩЕНА ВАЛІДАЦІЯ
+  try {
+    // ПОМИЛКА БУЛА ТУТ: Додаємо selectedZone в список змінних
+    const { name, email, bookingStartDate, comment, phone, selectedZone } =
+      req.body;
+
+    // 1. ВАЛІДАЦІЯ
     if (!name || !email || !bookingStartDate || !phone) {
       return res.status(400).json({
         success: false,
@@ -107,40 +107,44 @@ export const createBooking = async (req, res) => {
       });
     }
 
-    // Проста перевірка формату email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Невірний формат email' });
-    }
-
     // 2. ЗАПИС У МОНГО
+    // Тепер selectedZone точно потрапить у базу
     const booking = await Booking.create({
       name,
       email,
       bookingStartDate,
       comment: comment || '',
       phone,
+      selectedZone: selectedZone || 'Не обрано',
     });
 
-    logger.info('✅ Дані успішно збережено в MongoDB:', booking._id);
+    logger.info('✅ Запис створено в MongoDB:', booking._id);
 
-    // 3. ПІДГОТОВКА ДАНИХ ДЛЯ EMAIL
-    const readableDate = new Date(bookingStartDate).toLocaleString('uk-UA', {
-      timeZone: 'Europe/Kyiv',
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    // 3. ВИПРАВЛЕННЯ "INVALID DATE"
+    // Створюємо об'єкт дати і перевіряємо його на валідність
+    const dateObj = new Date(bookingStartDate);
+    let readableDate;
 
-    // 4. МИТТЄВА ВІДПОВІДЬ КЛІЄНТУ
-    // Важливо відправити відповідь до того, як почнеться відправка пошти, щоб користувач не чекав
+    if (isNaN(dateObj.getTime())) {
+      // Якщо дата прийшла в поганому форматі, залишаємо як є або ставимо заглушку
+      readableDate = bookingStartDate;
+      logger.error('⚠️ Отримано некоректний формат дати:', bookingStartDate);
+    } else {
+      // Форматуємо дату для листа (Український стандарт)
+      readableDate = dateObj.toLocaleString('uk-UA', {
+        timeZone: 'Europe/Kyiv',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    }
+
+    // 4. ВІДПОВІДЬ КЛІЄНТУ (Фронтенду)
     res.status(201).json({
       success: true,
-      message: 'Бронювання створено успішно! Чекайте на дзвінок.',
+      message: 'Бронювання створено успішно!',
       data: {
         id: booking._id,
         name: booking.name,
@@ -148,28 +152,28 @@ export const createBooking = async (req, res) => {
       },
     });
 
-    // 5. EMAIL У ФОНІ (без await, щоб не затримувати клієнта)
-    const adminEmail = process.env.ADMIN_EMAIL;
+    // 5. ВІДПРАВКА EMAIL ВЛАСНИКУ
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL;
     if (adminEmail) {
+      // Створюємо копію об'єкта для листа з відформатованою датою
       const emailData = {
         ...booking.toObject(),
-        bookingStartDate: readableDate,
+        bookingStartDate: readableDate, // Замінюємо ISO-дату на красиву
       };
+
+      console.log('2. [EMAIL] Дані для шаблону листа:', emailData);
 
       sendEmail({
         to: adminEmail,
         subject: `☕️ Нове бронювання: ${name}`,
         html: generateBookingEmailHtml(emailData),
       })
-        .then(() => logger.info('[EMAIL] Лист адміністратору надіслано'))
-        .catch(err =>
-          logger.error('[EMAIL] Помилка відправки листа:', err.message)
-        );
+        .then(() => logger.info('[EMAIL] Лист успішно надіслано'))
+        .catch(err => logger.error('[EMAIL] Помилка відправки:', err.message));
     }
   } catch (error) {
     logger.error('[BOOKING] Критична помилка:', error.message);
 
-    // Перевірка на помилку унікальності (наприклад, якщо один email не може бронювати двічі одночасно)
     if (error.code === 11000) {
       return res
         .status(409)
@@ -179,7 +183,7 @@ export const createBooking = async (req, res) => {
     if (!res.headersSent) {
       res.status(500).json({
         success: false,
-        message: 'Сталася помилка на сервері при обробці бронювання',
+        message: 'Помилка сервера',
         error:
           process.env.NODE_ENV === 'development' ? error.message : undefined,
       });

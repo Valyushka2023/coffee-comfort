@@ -13,6 +13,19 @@ import ScrollToTopButton from '../../components/Ui/Buttons/ScrollToTopButton/Scr
 import CallbackModal from '../../components/Modal/CalllbackModal/CallbackModal.jsx';
 import ReviewModal from '../../components/Modal/ReviewModal/ReviewModal.jsx';
 
+const GALLERY_IMAGES = [
+  { id: 1, src: '/images/gallery-interior.webp', alt: 'Cozy corner' },
+  { id: 2, src: '/images/gallery-cappuchino1.webp', alt: 'Fresh cappuccino' },
+  { id: 3, src: '/images/gallery-interior1.webp', alt: 'Window seat' },
+  {
+    id: 4,
+    src: '/images/gallery-croissant3.webp',
+    alt: 'Freshly baked croissant',
+  },
+  { id: 5, src: '/images/gallery-barista.webp', alt: 'Barista at work' },
+  { id: 6, src: '/images/gallery-details.webp', alt: 'Coffee shop details' },
+];
+
 const Home = () => {
   const { visible, scrollToTop } = useWindowScrollToTopButton(300);
   const [isCallbackOpen, setCallbackOpen] = useState(false);
@@ -21,7 +34,7 @@ const Home = () => {
 
   const handleReviewSuccess = () => {
     setReviewOpen(false);
-    setReviewsTrigger(prev => prev + 1); // Оновлюємо список
+    setReviewsTrigger(prev => prev + 1);
   };
 
   return (
@@ -35,9 +48,12 @@ const Home = () => {
         <section id="menu">
           <Menu />
         </section>
+
         <section id="gallery">
-          <Gallery />
+          {/* 2. ОБОВ'ЯЗКОВО ПЕРЕДАЄМО МАСИВ КАРТИНОК ТУТ */}
+          <Gallery images={GALLERY_IMAGES} />
         </section>
+
         <section id="reviews">
           <Reviews refreshTrigger={reviewsTrigger} />
         </section>

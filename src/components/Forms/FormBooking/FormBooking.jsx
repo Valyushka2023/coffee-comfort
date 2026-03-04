@@ -1,24 +1,14 @@
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import useForm from '../../../hooks/useForm.js';
-
 import clsx from 'clsx';
-
 import DatePicker, { registerLocale } from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
-
 import uk from 'date-fns/locale/uk';
-
 import en from 'date-fns/locale/en-US';
-
 import { sendBookingRequest } from '../../../services/api.js';
-
 import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
-
 import AtmosphereSelector from '../../../components/AtmosphereSelector/AtmosphereSelector.jsx';
-
 import {
   validateName,
   validateEmail,
@@ -26,44 +16,30 @@ import {
   validateRequired,
   validateComment,
 } from '../../../utils/index.js';
-
 import css from './FormBooking.module.css';
 
 registerLocale('uk', uk);
-
 registerLocale('en', en);
 
 const initialState = {
   name: '',
-
   email: '',
-
   phone: '',
-
   bookingStartDate: null,
-
   comment: '',
-
   selectedZone: '',
 };
 
 const FormBooking = () => {
   const { t, i18n } = useTranslation('form_booking');
-
   const [isSuccess, setIsSuccess] = useState(false);
-
   const validationRules = useMemo(
     () => ({
       name: v => validateName(v, t),
-
       email: v => validateEmail(v, t),
-
       phone: v => validatePhone(v, t),
-
       bookingStartDate: v => validateRequired(v, t),
-
       comment: v => validateComment(v, t, true),
-
       selectedZone: () => null,
     }),
 
@@ -75,29 +51,22 @@ const FormBooking = () => {
 
     const zoneLabels = {
       window: t('zones.window', 'Біля вікна'),
-
       lounge: t('zones.lounge', 'Лаунж-зона'),
-
       work: t('zones.work', 'Робоча зона'),
     };
 
     const bookingData = {
       camperId: '64f1a2b3c4d5e6f7a8b9c0d1',
-
       name: formData.name.trim(),
-
       email: formData.email.trim(),
-
       phone: formData.phone.trim(),
 
       // Відправляємо назву зони текстом
-
       selectedZone:
         zoneLabels[formData.selectedZone] ||
         t('zones.not_selected', 'Не обрано'),
 
       comment: formData.comment.trim(),
-
       bookingStartDate: formData.bookingStartDate?.toLocaleString() || null,
     };
 
@@ -116,21 +85,13 @@ const FormBooking = () => {
 
   const {
     formData,
-
     errors,
-
     isSubmitting,
-
     hasAttemptedSubmit,
-
     submissionError,
-
     handleInputChange,
-
     handleDateChange,
-
     handleSubmit,
-
     setFormData,
   } = useForm(initialState, validationRules, onSubmit);
 
@@ -145,7 +106,6 @@ const FormBooking = () => {
       handleInputChange({
         target: {
           name: 'selectedZone',
-
           value: zoneId,
         },
       });
@@ -154,7 +114,6 @@ const FormBooking = () => {
 
   const getMinTime = selectedDate => {
     const date = selectedDate || new Date();
-
     const min = new Date(date);
 
     if (date.toDateString() === new Date().toDateString()) {
@@ -174,19 +133,14 @@ const FormBooking = () => {
 
   const getMaxTime = selectedDate => {
     const date = selectedDate || new Date();
-
     const max = new Date(date);
-
     max.setHours(23, 0, 0);
-
     return max;
   };
 
   const handleCloseSuccess = () => {
     setIsSuccess(false);
-
     // Якщо хочете повне очищення:
-
     window.location.reload();
   };
 
@@ -194,24 +148,17 @@ const FormBooking = () => {
     return (
       <div className={css['success-wrapper']}>
         {/* Зерна */}
-
         <div className={`${css.bean} ${css['coffee-bean1']}`}></div>
-
         <div className={`${css.bean} ${css['coffee-bean2']}`}></div>
-
         <div className={`${css.bean} ${css['coffee-bean3']}`}></div>
-
         <div className={`${css.bean} ${css['coffee-bean4']}`}></div>
-
         <div className={`${css.bean} ${css['coffee-bean5']}`}></div>
 
         <div className={css['success-container']}>
           <div className={css['success-icon']}>✓</div>
-
           <h3 className={css['title-success-form']}>
             {t('success_title', 'Успіх!')}
           </h3>
-
           <p className={css['text-success-form']}>
             {t(
               'success_message',
@@ -241,31 +188,22 @@ const FormBooking = () => {
         {[
           {
             id: 'user-name-input',
-
             name: 'name',
-
             label: 'name_label',
-
             type: 'text',
           },
 
           {
             id: 'user-email-input',
-
             name: 'email',
-
             label: 'email_label',
-
             type: 'email',
           },
 
           {
             id: 'user-phone-input',
-
             name: 'phone',
-
             label: 'phone_label',
-
             type: 'tel',
           },
         ].map(field => (

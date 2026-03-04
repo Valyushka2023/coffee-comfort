@@ -1,1 +1,132 @@
+/* .modal-content {
+}
+.modal-img {
+}
+.modal-footer {
+  display: flex;
+  flex-direction: column;
+  background-color: aqua;
+}
+.modal-title {
+  font-size: 1.2rem;
+}
+.modal-buttons {
+  display: flex;
+  gap: 0.5rem;
+  text-align: center;
+}
+.btn-back {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+.btn-confirm {
+  font-size: 1rem;
+  text-transform: uppercase;
+} */
+/**/
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* Збільшуємо загальну ширину вікна */
+  max-width: 800px;
+  margin: 0 auto;
+}
 
+.img-container {
+  width: 100%;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  /* Дозволяємо pinch-zoom для мобільних */
+  touch-action: pinch-zoom;
+  /* Тінь, щоб картинка "відривалася" від фону */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-img {
+  width: 100%;
+  /* Встановлюємо велику мінімальну висоту, щоб вона не була пласкою */
+  min-height: 450px;
+  max-height: 70vh; /* Щоб не вилазила за межі екрана по висоті */
+  display: block;
+  /* Співвідношення сторін для великого формату */
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.modal-footer {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.modal-title {
+  color: var(--text-form-review-color);
+  font-size: 1.8rem; /* Робимо заголовок соліднішим */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Використовуємо ваші базові класи кнопок */
+.btn-back,
+.btn-confirm {
+  flex: 1; /* Кнопки однакової ширини */
+  padding: 1rem 0.5rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-back {
+  background-color: transparent;
+  color: var(--text-reviews-color);
+  border: 1px solid var(--button-border-color);
+}
+
+.btn-confirm {
+  background-color: var(--button-review-bg-color);
+  color: var(--button-form-color);
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 4px 10px var(--shadow-icon-circle);
+}
+
+.btn-confirm:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+/* На мобільних пристроях */
+@media (max-width: 768px) {
+  .modal-img {
+    min-height: 350px;
+    aspect-ratio: 4 / 5; /* На телефонах робимо її високою (портретною) */
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* На мобільних картинка може бути ще більшою */
+@media (max-width: 480px) {
+  .modal-content {
+    max-width: 100%;
+  }
+  .modal-img {
+    aspect-ratio: 1 / 1.1; /* Квадратна картинка на мобайлі займає більше місця */
+  }
+}
+/**/

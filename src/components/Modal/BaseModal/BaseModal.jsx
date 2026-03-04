@@ -5,7 +5,14 @@ import clsx from 'clsx';
 import CloseButton from '../../Ui/Buttons/CloseButton/CloseButton.jsx';
 import css from './BaseModal.module.css';
 
-const BaseModal = ({ isOpen, onClose, children, title, className }) => {
+const BaseModal = ({
+  isOpen,
+  onClose,
+  children,
+  title,
+  className,
+  showCloseButton = true, // Додали цей пропс із значенням true за замовчуванням
+}) => {
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.key === 'Escape') onClose();
@@ -38,9 +45,13 @@ const BaseModal = ({ isOpen, onClose, children, title, className }) => {
         role="dialog"
         aria-modal="true"
       >
-        <div className={css['closeBtn']}>
-          <CloseButton onClick={onClose} />
-        </div>
+        {/* Хрестик відмалюється лише тоді, коли showCloseButton дорівнює true */}
+        {showCloseButton && (
+          <div className={css['closeBtn']}>
+            <CloseButton onClick={onClose} />
+          </div>
+        )}
+
         {title && <h3 className={css['modal-title']}>{title}</h3>}
         {children}
       </div>
@@ -55,6 +66,7 @@ BaseModal.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
   className: PropTypes.string,
+  showCloseButton: PropTypes.bool, // Додали валідацію для нового пропса
 };
 
 export default BaseModal;

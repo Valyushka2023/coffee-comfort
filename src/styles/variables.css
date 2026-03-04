@@ -182,7 +182,8 @@
   --text-alt-color: var(--color-brown);
   --text-reviews-color: var(--color-white);
   --text-input-area-color: var(--color-brown);
-
+  --text-atmosphere-color: var(--color-latte-coffee);
+  --text-atmosphere-modal-color: var(--color-white);
   /* icon, label color */
   --icon-circle-bg-color: var(--color-light-brown);
   --icon-circle-color: var(--color-white);
@@ -213,8 +214,8 @@
   --shadow-footer-divider: var(--color-black-50);
 
   /* --shadow-menu: var(--color-black-50); */
-  --shadom-image-wrapper: var(--color-black-20);
-  --shadom-modal-content: var(--color-white-20);
+  --shadow-image-wrapper: var(--color-black-20);
+  --shadow-modal-content: var(--color-white-20);
   --shadow-reviews-card: var(--color-black-20);
   --shadow-contacts-map-form: var(--color-black-50);
 }
@@ -278,6 +279,8 @@
   --text-alt-color: var(--color-white);
   --text-reviews-color: var(--color-dark-brown1);
   --text-input-area-color: var(--color-white);
+  --text-atmosphere-color: var(--color-white);
+  --text-atmosphere-modal-color: var(--color-light-brown);
   /* icon, label color */
   --icon-circle-bg-color: var(--color-gold);
   --icon-circle-color: var(--color-black);
@@ -306,8 +309,8 @@
   --shadow-circle: var(--color-white-50);
   --shadow-up-button: var(--color-black-50);
   /* --shadow-menu: var(--color-white-50); */
-  --shadom-image-wrapper: var(--color-white-20);
-  --shadom-modal-content: var(--color-white-20);
+  --shadow-image-wrapper: var(--color-white-20);
+  --shadow-modal-content: var(--color-white-20);
   --shadow-reviews-card: var(--color-white-20);
   --shadow-contacts-map-form: var(--color-white-50);
 }

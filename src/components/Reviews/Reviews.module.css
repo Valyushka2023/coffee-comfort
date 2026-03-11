@@ -1,0 +1,276 @@
+/* --- ОСНОВНА СЕКЦІЯ --- */
+.reviews-section {
+  position: relative;
+  max-width: 75rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 2rem;
+  overflow: hidden;
+  background-color: var(--body-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
+    var(--section-border-bottom-color);
+  font-family: Inter, sans-serif;
+}
+
+/* --- ДЕКОРАТИВНІ ЗЕРНА --- */
+.bean {
+  position: absolute;
+  z-index: 0;
+  background: url('/images/coffee-bean.webp') no-repeat center / contain;
+  pointer-events: none;
+}
+
+/* Об'єднані параметри для кожного зерна */
+.coffee-bean1 {
+  top: 5%;
+  left: 20%;
+  width: 5rem;
+  height: 5rem;
+  transform: rotate(15deg);
+}
+
+.coffee-bean2 {
+  top: 10%;
+  right: 3%;
+  width: 6.25rem;
+  height: 6.25rem;
+  transform: rotate(-25deg);
+}
+
+.coffee-bean3 {
+  top: 10%;
+  left: 1.25rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  transform: rotate(10deg);
+}
+
+.coffee-bean4 {
+  right: 7%;
+  bottom: 12%;
+  width: 4.375rem;
+  height: 4.375rem;
+  transform: rotate(110deg);
+}
+
+.coffee-bean5 {
+  bottom: 5%;
+  left: 15%;
+  width: 5.625rem;
+  height: 5.625rem;
+  transform: rotate(-45deg);
+}
+
+/* --- ЗАГОЛОВОК --- */
+.reviews-container {
+  position: relative;
+  z-index: 10;
+}
+
+.reviews-title {
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.title-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.line {
+  width: 6.25rem;
+  height: 0.1875rem;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-light-brown),
+    transparent
+  );
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  color: var(--primary-color);
+}
+
+/* --- КАРТКИ ВІДГУКІВ --- */
+.reviews-grid {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.reviews-card {
+  position: relative;
+  max-height: 75rem;
+  padding: 1.25rem 2rem;
+  overflow: hidden;
+  background-color: var(--reviews-card-bg-color);
+  border-radius: 1.5rem;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  color: var(--reviews-text-color);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    max-height 0.5s ease,
+    padding 0.5s ease;
+  animation: fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Каскадна поява через затримку */
+.reviews-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.reviews-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.reviews-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.reviews-card:hover {
+  transform: translateY(-0.5rem);
+}
+
+.is-hidden {
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 2rem !important;
+  transform: translateY(1.25rem) scale(0.95) !important;
+  animation: none;
+  pointer-events: none;
+  opacity: 0 !important;
+  visibility: hidden;
+}
+
+/* --- ВНУТРІШНІ ЕЛЕМЕНТИ КАРТКИ --- */
+.rating {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  color: var(--color-amber);
+}
+
+.reviews-text {
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-reviews-color);
+}
+
+.user-footer,
+.user-info,
+.user-data {
+  display: flex;
+  align-items: center;
+}
+
+.user-footer {
+  justify-content: space-between;
+}
+
+.user-info {
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.user-data {
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.reviews-name {
+  font-weight: bold;
+}
+
+.reviews-date {
+  font-size: 1rem;
+  color: var(--text-reviews-color);
+}
+
+/* --- КНОПКИ (Оптимізовано) --- */
+.more-btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.875rem 0 2.5rem;
+}
+
+/* Спільні стилі для всіх кнопок */
+.show-more-button,
+.show-less-button,
+.google-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: var(--btn-height);
+  min-width: 13.75rem;
+  padding: 0 1.5rem;
+  background-color: var(--button-review-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: var(--btn-radius);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  font-size: var(--btn-font-size);
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--tertiary-color);
+  transition:
+    transform 0.4s ease,
+    background-color 0.4s ease,
+    color 0.4s ease,
+    filter 0.4s ease;
+}
+
+.show-more-button:hover,
+.show-less-button:hover,
+.google-button:hover {
+  background-color: var(--button-hover-bg-color) !important;
+  color: var(--button-hover-color) !important;
+  transform: translateY(-0.1875rem);
+  filter: brightness(1.1);
+}
+
+/* --- ДОДАТКОВІ СТИЛІ --- */
+.reviews-external {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.external-text {
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: var(--tertiary-color);
+}
+
+.rating-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.9375rem;
+}
+
+@keyframes fade-in-up {
+  from {
+    transform: translateY(1.875rem) scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}

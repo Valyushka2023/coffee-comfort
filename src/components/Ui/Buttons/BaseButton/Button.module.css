@@ -1,0 +1,107 @@
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border-radius: 12.5rem;
+  font-family: Inter, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* .button:hover {
+  border: 0.0625rem solid var(--hover-button-color);
+} */
+
+.small,
+.medium,
+.large {
+  height: var(--btn-height);
+  min-width: var(--btn-min-width);
+  border-radius: var(--btn-radius);
+  font-size: var(--btn-font-size);
+}
+
+.small {
+  border: 0.125rem solid var(--border-color);
+}
+
+.medium {
+  min-width: 10.375rem;
+}
+
+.large {
+  min-width: 11rem;
+}
+
+.default {
+  background: var(--button-default-bg-color);
+  color: var(--button-default-text-color);
+}
+
+.primary {
+  cursor: pointer;
+  background-color: var(--button-review-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: var(--btn-radius);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  font-size: var(--btn-font-size);
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--button-form-color);
+  transition:
+    transform 0.4s ease,
+    background-color 0.4s ease,
+    filter 0.4s ease;
+}
+
+.primary:hover {
+  background-color: var(--button-hover-bg-color) !important;
+  color: var(--button-hover-color) !important;
+  transform: translateY(-0.1875rem);
+  filter: brightness(1.1);
+}
+
+.secondary {
+  background: var(--button-secondary-bg-color);
+  color: var(--button-secondary-text-color);
+}
+
+.button:disabled,
+.primary:disabled,
+.secondary:disabled {
+  cursor: not-allowed;
+  background-color: var(--button-disabled-bg-color);
+  color: var(--button-disabled-text-color);
+  transform: none;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.button:hover:not(.small) {
+  background-color: var(--hover-bg-color);
+}
+
+.button:active:not(.small) {
+  background-color: var(--active-bg-color);
+}
+
+.small:hover {
+  background-color: transparent;
+  border-color: var(--hover-color);
+}
+
+.small:active {
+  background-color: transparent;
+  border-color: var(--active-color);
+}

@@ -1,0 +1,62 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.inputs-area-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  width: 100%;
+}
+
+.field-input-and-field-error {
+  position: relative; /* Важливо для error-popup */
+  width: 100%;
+}
+
+.field-input,
+.field-area {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background-color: var(--field-input-area-review-br-color);
+  border: 0.0625rem solid transparent;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-input-area-color);
+  transition: border-color 0.3s;
+}
+
+.field-input:focus,
+.field-area:focus {
+  border-color: var(--hover-input-area-color);
+  outline: none;
+}
+
+.field-error {
+  border-color: var(--error-color) !important;
+}
+
+.element-sending {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 3.5rem;
+  max-width: 13.75rem;
+}
+
+.error-popup {
+  position: absolute;
+  top: 100%;
+  left: 0.5rem;
+  z-index: 10;
+  padding: 0.125rem 0.5rem;
+  background: var(--body-bg-color);
+  border: 0.0625rem solid var(--error-color);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--error-color);
+  pointer-events: none;
+}

@@ -1,0 +1,185 @@
+.selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  /* margin-bottom: 12px; */
+  text-align: center;
+
+  /* background-color: aqua; */
+}
+
+.main-title {
+  font-size: 1.2rem;
+  color: var(--text-reviews-color);
+}
+
+.zone-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Всі іконки по верхній лінії */
+  gap: 1.5rem;
+  padding: 0;
+
+  /* background-color: chartreuse; */
+}
+
+.zone-item {
+  display: flex;
+  flex-direction: column;
+
+  /* gap: 1rem; */
+  justify-content: space-between;
+
+  /* background-color: chocolate; */
+}
+
+.zone-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 8.75rem; /* Ширина має бути однаковою */
+  background: none;
+  border: none;
+}
+
+.zone-card:hover {
+  transform: translateY(-0.3125rem);
+}
+
+.img-wrapper {
+  width: 3.75rem;
+  height: 3.75rem;
+  margin: 0 auto 0.625rem;
+  overflow: hidden;
+  border: 0.125rem solid var(--color-white);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* Коли зону вже обрано */
+.active-border {
+  /* border-color: var(--active-color) !important; */
+  box-shadow: 0 0 0.625rem 0.7rem var(--shadow-image-wrapper);
+}
+
+.zone-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.label-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Центрування по вертикалі всередині контейнера */
+
+  /* margin-top: 12px; */
+  min-height: 3em; /* Місце для 2-х рядків тексту */
+
+  /* background-color: crimson; */
+}
+
+.zone-label {
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--text-reviews-color);
+}
+
+.active-text {
+  font-weight: bold;
+  color: var(--text-atmosphere-color) !important;
+}
+
+/* --- Modal Styles --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Бекдроп — це кнопка підкладка */
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Найнижчий шар у модалці */
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: rgb(0 0 0 / 80%);
+  border: none;
+}
+
+/* Контент — вище за бекдроп */
+.modal-content {
+  position: relative;
+  z-index: 10; /* Набагато вище за бекдроп */
+  width: 90%;
+  max-width: 25rem;
+  padding: 1.25rem;
+  background: #3e2b24;
+  border-radius: 1.25rem;
+  pointer-events: auto; /* Дозволяє кліки по кнопках */
+}
+
+/* Переконаємось, що кнопки клікабельні */
+.btn-confirm,
+.btn-back {
+  position: relative;
+  z-index: 20; /* Вище за все інше */
+  cursor: pointer;
+}
+
+.modal-img {
+  width: 100%;
+  border-radius: 0.8125rem;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.modal-footer {
+  padding: 0.9375rem 0 0.3125rem;
+  text-align: center;
+}
+
+.modal-title {
+  margin-bottom: 0.9375rem;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.btn-confirm {
+  flex: 2;
+  cursor: pointer;
+  padding: 0.75rem;
+  background: #dcb083;
+  border: none;
+  border-radius: 1.5625rem;
+  font-weight: bold;
+  color: #3e2b24;
+}
+
+.btn-back {
+  flex: 1;
+  cursor: pointer;
+  padding: 0.75rem;
+  background: transparent;
+  border: 0.0625rem solid rgb(255 255 255 / 30%);
+  border-radius: 1.5625rem;
+  color: #fff;
+}

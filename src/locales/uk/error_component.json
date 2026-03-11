@@ -1,0 +1,10 @@
+{
+  "error_message": "Сталася помилка:",
+  "retry_button": "Повторити завантаження",
+  "error_camperNotFound": "Кемпер не знайдено",
+  "error_loadingCamper": "Помилка завантаження кемпера",
+  "error_idNotSpecified": "ID кемпера не вказано",
+  "error_addingReview": "Помилка додавання відгуку та оновлення даних",
+  "error_sendingFeedback": "Помилка надсилання відгуку",
+  "error_generic": "Помилка"
+}

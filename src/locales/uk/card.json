@@ -1,0 +1,8 @@
+{
+  "currency_symbol": "₴",
+  "reviews_count_one": "({{count}} відгук)",
+  "reviews_count_few": "({{count}} відгуки)",
+  "reviews_count_many": "({{count}} відгуків)",
+  "reviews_count_other": "({{count}} відгуку)",
+  "no_reviews": "0 (0 відгуків)"
+}

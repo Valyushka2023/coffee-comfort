@@ -1,0 +1,320 @@
+/* CSS-змінні */
+
+:root {
+  /* Overlay */
+  --overlay-bg: rgb(0 0 0 / 70%);
+  --overlay-blur: 0.25rem;
+
+  /* --- ДИЗАЙН-СИСТЕМА КНОПОК --- */
+  --btn-height: 3rem;
+  --btn-radius: 2rem;
+  --btn-font-size: 0.875rem;
+  --btn-min-width: 13.75rem;
+
+  /* --- ПАЛІТРА КОЛЬОРІВ --- */
+  --color-amber: #d4a373;
+  --color-gray-dark: #4a4a4a;
+  --color-gray-light: #918989;
+  --color-star-active: #fc3; /* Глобальний колір зірок */
+
+  /* --- СЕМАНТИЧНІ ЗМІННІ РЕЙТИНГУ --- */
+
+  /* Ці змінні можна буде перевизначати в окремих файлах */
+  --star-active-default: var(--color-star-active);
+  --star-inactive-default: var(--color-gray-light);
+
+  /* Dimensions */
+
+  /* padding */
+  --padding-xl: 0 4rem; /* max-width: 1440px, padding-desktop */
+  --padding-lg: 0 2.5rem; /* max-width: 1199px, padding-laptop */
+  --padding-md: 0 1.5rem; /* max-width: 991px, padding-tablet */
+  --padding-sm: 0 1.25rem; /* max-width: 767px, padding-mobile */
+  --padding-xs: 0 1rem; /* max-width: 479px, padding-mobile */
+  --padding-min: 0 0.5rem; /* max-width: 359px, padding-mobile */
+
+  /* padding form */
+  --padding-form-xl: 4rem; /* 64px */
+  --padding-form-lg: 2.5rem; /* 40px */
+  --padding-form-md: 1.5rem; /* 32px */
+  --padding-form-sm: 1.25rem; /* 20px */
+  --padding-form-xs: 1rem; /* 16px */
+  --padding-form-min: 0.5rem; /* 8px */
+
+  /* spacing */
+  --spacing-sm: 0.25rem; /* 4px */
+  --spacing-md: 0.375rem; /* 6px */
+  --spacing-lg: 1.125rem; /* 18px */
+
+  /* gap */
+  --gap-xl: 4rem; /* 64px */
+  --gap-lg: 2.5rem; /* 40px */
+  --gap-md: 1.5rem; /* 24x */
+  --gap-sm: 1.25rem; /* 20x */
+  --gap-xs: 1rem; /* 16x */
+
+  /* border */
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 1.25rem; /* 20px */
+  --radius-full: 624.9375rem; /* 9999px */
+
+  /* image */
+  --image-min-height: 19.5rem; /* 312px */
+
+  /* form */
+  --form-max-width-xl: 39rem; /* 624px */
+  --form-max-width-lg: 33.6875rem; /* 539px */
+  --form-max-width-md: 28.6875rem; /* 459px */
+
+  /******************************************************  */
+
+  /* Palette colors COFFEE COMFORT */
+
+  /* Primary colors */
+  --color-white: #fff; /* Білий колір, rgb(255 255 255 / 100%) */
+  --color-black: #000; /* Чорний колір, rgb(0 0 0 / 100%) */
+  --color-brown: #1a1512; /* Коричневий колір як дуже темна кава, rgb(26 21 18 / 100%) */
+  --color-gold: #d49d65; /* Золотистий колір, rgb(212 157 101 / 100%) */
+  --color-gray: #4a4a4a; /* Сірий колір як графіт, rgb(74 74 74 / 100%) */
+  --color-beige: #f4f1ea; /* Бежевий колір, rgb(244 241 234 / 100%) */
+
+  /* Shades */
+  --color-light-brown: #5c3d2e; /* Глибокий коричневий як шоколад, rgb(92 61 46 / 100%) */
+  --color-dark-brown: #141110; /* Вугільний з теплим підтоном  як еспресо, rgb(20 17 16 / 100%) */
+  --color-dark-brown1: #121212; /* Глибокий матовий темний як чорна кава, rgb(18 18 18 / 100%) */
+  --color-latte-coffee: #d4a373; /* Світло-золотистий як мускатний горіх, rgb(212 163 115 / 100%) */
+
+  /* --color-amber: #fc3; */
+
+  /* Бурштиновий колір як сонячне сяйво */
+  --color-light-beige: #fdfaf5; /* Світло-бежевий як топлене молоко,rgb(253 250 245 / 100%)  */
+  --color-dark-beige: #f8f4ec; /* Темно-бежевий як пісок, rgb(248 244 236 / 100%)  */
+  --color-latte-coffee-50: rgb(212 163 115 / 50%);
+  --color-light-brown-80: rgb(92 61 46 / 80%);
+  --color-light-gray-50: rgb(244 241 234 / 50%); /* світло-сірий на 50% */
+  --color-light-gray-80: rgb(244 241 234 / 80%); /* світло-сірий на 50% */
+  --color-light-gray-100: rgb(244 241 234 / 100%); /* світло-сірий на 100% */
+  --color-dark-gray-50: rgb(107 105 101 / 50%); /* темно-сірий на 50% */
+  --color-dark-gray-80: rgb(107 105 101 / 80%); /* темно-сірий на 50% */
+  --color-dark-gray-100: rgb(107 105 101 / 100%);
+  --color-terracotta-15: rgb(212 157 101 / 15%);
+  --color-white-50: rgb(255 255 255 / 50%); /* Білий на 50% */
+  --color-black-50: rgb(0 0 0 / 50%); /* Чорний на 50% */
+  --color-white-20: rgb(255 255 255 / 20%); /* Біли1 на 20% */
+  --color-black-20: rgb(0 0 0 / 20%); /* Чорний на 20% */
+  --color-muted-white: 150 150 150;
+  --color-pure-white: 255 255 255;
+
+  /*************************************  */
+
+  /* Elements whose colors do not change */
+  --form-success-bg-color: #d4a373;
+  --form-icon-success-bg-color: #5c3d2e;
+  --form-button-success-bg-color: #5c3d2e;
+  --hover-bg-color: #d4a373;
+  --hover-color: #d4a373;
+  --hover-input-area-color: #fff;
+  --hover-footer-color: #fff;
+
+  /* --hover-button-color: #fff; */
+  --active-color: #d4a373;
+  --error-color: #ff4d4f; /* Класичний червоний для помилок */
+  --warning-color: #ff9800; /* Помаранчевий для попереджень */
+
+  /************************************* */
+
+  /* LIGHT THEME  */
+
+  /* bg color */
+  --header-footer-bg-color: var(--color-dark-beige);
+  --body-bg-color: var(--color-light-beige);
+  --underline-bg-color: var(--color-light-brown);
+  --underline-bg-filter-btn-color: var(--color-light-brown);
+  --modal-content-bg-color: var(--color-light-beige);
+  --contact-form-bg-color: var(--color-light-brown);
+  --field-input-booking-br-color: var(--color-light-brown);
+  --field-input-area-review-br-color: var(--color-latte-coffee);
+  --reviews-card-bg-color: var(--color-light-brown);
+
+  /* color */
+  --primary-color: var(--color-light-brown);
+  --secondary-color: var(--color-gold);
+  --tertiary-color: var(--color-gray);
+  --quaternary-color: var(--color-latte-coffee);
+  --quinary-color: var(--color-light-brown);
+  --placeholder-booking-color: var(--color-light-gray-50);
+  --placeholder-review-color: var(--color-light-brown-80);
+  --color-header-link: var(--color-light-brown);
+
+  /* logo color */
+  --logo-primary-color: var(--color-light-brown);
+  --logo-secondary-color: var(--color-latte-coffee);
+  --steam-color: var(--color-muted-white);
+
+  /* button, button-icon color, button-hover */
+  --toggle-theme-icon-color: var(--color-light-brown);
+  --button-hover-bg-color: var(--color-light-brown);
+  --button-hover-color: var(--color-white);
+  --button-hover-close-color: var(--color-latte-coffee);
+  --button-burger-icon-color: var(--color-light-brown);
+  --button-close-icon-color: var(--color-white);
+  --button-review-close-color: var(--color-white);
+  --button-cta-bg-color: var(--color-latte-coffee);
+  --button-form-bg-color: var(--color-latte-coffee);
+  --button-form-color: var(--color-brown);
+  --button-cta-color: var(--color-white);
+  --button-up-bg-color: var(--color-latte-coffee);
+  --button-up-color: var(--color-light-brown);
+  --button-google-bg-color: var(--color-light-brown);
+  --button-google-color: var(--color-beige);
+  --button-review-bg-color: var(--color-latte-coffee);
+  --button-review-color: var(--color-brown);
+  --filter-btn-bg-color: var(--color-latte-coffee);
+  --filter-btn-color: var(--color-light-brown);
+  --top-badge-bg-color: var(--color-latte-coffee);
+  --top-badge-color: var(--color-light-brown);
+  --item-description-color: var(--color-dark-gray-80);
+  --contact-submit-btn-bg-color: var(--color-latte-coffee);
+  --contact-input-textarea-bg-color: var(--color-latte-coffee);
+  --text-form-booking-color: var(--color-brown);
+  --text-form-review-color: var(--color-white);
+  --text-alt-color: var(--color-brown);
+  --text-reviews-color: var(--color-white);
+  --text-input-area-color: var(--color-brown);
+  --text-atmosphere-color: var(--color-latte-coffee);
+  --text-atmosphere-modal-color: var(--color-white);
+  --text-mobile-color: var(--color-light-brown);
+
+  /* icon, label color */
+  --icon-circle-bg-color: var(--color-light-brown);
+  --icon-circle-color: var(--color-white);
+  --circle-label-bg-color: var(--color-gold);
+  --circle-label-color: var(--color-white);
+  --reviews-text-color: var(--color-white);
+  --icon-map-color: #dc2626; /* Насичений червоний */
+  --icon-clock-color: #ca8a04; /* Колір "Охра" */
+  --icon-social-color: var(--color-light-brown);
+  --avatar-bg-color: var(--color-latte-coffee);
+  --avatar-color: var(--color-dark-brown);
+
+  /* divider.  border color */
+  --divider-color: var(--color-black-20);
+  --section-border-bottom-color: var(--color-latte-coffee-50);
+  --circle-big-border-color: var(--color-white);
+  --circle-medium-border-color: var(--color-light-gray-50);
+  --circle-small-border-color: var(--color-dark-gray-50);
+  --input-textarea-border-color: var(--color-light-brown);
+  --button-border-color: var(--color-white);
+
+  /* box-shadow color */
+  --shadow-icon-circle: var(--color-black-50);
+  --shadow-circle: var(--color-black-50);
+  --shadow-up-button: var(--color-black-50);
+  --shadow-footer-divider: var(--color-black-50);
+
+  /* --shadow-menu: var(--color-black-50); */
+  --shadow-image-wrapper: var(--color-black-20);
+  --shadow-modal-content: var(--color-white-20);
+  --shadow-reviews-card: var(--color-black-20);
+  --shadow-contacts-map-form: var(--color-black-50);
+}
+
+.dark-theme {
+  /************************************* */
+
+  /* DARK THEME */
+
+  /* bg color */
+  --header-footer-bg-color: var(--color-dark-brown1);
+  --body-bg-color: var(--color-dark-brown);
+  --underline-bg-color: var(--color-gold);
+  --underline-bg-filter-btn-color: var(--color-light-brown);
+  --modal-content-bg-color: var(--color-light-beige);
+  --contact-form-bg-color: var(--color-latte-coffee);
+  --field-input-booking-br-color: var(--color-latte-coffee);
+  --field-input-area-review-br-color: var(--color-light-brown);
+  --reviews-card-bg-color: var(--color-latte-coffee);
+
+  /* color */
+  --primary-color: var(--color-gold);
+  --secondary-color: var(--color-light-brown);
+  --tertiary-color: var(--color-light-beige);
+  --quaternary-color: var(--color-latte-coffee);
+  --quinary-color: var(--color-latte-coffee);
+  --placeholder-booking-color: var(--color-light-brown-80);
+  --placeholder-review-color: var(--color-light-gray-50);
+  --color-header-link: var(--color-white);
+
+  /* logo color */
+  --logo-primary-color: var(--color-beige);
+  --logo-secondary-color: var(--color-latte-coffee);
+  --steam-color: var(--color-pure-white);
+
+  /* button, button-icon color, button-hover */
+  --toggle-theme-icon-color: var(--color-amber);
+  --button-hover-bg-color: var(--color-latte-coffee);
+  --button-hover-color: var(--color-brown);
+  --button-hover-close-color: var(--color-white);
+  --button-burger-icon-color: var(--color-beige);
+  --button-close-icon-color: var(--color-brown);
+  --button-review-close-color: var(--color-light-brown);
+  --button-cta-bg-color: var(--color-latte-coffee);
+  --button-cta-color: var(--color-dark-brown1);
+  --button-form-bg-color: var(--color-light-brown);
+  --button-form-color: var(--color-white);
+  --filter-btn-bg-color: var(--color-latte-coffee);
+  --filter-btn-color: var(--color-light-brown);
+  --button-google-bg-color: var(--color-latte-coffee);
+  --button-google-color: var(--color-brown);
+  --button-review-bg-color: var(--color-light-brown);
+  --button-review-color: var(--color-white);
+  --top-badge-bg-color: var(--color-latte-coffee);
+  --top-badge-color: var(--color-light-brown);
+  --item-description-color: var(--color-light-gray-80);
+  --contact-submit-btn-bg-color: var(--color-light-brown);
+  --contact-input-textarea-bg-color: var(--color-light-brown);
+  --text-form-booking-color: var(--color-white);
+  --text-form-review-color: var(--color-brown);
+  --text-alt-color: var(--color-white);
+  --text-reviews-color: var(--color-dark-brown1);
+  --text-input-area-color: var(--color-white);
+  --text-atmosphere-color: var(--color-white);
+  --text-atmosphere-modal-color: var(--color-light-brown);
+  --text-mobile-color: var(--color-white);
+
+  /* icon, label color */
+  --icon-circle-bg-color: var(--color-gold);
+  --icon-circle-color: var(--color-black);
+  --circle-label-bg-color: var(--color-gold);
+  --circle-label-color: var(--color-black);
+
+  /* --reviews-card-bg-color: var(--color-gold); */
+
+  --reviews-text-color: var(--color-black);
+  --icon-map-color: #ff6b6b; /*  Червоний */
+  --icon-clock-color: #ffd700; /* Чисте золото */
+  --icon-social-color: var(--color-latte-coffee);
+  --avatar-bg-color: var(--color-light-brown);
+  --avatar-color: var(--color-latte-coffee);
+
+  /* divider, border color */
+  --divider-color: var(--color-white-20);
+  --section-border-bottom-color: var(--color-latte-coffee-50);
+  --circle-big-border-color: var(--color-white);
+  --circle-medium-border-color: var(--color-light-gray-50);
+  --circle-small-border-color: var(--color-dark-gray-50);
+  --input-textarea-border-color: var(--color-light-brown);
+  --button-border-color: var(--color-white);
+
+  /* box-shadow color */
+  --shadow-icon-circle: var(--color-white-50);
+  --shadow-circle: var(--color-white-50);
+  --shadow-up-button: var(--color-black-50);
+
+  /* --shadow-menu: var(--color-white-50); */
+  --shadow-image-wrapper: var(--color-white-20);
+  --shadow-modal-content: var(--color-white-20);
+  --shadow-reviews-card: var(--color-white-20);
+  --shadow-contacts-map-form: var(--color-white-50);
+}

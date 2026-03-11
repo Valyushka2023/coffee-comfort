@@ -1,0 +1,152 @@
+/* --- ГЛОБАЛЬНІ СТИЛІ --- */
+@import url('./variables.css');
+@import url('./reset.css');
+
+/* Базові налаштування */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #fff;
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  text-size-adjust: 100%;
+}
+
+/* Типографіка */
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+p {
+  font-size: 1rem;
+}
+
+/* Зображення */
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+
+  /* vertical-align було видалено, бо воно ігнорується при display: block */
+  font-style: italic;
+}
+
+/* Посилання та кнопки */
+a,
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+button {
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* Відступи у секціях */
+section {
+  position: relative;
+  width: 100%;
+  scroll-margin-top: 5rem;
+}
+
+/* Debug: Червоні контури (можна вимкнути) */
+
+/* * {
+  outline: 0.0625rem solid red !important;
+} */
+
+section > *:last-child,
+article > *:last-child,
+div[class*='container'] > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Допоміжні класи */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* --- DATEPICKER СТИЛІ --- */
+.react-datepicker__navigation {
+  top: 0.625rem !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #5d4037 !important;
+  border-width: 0.125rem 0.125rem 0 0 !important;
+}
+
+/* Модальне вікно */
+.gallery-specific-modal {
+  bottom: 2.25rem;
+  width: 90%;
+  max-width: 53.125rem;
+  padding: 1.875rem;
+}
+
+.gallery-specific-modal .close-button {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.9375rem;
+  z-index: 10;
+  color: #3d2b1f !important;
+}
+
+.rating-wrapper .star-rating-label {
+  display: none;
+}

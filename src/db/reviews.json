@@ -1,0 +1,40 @@
+{
+  "reviews": [
+    {
+      "reviewer_name": "Alice",
+      "reviewer_rating": 5,
+      "comment": "Exceptional RV! The Road Bear C 23-25 provided a comfortable and enjoy…",
+      "camperId": "1"
+    },
+    {
+      "reviewer_name": "Bob",
+      "reviewer_rating": 4,
+      "comment": "Great RV for a road trip. Spacious and well-equipped. Only minor issue…",
+      "camperId": "2"
+    },
+    {
+      "_id": "1745432793190",
+      "camperId": "6806abf1c32fcdee8bd4f87a",
+      "reviewer_name": "Іван",
+      "reviewer_rating": 5,
+      "comment": "Чудовий кемпер!",
+      "email": "ivan@example.com"
+    },
+    {
+      "_id": "1745433229001",
+      "camperId": "6806abf1c32fcdee8bd4f87b",
+      "reviewer_name": "Georg",
+      "reviewer_rating": 2,
+      "comment": "Чудо!",
+      "email": " v.hryshchenko24@gmail.com"
+    },
+    {
+      "_id": "1745496447614",
+      "camperId": "6806ac0abe5e098a51be7a02",
+      "reviewer_name": "Georg",
+      "reviewer_rating": 2,
+      "comment": "Чудо!",
+      "email": " v.hryshchenko24@gmail.com"
+    }
+  ]
+}

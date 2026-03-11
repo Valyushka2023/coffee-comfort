@@ -1,0 +1,46 @@
+.scroll-to-top-button {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: var(--button-up-bg-color);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-up-button);
+  color: var(--button-up-color);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    background-color 0.3s ease;
+  transform: translateY(1.25rem);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.visible {
+  transform: translateY(0);
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.scroll-to-top-button:hover {
+  background-color: var(--hover-bg-color);
+  transform: translateY(0) scale(1.05);
+}
+
+.scroll-to-top-button:active {
+  background-color: var(--active-bg-color);
+  transform: translateY(0) scale(0.95);
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  stroke: currentcolor;
+}

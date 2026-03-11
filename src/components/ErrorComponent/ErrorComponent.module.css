@@ -1,0 +1,22 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 12.5rem;
+}
+
+.error-message {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.retry-button {
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #4caf50;
+  border: none;
+  font-size: 1.2rem;
+  color: white;
+}

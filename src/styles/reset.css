@@ -1,0 +1,48 @@
+/* --- СУЧАСНИЙ RESET --- */
+
+/* Скидання відступів та рамок для всіх елементів */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+}
+
+/* Налаштування для основних контейнерів */
+html {
+  line-height: 1.15;
+  text-size-adjust: 100%;
+}
+
+body {
+  line-height: 1.5;
+}
+
+/* Скидання списків */
+ol,
+ul {
+  list-style: none;
+}
+
+/* Скидання для таблиць */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Коректне відображення зображень */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Видалення стандартних стилів для кнопок та полів */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}

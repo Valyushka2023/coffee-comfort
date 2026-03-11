@@ -1,0 +1,26 @@
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(255 255 255 / 80%);
+}
+
+.loader-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.9735rem;
+  background: rgb(255 255 255 / 70%);
+  border-radius: 0.5rem;
+  transform: translate(-50%, -50%);
+}

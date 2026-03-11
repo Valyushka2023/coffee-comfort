@@ -1,0 +1,36 @@
+import { useTranslation } from 'react-i18next';
+
+import css from './Hero.module.css';
+
+const Hero = () => {
+  const { t } = useTranslation('hero');
+  return (
+    <section className={css['hero']}>
+      <div className={css['overlay']}>
+        <div className={css['container']}>
+          <h1 className={css['title']}>
+            {t('title', 'Our coffee creates your mood')}
+          </h1>
+          <p className={css['subtitle']}>
+            {t(
+              'subtitle',
+              'Freshly roasted coffee and signature desserts daily'
+            )}
+          </p>
+
+          <div className={css['buttons']}>
+            <a href="#menu">{t('menu_buttons', 'View menu')}</a>
+            <a href="#contacts">{t('contacts_buttons', 'Visit us')} </a>
+          </div>
+        </div>
+      </div>
+      <div className={css['scroll-indicator']} aria-hidden="true">
+        <span className={css['arrow-wrapper']}>
+          <span className={css['arrow']}></span>
+        </span>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

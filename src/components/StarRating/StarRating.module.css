@@ -1,0 +1,104 @@
+/* 1. Основний контейнер */
+.wrapper,
+.label-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  /* margin-bottom: 10px; */
+}
+
+/* 2. Заголовок (Label) */
+.label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: none;
+  color: var(--text-form-review-color);
+}
+
+/* Специфічний селектор для глобальних стилів форми, якщо потрібно */
+
+/* .form :global([class*='label']) {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  
+} */
+
+/* 3. Контейнер для зірок та інпуту */
+.field-input-and-field-error {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.stars {
+  display: flex;
+  gap: 0.3125rem;
+
+  /* padding: 5px 0; */
+  width: max-content;
+  border-bottom: 0.0625rem solid transparent;
+  transition: border-color 0.3s ease;
+  user-select: none;
+}
+
+/* Стан помилки (рамка знизу) */
+.field-error,
+.stars.field-error {
+  border-bottom-color: var(--error-color, #ff4d4d);
+}
+
+/* 4. Стилі окремої зірки */
+.star {
+  display: inline-flex;
+  border-radius: 0.25rem;
+  outline: none;
+  line-height: 0;
+
+  /* Базовий стан (порожня зірка) */
+  color: var(--star-inactive-default, #948f8f);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+  opacity: 0.65;
+}
+
+/* Стан заповненої зірки */
+.star.filled {
+  color: var(--star-active-default, #fc3);
+  opacity: 1;
+}
+
+/* 5. Інтерактивні стани (тільки якщо НЕ readOnly) */
+.wrapper:not(.read-only) .star:hover {
+  cursor: pointer;
+  transform: scale(1.18);
+  opacity: 1;
+}
+
+.wrapper:not(.read-only) .star:focus-visible {
+  box-shadow: 0 0 0 0.125rem var(--star-active-default, #fc3);
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* 6. Повідомлення про помилку (Popup) */
+.error-popup {
+  position: absolute;
+  top: calc(100% + 0.3125rem);
+  left: 0;
+  z-index: 10;
+  margin-top: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--body-bg-color, #1a1a1a);
+  border: 0.0625rem solid var(--error-color, #ff4d4d);
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--error-color, #ff4d4d);
+  pointer-events: none;
+}

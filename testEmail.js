@@ -1,0 +1,23 @@
+/* eslint-env node */ // <--- Додано цю директиву для визначення process та console
+
+import dotenv from 'dotenv';
+// Оновлюємо шлях, щоб він був коректним, враховуючи, що він запускається
+// з кореня проєкту (якщо testEmail.js теж знаходиться в корені).
+import { sendEmail } from './src/config/sendEmail.js';
+
+dotenv.config();
+
+const runTest = async () => {
+  try {
+    await sendEmail({
+      to: process.env.ADMIN_EMAIL, // або введи прямо тут: 'твоя_пошта@gmail.com'
+      subject: '📨 Тест від sendEmail()',
+      html: '<h2>Це тестовий лист з реального коду!</h2><p>Перевірка успішна!</p>',
+    });
+    console.log('✅ Тестовий лист успішно надіслано');
+  } catch (err) {
+    console.error('❌ Помилка під час надсилання листа:', err);
+  }
+};
+
+runTest();

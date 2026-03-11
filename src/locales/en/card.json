@@ -1,0 +1,8 @@
+{
+  "currency_symbol": "€",
+  "reviews_count_one": "({{count}} reviews)",
+  "reviews_count_few": "({{count}} reviews)",
+  "reviews_count_many": "({{count}} reviews)",
+  "reviews_count_other": "({{count}} reviews)",
+  "no_reviews": "0 (0 reviews)"
+}

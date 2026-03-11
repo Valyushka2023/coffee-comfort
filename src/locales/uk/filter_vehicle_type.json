@@ -1,0 +1,11 @@
+{
+  "vehicle_type": "Тип транспорту",
+  "label_panel-truck": "Фургон",
+  "aria_panel-truck": "Фургон (мінівен або кемпервен)",
+
+  "label_fully_integrated": "Повністю Інтегрований",
+  "aria_fully_integrated": "Повністю Інтегрований (Клас A) Кемпер",
+
+  "label_alcove": "Альковий",
+  "aria_alcove": "Альков Кемпер"
+}

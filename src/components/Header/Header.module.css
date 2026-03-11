@@ -1,0 +1,177 @@
+:root {
+  --nav-font-size: 1rem;
+}
+
+.header-section {
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+  width: 100%;
+  max-width: 75rem;
+  margin: 0 auto;
+  background-color: var(--header-footer-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color);
+  line-height: 1.5;
+  color: var(--tertiary-color);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0.625rem 1.5rem;
+}
+
+.logo-header {
+  font-size: var(--nav-font-size);
+  text-decoration: none;
+  color: var(--tertiary-color);
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  align-items: center;
+
+  justify-content: center;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+  font-size: var(--nav-font-size);
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--text-mobile-color);
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+.nav-link {
+  line-height: 1;
+  display: flex; /* Робимо посилання флекс-контейнером */
+  align-items: center; /* Центруємо текст всередині посилання */
+}
+.nav-link::after {
+  position: absolute;
+  bottom: -0.125rem;
+  left: 0;
+  width: 100%;
+  height: 0.0625rem;
+  background-color: var(--hover-color);
+  transition: transform 0.35s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  content: '';
+}
+
+.nav-link:hover {
+  color: var(--hover-color);
+  transform: translateY(-0.0625rem);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.toggle-icons {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button-cta {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: var(--btn-height);
+  min-width: 13.75rem;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--button-review-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: var(--btn-radius);
+  font-size: var(--nav-font-size);
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--tertiary-color);
+  transition:
+    transform 0.4s ease,
+    background-color 0.4s ease,
+    filter 0.4s ease;
+}
+
+@media (width <= 74.9375rem) {
+  .header-container {
+    padding: 0.625rem 1rem;
+  }
+
+  .nav-desktop {
+    gap: 1.5rem;
+  }
+}
+
+@media (width <= 61.9375rem) {
+  .nav-desktop {
+    gap: 0.8rem;
+  }
+
+  .toggle-icons {
+    gap: 0.8rem;
+  }
+
+  .button-cta {
+    min-width: 10rem;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (width <= 47.9375rem) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .button-cta {
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .header-container {
+    justify-content: space-between;
+  }
+
+  .toggle-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+@media (width <= 29.9375rem) {
+  .header-container {
+    padding: 0.625rem 0.75rem;
+  }
+
+  .logo-header {
+    font-size: 0.875rem;
+  }
+
+  .button-cta {
+    display: none;
+  }
+
+  .toggle-icons {
+    flex-shrink: 1;
+  }
+}

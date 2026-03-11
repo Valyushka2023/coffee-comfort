@@ -1,0 +1,18 @@
+{
+  "vehicle_equipment": "Vehicle equipment",
+
+  "label_ac": "AC",
+  "aria_ac": "Air Conditioner",
+
+  "label_transmission": "Automatic",
+  "aria_transmission": "Automatic transmission",
+
+  "label_kitchen": "Kitchen",
+  "aria_kitchen": "Kitchen",
+
+  "label_tv": "TV",
+  "aria_tv": "Television",
+
+  "label_bathroom": "Bathroom",
+  "aria_bathroom": "Bathroom with shower"
+}

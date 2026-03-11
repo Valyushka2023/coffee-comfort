@@ -1,0 +1,50 @@
+.base-close-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--button-close-icon-color);
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.base-close-button:hover {
+  color: var(--button-hover-close-color);
+  transform: scale(1.05);
+}
+
+.base-close-button:active {
+  color: var(--active-color);
+  transform: scale(0.95);
+}
+
+@media (width <= 74.9375rem) {
+  .base-close-button {
+    font-size: 1.2rem;
+  }
+}
+
+@media (width <= 61.9375rem) {
+  .base-close-button {
+    font-size: 1.1rem;
+  }
+}
+
+@media (width <= 47.9375rem) {
+  .base-close-button {
+    font-size: 1rem;
+  }
+}
+
+@media (width <= 29.9375rem) {
+  .base-close-button {
+    font-size: 0.9rem;
+  }
+}

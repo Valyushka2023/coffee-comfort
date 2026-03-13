@@ -59,17 +59,21 @@
 // };
 import axios from 'axios';
 
-// Визначаємо базовий URL:
-// Якщо ми в режимі розробки ('development'), використовуємо localhost.
-// Якщо ми в режимі 'production' (на Vercel), використовуємо порожній рядок,
-// щоб запити йшли до того ж домену, де лежить сайт.
-const BACKEND_BASE_URL =
-  import.meta.env.MODE === 'production'
-    ? ''
-    : import.meta.env.VITE_API_URL || 'http://localhost:5001';
+/**
+ * Визначаємо базовий URL для запитів.
+ * На Vercel (production) запити йдуть відносно поточного домену (порожній рядок),
+ * тому запит на '/api/menu' піде на 'https://your-site.vercel.app/api/menu'.
+ * Для локальної розробки ми використовуємо змінну VITE_API_URL або localhost:5001.
+ */
+const getBaseUrl = () => {
+  if (import.meta.env.MODE === 'production') {
+    return '';
+  }
+  return import.meta.env.VITE_API_URL || 'http://localhost:5001';
+};
 
 const api = axios.create({
-  baseURL: BACKEND_BASE_URL,
+  baseURL: getBaseUrl(),
   headers: {
     'Content-Type': 'application/json',
   },
@@ -121,5 +125,15 @@ export const fetchReviewsRequest = async () => {
   } catch (error) {
     console.error('❌ API Error (Fetch Reviews):', error);
     handleError(error, 'Помилка завантаження відгуків');
+  }
+};
+
+export const fetchMenuRequest = async () => {
+  try {
+    const { data } = await api.get(ENDPOINTS.MENU);
+    return data;
+  } catch (error) {
+    console.error('❌ API Error (Fetch Menu):', error);
+    handleError(error, 'Помилка завантаження меню');
   }
 };

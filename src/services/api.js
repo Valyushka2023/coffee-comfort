@@ -14,6 +14,7 @@ const ENDPOINTS = {
   BOOKINGS: '/api/bookings',
   REVIEWS: '/api/reviews',
   CALLBACKS: '/api/callbacks',
+  MENU: '/api/menu',
 };
 
 const handleError = (error, defaultMessage) => {

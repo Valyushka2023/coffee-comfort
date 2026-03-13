@@ -1,26 +1,37 @@
 import axios from 'axios';
 
-const BACKEND_BASE_URL =
-  import.meta.env.VITE_API_URL || 'http://localhost:5001';
+// базовый URL для API
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
+// создаём axios instance
 const api = axios.create({
-  baseURL: BACKEND_BASE_URL,
+  baseURL: `${BASE_URL}/api`,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+// endpoints
 const ENDPOINTS = {
-  BOOKINGS: '/api/bookings',
-  REVIEWS: '/api/reviews',
-  CALLBACKS: '/api/callbacks',
-  MENU: '/api/menu',
+  BOOKINGS: '/bookings',
+  REVIEWS: '/reviews',
+  CALLBACKS: '/callbacks',
+  MENU: '/menu',
 };
 
+// обработка ошибок
 const handleError = (error, defaultMessage) => {
-  const message = error.response?.data?.message || defaultMessage;
+  console.error('API Error:', error);
+
+  const message =
+    error.response?.data?.message || error.message || defaultMessage;
+
   throw new Error(message);
 };
+
+// ======================
+// BOOKINGS
+// ======================
 
 export const sendBookingRequest = async bookingData => {
   try {
@@ -31,6 +42,10 @@ export const sendBookingRequest = async bookingData => {
   }
 };
 
+// ======================
+// CALLBACK
+// ======================
+
 export const sendCallbackRequest = async callbackData => {
   try {
     const { data } = await api.post(ENDPOINTS.CALLBACKS, callbackData);
@@ -39,6 +54,10 @@ export const sendCallbackRequest = async callbackData => {
     handleError(error, 'Помилка замовлення дзвінка');
   }
 };
+
+// ======================
+// REVIEWS
+// ======================
 
 export const sendReviewRequest = async reviewData => {
   try {
@@ -54,8 +73,20 @@ export const fetchReviewsRequest = async () => {
     const { data } = await api.get(ENDPOINTS.REVIEWS);
     return data;
   } catch (error) {
-    console.error('❌ API Error (Fetch Reviews):', error);
     handleError(error, 'Помилка завантаження відгуків');
+  }
+};
+
+// ======================
+// MENU
+// ======================
+
+export const fetchMenuRequest = async () => {
+  try {
+    const { data } = await api.get(ENDPOINTS.MENU);
+    return data;
+  } catch (error) {
+    handleError(error, 'Помилка завантаження меню');
   }
 };
 // import axios from 'axios';

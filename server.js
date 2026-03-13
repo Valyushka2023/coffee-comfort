@@ -12,7 +12,12 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5001;
-
+// Використовуємо port тільки якщо ми не на Vercel (локально)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`🚀 Server running on http://localhost:${port}`);
+  });
+}
 // --- CORS налаштування ---
 app.use(
   cors({
@@ -43,14 +48,15 @@ app.use((req, res) => {
 });
 
 // --- ПІДКЛЮЧЕННЯ ДО БД ---
+// На Vercel ми не викликаємо app.listen!
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log('✅ Connected to MongoDB');
-    app.listen(port, () => {
-      console.log(`🚀 Server running on http://localhost:${port}`);
-    });
   })
   .catch(err => {
     console.error('❌ MongoDB connection error:', err);
   });
+
+// Експортуємо app для Vercel
+export default app;

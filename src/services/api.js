@@ -59,31 +59,17 @@
 // };
 import axios from 'axios';
 
-/**
- * Оновлений підхід до базового URL:
- * Vercel автоматично задає змінну VITE_API_URL, але для
- * Serverless-архітектури найкраще використовувати відносні шляхи.
- */
 const getBaseUrl = () => {
-  // Перевіряємо, чи ми на Vercel (Vercel автоматично додає VERCEL=1)
-  // або перевіряємо режим збірки Vite.
-  const isProduction = import.meta.env.MODE === 'production';
-
-  if (isProduction) {
-    return ''; // Запити йдуть на поточний домен (наприклад, /api/menu)
-  }
-
-  // Локальна розробка
-  return import.meta.env.VITE_API_URL || 'http://localhost:5001';
+  return import.meta.env.MODE === 'production' ? '' : 'http://localhost:5001';
 };
 
+// ТЕПЕР МИ ВИКОРИСТОВУЄМО ФУНКЦІЮ getBaseUrl()
 const api = axios.create({
   baseURL: getBaseUrl(),
   headers: {
     'Content-Type': 'application/json',
   },
 });
-
 // Додаємо інтерцептор, щоб бачити, куди саме йде запит (для дебагу в консолі)
 api.interceptors.request.use(config => {
   console.log(`🚀 Sending request to: ${config.baseURL}${config.url}`);

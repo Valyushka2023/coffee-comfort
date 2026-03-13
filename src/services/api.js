@@ -60,15 +60,20 @@
 import axios from 'axios';
 
 /**
- * Визначаємо базовий URL для запитів.
- * На Vercel (production) запити йдуть відносно поточного домену (порожній рядок),
- * тому запит на '/api/menu' піде на 'https://your-site.vercel.app/api/menu'.
- * Для локальної розробки ми використовуємо змінну VITE_API_URL або localhost:5001.
+ * Оновлений підхід до базового URL:
+ * Vercel автоматично задає змінну VITE_API_URL, але для
+ * Serverless-архітектури найкраще використовувати відносні шляхи.
  */
 const getBaseUrl = () => {
-  if (import.meta.env.MODE === 'production') {
-    return '';
+  // Перевіряємо, чи ми на Vercel (Vercel автоматично додає VERCEL=1)
+  // або перевіряємо режим збірки Vite.
+  const isProduction = import.meta.env.MODE === 'production';
+
+  if (isProduction) {
+    return ''; // Запити йдуть на поточний домен (наприклад, /api/menu)
   }
+
+  // Локальна розробка
   return import.meta.env.VITE_API_URL || 'http://localhost:5001';
 };
 
@@ -79,12 +84,20 @@ const api = axios.create({
   },
 });
 
+// Додаємо інтерцептор, щоб бачити, куди саме йде запит (для дебагу в консолі)
+api.interceptors.request.use(config => {
+  console.log(`🚀 Sending request to: ${config.baseURL}${config.url}`);
+  return config;
+});
+
 const ENDPOINTS = {
   BOOKINGS: '/api/bookings',
   REVIEWS: '/api/reviews',
   CALLBACKS: '/api/callbacks',
   MENU: '/api/menu',
 };
+
+// ... решта вашого коду без змін ...
 
 const handleError = (error, defaultMessage) => {
   const message = error.response?.data?.message || defaultMessage;

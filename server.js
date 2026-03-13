@@ -59,4 +59,5 @@ mongoose
   });
 
 // Експортуємо app для Vercel
+
 export default app;

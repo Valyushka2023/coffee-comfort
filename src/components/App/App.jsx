@@ -6,6 +6,7 @@ import Loader from '../Ui/Loader/Loader.jsx';
 const Home = lazy(() => import('../../pages/Home/Home.jsx'));
 
 function App() {
+  console.log('Update 1');
   return (
     <Router>
       <main className="page-fade">

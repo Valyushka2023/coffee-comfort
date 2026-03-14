@@ -1,15 +1,10 @@
 import axios from 'axios';
 
-// --- Оновлений базовий URL ---
-// Тепер береться виключно зі змінних середовища (VITE_API_URL на Vercel)
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-// Перевірка на випадок, якщо ви забули додати змінну на Vercel
 if (!BASE_URL) {
   console.error('⚠️ ПОМИЛКА: VITE_API_URL не задано у налаштуваннях Vercel!');
 }
-
-// створюємо axios instance
 const api = axios.create({
   baseURL: `${BASE_URL}/api`,
   headers: {
@@ -17,7 +12,6 @@ const api = axios.create({
   },
 });
 
-// endpoints
 const ENDPOINTS = {
   BOOKINGS: '/bookings',
   REVIEWS: '/reviews',
@@ -25,7 +19,6 @@ const ENDPOINTS = {
   MENU: '/menu',
 };
 
-// --- Обробка помилок ---
 const handleError = (error, defaultMessage) => {
   console.error('API Error:', error);
 

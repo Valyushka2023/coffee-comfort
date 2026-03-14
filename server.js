@@ -93,27 +93,27 @@ dotenv.config();
 const app = express();
 
 // --- CORS налаштування ---
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Якщо змінна пуста, дозволяємо всім (або задаємо дефолтний localhost)
-      const allowedOrigins = process.env.CORS_ORIGIN
-        ? process.env.CORS_ORIGIN.split(',')
-        : ['http://localhost:5173'];
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       // Якщо змінна пуста, дозволяємо всім (або задаємо дефолтний localhost)
+//       const allowedOrigins = process.env.CORS_ORIGIN
+//         ? process.env.CORS_ORIGIN.split(',')
+//         : ['http://localhost:5173'];
 
-      // !origin — це запити, які не передають заголовок Origin (наприклад, сервер-сервер)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  })
-);
-
+//       // !origin — це запити, які не передають заголовок Origin (наприклад, сервер-сервер)
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     credentials: true,
+//   })
+// );
+app.use(cors());
 app.use(express.json());
 
 // --- МАРШРУТИ ---
@@ -134,11 +134,11 @@ mongoose
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // --- СЕРВЕР ---
-const port = process.env.PORT || 5001;
-
-// Запускаємо сервер, якщо це не Vercel (або якщо ми хочемо локально/на Render)
-if (process.env.NODE_ENV !== 'production' || process.env.RENDER) {
-  app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
-}
+// const port = process.env.PORT || 5001;
+// if (process.env.NODE_ENV !== 'production' || process.env.RENDER) {
+//   app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
+// }
+const port = process.env.PORT || 10000; // Render любить порт 10000
+app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
 
 export default app;

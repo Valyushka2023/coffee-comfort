@@ -1,9 +1,15 @@
 import axios from 'axios';
 
-// базовый URL для API
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+// --- Оновлений базовий URL ---
+// Тепер береться виключно зі змінних середовища (VITE_API_URL на Vercel)
+const BASE_URL = import.meta.env.VITE_API_URL;
 
-// создаём axios instance
+// Перевірка на випадок, якщо ви забули додати змінну на Vercel
+if (!BASE_URL) {
+  console.error('⚠️ ПОМИЛКА: VITE_API_URL не задано у налаштуваннях Vercel!');
+}
+
+// створюємо axios instance
 const api = axios.create({
   baseURL: `${BASE_URL}/api`,
   headers: {
@@ -19,7 +25,7 @@ const ENDPOINTS = {
   MENU: '/menu',
 };
 
-// обработка ошибок
+// --- Обробка помилок ---
 const handleError = (error, defaultMessage) => {
   console.error('API Error:', error);
 
@@ -32,7 +38,6 @@ const handleError = (error, defaultMessage) => {
 // ======================
 // BOOKINGS
 // ======================
-
 export const sendBookingRequest = async bookingData => {
   try {
     const { data } = await api.post(ENDPOINTS.BOOKINGS, bookingData);
@@ -45,7 +50,6 @@ export const sendBookingRequest = async bookingData => {
 // ======================
 // CALLBACK
 // ======================
-
 export const sendCallbackRequest = async callbackData => {
   try {
     const { data } = await api.post(ENDPOINTS.CALLBACKS, callbackData);
@@ -58,7 +62,6 @@ export const sendCallbackRequest = async callbackData => {
 // ======================
 // REVIEWS
 // ======================
-
 export const sendReviewRequest = async reviewData => {
   try {
     const { data } = await api.post(ENDPOINTS.REVIEWS, reviewData);
@@ -80,7 +83,6 @@ export const fetchReviewsRequest = async () => {
 // ======================
 // MENU
 // ======================
-
 export const fetchMenuRequest = async () => {
   try {
     const { data } = await api.get(ENDPOINTS.MENU);

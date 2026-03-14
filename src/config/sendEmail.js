@@ -59,16 +59,10 @@ dotenv.config();
 
 // Створюємо транспортер
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: 587,
-  secure: false,
-  requireTLS: true,
+  service: 'gmail', // Це ключовий момент!
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-  tls: {
-    rejectUnauthorized: false, // Можна замінити на true для кращої безпеки, якщо сервер підтримує
+    user: process.env.SMTP_USER, // Ваша пошта (напр. coffee.comfort.cafe@gmail.com)
+    pass: process.env.SMTP_PASSWORD, // ТАЙНИЙ 16-значний пароль додатка
   },
 });
 

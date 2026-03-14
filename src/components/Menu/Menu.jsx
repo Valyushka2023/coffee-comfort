@@ -12,7 +12,10 @@ const Menu = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/menu');
+        // ВИПРАВЛЕНО:
+        const baseUrl =
+          import.meta.env.VITE_API_URL || 'https://coffee-comfort.onrender.com';
+        const response = await axios.get(`${baseUrl}/api/menu`);
         setMenuItems(response.data);
       } catch (err) {
         console.error('Помилка завантаження меню:', err);

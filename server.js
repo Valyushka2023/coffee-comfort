@@ -134,12 +134,11 @@ mongoose
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // --- СЕРВЕР ---
-// Для Vercel app автоматично експортується, app.listen не потрібен
-if (process.env.NODE_ENV !== 'production') {
-  const port = process.env.PORT || 5001;
-  app.listen(port, () =>
-    console.log(`🚀 Server running on http://localhost:${port}`)
-  );
+const port = process.env.PORT || 5001;
+
+// Запускаємо сервер, якщо це не Vercel (або якщо ми хочемо локально/на Render)
+if (process.env.NODE_ENV !== 'production' || process.env.RENDER) {
+  app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
 }
 
 export default app;

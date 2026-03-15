@@ -169,3 +169,19 @@
     font-size: 0.75rem;
   }
 } */
+/* Для головного контейнера секцій */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+section {
+  padding: 4rem 0;
+}
+
+/* Виправлення проблеми з фіксованим хедером */
+/* Якщо хедер займає місце зверху, додайте до секцій scroll-margin-top */
+section {
+  scroll-margin-top: 80px;
+}

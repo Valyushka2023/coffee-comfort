@@ -183,6 +183,7 @@ import errorComponentEN from '../locales/en/error_component.json';
 import contentDetailsEN from '../locales/en/content_details.json';
 import contentReviewsEN from '../locales/en/content_reviews.json';
 import fullScreenImageModalEN from '../locales/en/full_screen_image_modal.json';
+import callbackModalEN from '../locales/en/callback_modal.json';
 
 const unitsEN = {
   m: 'm',
@@ -219,6 +220,7 @@ import errorComponentUK from '../locales/uk/error_component.json';
 import contentDetailsUK from '../locales/uk/content_details.json';
 import contentReviewsUK from '../locales/uk/content_reviews.json';
 import fullScreenImageModalUK from '../locales/uk/full_screen_image_modal.json';
+import callbackModalUK from '../locales/uk/callback_modal.json';
 
 const unitsUK = {
   m: 'м',
@@ -257,6 +259,7 @@ const resources = {
     content_details: contentDetailsEN,
     content_reviews: contentReviewsEN,
     full_screen_image_modal: fullScreenImageModalEN,
+    callback_modal: callbackModalEN,
   },
   uk: {
     button: buttonUK,
@@ -287,6 +290,7 @@ const resources = {
     content_details: contentDetailsUK,
     content_reviews: contentReviewsUK,
     full_screen_image_modal: fullScreenImageModalUK,
+    callback_modal: callbackModalUK,
   },
 };
 

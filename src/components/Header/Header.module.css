@@ -101,6 +101,7 @@
   background-color: var(--button-review-bg-color);
   border: 0.0625rem solid var(--button-border-color);
   border-radius: var(--btn-radius);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
   font-size: var(--nav-font-size);
   font-weight: 600;
   text-decoration: none;
@@ -110,6 +111,27 @@
     transform 0.4s ease,
     background-color 0.4s ease,
     filter 0.4s ease;
+  /* cursor: pointer; */
+  /* background-color: var(--button-review-bg-color); */
+  /* border: 0.0625rem solid var(--button-border-color); */
+  /* border-radius: var(--btn-radius); */
+
+  /* font-size: var(--btn-font-size); */
+  /* font-weight: 600; */
+  /* text-decoration: none; */
+  /* text-transform: uppercase; */
+  /* color: var(--button-form-color); */
+  /* transition:
+    transform 0.4s ease,
+    background-color 0.4s ease,
+    filter 0.4s ease; */
+}
+
+.button-cta:hover {
+  background-color: var(--button-hover-bg-color) !important;
+  color: var(--button-hover-color) !important;
+  transform: translateY(-0.1875rem);
+  filter: brightness(1.1);
 }
 
 @media (width <= 74.9375rem) {

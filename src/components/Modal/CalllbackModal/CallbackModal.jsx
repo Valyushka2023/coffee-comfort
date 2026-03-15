@@ -73,7 +73,7 @@ const CallbackModal = ({ isOpen, onClose }) => {
     <BaseModal
       isOpen={isOpen}
       onClose={handleClose}
-      title={t('title', 'ЗАМОВИТИ ДЗВІНОК')}
+      title={t('title', 'ORDER A CAL')}
     >
       <form className={css['form']} onSubmit={handleSubmit} noValidate>
         <div className={css['inputs-area-form']}>

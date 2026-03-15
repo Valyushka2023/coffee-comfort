@@ -59,7 +59,8 @@
 }
 
 .footer-item:not(.no-hover):hover {
-  color: var(--hover-footer-color);
+  /* color: var(--hover-footer-color);  */
+  color: var(--button-footer-hover-color);
   transform: translateY(-0.1875rem);
 }
 
@@ -86,7 +87,7 @@
 
 .callback-link:hover,
 .review-trigger:hover {
-  color: var(--hover-footer-color);
+  color: var(--button-footer-hover-color);
   transform: translateY(-0.1875rem);
 }
 
@@ -105,7 +106,7 @@
 }
 
 .social-icons a:hover {
-  color: var(--hover-footer-color);
+  color: var(--button-footer-hover-color);
   transform: translateY(-0.1875rem);
 }
 

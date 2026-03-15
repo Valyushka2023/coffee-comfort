@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
+import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
 import css from './FormReview.module.css';
 
 const FormReview = ({ isOpen, onClose, onReviewAdded }) => {

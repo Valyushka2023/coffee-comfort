@@ -157,6 +157,7 @@
   --button-hover-bg-color: var(--color-light-brown);
   --button-hover-color: var(--color-white);
   --button-hover-close-color: var(--color-latte-coffee);
+  --button-footer-hover-color: var(--color-latte-coffee);
   --button-burger-icon-color: var(--color-light-brown);
   --button-close-icon-color: var(--color-white);
   --button-review-close-color: var(--color-white);
@@ -256,6 +257,7 @@
   --button-hover-bg-color: var(--color-latte-coffee);
   --button-hover-color: var(--color-brown);
   --button-hover-close-color: var(--color-white);
+  --button-footer-hover-color: var(--color-white);
   --button-burger-icon-color: var(--color-beige);
   --button-close-icon-color: var(--color-brown);
   --button-review-close-color: var(--color-light-brown);

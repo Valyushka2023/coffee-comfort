@@ -139,9 +139,20 @@ const FormBooking = () => {
   };
 
   const handleCloseSuccess = () => {
-    setIsSuccess(false);
-    // Якщо хочете повне очищення:
-    window.location.reload();
+    setIsSuccess(false); // Закриваємо модалку
+
+    // 1. Очищуємо форму (встановлюємо початкові значення)
+    setFormData({
+      name: '',
+      phone: '',
+      email: '',
+      selectedZone: '',
+      comment: '',
+      bookingStartDate: '', // або те, що у вас є в стані
+    });
+
+    // 2. Плавна прокрутка вгору (щоб не кидало посеред сторінки)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (isSuccess) {

@@ -153,3 +153,48 @@
     opacity: 0.9;
   }
 }
+
+@media (max-width: 61.9375rem) {
+  .title {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+  }
+  .subtitle {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    margin-bottom: 1.5rem;
+  }
+  .buttons a {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .hero {
+    min-height: 70vh;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  .buttons {
+    gap: 1rem;
+  }
+  .buttons a {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .hero {
+    min-height: 60vh;
+  }
+  .title {
+    font-size: 1.75rem;
+  }
+  .buttons {
+    flex-direction: column; /* Кнопки в стовпчик на дуже малих екранах */
+    gap: 0.5rem;
+  }
+}

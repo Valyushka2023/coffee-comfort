@@ -1,4 +1,5 @@
 .avatar {
+  position: relative;
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -7,18 +8,11 @@
   height: 3.125rem;
   overflow: hidden;
   background-color: var(--avatar-bg-color);
-  border: 0.125rem solid #fff;
   border-radius: 50%;
-  box-shadow: 0 0.125rem 0.3125rem rgb(0 0 0 / 10%);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--avatar-color);
-}
-
-.avatar-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .initial {

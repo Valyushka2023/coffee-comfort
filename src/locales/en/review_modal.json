@@ -2,7 +2,7 @@
   "title": "Your opinion",
   "name_placeholder": "Your name (2-20 characters)",
   "comment_placeholder": "Your comment (max. 150 characters)...",
-  "send": "Send",
+  "submit_btn": "Send",
   "errors": {
     "required": "Please fill in the field.",
     "name_length": "The name must be between 2 and 20 characters.",

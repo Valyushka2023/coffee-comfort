@@ -100,11 +100,21 @@ const CallbackModal = ({ isOpen, onClose }) => {
           ))}
         </div>
 
-        <div className={css['element-sending']}>
+        {/* <div className={css['element-sending']}>
           <Button variant="primary" type="submit" disabled={isSubmitting}>
             {isSubmitting
               ? t('processing', 'ОБРОБКА...')
               : t('submit_btn', 'ЗАМОВИТИ')}
+          </Button>
+        </div> */}
+        <div className={css['element-sending']}>
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={isSubmitting}
+            isFixedWidth={true} // Кнопка завжди буде гарного розміру
+          >
+            {isSubmitting ? t('processing') : t('submit_btn')}
           </Button>
         </div>
       </form>

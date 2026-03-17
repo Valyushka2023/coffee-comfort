@@ -47,11 +47,21 @@ const BaseModal = ({
       >
         {/* Хрестик відмалюється лише тоді, коли showCloseButton дорівнює true */}
         {showCloseButton && (
-          <div className={css['close-btn']}>
+          <div
+            className={clsx(
+              css['close-btn'],
+              className && css['gallery-close-btn']
+            )}
+          >
             <CloseButton onClick={onClose} />
           </div>
         )}
 
+        {/* {showCloseButton && (
+          <div className={css['modal-header']}>
+            <CloseButton onClick={onClose} />
+          </div>
+        )} */}
         {title && <h3 className={css['modal-title']}>{title}</h3>}
         {children}
       </div>

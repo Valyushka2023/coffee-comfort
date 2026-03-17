@@ -6,10 +6,16 @@
   --overlay-blur: 0.25rem;
 
   /* --- ДИЗАЙН-СИСТЕМА КНОПОК --- */
+  --btn-font-family: 'Montserrat', sans-serif;
+  --btn-font-weight: 600;
   --btn-height: 3rem;
   --btn-radius: 2rem;
-  --btn-font-size: 0.875rem;
+  --btn-font-size: 1rem;
   --btn-min-width: 13.75rem;
+
+  /* --- ДИЗАЙН-СИСТЕМА ПОСИЛАНЬ--- */
+  --link-font-size: 1rem;
+  --link-font-weight: 600;
 
   /* --- ПАЛІТРА КОЛЬОРІВ --- */
   --color-amber: #d4a373;

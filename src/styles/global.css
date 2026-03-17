@@ -45,25 +45,31 @@ h1 {
   margin-bottom: 1rem;
   font-size: 3rem;
   font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 h2 {
   font-size: 1.5rem;
   font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 h3 {
   font-size: 1.25rem;
   font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 h4 {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 p {
   font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 }
 
 /* Зображення */
@@ -77,17 +83,27 @@ img {
 }
 
 /* Посилання та кнопки */
-a,
+.header-link,
+.header-cta-link,
 button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-family: inherit;
+
+  /* Використовуємо ваші змінні з variables.css */
+  font-family: var(--btn-font-family, 'Montserrat', sans-serif) !important;
+  font-weight: var(--btn-font-weight, 600) !important;
+  font-size: var(--btn-font-size, 1rem);
+
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2; /* Додаємо для кращого центрування тексту */
 }
 
+/* Окремі налаштування суто для кнопок (щоб не впливати на звичайні посилання меню) */
 button {
   cursor: pointer;
   padding: 0;
@@ -95,7 +111,17 @@ button {
   border: none;
   outline: none;
 }
-
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/* Якщо ви хочете, щоб звичайні посилання (тег <a>) 
+   просто успадковували шрифт body (Inter) */
+/* a:not(.header-link):not(.header-cta-link) {
+  text-transform: none;
+  font-weight: inherit;
+  letter-spacing: normal;
+} */
 /* Відступи у секціях */
 section {
   position: relative;

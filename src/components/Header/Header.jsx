@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import Logo from '../../components/Ui/Logo/Logo.jsx';
 import ThemeToggle from '../../components/Ui/Buttons/ThemeToggle/ThemeToggle.jsx';
 import LanguageSwitcher from '../../components/Ui/LanguageSwitcher/LanguageSwitcher.jsx';
-// Імпортуємо ваш компонент кнопки
 import MenuToggleButton from '../../components/Ui/Buttons/MenuToggleButton/MenuToggleButton.jsx';
 import css from './Header.module.css';
 
@@ -14,34 +13,39 @@ const Header = ({ onToggleMenu, isMenuOpen }) => {
   return (
     <header className={css['header-section']}>
       <div className={css['header-container']}>
-        <Link to="/" className={css['logo-header']}>
+        {/* Логотип */}
+        <Link to="/" className={css['header-logo']}>
           <Logo />
         </Link>
 
-        <nav className={css['nav-desktop']}>
-          <a href="#menu" className={css['nav-link']}>
-            {t('nav_menu', 'Menu')}
+        {/* Навігаційні посилання */}
+        <nav className={css['header-links']}>
+          <a href="#menu" className={css['header-link']}>
+            {t('menu_header-link', 'Menu')}
           </a>
-          <a href="#about" className={css['nav-link']}>
-            {t('nav_about', 'About us')}
+          <a href="#about" className={css['header-link']}>
+            {t('about_header_link', 'About us')}
           </a>
-          <a href="#gallery" className={css['nav-link']}>
-            {t('nav_gallery', 'Gallery')}
+          <a href="#gallery" className={css['header-link']}>
+            {t('gallery_header_link', 'Gallery')}
           </a>
-          <a href="#contacts" className={css['nav-link']}>
-            {t('nav_contacts', 'Contacts')}
+          <a href="#contacts" className={css['header-link']}>
+            {t('contacts_header_link', 'Contacts')}
           </a>
         </nav>
 
-        <div className={css['toggle-icons']}>
-          <a href="#contacts" className={css['button-cta']}>
+        {/* Блок дій */}
+        <div className={css['actions-wrapper']}>
+          {/* Повертаємо посилання, стилізоване під кнопку */}
+          <a href="#contacts" className={css['header-cta-link']}>
             {t('cta_booking', 'Book a table')}
           </a>
-          <ThemeToggle />
-          <LanguageSwitcher />
 
-          {/* Використовуємо компонент замість стандартного тегу button */}
-          <MenuToggleButton isOpen={isMenuOpen} onClick={onToggleMenu} />
+          <div className={css['settings-group']}>
+            <ThemeToggle />
+            <LanguageSwitcher />
+            <MenuToggleButton isOpen={isMenuOpen} onClick={onToggleMenu} />
+          </div>
         </div>
       </div>
     </header>

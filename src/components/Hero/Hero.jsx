@@ -11,16 +11,20 @@ const Hero = () => {
           <h1 className={css['title']}>
             {t('title', 'Our coffee creates your mood')}
           </h1>
-          <p className={css['subtitle']}>
+          <h2 className={css['subtitle']}>
             {t(
               'subtitle',
               'Freshly roasted coffee and signature desserts daily'
             )}
-          </p>
+          </h2>
 
-          <div className={css['buttons']}>
-            <a href="#menu">{t('menu_buttons', 'View menu')}</a>
-            <a href="#contacts">{t('contacts_buttons', 'Visit us')} </a>
+          <div className={css['hero-links']}>
+            <a href="#menu" className={css['hero-link']}>
+              {t('menu_hero_link', 'View menu')}
+            </a>
+            <a href="#contacts" className={css['hero-link']}>
+              {t('contacts_hero_link', 'Visit us')}
+            </a>
           </div>
         </div>
       </div>

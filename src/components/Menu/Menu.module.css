@@ -166,6 +166,9 @@
   margin-bottom: 4rem;
   flex-wrap: wrap;
 }
+.fixed-width {
+  min-width: 8rem; /* або інше значення, яке гарно виглядає на скриншоті */
+}
 
 .filter-btn {
   position: relative;
@@ -230,9 +233,10 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 2.5rem;
-  font-size: 1.5rem;
-  font-weight: 700;
+  /* font-size: 1.5rem;
+  font-weight: 700; */
   color: var(--primary-color);
+  text-transform: uppercase;
 }
 
 .category-line {

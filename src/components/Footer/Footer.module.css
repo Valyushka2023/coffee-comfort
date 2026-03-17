@@ -35,8 +35,8 @@
 
 .column-title {
   margin: 0;
-  font-size: 0.875rem;
-  font-weight: bold;
+  /* font-size: 0.875rem;
+  font-weight: bold; */
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
@@ -59,7 +59,6 @@
 }
 
 .footer-item:not(.no-hover):hover {
-  /* color: var(--hover-footer-color);  */
   color: var(--button-footer-hover-color);
   transform: translateY(-0.1875rem);
 }

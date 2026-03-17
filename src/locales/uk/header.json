@@ -1,7 +1,7 @@
 {
-  "nav_menu": "Меню",
-  "nav_about": "Про нас",
-  "nav_gallery": "Галерея",
-  "nav_contacts": "Контакти",
+  "menu_header_link": "Меню",
+  "about_header_link": "Про нас",
+  "gallery_header_link": "Галерея",
+  "contacts_header_link": "Контакти",
   "cta_booking": "Забронювати стіл"
 }

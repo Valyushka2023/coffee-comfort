@@ -69,7 +69,7 @@ const Menu = () => {
             <button
               key={catKey}
               onClick={() => setActiveCategory(catKey)}
-              className={`${css['filter-btn']} ${activeCategory === catKey ? css.active : ''}`}
+              className={`${css['filter-btn']} ${activeCategory === catKey ? css.active : ''} ${css['fixed-width']}`}
             >
               {catKey === 'all'
                 ? t('categories.all')

@@ -6,6 +6,7 @@ const Button = ({
   variant = 'default',
   onClick,
   size = 'medium',
+  isFixedWidth = false,
   disabled = false,
   children,
   to,
@@ -15,17 +16,24 @@ const Button = ({
   const navigate = useNavigate();
 
   const handleClick = e => {
-    if (onClick) {
-      onClick(e);
-    }
-    if (to) {
-      navigate(to);
-    }
+    if (disabled) return;
+    if (onClick) onClick(e);
+    if (to) navigate(to);
   };
+
+  const combinedClasses = [
+    css.button,
+    css[variant],
+    css[size],
+    isFixedWidth ? css['fixed-width'] : '',
+    className,
+  ]
+    .join(' ')
+    .trim();
 
   return (
     <button
-      className={`${css['button']} ${css[variant]} ${css[size]} ${className}`}
+      className={combinedClasses}
       onClick={handleClick}
       disabled={disabled}
       {...rest}
@@ -36,9 +44,10 @@ const Button = ({
 };
 
 Button.propTypes = {
-  variant: PropTypes.oneOf(['default', 'primary', 'secondary']),
-  onClick: PropTypes.func,
+  variant: PropTypes.oneOf(['default', 'primary', 'active']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
+  isFixedWidth: PropTypes.bool,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
   children: PropTypes.node.isRequired,
   to: PropTypes.string,

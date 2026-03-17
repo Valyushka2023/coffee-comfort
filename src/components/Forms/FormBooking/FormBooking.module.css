@@ -182,8 +182,9 @@
 }
 
 .title-form {
-  font-size: 1.5rem;
-  font-weight: 600;
+  /* font-size: 1.5rem;
+  font-weight: 600; */
+  text-transform: uppercase;
   line-height: 1.2;
   text-align: center;
   color: var(--text-reviews-color);
@@ -383,6 +384,9 @@
   margin-top: 0.625rem;
   text-align: center;
   white-space: normal;
+}
+.element-sending {
+  margin: 0 auto;
 }
 
 /* Адаптивність */

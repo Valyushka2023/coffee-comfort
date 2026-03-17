@@ -1,7 +1,7 @@
 {
-  "nav_menu": "Menu",
-  "nav_about": "About us",
-  "nav_gallery": "Gallery",
-  "nav_cotacts": "Contacts",
+  "menu_header_link": "Menu",
+  "about_header_link": "About us",
+  "gallery_header_link": "Gallery",
+  "contacts_header_link": "Contacts",
   "cta_booking": "Book a table"
 }

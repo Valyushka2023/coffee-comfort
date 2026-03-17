@@ -4,14 +4,24 @@
   max-width: 53.125rem;
   padding: 1.875rem;
 }
+/* Перевизначаємо позиціонування хрестика саме для галереї */
+.gallery-specific-modal .close-btn {
+  top: 1rem !important; /* Наприклад, відсунути від краю */
+  right: 1rem !important;
+  background-color: transparent !important; /* Прибрати фоновий колір aqua */
+}
 
+/* Якщо потрібно змінити вигляд іконки хрестика всередині */
+.gallery-specific-modal .close-btn button {
+  stroke: white; /* Наприклад, зробити хрестик білим */
+}
 .img-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   overflow: hidden;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   aspect-ratio: 4 / 3;
 }
 

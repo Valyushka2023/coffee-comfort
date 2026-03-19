@@ -78,6 +78,15 @@
 }
 
 /* Адаптивність */
+@media (max-width: 61.9375rem) {
+  /* .header-link {
+    font-size: 0.9rem;
+  } */
+
+  /* .header-cta-link {
+    font-size: 0.5rem;
+  } */
+}
 @media (max-width: 480px) {
   .fixed-width {
     min-width: 100%;

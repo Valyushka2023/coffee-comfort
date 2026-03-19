@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'; // 1. Додай цей імпорт
-export const Moon = ({ size = 24, color = 'currentColor', ...props }) => (
+import PropTypes from 'prop-types';
+export const Moon = ({ size = '1em', color = 'currentColor', ...props }) => (
   <svg
     width={size}
     height={size}

@@ -68,10 +68,35 @@
   transform: scale(1);
 }
 
-@media (width <= 3rem) {
+/* @media (width <= 3rem) {
   .language-en,
   .language-uk,
   .separator {
     font-size: 0.9rem;
+  }
+} */
+@media (max-width: 74.9375rem) {
+}
+
+@media (max-width: 61.9375rem) {
+  .lang-switcher {
+    gap: 0.12rem;
+  }
+  .language-en,
+  .language-uk {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 47.9375rem) {
+  .language-en,
+  .language-uk {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .language-en,
+  .language-uk {
+    font-size: 0.7rem;
   }
 }

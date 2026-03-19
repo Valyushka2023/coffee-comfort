@@ -18,6 +18,7 @@
 /* Іконка Сонця (активна в темній темі) */
 .theme-icon-md-light {
   font-size: 1.4rem;
+
   color: var(--toggle-theme-icon-color);
 
   /* Анімація м'якого пульсуючого сяйва */
@@ -52,9 +53,36 @@
 }
 
 /* Адаптивність */
-@media (width <= 48rem) {
+/* @media (width <= 48rem) {
   .theme-icon-md-light,
   .theme-icon-md-dark {
     font-size: 1.2rem;
+  }
+} */
+@media (max-width: 74.9375rem) {
+  .theme-icon-md-light,
+  .theme-icon-md-dark {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 61.9375rem) {
+  .theme-icon-md-light,
+  .theme-icon-md-dark {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .theme-icon-md-light,
+  .theme-icon-md-dark {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .theme-icon-md-light,
+  .theme-icon-md-dark {
+    font-size: 0.8rem;
   }
 }

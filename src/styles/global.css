@@ -112,6 +112,7 @@ button {
   outline: none;
 }
 a {
+  letter-spacing: 0.05em;
   text-decoration: none;
   color: inherit;
 }

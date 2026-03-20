@@ -154,13 +154,26 @@
 @media (max-width: 47.9375rem) {
   .header-links {
     display: none;
+    gap: 0.5rem;
   }
   .header-link {
     font-size: 0.8rem;
   }
+
   .header-cta-link {
-    display: none;
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
+    width: 10.5rem;
+  }
+  .actions-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex: 0 0 auto;
+  }
+  .settings-group {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
   }
 }
 
@@ -171,6 +184,6 @@
     gap: 1.7rem;
   }
   .actions-wrapper {
-    /* gap: 0.5rem; */
+    gap: 0.5rem;
   }
 }

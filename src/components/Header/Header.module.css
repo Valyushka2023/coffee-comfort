@@ -6,6 +6,7 @@
   max-width: 75rem;
   margin: 0 auto;
   background-color: var(--header-footer-bg-color);
+  background-color: aqua;
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color);
 }

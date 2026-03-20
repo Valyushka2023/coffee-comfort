@@ -110,6 +110,7 @@
 @media (max-width: 61.9375rem) {
   .logo {
     font-size: 0.9rem;
+    letter-spacing: normal;
   }
 
   .logo-coffee-cap img {
@@ -120,7 +121,7 @@
 
 @media (max-width: 47.9375rem) {
   .logo {
-    font-size: 0.9rem;
+    /* font-size: 0.9rem; */
   }
 
   .logo-coffee-cap img {
@@ -138,7 +139,7 @@
 
 @media (max-width: 29.9375rem) {
   .logo {
-    font-size: 0.9rem;
+    /* font-size: 0.9rem; */
   }
 
   .logo-coffee-cap img {

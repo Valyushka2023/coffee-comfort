@@ -85,6 +85,7 @@
   .language-en,
   .language-uk {
     font-size: 0.9rem;
+    letter-spacing: normal;
   }
 }
 @media (max-width: 47.9375rem) {

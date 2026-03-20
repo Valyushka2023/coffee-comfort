@@ -138,7 +138,8 @@
     gap: 0.9rem;
   }
   .header-cta-link {
-    width: 12rem;
+    width: 11.7rem;
+    padding: 0 0.2rem;
     letter-spacing: normal;
   }
 }

@@ -130,11 +130,14 @@
   .header-links {
     gap: 0.9rem;
   }
+  .header-link {
+    font-size: 0.9rem;
+  }
   .actions-wrapper {
     gap: 0.9rem;
   }
   .header-cta-link {
-    width: 12.5rem;
+    width: 1.5rem;
   }
 }
 

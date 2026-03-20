@@ -132,12 +132,14 @@
   }
   .header-link {
     font-size: 0.9rem;
+    letter-spacing: normal;
   }
   .actions-wrapper {
     gap: 0.9rem;
   }
   .header-cta-link {
     width: 12.5rem;
+    letter-spacing: normal;
   }
 }
 

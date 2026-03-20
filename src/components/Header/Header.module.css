@@ -6,7 +6,7 @@
   max-width: 75rem;
   margin: 0 auto;
   background-color: var(--header-footer-bg-color);
-  background-color: aqua;
+  background-color: rgb(202, 233, 198);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color);
 }
@@ -138,7 +138,7 @@
 
   .header-cta-link {
     font-size: 0.8rem !important;
-    width: 8.5rem;
+    width: 10.5rem;
   }
   .actions-wrapper {
     display: flex;

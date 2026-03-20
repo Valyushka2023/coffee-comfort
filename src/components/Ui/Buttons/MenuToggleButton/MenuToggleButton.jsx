@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
+
 import { MenuIcon, CloseIcon } from '../../../Icons/index.js';
+
 import clsx from 'clsx';
+
 import css from './MenuToggleButton.module.css';
 
 const MenuToggleButton = ({ isOpen, onClick, ariaLabel = 'Toggle menu' }) => {
@@ -23,7 +26,9 @@ const MenuToggleButton = ({ isOpen, onClick, ariaLabel = 'Toggle menu' }) => {
 
 MenuToggleButton.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+
   onClick: PropTypes.func.isRequired,
+
   ariaLabel: PropTypes.string,
 };
 

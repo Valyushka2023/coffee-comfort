@@ -1,32 +1,36 @@
 .burger-button {
   position: relative;
+
   z-index: 1000;
+
   display: none;
+
   justify-content: center;
+
   align-items: center;
+
   cursor: pointer;
+
   background: none;
+
   border: none;
+
   color: var(--button-burger-icon-color);
+
   transition:
     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
     color 0.3s ease;
 }
-.burger-button {
-  display: none; /* За замовчуванням приховано */
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  color: var(--button-burger-icon-color);
-  cursor: pointer;
-}
 
 .icon {
   display: block;
+
   width: 1.4rem;
+
   height: 1.4rem;
+
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
   stroke: currentcolor;
 }
 
@@ -36,6 +40,7 @@
 
 .burger-button:hover {
   color: var(--hover-color);
+
   transform: scale(1.1);
 }
 
@@ -46,31 +51,31 @@
 .burger-button:active {
   transform: scale(0.9);
 }
+
 @media (max-width: 74.9375rem) {
   .icon {
     width: 1.2rem;
+
     height: 1.2rem;
   }
 }
 
 @media (max-width: 61.9375rem) {
-  .burger-button {
-    display: flex; /* З'являється на планшетах */
-  }
-}
+  .icon {
+    width: 1rem;
 
-.icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  stroke: currentcolor;
+    height: 1rem;
+  }
 }
 
 @media (max-width: 47.9375rem) {
   .burger-button {
     display: flex;
   }
+
   .icon {
     width: 0.9rem;
+
     height: 0.9rem;
   }
 }
@@ -78,6 +83,7 @@
 @media (max-width: 29.9375rem) {
   .icon {
     width: 0.8rem;
+
     height: 0.8rem;
   }
 }

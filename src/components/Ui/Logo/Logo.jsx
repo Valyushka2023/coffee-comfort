@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import css from './Logo.module.css';
 
 function Logo({ className = '' }) {

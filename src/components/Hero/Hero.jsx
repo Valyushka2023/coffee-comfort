@@ -5,13 +5,13 @@ import css from './Hero.module.css';
 const Hero = () => {
   const { t } = useTranslation('hero');
   return (
-    <section className={css['hero']}>
-      <div className={css['overlay']}>
-        <div className={css['container']}>
-          <h1 className={css['title']}>
+    <section className={css['hero-section']}>
+      <div className={css['hero-overlay']}>
+        <div className={css['hero-container']}>
+          <h1 className={css['hero-title']}>
             {t('title', 'Our coffee creates your mood')}
           </h1>
-          <h2 className={css['subtitle']}>
+          <h2 className={css['hero-subtitle']}>
             {t(
               'subtitle',
               'Freshly roasted coffee and signature desserts daily'

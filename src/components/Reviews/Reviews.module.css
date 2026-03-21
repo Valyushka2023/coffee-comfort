@@ -1,12 +1,10 @@
 /* --- ОСНОВНА СЕКЦІЯ --- */
 .reviews-section {
-  position: relative; /* Критично для позиціонування зерен */
+  position: relative;
   width: 100%;
-  /* max-width: 75rem; */
   min-height: 80vh;
-  /* margin: 0 auto; */
   padding: 4rem 1.5rem 2rem;
-  overflow: hidden; /* Щоб зерна не створювали горизонтальну прокрутку */
+  overflow: hidden;
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
@@ -61,7 +59,7 @@
 /* --- КОНТЕЙНЕР ТА ЗАГОЛОВОК --- */
 .reviews-container {
   position: relative;
-  z-index: 10; /* Поверх зерен */
+  z-index: 10;
   max-width: 75rem;
   width: 100%;
   margin: 0 auto;

@@ -1,9 +1,7 @@
 .gallery-section {
   position: relative;
-  /* max-width: 75rem; */
   width: 100%;
   min-height: 80vh;
-  /* margin: 0 auto; */
   padding: 4rem 1.5rem;
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);

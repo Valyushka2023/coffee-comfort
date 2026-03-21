@@ -1,7 +1,8 @@
 .contacts-section {
-  max-width: 75rem;
-  min-height: 100vh;
-  margin: 0 auto;
+  width: 100%;
+  /* max-width: 75rem; */
+  min-height: 80vh;
+  /* margin: 0 auto; */
   padding: 4rem 1.5rem;
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
@@ -14,11 +15,14 @@
   animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-.contacts-content {
+.contacts-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
+  max-width: 75rem;
+  width: 100%;
+  margin: 0 auto;
   gap: 2.5rem;
   padding: 2.5rem 0;
 }

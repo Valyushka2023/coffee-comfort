@@ -1,7 +1,9 @@
 .about-section {
   position: relative;
-  max-width: 75rem;
-  margin: 0 auto;
+  width: 100%;
+  /* max-width: 75rem; */
+  /* margin: 0 auto; */
+  min-height: 80vh;
   padding-top: 3rem;
   padding-bottom: 5rem;
   overflow: hidden;
@@ -100,6 +102,7 @@
   align-items: center;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
+  width: 100%;
   max-width: 75rem;
   margin: 0 auto;
   padding: 0 1.5rem;

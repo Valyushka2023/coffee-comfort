@@ -7,7 +7,7 @@ const Contacts = () => {
   const { t } = useTranslation('contacts');
   return (
     <section id="contacts-section" className={css['contacts-section']}>
-      <div className={css['contacts-content']}>
+      <div className={css['contacts-container']}>
         {/* ЛІВА ЧАСТИНА: Інформація та Карта */}
         <div className={css['contacts-info']}>
           <h2 className={css['contacts-title']}>{t('title', 'Visit Us')}</h2>

@@ -1,6 +1,7 @@
 .footer-section {
-  max-width: 75rem;
-  margin: 0 auto;
+  width: 100%;
+  /* max-width: 75rem; */
+  /* margin: 0 auto; */
   background-color: var(--header-footer-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color);
@@ -17,6 +18,7 @@
   justify-content: space-between;
   gap: 4.8rem;
   max-width: 75rem;
+  width: 100%;
   margin: 0 auto;
   padding: 1.5rem;
   flex-wrap: wrap;

@@ -4,8 +4,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 80vh;
-  overflow: hidden;
+  min-height: 100vh;
+  padding: 0 1.5rem;
+  /* overflow: hidden; */
   background-image: url('/images/Hero.webp');
   background-repeat: no-repeat;
   background-position: center;
@@ -17,6 +18,8 @@
   animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   color: var(--color-beige);
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-overlay {
@@ -40,8 +43,6 @@
 
 .hero-title {
   margin-bottom: 1.5rem;
-  /* font-size: clamp(2.2rem, 8vw, 3rem);
-  font-weight: 700; */
   text-transform: uppercase;
   animation: fade-slide-up 0.9s ease-out forwards;
   animation-delay: 0.2s;
@@ -54,8 +55,6 @@
   margin-right: auto;
   margin-bottom: 2.5rem;
   margin-left: auto;
-  /* font-size: clamp(1.1rem, 2.5vw, 2rem);
-  font-weight: 600; */
   text-transform: uppercase;
   animation: fade-slide-up 0.9s ease-out forwards;
   animation-delay: 0.4s;

@@ -2,7 +2,7 @@
 @import url('./variables.css');
 @import url('./reset.css');
 
-/* Базові налаштування */
+/* 1. Базові налаштування (об'єднано) */
 *,
 *::before,
 *::after {
@@ -11,32 +11,9 @@
 
 html {
   width: 100%;
-  height: auto;
-  min-height: 100%;
+  overflow-x: hidden; /* Критично для мобільних */
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
 }
-
-body > header,
-footer,
-section {
-  width: 100%;
-  margin: 0 auto;
-}
-
-/*
-footer {
-  background-color: var(--header-footer-bg-color);
-}
-
-section {
-  background-color: var(--body-bg-color);
-  margin-bottom: 1px;
-}
-
-section.hero-section {
-  box-shadow: none;
-} */
 
 body {
   position: relative;
@@ -44,29 +21,36 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  background-color: #fff;
+  overflow-x: hidden; /* Подвійний захист від скролу */
+  background-color: var(--body-bg-color, #fff);
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
   color: #333;
-  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
+/* 2. Структурні елементи */
+/* Видалено жорстке width: 100% для секцій, щоб вони слухалися батьківського контейнера */
+section,
+footer,
+header {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+section {
+  scroll-margin-top: 5rem; /* Щоб хедер не закривав заголовок при переході за якорем */
+}
+
+/* 3. Типографіка */
 h1,
 h2,
 h3,
 h4 {
   font-family: 'Playfair Display', serif;
-}
-
-/* Типографіка */
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
   margin-top: 0;
+  line-height: 1.2;
 }
 
 h1 {
@@ -75,108 +59,76 @@ h1 {
   font-weight: 600;
   letter-spacing: 0.05em;
 }
-
 h2 {
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.05em;
 }
-
 h3 {
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.05em;
 }
-
 h4 {
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.05em;
 }
-
 p {
+  margin-top: 0;
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.05em;
 }
 
-/* Зображення */
+/* 4. Зображення */
 img {
   display: block;
+  max-width: 100%; /* Не дає картинці "вивалитися" за межі екрана */
   height: auto;
-  max-width: 100%;
-
-  /* vertical-align було видалено, бо воно ігнорується при display: block */
   font-style: italic;
 }
 
-/* Посилання та кнопки */
+/* 5. Посилання та кнопки */
 .header-link,
 .header-cta-link,
+button,
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
 button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
-  /* Використовуємо ваші змінні з variables.css */
-  font-family: var(--btn-font-family, 'Montserrat', sans-serif) !important;
-  font-weight: var(--btn-font-weight, 600) !important;
-  font-size: var(--btn-font-size, 1rem);
-
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  line-height: 1.2; /* Додаємо для кращого центрування тексту */
-}
-
-/* Окремі налаштування суто для кнопок (щоб не впливати на звичайні посилання меню) */
-button {
   cursor: pointer;
   padding: 0;
   background: none;
   border: none;
   outline: none;
-}
-a {
+  font-family: var(--btn-font-family, 'Montserrat', sans-serif);
+  font-weight: var(--btn-font-weight, 600);
+  text-transform: uppercase;
   letter-spacing: 0.05em;
-  text-decoration: none;
-  color: inherit;
-}
-/* Якщо ви хочете, щоб звичайні посилання (тег <a>) 
-   просто успадковували шрифт body (Inter) */
-/* a:not(.header-link):not(.header-cta-link) {
-  text-transform: none;
-  font-weight: inherit;
-  letter-spacing: normal;
-} */
-/* Відступи у секціях */
-section {
-  position: relative;
-  width: 100%;
-  scroll-margin-top: 5rem;
 }
 
-/* Debug: Червоні контури (можна вимкнути) */
-
-/* * {
-  outline: 0.0625rem solid red !important;
-} */
-
-section > *:last-child,
-article > *:last-child,
-div[class*='container'] > *:last-child {
-  margin-bottom: 0;
-}
-
-/* Допоміжні класи */
+/* 6. Специфічні компоненти */
 .input-wrapper {
   position: relative;
   width: 100%;
 }
 
-/* --- DATEPICKER СТИЛІ --- */
+/* Модальне вікно (виправлено для адаптивності) */
+.gallery-specific-modal {
+  width: 95%; /* Трохи більше для малих екранів */
+  max-width: 53.125rem;
+  padding: 1.5rem;
+  margin: 0 auto;
+}
+
+/* Datepicker фікси */
 .react-datepicker__navigation {
   top: 0.625rem !important;
 }
@@ -184,24 +136,4 @@ div[class*='container'] > *:last-child {
 .react-datepicker__navigation-icon::before {
   border-color: #5d4037 !important;
   border-width: 0.125rem 0.125rem 0 0 !important;
-}
-
-/* Модальне вікно */
-.gallery-specific-modal {
-  bottom: 2.25rem;
-  width: 90%;
-  max-width: 53.125rem;
-  padding: 1.875rem;
-}
-
-.gallery-specific-modal .close-button {
-  position: absolute;
-  top: 0.625rem;
-  right: 0.9375rem;
-  z-index: 10;
-  color: #3d2b1f !important;
-}
-
-.rating-wrapper .star-rating-label {
-  display: none;
 }

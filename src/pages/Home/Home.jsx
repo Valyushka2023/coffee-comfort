@@ -14,6 +14,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 import ScrollToTopButton from '../../components/Ui/Buttons/ScrollToTopButton/ScrollToTopButton.jsx';
 import CallbackModal from '../../components/Modal/CalllbackModal/CallbackModal.jsx';
 import ReviewModal from '../../components/Modal/ReviewModal/ReviewModal.jsx';
+import css from '../Home/Home.module.css';
 
 const NAV_ITEMS = [
   { href: '#menu', labelKey: 'nav_menu', defaultLabel: 'Menu' },
@@ -50,7 +51,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className={css['site-wrapper']}>
       <Header
         isMenuOpen={isMenuOpen}
         onToggleMenu={() => {
@@ -104,7 +105,7 @@ const Home = () => {
         onClose={() => setReviewOpen(false)}
         onSuccess={handleReviewSuccess}
       />
-    </>
+    </div>
   );
 };
 

@@ -2,7 +2,7 @@
   position: relative;
   /* width: 100%; */
   /* min-height: 80vh; */
-  padding: 4rem 1.5rem;
+  padding: 4rem 0;
   overflow: hidden;
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);

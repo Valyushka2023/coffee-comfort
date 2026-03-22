@@ -9,26 +9,46 @@
   box-sizing: border-box;
 }
 
+/* html {
+  width: 100%;
+  overflow-x: hidden; 
+  scroll-behavior: smooth;
+} */
+
 html {
   width: 100%;
-  overflow-x: hidden; /* Критично для мобільних */
+  overflow-x: hidden; /* Тільки тут! */
   scroll-behavior: smooth;
+  height: auto; /* Не ставте 100%, щоб не обмежувати висоту прокрутки */
 }
-
-body {
+/* body {
   position: relative;
   width: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Подвійний захист від скролу */
+  overflow-x: hidden; 
+  background-color: var(--body-bg-color, #fff);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  color: #333;
+  -webkit-text-size-adjust: 100%;
+} */
+body {
+  /* position: relative;  <-- ВИДАЛЕНО */
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  /* overflow-x: hidden; <-- ПЕРЕНЕСЕНО В HTML (див. нижче) */
+
   background-color: var(--body-bg-color, #fff);
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
   color: #333;
   -webkit-text-size-adjust: 100%;
 }
-
 /* 2. Структурні елементи */
 /* Видалено жорстке width: 100% для секцій, щоб вони слухалися батьківського контейнера */
 section,

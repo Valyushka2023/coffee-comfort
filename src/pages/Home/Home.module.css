@@ -4,6 +4,7 @@
   margin: 0 auto;
   min-height: 100vh;
   overflow: hidden;
+  padding-top: 1px;
 }
 /* .container-page {
   display: flex;

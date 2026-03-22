@@ -14,7 +14,8 @@ import Footer from '../../components/Footer/Footer.jsx';
 import ScrollToTopButton from '../../components/Ui/Buttons/ScrollToTopButton/ScrollToTopButton.jsx';
 import CallbackModal from '../../components/Modal/CalllbackModal/CallbackModal.jsx';
 import ReviewModal from '../../components/Modal/ReviewModal/ReviewModal.jsx';
-import css from '../Home/Home.module.css';
+
+import css from './Home.module.css';
 
 const NAV_ITEMS = [
   { href: '#menu', labelKey: 'nav_menu', defaultLabel: 'Menu' },
@@ -50,16 +51,14 @@ const Home = () => {
     setReviewsTrigger(prev => prev + 1);
   };
 
-  return (
-    <div className={css['container-page']}>
-      <Header
-        isMenuOpen={isMenuOpen}
-        onToggleMenu={() => {
-          console.log('Стан меню зараз:', !isMenuOpen);
-          setIsMenuOpen(!isMenuOpen);
-        }}
-      />
+  const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
+  return (
+    <>
+      {/* 1. Header винесено за межі контейнера-сторінки для роботи sticky/fixed */}
+      <Header isMenuOpen={isMenuOpen} onToggleMenu={toggleMenu} />
+
+      {/* 2. Mobile Menu (поза основним потоком) */}
       {isMenuOpen && (
         <MobileMenu
           isOpen={isMenuOpen}
@@ -69,30 +68,40 @@ const Home = () => {
         />
       )}
 
-      <main>
-        <Hero />
-        <section id="about">
-          <AboutUs />
-        </section>
-        <section id="menu">
-          <Menu />
-        </section>
-        <section id="gallery">
-          <Gallery images={GALLERY_IMAGES} />
-        </section>
-        <section id="reviews">
-          <Reviews refreshTrigger={reviewsTrigger} />
-        </section>
-        <section id="contacts">
-          <Contacts />
-        </section>
-      </main>
+      {/* 3. Головний обмежувач ширини для контенту */}
+      <div className={css['container-page']}>
+        <main>
+          {/* Секція Hero зазвичай перша, вона автоматично притиснеться до Хедера */}
+          <Hero />
 
-      <Footer
-        onOpenReview={() => setReviewOpen(true)}
-        onOpenCallback={() => setCallbackOpen(true)}
-      />
+          <section id="about">
+            <AboutUs />
+          </section>
 
+          <section id="menu">
+            <Menu />
+          </section>
+
+          <section id="gallery">
+            <Gallery images={GALLERY_IMAGES} />
+          </section>
+
+          <section id="reviews">
+            <Reviews refreshTrigger={reviewsTrigger} />
+          </section>
+
+          <section id="contacts">
+            <Contacts />
+          </section>
+        </main>
+
+        <Footer
+          onOpenReview={() => setReviewOpen(true)}
+          onOpenCallback={() => setCallbackOpen(true)}
+        />
+      </div>
+
+      {/* 4. Глобальні допоміжні компоненти */}
       <ScrollToTopButton visible={visible} onClick={scrollToTop} />
 
       <CallbackModal
@@ -105,7 +114,7 @@ const Home = () => {
         onClose={() => setReviewOpen(false)}
         onSuccess={handleReviewSuccess}
       />
-    </div>
+    </>
   );
 };
 

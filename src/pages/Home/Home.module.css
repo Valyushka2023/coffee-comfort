@@ -1,10 +1,18 @@
-.site-wrapper {
+/* .container-page {
   box-sizing: border-box;
   width: calc(100% - 3rem);
   margin: 0 auto;
   min-height: 100vh;
+} */
+.container-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 90rem;
+  max-height: 100vh;
+  margin: 0 auto;
+  padding: var(--padding-form-min);
 }
-
 main {
   flex: 1;
   display: contents;

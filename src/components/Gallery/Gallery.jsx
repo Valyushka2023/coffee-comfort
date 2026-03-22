@@ -6,7 +6,7 @@ import css from './Gallery.module.css';
 
 const Gallery = ({ images = [] }) => {
   const [selectedImg, setSelectedImg] = useState(null);
-  const { t } = useTranslation(); // Додаємо хук перекладу
+  const { t } = useTranslation('gallery'); // Додаємо хук перекладу
 
   return (
     <section className={css['gallery-section']}>

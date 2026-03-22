@@ -51,7 +51,7 @@ const Home = () => {
   };
 
   return (
-    <div className={css['site-wrapper']}>
+    <div className={css['container-page']}>
       <Header
         isMenuOpen={isMenuOpen}
         onToggleMenu={() => {

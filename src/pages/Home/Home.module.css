@@ -1,9 +1,15 @@
 .container-page {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   width: calc(100% - 3rem);
+  /* width: 100%; */
+
+  max-height: 80vh;
   margin: 0 auto;
-  min-height: 100vh;
+  /* min-height: 80vh; */
   overflow: hidden;
+  /* padding: var(--padding-form-min); */
 }
 /* .container-page {
   display: flex;
@@ -20,25 +26,25 @@ main {
 }
 
 @media (width <= 74.9375rem) {
-  .site-wrapper {
+  .container-page {
     width: calc(100% - 2.75rem);
   }
 }
 
 @media (width <= 61.9375rem) {
-  .site-wrapper {
+  .container-page {
     width: calc(100% - 2.5rem);
   }
 }
 
 @media (width <= 47.9375rem) {
-  .site-wrapper {
+  .container-page {
     width: calc(100% - 2.25);
   }
 }
 
 @media (width <= 29.9375rem) {
-  .site-wrapper {
+  .container-page {
     width: calc(100% - 2rem);
   }
 }

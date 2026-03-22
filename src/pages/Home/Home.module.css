@@ -9,7 +9,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 90rem;
-  max-height: 100vh;
+  max-height: 80vh;
   margin: 0 auto;
   padding: var(--padding-form-min);
 }

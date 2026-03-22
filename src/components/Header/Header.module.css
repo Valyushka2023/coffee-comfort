@@ -162,9 +162,6 @@
   .header-section {
     width: calc(100% - 2.25rem);
   }
-  .header-container {
-    max-width: calc(100%-2rem);
-  }
 
   .header-link {
     display: none;

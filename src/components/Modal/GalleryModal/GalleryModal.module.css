@@ -4,6 +4,7 @@
   max-width: 53.125rem;
   padding: 1.875rem;
 }
+
 /* Перевизначаємо позиціонування хрестика саме для галереї */
 .gallery-specific-modal .close-btn {
   top: 1rem !important; /* Наприклад, відсунути від краю */
@@ -15,6 +16,7 @@
 .gallery-specific-modal .close-btn button {
   stroke: white; /* Наприклад, зробити хрестик білим */
 }
+
 .img-wrapper {
   display: flex;
   justify-content: center;

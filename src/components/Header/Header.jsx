@@ -1,17 +1,10 @@
 import PropTypes from 'prop-types';
-
 import { Link } from 'react-router-dom';
-
 import { useTranslation } from 'react-i18next';
-
 import Logo from '../../components/Ui/Logo/Logo.jsx';
-
 import ThemeToggle from '../../components/Ui/Buttons/ThemeToggle/ThemeToggle.jsx';
-
 import LanguageSwitcher from '../../components/Ui/LanguageSwitcher/LanguageSwitcher.jsx';
-
 import MenuToggleButton from '../../components/Ui/Buttons/MenuToggleButton/MenuToggleButton.jsx';
-
 import css from './Header.module.css';
 
 const Header = ({ onToggleMenu, isMenuOpen }) => {
@@ -70,7 +63,6 @@ const Header = ({ onToggleMenu, isMenuOpen }) => {
 
 Header.propTypes = {
   onToggleMenu: PropTypes.func.isRequired,
-
   isMenuOpen: PropTypes.bool.isRequired,
 };
 

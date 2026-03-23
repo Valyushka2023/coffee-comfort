@@ -16,7 +16,12 @@ describe('CallbackModal Component', () => {
 
   it('повинен закриватися при натисканні на кнопку закриття', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <CallbackModal isOpen={true} onClose={handleClose} />
       </MemoryRouter>
     );
@@ -33,7 +38,12 @@ describe('CallbackModal Component', () => {
 
   it('має дозволяти введення імені та телефону', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <CallbackModal isOpen={true} onClose={handleClose} />
       </MemoryRouter>
     );

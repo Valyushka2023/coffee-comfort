@@ -25,25 +25,25 @@
   transform: scale(0.95);
 }
 
-@media (width <= 74.9375rem) {
+@media (max-width: 74.9375rem) {
   .base-close-button {
     font-size: 1.2rem;
   }
 }
 
-@media (width <= 61.9375rem) {
+@media (max-width: 61.9375rem) {
   .base-close-button {
     font-size: 1.1rem;
   }
 }
 
-@media (width <= 47.9375rem) {
+@media (max-width: 47.9375rem) {
   .base-close-button {
     font-size: 1rem;
   }
 }
 
-@media (width <= 29.9375rem) {
+@media (max-width: 29.9375rem) {
   .base-close-button {
     font-size: 0.9rem;
   }

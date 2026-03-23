@@ -182,11 +182,12 @@
 }
 
 .title-form {
+  line-height: 1.2;
+  text-align: center;
+
   /* font-size: 1.5rem;
   font-weight: 600; */
   text-transform: uppercase;
-  line-height: 1.2;
-  text-align: center;
   color: var(--text-reviews-color);
 }
 
@@ -385,12 +386,13 @@
   text-align: center;
   white-space: normal;
 }
+
 .element-sending {
   margin: 0 auto;
 }
 
 /* Адаптивність */
-@media (width <= 74.9375rem) {
+@media (max-width: 74.9375rem) {
   .form {
     padding: var(--padding-form-lg);
   }
@@ -400,19 +402,19 @@
   }
 }
 
-@media (width <= 61.9375rem) {
+@media (max-width: 61.9375rem) {
   .form {
     padding: var(--padding-form-md);
   }
 }
 
-@media (width <= 47.9375rem) {
+@media (max-width: 47.9375rem) {
   .form {
     padding: var(--padding-form-sm);
   }
 }
 
-@media (width <= 29.9375rem) {
+@media (max-width: 29.9375rem) {
   .form {
     padding: var(--padding-form-xs);
   }

@@ -18,7 +18,7 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "validate": "npm run lint && npm run check-types && npm run test",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --project jsconfig.json --noEmit"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",

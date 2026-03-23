@@ -1,33 +1,12 @@
-/* .hero-section {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-
-  min-height: 100vh;
-  background-image: url('/images/Hero.webp');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease;
-  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  color: var(--color-beige);
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-} */
 .hero-section {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: auto;
   min-height: 100vh;
-  /* overflow: hidden; */
   background-image:
     linear-gradient(rgb(46 47 66 / 30%), rgb(46 47 66 / 30%)),
     url('/images/Hero.webp');
@@ -35,15 +14,14 @@
   background-position: center;
   background-size: cover;
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  text-align: center;
+  color: var(--color-beige);
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
   animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  color: var(--color-beige);
-  text-align: center;
-  align-items: center;
-  justify-content: center;
 }
+
 .hero-overlay {
   display: flex;
   flex: 1;
@@ -51,7 +29,6 @@
   align-items: center;
   width: 100%;
   height: 100vh;
-
   background: linear-gradient(to bottom, rgb(0 0 0 / 30%), rgb(0 0 0 / 70%));
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
     var(--section-border-bottom-color);
@@ -84,19 +61,16 @@
   opacity: 0;
 }
 
-/* Контейнер: керує розташуванням (флекси, відступи) */
 .hero-links {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  flex-wrap: wrap;
-  /* ваші анімації */
   animation: fade-slide-up 0.9s ease-out forwards;
   animation-delay: 0.6s;
   opacity: 0;
+  flex-wrap: wrap;
 }
 
-/* Саме посилання: керує виглядом тексту */
 .hero-link {
   padding: 0.5rem 0;
   border-bottom: 0.125rem solid transparent;
@@ -104,7 +78,6 @@
   font-weight: var(--link-font-weight, 600);
   text-decoration: none;
   text-transform: uppercase;
-
   color: var(--color-beige);
   transition:
     opacity 0.3s ease,
@@ -112,8 +85,8 @@
 }
 
 .hero-link:hover {
-  border-bottom-color: var(--color-beige);
   opacity: 0.7;
+  border-bottom-color: var(--color-beige);
 }
 
 .scroll-indicator {
@@ -184,10 +157,12 @@
   .title {
     font-size: clamp(2rem, 6vw, 2.5rem);
   }
+
   .subtitle {
-    font-size: clamp(1rem, 2vw, 1.5rem);
     margin-bottom: 1.5rem;
+    font-size: clamp(1rem, 2vw, 1.5rem);
   }
+
   .buttons a {
     font-size: 1.25rem;
   }
@@ -197,16 +172,20 @@
   .hero {
     min-height: 70vh;
   }
+
   .title {
     font-size: 2rem;
   }
+
   .subtitle {
-    font-size: 1rem;
     padding: 0 1rem;
+    font-size: 1rem;
   }
+
   .buttons {
     gap: 1rem;
   }
+
   .buttons a {
     font-size: 1.1rem;
   }
@@ -216,11 +195,13 @@
   .hero {
     min-height: 60vh;
   }
+
   .title {
     font-size: 1.75rem;
   }
+
   .buttons {
-    flex-direction: column; /* Кнопки в стовпчик на дуже малих екранах */
+    flex-direction: column;
     gap: 0.5rem;
   }
 }

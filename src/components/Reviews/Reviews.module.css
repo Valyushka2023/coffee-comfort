@@ -1,7 +1,9 @@
 /* --- ОСНОВНА СЕКЦІЯ --- */
 .reviews-section {
   position: relative;
+
   /* width: 100%; */
+
   /* min-height: 80vh; */
   padding: 4rem 0;
   overflow: hidden;
@@ -9,6 +11,7 @@
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
     var(--section-border-bottom-color);
+
   /* font-family: Inter, sans-serif; */
   transition:
     background-color 0.3s ease,
@@ -31,6 +34,7 @@
   height: 5rem;
   transform: rotate(15deg);
 }
+
 .coffee-bean2 {
   top: 10%;
   right: 3%;
@@ -38,6 +42,7 @@
   height: 6.25rem;
   transform: rotate(-25deg);
 }
+
 .coffee-bean3 {
   top: 10%;
   left: 1.25rem;
@@ -45,6 +50,7 @@
   height: 7.5rem;
   transform: rotate(10deg);
 }
+
 .coffee-bean4 {
   right: 7%;
   bottom: 12%;
@@ -52,6 +58,7 @@
   height: 4.375rem;
   transform: rotate(110deg);
 }
+
 .coffee-bean5 {
   bottom: 5%;
   left: 15%;
@@ -64,13 +71,14 @@
 .reviews-container {
   position: relative;
   z-index: 10;
-  max-width: 75rem;
   width: 100%;
+  max-width: 75rem;
   margin: 0 auto;
 }
 
 .reviews-title {
   margin-bottom: 1rem;
+
   /* font-family: 'Playfair Display', serif; */
   font-size: 3rem;
   text-align: center;
@@ -106,6 +114,7 @@
 .reviews-grid {
   display: grid;
   align-items: start;
+
   /* Автоматична сітка: колонки не менше 22rem */
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 1.5rem;
@@ -125,8 +134,8 @@
 }
 
 .reviews-card:hover {
-  transform: translateY(-0.5rem);
   box-shadow: 0 0.5rem 1.5rem var(--shadow-icon-circle);
+  transform: translateY(-0.5rem);
 }
 
 .reviews-text {

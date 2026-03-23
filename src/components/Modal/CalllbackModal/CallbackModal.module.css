@@ -38,6 +38,7 @@
 .field-error {
   border-color: var(--error-color) !important;
 }
+
 /* 
 .element-sending {
   display: flex;
@@ -51,8 +52,10 @@
   justify-content: center;
   width: 100%;
   margin-top: 0.5rem;
+
   /* Прибираємо висоту та max-width, бо Button сам про себе подбає */
 }
+
 .error-popup {
   position: absolute;
   top: 100%;

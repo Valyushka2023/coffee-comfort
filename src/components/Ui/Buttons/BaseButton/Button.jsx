@@ -44,7 +44,7 @@ const Button = ({
 };
 
 Button.propTypes = {
-  variant: PropTypes.oneOf(['default', 'primary', 'active']),
+  variant: PropTypes.oneOf(['default', 'primary', 'active', 'secondary']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   isFixedWidth: PropTypes.bool,
   onClick: PropTypes.func,

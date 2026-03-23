@@ -18,11 +18,11 @@
   visibility: visible;
 }
 
-@media (width >= 47.9376rem) {
+/* @media (max-width: 47.9376rem) {
   .menu {
     display: none !important;
   }
-}
+} */
 
 .mobile-nav {
   display: flex;
@@ -90,7 +90,7 @@
   visibility: visible;
 }
 
-@media (width >= 47.9376rem) {
+@media (max-width: 47.9376rem) {
   .menu-backdrop {
     display: none !important;
   }

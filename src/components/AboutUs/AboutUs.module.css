@@ -1,8 +1,9 @@
 .about-section {
   position: relative;
+  padding: 4rem 0;
   padding-top: 3rem;
   padding-bottom: 3rem;
-  padding: 4rem 0;
+
   /* overflow: hidden; */
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
@@ -106,6 +107,7 @@
 
 .about-title {
   margin-bottom: 1.5625rem;
+
   /* font-family: 'Playfair Display', serif; */
   font-size: 3rem;
   color: var(--primary-color);
@@ -211,7 +213,7 @@
 }
 
 /* --- Адаптивність --- */
-@media (width <= 62rem) {
+@media (max-width: 61.9375rem) {
   .about-container {
     grid-template-columns: 1fr;
     text-align: center;

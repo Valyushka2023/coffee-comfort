@@ -1,19 +1,17 @@
-/**/
-/* Фундамент для всіх кнопок */
 .button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   padding: 0.8rem 1.5rem;
+  background: transparent;
+  border: none;
   border-radius: var(--btn-radius, 12.5rem);
   font-family: Inter, sans-serif;
   font-size: var(--btn-font-size, 1rem);
   font-weight: 500;
   line-height: 1.5;
   white-space: nowrap;
-  cursor: pointer;
-  border: none;
-  background: transparent;
   transition:
     transform 0.3s ease,
     background-color 0.3s ease,
@@ -25,8 +23,8 @@
 /* Модифікатори розмірів */
 .small {
   padding: 0.4rem 1rem;
+  border: 0.125rem solid var(--border-color);
   font-size: 0.9rem;
-  border: 2px solid var(--border-color);
 }
 
 .large {
@@ -41,12 +39,12 @@
 
 /* Основна кнопка (Primary) */
 .primary {
-  font-weight: 600;
   background-color: var(--button-review-bg-color);
   border: 0.0625rem solid var(--button-border-color);
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
-  color: var(--button-form-color);
+  font-weight: 600;
   text-transform: uppercase;
+  color: var(--button-form-color);
 }
 
 .primary:hover:not(:disabled) {
@@ -59,18 +57,18 @@
 /* Стан Active (для фільтрів у меню) */
 .active {
   background-color: var(--button-hover-bg-color);
+  border-bottom: 0.125rem solid var(--primary-color);
   color: var(--button-hover-color);
-  border-bottom: 2px solid var(--primary-color);
 }
 
 /* Стан Disabled */
 .button:disabled {
   cursor: not-allowed;
   background-color: var(--button-disabled-bg-color);
+  box-shadow: none;
   color: var(--button-disabled-text-color);
   transform: none;
   filter: none;
-  box-shadow: none;
 }
 
 .button:active:not(:disabled) {
@@ -87,7 +85,8 @@
     font-size: 0.5rem;
   } */
 }
-@media (max-width: 480px) {
+
+@media (max-width: 47.9375rem) {
   .fixed-width {
     min-width: 100%;
   }

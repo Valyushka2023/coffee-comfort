@@ -21,10 +21,10 @@
   width: 100%;
   max-height: 70vh;
   min-height: 28.125rem;
+  background-color: aqua;
   transition: transform 0.3s ease;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  background-color: aqua;
 }
 
 .modal-footer {
@@ -34,10 +34,8 @@
 
 .modal-title {
   margin-bottom: 1.5rem;
-
   text-align: center;
   text-transform: uppercase;
-
   color: var(--text-form-review-color);
 }
 
@@ -48,95 +46,38 @@
   width: 100%;
 }
 
-.btn-back,
-.btn-confirm {
+.flex-btn {
   flex: 1;
-  cursor: pointer;
-  padding: 1rem 0.5rem;
-  border-radius: 2rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-transform: uppercase;
 }
 
-.btn-back {
-  background-color: transparent;
-  border: 0.0625rem solid var(--button-border-color);
-  color: var(--text-reviews-color);
-}
+/* --- Медіа-запити --- */
 
-.btn-confirm {
-  background-color: var(--button-review-bg-color);
-  border: none;
-  box-shadow: 0 0.25rem 0.625rem var(--shadow-icon-circle);
-  font-weight: 600;
-  color: var(--button-form-color);
-}
-
-.btn-confirm:hover {
-  transform: translateY(-0.125rem);
-  filter: brightness(1.1);
-}
-
-@media (width <= 48rem) {
+@media (max-width: 47.9375rem) {
   .modal-img {
-    min-height: 21.875rem;
+    /* Прибрав дублікати width, display тощо, лишив тільки зміни */
+    height: 21.875rem;
+    max-height: 60vh;
     aspect-ratio: 4 / 5;
   }
 
   .modal-title {
     font-size: 1.4rem;
   }
+
+  /* Видалив дублікати .modal-content та .img-container, 
+     бо вони нічим не відрізнялися від базових */
+
+  .modal-buttons {
+    flex-direction: column;
+  }
 }
 
-@media (width <= 30rem) {
+@media (max-width: 29.9375rem) {
   .modal-content {
     max-width: 100%;
   }
 
   .modal-img {
     aspect-ratio: 1 / 1.1;
-  }
-}
-/***/
-/* AtmosphereModal.module.css */
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.img-container {
-  width: 100%;
-  margin-bottom: 1.5rem;
-  overflow: hidden;
-  border-radius: 1.25rem;
-  box-shadow: 0 0.625rem 1.875rem rgb(0 0 0 / 30%);
-}
-
-.modal-img {
-  display: block;
-  width: 100%;
-  max-height: 60vh;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-}
-
-/* Цей клас просто змушує кнопки ділити простір порівну */
-.flex-btn {
-  flex: 1;
-}
-
-@media (max-width: 480px) {
-  .modal-buttons {
-    flex-direction: column;
   }
 }

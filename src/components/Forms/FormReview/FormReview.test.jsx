@@ -8,7 +8,12 @@ describe('FormReview Component', () => {
     const mockOnClose = vi.fn();
 
     render(
-      <MemoryRouter>
+      <MemoryRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         {' '}
         {/* Обгортка для розв'язання проблеми з useNavigate */}
         <FormReview isOpen={true} onClose={mockOnClose} />

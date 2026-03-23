@@ -7,6 +7,7 @@
 
 .language-en,
 .language-uk {
+  position: relative;
   cursor: pointer;
   padding: 0;
   background: none;
@@ -14,12 +15,11 @@
   font-family: var(--btn-font-family, 'Montserrat', sans-serif);
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
   text-decoration: none;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--tertiary-color);
   transition: all 0.3s ease;
-  position: relative;
 }
 
 .active {
@@ -31,8 +31,8 @@
 .separator {
   cursor: default;
   margin: 0 0.25rem;
-  font-size: 1.1rem;
   font-family: var(--btn-font-family, 'Montserrat', sans-serif);
+  font-size: 1.1rem;
   font-weight: 300;
   color: var(--primary-color);
 }
@@ -45,49 +45,42 @@
 
 .language-en:not(.active)::after,
 .language-uk:not(.active)::after {
-  content: '';
   position: absolute;
   bottom: -0.2rem;
   left: 0;
   width: 100%;
   height: 0.125rem;
   background-color: var(--hover-color);
+  transition: transform 0.3s ease;
 
   /* МАГІЯ АНІМАЦІЇ */
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.3s ease;
+  content: '';
 }
 
 .language-en:not(.active):hover::after,
 .language-uk:not(.active):hover::after {
   transform: scaleX(1);
 }
+
 .language-en:not(.active):active,
 .language-uk:not(.active):active {
   transform: scale(1);
-}
-
-/* @media (width <= 3rem) {
-  .language-en,
-  .language-uk,
-  .separator {
-    font-size: 0.9rem;
-  }
-} */
-@media (max-width: 74.9375rem) {
 }
 
 @media (max-width: 61.9375rem) {
   .lang-switcher {
     gap: 0.12rem;
   }
+
   .language-en,
   .language-uk {
     font-size: 0.9rem;
     letter-spacing: normal;
   }
 }
+
 @media (max-width: 47.9375rem) {
   .language-en,
   .language-uk {

@@ -50,6 +50,10 @@
     width: 0.9rem;
     height: 0.9rem;
   }
+
+  .burger-button {
+    display: flex;
+  }
 }
 
 @media (max-width: 47.9375rem) {

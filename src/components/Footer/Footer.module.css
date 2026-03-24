@@ -10,15 +10,20 @@
 }
 
 .footer-container {
+  /* 1. Розміри та висота */
   display: flex;
   justify-content: space-between;
   gap: 4.8rem;
   width: 100%;
   max-width: 75rem;
-  margin: 0 auto;
-  padding: 1.5rem 0;
+
+  /* 2. Внутрішні відступи (Безпечна зона для контенту) */
+  padding: 1.5rem;
   color: var(--tertiary-color);
   flex-wrap: wrap;
+
+  /* 3. Зовнішні відступи (Центрування) */
+  margin-inline: auto;
 }
 
 .footer-column {
@@ -122,13 +127,13 @@
   opacity: 0.7;
 }
 
-@media (max-width : 74.9375rem) {
+@media (max-width: 74.9375rem) {
   .footer-container {
     gap: 3rem;
   }
 }
 
-@media (max-width : 61.9375rem) {
+@media (max-width: 61.9375rem) {
   .footer-container {
     justify-content: center;
     gap: 2rem;
@@ -139,7 +144,7 @@
   }
 }
 
-@media (max-width : 47.9375rem) {
+@media (max-width: 47.9375rem) {
   .footer-container {
     flex-direction: column;
     align-items: center;
@@ -152,7 +157,7 @@
   }
 }
 
-@media (max-width : 29.9375rem) {
+@media (max-width: 29.9375rem) {
   .footer-container {
     padding: 1rem 0.5rem;
   }

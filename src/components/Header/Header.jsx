@@ -13,46 +13,32 @@ const Header = ({ onToggleMenu, isMenuOpen }) => {
   return (
     <header className={css['header-section']}>
       <div className={css['header-container']}>
-        {/* Логотип */}
-
         <Link to="/" className={css['header-logo']}>
           <Logo />
         </Link>
-
-        {/* Навігаційні посилання */}
 
         <nav className={css['header-links']}>
           <a href="#menu" className={css['header-link']}>
             {t('menu_header-link', 'Menu')}
           </a>
-
           <a href="#about" className={css['header-link']}>
             {t('about_header_link', 'About us')}
           </a>
-
           <a href="#gallery" className={css['header-link']}>
             {t('gallery_header_link', 'Gallery')}
           </a>
-
           <a href="#contacts" className={css['header-link']}>
             {t('contacts_header_link', 'Contacts')}
           </a>
         </nav>
 
-        {/* Блок дій */}
-
         <div className={css['actions-wrapper']}>
-          {/* Повертаємо посилання, стилізоване під кнопку */}
-
           <a href="#contacts" className={css['header-cta-link']}>
             {t('cta_booking', 'Book a table')}
           </a>
-
           <div className={css['settings-group']}>
             <ThemeToggle />
-
             <LanguageSwitcher />
-
             <MenuToggleButton isOpen={isMenuOpen} onClick={onToggleMenu} />
           </div>
         </div>

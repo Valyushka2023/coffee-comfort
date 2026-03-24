@@ -82,15 +82,15 @@
 }
 
 @media (max-width: 47.9375rem) {
-  .language-en,
+  /* .language-en,
   .language-uk {
     font-size: 0.9rem;
-  }
+  } */
 }
 
 @media (max-width: 29.9375rem) {
-  .language-en,
+  /* .language-en,
   .language-uk {
     font-size: 0.9rem;
-  }
+  } */
 }

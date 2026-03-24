@@ -69,20 +69,20 @@
 @media (max-width: 61.9375rem) {
   .theme-icon-md-light,
   .theme-icon-md-dark {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 47.9375rem) {
-  .theme-icon-md-light,
-  .theme-icon-md-dark {
     font-size: 0.9rem;
   }
 }
 
+@media (max-width: 47.9375rem) {
+  /* .theme-icon-md-light,
+  .theme-icon-md-dark {
+    font-size: 0.9rem;
+  } */
+}
+
 @media (max-width: 29.9375rem) {
-  .theme-icon-md-light,
+  /* .theme-icon-md-light,
   .theme-icon-md-dark {
     font-size: 0.8rem;
-  }
+  } */
 }

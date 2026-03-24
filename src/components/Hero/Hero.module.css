@@ -71,7 +71,6 @@
   animation: fade-slide-up 0.9s ease-out forwards;
   animation-delay: 0.6s;
   opacity: 0;
-  flex-wrap: wrap;
 }
 
 .hero-link {
@@ -158,17 +157,20 @@
 
 @media (max-width: 61.9375rem) {
   .hero-title {
-    font-size: clamp(2rem, 6vw, 2.5rem);
+    font-size: 2.5rem;
   }
 
   .hero-subtitle {
-    font-size: clamp(1rem, 2vw, 1.5rem);
     margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1.65rem;
+    letter-spacing: 0.1rem;
   }
 
-  /* .buttons a {
-    font-size: 1.25rem;
-  } */
+  .hero-link {
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+  }
 }
 
 @media (max-width: 47.9375rem) {
@@ -176,22 +178,9 @@
     min-height: 70vh;
   }
 
-  .hero-title {
-    font-size: 2rem;
-  }
-
   .hero-subtitle {
-    font-size: 1rem;
     padding-inline: 1rem;
   }
-
-  /* .buttons {
-    gap: 1rem;
-  }
-
-  .buttons a {
-    font-size: 1.1rem;
-  } */
 }
 
 @media (max-width: 29.9375rem) {
@@ -199,17 +188,9 @@
     min-height: 60vh;
   }
 
-  .hero-title {
-    font-size: 1.75rem;
-  }
-
   .hero-links {
+    display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
-
-  /* .buttons {
-    flex-direction: column;
-    gap: 0.5rem;
-  } */
 }

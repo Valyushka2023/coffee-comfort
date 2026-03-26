@@ -1,17 +1,11 @@
 .menu-section {
   position: relative;
-
-  /* width: 100%; */
-
-  /* min-height: 80vh; */
   padding: 4rem 0;
   overflow: hidden;
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
     var(--section-border-bottom-color);
-
-  /* font-family: Inter, sans-serif; */
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
@@ -125,9 +119,7 @@
 
 .menu-title {
   margin-bottom: 1rem;
-
-  /* font-family: 'Playfair Display', serif; */
-  font-size: 3rem;
+  text-transform: uppercase;
   color: var(--primary-color);
 }
 
@@ -173,7 +165,7 @@
 }
 
 .fixed-width {
-  min-width: 8rem; /* або інше значення, яке гарно виглядає на скриншоті */
+  min-width: 8rem;
 }
 
 .filter-btn {
@@ -240,9 +232,6 @@
   gap: 1rem;
   margin-bottom: 2.5rem;
   text-transform: uppercase;
-
-  /* font-size: 1.5rem;
-  font-weight: 700; */
   color: var(--primary-color);
 }
 
@@ -259,6 +248,10 @@
   grid-template-columns: 1fr;
   gap: 1.5rem 3.5rem;
 }
+
+/* .menu-item {
+  background-color: aqua;
+} */
 
 @media (max-width: 61.9375rem) {
   .items-grid {

@@ -51,14 +51,11 @@ const Menu = () => {
       {/* Декоративні зерна */}
 
       <div className={`${css['bean']} ${css['coffee-bean1']}`}></div>
-
       <div className={`${css['bean']} ${css['coffee-bean2']}`}></div>
-
       <div className={`${css['bean']} ${css['coffee-bean3']}`}></div>
-
       <div className={`${css['bean']} ${css['coffee-bean4']}`}></div>
-
       <div className={`${css['bean']} ${css['coffee-bean5']}`}></div>
+
       <div className={css['menu-container']}>
         <header className={css['menu-header']}>
           <h2 className={css['menu-title']}>{t('menu_title')}</h2>

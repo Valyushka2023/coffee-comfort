@@ -79,10 +79,8 @@
 
 .reviews-title {
   margin-bottom: 1rem;
-
-  /* font-family: 'Playfair Display', serif; */
-  font-size: 3rem;
   text-align: center;
+  text-transform: uppercase;
   color: var(--primary-color);
 }
 

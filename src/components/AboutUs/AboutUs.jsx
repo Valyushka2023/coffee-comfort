@@ -8,7 +8,9 @@ const AboutUs = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // Використовуємо window. щоб ESLint не видавав помилку undef
+    // 1. Додаємо перевірку на самому початку
+    if (typeof window === 'undefined') return;
+
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
@@ -43,14 +45,14 @@ const AboutUs = () => {
           </p>
 
           <ul className={css['about-features']}>
-            <li>
+            <li className={css['about-card']}>
               <div className={css['about-icon-circle']}>
                 <Coffee size={20} />
               </div>
               <div>
-                <strong className={css['about-accent-title']}>
+                <h4 className={css['about-accent-title']}>
                   {t('select', 'Selected beans')}
-                </strong>
+                </h4>
                 <p className={css['beans']}>
                   {t(
                     'beans',
@@ -60,14 +62,14 @@ const AboutUs = () => {
               </div>
             </li>
 
-            <li>
+            <li className={css['about-card']}>
               <div className={css['about-icon-circle']}>
                 <Flame size={20} />
               </div>
               <div>
-                <strong className={css['about-accent-title']}>
+                <h4 className={css['about-accent-title']}>
                   {t('roast', 'Hand Roasted')}
-                </strong>
+                </h4>
                 <p className={css['roasting']}>
                   {t(
                     'roasting',
@@ -77,14 +79,14 @@ const AboutUs = () => {
               </div>
             </li>
 
-            <li>
+            <li className={css['about-card']}>
               <div className={css['about-icon-circle']}>
                 <Home size={20} />
               </div>
               <div>
-                <strong className={css['about-accent-title']}>
+                <h4 className={css['about-accent-title']}>
                   {t('cook', 'The magic of cooking')}
-                </strong>
+                </h4>
                 <p className={css['cooking']}>
                   {t(
                     'cooking',

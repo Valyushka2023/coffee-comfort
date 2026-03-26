@@ -145,7 +145,7 @@ const FormBooking = () => {
 
   return (
     <form className={css['form']} onSubmit={handleSubmit} noValidate>
-      <h2 className={css['title-form']}>{t('title')}</h2>
+      <h3 className={css['title-form']}>{t('title')}</h3>
 
       <AtmosphereSelector
         selectedZone={formData.selectedZone}

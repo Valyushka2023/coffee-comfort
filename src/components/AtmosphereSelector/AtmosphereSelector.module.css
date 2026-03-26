@@ -11,6 +11,7 @@
 
 .main-title {
   /* font-size: 1.2rem; */
+  text-transform: uppercase;
   color: var(--text-reviews-color);
 }
 
@@ -82,14 +83,14 @@
 }
 
 .zone-label {
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.2;
   text-align: center;
+  word-spacing: 100vw;
   color: var(--text-reviews-color);
 }
 
 .active-text {
-  font-weight: bold;
   color: var(--text-atmosphere-color) !important;
 }
 

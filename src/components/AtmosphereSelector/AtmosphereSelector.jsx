@@ -17,9 +17,9 @@ const AtmosphereSelector = ({ selectedZone, onSelect }) => {
 
   return (
     <div className={css['selector-container']}>
-      <h3 className={css['main-title']}>
+      <h4 className={css['main-title']}>
         {t('choose_atmosphere', 'Виберіть атмосферну зону')}
-      </h3>
+      </h4>
 
       <div className={css['zone-grid']}>
         {ZONES.map(zone => (

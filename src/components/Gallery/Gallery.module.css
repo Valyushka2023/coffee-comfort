@@ -24,10 +24,13 @@
 
 .gallery-title {
   margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
 
   /* font-family: 'Playfair Display', serif; */
-  font-size: 3rem;
-  text-align: center;
+
+  /* font-size: 3rem; */
+
   color: var(--primary-color);
 }
 

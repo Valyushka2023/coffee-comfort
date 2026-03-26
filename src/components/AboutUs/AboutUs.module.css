@@ -3,8 +3,6 @@
   padding: 4rem 0;
   padding-top: 3rem;
   padding-bottom: 3rem;
-
-  /* overflow: hidden; */
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
@@ -62,9 +60,13 @@
 
   /* top: 2rem; */
   left: 5.125rem;
+
+  /* z-index: 2; */
   width: 18.75rem;
   height: 18.75rem;
   border-color: var(--circle-big-border-color);
+
+  /* box-shadow: 0 1.25rem 2.5rem rgb(0 0 0 / 20%); */
 }
 
 .is-visible .about-circle-big {
@@ -74,9 +76,13 @@
 .about-circle-small {
   top: 11.25rem;
   right: 2.625rem;
+
+  /* z-index: 4; */
   width: 9.375rem;
   height: 9.375rem;
   border-color: var(--circle-small-border-color);
+
+  /* box-shadow: 0 0.625rem 1.25rem rgb(0 0 0 / 10%); */
 }
 
 .is-visible .about-circle-small {
@@ -86,9 +92,13 @@
 .about-circle-medium {
   right: 5.5rem;
   bottom: 1.25rem;
+
+  /* z-index: 3; */
   width: 13.75rem;
   height: 13.75rem;
   border-color: var(--circle-medium-border-color);
+
+  /* box-shadow: 0 0.9375rem 1.875rem rgb(0 0 0 / 15%); */
 }
 
 .is-visible .about-circle-medium {
@@ -108,9 +118,7 @@
 
 .about-title {
   margin-bottom: 1.5625rem;
-
-  /* font-family: 'Playfair Display', serif; */
-  font-size: 3rem;
+  text-transform: uppercase;
   color: var(--primary-color);
 }
 
@@ -128,9 +136,24 @@
 
 .about-features li {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.25rem;
   margin-bottom: 1.5625rem;
+}
+
+.about-card {
+  min-height: auto;
+  padding: 1rem;
+  background-color: transparent;
+  border-radius: 0.75rem;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.about-card:hover {
+  background-color: var(--color-terracotta-15);
+  box-shadow: 0 0.25rem 0.9375rem rgb(0 0 0 / 5%);
 }
 
 .about-icon-circle {
@@ -150,11 +173,8 @@
   margin-bottom: 0.2rem;
   font-size: 1.15rem;
   font-weight: 700;
+  text-transform: uppercase;
   color: var(--primary-color);
-
-  /* Робимо колір трохи глибшим для кращого сприйняття */
-
-  /* filter: brightness(0.9); */
 }
 
 .about-features p {

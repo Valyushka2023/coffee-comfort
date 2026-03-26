@@ -230,17 +230,26 @@ const AboutUs = () => {
 
         <div className={css['about-image-composition']}>
           <div className={`${css['about-circle']} ${css['about-circle-big']}`}>
-            <img src="/images/beans1.webp" alt="Beans" />
+            <img src="/images/beans1.webp" alt="Beans" />{' '}
+            <span className={css['about-circle-label']}>
+              {t('circle_big', 'Beans')}{' '}
+            </span>{' '}
           </div>
           <div
             className={`${css['about-circle']} ${css['about-circle-small']}`}
           >
             <img src="/images/roasting.webp" alt="Roasting" />
+            <span className={css['about-circle-label']}>
+              {t('circle_small', 'Roasting')}{' '}
+            </span>{' '}
           </div>
           <div
             className={`${css['about-circle']} ${css['about-circle-medium']}`}
           >
             <img src="/images/cooking.webp" alt="Preparation" />
+            <span className={css['about-circle-label']}>
+              {t('circle_medium', 'Magic')}{' '}
+            </span>{' '}
           </div>
         </div>
       </div>

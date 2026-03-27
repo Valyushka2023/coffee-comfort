@@ -254,3 +254,12 @@
     transform: translateY(0) scale(1) !important;
   }
 }
+
+@media (max-width: 41.9375rem) {
+  .about-image-composition {
+    top: -2rem;
+    height: 25rem;
+    max-width: 31.25rem;
+    margin: 0 auto;
+  }
+}

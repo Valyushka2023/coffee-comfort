@@ -289,7 +289,13 @@
   }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 61.9375rem) {
+  .item-header-row {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
   .items-grid {
     grid-template-columns: 1fr; /* На мобільних тільки одна колонка */
     max-width: 32rem; /* Щоб картки не були занадто широкими */

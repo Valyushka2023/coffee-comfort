@@ -89,7 +89,8 @@
 
 .about-features p {
   margin: 0.25rem 0 0;
-  font-size: 1rem;
+
+  /* font-size: 1rem; */
   color: var(--tertiary-color);
 }
 

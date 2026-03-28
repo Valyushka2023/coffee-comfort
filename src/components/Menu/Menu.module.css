@@ -3,9 +3,17 @@
   padding: 4rem 0;
   overflow: hidden;
   background-color: var(--body-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
+    var(--section-border-bottom-color);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   contain: paint;
 }
 
+/* --- ДЕКОРАТИВНІ ЗЕРНА --- */
 .bean {
   position: absolute;
   z-index: 0;
@@ -15,25 +23,57 @@
   pointer-events: none;
 }
 
+/* Зерна в заголовку (статичні) */
+.coffee-bean1 {
+  top: -3.25rem;
+  right: 12%;
+  width: 5rem;
+  height: 5rem;
+  transform: rotate(15deg);
+}
+
+.coffee-bean2 {
+  top: 0.75rem;
+  right: -1%;
+  width: 6.25rem;
+  height: 6.25rem;
+  transform: rotate(-25deg);
+}
+
+.coffee-bean3 {
+  top: -2.625rem;
+  left: 2%;
+  width: 7.5rem;
+  height: 7.5rem;
+  transform: rotate(10deg);
+}
+
+/* Зерна внизу секції */
 .coffee-bean4 {
   right: 15%;
-  bottom: 5%;
+  bottom: 2%;
   width: 4.375rem;
   height: 4.375rem;
   transform: rotate(110deg);
 }
 
 .coffee-bean5 {
-  bottom: 2%;
+  bottom: 1%;
   left: 15%;
   width: 5.625rem;
   height: 5.625rem;
   transform: rotate(-45deg);
 }
 
+/* --- КОНТЕЙНЕР --- */
 .menu-container {
   position: relative;
   z-index: 1;
+
+  /* Центруємо весь контент всередині контейнера */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: 75rem;
   margin-inline: auto;
@@ -43,41 +83,18 @@
 .menu-header-wrapper {
   position: relative;
   z-index: 2;
+  width: 100%;
   margin-bottom: 3rem;
   text-align: center;
 }
 
 .menu-title {
-  position: relative;
-  z-index: 2;
+  font-size: 2.5rem;
   text-transform: uppercase;
   color: var(--primary-color);
 }
 
-.coffee-bean1 {
-  top: -3.25rem;
-  right: 3%;
-  width: 5rem;
-  height: 5rem;
-  transform: rotate(15deg);
-}
-
-.coffee-bean2 {
-  top: 0.75rem;
-  right: -5%;
-  width: 6.25rem;
-  height: 6.25rem;
-  transform: rotate(-25deg);
-}
-
-.coffee-bean3 {
-  top: -1.625rem;
-  left: 2%;
-  width: 7.5rem;
-  height: 7.5rem;
-  transform: rotate(10deg);
-}
-
+/* --- ФІЛЬТРИ --- */
 .menu-filter {
   display: flex;
   justify-content: center;
@@ -96,9 +113,11 @@
   border-radius: var(--btn-radius, 2rem);
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
   color: var(--color-header-link);
-  transition:
-    all 0.3s ease,
-    color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-0.1875rem);
 }
 
 .filter-btn::after {
@@ -108,17 +127,11 @@
   left: 20%;
   height: 0.125rem;
   background-color: var(--color-header-link);
-  transition:
-    transform 0.3s ease,
-    background-color 0.3s ease;
+  transition: transform 0.3s ease;
   transform: scaleX(0);
   transform-origin: left;
   opacity: 0.8;
   content: '';
-}
-
-.filter-btn:hover {
-  transform: translateY(-0.1875rem);
 }
 
 .filter-btn.active::after {
@@ -126,66 +139,91 @@
   opacity: 1;
 }
 
+/* --- СІТКА ТА КАТЕГОРІЇ --- */
 .menu-grid-container {
+  width: 100%;
   min-height: 25rem;
 }
 
 .menu-category-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрує заголовок категорії та сітку разом */
+  width: 100%;
   margin-bottom: 5rem;
   animation: fade-only 0.5s ease forwards;
 }
 
-@keyframes fade-only {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.category-title {
+/* .category-title {
   display: flex;
+
+  justify-content: flex-start;
   align-items: center;
   gap: 1.5rem;
+  width: 100%;
   margin-bottom: 2.5rem;
+  padding: 0 0.75rem;
+  background-color: aqua;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--primary-color);
+} */
+
+.category-title {
+  display: block; /* Змінюємо flex на block для простого вирівнювання */
+  width: 100%; /* Займає всю ширину контейнера */
+  margin-bottom: 2.5rem;
+  padding-left: 0.75rem;
+  font-size: 1.5rem; /* Налаштуйте розмір під себе */
+  font-weight: 700;
+  text-align: left; /* Притискає текст до лівого краю */
   text-transform: uppercase;
   color: var(--primary-color);
 }
 
+/* Декоративні лінії з обох боків від "НАПОЇ" */
+.category-title::before,
 .category-title::after {
   flex-grow: 1;
   height: 0.0625rem;
-  background: linear-gradient(to right, var(--border-color), transparent);
   opacity: 0.4;
   content: '';
 }
 
-.items-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
-  gap: 1.5rem 2.5rem;
+.category-title::before {
+  background: linear-gradient(to left, var(--border-color), transparent);
 }
 
+.category-title::after {
+  background: linear-gradient(to right, var(--border-color), transparent);
+}
+
+.items-grid {
+  display: grid;
+  justify-content: center;
+
+  /* Виправлено minmax для адаптивності: min(100%, 28rem) */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
+  gap: 2rem 3rem;
+  width: 100%;
+}
+
+/* --- КАРТКА ТОВАРУ --- */
 .menu-card {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.menu-card:hover {
-  background-color: var(--color-terracotta-15, rgb(0 0 0 / 3%));
-  transform: translateY(-0.3125rem);
+  gap: 1.5rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .item-photo-wrapper {
   flex-shrink: 0;
-  width: 5rem;
-  height: 5rem;
+  width: 6rem; /* Трохи збільшено для балансу */
+  height: 6rem;
   overflow: hidden;
   border: 0.125rem solid var(--primary-color);
   border-radius: 50%;
@@ -207,17 +245,22 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  justify-content: center;
 }
 
 .item-header-row {
   display: flex;
+
+  /* justify-content: space-between;  */
   align-items: baseline;
-  gap: 1.5rem;
-  margin-bottom: 0.3rem;
+  gap: 2.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .item-name {
   margin: 0;
+
+  /* font-size: 1.1rem; */
   text-transform: uppercase;
   color: var(--primary-color);
 }
@@ -226,20 +269,53 @@
   font-size: 1.1rem;
   font-weight: 700;
   white-space: nowrap;
-  color: var(--tertiary-color);
+  color: var(--primary-color);
 }
 
 .item-description {
-  display: block;
+  /* font-size: 0.9rem; */
+
+  /* line-height: 1.4; */
   color: var(--tertiary-color);
   opacity: 0.8;
 }
 
-@media (max-width: 47.9375rem) {
+/* --- АДАПТИВНІСТЬ ТА ХОВЕРИ --- */
+@media (min-width: 75rem) {
+  .menu-card:hover {
+    background-color: var(--color-terracotta-15);
+    box-shadow: 0 0.25rem 0.9375rem rgb(0 0 0 / 5%);
+    transform: translateY(-0.125rem);
+  }
+}
+
+@media (max-width: 48rem) {
+  .items-grid {
+    grid-template-columns: 1fr; /* На мобільних тільки одна колонка */
+    max-width: 32rem; /* Щоб картки не були занадто широкими */
+    margin: 0 auto;
+  }
+
+  .item-header-row {
+    flex-wrap: wrap; /* Ціна може падати під назву на дуже вузьких екранах */
+  }
+
   .coffee-bean1,
   .coffee-bean2,
   .coffee-bean3 {
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+@keyframes fade-only {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

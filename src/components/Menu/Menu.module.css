@@ -48,8 +48,10 @@
 }
 
 .coffee-bean1 {
-  top: 5%;
-  left: 20%;
+  top: 2%;
+
+  /* left: 25%; */
+  right: 23%;
   width: 5rem;
   height: 5rem;
   background-image: url('/images/coffee-bean.webp');
@@ -66,8 +68,8 @@
 }
 
 .coffee-bean3 {
-  top: 10%;
-  left: 1.25rem;
+  top: 6%;
+  left: 10%;
   width: 7.5rem;
   height: 7.5rem;
   background-image: url('/images/coffee-bean.webp');
@@ -76,7 +78,7 @@
 
 .coffee-bean4 {
   right: 7%;
-  bottom: 12%;
+  bottom: 6%;
   width: 4.375rem;
   height: 4.375rem;
   background-image: url('/images/coffee-bean.webp');
@@ -84,7 +86,7 @@
 }
 
 .coffee-bean5 {
-  bottom: 5%;
+  bottom: 2%;
   left: 15%;
   width: 5.625rem;
   height: 5.625rem;

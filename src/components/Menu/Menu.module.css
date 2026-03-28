@@ -89,7 +89,7 @@
 }
 
 .menu-title {
-  font-size: 2.5rem;
+  /* font-size: 2.5rem; */
   text-transform: uppercase;
   color: var(--primary-color);
 }
@@ -174,8 +174,9 @@
   width: 100%; /* Займає всю ширину контейнера */
   margin-bottom: 2.5rem;
   padding-left: 0.75rem;
-  font-size: 1.5rem; /* Налаштуйте розмір під себе */
-  font-weight: 700;
+
+  /* font-size: 1.5rem; 
+  font-weight: 700; */
   text-align: left; /* Притискає текст до лівого краю */
   text-transform: uppercase;
   color: var(--primary-color);
@@ -316,7 +317,7 @@
 
 @keyframes fade-only {
   from {
-    transform: translateY(10px);
+    transform: translateY(0.625rem);
     opacity: 0;
   }
 
@@ -325,3 +326,10 @@
     opacity: 1;
   }
 }
+
+/* @media (max-width: 29.9375rem) {
+  .coffee-bean2 {
+    top: 2.75rem;
+    right: -1%;
+  }
+} */

@@ -3,101 +3,34 @@
   padding: 4rem 0;
   overflow: hidden;
   background-color: var(--body-bg-color);
-  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
-  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
-    var(--section-border-bottom-color);
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease;
-
-  /* Анімація появи всієї секції */
-  animation: section-fade-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  contain: paint;
 }
 
-/* Декоративні псевдоелементи (текстура на фоні) */
-.menu-section::before,
-.menu-section::after {
-  position: absolute;
-  z-index: 0;
-  width: 11.25rem;
-  height: 11.25rem;
-  background-image: url('/images/coffee-bean-texture.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  pointer-events: none;
-  opacity: 0.04;
-  content: '';
-}
-
-.menu-section::before {
-  top: 5%;
-  left: -2.5rem;
-  transform: rotate(-20deg);
-}
-
-.menu-section::after {
-  right: -2.5rem;
-  bottom: 10%;
-  transform: rotate(35deg);
-}
-
-/* Окремі зерна (ті, що ми рендеримо через масив) */
 .bean {
   position: absolute;
   z-index: 0;
+  background-image: url('/images/coffee-bean.webp');
   background-repeat: no-repeat;
   background-size: contain;
-  transition: transform 0.3s ease-out;
   pointer-events: none;
-  opacity: 1;
-}
-
-.coffee-bean1 {
-  top: 2%;
-  right: 12%;
-  width: 5rem;
-  height: 5rem;
-  background-image: url('/images/coffee-bean.webp');
-  transform: rotate(15deg);
-}
-
-.coffee-bean2 {
-  top: 15%;
-  right: 2%;
-  width: 6.25rem;
-  height: 6.25rem;
-  background-image: url('/images/coffee-bean.webp');
-  transform: rotate(-25deg);
-}
-
-.coffee-bean3 {
-  top: 4%;
-  left: 3%;
-  width: 7.5rem;
-  height: 7.5rem;
-  background-image: url('/images/coffee-bean.webp');
-  transform: rotate(10deg);
 }
 
 .coffee-bean4 {
-  right: 7%;
+  right: 15%;
   bottom: 5%;
   width: 4.375rem;
   height: 4.375rem;
-  background-image: url('/images/coffee-bean.webp');
   transform: rotate(110deg);
 }
 
 .coffee-bean5 {
-  bottom: 1%;
+  bottom: 2%;
   left: 15%;
   width: 5.625rem;
   height: 5.625rem;
-  background-image: url('/images/coffee-bean.webp');
   transform: rotate(-45deg);
 }
 
-/* Контейнер */
 .menu-container {
   position: relative;
   z-index: 1;
@@ -107,20 +40,44 @@
   padding-inline: 1.5rem;
 }
 
-.menu-header {
+.menu-header-wrapper {
+  position: relative;
+  z-index: 2;
   margin-bottom: 3rem;
   text-align: center;
 }
 
 .menu-title {
-  /* font-size: 3rem; */
+  position: relative;
+  z-index: 2;
   text-transform: uppercase;
-
-  /* letter-spacing: 0.1rem; */
   color: var(--primary-color);
 }
 
-/* Фільтри */
+.coffee-bean1 {
+  top: -3.25rem;
+  right: 3%;
+  width: 5rem;
+  height: 5rem;
+  transform: rotate(15deg);
+}
+
+.coffee-bean2 {
+  top: 0.75rem;
+  right: -5%;
+  width: 6.25rem;
+  height: 6.25rem;
+  transform: rotate(-25deg);
+}
+
+.coffee-bean3 {
+  top: -1.625rem;
+  left: 2%;
+  width: 7.5rem;
+  height: 7.5rem;
+  transform: rotate(10deg);
+}
+
 .menu-filter {
   display: flex;
   justify-content: center;
@@ -131,52 +88,61 @@
 
 .filter-btn {
   position: relative;
-  z-index: 1;
   cursor: pointer;
   min-width: 8rem;
   padding: 0.625rem 1.5rem;
-  background-color: var(--filter-btn-bg-color);
-  border: 0.125rem solid var(--border-color);
-  border-radius: 6.25rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--filter-btn-color);
-  transition: all 0.3s ease;
-}
-
-.filter-btn.active {
-  background-color: var(--filter-btn-bg-color);
-  border-color: var(--primary-color);
+  background-color: var(--button-review-menu-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: var(--btn-radius, 2rem);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  color: var(--color-header-link);
+  transition:
+    all 0.3s ease,
+    color 0.3s ease;
 }
 
 .filter-btn::after {
   position: absolute;
-  right: 1.5rem;
+  right: 20%;
   bottom: 0.5rem;
-  left: 1.5rem;
+  left: 20%;
   height: 0.125rem;
-  background-color: var(--primary-color);
-  transition: transform 0.3s ease;
+  background-color: var(--color-header-link);
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
   transform: scaleX(0);
-  opacity: 0.7;
+  transform-origin: left;
+  opacity: 0.8;
   content: '';
 }
 
-.filter-btn.active::after,
-.filter-btn:hover::after {
-  transform: scaleX(1);
+.filter-btn:hover {
+  transform: translateY(-0.1875rem);
 }
 
-/* Сітка та блоки */
+.filter-btn.active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
 .menu-grid-container {
-  min-height: 25rem; /* щоб футер не стрибав при фільтрації */
+  min-height: 25rem;
 }
 
 .menu-category-block {
   margin-bottom: 5rem;
+  animation: fade-only 0.5s ease forwards;
+}
 
-  /* Анімація появи категорій */
-  animation: slide-up 0.5s ease forwards;
+@keyframes fade-only {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .category-title {
@@ -184,8 +150,6 @@
   align-items: center;
   gap: 1.5rem;
   margin-bottom: 2.5rem;
-
-  /* font-size: 1.75rem; */
   text-transform: uppercase;
   color: var(--primary-color);
 }
@@ -201,10 +165,9 @@
 .items-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
-  gap: 0.5rem;
+  gap: 1.5rem 2.5rem;
 }
 
-/* Картка товару (menu-card) */
 .menu-card {
   display: flex;
   align-items: center;
@@ -256,10 +219,6 @@
 .item-name {
   margin: 0;
   text-transform: uppercase;
-
-  /* font-weight: 600; */
-
-  /* font-style: italic; */
   color: var(--primary-color);
 }
 
@@ -272,86 +231,15 @@
 
 .item-description {
   display: block;
-
-  /* font-size: 1rem;
-  font-style: italic; */
-
-  /* line-height: 1.2; */
   color: var(--tertiary-color);
   opacity: 0.8;
 }
 
-/* Dark Theme */
-.dark-theme .bean {
-  filter: brightness(1.5) contrast(1.2)
-    drop-shadow(0 0 0.3125rem rgb(255 255 255 / 10%));
-}
-
-/* Animations */
-@keyframes section-fade-in {
-  from {
-    transform: translateY(1.25rem);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-up {
-  from {
-    transform: translateY(1.875rem);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Адаптивність */
-@media (max-width: 62rem) {
-  .items-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 48rem) {
-  .menu-title {
-    font-size: 2.25rem;
-  }
-
-  .menu-card:hover {
-    transform: none;
-  }
-
-  /* .item-header-row {
-    flex-direction: column;
-    gap: 0.2rem;
-  } */
-}
-
-@media (max-width: 30rem) {
-  /* .bean {
-    opacity: 0.1;
-  } */
-  .coffee-bean1 {
-    top: 1%;
-    right: 2%;
-  }
-
-  .coffee-bean2 {
-    top: 18%;
-    right: 2%;
-  }
-
+@media (max-width: 47.9375rem) {
+  .coffee-bean1,
+  .coffee-bean2,
   .coffee-bean3 {
-    top: 7%;
-    left: 0;
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 4rem;
+    height: 4rem;
   }
 }

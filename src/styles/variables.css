@@ -175,7 +175,7 @@
   --button-up-color: var(--color-light-brown);
   --button-google-bg-color: var(--color-light-brown);
   --button-google-color: var(--color-beige);
-  --button-review-bg-color: var(--color-latte-coffee);
+  --button-review-menu-bg-color: var(--color-latte-coffee);
   --button-review-color: var(--color-brown);
   --filter-btn-bg-color: var(--color-latte-coffee);
   --filter-btn-color: var(--color-light-brown);
@@ -275,7 +275,7 @@
   --filter-btn-color: var(--color-light-brown);
   --button-google-bg-color: var(--color-latte-coffee);
   --button-google-color: var(--color-brown);
-  --button-review-bg-color: var(--color-light-brown);
+  --button-review-menu-bg-color: var(--color-light-brown);
   --button-review-color: var(--color-white);
   --top-badge-bg-color: var(--color-latte-coffee);
   --top-badge-color: var(--color-light-brown);

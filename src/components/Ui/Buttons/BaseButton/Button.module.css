@@ -39,7 +39,7 @@
 
 /* Основна кнопка (Primary) */
 .primary {
-  background-color: var(--button-review-bg-color);
+  background-color: var(--button-review-menu-bg-color);
   border: 0.0625rem solid var(--button-border-color);
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
   font-weight: 600;

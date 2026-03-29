@@ -1,3 +1,20 @@
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  min-height: 25rem; /* Щоб сторінка не стрибала при завантаженні */
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  color: #6f4e37;
+}
+
 .menu-section {
   position: relative;
   padding: 4rem 0;
@@ -13,7 +30,6 @@
   contain: paint;
 }
 
-/* --- ДЕКОРАТИВНІ ЗЕРНА --- */
 .bean {
   position: absolute;
   z-index: 0;
@@ -23,7 +39,6 @@
   pointer-events: none;
 }
 
-/* Зерна в заголовку (статичні) */
 .coffee-bean1 {
   top: -3.25rem;
   right: 12%;
@@ -48,7 +63,6 @@
   transform: rotate(10deg);
 }
 
-/* Зерна внизу секції */
 .coffee-bean4 {
   right: 15%;
   bottom: 2%;
@@ -65,12 +79,9 @@
   transform: rotate(-45deg);
 }
 
-/* --- КОНТЕЙНЕР --- */
 .menu-container {
   position: relative;
   z-index: 1;
-
-  /* Центруємо весь контент всередині контейнера */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,12 +100,10 @@
 }
 
 .menu-title {
-  /* font-size: 2.5rem; */
   text-transform: uppercase;
   color: var(--primary-color);
 }
 
-/* --- ФІЛЬТРИ --- */
 .menu-filter {
   display: flex;
   justify-content: center;
@@ -139,7 +148,6 @@
   opacity: 1;
 }
 
-/* --- СІТКА ТА КАТЕГОРІЇ --- */
 .menu-grid-container {
   width: 100%;
   min-height: 25rem;
@@ -148,41 +156,22 @@
 .menu-category-block {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрує заголовок категорії та сітку разом */
+  align-items: center;
   width: 100%;
   margin-bottom: 5rem;
   animation: fade-only 0.5s ease forwards;
 }
 
-/* .category-title {
-  display: flex;
-
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1.5rem;
+.category-title {
+  display: block;
   width: 100%;
   margin-bottom: 2.5rem;
-  padding: 0 0.75rem;
-  background-color: aqua;
-  text-align: left;
-  text-transform: uppercase;
-  color: var(--primary-color);
-} */
-
-.category-title {
-  display: block; /* Змінюємо flex на block для простого вирівнювання */
-  width: 100%; /* Займає всю ширину контейнера */
-  margin-bottom: 2.5rem;
   padding-left: 0.75rem;
-
-  /* font-size: 1.5rem; 
-  font-weight: 700; */
-  text-align: left; /* Притискає текст до лівого краю */
+  text-align: left;
   text-transform: uppercase;
   color: var(--primary-color);
 }
 
-/* Декоративні лінії з обох боків від "НАПОЇ" */
 .category-title::before,
 .category-title::after {
   flex-grow: 1;
@@ -202,14 +191,11 @@
 .items-grid {
   display: grid;
   justify-content: center;
-
-  /* Виправлено minmax для адаптивності: min(100%, 28rem) */
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
   gap: 2rem 3rem;
   width: 100%;
 }
 
-/* --- КАРТКА ТОВАРУ --- */
 .menu-card {
   display: flex;
   align-items: center;
@@ -223,7 +209,7 @@
 
 .item-photo-wrapper {
   flex-shrink: 0;
-  width: 6rem; /* Трохи збільшено для балансу */
+  width: 6rem;
   height: 6rem;
   overflow: hidden;
   border: 0.125rem solid var(--primary-color);
@@ -251,19 +237,17 @@
 
 .item-header-row {
   display: flex;
-
-  /* justify-content: space-between;  */
   align-items: baseline;
   gap: 2.5rem;
+  width: 100%;
   margin-bottom: 0.4rem;
 }
 
 .item-name {
   margin: 0;
-
-  /* font-size: 1.1rem; */
   text-transform: uppercase;
   color: var(--primary-color);
+  overflow-wrap: break-word;
 }
 
 .item-price {
@@ -274,14 +258,18 @@
 }
 
 .item-description {
-  /* font-size: 0.9rem; */
-
-  /* line-height: 1.4; */
   color: var(--tertiary-color);
   opacity: 0.8;
 }
 
-/* --- АДАПТИВНІСТЬ ТА ХОВЕРИ --- */
+.no-data {
+  padding: 3, 125rem;
+  font-style: italic;
+  text-align: center;
+  color: #888;
+  grid-column: 1 / -1;
+}
+
 @media (min-width: 75rem) {
   .menu-card:hover {
     background-color: var(--color-terracotta-15);
@@ -290,21 +278,17 @@
   }
 }
 
-@media (max-width: 61.9375rem) {
-  .item-header-row {
-    gap: 1.5rem;
-  }
-}
-
 @media (max-width: 47.9375rem) {
   .items-grid {
-    grid-template-columns: 1fr; /* На мобільних тільки одна колонка */
-    max-width: 32rem; /* Щоб картки не були занадто широкими */
+    grid-template-columns: 1fr;
+    max-width: 32rem;
     margin: 0 auto;
   }
 
   .item-header-row {
-    flex-wrap: wrap; /* Ціна може падати під назву на дуже вузьких екранах */
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    background-color: aqua;
   }
 
   .coffee-bean1,
@@ -313,23 +297,16 @@
     width: 3.5rem;
     height: 3.5rem;
   }
+
+  @keyframes fade-only {
+    from {
+      transform: translateY(0.625rem);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }
-
-@keyframes fade-only {
-  from {
-    transform: translateY(0.625rem);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* @media (max-width: 29.9375rem) {
-  .coffee-bean2 {
-    top: 2.75rem;
-    right: -1%;
-  }
-} */

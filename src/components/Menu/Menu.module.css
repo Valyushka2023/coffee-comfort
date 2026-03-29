@@ -285,11 +285,11 @@
     margin: 0 auto;
   }
 
-  .item-header-row {
-    /* flex-wrap: wrap; */
+  /* .item-header-row {
+    
     justify-content: space-between;
     background-color: aqua;
-  }
+  } */
 
   .coffee-bean1,
   .coffee-bean2,
@@ -308,5 +308,14 @@
       transform: translateY(0);
       opacity: 1;
     }
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .item-header-row {
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+
+    /* background-color: aqua; */
   }
 }

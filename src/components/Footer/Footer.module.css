@@ -223,18 +223,16 @@
   margin-bottom: 1rem;
 }
 
-/* ПРАВИЛО КАСКАДУ: 
-   Сначала базовые стили, потом :active, потом :hover 
-*/
+/* --- БАЗОВІ СТИЛІ ЕЛЕМЕНТІВ --- */
 
-.footer-item {
+.footer-item,
+.callback-link,
+.review-trigger,
+.social-icons a {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
   outline: none;
-  font-size: 0.95rem;
   text-decoration: none;
-  color: var(--primary-color);
   transition:
     transform 0.3s ease,
     color 0.3s ease;
@@ -243,62 +241,70 @@
   -webkit-touch-callout: none;
 }
 
+.footer-item {
+  gap: 0.625rem;
+  font-size: 0.95rem;
+  color: var(--primary-color);
+}
+
 .callback-link,
 .review-trigger {
-  display: flex;
-  align-items: center;
   gap: 0.625rem;
   cursor: pointer;
   padding: 0;
   background: none;
   border: none;
-  outline: none;
   font-family: inherit;
   font-size: 0.95rem;
   text-decoration: underline;
   text-transform: uppercase;
   word-spacing: 0.35rem;
   color: var(--primary-color);
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease;
-  user-select: none;
   text-underline-offset: 0.25rem;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-touch-callout: none;
 }
 
 .social-icons a {
-  display: flex;
-  outline: none;
   color: var(--icon-social-color);
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-touch-callout: none;
 }
 
-/* СТАН ACTIVE (для відгуку на натискання) */
+/* --- СКИДАННЯ ФОКУСУ (Для мобільних) --- */
+
+/* Це гарантує, що після повернення на сторінку елемент не буде "світитися" */
+.footer-item:focus,
+.callback-link:focus,
+.review-trigger:focus,
+.social-icons a:focus {
+  outline: none !important;
+  color: inherit; /* Повертає до базового кольору класу */
+}
+
+/* --- СТАН ACTIVE (Відгук при натисканні) --- */
+
+/* Працює і на десктопі, і на мобільних в момент торкання */
 .footer-item:active,
 .callback-link:active,
 .review-trigger:active,
 .social-icons a:active {
+  color: var(--button-footer-hover-color) !important;
   transition: transform 0.1s ease;
   transform: scale(0.95) !important;
 }
 
-/* СТАН HOVER (ми перемістили його нижче ACTIVE, щоб задовольнити Stylelint) */
-.footer-item:not(.no-hover):hover,
-.callback-link:hover,
-.review-trigger:hover,
-.social-icons a:hover {
-  color: var(--button-footer-hover-color);
-  transform: translateY(-0.1875rem);
+/* --- СТАН HOVER (Тільки для пристроїв з мишкою) --- */
+
+/* Цей блок ігнорується смартфонами, що вирішує проблему залипання кольору */
+@media (hover: hover) {
+  .footer-item:not(.no-hover):hover,
+  .callback-link:hover,
+  .review-trigger:hover,
+  .social-icons a:hover {
+    color: var(--button-footer-hover-color);
+    transform: translateY(-0.1875rem);
+  }
 }
 
-/* РЕШТА СТИЛІВ */
+/* --- ДОДОТКОВІ СТИЛІ --- */
+
 .social-icons {
   display: flex;
   align-items: center;
@@ -321,7 +327,8 @@
   opacity: 0.7;
 }
 
-/* МЕДІА ЗАПИТИ */
+/* --- МЕДІА ЗАПИТИ (Адаптивність) --- */
+
 @media (max-width: 74.9375rem) {
   .footer-container {
     gap: 3rem;

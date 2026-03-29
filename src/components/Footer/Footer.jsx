@@ -182,7 +182,8 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
-              onClick={handleTouchFocus}
+              /* Використовуємо pointerUp для надійності на тач-скрінах */
+              onPointerUp={e => setTimeout(() => e.currentTarget.blur(), 50)}
             >
               <InstagramIcon size={24} />
             </a>
@@ -191,7 +192,7 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
               target="_blank"
               rel="noreferrer"
               aria-label="Facebook"
-              onClick={handleTouchFocus}
+              onPointerUp={e => setTimeout(() => e.currentTarget.blur(), 50)}
             >
               <FacebookIcon size={24} />
             </a>

@@ -238,7 +238,6 @@
     color 0.3s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent !important;
-  -webkit-touch-callout: none;
 }
 
 .footer-item {
@@ -267,20 +266,24 @@
   color: var(--icon-social-color);
 }
 
-/* --- СКИДАННЯ ФОКУСУ (Для мобільних) --- */
+/* --- ВИПРАВЛЕННЯ ФОКУСУ (Щоб колір скидався після натискання) --- */
 
-/* Це гарантує, що після повернення на сторінку елемент не буде "світитися" */
+/* Коли кнопка отримує фокус, вона ПОВИННА повернутися до базового кольору, 
+   якщо ми повернулися на сторінку */
 .footer-item:focus,
 .callback-link:focus,
-.review-trigger:focus,
-.social-icons a:focus {
+.review-trigger:focus {
   outline: none !important;
-  color: inherit; /* Повертає до базового кольору класу */
+  color: var(--primary-color) !important;
 }
 
-/* --- СТАН ACTIVE (Відгук при натисканні) --- */
+.social-icons a:focus {
+  outline: none !important;
+  color: var(--icon-social-color) !important;
+}
 
-/* Працює і на десктопі, і на мобільних в момент торкання */
+/* --- СТАН ACTIVE (Миттєвий відгук при дотику/кліку) --- */
+
 .footer-item:active,
 .callback-link:active,
 .review-trigger:active,
@@ -292,7 +295,6 @@
 
 /* --- СТАН HOVER (Тільки для пристроїв з мишкою) --- */
 
-/* Цей блок ігнорується смартфонами, що вирішує проблему залипання кольору */
 @media (hover: hover) {
   .footer-item:not(.no-hover):hover,
   .callback-link:hover,
@@ -303,7 +305,7 @@
   }
 }
 
-/* --- ДОДОТКОВІ СТИЛІ --- */
+/* --- ДОДАТКОВІ СТИЛІ --- */
 
 .social-icons {
   display: flex;
@@ -327,7 +329,7 @@
   opacity: 0.7;
 }
 
-/* --- МЕДІА ЗАПИТИ (Адаптивність) --- */
+/* --- МЕДІА ЗАПИТИ --- */
 
 @media (max-width: 74.9375rem) {
   .footer-container {
@@ -356,15 +358,5 @@
 
   .footer-column {
     align-items: center;
-  }
-}
-
-@media (max-width: 29.9375rem) {
-  .footer-container {
-    padding: 1rem 0.5rem;
-  }
-
-  .column-title {
-    font-size: 0.8rem;
   }
 }

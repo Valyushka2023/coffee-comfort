@@ -268,7 +268,7 @@
   -webkit-touch-callout: none;
 }
 
-.social-icons a {
+/* .social-icons a {
   display: flex;
   outline: none;
   color: var(--icon-social-color);
@@ -278,6 +278,31 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent !important;
   -webkit-touch-callout: none;
+} */
+
+/* Базовий колір іконки */
+.social-icons a {
+  display: flex;
+  outline: none;
+  color: var(--icon-social-color);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Ефект при натисканні (працює на мобілках) */
+.social-icons a:active {
+  color: var(--button-footer-hover-color); /* Колір тільки в момент торкання */
+  transform: scale(0.9);
+}
+
+/* Ефект наведення ТІЛЬКИ для пристроїв з мишкою */
+@media (hover: hover) {
+  .social-icons a:hover {
+    color: var(--button-footer-hover-color);
+    transform: translateY(-0.1875rem);
+  }
 }
 
 /* СТАН ACTIVE (для відгуку на натискання) */

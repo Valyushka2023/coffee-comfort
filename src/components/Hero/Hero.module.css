@@ -84,11 +84,18 @@
   transition:
     opacity 0.3s ease,
     border-bottom 0.3s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hero-link:hover {
   opacity: 0.7;
   border-bottom-color: var(--color-beige);
+}
+
+.hero-link:active {
+  transform: translateY(0.0625rem); /* Легкий рух вниз при кліку */
+  opacity: 0.5;
 }
 
 .scroll-indicator {

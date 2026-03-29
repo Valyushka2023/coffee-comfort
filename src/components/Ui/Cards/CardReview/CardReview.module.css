@@ -1,0 +1,63 @@
+.reviews-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Щоб всі картки були однієї висоти в ряду */
+  padding: 1.25rem 2rem;
+  background-color: var(--reviews-card-bg-color);
+  border-radius: 1.5rem;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  color: var(--reviews-text-color);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.reviews-card:hover {
+  box-shadow: 0 0.5rem 1.5rem var(--shadow-icon-circle);
+  transform: translateY(-0.5rem);
+}
+
+.rating-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.9375rem;
+}
+
+.reviews-text {
+  flex-grow: 1; /* Текст займає весь вільний простір */
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-reviews-color);
+}
+
+.user-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.user-data {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviews-name {
+  font-weight: bold;
+}
+
+.reviews-date {
+  font-size: 1rem;
+  color: var(--text-reviews-color);
+}

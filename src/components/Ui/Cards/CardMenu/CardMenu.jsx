@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import css from './CardMenu.module.css';
 
 const CardMenu = ({ item, formatPrice }) => {
-  const { t } = useTranslation('card_menu'); // Використовуємо переклад прямо тут
+  const { t } = useTranslation('card_menu');
 
   const itemKey = item.key || item.Key;
   const name = t(`items.${itemKey}.name`, item.name || itemKey);

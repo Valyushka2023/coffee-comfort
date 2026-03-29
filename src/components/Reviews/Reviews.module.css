@@ -1,25 +1,17 @@
-/* --- ОСНОВНА СЕКЦІЯ --- */
-.reviews-section {
+/* .reviews-section {
   position: relative;
-
-  /* width: 100%; */
-
-  /* min-height: 80vh; */
   padding: 4rem 0;
   overflow: hidden;
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
     var(--section-border-bottom-color);
-
-  /* font-family: Inter, sans-serif; */
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
   animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* --- ДЕКОРАТИВНІ ЗЕРНА --- */
 .bean {
   position: absolute;
   z-index: 0;
@@ -67,7 +59,6 @@
   transform: rotate(-45deg);
 }
 
-/* --- КОНТЕЙНЕР ТА ЗАГОЛОВОК --- */
 .reviews-container {
   position: relative;
   z-index: 10;
@@ -109,12 +100,9 @@
   color: var(--primary-color);
 }
 
-/* --- СІТКА ВІДГУКІВ --- */
 .reviews-grid {
   display: grid;
   align-items: start;
-
-  /* Автоматична сітка: колонки не менше 22rem */
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
@@ -145,7 +133,6 @@
   color: var(--text-reviews-color);
 }
 
-/* --- ФУТЕР КАРТКИ (Аватар + Дата) --- */
 .user-footer {
   display: flex;
   justify-content: space-between;
@@ -181,13 +168,12 @@
   margin-bottom: 0.9375rem;
 }
 
-/* --- КОНТЕЙНЕР ДЛЯ КНОПОК --- */
 .more-btn-container {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
   margin: 1.875rem 0 2.5rem;
-  flex-wrap: wrap; /* Щоб кнопки не вилазили за екран на мобільних */
+  flex-wrap: wrap;
 }
 
 .reviews-external {
@@ -203,7 +189,165 @@
   color: var(--tertiary-color);
 }
 
-/* Додаємо базовий скрол-ефект */
 html {
   scroll-behavior: smooth;
+} */
+
+.reviews-section {
+  position: relative;
+  padding: 4rem 0;
+  overflow: hidden;
+  background-color: var(--body-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
+    var(--section-border-bottom-color);
+  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* СЕРЕДНІЙ РЕЙТИНГ (Додано) */
+.average-rating-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.rating-big-number {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--primary-color);
+}
+
+.rating-stars-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-count-label {
+  font-size: 1rem;
+  color: var(--tertiary-color);
+  opacity: 0.8;
+}
+
+/* ДЕКОРАТИВНІ ЗЕРНА (Залишаються без змін) */
+.bean {
+  position: absolute;
+  z-index: 0;
+  background: url('/images/coffee-bean.webp') no-repeat center / contain;
+  pointer-events: none;
+}
+
+.coffee-bean1 {
+  top: 5%;
+  left: 20%;
+  width: 5rem;
+  height: 5rem;
+  transform: rotate(15deg);
+}
+
+.coffee-bean2 {
+  top: 10%;
+  right: 3%;
+  width: 6.25rem;
+  height: 6.25rem;
+  transform: rotate(-25deg);
+}
+
+.coffee-bean3 {
+  top: 10%;
+  left: 1.25rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  transform: rotate(10deg);
+}
+
+.coffee-bean4 {
+  right: 7%;
+  bottom: 12%;
+  width: 4.375rem;
+  height: 4.375rem;
+  transform: rotate(110deg);
+}
+
+.coffee-bean5 {
+  bottom: 5%;
+  left: 15%;
+  width: 5.625rem;
+  height: 5.625rem;
+  transform: rotate(-45deg);
+}
+
+/* КОНТЕЙНЕР ТА СІТКА */
+.reviews-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.reviews-title {
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.title-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.line {
+  width: 6.25rem;
+  height: 0.1875rem;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-light-brown),
+    transparent
+  );
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  color: var(--primary-color);
+}
+
+.reviews-grid {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.more-btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.875rem 0 2.5rem;
+  flex-wrap: wrap;
+}
+
+.reviews-external {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.external-text {
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: var(--tertiary-color);
 }

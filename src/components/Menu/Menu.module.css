@@ -271,8 +271,8 @@
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
-
-  /* contain: paint; — залиш, якщо впевнена, що елементи не мають виходити за межі */
+  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  contain: paint;
 }
 
 /* Декоративні зерна */
@@ -347,7 +347,7 @@
 }
 
 .menu-title {
-  font-size: clamp(2rem, 5vw, 3rem);
+  /* font-size: clamp(2rem, 5vw, 3rem); */
   text-transform: uppercase;
   color: var(--primary-color);
 }
@@ -370,24 +370,27 @@
   border: 0.0625rem solid var(--button-border-color);
   border-radius: var(--btn-radius, 2rem);
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
-  font-weight: 600;
+
+  /* font-weight: 600; */
   color: var(--color-header-link);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); */
+  transition: all 0.3s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .filter-btn:hover {
-  background-color: var(--button-hover-bg-color);
+  /* background-color: var(--button-hover-bg-color); */
   transform: translateY(-0.1875rem);
 }
 
-/* Стиль для Активної кнопки */
+/* 
 .filter-btn.active {
-  background-color: var(--primary-color); /* Або інший акцентний колір */
+  background-color: var(--primary-color); 
   border-color: var(--primary-color);
   color: #fff;
-}
+} */
 
 .filter-btn:active {
   transform: scale(0.96);
@@ -396,6 +399,29 @@
 .filter-btn:focus-visible {
   outline: 0.125rem solid var(--hover-color);
   outline-offset: 0.1875rem;
+}
+
+.filter-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.filter-btn::after {
+  position: absolute;
+  right: 20%;
+  bottom: 0.5rem;
+  left: 20%;
+  height: 0.125rem;
+  background-color: var(--color-header-link);
+  transition: transform 0.3s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0.8;
+  content: '';
+}
+
+.filter-btn.active::after {
+  transform: scaleX(1);
+  opacity: 1;
 }
 
 /* Сітка */
@@ -409,10 +435,11 @@
   width: 100%;
   margin-bottom: 5rem;
   animation: fade-only 0.6s ease-out forwards;
-  will-change: transform, opacity;
+
+  /* will-change: transform, opacity; */
 }
 
-.category-title {
+/* .category-title {
   width: 100%;
   margin-bottom: 2.5rem;
   padding-left: 0.5rem;
@@ -420,7 +447,16 @@
     0,
     25rem solid var(--primary-color);
 
-  /* font-size: 1.5rem; */
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--primary-color);
+} */
+
+.category-title {
+  display: block;
+  width: 100%;
+  margin-bottom: 2.5rem;
+  padding-left: 0.75rem;
   text-align: left;
   text-transform: uppercase;
   color: var(--primary-color);
@@ -479,7 +515,7 @@
   }
 }
 
-/* @keyframes fade-only {
+@keyframes fade-only {
   from {
     transform: translateY(0.625rem);
     opacity: 0;
@@ -489,4 +525,4 @@
     transform: translateY(0);
     opacity: 1;
   }
-} */
+}

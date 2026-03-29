@@ -44,7 +44,11 @@
   text-decoration: none;
   text-transform: uppercase;
   color: var(--text-mobile-color);
-  transition: color 0.3s ease;
+  transition: color 0.3s ease; /* Додаємо сюди для чистого кліку на мобільних пристроях */
+
+  /* Також корисно додати це, щоб уникнути виділення тексту при довгому натисканні */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .header-link:hover {
@@ -66,6 +70,11 @@
 
 .header-link:hover::after {
   transform: scaleX(1);
+}
+
+.header-link:focus-visible {
+  outline: 0.125rem solid var(--hover-color);
+  outline-offset: 0.25rem;
 }
 
 .actions-wrapper {

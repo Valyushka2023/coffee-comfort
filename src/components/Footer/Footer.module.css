@@ -1,8 +1,8 @@
-.footer-section {
+/* .footer-section {
   background-color: var(--header-footer-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
 
-  /* box-shadow: 0 0.25rem 0.625rem -0.125rem var(--section-border-bottom-color); */
+
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
@@ -10,19 +10,18 @@
 }
 
 .footer-container {
-  /* 1. Розміри та висота */
+
   display: flex;
   justify-content: space-between;
   gap: 4.8rem;
   width: 100%;
   max-width: 75rem;
 
-  /* 2. Внутрішні відступи (Безпечна зона для контенту) */
+
   padding: 1.5rem;
   color: var(--tertiary-color);
   flex-wrap: wrap;
 
-  /* 3. Зовнішні відступи (Центрування) */
   margin-inline: auto;
 }
 
@@ -163,6 +162,188 @@
     flex-direction: column;
     align-items: center;
     gap: 1, 5rem;
+    text-align: center;
+  }
+
+  .footer-column {
+    align-items: center;
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .footer-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .column-title {
+    font-size: 0.8rem;
+  }
+} */
+
+.footer-section {
+  background-color: var(--header-footer-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 4.8rem;
+  width: 100%;
+  max-width: 75rem;
+  padding: 1.5rem;
+  color: var(--tertiary-color);
+  flex-wrap: wrap;
+  margin-inline: auto;
+}
+
+.footer-column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.625rem;
+  min-width: 12.5rem;
+  margin: 0;
+}
+
+.column-title {
+  margin: 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.footer-column .column-title:first-child {
+  margin-bottom: 1rem;
+}
+
+/* ПРАВИЛО КАСКАДУ: 
+   Сначала базовые стили, потом :active, потом :hover 
+*/
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  outline: none;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none;
+}
+
+.callback-link,
+.review-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-transform: uppercase;
+  word-spacing: 0.35rem;
+  color: var(--primary-color);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+  user-select: none;
+  text-underline-offset: 0.25rem;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none;
+}
+
+.social-icons a {
+  display: flex;
+  outline: none;
+  color: var(--icon-social-color);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none;
+}
+
+/* СТАН ACTIVE (для відгуку на натискання) */
+.footer-item:active,
+.callback-link:active,
+.review-trigger:active,
+.social-icons a:active {
+  transition: transform 0.1s ease;
+  transform: scale(0.95) !important;
+}
+
+/* СТАН HOVER (ми перемістили його нижче ACTIVE, щоб задовольнити Stylelint) */
+.footer-item:not(.no-hover):hover,
+.callback-link:hover,
+.review-trigger:hover,
+.social-icons a:hover {
+  color: var(--button-footer-hover-color);
+  transform: translateY(-0.1875rem);
+}
+
+/* РЕШТА СТИЛІВ */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.9375rem;
+}
+
+.footer-divider {
+  width: calc(100% - 3.75rem);
+  height: 0.0625rem;
+  margin: 0 auto;
+  background-color: var(--divider-color, #444);
+}
+
+.footer-bottom {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--color-light-gray-80);
+  opacity: 0.7;
+}
+
+/* МЕДІА ЗАПИТИ */
+@media (max-width: 74.9375rem) {
+  .footer-container {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 61.9375rem) {
+  .footer-container {
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .footer-column {
+    min-width: 20rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
     text-align: center;
   }
 

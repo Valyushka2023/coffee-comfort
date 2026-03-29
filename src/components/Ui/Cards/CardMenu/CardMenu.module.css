@@ -1,0 +1,85 @@
+.menu-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.item-photo-wrapper {
+  flex-shrink: 0;
+  width: 6rem;
+  height: 6rem;
+  overflow: hidden;
+  border: 0.125rem solid var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+}
+
+.item-photo {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  object-fit: cover;
+}
+
+.menu-card:hover .item-photo {
+  transform: scale(1.1);
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.item-header-row {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  max-width: 12rem;
+  margin-bottom: 0.4rem;
+}
+
+.item-name {
+  margin: 0;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  overflow-wrap: break-word;
+}
+
+.item-price {
+  margin-left: auto;
+  padding-left: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--primary-color);
+}
+
+.item-description {
+  color: var(--tertiary-color);
+  opacity: 0.8;
+}
+
+@media (min-width: 75rem) {
+  .menu-card:hover {
+    background-color: var(--color-terracotta-15);
+    box-shadow: 0 0.25rem 0.9375rem rgb(0 0 0 / 5%);
+    transform: translateY(-0.125rem);
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .item-header-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: none;
+  }
+}

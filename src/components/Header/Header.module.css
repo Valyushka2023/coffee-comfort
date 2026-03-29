@@ -97,6 +97,14 @@
   transition:
     transform 0.3s ease,
     background-color 0.3s ease;
+  user-select: none; /* Можна винести сюди, щоб не дублювати в станах */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Виправляємо помилку в назві та покращуємо доступність */
+.header-cta-link:focus-visible {
+  outline: 0.125rem solid var(--hover-color);
+  outline-offset: 0.25rem;
 }
 
 .header-cta-link:hover {

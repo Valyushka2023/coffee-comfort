@@ -1,11 +1,11 @@
-.loading-wrapper {
+/* .loading-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
   width: 100%;
-  min-height: 25rem; /* Щоб сторінка не стрибала при завантаженні */
+  min-height: 25rem;
 }
 
 .loading-text {
@@ -123,7 +123,25 @@
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
   color: var(--color-header-link);
   transition: all 0.3s ease;
+
+
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
+
+
+.filter-btn:focus-visible {
+  outline: 0.125rem solid var(--hover-color);
+  outline-offset: 0.1875rem;
+}
+
+
+.filter-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.filter-btn:active {
+  transform: scale(0.96);
 
 .filter-btn:hover {
   transform: translateY(-0.1875rem);
@@ -172,22 +190,6 @@
   color: var(--primary-color);
 }
 
-.category-title::before,
-.category-title::after {
-  flex-grow: 1;
-  height: 0.0625rem;
-  opacity: 0.4;
-  content: '';
-}
-
-.category-title::before {
-  background: linear-gradient(to left, var(--border-color), transparent);
-}
-
-.category-title::after {
-  background: linear-gradient(to right, var(--border-color), transparent);
-}
-
 .items-grid {
   display: grid;
   justify-content: center;
@@ -196,86 +198,12 @@
   width: 100%;
 }
 
-.menu-card {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  transition:
-    transform 0.3s ease,
-    background-color 0.3s ease;
-}
-
-.item-photo-wrapper {
-  flex-shrink: 0;
-  width: 6rem;
-  height: 6rem;
-  overflow: hidden;
-  border: 0.125rem solid var(--primary-color);
-  border-radius: 50%;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
-}
-
-.item-photo {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.5s ease;
-  object-fit: cover;
-}
-
-.menu-card:hover .item-photo {
-  transform: scale(1.1);
-}
-
-.item-content {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-}
-
-.item-header-row {
-  display: flex;
-  align-items: baseline;
-  gap: 2.5rem;
-  width: 100%;
-  margin-bottom: 0.4rem;
-}
-
-.item-name {
-  margin: 0;
-  text-transform: uppercase;
-  color: var(--primary-color);
-  overflow-wrap: break-word;
-}
-
-.item-price {
-  font-size: 1.1rem;
-  font-weight: 700;
-  white-space: nowrap;
-  color: var(--primary-color);
-}
-
-.item-description {
-  color: var(--tertiary-color);
-  opacity: 0.8;
-}
-
 .no-data {
-  padding: 3, 125rem;
+  padding: 3.125rem;
   font-style: italic;
   text-align: center;
   color: #888;
   grid-column: 1 / -1;
-}
-
-@media (min-width: 75rem) {
-  .menu-card:hover {
-    background-color: var(--color-terracotta-15);
-    box-shadow: 0 0.25rem 0.9375rem rgb(0 0 0 / 5%);
-    transform: translateY(-0.125rem);
-  }
 }
 
 @media (max-width: 47.9375rem) {
@@ -285,11 +213,263 @@
     margin: 0 auto;
   }
 
-  /* .item-header-row {
-    
+  .coffee-bean1,
+  .coffee-bean2,
+  .coffee-bean3 {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+@keyframes fade-only {
+  from {
+    transform: translateY(0.625rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .item-header-row {
+    display: flex;
     justify-content: space-between;
-    background-color: aqua;
-  } */
+    gap: 0.5rem;
+    width: 100%;
+    max-width: none;
+  }
+} */
+
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  min-height: 25rem;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  color: #6f4e37;
+}
+
+.menu-section {
+  position: relative;
+  padding: 4rem 0;
+  overflow: hidden;
+  background-color: var(--body-bg-color);
+  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
+    var(--section-border-bottom-color);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  /* contain: paint; — залиш, якщо впевнена, що елементи не мають виходити за межі */
+}
+
+/* Декоративні зерна */
+.bean {
+  position: absolute;
+  z-index: 0;
+  background-image: url('/images/coffee-bean.webp');
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  opacity: 0.6; /* Додав трохи прозорості, щоб не відволікали від тексту */
+}
+
+.coffee-bean1 {
+  top: -3.25rem;
+  right: 12%;
+  width: 5rem;
+  height: 5rem;
+  transform: rotate(15deg);
+}
+
+.coffee-bean2 {
+  top: 0.75rem;
+  right: -1%;
+  width: 6.25rem;
+  height: 6.25rem;
+  transform: rotate(-25deg);
+}
+
+.coffee-bean3 {
+  top: -2.625rem;
+  left: 2%;
+  width: 7.5rem;
+  height: 7.5rem;
+  transform: rotate(10deg);
+}
+
+.coffee-bean4 {
+  right: 15%;
+  bottom: 2%;
+  width: 4.375rem;
+  height: 4.375rem;
+  transform: rotate(110deg);
+}
+
+.coffee-bean5 {
+  bottom: 1%;
+  left: 15%;
+  width: 5.625rem;
+  height: 5.625rem;
+  transform: rotate(-45deg);
+}
+
+.menu-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.menu-header-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.menu-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+/* Фільтри */
+.menu-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  position: relative;
+  cursor: pointer;
+  min-width: 8rem;
+  padding: 0.625rem 1.5rem;
+  background-color: var(--button-review-menu-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: var(--btn-radius, 2rem);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  font-weight: 600;
+  color: var(--color-header-link);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.filter-btn:hover {
+  background-color: var(--button-hover-bg-color);
+  transform: translateY(-0.1875rem);
+}
+
+/* Стиль для Активної кнопки */
+.filter-btn.active {
+  background-color: var(--primary-color); /* Або інший акцентний колір */
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.filter-btn:active {
+  transform: scale(0.96);
+}
+
+.filter-btn:focus-visible {
+  outline: 0.125rem solid var(--hover-color);
+  outline-offset: 0.1875rem;
+}
+
+/* Сітка */
+.menu-grid-container {
+  width: 100%;
+}
+
+.menu-category-block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 5rem;
+  animation: fade-only 0.6s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.category-title {
+  width: 100%;
+  margin-bottom: 2.5rem;
+  padding-left: 0.5rem;
+  border-left:
+    0,
+    25rem solid var(--primary-color);
+
+  /* font-size: 1.5rem; */
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+/* .items-grid {
+  display: grid;
+
+
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+  gap: 2.5rem 4rem;
+  width: 100%;
+} */
+
+.items-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
+  gap: 2rem 3rem;
+  width: 100%;
+}
+
+.no-data {
+  padding: 3.125rem;
+  font-style: italic;
+  text-align: center;
+  color: #888;
+}
+
+/* Анімація появи */
+@keyframes fade-only {
+  from {
+    transform: translateY(1.25rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Адаптивність */
+@media (max-width: 47.9375rem) {
+  .items-grid {
+    grid-template-columns: 1fr;
+    max-width: 32rem;
+    margin: 0 auto;
+  }
 
   .coffee-bean1,
   .coffee-bean2,
@@ -297,25 +477,16 @@
     width: 3.5rem;
     height: 3.5rem;
   }
-
-  @keyframes fade-only {
-    from {
-      transform: translateY(0.625rem);
-      opacity: 0;
-    }
-
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
 }
 
-@media (max-width: 29.9375rem) {
-  .item-header-row {
-    /* flex-wrap: wrap; */
-    justify-content: space-between;
-
-    /* background-color: aqua; */
+/* @keyframes fade-only {
+  from {
+    transform: translateY(0.625rem);
+    opacity: 0;
   }
-}
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+} */

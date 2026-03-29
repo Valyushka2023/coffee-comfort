@@ -24,7 +24,8 @@ import pricesModalEN from '../locales/en/prices_modal.json';
 import contactsModalEN from '../locales/en/contacts_modal.json';
 import filterLocationEN from '../locales/en/filter_location.json';
 import starRatingEN from '../locales/en/star_rating.json';
-import cardEN from '../locales/en/card.json';
+
+import cardMenuEN from '../locales/en/card_menu.json';
 import featureIconEN from '../locales/en/feature_icon.json';
 import errorComponentEN from '../locales/en/error_component.json';
 import contentDetailsEN from '../locales/en/content_details.json';
@@ -61,7 +62,8 @@ import pricesModalUK from '../locales/uk/prices_modal.json';
 import contactsModalUK from '../locales/uk/contacts_modal.json';
 import filterLocationUK from '../locales/uk/filter_location.json';
 import starRatingUK from '../locales/uk/star_rating.json';
-import cardUK from '../locales/uk/card.json';
+
+import cardMenuUK from '../locales/uk/card_menu.json';
 import featureIconUK from '../locales/uk/feature_icon.json';
 import errorComponentUK from '../locales/uk/error_component.json';
 import contentDetailsUK from '../locales/uk/content_details.json';
@@ -99,7 +101,8 @@ const resources = {
     contacts_modal: contactsModalEN,
     filter_location: filterLocationEN,
     star_rating: starRatingEN,
-    card: cardEN,
+    card_menu: cardMenuEN,
+
     feature_icon: featureIconEN,
     units: unitsEN,
     error_component: errorComponentEN,
@@ -130,7 +133,8 @@ const resources = {
     contacts_modal: contactsModalUK,
     filter_location: filterLocationUK,
     star_rating: starRatingUK,
-    card: cardUK,
+    card_menu: cardMenuUK,
+
     feature_icon: featureIconUK,
     units: unitsUK,
     error_component: errorComponentUK,

@@ -99,7 +99,8 @@ const Menu = () => {
                 <h3 className={css['category-title']}>
                   <span>{t(`categories.${section.categoryKey}`)}</span>
                 </h3>
-                <div className={css['items-grid']}>
+                {/* Сітка з картками меню */}
+                <div className={css['menu-items-grid']}>
                   {section.items.map(item => (
                     <CardMenu
                       key={item._id}

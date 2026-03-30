@@ -261,18 +261,23 @@ const Reviews = ({ refreshTrigger }) => {
         </div>
 
         {/* Сітка з картками відгуків */}
-        <div className={css['reviews-grid-container']}>
-          {!isLoading &&
-            reviews
-              .slice(0, visibleCount)
-              .map(rev => (
-                <CardReview
-                  key={rev._id}
-                  review={rev}
-                  currentLang={currentLang}
-                  formatDate={formatDate}
-                />
-              ))}
+        <div className={css['reviews-items-grid']}>
+          {!isLoading && reviews.length > 0
+            ? reviews
+                .slice(0, visibleCount)
+                .map(rev => (
+                  <CardReview
+                    key={rev._id}
+                    review={rev}
+                    currentLang={currentLang}
+                    formatDate={formatDate}
+                  />
+                ))
+            : !isLoading && (
+                <div className={css['no-data']}>
+                  {t('no_reviews', 'Default text')}
+                </div>
+              )}
         </div>
 
         {/* Кнопки керування кількістю відгуків */}

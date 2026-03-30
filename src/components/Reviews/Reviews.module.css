@@ -204,6 +204,72 @@ html {
   animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
+.bean {
+  position: absolute;
+  z-index: 0;
+  background-image: url('/images/coffee-bean.webp');
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  opacity: 0.6; /* Додав трохи прозорості, щоб не відволікали від тексту */
+}
+
+.coffee-bean4 {
+  right: 15%;
+  bottom: 2%;
+  width: 4.375rem;
+  height: 4.375rem;
+  transform: rotate(110deg);
+}
+
+.coffee-bean5 {
+  bottom: 1%;
+  left: 15%;
+  width: 5.625rem;
+  height: 5.625rem;
+  transform: rotate(-45deg);
+}
+
+.reviews-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.reviews-title {
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.coffee-bean1 {
+  top: -3.25rem;
+  right: 12%;
+  width: 5rem;
+  height: 5rem;
+  transform: rotate(15deg);
+}
+
+.coffee-bean2 {
+  top: 1.75rem;
+  right: -1%;
+  width: 6.25rem;
+  height: 6.25rem;
+  transform: rotate(-25deg);
+}
+
+.coffee-bean3 {
+  top: -2.625rem;
+  left: 2%;
+  width: 7.5rem;
+  height: 7.5rem;
+  transform: rotate(10deg);
+}
+
 /* СЕРЕДНІЙ РЕЙТИНГ (Додано) */
 .average-rating-block {
   display: flex;
@@ -233,71 +299,6 @@ html {
   opacity: 0.8;
 }
 
-/* ДЕКОРАТИВНІ ЗЕРНА (Залишаються без змін) */
-.bean {
-  position: absolute;
-  z-index: 0;
-  background: url('/images/coffee-bean.webp') no-repeat center / contain;
-  pointer-events: none;
-}
-
-.coffee-bean1 {
-  top: 5%;
-  left: 20%;
-  width: 5rem;
-  height: 5rem;
-  transform: rotate(15deg);
-}
-
-.coffee-bean2 {
-  top: 10%;
-  right: 3%;
-  width: 6.25rem;
-  height: 6.25rem;
-  transform: rotate(-25deg);
-}
-
-.coffee-bean3 {
-  top: 10%;
-  left: 1.25rem;
-  width: 7.5rem;
-  height: 7.5rem;
-  transform: rotate(10deg);
-}
-
-.coffee-bean4 {
-  right: 7%;
-  bottom: 12%;
-  width: 4.375rem;
-  height: 4.375rem;
-  transform: rotate(110deg);
-}
-
-.coffee-bean5 {
-  bottom: 5%;
-  left: 15%;
-  width: 5.625rem;
-  height: 5.625rem;
-  transform: rotate(-45deg);
-}
-
-/* КОНТЕЙНЕР ТА СІТКА */
-.reviews-container {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 75rem;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-}
-
-.reviews-title {
-  margin-bottom: 1rem;
-  text-align: center;
-  text-transform: uppercase;
-  color: var(--primary-color);
-}
-
 .title-divider {
   display: flex;
   justify-content: center;
@@ -323,7 +324,7 @@ html {
   color: var(--primary-color);
 }
 
-.reviews-grid {
+.reviews-grid-container {
   display: grid;
   align-items: start;
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
@@ -350,4 +351,13 @@ html {
   margin-bottom: 1.5rem;
   font-style: italic;
   color: var(--tertiary-color);
+}
+
+@media (max-width: 47.9375rem) {
+  .coffee-bean1,
+  .coffee-bean2,
+  .coffee-bean3 {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
 }

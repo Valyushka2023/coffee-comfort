@@ -213,57 +213,55 @@ const Reviews = ({ refreshTrigger }) => {
 
   return (
     <section id="reviews" className={css['reviews-section']}>
-      {/* Декоративні зерна кави */}
-      {[1, 2, 3, 4, 5].map(num => (
-        <div
-          key={num}
-          className={`${css.bean} ${css[`coffee-bean${num}`]}`}
-        ></div>
-      ))}
+      <div className={`${css['bean']} ${css['coffee-bean4']}`}></div>
+      <div className={`${css['bean']} ${css['coffee-bean5']}`}></div>
 
       <div className={css['reviews-container']}>
-        <div className={css['reviews-header']}>
+        <header className={css['reviews-header-wrapper']}>
           <h2 className={css['reviews-title']}>
             {t('title', 'What Customers Say')}
           </h2>
+          <div className={`${css.bean} ${css['coffee-bean1']}`}></div>
+          <div className={`${css.bean} ${css['coffee-bean2']}`}></div>
+          <div className={`${css.bean} ${css['coffee-bean3']}`}></div>
+        </header>
 
-          {/* Блок середнього рейтингу кав'ярні */}
-          {!isLoading && reviews.length > 0 && (
-            <div className={css['average-rating-block']}>
-              <span className={css['rating-big-number']}>{averageRating}</span>
-              <div className={css['rating-stars-wrapper']}>
-                <StarRating
-                  value={Number(averageRating)}
-                  readOnly={true}
-                  size={28}
-                />
-              </div>
-              <span className={css['rating-count-label']}>
-                {reviews.length} {t('reviews_count', 'відгуків')}
-              </span>
+        {/* Блок середнього рейтингу кав'ярні */}
+        {!isLoading && reviews.length > 0 && (
+          <div className={css['average-rating-block']}>
+            <span className={css['rating-big-number']}>{averageRating}</span>
+            <div className={css['rating-stars-wrapper']}>
+              <StarRating
+                value={Number(averageRating)}
+                readOnly={true}
+                size={28}
+              />
             </div>
-          )}
-
-          <div className={css['title-divider']}>
-            <div className={css.line}></div>
-            <div className={css.ornament}>
-              <svg width="80" height="40" viewBox="0 0 100 50">
-                <path
-                  d="M10 25C30 5 70 45 90 25M10 25C30 45 70 5 90 25"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <circle cx="50" cy="25" r="3" fill="currentColor" />
-              </svg>
-            </div>
-            <div className={css.line}></div>
+            <span className={css['rating-count-label']}>
+              {reviews.length} {t('reviews_count', 'відгуків')}
+            </span>
           </div>
+        )}
+
+        <div className={css['title-divider']}>
+          <div className={css['line']}></div>
+          <div className={css['ornament']}>
+            <svg width="80" height="40" viewBox="0 0 100 50">
+              <path
+                d="M10 25C30 5 70 45 90 25M10 25C30 45 70 5 90 25"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+              />
+              <circle cx="50" cy="25" r="3" fill="currentColor" />
+            </svg>
+          </div>
+          <div className={css['line']}></div>
         </div>
 
         {/* Сітка з картками відгуків */}
-        <div className={css['reviews-grid']}>
+        <div className={css['reviews-grid-container']}>
           {!isLoading &&
             reviews
               .slice(0, visibleCount)

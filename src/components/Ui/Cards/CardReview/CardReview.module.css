@@ -2,10 +2,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Щоб всі картки були однієї висоти в ряду */
+  height: 100%;
   padding: 1.25rem 2rem;
   background-color: var(--reviews-card-bg-color);
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
   color: var(--reviews-text-color);
   transition:
@@ -25,12 +25,18 @@
 }
 
 .reviews-text {
-  flex-grow: 1; /* Текст займає весь вільний простір */
-  margin-bottom: 1.25rem;
+  position: relative;
+  display: -webkit-box;
+  flex-grow: 1;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
   font-size: 1.1rem;
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.3;
   color: var(--text-reviews-color);
+  -webkit-line-clamp: 2; /* Твоє обмеження */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 .user-footer {
@@ -60,4 +66,34 @@
 .reviews-date {
   font-size: 1rem;
   color: var(--text-reviews-color);
+}
+
+/* --- ТЕ, ЩО Я ДОДАВ ДЛЯ РОБОТИ КНОПКИ --- */
+
+.full-text {
+  display: block; /* Прибирає обмеження рядків */
+  overflow: visible;
+  -webkit-line-clamp: unset;
+}
+
+.read-more-btn {
+  cursor: pointer;
+  margin-bottom: 0.5rem; /* Щоб була відстань до футера */
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+
+  /* font-weight: bold; */
+  text-align: left;
+
+  /* text-decoration: underline; */
+
+  /* color: var(--primary-color); */
+  color: aqua;
+}
+
+.read-more-btn:hover {
+  color: var(--hover-color, #6f4e37);
 }

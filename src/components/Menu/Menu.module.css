@@ -1,20 +1,3 @@
-.loading-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  width: 100%;
-  min-height: 25rem;
-}
-
-.loading-text {
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-align: center;
-  color: #6f4e37;
-}
-
 .menu-section {
   position: relative;
   padding: 4rem 0;
@@ -30,7 +13,123 @@
   contain: paint;
 }
 
-/* Декоративні зерна */
+.menu-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.menu-header-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.menu-title {
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+/* Фільтри */
+.menu-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  position: relative;
+  cursor: pointer;
+  min-width: 8rem;
+  padding: 0.625rem 1.5rem;
+  background-color: var(--button-review-menu-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: var(--btn-radius, 2rem);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  color: var(--color-header-link);
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.filter-btn.active::after {
+  position: absolute;
+  right: 20%;
+  bottom: 0.5rem;
+  left: 20%;
+  height: 0.125rem;
+  background-color: var(--color-header-link);
+  content: '';
+}
+
+/* Сітка та Блоки */
+.menu-grid-container {
+  width: 100%;
+  min-height: 60vh; /* Щоб футер не стрибав */
+}
+
+.menu-category-block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 5rem;
+  animation: fade-only 0.6s ease-out forwards;
+}
+
+.menu-items-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
+  gap: 2rem 3rem;
+  width: 100%;
+}
+
+/* --- СКЕЛЕТОНИ --- */
+.skeleton-card {
+  position: relative;
+  width: 100%;
+  height: 7.5rem; /* Приблизна висота CardMenu */
+  overflow: hidden;
+  background-color: var(--section-border-bottom-color);
+  border-radius: 1rem;
+  opacity: 0.3;
+}
+
+.skeleton-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 50%),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Декоративні зерна кави */
 .bean {
   position: absolute;
   z-index: 0;
@@ -38,7 +137,7 @@
   background-repeat: no-repeat;
   background-size: contain;
   pointer-events: none;
-  opacity: 0.6; /* Додав трохи прозорості, щоб не відволікали від тексту */
+  opacity: 0.6;
 }
 
 .coffee-bean1 {
@@ -81,170 +180,9 @@
   transform: rotate(-45deg);
 }
 
-.menu-container {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 75rem;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-}
-
-.menu-header-wrapper {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  margin-bottom: 3rem;
-  text-align: center;
-}
-
-.menu-title {
-  /* font-size: clamp(2rem, 5vw, 3rem); */
-  text-transform: uppercase;
-  color: var(--primary-color);
-}
-
-/* Фільтри */
-.menu-filter {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 4rem;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  position: relative;
-  cursor: pointer;
-  min-width: 8rem;
-  padding: 0.625rem 1.5rem;
-  background-color: var(--button-review-menu-bg-color);
-  border: 0.0625rem solid var(--button-border-color);
-  border-radius: var(--btn-radius, 2rem);
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
-
-  /* font-weight: 600; */
-  color: var(--color-header-link);
-
-  /* transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); */
-  transition: all 0.3s ease;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.filter-btn:hover {
-  /* background-color: var(--button-hover-bg-color); */
-  transform: translateY(-0.1875rem);
-}
-
-/* 
-.filter-btn.active {
-  background-color: var(--primary-color); 
-  border-color: var(--primary-color);
-  color: #fff;
-} */
-
-.filter-btn:active {
-  transform: scale(0.96);
-}
-
-.filter-btn:focus-visible {
-  outline: 0.125rem solid var(--hover-color);
-  outline-offset: 0.1875rem;
-}
-
-.filter-btn:focus:not(:focus-visible) {
-  outline: none;
-}
-
-.filter-btn::after {
-  position: absolute;
-  right: 20%;
-  bottom: 0.5rem;
-  left: 20%;
-  height: 0.125rem;
-  background-color: var(--color-header-link);
-  transition: transform 0.3s ease;
-  transform: scaleX(0);
-  transform-origin: left;
-  opacity: 0.8;
-  content: '';
-}
-
-.filter-btn.active::after {
-  transform: scaleX(1);
-  opacity: 1;
-}
-
-/* Сітка */
-.menu-grid-container {
-  width: 100%;
-}
-
-.menu-category-block {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 5rem;
-  animation: fade-only 0.6s ease-out forwards;
-
-  /* will-change: transform, opacity; */
-}
-
-/* .category-title {
-  width: 100%;
-  margin-bottom: 2.5rem;
-  padding-left: 0.5rem;
-  border-left:
-    0,
-    25rem solid var(--primary-color);
-
-  text-align: left;
-  text-transform: uppercase;
-  color: var(--primary-color);
-} */
-
-.category-title {
-  display: block;
-  width: 100%;
-  margin-bottom: 2.5rem;
-  padding-left: 0.75rem;
-  text-align: left;
-  text-transform: uppercase;
-  color: var(--primary-color);
-}
-
-/* .items-grid {
-  display: grid;
-
-
-  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
-  gap: 2.5rem 4rem;
-  width: 100%;
-} */
-
-.menu-items-grid {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
-  gap: 2rem 3rem;
-  width: 100%;
-}
-
-.no-data {
-  padding: 3.125rem;
-  font-style: italic;
-  text-align: center;
-  color: #888;
-}
-
-/* Анімація появи */
 @keyframes fade-only {
   from {
-    transform: translateY(1.25rem);
+    transform: translateY(1rem);
     opacity: 0;
   }
 
@@ -254,30 +192,10 @@
   }
 }
 
-/* Адаптивність */
 @media (max-width: 47.9375rem) {
-  .items-grid {
+  .menu-items-grid {
     grid-template-columns: 1fr;
     max-width: 32rem;
     margin: 0 auto;
-  }
-
-  .coffee-bean1,
-  .coffee-bean2,
-  .coffee-bean3 {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-}
-
-@keyframes fade-only {
-  from {
-    transform: translateY(0.625rem);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
   }
 }

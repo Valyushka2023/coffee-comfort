@@ -5,5 +5,9 @@
   "show_less": "Згорнути",
   "no_reviews": "Відгуків поки немає. Станьте першим, хто поділиться враженнями!",
   "google_cta": "Хочете побачити більше відгуків?",
-  "read_on_google": "Читати всі відгуки в Google"
+  "read_on_google": "Читати всі відгуки в Google",
+  "reviews_count_one": "{{count}} відгук",
+  "reviews_count_few": "{{count}} відгуки",
+  "reviews_count_many": "{{count}} відгуків",
+  "reviews_count_other": "{{count}} відгуку"
 }

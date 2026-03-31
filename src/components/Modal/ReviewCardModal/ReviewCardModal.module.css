@@ -1,0 +1,55 @@
+.modal-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rating-date-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.0625rem solid var(--button-border-color);
+}
+
+.modal-date {
+  font-size: 0.9rem;
+  color: var(--text-reviews-color);
+  opacity: 0.8;
+}
+
+.text-scroll-area {
+  max-height: 45vh; /* Обмежуємо висоту тексту для скролу */
+  padding-right: 0.5rem;
+  overflow-y: auto;
+}
+
+/* Оформлення скролу */
+.text-scroll-area::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.text-scroll-area::-webkit-scrollbar-thumb {
+  background-color: var(--button-border-color);
+  border-radius: 0.25rem;
+}
+
+.modal-full-text {
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.6;
+  white-space: pre-wrap; /* Щоб зберігалися відступи */
+  color: var(--text-reviews-color);
+}
+
+.modal-user-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 0.0625rem solid var(--button-border-color);
+}
+
+.modal-author-name {
+  font-weight: bold;
+}

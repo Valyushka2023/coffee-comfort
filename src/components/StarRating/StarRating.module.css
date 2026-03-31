@@ -1,97 +1,3 @@
-/* .wrapper,
-.label-input-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-
-} */
-
-/*
-.label {
-  display: block;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-transform: none;
-  color: var(--text-form-review-color);
-}
-
-
-.field-input-and-field-error {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.stars {
-  display: flex;
-  gap: 0.3125rem;
-
-
-  width: max-content;
-  border-bottom: 0.0625rem solid transparent;
-  transition: border-color 0.3s ease;
-  user-select: none;
-}
-
-
-.field-error,
-.stars.field-error {
-  border-bottom-color: var(--error-color, #ff4d4d);
-}
-
-
-.star {
-  display: inline-flex;
-  border-radius: 0.25rem;
-  outline: none;
-  line-height: 0;
-
-
-  color: var(--star-inactive-default, #948f8f);
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease,
-    opacity 0.2s ease;
-  opacity: 0.65;
-}
-
-
-.star.filled {
-  color: var(--star-active-default, #fc3);
-  opacity: 1;
-}
-
-
-.wrapper:not(.read-only) .star:hover {
-  cursor: pointer;
-  transform: scale(1.18);
-  opacity: 1;
-}
-
-.wrapper:not(.read-only) .star:focus-visible {
-  box-shadow: 0 0 0 0.125rem var(--star-active-default, #fc3);
-  transform: scale(1.1);
-  opacity: 1;
-}
-
-
-.error-popup {
-  position: absolute;
-  top: calc(100% + 0.3125rem);
-  left: 0;
-  z-index: 10;
-  margin-top: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  background-color: var(--body-bg-color, #1a1a1a);
-  border: 0.0625rem solid var(--error-color, #ff4d4d);
-  border-radius: 0.25rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  white-space: nowrap;
-  color: var(--error-color, #ff4d4d);
-  pointer-events: none;
-} */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -144,7 +50,7 @@
 .star.filled {
   /* Колір заповненої зірки */
   color: var(--star-active-default, #fc3);
-  opacity: 1; /* Робимо заповнену зірку повністю непрозорою */
+  opacity: 1;
 }
 
 /* Ефекти ховера працюють тільки якщо немає класу .read-only */

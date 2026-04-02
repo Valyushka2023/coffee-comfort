@@ -37,14 +37,18 @@
   outline: none;
 
   /* Колір контуру неактивної зірки */
-  color: var(--star-inactive-default, #948f8f);
+  color: var(--star-inactive-default, #918989);
   transition:
     transform 0.2s ease,
     color 0.2s ease,
     opacity 0.2s ease;
   user-select: none;
-  opacity: 0.65;
+  opacity: 1;
   -webkit-tap-highlight-color: transparent;
+}
+
+.star svg {
+  fill: currentcolor;
 }
 
 .star.filled {

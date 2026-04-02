@@ -310,14 +310,6 @@
   grid-auto-rows: 1fr;
 }
 
-/* .reviews-items-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-  gap: 2rem 3rem;
-  width: 100%;
-  grid-auto-rows: 1fr;
-} */
-
 /* --- СКЕЛЕТОНИ ДЛЯ ВІДГУКІВ --- */
 .skeleton-review-card {
   position: relative;
@@ -472,5 +464,10 @@
     left: 5%;
     height: 5.625rem;
     transform: rotate(-140deg);
+  }
+
+  .more-btn-container {
+    display: flex;
+    flex-direction: column;
   }
 }

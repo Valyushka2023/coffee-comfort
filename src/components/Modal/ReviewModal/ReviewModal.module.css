@@ -76,3 +76,6 @@
   color: var(--error-color);
   pointer-events: none;
 }
+
+@media (max-width: 47.9375rem) {
+}

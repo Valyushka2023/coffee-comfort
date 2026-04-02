@@ -1,55 +1,56 @@
-.modal-content-wrapper {
+.card-review-modal {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.rating-date-info {
+.rating-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 0.5rem;
-  border-bottom: 0.0625rem solid var(--button-border-color);
 }
 
-.modal-date {
-  font-size: 0.9rem;
+.text-review-modal {
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.6;
+  text-align: justify;
+  white-space: pre-wrap;
+  color: var(--text-reviews-color);
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+.card-review-modal-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-info-modal {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.user-data-modal {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author-name-modal {
+  font-size: 1.1rem;
+  color: var(--text-reviews-color);
+}
+
+.date-modal {
+  font-size: 1rem;
   color: var(--text-reviews-color);
   opacity: 0.8;
 }
 
-.text-scroll-area {
-  max-height: 45vh; /* Обмежуємо висоту тексту для скролу */
-  padding-right: 0.5rem;
-  overflow-y: auto;
-}
-
-/* Оформлення скролу */
-.text-scroll-area::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-.text-scroll-area::-webkit-scrollbar-thumb {
-  background-color: var(--button-border-color);
-  border-radius: 0.25rem;
-}
-
-.modal-full-text {
-  font-size: 1.1rem;
-  font-style: italic;
-  line-height: 1.6;
-  white-space: pre-wrap; /* Щоб зберігалися відступи */
-  color: var(--text-reviews-color);
-}
-
-.modal-user-footer {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding-top: 1rem;
-  border-top: 0.0625rem solid var(--button-border-color);
-}
-
-.modal-author-name {
-  font-weight: bold;
+@media (max-width: 47.9375rem) {
 }

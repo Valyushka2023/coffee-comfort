@@ -128,11 +128,6 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
           ))}
         </div>
 
-        {/* <div className={css['element-sending']}>
-          <Button variant="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? t('sending', 'ОБРОБКА...') : t('send', 'НАДІСЛАТИ')}
-          </Button>
-        </div> */}
         <div className={css['element-sending']}>
           <Button
             variant="primary"

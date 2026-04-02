@@ -15,23 +15,27 @@ const ReviewCardModal = ({
     <BaseModal
       isOpen={isOpen}
       onClose={onClose}
-      title={review.name} // Ім'я клієнта як заголовок
+      // title={review.name}
     >
-      <div className={css['modal-content-wrapper']}>
-        <div className={css['rating-date-info']}>
+      <div className={css['card-review-modal']}>
+        <div className={css['rating-wrapper']}>
           <StarRating value={review.rating} readOnly={true} size={20} />
-          <span className={css['modal-date']}>
-            {formatDate(review.createdAt || review.date)}
-          </span>
         </div>
 
-        <div className={css['text-scroll-area']}>
-          <p className={css['modal-full-text']}>{review.text}</p>
-        </div>
+        {/* <div className={css['text-scroll-area']}> */}
+        <p className={css['text-review-modal']}>{review.text}</p>
+        {/* </div> */}
 
-        <div className={css['modal-user-footer']}>
-          <Avatar name={review.name} src={review.avatar} lang={currentLang} />
-          <span className={css['modal-author-name']}>{review.name}</span>
+        <div className={css['card-review-modal-footer']}>
+          <div className={css['user-info-modal']}>
+            <Avatar name={review.name} src={review.avatar} lang={currentLang} />
+            <div className={css['user-data-modal']}>
+              <span className={css['author-name-modal']}>{review.name}</span>{' '}
+              <span className={css['date-modal']}>
+                {formatDate(review.createdAt || review.date)}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </BaseModal>

@@ -1,4 +1,4 @@
-.reviews-card {
+.card-review {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
     box-shadow 0.4s ease;
 }
 
-.reviews-card:hover {
+.card-review:hover {
   box-shadow: 0 0.5rem 1.5rem var(--shadow-icon-circle);
   transform: translateY(-0.5rem);
 }
@@ -24,7 +24,7 @@
   margin-bottom: 0.9375rem;
 }
 
-.reviews-text {
+.text-review {
   position: relative;
   display: -webkit-box;
   flex-grow: 1;
@@ -33,13 +33,16 @@
   font-size: 1.1rem;
   font-style: italic;
   line-height: 1.3;
+  text-align: justify;
   color: var(--text-reviews-color);
-  -webkit-line-clamp: 2; /* Твоє обмеження */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
-.user-footer {
+.card-review-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,41 +62,38 @@
   align-items: center;
 }
 
-.reviews-name {
-  font-weight: bold;
+.author-name {
+  font-size: 1.1rem;
+  color: var(--text-reviews-color);
 }
 
-.reviews-date {
+.date {
   font-size: 1rem;
   color: var(--text-reviews-color);
+  opacity: 0.8;
 }
 
 /* --- ТЕ, ЩО Я ДОДАВ ДЛЯ РОБОТИ КНОПКИ --- */
 
 .full-text {
-  display: block; /* Прибирає обмеження рядків */
+  display: block;
   overflow: visible;
   -webkit-line-clamp: unset;
 }
 
 .read-more-btn {
   cursor: pointer;
-  margin-bottom: 0.5rem; /* Щоб була відстань до футера */
+  margin-bottom: 0.5rem;
   padding: 0;
   background: none;
   border: none;
   font-family: inherit;
   font-size: 0.8rem;
-
-  /* font-weight: bold; */
   text-align: left;
-
-  /* text-decoration: underline; */
-
-  /* color: var(--primary-color); */
-  color: aqua;
+  color: var(--text-reviews-color);
+  opacity: 0.5;
 }
 
 .read-more-btn:hover {
-  color: var(--hover-color, #6f4e37);
+  opacity: 1;
 }

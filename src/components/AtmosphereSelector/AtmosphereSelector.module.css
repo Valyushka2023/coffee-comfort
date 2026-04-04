@@ -176,7 +176,6 @@
 }
 
 .main-title {
-  font-size: 1.1rem;
   text-transform: uppercase;
   color: var(--text-reviews-color);
 }
@@ -314,12 +313,36 @@
 }
 
 /* Для мобільних у горизонталі */
-@media (max-height: 25rem) {
+
+/* @media (max-height: 25rem) {
   .modal-content {
     padding: 1rem;
   }
 
   .modal-img {
-    display: none; /* Ховаємо картинку в горизонталі, щоб вистачило місця тексту і кнопкам */
+    display: none;
+  }
+} */
+@media (max-width: 47.9375rem) {
+  .zone-grid {
+    /* display: flex;
+    justify-content: center;
+    align-items: flex-start; */
+    gap: 0.8rem;
+
+    /* padding: 0.5rem;
+    flex-wrap: wrap; */
+  }
+}
+
+@media (max-width: 29.9375rem) {
+  .zone-grid {
+    /* display: flex;
+    justify-content: center;
+    align-items: flex-start; */
+    gap: 0.5rem;
+
+    /* padding: 0.5rem;
+    flex-wrap: wrap; */
   }
 }

@@ -18,7 +18,7 @@
   "comment_placeholder": "Your wishes",
   "success_title": "Success!",
   "success_message": "Your table is booked. We will call you back soon.",
-
+  "back_button": "Close",
   "send": "Send",
   "errors": {
     "required": "Please fill in the field.",

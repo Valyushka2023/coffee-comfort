@@ -18,6 +18,7 @@
   "comment_placeholder": "Ваші побажання...",
   "success_title": "Успіх!",
   "success_message": "Ваш столик заброньовано. Ми вам скоро передзвонимо.",
+  "back_button": "Закрити",
   "send": "Надіслати",
   "errors": {
     "required": "Будь ласка, заповніть поле.",

@@ -38,7 +38,6 @@
   color: var(--primary-color);
 }
 
-/* Фільтри */
 .menu-filter {
   display: flex;
   justify-content: center;
@@ -71,10 +70,9 @@
   content: '';
 }
 
-/* Сітка та Блоки */
 .menu-grid-container {
   width: 100%;
-  min-height: 60vh; /* Щоб футер не стрибав */
+  min-height: 60vh;
 }
 
 .menu-category-block {
@@ -97,7 +95,7 @@
 .skeleton-card {
   position: relative;
   width: 100%;
-  height: 7.5rem; /* Приблизна висота CardMenu */
+  height: 7.5rem;
   overflow: hidden;
   background-color: var(--section-border-bottom-color);
   border-radius: 1rem;
@@ -139,30 +137,6 @@
   pointer-events: none;
   opacity: 0.6;
 }
-
-/* .coffee-bean1 {
-  top: -3.25rem;
-  right: 12%;
-  width: 5rem;
-  height: 5rem;
-  transform: rotate(15deg);
-}
-
-.coffee-bean2 {
-  top: 0.15rem;
-  right: -1%;
-  width: 6.25rem;
-  height: 6.25rem;
-  transform: rotate(-25deg);
-}
-
-.coffee-bean3 {
-  top: -2.625rem;
-  left: 2%;
-  width: 7.5rem;
-  height: 7.5rem;
-  transform: rotate(10deg);
-} */
 
 .coffee-bean1 {
   top: -3.25rem;

@@ -1,16 +1,11 @@
-.selector-container {
+/* .selector-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  /* margin-bottom: 12px; */
   text-align: center;
-
-  /* background-color: aqua; */
 }
 
 .main-title {
-  /* font-size: 1.2rem; */
   text-transform: uppercase;
   color: var(--text-reviews-color);
 }
@@ -18,21 +13,15 @@
 .zone-grid {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Всі іконки по верхній лінії */
+  align-items: flex-start; 
   gap: 1.5rem;
   padding: 0;
-
-  /* background-color: chartreuse; */
 }
 
 .zone-item {
   display: flex;
   flex-direction: column;
-
-  /* gap: 1rem; */
   justify-content: space-between;
-
-  /* background-color: chocolate; */
 }
 
 .zone-card {
@@ -40,7 +29,7 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  width: 8.75rem; /* Ширина має бути однаковою */
+  width: 8.75rem; 
   background: none;
   border: none;
 }
@@ -59,9 +48,7 @@
   transition: all 0.3s ease;
 }
 
-/* Коли зону вже обрано */
 .active-border {
-  /* border-color: var(--active-color) !important; */
   box-shadow: 0 0 0.625rem 0.7rem var(--shadow-image-wrapper);
 }
 
@@ -74,12 +61,8 @@
 .label-container {
   display: flex;
   justify-content: center;
-  align-items: center; /* Центрування по вертикалі всередині контейнера */
-
-  /* margin-top: 12px; */
-  min-height: 3em; /* Місце для 2-х рядків тексту */
-
-  /* background-color: crimson; */
+  align-items: center;
+  min-height: 3em;
 }
 
 .zone-label {
@@ -94,7 +77,6 @@
   color: var(--text-atmosphere-color) !important;
 }
 
-/* --- Modal Styles --- */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -107,12 +89,12 @@
   height: 100vh;
 }
 
-/* Бекдроп — це кнопка підкладка */
+
 .modal-backdrop {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1; /* Найнижчий шар у модалці */
+  z-index: 1; 
   cursor: pointer;
   width: 100%;
   height: 100%;
@@ -121,23 +103,22 @@
   border: none;
 }
 
-/* Контент — вище за бекдроп */
+
 .modal-content {
   position: relative;
-  z-index: 10; /* Набагато вище за бекдроп */
+  z-index: 10; 
   width: 90%;
   max-width: 25rem;
   padding: 1.25rem;
   background: #3e2b24;
   border-radius: 1.25rem;
-  pointer-events: auto; /* Дозволяє кліки по кнопках */
+  pointer-events: auto; 
 }
 
-/* Переконаємось, що кнопки клікабельні */
 .btn-confirm,
 .btn-back {
   position: relative;
-  z-index: 20; /* Вище за все інше */
+  z-index: 20; 
   cursor: pointer;
 }
 
@@ -183,4 +164,162 @@
   border: 0.0625rem solid rgb(255 255 255 / 30%);
   border-radius: 1.5625rem;
   color: #fff;
+} */
+
+/***  */
+.selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  text-align: center;
+}
+
+.main-title {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--text-reviews-color);
+}
+
+.zone-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.5rem;
+  flex-wrap: wrap; /* Дозволяє іконкам переноситись на новий рядок */
+}
+
+.zone-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 6.5rem;
+  background: none;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.zone-card:hover {
+  transform: translateY(-0.3125rem);
+}
+
+.img-wrapper {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  border: 0.125rem solid var(--color-white);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.active-border {
+  border-color: var(--color-light-brown);
+  box-shadow: 0 0 0.625rem 0.125rem var(--color-light-brown);
+}
+
+.zone-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.label-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 2.5rem;
+}
+
+.zone-label {
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: var(--text-reviews-color);
+}
+
+.active-text {
+  font-weight: bold;
+  color: var(--color-light-brown);
+}
+
+/* МОДАЛЬНЕ ВІКНО */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background: rgb(0 0 0 / 85%);
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  max-height: 90vh; /* Щоб не вилазило за екран */
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow-y: auto; /* Додає скрол, якщо не влазить по висоті */
+  background: #3e2b24;
+  border-radius: 1.5rem;
+}
+
+.modal-img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.modal-title {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-confirm,
+.btn-back {
+  flex: 1;
+  cursor: pointer;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 2rem;
+  font-weight: bold;
+}
+
+.btn-confirm {
+  background: #dcb083;
+  color: #3e2b24;
+}
+
+.btn-back {
+  background: transparent;
+  border: 0.0625rem solid rgb(255 255 255 / 30%);
+  color: #fff;
+}
+
+/* Для мобільних у горизонталі */
+@media (max-height: 25rem) {
+  .modal-content {
+    padding: 1rem;
+  }
+
+  .modal-img {
+    display: none; /* Ховаємо картинку в горизонталі, щоб вистачило місця тексту і кнопкам */
+  }
 }

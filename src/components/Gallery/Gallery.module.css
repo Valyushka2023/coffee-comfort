@@ -60,15 +60,12 @@
   color: var(--primary-color);
 }
 
-/* СІТКА */
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(21.875rem, 1fr));
   gap: 1.5rem;
 }
 
-/* КНОПКА-ОБОРТКА КАРТИНКИ */
 .thumb-btn {
   display: block;
   cursor: pointer;
@@ -80,8 +77,6 @@
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.9375rem var(--shadom-image-wrapper);
   transition: transform 0.3s ease;
-
-  /* Робимо всі картинки квадратними */
   aspect-ratio: 1 / 1;
 }
 
@@ -89,22 +84,19 @@
   transform: translateY(-0.3125rem);
 }
 
-/* САМА КАРТИНКА */
 .thumb-img {
   display: block;
   width: 100%;
   height: 100%;
   transition: transform 0.5s ease;
-  object-fit: cover; /* Заповнює квадрат без деформації */
+  object-fit: cover;
 }
 
 .thumb-btn:hover .thumb-img {
   transform: scale(1.08);
 }
 
-/* Для планшетів та невеликих екранів (до 768px) */
 @media (max-width: 47.9375rem) {
-  /* 768px */
   .gallery-section {
     padding: 3rem 0;
   }
@@ -114,7 +106,6 @@
   }
 
   .grid {
-    /* Зменшуємо мінімальну ширину картки, щоб вони влазили по дві або по одній */
     grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
     gap: 1.25rem;
   }
@@ -125,19 +116,16 @@
   }
 
   .line {
-    width: 4rem; /* Скорочуємо декоративні лінії */
+    width: 4rem;
   }
 }
 
-/* Для мобільних телефонів (до 480px) */
 @media (max-width: 29.9375rem) {
-  /* 480px */
   .gallery-container {
     padding-inline: 1rem;
   }
 
   .grid {
-    /* На дуже маленьких екранах робимо одну колонку */
     grid-template-columns: 1fr;
     gap: 1rem;
   }
@@ -159,7 +147,6 @@
     width: 2.5rem;
   }
 
-  /* Збільшуємо радіус закруглення для кращого вигляду на мобільних */
   .thumb-btn {
     border-radius: 0.75rem;
   }

@@ -140,7 +140,7 @@
   opacity: 0.6;
 }
 
-.coffee-bean1 {
+/* .coffee-bean1 {
   top: -3.25rem;
   right: 12%;
   width: 5rem;
@@ -150,6 +150,30 @@
 
 .coffee-bean2 {
   top: 0.15rem;
+  right: -1%;
+  width: 6.25rem;
+  height: 6.25rem;
+  transform: rotate(-25deg);
+}
+
+.coffee-bean3 {
+  top: -2.625rem;
+  left: 2%;
+  width: 7.5rem;
+  height: 7.5rem;
+  transform: rotate(10deg);
+} */
+
+.coffee-bean1 {
+  top: -3.25rem;
+  right: 12%;
+  width: 5rem;
+  height: 5rem;
+  transform: rotate(15deg);
+}
+
+.coffee-bean2 {
+  top: 1.75rem;
   right: -1%;
   width: 6.25rem;
   height: 6.25rem;
@@ -197,5 +221,14 @@
     grid-template-columns: 1fr;
     max-width: 32rem;
     margin: 0 auto;
+  }
+
+  .coffee-bean1,
+  .coffee-bean2,
+  .coffee-bean3,
+  .coffee-bean4,
+  .coffee-bean5 {
+    width: 3.5rem;
+    height: 3.5rem;
   }
 }

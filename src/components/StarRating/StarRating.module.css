@@ -35,8 +35,6 @@
   display: inline-flex;
   border-radius: 0.25rem;
   outline: none;
-
-  /* Колір контуру неактивної зірки */
   color: var(--star-inactive-default, #918989);
   transition:
     transform 0.2s ease,
@@ -52,12 +50,10 @@
 }
 
 .star.filled {
-  /* Колір заповненої зірки */
   color: var(--star-active-default, #fc3);
   opacity: 1;
 }
 
-/* Ефекти ховера працюють тільки якщо немає класу .read-only */
 .wrapper:not(.read-only) .star:hover {
   transform: scale(1.18);
   opacity: 1;
@@ -71,14 +67,28 @@
 
 .error-popup {
   position: absolute;
-  top: calc(100% + 0.3125rem);
+  top: calc(100% + 0.25rem);
   left: 0;
-  z-index: 10;
+  z-index: 100;
+  margin: 0;
   padding: 0.25rem 0.5rem;
-  background-color: var(--body-bg-color, #1a1a1a);
-  border: 0.0625rem solid var(--error-color, #ff4d4d);
-  border-radius: 0.25rem;
-  font-size: 0.8rem;
-  color: var(--error-color, #ff4d4d);
+  background-color: var(--body-bg-color);
+  border: 0.0625rem solid var(--error-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--box-shadow);
+  font-size: 0.9rem;
+  letter-spacing: 0.056rem;
+  white-space: nowrap;
+  color: var(--error-color);
   pointer-events: none;
+}
+
+.error-popup::before {
+  position: absolute;
+  bottom: 100%;
+  left: 0.625rem;
+  border-color: transparent transparent var(--error-color) transparent;
+  border-style: solid;
+  border-width: 0.3125rem;
+  content: '';
 }

@@ -14,7 +14,7 @@ import {
   validateRating,
 } from '../../../utils/index.js';
 
-import css from './ReviewModal.module.css';
+import css from './ReviewFormModal.module.css';
 
 const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
   const { t } = useTranslation('review_modal');
@@ -87,9 +87,6 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
             onChange={value => handleDateChange(value, 'rating')}
             error={hasAttemptedSubmit && errors.rating}
           />
-          {hasAttemptedSubmit && errors.rating && (
-            <p className={css['error-popup']}>{errors.rating}</p>
-          )}
         </div>
 
         <div className={css['inputs-area-form']}>

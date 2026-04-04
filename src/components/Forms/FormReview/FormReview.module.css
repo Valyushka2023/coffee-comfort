@@ -1,5 +1,4 @@
-/* Темний фон навколо вікна */
-.overlay {
+/* .overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +11,7 @@
   background: rgb(0 0 0 / 50%);
 }
 
-/* Прозора кнопка на весь екран */
+
 .backdrop-button {
   position: absolute;
   cursor: default;
@@ -22,7 +21,7 @@
   border: none;
 }
 
-/* Саме біле віконце */
+
 .modal {
   position: relative;
   z-index: 1001;
@@ -95,4 +94,4 @@
 
 .actions button:active {
   transform: scale(0.98);
-}
+} */

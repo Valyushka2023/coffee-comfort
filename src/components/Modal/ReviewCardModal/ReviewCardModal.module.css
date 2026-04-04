@@ -13,8 +13,8 @@
 .text-review-modal {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  border-top: 2px solid var(--color-light-gray-50);
-  border-bottom: 2px solid var(--color-light-gray-50);
+  border-top: 0.125rem solid var(--color-light-gray-50);
+  border-bottom: 0.125rem solid var(--color-light-gray-50);
   font-size: 1.1rem;
   font-style: italic;
   line-height: 1.6;

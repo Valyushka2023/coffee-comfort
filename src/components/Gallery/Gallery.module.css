@@ -5,8 +5,6 @@
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
     var(--section-border-bottom-color);
-
-  /* font-family: Inter, sans-serif; */
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
@@ -26,11 +24,6 @@
   margin-bottom: 1rem;
   text-align: center;
   text-transform: uppercase;
-
-  /* font-family: 'Playfair Display', serif; */
-
-  /* font-size: 3rem; */
-
   color: var(--primary-color);
 }
 
@@ -69,11 +62,6 @@
 
 /* СІТКА */
 
-/* .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));
-  gap: 1.5rem;
-} */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(21.875rem, 1fr));
@@ -112,4 +100,67 @@
 
 .thumb-btn:hover .thumb-img {
   transform: scale(1.08);
+}
+
+/* Для планшетів та невеликих екранів (до 768px) */
+@media (max-width: 47.9375rem) {
+  /* 768px */
+  .gallery-section {
+    padding: 3rem 0;
+  }
+
+  .gallery-container {
+    padding-inline: 1.25rem;
+  }
+
+  .grid {
+    /* Зменшуємо мінімальну ширину картки, щоб вони влазили по дві або по одній */
+    grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .gallery-subtitle {
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+  }
+
+  .line {
+    width: 4rem; /* Скорочуємо декоративні лінії */
+  }
+}
+
+/* Для мобільних телефонів (до 480px) */
+@media (max-width: 29.9375rem) {
+  /* 480px */
+  .gallery-container {
+    padding-inline: 1rem;
+  }
+
+  .grid {
+    /* На дуже маленьких екранах робимо одну колонку */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .gallery-title {
+    font-size: 1.5rem;
+  }
+
+  .gallery-subtitle {
+    padding: 0 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .title-divider {
+    gap: 0.75rem;
+  }
+
+  .line {
+    width: 2.5rem;
+  }
+
+  /* Збільшуємо радіус закруглення для кращого вигляду на мобільних */
+  .thumb-btn {
+    border-radius: 0.75rem;
+  }
 }

@@ -143,12 +143,12 @@ import fullScreenImageModalEN from '../locales/en/full_screen_image_modal.json';
 import callbackModalEN from '../locales/en/callback_modal.json';
 import validationEN from '../locales/en/validation.json'; // Додано
 
-const unitsEN = {
-  m: 'm',
-  l: 'l',
-  km: 'km',
-  l_per_100km: 'l/100km',
-};
+// const unitsEN = {
+//   m: 'm',
+//   l: 'l',
+//   km: 'km',
+//   l_per_100km: 'l/100km',
+// };
 
 // --- Імпорт файлів перекладу (UK) --- //
 import buttonUK from '../locales/uk/button.json';
@@ -168,12 +168,12 @@ import fullScreenImageModalUK from '../locales/uk/full_screen_image_modal.json';
 import callbackModalUK from '../locales/uk/callback_modal.json';
 import validationUK from '../locales/uk/validation.json'; // Додано
 
-const unitsUK = {
-  m: 'м',
-  l: 'л',
-  km: 'км',
-  l_per_100km: 'л/100км',
-};
+// const unitsUK = {
+//   m: 'м',
+//   l: 'л',
+//   km: 'км',
+//   l_per_100km: 'л/100км',
+// };
 
 const resources = {
   en: {
@@ -189,7 +189,7 @@ const resources = {
     footer: footerEN,
     star_rating: starRatingEN,
     card_menu: cardMenuEN,
-    units: unitsEN,
+
     content_reviews: contentReviewsEN,
     full_screen_image_modal: fullScreenImageModalEN,
     callback_modal: callbackModalEN,
@@ -208,7 +208,7 @@ const resources = {
     footer: footerUK,
     star_rating: starRatingUK,
     card_menu: cardMenuUK,
-    units: unitsUK,
+
     content_reviews: contentReviewsUK,
     full_screen_image_modal: fullScreenImageModalUK,
     callback_modal: callbackModalUK,

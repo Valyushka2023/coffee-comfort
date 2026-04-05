@@ -141,14 +141,8 @@ import cardMenuEN from '../locales/en/card_menu.json';
 import contentReviewsEN from '../locales/en/content_reviews.json';
 import fullScreenImageModalEN from '../locales/en/full_screen_image_modal.json';
 import callbackModalEN from '../locales/en/callback_modal.json';
-import validationEN from '../locales/en/validation.json'; // Додано
-
-// const unitsEN = {
-//   m: 'm',
-//   l: 'l',
-//   km: 'km',
-//   l_per_100km: 'l/100km',
-// };
+import validationEN from '../locales/en/validation.json';
+import errorComponentEN from '../locales/en/error_component.json'; // Додано
 
 // --- Імпорт файлів перекладу (UK) --- //
 import buttonUK from '../locales/uk/button.json';
@@ -166,14 +160,8 @@ import cardMenuUK from '../locales/uk/card_menu.json';
 import contentReviewsUK from '../locales/uk/content_reviews.json';
 import fullScreenImageModalUK from '../locales/uk/full_screen_image_modal.json';
 import callbackModalUK from '../locales/uk/callback_modal.json';
-import validationUK from '../locales/uk/validation.json'; // Додано
-
-// const unitsUK = {
-//   m: 'м',
-//   l: 'л',
-//   km: 'км',
-//   l_per_100km: 'л/100км',
-// };
+import validationUK from '../locales/uk/validation.json';
+import errorComponentUK from '../locales/uk/error_component.json'; // Додано
 
 const resources = {
   en: {
@@ -189,11 +177,11 @@ const resources = {
     footer: footerEN,
     star_rating: starRatingEN,
     card_menu: cardMenuEN,
-
     content_reviews: contentReviewsEN,
     full_screen_image_modal: fullScreenImageModalEN,
     callback_modal: callbackModalEN,
-    validation: validationEN, // Додано
+    validation: validationEN,
+    error_component: errorComponentEN, // Додано
   },
   uk: {
     button: buttonUK,
@@ -208,11 +196,11 @@ const resources = {
     footer: footerUK,
     star_rating: starRatingUK,
     card_menu: cardMenuUK,
-
     content_reviews: contentReviewsUK,
     full_screen_image_modal: fullScreenImageModalUK,
     callback_modal: callbackModalUK,
-    validation: validationUK, // Додано
+    validation: validationUK,
+    error_component: errorComponentUK, // Додано
   },
 };
 
@@ -229,10 +217,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    // ns автоматично береться з ключів resources.en
     ns: Object.keys(resources.en),
-    // ВИПРАВЛЕНО: ти вказала 'home' як дефолтний, але у тебе немає файлу home.json.
-    // Краще поставити 'header' або будь-який існуючий.
     defaultNS: 'header',
   });
 

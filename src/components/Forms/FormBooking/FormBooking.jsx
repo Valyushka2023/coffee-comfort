@@ -42,7 +42,7 @@ const FORM_FIELDS = [
 ];
 
 const FormBooking = () => {
-  const { t, i18n } = useTranslation('form_booking');
+  const { t, i18n } = useTranslation(['form_booking', 'validation']);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const currentLocale = i18n.language.startsWith('uk') ? 'uk' : 'en';
@@ -184,7 +184,7 @@ const FormBooking = () => {
               locale={currentLocale}
               showTimeSelect
               dateFormat="yyyy-MM-dd HH:mm"
-              placeholderText={t('date_placeholder', 'Оберіть дату')}
+              placeholderText={t('date_placeholder', 'Оберіть дату та час')}
               className={clsx(
                 css['field-input'],
                 hasAttemptedSubmit &&

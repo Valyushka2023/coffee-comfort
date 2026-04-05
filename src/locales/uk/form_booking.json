@@ -12,21 +12,13 @@
   "email_placeholder": "example@gmail.com",
   "phone_label": "Телефон",
   "phone_placeholder": "+380XXXXXXXXX",
-  "date_label": "Дата  бронювання",
-  "booking_start_date_placeholder": "Оберіть дату та час",
+  "date_label": "Дата бронювання",
+  "date_placeholder": "Оберіть дату та час",
   "comment_label": "Коментар",
   "comment_placeholder": "Ваші побажання...",
   "success_title": "Успіх!",
   "success_message": "Ваш столик заброньовано. Ми вам скоро передзвонимо.",
   "back_button": "Закрити",
   "send": "Надіслати",
-  "errors": {
-    "required": "Будь ласка, заповніть поле.",
-    "name_length": "Ім’я має бути від 2 до 20 символів.",
-    "invalid_email": "Невірний формат електронної пошти.",
-    "email_too_long": "Електронна пошта занадто довга.",
-    "invalid_phone": "Невірний формат номера телефону.",
-    "invalid_end_date": "Дата закінчення має бути пізніше дати початку.",
-    "comment_too_long": "Коментар має бути не більше 150 символів."
-  }
+  "submit_error": "Помилка надсилання. Будь ласка, спробуйте ще раз."
 }

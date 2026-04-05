@@ -18,7 +18,8 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "validate": "npm run lint && npm run check-types && npm run test",
-    "check-types": "tsc --project jsconfig.json --noEmit"
+    "check-types": "tsc --project jsconfig.json --noEmit",
+    "i18n:parse": "i18next-parser"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
@@ -87,6 +88,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.15.0",
+    "i18next-parser": "^9.4.0",
     "jsdom": "^27.4.0",
     "nodemon": "^3.1.10",
     "pino-pretty": "^13.0.0",

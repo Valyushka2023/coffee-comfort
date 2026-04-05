@@ -1,35 +1,61 @@
-/**
- * Уніфіковані валідатори для всього проєкту
- * Використовують найбільш суворі правила з FormBooking та ReviewModal
- */
-
 export const validateName = (value, t) => {
   const val = value?.trim() || '';
-  if (!val) return t('errors.required', 'Поле обов’язкове');
+  if (!val)
+    return t('errors.required', 'This field is required', {
+      ns: 'validation',
+    });
   if (val.length < 2 || val.length > 20) {
-    return t('errors.name_length', 'Ім’я має бути від 2 до 20 символів');
+    return t('errors.name_length', 'Name must be between 2 and 20 characters', {
+      ns: 'validation',
+    });
   }
   return null;
 };
 
 export const validatePhone = (value, t) => {
   const val = value?.trim() || '';
-  if (!val) return t('errors.required', 'Поле обов’язкове');
+  if (!val)
+    return t('errors.required', 'This field is required', {
+      ns: 'validation',
+    });
 
-  // Видаляємо все крім цифр для точної перевірки довжини
+  // Видаляємо все крім цифр для перевірки довжини
   const digits = val.replace(/\D/g, '');
   if (digits.length < 10 || digits.length > 15) {
-    return t('errors.invalid_phone', 'Некоректний номер (10-15 цифр)');
+    return t('errors.invalid_phone', 'Invalid phone number format', {
+      ns: 'validation',
+    });
   }
   return null;
 };
 
 export const validateEmail = (value, t) => {
   const val = value?.trim() || '';
-  if (!val) return t('errors.required', 'Поле обов’язкове');
+  if (!val)
+    return t('errors.required', 'This field is required', {
+      ns: 'validation',
+    });
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(val)) {
-    return t('errors.invalid_email', 'Невірний формат email');
+    return t('errors.invalid_email', 'Invalid email format', {
+      ns: 'validation',
+    });
+  }
+  return null;
+};
+
+export const validateDateRange = (startDate, endDate, t) => {
+  if (!startDate || !endDate) return null;
+
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (end <= start) {
+    return t(
+      'errors.invalid_end_date',
+      'End date must be later than start date',
+      { ns: 'validation' }
+    );
   }
   return null;
 };
@@ -37,24 +63,36 @@ export const validateEmail = (value, t) => {
 export const validateComment = (value, t, isRequired = true) => {
   const val = value?.trim() || '';
 
-  // Якщо поле обов'язкове (як у відгуках)
   if (isRequired && !val) {
-    return t('errors.required', 'Поле обов’язкове');
+    return t('errors.required', 'This field is required', {
+      ns: 'validation',
+    });
   }
 
-  // Обмеження 150 символів (як у вашому ReviewModal та FormBooking)
   if (val.length > 150) {
-    return t('errors.comment_too_long', 'Коментар має бути до 150 символів');
+    return t(
+      'errors.comment_too_long',
+      'Comment must be no more than 150 characters',
+      {
+        ns: 'validation',
+      }
+    );
   }
   return null;
 };
 
 export const validateRating = (value, t) => {
   return Number(value) < 1
-    ? t('errors.rating_required', 'Будь ласка, оберіть оцінку')
+    ? t('errors.rating_required', 'Please provide a star rating', {
+        ns: 'validation',
+      })
     : null;
 };
 
 export const validateRequired = (value, t) => {
-  return !value ? t('errors.required', 'Поле обов’язкове') : null;
+  return !value
+    ? t('errors.required', 'This field is required', {
+        ns: 'validation',
+      })
+    : null;
 };

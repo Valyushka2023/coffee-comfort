@@ -3,10 +3,5 @@
   "name_placeholder": "Your name",
   "submit_btn": "ORDER",
   "processing": "PROCESSING...",
-  "success_message": "Thank you! We will call you back shortly.",
-  "errors": {
-    "required": "Please fill in this field",
-    "name_short": "Name must be at least 2 characters",
-    "phone_invalid": "Enter a valid phone number"
-  }
+  "success_message": "Thank you! We will call you back shortly."
 }

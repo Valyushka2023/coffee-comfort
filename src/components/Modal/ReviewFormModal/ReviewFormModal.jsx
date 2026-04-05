@@ -17,7 +17,7 @@ import {
 import css from './ReviewFormModal.module.css';
 
 const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
-  const { t } = useTranslation('review_modal');
+  const { t } = useTranslation(['review_form_modal', 'validation']);
 
   const fields = useMemo(
     () => [

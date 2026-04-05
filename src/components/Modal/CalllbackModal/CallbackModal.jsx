@@ -7,11 +7,13 @@ import BaseModal from '../BaseModal/BaseModal.jsx';
 import useForm from '../../../hooks/useForm.js';
 import { sendCallbackRequest } from '../../../services/api.js';
 import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
+import { validateName, validatePhone } from '../../../utils/validators.js';
 
 import css from './CallbackModal.module.css';
 
 const CallbackModal = ({ isOpen, onClose }) => {
-  const { t } = useTranslation('callback_modal');
+  // Підключаємо два простори назв: основний для модалки та загальний для валідації
+  const { t } = useTranslation(['callback_modal', 'validation']);
 
   const fields = useMemo(
     () => [
@@ -20,25 +22,20 @@ const CallbackModal = ({ isOpen, onClose }) => {
         placeholder: t('name_placeholder', "Ім'я"),
         type: 'text',
       },
-      { name: 'phone', placeholder: '+380...', type: 'tel' },
+      {
+        name: 'phone',
+        placeholder: '+380...',
+        type: 'tel',
+      },
     ],
     [t]
   );
 
   const validationRules = useMemo(
     () => ({
-      name: v =>
-        !v?.trim()
-          ? t('errors.required')
-          : v.trim().length < 2
-            ? t('errors.name_length')
-            : null,
-      phone: v =>
-        !v?.trim()
-          ? t('errors.required')
-          : v.replace(/\D/g, '').length < 10
-            ? t('errors.phone_invalid')
-            : null,
+      // Передаємо функцію t, щоб валідатор міг знайти ключі у validation.json
+      name: v => validateName(v, t),
+      phone: v => validatePhone(v, t),
     }),
     [t]
   );
@@ -73,7 +70,7 @@ const CallbackModal = ({ isOpen, onClose }) => {
     <BaseModal
       isOpen={isOpen}
       onClose={handleClose}
-      title={t('title', 'ORDER A CAL')}
+      title={t('title', 'Замовити дзвінок')}
     >
       <form className={css['form']} onSubmit={handleSubmit} noValidate>
         <div className={css['inputs-area-form']}>
@@ -100,19 +97,12 @@ const CallbackModal = ({ isOpen, onClose }) => {
           ))}
         </div>
 
-        {/* <div className={css['element-sending']}>
-          <Button variant="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting
-              ? t('processing', 'ОБРОБКА...')
-              : t('submit_btn', 'ЗАМОВИТИ')}
-          </Button>
-        </div> */}
         <div className={css['element-sending']}>
           <Button
             variant="primary"
             type="submit"
             disabled={isSubmitting}
-            isFixedWidth={true} // Кнопка завжди буде гарного розміру
+            isFixedWidth={true}
           >
             {isSubmitting ? t('processing') : t('submit_btn')}
           </Button>
@@ -126,4 +116,5 @@ CallbackModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
+
 export default CallbackModal;

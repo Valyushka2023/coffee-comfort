@@ -90,6 +90,7 @@
 
 @media (max-width: 47.9375rem) {
   .fixed-width {
-    min-width: 100%;
+    width: 100%;
+    min-width: 5.75rem;
   }
 }

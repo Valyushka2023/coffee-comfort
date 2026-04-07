@@ -81,8 +81,10 @@
   transition: color 0.3s ease;
 }
 
-.item-map {
+.item-map,
+.item-clock {
   display: flex;
+  align-items: center;
 }
 
 .info-icon {

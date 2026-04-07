@@ -77,6 +77,21 @@
   transform: scale(0.95);
 }
 
+/* Варіант за замовчуванням (Default) */
+.default {
+  background-color: transparent;
+  border: 0.0625rem solid var(--button-review-menu-bg-color); /* Колір рамки як фон у primary */
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-form-review-color);
+}
+
+.default:hover:not(:disabled) {
+  background-color: rgb(255 255 255 / 10%); /* Легке підсвічування */
+  border-color: var(--button-hover-bg-color);
+  transform: translateY(-0.1875rem);
+}
+
 /* Адаптивність */
 @media (max-width: 61.9375rem) {
   /* .header-link {

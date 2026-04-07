@@ -1,41 +1,194 @@
-/* Датапікер */
-.datepicker-wrapper :global(.react-datepicker-wrapper),
-.datepicker-wrapper :global(.react-datepicker__input-container) {
-  display: block;
+/* ==========================================================================
+   ОСНОВНИЙ КОНТЕЙНЕР ФОРМИ
+   ========================================================================== */
+.form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: var(--contact-form-bg-color);
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
+}
+
+.title-form {
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--text-reviews-color);
+}
+
+/* AtmosphereSelector стилізується всередині свого компонента, 
+   але тут ми описуємо блоки, що йдуть за ним */
+
+.inputs-area-form {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: var(--contact-input-textarea-bg-color);
+  border: 0.0625rem solid var(--color-white);
+  border-radius: 0.5rem;
+}
+
+/* ==========================================================================
+   РЯДКИ ТА МІТКИ (LABELS)
+   ========================================================================== */
+.label-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.label-area-wrapper {
+  display: flex;
+  align-items: start;
+  gap: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.label {
+  max-width: 7.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  color: var(--text-form-label-color);
+  word-wrap: break-word;
+}
+
+.label-area-wrapper .label {
+  padding: 0.8rem 0;
+}
+
+/* ==========================================================================
+   ПОЛЯ ВВОДУ (INPUTS, TEXTAREA, DATEPICKER)
+   ========================================================================== */
+.field-input-and-field-error {
+  position: relative;
+  flex: 1;
   width: 100%;
 }
 
-.datepicker-wrapper :global(.react-datepicker__input-container) input {
-  display: block;
-  cursor: text;
+.field-area-and-field-error {
+  position: relative;
   width: 100%;
-  min-height: 2.5rem;
-  padding: 0.2rem 1.125rem 0.3rem;
+}
+
+.field-input,
+.field-area {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1.125rem;
   box-sizing: border-box;
   background-color: var(--contact-form-bg-color);
   border: 0.0625rem solid transparent;
   border-radius: var(--radius-sm);
   outline: none;
   font-size: 1rem;
+  font-weight: 400;
   color: var(--text-reviews-color);
   transition: border-color 0.3s ease;
 }
 
-.datepicker-wrapper :global(.react-datepicker__input-container) input:hover {
-  border: 0.0625rem solid var(--hover-input-area-color);
+.field-area {
+  min-height: 6rem;
+  line-height: 1.5;
+  resize: vertical;
 }
 
-.datepicker-wrapper :global(.react-datepicker__input-container) input:focus {
+/* Стан фокусу та ховеру */
+.field-input:focus,
+.field-area:focus,
+.field-input:hover,
+.field-area:hover {
   border-color: var(--hover-input-area-color);
 }
 
-.datepicker-wrapper
+/* Плейсхолдери */
+.field-input::placeholder,
+.field-area::placeholder {
+  margin-top: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-reviews-color);
+  opacity: 0.6;
+}
+
+/* Специфічні налаштування для DatePicker */
+.field-input-and-field-error :global(.react-datepicker-wrapper),
+.field-input-and-field-error :global(.react-datepicker__input-container) {
+  display: block;
+  width: 100%;
+}
+
+.field-input-and-field-error
   :global(.react-datepicker__input-container)
-  :global(.field-error) {
+  input::placeholder {
+  font-size: 1rem;
+  color: var(--text-reviews-color);
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   ВАЛІДАЦІЯ ТА ПОМИЛКИ
+   ========================================================================== */
+.field-error {
   border-color: var(--error-color) !important;
 }
 
-/* Успішна форма */
+.error-popup {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--body-bg-color);
+  border: 0.0625rem solid var(--error-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--box-shadow);
+  font-size: 0.9rem;
+  letter-spacing: 0.056rem;
+  white-space: nowrap;
+  color: var(--error-color);
+}
+
+.error-popup::before {
+  position: absolute;
+  bottom: 100%;
+  left: 0.625rem;
+  border-color: transparent transparent var(--error-color) transparent;
+  border-style: solid;
+  border-width: 0.3125rem;
+  content: '';
+}
+
+/* ==========================================================================
+   КНОПКА ВІДПРАВКИ ТА ЗАГАЛЬНІ ПОМИЛКИ
+   ========================================================================== */
+.element-sending {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.general-error-popup {
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--error-color);
+}
+
+/* ==========================================================================
+   ЕКРАН УСПІШНОЇ ВІДПРАВКИ (SUCCESS STATE)
+   ========================================================================== */
 .success-wrapper {
   position: relative;
   display: flex;
@@ -93,122 +246,10 @@
   color: var(--color-light-brown);
 }
 
-/* Форма */
-.form {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 100%;
-  padding: 2rem;
-  box-sizing: border-box;
-  background-color: var(--contact-form-bg-color);
-  border-radius: 1rem;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
-}
-
-.title-form {
-  line-height: 1.2;
-  text-align: center;
-  text-transform: uppercase;
-  color: var(--text-reviews-color);
-}
-
-.inputs-area-form {
-  width: 100%;
-  padding: 1rem;
-  box-sizing: border-box;
-  background-color: var(--contact-input-textarea-bg-color);
-  border: 0.0625rem solid var(--color-white);
-  border-radius: 0.5rem;
-}
-
-.label-input-wrapper,
-.label-area-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-  margin-bottom: 1.5rem; /* Місце для абсолютної помилки */
-  box-sizing: border-box;
-}
-
-.field-input-and-field-error,
-.field-area-and-field-error {
-  position: relative;
-  width: 100%;
-}
-
-.field-input,
-.field-area {
-  display: block;
-  width: 100%;
-  padding: 0.6rem 1.125rem;
-  box-sizing: border-box;
-  background-color: var(--contact-form-bg-color);
-  border: 0.0625rem solid transparent;
-  border-radius: var(--radius-sm);
-  outline: none;
-  font-size: 1rem;
-  color: var(--text-reviews-color);
-  transition: border-color 0.3s ease;
-}
-
-.field-area {
-  min-height: 6rem;
-  resize: vertical;
-}
-
-.field-input:focus,
-.field-area:focus,
-.field-input:hover,
-.field-area:hover {
-  border-color: var(--hover-input-area-color);
-}
-
-.field-error {
-  border-color: var(--error-color) !important;
-}
-
-.error-popup {
-  /* position: absolute;
-  top: calc(100% + 0.125rem);
-  left: 0;
-  z-index: 10;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  color: var(--error-color); */
-  position: absolute;
-  top: calc(100% + 0.25rem);
-  left: 0;
-  z-index: 100;
-  margin: 0;
-  padding: 0.25rem 0.5rem;
-  background-color: var(--body-bg-color);
-  border: 0.0625rem solid var(--error-color);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--box-shadow);
-  font-size: 0.9rem;
-  letter-spacing: 0.056rem;
-  white-space: nowrap;
-  color: var(--error-color);
-}
-
-.general-error-popup {
-  margin-bottom: 1rem;
-  text-align: center;
-  color: var(--error-color);
-}
-
-.element-sending {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* Адаптивність */
-@media (max-width: 48rem) {
+/* ==========================================================================
+   АДАПТИВНІСТЬ (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 47.9375rem) {
   .form {
     gap: 1rem;
     padding: 1.5rem;
@@ -219,9 +260,14 @@
   }
 }
 
-@media (max-width: 30rem) {
+@media (max-width: 29.9375rem) {
   .form {
     padding: 1rem;
+  }
+
+  .label-input-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .label {

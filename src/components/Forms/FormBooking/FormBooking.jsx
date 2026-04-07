@@ -60,20 +60,16 @@ const FormBooking = () => {
   );
 
   const onSubmit = async currentFormData => {
-    const zoneLabels = {
-      window: t('zones.window', 'Біля вікна'),
-      lounge: t('zones.lounge', 'Лаунж-зона'),
-      work: t('zones.work', 'Робоча зона'),
-    };
+    const translatedZone = currentFormData.selectedZone
+      ? t(`atmosphere.zones.${currentFormData.selectedZone}`)
+      : t('atmosphere.not_selected');
 
     const bookingData = {
       camperId: '64f1a2b3c4d5e6f7a8b9c0d1',
       name: currentFormData.name.trim(),
       email: currentFormData.email.trim(),
       phone: currentFormData.phone.trim(),
-      selectedZone:
-        zoneLabels[currentFormData.selectedZone] ||
-        t('zones.not_selected', 'Не обрано'),
+      selectedZone: translatedZone,
       comment: currentFormData.comment.trim(),
       bookingStartDate:
         currentFormData.bookingStartDate?.toLocaleString() || null,
@@ -98,12 +94,11 @@ const FormBooking = () => {
     handleDateChange,
     handleSubmit,
     setFormData,
+    resetForm,
   } = useForm(initialState, validationRules, onSubmit);
 
   const handleCloseSuccess = () => {
-    if (typeof setFormData === 'function') {
-      setFormData(initialState);
-    }
+    resetForm();
     setIsSuccess(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -123,12 +118,12 @@ const FormBooking = () => {
         <div className={css['success-container']}>
           <div className={css['success-icon']}>✓</div>
           <h3 className={css['title-success-form']}>
-            {t('success_title', 'Успіх!')}
+            {t('success_title', 'Success!')}
           </h3>
           <p className={css['text-success-form']}>
             {t(
               'success_message',
-              'Ваш столик заброньовано. Ми зателефонуємо вам найближчим часом.'
+              'Your table is booked. We will call you shortly.'
             )}
           </p>
           <Button variant="primary" onClick={handleCloseSuccess}>
@@ -183,8 +178,11 @@ const FormBooking = () => {
               onChange={date => handleDateChange(date, 'bookingStartDate')}
               locale={currentLocale}
               showTimeSelect
-              dateFormat="yyyy-MM-dd HH:mm"
-              placeholderText={t('date_placeholder', 'Оберіть дату та час')}
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="Time"
+              dateFormat="yyyy-MM-dd    HH:mm"
+              placeholderText={t('date_placeholder', 'Choose a date and time')}
               className={clsx(
                 css['field-input'],
                 hasAttemptedSubmit &&
@@ -205,7 +203,7 @@ const FormBooking = () => {
               name="comment"
               value={formData.comment}
               onChange={handleInputChange}
-              placeholder={t('comment_placeholder', 'Ваш коментар')}
+              placeholder={t('comment_placeholder', 'Your comment')}
               className={clsx(
                 css['field-area'],
                 hasAttemptedSubmit && errors.comment && css['field-error']
@@ -221,10 +219,15 @@ const FormBooking = () => {
       <div className={css['element-sending']}>
         {submissionError && (
           <p className={css['general-error-popup']}>
-            {t('submit_error', 'Помилка відправки. Спробуйте ще раз.')}
+            {t('submit_error', 'Sending error. Please try again.')}
           </p>
         )}
-        <Button variant="primary" type="submit" disabled={isSubmitting}>
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={isSubmitting}
+          isFixedWidth={true}
+        >
           {isSubmitting ? t('sending') : t('send')}
         </Button>
       </div>

@@ -23,7 +23,7 @@ const AtmosphereSelector = ({ selectedZone, onSelect }) => {
   return (
     <div className={css['selector-container']}>
       <h4 className={css['main-title']}>
-        {t('choose_atmosphere', 'Виберіть атмосферну зону')}
+        {t('atmosphere.title', 'Choose an atmosphere zone')}
       </h4>
 
       <div className={css['zone-grid']}>
@@ -41,7 +41,7 @@ const AtmosphereSelector = ({ selectedZone, onSelect }) => {
               >
                 <img
                   src={zone.img}
-                  alt={t(`zones.${zone.id}`)}
+                  alt={t(`atmosphere.zones.${zone.id}`)}
                   className={css['zone-img']}
                 />
               </div>
@@ -50,9 +50,10 @@ const AtmosphereSelector = ({ selectedZone, onSelect }) => {
                   className={clsx(css['zone-label'], {
                     [css['active-text']]: selectedZone === zone.id,
                   })}
-                >
-                  {t(`zones.${zone.id}`)}
-                </span>
+                  dangerouslySetInnerHTML={{
+                    __html: t(`atmosphere.zones.${zone.id}`),
+                  }}
+                ></span>
               </div>
             </button>
           </div>
@@ -63,7 +64,10 @@ const AtmosphereSelector = ({ selectedZone, onSelect }) => {
         <AtmosphereModal
           isOpen={!!previewZone}
           onClose={() => setPreviewZone(null)}
-          zone={previewZone}
+          zone={{
+            ...previewZone,
+            title: t(`atmosphere.zones.${previewZone.id}`), // Передаємо перекладену назву в модалку
+          }}
           onConfirm={() => handleConfirm(previewZone.id)}
         />
       )}

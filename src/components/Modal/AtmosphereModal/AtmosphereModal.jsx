@@ -15,12 +15,17 @@ const AtmosphereModal = ({ isOpen, onClose, zone, onConfirm }) => {
         <div className={css['img-container']}>
           <img
             src={zone.img}
-            alt={t(`zones.${zone.id}`)}
+            alt={t(`atmosphere.zones.${zone.id}`)} // Додано atmosphere.
             className={css['modal-img']}
           />
         </div>
         <div className={css['modal-footer']}>
-          <h3 className={css['modal-title']}>{t(`zones.${zone.id}`)}</h3>
+          <h3
+            className={css['modal-title']}
+            dangerouslySetInnerHTML={{
+              __html: t(`atmosphere.zones.${zone.id}`),
+            }}
+          />
           <div className={css['modal-buttons']}>
             {/* Використовуємо універсальну кнопку з новим пропсом isFixedWidth */}
             <Button
@@ -28,7 +33,7 @@ const AtmosphereModal = ({ isOpen, onClose, zone, onConfirm }) => {
               onClick={onClose}
               className={css['flex-btn']}
             >
-              {t('back_button', 'Назад')}
+              {t('back_button')}
             </Button>
 
             <Button
@@ -39,7 +44,8 @@ const AtmosphereModal = ({ isOpen, onClose, zone, onConfirm }) => {
                 onClose();
               }}
             >
-              {t('select_zone_button', 'Обрати')}
+              {t('atmosphere.select_button', 'Обрати')}{' '}
+              {/* Додано шлях або дефолтне значення */}
             </Button>
           </div>
         </div>

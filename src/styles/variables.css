@@ -192,6 +192,7 @@
   --text-atmosphere-color: var(--color-latte-coffee);
   --text-atmosphere-modal-color: var(--color-white);
   --text-mobile-color: var(--color-light-brown);
+  --text-form-label-color: var(--color-brown);
 
   /* icon, label color */
   --icon-circle-bg-color: var(--color-light-brown);
@@ -290,6 +291,7 @@
   --text-atmosphere-color: var(--color-white);
   --text-atmosphere-modal-color: var(--color-light-brown);
   --text-mobile-color: var(--color-white);
+  --text-form-label-color: var(--color-white);
 
   /* icon, label color */
   --icon-circle-bg-color: var(--color-gold);

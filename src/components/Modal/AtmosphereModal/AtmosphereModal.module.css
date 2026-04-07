@@ -34,8 +34,10 @@
 
 .modal-title {
   margin-bottom: 1.5rem;
+  line-height: 1.2;
   text-align: center;
   text-transform: uppercase;
+  white-space: pre-line;
   color: var(--text-form-review-color);
 }
 

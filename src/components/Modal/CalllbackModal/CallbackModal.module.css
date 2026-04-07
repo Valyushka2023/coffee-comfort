@@ -69,3 +69,13 @@
   color: var(--error-color);
   pointer-events: none;
 }
+
+.error-popup::before {
+  position: absolute;
+  bottom: 100%;
+  left: 0.625rem;
+  border-color: transparent transparent var(--error-color) transparent;
+  border-style: solid;
+  border-width: 0.3125rem;
+  content: '';
+}

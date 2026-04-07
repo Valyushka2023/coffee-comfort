@@ -1,11 +1,6 @@
 {
   "title": "Book a table now",
-  "choose_atmosphere": "Choose an atmosphere zone",
-  "zones": {
-    "window": "View-zone",
-    "lounge": "Lounge-zone",
-    "work": "Work-zone"
-  },
+
   "name_label": "Name",
   "name_placeholder": "Your name",
   "email_label": "Email",
@@ -21,5 +16,15 @@
   "back_button": "Close",
   "send": "Send",
   "sending": "Sending...",
-  "submit_error": "Submission error. Please try again."
+  "submit_error": "Submission error. Please try again.",
+  "atmosphere": {
+    "title": "Choose an atmosphere zone",
+    "not_selected": "Not selected",
+    "select_button": "Choose",
+    "zones": {
+      "window": "View-<br />zone",
+      "lounge": "Lounge-<br />zone",
+      "work": "Work-<br />zone"
+    }
+  }
 }

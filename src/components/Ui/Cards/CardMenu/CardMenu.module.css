@@ -76,6 +76,7 @@
   }
 }
 
+/* 
 @media (max-width: 74.9375rem) {
   .menu-card:hover {
   }
@@ -89,7 +90,7 @@
 @media (max-width: 47.9375rem) {
   .menu-card:hover {
   }
-}
+} */
 
 @media (max-width: 29.9375rem) {
   .item-header-row {

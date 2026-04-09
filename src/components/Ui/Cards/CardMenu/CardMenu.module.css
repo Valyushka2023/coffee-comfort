@@ -5,6 +5,7 @@
   width: 100%; /* Додайте явну ширину */
   padding: 0.75rem;
   box-sizing: border-box;
+  overflow: hidden;
   background-color: chartreuse;
   border-radius: 0.75rem;
   transition:

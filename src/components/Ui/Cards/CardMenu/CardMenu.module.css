@@ -41,15 +41,18 @@
   display: flex;
   align-items: baseline;
   width: 100%;
-  max-width: 14rem;
+
+  /* Видаліть або закоментуйте max-width: 14rem; */
   margin-bottom: 0.4rem;
 }
 
-.item-name {
-  margin: 0;
-  text-transform: uppercase;
-  color: var(--primary-color);
-  overflow-wrap: break-word;
+.menu-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%; /* Додайте явну ширину */
+  padding: 0.75rem;
+  box-sizing: border-box;
 }
 
 .item-price {

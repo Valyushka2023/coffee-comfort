@@ -197,9 +197,17 @@
 
 @media (max-width: 47.9375rem) {
   .menu-items-grid {
+    justify-content: start; /* Вирівнювання по лівому краю */
     grid-template-columns: 1fr;
-    max-width: 32rem;
-    margin: 0 auto;
+    max-width: 100%; /* Змініть з 32rem на 100% */
+    margin: 0; /* Приберіть margin auto */
+  }
+
+  /* Також переконайтеся, що заголовок категорії не має зайвих відступів */
+  .category-title {
+    width: 100%;
+    margin-left: 0.75rem; /* Щоб збігалося з padding картки */
+    text-align: left;
   }
 
   .coffee-bean1,

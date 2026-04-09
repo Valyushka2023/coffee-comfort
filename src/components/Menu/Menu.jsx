@@ -100,9 +100,9 @@ const Menu = () => {
                 key={section.categoryKey}
                 className={css['menu-category-block']}
               >
-                <h3 className={css['category-title']}>
+                <h4 className={css['category-title']}>
                   <span>{t(`categories.${section.categoryKey}`)}</span>
-                </h3>
+                </h4>
                 <div className={css['menu-items-grid']}>
                   {section.items.map(item => (
                     <CardMenu

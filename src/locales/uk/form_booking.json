@@ -21,8 +21,8 @@
     "not_selected": "Не обрано",
     "select_button": "Обрати",
     "zones": {
-      "window": "Панорамна<br />зона",
-      "lounge": "Зона<br />релаксу",
+      "window": "Видова<br />зона",
+      "lounge": "Релакс<br />зона",
       "work": "Робоча<br />зона"
     }
   }

@@ -5,16 +5,14 @@
   padding: 1.875rem;
 }
 
-/* Перевизначаємо позиціонування хрестика саме для галереї */
 .gallery-specific-modal .close-btn {
-  top: 1rem !important; /* Наприклад, відсунути від краю */
+  top: 1rem !important;
   right: 1rem !important;
-  background-color: transparent !important; /* Прибрати фоновий колір aqua */
+  background-color: transparent !important;
 }
 
-/* Якщо потрібно змінити вигляд іконки хрестика всередині */
 .gallery-specific-modal .close-btn button {
-  stroke: white; /* Наприклад, зробити хрестик білим */
+  stroke: white;
 }
 
 .img-wrapper {
@@ -42,5 +40,34 @@
   to {
     transform: translate(-50%, 0);
     opacity: 1;
+  }
+}
+
+/* ДОДАЄМО ЦЕЙ БЛОК ДЛЯ МОБІЛЬНИХ (UX ПРАВКИ) */
+
+@media (max-width: 47.9375rem) {
+  .gallery-specific-modal {
+    bottom: 0 !important;
+
+    /* Робимо модалку на весь екран */
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: black !important; /* На мобільних чорний фон кращий для фото */
+    border-radius: 0 !important;
+  }
+
+  .img-wrapper {
+    height: 100%;
+    border-radius: 0;
+    aspect-ratio: auto; /* Прибираємо обмеження 4/3 */
+  }
+
+  .full-img {
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain; /* Щоб на вертикальних екранах картинка не обрізалася */
   }
 }

@@ -1,4 +1,4 @@
-.gallery-specific-modal {
+/* .gallery-specific-modal {
   bottom: 2.25rem;
   width: 90%;
   max-width: 53.125rem;
@@ -43,27 +43,27 @@
   }
 }
 
-/* ДОДАЄМО ЦЕЙ БЛОК ДЛЯ МОБІЛЬНИХ (UX ПРАВКИ) */
+
 @media (max-width: 61.9375rem) {
   .gallery-specific-modal {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 95% !important;
-    max-height: 80vh; /* Не даємо модалці бути більшою за екран */
-    padding: 1.5rem !important; /* Залишаємо невелику рамку */
+    max-height: 80vh; 
+    padding: 1.5rem !important; 
   }
 
-  /* Якщо екран повернули горизонтально (Landscape) */
+
   @media (orientation: landscape) {
     .gallery-specific-modal {
-      /* width: auto !important; */
+      width: auto !important;
       max-width: 40vw;
       max-height: 40vh;
     }
 
     .full-img {
-      max-height: 50vh; /* Зменшуємо висоту картинки, щоб влізла рамка і хрестик */
+      max-height: 50vh; /
     }
   }
 }
@@ -74,20 +74,123 @@
     flex-direction: column;
     justify-content: center;
     width: 65% !important;
-    max-height: 40vh; /* Не даємо модалці бути більшою за екран */
-    padding: 1.5rem !important; /* Залишаємо невелику рамку */
+    max-height: 40vh; 
+    padding: 1.5rem !important; 
   }
 
-  /* Якщо екран повернули горизонтально (Landscape) */
+
   @media (orientation: landscape) {
     .gallery-specific-modal {
-      /* width: auto !important; */
-      max-width: 30vw;
-      max-height: 30vh;
+   
+      max-width: 60vw;
+      max-height: 60vh;
     }
 
     .full-img {
-      max-height: 30vh; /* Зменшуємо висоту картинки, щоб влізла рамка і хрестик */
+      max-height: 30vh; 
     }
+  }
+} */
+
+.gallery-specific-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 53.125rem;
+  padding: 1.875rem;
+  box-sizing: border-box;
+  background-color: var(--contact-form-bg-color);
+}
+
+/* Перевизначаємо хрестик, щоб він мав підкладку і був помітним */
+.gallery-specific-modal .close-btn {
+  top: 0.75rem !important;
+  right: 0.75rem !important;
+  padding: 0.25rem;
+  background-color: rgb(0 0 0 / 40%) !important;
+  border-radius: 50%;
+  line-height: 0;
+  transition: background-color 0.3s ease;
+}
+
+.gallery-specific-modal .close-btn:hover {
+  background-color: rgb(0 0 0 / 60%) !important;
+}
+
+.gallery-specific-modal .close-btn button {
+  stroke: white;
+}
+
+.img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  /* aspect-ratio прибрано для гнучкості */
+}
+
+.full-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 75vh; /* Обмеження, щоб влізло на десктопний екран */
+  object-fit: contain; /* Картинка не обрізається */
+}
+
+/* --- Адаптивність для планшетів та смартфонів --- */
+
+@media (max-width: 61.9375rem) {
+  .gallery-specific-modal {
+    width: 95% !important;
+    max-height: 90vh; /* Запобігаємо вильоту за межі екрана */
+    padding: 1.5rem 1rem 1rem !important;
+  }
+
+  .full-img {
+    max-height: 70vh;
+  }
+}
+
+/* --- Виправлення для ГОРИЗОНТАЛЬНОГО режиму (Landscape) --- */
+
+/* Коли висота екрана мала (телефони на боці) */
+@media (max-height: 31.25rem) and (orientation: landscape) {
+  .gallery-specific-modal {
+    bottom: 0 !important;
+    width: auto !important; /* Модалка звужується під фото */
+    max-height: 96vh;
+    padding: 0.5rem !important;
+  }
+
+  .img-wrapper {
+    height: 100%;
+  }
+
+  .full-img {
+    width: auto;
+    max-height: 85vh; /* Даємо картинці більше місця по висоті */
+  }
+
+  .gallery-specific-modal .close-btn {
+    top: 0.5rem !important;
+    right: 0.5rem !important;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
   }
 }

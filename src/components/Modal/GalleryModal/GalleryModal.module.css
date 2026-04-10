@@ -59,11 +59,11 @@
   @media (orientation: landscape) {
     .gallery-specific-modal {
       width: auto !important;
-      max-width: 80vw;
+      max-width: 60vw;
     }
 
     .full-img {
-      max-height: 50vh; /* Зменшуємо висоту картинки, щоб влізла рамка і хрестик */
+      max-height: 30vh; /* Зменшуємо висоту картинки, щоб влізла рамка і хрестик */
     }
   }
 }

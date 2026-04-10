@@ -60,6 +60,7 @@
     .gallery-specific-modal {
       width: auto !important;
       max-width: 60vw;
+      max-height: 60vh;
     }
 
     .full-img {

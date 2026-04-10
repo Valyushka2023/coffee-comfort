@@ -47,27 +47,23 @@
 
 @media (max-width: 47.9375rem) {
   .gallery-specific-modal {
-    bottom: 0 !important;
-
-    /* Робимо модалку на весь екран */
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background-color: black !important; /* На мобільних чорний фон кращий для фото */
-    border-radius: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95% !important;
+    max-height: 90vh; /* Не даємо модалці бути більшою за екран */
+    padding: 1rem !important; /* Залишаємо невелику рамку */
   }
 
-  .img-wrapper {
-    height: 100%;
-    border-radius: 0;
-    aspect-ratio: auto; /* Прибираємо обмеження 4/3 */
-  }
+  /* Якщо екран повернули горизонтально (Landscape) */
+  @media (orientation: landscape) {
+    .gallery-specific-modal {
+      width: auto !important;
+      max-width: 90vw;
+    }
 
-  .full-img {
-    height: auto;
-    max-height: 100vh;
-    object-fit: contain; /* Щоб на вертикальних екранах картинка не обрізалася */
+    .full-img {
+      max-height: 60vh; /* Зменшуємо висоту картинки, щоб влізла рамка і хрестик */
+    }
   }
 }

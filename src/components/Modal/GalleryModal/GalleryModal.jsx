@@ -7,26 +7,34 @@ const GalleryModal = ({ isOpen, onClose, image }) => {
   const [touchStart, setTouchStart] = useState(null);
 
   if (!image) return null;
+
   const handleTouchStart = e => {
     setTouchStart(e.targetTouches[0].clientY);
   };
+
   const handleTouchMove = e => {
     if (!touchStart) return;
+
     const touchEnd = e.targetTouches[0].clientY;
-    // Якщо свайпнули вниз більше ніж на 100px — закриваємо
-    if (touchEnd - touchStart > 100) {
+    const distance = touchEnd - touchStart;
+
+    // Якщо ми почали свайпати вниз, блокуємо стандартну прокрутку браузера
+    if (distance > 0 && e.cancelable) {
+      // e.preventDefault(); // Розкоментуй, якщо фон все одно смикається
+    }
+
+    if (distance > 100) {
       onClose();
       setTouchStart(null);
     }
   };
+
   return (
     <BaseModal
       isOpen={isOpen}
       onClose={onClose}
-      /* Використовуємо специфічний клас для пріоритету стилів */
       className={css['gallery-specific-modal']}
     >
-      {/* Додаємо слухачі touch подій на обгортку картинки */}
       <div
         className={css['img-wrapper']}
         onTouchStart={handleTouchStart}

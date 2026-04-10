@@ -51,19 +51,19 @@
     flex-direction: column;
     justify-content: center;
     width: 95% !important;
-    max-height: 90vh; /* Не даємо модалці бути більшою за екран */
-    padding: 1rem !important; /* Залишаємо невелику рамку */
+    max-height: 80vh; /* Не даємо модалці бути більшою за екран */
+    padding: 1.5rem !important; /* Залишаємо невелику рамку */
   }
 
   /* Якщо екран повернули горизонтально (Landscape) */
   @media (orientation: landscape) {
     .gallery-specific-modal {
       width: auto !important;
-      max-width: 90vw;
+      max-width: 80vw;
     }
 
     .full-img {
-      max-height: 60vh; /* Зменшуємо висоту картинки, щоб влізла рамка і хрестик */
+      max-height: 50vh; /* Зменшуємо висоту картинки, щоб влізла рамка і хрестик */
     }
   }
 }

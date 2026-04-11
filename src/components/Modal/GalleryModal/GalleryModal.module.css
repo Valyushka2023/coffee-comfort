@@ -104,7 +104,6 @@
   background-color: var(--contact-form-bg-color);
 }
 
-/* Перевизначаємо хрестик, щоб він мав підкладку і був помітним */
 .gallery-specific-modal .close-btn {
   top: 0.75rem !important;
   right: 0.75rem !important;
@@ -131,24 +130,20 @@
   height: 100%;
   overflow: hidden;
   border-radius: 0.5rem;
-
-  /* aspect-ratio прибрано для гнучкості */
 }
 
 .full-img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 75vh; /* Обмеження, щоб влізло на десктопний екран */
-  object-fit: contain; /* Картинка не обрізається */
+  max-height: 75vh;
+  object-fit: contain;
 }
-
-/* --- Адаптивність для планшетів та смартфонів --- */
 
 @media (max-width: 61.9375rem) {
   .gallery-specific-modal {
     width: 95% !important;
-    max-height: 90vh; /* Запобігаємо вильоту за межі екрана */
+    max-height: 90vh;
     padding: 1.5rem 1rem 1rem !important;
   }
 
@@ -157,13 +152,10 @@
   }
 }
 
-/* --- Виправлення для ГОРИЗОНТАЛЬНОГО режиму (Landscape) --- */
-
-/* Коли висота екрана мала (телефони на боці) */
 @media (max-height: 31.25rem) and (orientation: landscape) {
   .gallery-specific-modal {
     bottom: 0 !important;
-    width: auto !important; /* Модалка звужується під фото */
+    width: auto !important;
     max-height: 96vh;
     padding: 0.5rem !important;
   }
@@ -174,7 +166,7 @@
 
   .full-img {
     width: auto;
-    max-height: 85vh; /* Даємо картинці більше місця по висоті */
+    max-height: 85vh;
   }
 
   .gallery-specific-modal .close-btn {

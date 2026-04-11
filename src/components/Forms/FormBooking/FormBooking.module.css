@@ -8,7 +8,7 @@
   gap: 1.5rem;
   width: 100%;
   max-width: 100%;
-  padding: 2rem;
+  padding: 1.5rem;
   box-sizing: border-box;
   background-color: var(--contact-form-bg-color);
   border-radius: 1rem;
@@ -252,10 +252,10 @@
 /* ==========================================================================
    АДАПТИВНІСТЬ (MEDIA QUERIES)
    ========================================================================== */
-@media (max-width: 47.9375rem) {
+@media (max-width: 61.9375rem) {
   .form {
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .title-form {
@@ -263,29 +263,41 @@
   }
 }
 
-@media (max-width: 29.9375rem) {
-  .form {
+@media (max-width: 47.9375rem) {
+  /* .form {
+    gap: 1rem;
     padding: 1rem;
-  }
+  } */
 
-  .label-input-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+   /* .title-form {
+    font-size: 1.2rem;
+  } */
+} 
 
-  .label {
-    max-width: 100%;
-    padding: 0;
-    font-size: 0.9rem;
-  }
+  @media (max-width: 29.9375rem) {
+    .form {
+      padding: 1rem;
+    }
 
-  .label-area-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 0;
-  }
+    .label-input-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
-  .label-area-wrapper .label {
-    padding: 0;
+    .label {
+      max-width: 100%;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .label-area-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 0;
+    }
+
+    .label-area-wrapper .label {
+      padding: 0;
+    }
   }
 }

@@ -1,6 +1,7 @@
 {
   "title": "Order a call",
-  "name_placeholder": "Your name",
+  "name_placeholder": "Your name (2-20 characters)",
+  "phone_placeholder": "+380XXXXXXXXX",
   "submit_btn": "ORDER",
   "processing": "PROCESSING...",
   "success_message": "Thank you! We will call you back shortly."

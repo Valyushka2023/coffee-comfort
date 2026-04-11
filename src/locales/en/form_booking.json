@@ -2,7 +2,7 @@
   "title": "Book a table now",
 
   "name_label": "Name",
-  "name_placeholder": "Your name",
+  "name_placeholder": "Your name (2-20 characters)",
   "email_label": "Email",
   "email_placeholder": "example@gmail.com",
   "phone_label": "Phone",
@@ -10,7 +10,7 @@
   "date_label": "Reservation Date",
   "date_placeholder": "Choose a date and time",
   "comment_label": "Comment",
-  "comment_placeholder": "Your wishes",
+  "comment_placeholder": "Your wishes (max. 150 characters)...",
   "success_title": "Success!",
   "success_message": "Your table is booked. We will call you back soon.",
   "back_button": "Close",

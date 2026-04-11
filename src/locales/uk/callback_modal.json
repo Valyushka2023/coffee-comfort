@@ -1,6 +1,7 @@
 {
   "title": "Замовити дзвінок",
-  "name_placeholder": "Ваше ім'я",
+  "name_placeholder": "Ваше ім'я (2-20 символів)",
+  "phone_placeholder": "+380XXXXXXXXX",
   "submit_btn": "ЗАМОВИТИ",
   "processing": "ОБРОБКА...",
   "success_message": "Дякуємо! Ми зателефонуємо вам найближчим часом."

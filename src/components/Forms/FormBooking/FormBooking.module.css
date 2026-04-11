@@ -162,7 +162,7 @@
   border: 0.0625rem solid var(--error-color);
   border-radius: var(--radius-sm);
   box-shadow: var(--box-shadow);
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.056rem;
   white-space: nowrap;
   color: var(--error-color);

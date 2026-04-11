@@ -65,7 +65,8 @@
   background: var(--body-bg-color);
   border: 0.0625rem solid var(--error-color);
   border-radius: 0.25rem;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.056rem;
   color: var(--error-color);
   pointer-events: none;
 }

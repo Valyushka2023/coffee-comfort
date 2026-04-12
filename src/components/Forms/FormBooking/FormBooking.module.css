@@ -267,17 +267,6 @@
   }
 }
 
-@media (max-width: 47.9375rem) {
-  /* .form {
-    gap: 1rem;
-    padding: 1rem;
-  } */
-
-  /* .title-form {
-    font-size: 1.2rem;
-  } */
-}
-
 @media (max-width: 29.9375rem) {
   .label-input-wrapper {
     flex-direction: column;

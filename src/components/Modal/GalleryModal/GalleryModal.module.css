@@ -185,8 +185,8 @@
   align-items: center !important;
   width: 90vw !important;
   height: 70vh !important;
-  max-width: 850px !important;
-  max-height: 600px !important;
+  max-width: 53.125rem !important;
+  max-height: 37.5rem !important;
   padding: 1.5rem !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
@@ -240,7 +240,7 @@
 }
 
 /* Для мобільних екранів */
-@media (max-width: 768px) {
+@media (max-width: 47.9375rem) {
   .gallery-specific-modal {
     width: 95vw !important;
     height: 60vh !important;

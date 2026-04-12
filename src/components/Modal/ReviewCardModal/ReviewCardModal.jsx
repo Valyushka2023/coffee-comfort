@@ -11,20 +11,18 @@ const ReviewCardModal = ({
   currentLang,
   formatDate,
 }) => {
+  // Захист: якщо review раптом не передано, не "ламаємо" додаток
+  if (!review) return null;
+
   return (
-    <BaseModal
-      isOpen={isOpen}
-      onClose={onClose}
-      // title={review.name}
-    >
+    <BaseModal isOpen={isOpen} onClose={onClose}>
       <div className={css['card-review-modal']}>
         <div className={css['rating-wrapper']}>
           <StarRating value={review.rating} readOnly={true} size={20} />
         </div>
 
-        {/* <div className={css['text-scroll-area']}> */}
-        <p className={css['text-review-modal']}>{review.text}</p>
-        {/* </div> */}
+        {/* ВИПРАВЛЕНО: Використовуємо comment */}
+        <p className={css['text-review-modal']}>{review.comment}</p>
 
         <div className={css['card-review-modal-footer']}>
           <div className={css['user-info-modal']}>
@@ -47,7 +45,7 @@ ReviewCardModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   review: PropTypes.shape({
     name: PropTypes.string,
-    text: PropTypes.string,
+    comment: PropTypes.string, // ВИПРАВЛЕНО: було text, тепер comment
     rating: PropTypes.number,
     avatar: PropTypes.string,
     createdAt: PropTypes.string,

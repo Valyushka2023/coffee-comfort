@@ -24,7 +24,7 @@
   margin-bottom: 0.9375rem;
 }
 
-.text-review {
+.comment-review {
   position: relative;
   display: -webkit-box;
   flex-grow: 1;
@@ -36,6 +36,7 @@
   text-align: justify;
   color: var(--text-reviews-color);
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   text-justify: inter-word;
@@ -75,10 +76,11 @@
 
 /* --- ТЕ, ЩО Я ДОДАВ ДЛЯ РОБОТИ КНОПКИ --- */
 
-.full-text {
+.full-comment {
   display: block;
   overflow: visible;
   -webkit-line-clamp: unset;
+  line-clamp: 2;
 }
 
 .read-more-btn {

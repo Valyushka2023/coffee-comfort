@@ -5,8 +5,8 @@ const callbackSchema = new mongoose.Schema({
     type: String,
     required: [true, 'errors.required'],
     trim: true,
-    minlength: [2, 'name_length'], // Мінімальна довжина з вашим ключем
-    maxlength: [20, 'name_length'], // Максимальна довжина з тим самим ключем
+    minlength: [2, 'name_length'],
+    maxlength: [20, 'name_length'],
   },
 
   phone: {

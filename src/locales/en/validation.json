@@ -1,6 +1,6 @@
 {
   "errors": {
-    "comment_too_long": "Comment must be no longer than 150 characters",
+    "comment_too_long": "Comment must be no longer than 110 characters",
     "invalid_email": "Invalid email format",
     "invalid_phone": "Invalid phone number format",
     "name_length": "Name must be between 2 and 20 characters",

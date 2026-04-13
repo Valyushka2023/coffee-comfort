@@ -24,7 +24,7 @@
   margin-bottom: 0.9375rem;
 }
 
-.comment-review {
+.text-review {
   position: relative;
   display: -webkit-box;
   flex-grow: 1;
@@ -76,7 +76,7 @@
 
 /* --- ТЕ, ЩО Я ДОДАВ ДЛЯ РОБОТИ КНОПКИ --- */
 
-.full-comment {
+.full-text {
   display: block;
   overflow: visible;
   -webkit-line-clamp: unset;

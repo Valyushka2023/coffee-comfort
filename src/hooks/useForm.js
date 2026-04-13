@@ -73,7 +73,7 @@
 // export default useForm;
 
 /*****/
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const useForm = (initialState, validationRules, onSubmit) => {
   const [formData, setFormData] = useState(initialState);
@@ -82,36 +82,17 @@ const useForm = (initialState, validationRules, onSubmit) => {
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [submissionError, setSubmissionError] = useState(null);
 
-  const resetForm = () => {
+  // Використовуємо useCallback, щоб посилання на функцію не змінювалося
+  const resetForm = useCallback(() => {
     setFormData(initialState);
     setErrors({});
     setHasAttemptedSubmit(false);
     setSubmissionError(null);
-  };
+  }, [initialState]);
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-
+  const updateErrors = (name, value) => {
     if (validationRules[name]) {
       const error = validationRules[name](value);
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        if (error) {
-          newErrors[name] = error;
-        } else {
-          delete newErrors[name]; // Чистимо об'єкт від успішно валідованих полів
-        }
-        return newErrors;
-      });
-    }
-  };
-
-  const handleDateChange = (date, name) => {
-    setFormData(prev => ({ ...prev, [name]: date }));
-
-    if (validationRules[name]) {
-      const error = validationRules[name](date);
       setErrors(prev => {
         const newErrors = { ...prev };
         if (error) {
@@ -124,28 +105,43 @@ const useForm = (initialState, validationRules, onSubmit) => {
     }
   };
 
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    updateErrors(name, value);
+  };
+
+  const handleDateChange = (date, name) => {
+    setFormData(prev => ({ ...prev, [name]: date }));
+    updateErrors(name, date);
+  };
+
   const handleSubmit = async e => {
     if (e && e.preventDefault) e.preventDefault();
     setHasAttemptedSubmit(true);
 
-    const newErrors = {};
+    const validationErrors = {};
     Object.keys(validationRules).forEach(key => {
       const error = validationRules[key](formData[key]);
-      if (error) newErrors[key] = error;
+      if (error) validationErrors[key] = error;
     });
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
     setIsSubmitting(true);
     setSubmissionError(null);
+
     try {
       await onSubmit(formData);
+      // Якщо форма ще існує (не закрита модалка), чистимо її
+      resetForm();
     } catch (err) {
-      // Тепер помилка точно потрапить сюди і виведеться в UI
-      setSubmissionError(err.message || 'Something went wrong');
+      // Обробляємо помилку з Axios або Fetch
+      const errorMsg = err.response?.data?.message || err.message || 'Error';
+      setSubmissionError(errorMsg);
     } finally {
       setIsSubmitting(false);
     }

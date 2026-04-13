@@ -46,7 +46,7 @@
 }
 
 .active-border {
-  border-color: var(--color-light-brown);
+  border: 0.25rem solid var(--color-white);
   box-shadow: 0 0 0.625rem 0.125rem var(--color-light-brown);
 }
 
@@ -65,13 +65,13 @@
 
 .zone-label {
   font-size: 0.85rem;
-  line-height: 1.2;
+  line-height: 1.5;
   color: var(--text-reviews-color);
 }
 
 .active-text {
   font-weight: bold;
-  color: var(--color-light-brown);
+  text-decoration: underline;
 }
 
 /* МОДАЛЬНЕ ВІКНО */

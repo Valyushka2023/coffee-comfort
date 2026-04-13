@@ -2,25 +2,29 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import StarRating from '../../../StarRating/StarRating.jsx';
 import Avatar from '../../Avatars/Avatar.jsx';
-import ReviewCardModal from '../../../Modal/ReviewCardModal/ReviewCardModal.jsx'; // Оновлена назва
+import ReviewCardModal from '../../../Modal/ReviewCardModal/ReviewCardModal.jsx';
 import css from './CardReview.module.css';
 
 const ReviewCard = ({ review, currentLang, formatDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Визначаємо ім'я та текст залежно від мови
+  // 1. Визначаємо ім'я
   const name =
     typeof review.name === 'object'
       ? review.name[currentLang] || review.name.uk
-      : review.name;
+      : review.name || 'Anonymous';
+
+  // 2. ВИПРАВЛЕНО: Додаємо перевірку на review.text ТА review.comment
+  // Використовуємо оператор опціонального ланцюжка ?. та "або", щоб уникнути undefined
+  const rawText = review.text || review.comment || '';
 
   const text =
-    typeof review.text === 'object'
-      ? review.text[currentLang] || review.text.uk
-      : review.text;
+    typeof rawText === 'object'
+      ? rawText[currentLang] || rawText.uk || ''
+      : rawText;
 
-  // Кнопка з'явиться, якщо текст довгий
-  const isLongText = text.length > 110;
+  // 3. ТЕПЕР text гарантовано є рядком (хоча б порожнім), тому .length не видасть помилку
+  const isLongText = text.length > 85;
 
   return (
     <>
@@ -54,11 +58,10 @@ const ReviewCard = ({ review, currentLang, formatDate }) => {
         </div>
       </div>
 
-      {/* Модальне вікно для детального перегляду відгуку */}
       <ReviewCardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        review={{ ...review, name, text }} // Передаємо вже готові name та text
+        review={{ ...review, name, text }}
         currentLang={currentLang}
         formatDate={formatDate}
       />

@@ -27,8 +27,8 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
         component: 'input',
       },
       {
-        name: 'comment',
-        placeholder: t('comment_placeholder'),
+        name: 'text',
+        placeholder: t('text_placeholder'),
         component: 'textarea',
       },
     ],
@@ -38,20 +38,32 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
   const validationRules = useMemo(
     () => ({
       name: v => validateName(v, t),
-      comment: v => validateComment(v, t, true),
+      // Використовуємо validateComment, бо вона повертає null при успіху
+      text: v => validateComment(v, t, true),
       rating: v => validateRating(v, t),
     }),
     [t]
   );
 
   const handleFormSubmit = async formData => {
-    await sendReviewRequest({
-      name: { uk: formData.name.trim(), en: formData.name.trim() },
-      text: { uk: formData.comment.trim(), en: formData.comment.trim() },
-      rating: formData.rating,
-    });
-    resetForm();
-    onSuccess();
+    try {
+      await sendReviewRequest({
+        name: {
+          uk: formData.name.trim(),
+          en: formData.name.trim(),
+        },
+        // ПЕРЕЙМЕНУЙТЕ КЛЮЧ ТУТ: з text на comment
+        comment: {
+          uk: formData.text.trim(),
+          en: formData.text.trim(),
+        },
+        rating: formData.rating,
+      });
+      resetForm();
+      onSuccess();
+    } catch (error) {
+      console.error("Backend still wants 'comment':", error);
+    }
   };
 
   const {
@@ -64,7 +76,7 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
     handleSubmit,
     resetForm,
   } = useForm(
-    { name: '', comment: '', rating: 0 },
+    { name: '', text: '', rating: 0 },
     validationRules,
     handleFormSubmit
   );
@@ -88,13 +100,13 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
             error={hasAttemptedSubmit && errors.rating}
           />
         </div>
-
         <div className={css['inputs-area-form']}>
           {fields.map(field => (
             <div
               key={field.name}
               className={css['field-input-and-field-error']}
             >
+              {/* ВИПРАВЛЕНО: перевіряємо component, а не text */}
               {field.component === 'textarea' ? (
                 <textarea
                   name={field.name}
@@ -118,13 +130,13 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
                   onChange={handleInputChange}
                 />
               )}
+              {/* Відображення тексту помилки */}
               {hasAttemptedSubmit && errors[field.name] && (
                 <p className={css['error-popup']}>{errors[field.name]}</p>
               )}
             </div>
           ))}
         </div>
-
         <div className={css['element-sending']}>
           <Button
             variant="primary"

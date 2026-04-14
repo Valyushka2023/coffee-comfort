@@ -54,6 +54,7 @@
   align-items: start;
   gap: 0.5rem;
   width: 100%;
+  margin-bottom: 1rem;
   box-sizing: border-box;
 }
 
@@ -67,9 +68,9 @@
   word-wrap: break-word;
 }
 
-.inputs-area-form .label-input-wrapper:nth-child(4) {
+/* .inputs-area-form .label-input-wrapper:nth-child(4) {
   gap: 0;
-}
+} */
 
 .label-area-wrapper .label {
   padding: 0.8rem 0;
@@ -276,6 +277,7 @@
   .label {
     max-width: 100%;
     padding: 0;
+    word-wrap: none;
   }
 
   .label-area-wrapper {

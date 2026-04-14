@@ -38,13 +38,13 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
   const validationRules = useMemo(
     () => ({
       name: v => validateName(v, t),
-      // Використовуємо validateComment, бо вона повертає null при успіху
       text: v => validateComment(v, t, true),
       rating: v => validateRating(v, t),
     }),
     [t]
   );
 
+  // ОНОВЛЕНА ФУНКЦІЯ handleFormSubmit
   const handleFormSubmit = async formData => {
     try {
       await sendReviewRequest({
@@ -52,17 +52,22 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
           uk: formData.name.trim(),
           en: formData.name.trim(),
         },
-        // ПЕРЕЙМЕНУЙТЕ КЛЮЧ ТУТ: з text на comment
-        comment: {
+        // ВИПРАВЛЕНО: Ключ тепер "text", як того очікує схема в MongoDB
+        text: {
           uk: formData.text.trim(),
           en: formData.text.trim(),
         },
         rating: formData.rating,
       });
-      resetForm();
-      onSuccess();
+
+      resetForm(); // Очищуємо поля
+      onSuccess(); // Викликаємо успішне завершення (це закриє модалку)
     } catch (error) {
-      console.error("Backend still wants 'comment':", error);
+      // Якщо бекенд поверне 500, ми потрапимо сюди і форма НЕ закриється
+      console.error('❌ Помилка при відправці відгуку:', error);
+      alert(
+        t('error_sending_review') || 'Помилка при відправці. Спробуйте ще раз.'
+      );
     }
   };
 
@@ -106,7 +111,6 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
               key={field.name}
               className={css['field-input-and-field-error']}
             >
-              {/* ВИПРАВЛЕНО: перевіряємо component, а не text */}
               {field.component === 'textarea' ? (
                 <textarea
                   name={field.name}
@@ -130,7 +134,6 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
                   onChange={handleInputChange}
                 />
               )}
-              {/* Відображення тексту помилки */}
               {hasAttemptedSubmit && errors[field.name] && (
                 <p className={css['error-popup']}>{errors[field.name]}</p>
               )}
@@ -142,7 +145,7 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
             variant="primary"
             type="submit"
             disabled={isSubmitting}
-            isFixedWidth={true} // Кнопка завжди буде гарного розміру
+            isFixedWidth={true}
           >
             {isSubmitting ? t('processing') : t('submit_btn')}
           </Button>
@@ -157,4 +160,5 @@ ReviewModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
 };
+
 export default ReviewModal;

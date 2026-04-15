@@ -1,13 +1,3 @@
-// import express from 'express';
-// import { getReviews, addReview } from '../controllers/reviewController.js';
-
-// const router = express.Router();
-
-// router.get('/', getReviews); // Тепер буде працювати http://localhost:5001/api/reviews
-
-// router.post('/reviews', addReview);
-
-// export default router;
 import express from 'express';
 import { getReviews, addReview } from '../controllers/reviewController.js';
 

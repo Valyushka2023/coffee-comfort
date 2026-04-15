@@ -52,8 +52,6 @@
   height: 0.125rem;
   background-color: var(--hover-color);
   transition: transform 0.3s ease;
-
-  /* МАГІЯ АНІМАЦІЇ */
   transform: scaleX(0);
   transform-origin: left;
   content: '';
@@ -79,18 +77,4 @@
     font-size: 0.9rem;
     letter-spacing: normal;
   }
-}
-
-@media (max-width: 47.9375rem) {
-  /* .language-en,
-  .language-uk {
-    font-size: 0.9rem;
-  } */
-}
-
-@media (max-width: 29.9375rem) {
-  /* .language-en,
-  .language-uk {
-    font-size: 0.9rem;
-  } */
 }

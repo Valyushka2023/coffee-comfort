@@ -17,10 +17,6 @@ export const MapPin = ({ size = 24, color = '#FF6B6B', ...props }) => (
   </svg>
 );
 
-// MapPin.propTypes = {
-//   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//   color: PropTypes.string,
-// };
 MapPin.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,

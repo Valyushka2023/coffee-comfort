@@ -1,4 +1,3 @@
-// src/Icons/ReviewIcon.jsx
 import PropTypes from 'prop-types';
 
 const ReviewIcon = ({ size = 18, color = 'currentColor' }) => {

@@ -44,9 +44,7 @@
   text-decoration: none;
   text-transform: uppercase;
   color: var(--text-mobile-color);
-  transition: color 0.3s ease; /* Додаємо сюди для чистого кліку на мобільних пристроях */
-
-  /* Також корисно додати це, щоб уникнути виділення тексту при довгому натисканні */
+  transition: color 0.3s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -106,11 +104,10 @@
   transition:
     transform 0.3s ease,
     background-color 0.3s ease;
-  user-select: none; /* Можна винести сюди, щоб не дублювати в станах */
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Виправляємо помилку в назві та покращуємо доступність */
 .header-cta-link:focus-visible {
   outline: 0.125rem solid var(--hover-color);
   outline-offset: 0.25rem;

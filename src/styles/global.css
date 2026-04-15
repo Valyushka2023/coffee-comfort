@@ -22,28 +22,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* body {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; 
-  background-color: var(--body-bg-color, #fff);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.5;
-  color: #333;
-  -webkit-text-size-adjust: 100%;
-} */
 body {
-  /* position: relative;  <-- ВИДАЛЕНО */
   width: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
-
-  /* overflow-x: hidden; <-- ПЕРЕНЕСЕНО В HTML (див. нижче) */
-
   background-color: var(--body-bg-color, #fff);
   font-family: Inter, sans-serif;
   line-height: 1.5;

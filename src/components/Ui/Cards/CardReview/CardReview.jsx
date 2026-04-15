@@ -8,14 +8,11 @@ import css from './CardReview.module.css';
 const ReviewCard = ({ review, currentLang, formatDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 1. Визначаємо ім'я
   const name =
     typeof review.name === 'object'
       ? review.name[currentLang] || review.name.uk
       : review.name || 'Anonymous';
 
-  // 2. ВИПРАВЛЕНО: Додаємо перевірку на review.text ТА review.comment
-  // Використовуємо оператор опціонального ланцюжка ?. та "або", щоб уникнути undefined
   const rawText = review.text || review.comment || '';
 
   const text =
@@ -23,7 +20,6 @@ const ReviewCard = ({ review, currentLang, formatDate }) => {
       ? rawText[currentLang] || rawText.uk || ''
       : rawText;
 
-  // 3. ТЕПЕР text гарантовано є рядком (хоча б порожнім), тому .length не видасть помилку
   const isLongText = text.length > 85;
 
   return (

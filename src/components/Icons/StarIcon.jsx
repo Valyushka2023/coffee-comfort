@@ -1,8 +1,5 @@
 import PropTypes from 'prop-types';
 
-/**
- * Компонент StarIcon для відображення рейтингу.
- */
 export const StarIcon = ({
   size = 24,
   color = 'currentColor',

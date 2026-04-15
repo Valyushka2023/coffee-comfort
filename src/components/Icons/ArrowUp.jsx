@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'; // 1. Додай цей імпорт
+import PropTypes from 'prop-types';
 export const ArrowUp = ({ size = 24, color = 'currentColor', ...props }) => (
   <svg
     width={size}

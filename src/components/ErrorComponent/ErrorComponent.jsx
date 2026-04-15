@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import css from './ErrorComponent.module.css';
 
 const ErrorComponent = ({ error, onRetry }) => {
-  // >>> ВИПРАВЛЕННЯ: Змінено 'errorComponent' на 'error_component'
   const { t } = useTranslation('error_component');
 
   return (

@@ -44,7 +44,6 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
     [t]
   );
 
-  // ОНОВЛЕНА ФУНКЦІЯ handleFormSubmit
   const handleFormSubmit = async formData => {
     try {
       await sendReviewRequest({
@@ -52,7 +51,7 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
           uk: formData.name.trim(),
           en: formData.name.trim(),
         },
-        // ВИПРАВЛЕНО: Ключ тепер "text", як того очікує схема в MongoDB
+
         text: {
           uk: formData.text.trim(),
           en: formData.text.trim(),
@@ -60,10 +59,9 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
         rating: formData.rating,
       });
 
-      resetForm(); // Очищуємо поля
-      onSuccess(); // Викликаємо успішне завершення (це закриє модалку)
+      resetForm();
+      onSuccess();
     } catch (error) {
-      // Якщо бекенд поверне 500, ми потрапимо сюди і форма НЕ закриється
       console.error('❌ Помилка при відправці відгуку:', error);
       alert(
         t('error_sending_review') || 'Помилка при відправці. Спробуйте ще раз.'

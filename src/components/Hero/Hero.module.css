@@ -94,7 +94,7 @@
 }
 
 .hero-link:active {
-  transform: translateY(0.0625rem); /* Легкий рух вниз при кліку */
+  transform: translateY(0.0625rem);
   opacity: 0.5;
 }
 

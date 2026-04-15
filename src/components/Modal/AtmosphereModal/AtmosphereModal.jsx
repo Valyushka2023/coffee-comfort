@@ -15,7 +15,7 @@ const AtmosphereModal = ({ isOpen, onClose, zone, onConfirm }) => {
         <div className={css['img-container']}>
           <img
             src={zone.img}
-            alt={t(`atmosphere.zones.${zone.id}`)} // Додано atmosphere.
+            alt={t(`atmosphere.zones.${zone.id}`)}
             className={css['modal-img']}
           />
         </div>

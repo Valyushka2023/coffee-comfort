@@ -12,20 +12,16 @@
 
 .theme-toggle-btn:hover {
   background-color: rgb(255 204 51 / 10%);
-  transform: scale(1.1) rotate(45deg); /* Поворот на 45 градусів при наведенні */
+  transform: scale(1.1) rotate(45deg);
 }
 
-/* Іконка Сонця (активна в темній темі) */
 .theme-icon-md-light {
   font-size: 1.4rem;
   color: var(--toggle-theme-icon-color);
-
-  /* Анімація м'якого пульсуючого сяйва */
   animation: sun-glow 3s infinite ease-in-out;
   filter: drop-shadow(0 0 0.3125rem rgb(255 204 51 / 60%));
 }
 
-/* Іконка Місяця (активна у світлій темі) */
 .theme-icon-md-dark {
   font-size: 1.4rem;
   color: var(--toggle-theme-icon-color);
@@ -33,7 +29,6 @@
   filter: drop-shadow(0 0 0.125rem rgb(212 163 115 / 30%));
 }
 
-/* Анімація для сонечка */
 @keyframes sun-glow {
   0% {
     transform: scale(1);
@@ -41,7 +36,7 @@
   }
 
   50% {
-    transform: scale(1.1); /* Легке збільшення, ніби воно "дихає" */
+    transform: scale(1.1);
     filter: drop-shadow(0 0 0.75rem rgb(255 204 51 / 80%));
   }
 
@@ -51,14 +46,6 @@
   }
 }
 
-/* Адаптивність */
-
-/* @media (width <= 48rem) {
-  .theme-icon-md-light,
-  .theme-icon-md-dark {
-    font-size: 1.2rem;
-  }
-} */
 @media (max-width: 74.9375rem) {
   .theme-icon-md-light,
   .theme-icon-md-dark {
@@ -71,18 +58,4 @@
   .theme-icon-md-dark {
     font-size: 0.9rem;
   }
-}
-
-@media (max-width: 47.9375rem) {
-  /* .theme-icon-md-light,
-  .theme-icon-md-dark {
-    font-size: 0.9rem;
-  } */
-}
-
-@media (max-width: 29.9375rem) {
-  /* .theme-icon-md-light,
-  .theme-icon-md-dark {
-    font-size: 0.8rem;
-  } */
 }

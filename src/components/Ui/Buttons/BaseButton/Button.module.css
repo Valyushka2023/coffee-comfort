@@ -22,7 +22,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Модифікатори розмірів */
 .small {
   padding: 0.4rem 1rem;
   border: 0.125rem solid var(--border-color);
@@ -34,12 +33,10 @@
   font-size: 1.4rem;
 }
 
-/* Фіксована ширина для симетрії */
 .fixed-width {
   min-width: 13.75rem;
 }
 
-/* Основна кнопка (Primary) */
 .primary {
   background-color: var(--button-review-menu-bg-color);
   border: 0.0625rem solid var(--button-border-color);
@@ -56,14 +53,12 @@
   filter: brightness(1.1);
 }
 
-/* Стан Active (для фільтрів у меню) */
 .active {
   background-color: var(--button-hover-bg-color);
   border-bottom: 0.125rem solid var(--primary-color);
   color: var(--button-hover-color);
 }
 
-/* Стан Disabled */
 .button:disabled {
   cursor: not-allowed;
   background-color: var(--button-disabled-bg-color);
@@ -77,30 +72,18 @@
   transform: scale(0.95);
 }
 
-/* Варіант за замовчуванням (Default) */
 .default {
   background-color: transparent;
-  border: 0.0625rem solid var(--button-review-menu-bg-color); /* Колір рамки як фон у primary */
+  border: 0.0625rem solid var(--button-review-menu-bg-color);
   font-weight: 600;
   text-transform: uppercase;
   color: var(--text-form-review-color);
 }
 
 .default:hover:not(:disabled) {
-  background-color: rgb(255 255 255 / 10%); /* Легке підсвічування */
+  background-color: rgb(255 255 255 / 10%);
   border-color: var(--button-hover-bg-color);
   transform: translateY(-0.1875rem);
-}
-
-/* Адаптивність */
-@media (max-width: 61.9375rem) {
-  /* .header-link {
-    font-size: 0.9rem;
-  } */
-
-  /* .header-cta-link {
-    font-size: 0.5rem;
-  } */
 }
 
 @media (max-width: 47.9375rem) {

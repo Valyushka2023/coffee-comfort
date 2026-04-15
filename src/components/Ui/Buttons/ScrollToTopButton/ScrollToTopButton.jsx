@@ -15,12 +15,10 @@ const ScrollToTopButton = ({ visible, onClick, className }) => {
   );
 };
 
-// Це прибере жовті попередження "missing in props validation"
 ScrollToTopButton.propTypes = {
   visible: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
 
-// ЦЕ НАЙВАЖЛИВІШЕ: додаємо експорт, щоб прибрати помилку "never used"
 export default ScrollToTopButton;

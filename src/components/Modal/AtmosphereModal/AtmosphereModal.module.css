@@ -52,11 +52,8 @@
   flex: 1;
 }
 
-/* --- Медіа-запити --- */
-
 @media (max-width: 47.9375rem) {
   .modal-img {
-    /* Прибрав дублікати width, display тощо, лишив тільки зміни */
     height: 21.875rem;
     max-height: 60vh;
     aspect-ratio: 4 / 5;
@@ -65,9 +62,6 @@
   .modal-title {
     font-size: 1.4rem;
   }
-
-  /* Видалив дублікати .modal-content та .img-container, 
-     бо вони нічим не відрізнялися від базових */
 
   .modal-buttons {
     flex-direction: column;

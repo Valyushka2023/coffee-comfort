@@ -61,7 +61,6 @@ const StarRating = ({
                 <StarIcon
                   size={size}
                   color="currentColor"
-                  /* ТУТ МАГІЯ: передаємо заповнення залежно від стану */
                   fill={isFilled ? 'currentColor' : 'none'}
                   strokeWidth="2"
                 />
@@ -70,7 +69,6 @@ const StarRating = ({
           })}
         </div>
 
-        {/* Додано блок помилки, щоб стилі .error-popup працювали */}
         {error && <div className={css['error-popup']}>{error}</div>}
       </div>
     </div>

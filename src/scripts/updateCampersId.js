@@ -2,11 +2,11 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import mongoose from 'mongoose'; // Для генерації ObjectId
+import mongoose from 'mongoose';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const filePath = path.join(__dirname, '../../src/db/campers.json'); // Шлях до вашого файлу campers.json
+const filePath = path.join(__dirname, '../../src/db/campers.json');
 
 async function updateCampersId() {
   try {
@@ -14,11 +14,11 @@ async function updateCampersId() {
     const campersData = JSON.parse(data);
     const updatedItems = campersData.items.map(camper => ({
       ...camper,
-      _id: new mongoose.Types.ObjectId().toHexString(), // Генеруємо новий ObjectId і перетворюємо його на hex-рядок
+      _id: new mongoose.Types.ObjectId().toHexString(),
     }));
 
     const updatedData = { items: updatedItems };
-    const updatedJson = JSON.stringify(updatedData, null, 2); // Форматуємо JSON для кращого читання
+    const updatedJson = JSON.stringify(updatedData, null, 2);
 
     await fs.writeFile(filePath, updatedJson, 'utf8');
   } catch {

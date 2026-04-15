@@ -176,7 +176,6 @@
   color: var(--tertiary-color);
 }
 
-/* Декоративні зерна */
 .bean {
   position: absolute;
   z-index: 0;

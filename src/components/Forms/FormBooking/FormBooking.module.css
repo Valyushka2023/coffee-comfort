@@ -1,6 +1,3 @@
-/* ==========================================================================
-   ОСНОВНИЙ КОНТЕЙНЕР ФОРМИ
-   ========================================================================== */
 .form {
   display: flex;
   flex: 1;
@@ -22,9 +19,6 @@
   color: var(--text-reviews-color);
 }
 
-/* AtmosphereSelector стилізується всередині свого компонента, 
-   але тут ми описуємо блоки, що йдуть за ним */
-
 .inputs-area-form {
   display: flex;
   flex-direction: column;
@@ -37,9 +31,6 @@
   border-radius: 0.5rem;
 }
 
-/* ==========================================================================
-   РЯДКИ ТА МІТКИ (LABELS)
-   ========================================================================== */
 .label-input-wrapper {
   display: flex;
   align-items: center;
@@ -68,17 +59,10 @@
   word-wrap: break-word;
 }
 
-/* .inputs-area-form .label-input-wrapper:nth-child(4) {
-  gap: 0;
-} */
-
 .label-area-wrapper .label {
   padding: 0.8rem 0;
 }
 
-/* ==========================================================================
-   ПОЛЯ ВВОДУ (INPUTS, TEXTAREA, DATEPICKER)
-   ========================================================================== */
 .field-input-and-field-error {
   position: relative;
   flex: 1;
@@ -112,7 +96,6 @@
   resize: vertical;
 }
 
-/* Стан фокусу та ховеру */
 .field-input:focus,
 .field-area:focus,
 .field-input:hover,
@@ -120,7 +103,6 @@
   border-color: var(--hover-input-area-color);
 }
 
-/* Плейсхолдери */
 .field-input::placeholder,
 .field-area::placeholder {
   margin-top: 0;
@@ -130,7 +112,6 @@
   opacity: 0.6;
 }
 
-/* Специфічні налаштування для DatePicker */
 .field-input-and-field-error :global(.react-datepicker-wrapper),
 .field-input-and-field-error :global(.react-datepicker__input-container) {
   display: block;
@@ -145,9 +126,6 @@
   opacity: 0.6;
 }
 
-/* ==========================================================================
-   ВАЛІДАЦІЯ ТА ПОМИЛКИ
-   ========================================================================== */
 .field-error {
   border-color: var(--error-color) !important;
 }
@@ -179,9 +157,6 @@
   content: '';
 }
 
-/* ==========================================================================
-   КНОПКА ВІДПРАВКИ ТА ЗАГАЛЬНІ ПОМИЛКИ
-   ========================================================================== */
 .element-sending {
   width: 100%;
   margin: 0 auto;
@@ -194,9 +169,6 @@
   color: var(--error-color);
 }
 
-/* ==========================================================================
-   ЕКРАН УСПІШНОЇ ВІДПРАВКИ (SUCCESS STATE)
-   ========================================================================== */
 .success-wrapper {
   position: relative;
   display: flex;
@@ -254,9 +226,6 @@
   color: var(--color-light-brown);
 }
 
-/* ==========================================================================
-   АДАПТИВНІСТЬ (MEDIA QUERIES)
-   ========================================================================== */
 @media (max-width: 61.9375rem) {
   .form {
     gap: 1rem;

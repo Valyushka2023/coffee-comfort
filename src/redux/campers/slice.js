@@ -7,11 +7,11 @@ const campersSlice = createSlice({
     items: [],
     loading: false,
     error: null,
-    currentCamper: null, // Додаємо currentCamper
+    currentCamper: null,
   },
   reducers: {
     setCamper: (state, action) => {
-      state.currentCamper = action.payload; // Додаємо редюсер setCamper
+      state.currentCamper = action.payload;
     },
   },
   extraReducers: builder => {

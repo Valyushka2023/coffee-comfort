@@ -10,7 +10,6 @@ const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Функція форматування ціни
   const formatPrice = price => {
     const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
     return i18n.language === 'uk'

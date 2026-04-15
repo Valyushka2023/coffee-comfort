@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next'; // Переконайтеся, що імпорт присутній
+import { useTranslation } from 'react-i18next';
 import GalleryModal from '../Modal/GalleryModal/GalleryModal.jsx';
 import css from './Gallery.module.css';
 
 const Gallery = ({ images = [] }) => {
   const [selectedImg, setSelectedImg] = useState(null);
-  const { t } = useTranslation('gallery'); // Додаємо хук перекладу
+  const { t } = useTranslation('gallery');
 
   return (
     <section className={css['gallery-section']}>
@@ -59,7 +59,6 @@ const Gallery = ({ images = [] }) => {
           ))}
         </div>
       </div>{' '}
-      {/* ТУТ БУВ ПРОПУЩЕНИЙ ДІВ */}
       <GalleryModal
         isOpen={!!selectedImg}
         onClose={() => setSelectedImg(null)}

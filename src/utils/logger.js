@@ -1,26 +1,3 @@
-// const isBrowser = typeof window !== 'undefined';
-
-// const getLogLevel = () => {
-//   try {
-//     if (isBrowser) {
-//       return import.meta.env.VITE_LOG_LEVEL || 'info';
-//     }
-//     return process.env.VITE_LOG_LEVEL || 'info';
-//   } catch {
-//     return 'info';
-//   }
-// };
-
-// const LOG_LEVEL = getLogLevel();
-
-// const logger = {
-//   info: (msg, ...args) =>
-//     LOG_LEVEL === 'info' && console.log(`ℹ️ [INFO]: ${msg}`, ...args),
-//   error: (msg, ...args) => console.error(`❌ [ERROR]: ${msg}`, ...args),
-// };
-
-// export default logger;
-/**/
 const isBrowser = typeof window !== 'undefined';
 
 const getLogLevel = () => {

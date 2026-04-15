@@ -66,7 +66,7 @@ const AtmosphereSelector = ({ selectedZone, onSelect }) => {
           onClose={() => setPreviewZone(null)}
           zone={{
             ...previewZone,
-            title: t(`atmosphere.zones.${previewZone.id}`), // Передаємо перекладену назву в модалку
+            title: t(`atmosphere.zones.${previewZone.id}`),
           }}
           onConfirm={() => handleConfirm(previewZone.id)}
         />

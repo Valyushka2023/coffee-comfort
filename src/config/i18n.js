@@ -2,7 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// --- Імпорт файлів перекладу (EN) --- //
 import buttonEN from '../locales/en/button.json';
 import aboutUsEN from '../locales/en/about_us.json';
 import formBookingEN from '../locales/en/form_booking.json';
@@ -19,9 +18,8 @@ import contentReviewsEN from '../locales/en/content_reviews.json';
 import fullScreenImageModalEN from '../locales/en/full_screen_image_modal.json';
 import callbackModalEN from '../locales/en/callback_modal.json';
 import validationEN from '../locales/en/validation.json';
-import errorComponentEN from '../locales/en/error_component.json'; // Додано
+import errorComponentEN from '../locales/en/error_component.json';
 
-// --- Імпорт файлів перекладу (UK) --- //
 import buttonUK from '../locales/uk/button.json';
 import aboutUsUK from '../locales/uk/about_us.json';
 import formBookingUK from '../locales/uk/form_booking.json';
@@ -58,7 +56,7 @@ const resources = {
     full_screen_image_modal: fullScreenImageModalEN,
     callback_modal: callbackModalEN,
     validation: validationEN,
-    error_component: errorComponentEN, // Додано
+    error_component: errorComponentEN,
   },
   uk: {
     button: buttonUK,
@@ -77,7 +75,7 @@ const resources = {
     full_screen_image_modal: fullScreenImageModalUK,
     callback_modal: callbackModalUK,
     validation: validationUK,
-    error_component: errorComponentUK, // Додано
+    error_component: errorComponentUK,
   },
 };
 
@@ -98,7 +96,6 @@ i18n
     defaultNS: 'header',
   });
 
-// SEO та доступність
 if (typeof window !== 'undefined') {
   document.documentElement.lang = i18n.language;
 }

@@ -12,19 +12,13 @@ const ReviewCardModal = ({
   formatDate,
 }) => {
   return (
-    <BaseModal
-      isOpen={isOpen}
-      onClose={onClose}
-      // title={review.name}
-    >
+    <BaseModal isOpen={isOpen} onClose={onClose}>
       <div className={css['card-review-modal']}>
         <div className={css['rating-wrapper']}>
           <StarRating value={review.rating} readOnly={true} size={20} />
         </div>
 
-        {/* <div className={css['text-scroll-area']}> */}
         <p className={css['text-review-modal']}>{review.text}</p>
-        {/* </div> */}
 
         <div className={css['card-review-modal-footer']}>
           <div className={css['user-info-modal']}>

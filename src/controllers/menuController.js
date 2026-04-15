@@ -1,20 +1,8 @@
-// import Menu from '../models/MenuModel.js';
-
-// export const getMenu = async (req, res) => {
-//   try {
-//     const menuItems = await Menu.find();
-//     res.status(200).json(menuItems);
-//   } catch (error) {
-//     res
-//       .status(500)
-//       .json({ message: 'Помилка завантаження меню', error: error.message });
-//   }
-// };
 import Menu from '../models/MenuModel.js';
 
 export const getMenu = async (req, res) => {
   try {
-    const menuItems = await Menu.find(); // Запит до MongoDB
+    const menuItems = await Menu.find();
 
     if (!menuItems || menuItems.length === 0) {
       return res.status(404).json({ message: 'Меню порожнє або не знайдене' });

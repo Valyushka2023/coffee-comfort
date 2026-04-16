@@ -125,7 +125,7 @@
   }
 
   .gallery-container {
-    padding-inline: 1.05rem;
+    padding-inline: 0;
   }
 
   .grid {
@@ -144,10 +144,6 @@
 }
 
 @media (max-width: 29.9375rem) {
-  .gallery-container {
-    padding-inline: 0;
-  }
-
   .grid {
     grid-template-columns: 1fr;
     gap: 1rem;

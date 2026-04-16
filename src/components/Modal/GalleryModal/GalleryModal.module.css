@@ -40,20 +40,32 @@
 
 @media (max-width: 61.9375rem) {
   .gallery-specific-modal {
-    width: auto !important;
-    height: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    /* Встановлюємо розмір по найменшій стороні екрана */
+
+    /* 90vmin означає, що квадрат займе 90% від ширини у портреті 
+       або 90% від висоти у ландшафті */
+    width: 90vmin !important;
+    height: 90vmin !important;
+
+    /* Додаткові обмеження, щоб на великих планшетах не було завеликим */
+    max-width: 35rem !important;
+    max-height: 35rem !important;
+    padding: 0 !important;
   }
 
   .img-wrapper {
-    width: auto;
-    height: auto;
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 1 / 1 !important;
   }
 
-  /* .full-img {
-   
-    width: auto !important;
+  .full-img {
+    width: 100% !important;
     height: 100% !important;
-    max-width: 100% !important;
     object-fit: cover !important;
-  } */
+  }
 }

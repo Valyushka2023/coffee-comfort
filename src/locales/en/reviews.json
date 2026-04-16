@@ -7,5 +7,9 @@
   "google_cta": "Want to see more reviews?",
   "read_on_google": "Read all reviews on Google",
   "reviews_count_one": "{{count}} review",
-  "reviews_count_other": "{{count}} reviews"
+  "reviews_count_other": "{{count}} reviews",
+
+  "reviews": {
+    "read_more": "Read more..."
+  }
 }

@@ -9,5 +9,9 @@
   "reviews_count_one": "{{count}} відгук",
   "reviews_count_few": "{{count}} відгуки",
   "reviews_count_many": "{{count}} відгуків",
-  "reviews_count_other": "{{count}} відгуку"
+  "reviews_count_other": "{{count}} відгуку",
+
+  "reviews": {
+    "read_more": "Читати далі..."
+  }
 }

@@ -90,6 +90,8 @@
   font-family: inherit;
   font-size: 0.8rem;
   text-align: left;
+
+  /* text-transform: none; */
   color: var(--text-reviews-color);
   opacity: 0.5;
 }

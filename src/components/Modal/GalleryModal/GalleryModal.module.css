@@ -38,16 +38,11 @@
   object-position: center;
 }
 
-@media (max-width: 61.9375rem) {
+@media (max-width: 74.9375rem) {
   .gallery-specific-modal {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-
-    /* Встановлюємо розмір по найменшій стороні екрана */
-
-    /* 90vmin означає, що квадрат займе 90% від ширини у портреті 
-       або 90% від висоти у ландшафті */
     width: 90vmin !important;
     height: 90vmin !important;
 

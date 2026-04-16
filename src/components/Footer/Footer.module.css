@@ -13,7 +13,7 @@
   gap: 4.8rem;
   width: 100%;
   max-width: 75rem;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
   color: var(--tertiary-color);
   flex-wrap: wrap;
   margin-inline: auto;

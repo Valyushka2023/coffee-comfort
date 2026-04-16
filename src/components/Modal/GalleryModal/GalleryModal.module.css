@@ -1,4 +1,73 @@
+/* .gallery-specific-modal {
+  position: relative;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 90vw !important;
+  height: auto !important;
+  max-width: 35rem !important;
+  max-height: 90vh !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: #111;
+  border-radius: 1.5rem;
+} */
+
+/* .gallery-specific-modal :global(.modal-content) {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+} */
+
+/* .img-wrapper {
+  display: flex !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+.full-img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center;
+} */
+
+/* @media (max-width: 74.9375rem) {
+  .gallery-specific-modal {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 90vmin !important;
+    height: 90vmin !important;
+    max-width: 35rem !important;
+    max-height: 35rem !important;
+    padding: 0 !important;
+  }
+
+  .img-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  .full-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+} */
+
+/* 1. Основний контейнер модалки */
 .gallery-specific-modal {
+  /* 1. Задаємо розмір через змінну (це база для десктопа) */
+  --close-btn-size: 2.5rem;
+
   position: relative;
   display: flex !important;
   justify-content: center !important;
@@ -13,6 +82,19 @@
   border-radius: 1.5rem;
 }
 
+/* 2. Стиль для хрестика (без font-size, бо він у змінній) */
+.gallery-specific-modal :global(.base-close-button) {
+  font-weight: 900 !important;
+  transform: scale(1.2);
+  -webkit-text-stroke: 0.05rem currentcolor;
+}
+
+.gallery-specific-modal :global(.base-close-button:hover) {
+  transform: scale(1.3);
+  -webkit-text-stroke: 0.06rem currentcolor;
+}
+
+/* Решта коду модалки (content, img-wrapper, full-img) залишається без змін */
 .gallery-specific-modal :global(.modal-content) {
   display: flex !important;
   justify-content: center !important;
@@ -35,32 +117,22 @@
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center;
 }
 
+/* 3. АДАПТИВНІСТЬ (чиста і логічна) */
 @media (max-width: 74.9375rem) {
   .gallery-specific-modal {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    --close-btn-size: 2.4rem;
+
     width: 90vmin !important;
     height: 90vmin !important;
-
-    /* Додаткові обмеження, щоб на великих планшетах не було завеликим */
     max-width: 35rem !important;
     max-height: 35rem !important;
-    padding: 0 !important;
   }
+}
 
-  .img-wrapper {
-    width: 100% !important;
-    height: 100% !important;
-    aspect-ratio: 1 / 1 !important;
-  }
-
-  .full-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+@media (max-width: 47.9375rem) {
+  .gallery-specific-modal {
+    --close-btn-size: 2rem;
   }
 }

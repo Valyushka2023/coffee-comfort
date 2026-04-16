@@ -6,7 +6,7 @@
   padding: 0;
   background: none;
   border: none;
-  font-size: 1.3rem;
+  font-size: var(--close-btn-size, 1.5rem) !important;
   font-weight: 900;
   line-height: 1;
   color: var(--button-close-icon-color);

@@ -39,43 +39,21 @@
 }
 
 @media (max-width: 47.9375rem) {
-  /* .gallery-specific-modal {
-    width: 95vw !important;
-    height: auto !important;
-  } */
   .gallery-specific-modal {
-    /* Дозволяємо ширині підлаштовуватися під контент */
     width: auto !important;
-
-    /* Фіксуємо висоту, щоб на горизонтальному екрані вікно не вилазило за межі */
     height: auto !important;
-
-    /* Обмежуємо ширину, щоб вона не прилипала до країв екрана */
-    max-width: 95vw !important;
-    max-height: 85vh !important;
-    padding: 0 !important;
   }
-
-  /* .img-wrapper {
-    height: auto;
-  } */
 
   .img-wrapper {
-    display: flex !important;
-
-    /* Тепер wrapper диктує розмір модалки */
-    width: auto !important;
-    height: 100% !important;
-
-    /* Зберігаємо квадрат, але тепер він обмежений висотою модалки */
-    aspect-ratio: 1 / 1 !important;
+    width: auto;
+    height: auto;
   }
 
-  .full-img {
-    /* Важливо, щоб картинка не намагалася стати ширшою за контейнер */
+  /* .full-img {
+   
     width: auto !important;
     height: 100% !important;
     max-width: 100% !important;
     object-fit: cover !important;
-  }
+  } */
 }

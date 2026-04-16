@@ -67,9 +67,6 @@
   }
 }
 
-/* --- Специфічні стилі для текстового хрестика в галереї (ВАРІАНТ 2) --- */
-
-/* 1. Звертаємось до кнопки, коли на ній ОДНОЧАСНО два класи */
 .close-btn.gallery-close-btn {
   top: 1rem !important;
   right: 1rem !important;
@@ -79,24 +76,20 @@
     drop-shadow(0 0 0.3125rem rgb(0 0 0 / 80%)) !important;
 }
 
-/* 2. Звертаємось до самого символу всередині */
 .close-btn.gallery-close-btn :global(.base-close-button) {
   display: block !important;
   width: auto !important;
   height: auto !important;
-  font-size: 2.5rem !important; /* Робимо реально великим для перевірки */
+  font-size: 2.5rem !important;
   font-weight: 900 !important;
   line-height: 1 !important;
   color: #fff !important;
 }
 
-/* 3. Ефект наведення */
 .close-btn.gallery-close-btn:hover :global(.base-close-button) {
   color: #fff !important;
   transform: scale(1.1);
 }
-
-/* --- Кінець стилів для галереї --- */
 
 @media (max-height: 28.125rem) {
   .wrapper {

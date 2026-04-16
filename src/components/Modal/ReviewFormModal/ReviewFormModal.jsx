@@ -62,10 +62,8 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
       resetForm();
       onSuccess();
     } catch (error) {
-      console.error('❌ Помилка при відправці відгуку:', error);
-      alert(
-        t('error_sending_review') || 'Помилка при відправці. Спробуйте ще раз.'
-      );
+      console.error('❌ Error sending feedback:', error);
+      alert(t('error_sending_review') || 'Error sending. Try again.');
     }
   };
 
@@ -93,7 +91,7 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
     <BaseModal
       isOpen={isOpen}
       onClose={handleClose}
-      title={t('title', 'ВАША ДУМКА')}
+      title={t('title', 'YOUR OPINION')}
     >
       <form className={css['form']} onSubmit={handleSubmit} noValidate>
         <div className={css['rating-field-container']}>

@@ -21,18 +21,18 @@ export const sendEmail = async bookingData => {
     const mailOptions = {
       from: process.env.EMAIL, // Адреса відправника
       to: process.env.ADMIN_EMAIL || process.env.EMAIL, // Адреса отримувача (ваша пошта)
-      subject: `☕️ Нове бронювання: ${bookingData.name} (${bookingData.selectedZone || 'Зона не обрана'})`,
+      subject: `☕️ New booking: ${bookingData.name} (${bookingData.selectedZone || 'Zone not selected'})`,
       text: `
-        Нова заявка на бронювання:
+        New booking request:
         ---------------------------
-        Ім'я: ${bookingData.name}
-        Електронна пошта: ${bookingData.email}
-        Телефон: ${bookingData.phone}
+        Name: ${bookingData.name}
+        E-mail: ${bookingData.email}
+        Phone: ${bookingData.phone}
         
-        ОБРАНА ЗОНА: ${bookingData.selectedZone || 'Не вказано'}
+        SELECTED AREA: ${bookingData.selectedZone || 'Not specified'}
         
-        Дата: ${bookingData.bookingStartDate}
-        Коментар: ${bookingData.comment || '—'}
+        Date: ${bookingData.bookingStartDate}
+        Comment: ${bookingData.comment || '—'}
         ---------------------------
       `,
     };

@@ -14,7 +14,7 @@ export const addReview = async (req, res) => {
     const savedReview = await newReview.save();
     res.status(201).json(savedReview);
   } catch (err) {
-    console.error('❌ Помилка збереження:', err.message);
+    console.error('❌ Saving error:', err.message);
     res.status(500).json({ message: err.message });
   }
 };

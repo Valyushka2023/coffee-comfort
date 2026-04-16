@@ -37,7 +37,7 @@ const ReviewCard = ({ review, currentLang, formatDate }) => {
             className={css['read-more-btn']}
             onClick={() => setIsModalOpen(true)}
           >
-            Читати далі...
+            Read more...
           </button>
         )}
 

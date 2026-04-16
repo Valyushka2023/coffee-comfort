@@ -11,12 +11,12 @@ const runTest = async () => {
   try {
     await sendEmail({
       to: process.env.ADMIN_EMAIL, // або введи прямо тут: 'твоя_пошта@gmail.com'
-      subject: '📨 Тест від sendEmail()',
-      html: '<h2>Це тестовий лист з реального коду!</h2><p>Перевірка успішна!</p>',
+      subject: '📨 Test from sendEmail()',
+      html: '<h2>This is a test sheet from real code!</h2><p>Verification successful!</p>',
     });
-    console.log('✅ Тестовий лист успішно надіслано');
+    console.log('✅ Test email sent successfully');
   } catch (err) {
-    console.error('❌ Помилка під час надсилання листа:', err);
+    console.error('❌ Error sending email:', err);
   }
 };
 

@@ -5,14 +5,14 @@ export const getMenu = async (req, res) => {
     const menuItems = await Menu.find();
 
     if (!menuItems || menuItems.length === 0) {
-      return res.status(404).json({ message: 'Меню порожнє або не знайдене' });
+      return res.status(404).json({ message: 'Menu is empty or not found' });
     }
 
     res.status(200).json(menuItems);
   } catch (err) {
-    console.error('❌ Помилка завантаження меню:', err.message);
+    console.error('❌ Error loading menu:', err.message);
     res.status(500).json({
-      message: 'Помилка сервера при отриманні меню',
+      message: 'Server error while retrieving menu',
       error: err.message,
     });
   }

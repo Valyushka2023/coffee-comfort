@@ -44,7 +44,7 @@ const CallbackModal = ({ isOpen, onClose }) => {
     });
     resetForm();
     onClose();
-    window.alert(t('success_message', 'Ми зателефонуємо вам!'));
+    window.alert(t('success_message', 'We will call you!'));
   };
 
   const {

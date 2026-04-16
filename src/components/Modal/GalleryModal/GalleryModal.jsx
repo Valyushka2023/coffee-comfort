@@ -38,7 +38,7 @@ const GalleryModal = ({ isOpen, onClose, image }) => {
           src={image.src}
           alt={image.alt || 'Gallery image'}
           className={css['full-img']}
-          draggable="false" // Забороняємо перетягування
+          draggable="false"
         />
       </div>
     </BaseModal>

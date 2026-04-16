@@ -19,7 +19,7 @@
   width: 100%;
   max-width: 75rem;
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 0;
 }
 
 .about-text-block {
@@ -157,7 +157,7 @@
 
 .about-circle-small {
   top: 11.25rem;
-  right: 2.625rem;
+  right: 4rem;
   width: 9.375rem;
   height: 9.375rem;
   border-color: var(--circle-small-border-color);
@@ -168,7 +168,7 @@
 }
 
 .about-circle-medium {
-  right: 5.5rem;
+  right: 7rem;
   bottom: 1.25rem;
   width: 13.75rem;
   height: 13.75rem;

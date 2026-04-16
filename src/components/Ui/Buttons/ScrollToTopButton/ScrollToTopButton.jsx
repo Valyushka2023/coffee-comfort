@@ -8,7 +8,7 @@ const ScrollToTopButton = ({ visible, onClick, className }) => {
       type="button"
       onClick={onClick}
       className={`${css['scroll-to-top-button']} ${visible ? css.visible : ''} ${className || ''}`}
-      aria-label="Підняти вверх"
+      aria-label="Lift up"
     >
       <ArrowUpIcon className={css.icon} aria-hidden="true" />
     </button>

@@ -23,7 +23,7 @@ app.use('/api/callbacks', callbackRouters);
 
 // Обробка 404
 app.use((req, res) => {
-  res.status(404).json({ message: `Маршрут ${req.originalUrl} не знайдено` });
+  res.status(404).json({ message: `Route ${req.originalUrl} not found` });
 });
 
 // --- ПІДКЛЮЧЕННЯ ДО БД ---

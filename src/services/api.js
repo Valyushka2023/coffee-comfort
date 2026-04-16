@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 if (!BASE_URL) {
-  console.error('⚠️ ПОМИЛКА: VITE_API_URL не задано у налаштуваннях Vercel!');
+  console.error('⚠️ ERROR: VITE_API_URL is not set in Vercel settings!');
 }
 const api = axios.create({
   baseURL: `${BASE_URL}/api`,
@@ -36,7 +36,7 @@ export const sendBookingRequest = async bookingData => {
     const { data } = await api.post(ENDPOINTS.BOOKINGS, bookingData);
     return data;
   } catch (error) {
-    handleError(error, 'Помилка бронювання');
+    handleError(error, 'Booking error');
   }
 };
 
@@ -48,7 +48,7 @@ export const sendCallbackRequest = async callbackData => {
     const { data } = await api.post(ENDPOINTS.CALLBACKS, callbackData);
     return data;
   } catch (error) {
-    handleError(error, 'Помилка замовлення дзвінка');
+    handleError(error, 'Call order error');
   }
 };
 
@@ -60,7 +60,7 @@ export const sendReviewRequest = async reviewData => {
     const { data } = await api.post(ENDPOINTS.REVIEWS, reviewData);
     return data;
   } catch (error) {
-    handleError(error, 'Помилка відправки відгуку');
+    handleError(error, 'Error sending feedback');
   }
 };
 
@@ -69,7 +69,7 @@ export const fetchReviewsRequest = async () => {
     const { data } = await api.get(ENDPOINTS.REVIEWS);
     return data;
   } catch (error) {
-    handleError(error, 'Помилка завантаження відгуків');
+    handleError(error, 'Error loading reviews');
   }
 };
 
@@ -81,6 +81,6 @@ export const fetchMenuRequest = async () => {
     const { data } = await api.get(ENDPOINTS.MENU);
     return data;
   } catch (error) {
-    handleError(error, 'Помилка завантаження меню');
+    handleError(error, 'Error loading menu');
   }
 };

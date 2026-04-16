@@ -3,7 +3,7 @@ import { sendEmail } from '../config/sendEmail.js';
 import { generateBookingEmailHtml } from '../utils/emailTemplates.js';
 
 export const createBooking = async (req, res) => {
-  console.log('Отримані дані з фронтенду:', req.body);
+  console.log('Data received from the frontend:', req.body);
   let bookingId = null;
 
   try {
@@ -17,7 +17,7 @@ export const createBooking = async (req, res) => {
       bookingStartDate,
       comment,
       phone,
-      selectedZone: selectedZone || 'Не обрано',
+      selectedZone: selectedZone || 'Not selected',
     });
 
     bookingId = booking._id;
@@ -40,7 +40,7 @@ export const createBooking = async (req, res) => {
     if (adminEmail) {
       await sendEmail({
         to: adminEmail,
-        subject: `☕️ Нове бронювання: ${name}`,
+        subject: `☕️ New booking: ${name}`,
         html: generateBookingEmailHtml({
           ...booking.toObject(),
           bookingStartDate: readableDate,
@@ -51,7 +51,7 @@ export const createBooking = async (req, res) => {
     // 4. УСПІХ ✅
     res.status(201).json({
       success: true,
-      message: 'Бронювання створено успішно!',
+      message: 'Booking created successfully!',
       data: { id: booking._id, name: booking.name, date: readableDate },
     });
   } catch (error) {

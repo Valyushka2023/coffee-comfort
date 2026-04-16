@@ -18,11 +18,11 @@ const transporter = nodemailer.createTransport({
 // Основна функція
 export const sendEmail = async ({ to, subject, html }) => {
   // Логування вхідних параметрів
-  logger.info('[EMAIL] Отримано запит на відправку email:', { to, subject });
+  logger.info('[EMAIL] Received a request to send email:', { to, subject });
 
   // Перевірка параметрів
   if (!to || !subject || !html) {
-    const errorMsg = `[EMAIL] Відсутні обов'язкові параметри для надсилання email: ${JSON.stringify({ to, subject, html })}`;
+    const errorMsg = `[EMAIL] Missing required parameters for sending email: ${JSON.stringify({ to, subject, html })}`;
     logger.error(errorMsg);
     throw new Error('Missing email parameters');
   }
@@ -36,18 +36,16 @@ export const sendEmail = async ({ to, subject, html }) => {
 
   try {
     // Логування спроби відправити лист
-    logger.info(
-      `[EMAIL] Спроба відправити email на адресу: ${to}, тема: ${subject}`
-    );
+    logger.info(`[EMAIL] Attempt to send email to: ${to}, topic: ${subject}`);
 
     const info = await transporter.sendMail(mailOptions);
 
     // Логування успішної відправки
-    logger.info('✅ [EMAIL] Email успішно відправлено:', info);
+    logger.info('✅ [EMAIL] Email successfully sent:', info);
   } catch (error) {
     // Логування помилки
     logger.error(
-      '❌ [EMAIL] Помилка відправлення email на адресу: %s, помилка: %o',
+      '❌ [EMAIL] Error sending email to address: %s, error: %o',
       to,
       error
     );

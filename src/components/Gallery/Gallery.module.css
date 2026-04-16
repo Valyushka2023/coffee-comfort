@@ -145,7 +145,7 @@
 
 @media (max-width: 29.9375rem) {
   .gallery-container {
-    padding-inline: 0.9rem;
+    padding-inline: 0;
   }
 
   .grid {

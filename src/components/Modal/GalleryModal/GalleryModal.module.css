@@ -2,18 +2,18 @@
 .gallery-specific-modal {
   position: relative;
   display: flex !important;
-  flex-direction: column !important;
   justify-content: center !important;
   align-items: center !important;
   width: 90vw !important;
-  height: 70vh !important;
-  max-width: 53.125rem !important;
-  max-height: 37.5rem !important;
-  padding: 1.5rem !important;
-  box-sizing: border-box !important;
+  height: auto !important;
+
+  /* Для квадрата краще обмежити ширину, щоб він не був занадто велетенським на моніторах */
+  max-width: 35rem !important;
+  max-height: 90vh !important;
+  padding: 0 !important;
   overflow: hidden !important;
-  background-color: var(--contact-form-bg-color);
-  border-radius: 1rem;
+  background-color: #111;
+  border-radius: 1.5rem; /* Закруглені кути роблять квадрат м'якшим */
 }
 
 /* 2. Контент всередині BaseModal */
@@ -29,36 +29,22 @@
 /* 3. Огортка для картинки - ФІКСОВАНА ОБЛАСТЬ */
 .img-wrapper {
   display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-
-  /* Змушуємо обгортку займати максимум місця, але тримати пропорцію */
   width: 100% !important;
   height: 100% !important;
   overflow: hidden !important;
 
-  /* Фон, який заповнить порожнечу навколо "неправильного" фото */
-  background-color: rgb(0 0 0 / 20%) !important;
-  border-radius: 0.5rem;
-
-  /* Задаємо бажане співвідношення сторін (наприклад, 4:3 або 16:9) */
-  aspect-ratio: 4 / 3 !important;
+  /* Встановлюємо співвідношення 1 до 1 */
+  aspect-ratio: 1 / 1 !important;
 }
 
-/* 4. САМА КАРТИНКА - ВПИСУВАННЯ В ОБЛАСТЬ */
 .full-img {
-  display: block !important;
-
-  /* Фото намагається заповнити область aspect-ratio */
+  display: block;
   width: 100% !important;
   height: 100% !important;
 
-  /* Додатковий захист від розтягування */
-  max-width: 100% !important;
-  max-height: 100% !important;
-
-  /* Вписуємо фото повністю без обрізки */
-  object-fit: contain !important;
+  /* Картинка заповнює квадрат повністю */
+  object-fit: cover !important;
+  object-position: center;
 }
 
 /* Для мобільних екранів */
@@ -69,8 +55,8 @@
     padding: 1rem !important;
   }
 
-  .img-wrapper {
-    /* На мобільних можна змінити пропорцію на більш квадратну */
+  /* .img-wrapper {
+    
     aspect-ratio: 1 / 1 !important;
-  }
+  } */
 }

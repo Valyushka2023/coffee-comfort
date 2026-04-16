@@ -62,38 +62,49 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(21.875rem, 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(18.625rem, 1fr)
+  ); /* Адаптивна сітка */
+
   gap: 1.5rem;
+  padding: 1rem 0;
 }
 
+/* Кнопка-обгортка для картинки */
 .thumb-btn {
-  display: block;
   cursor: pointer;
-  width: 100%;
   padding: 0;
   overflow: hidden;
   background: none;
   border: none;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadom-image-wrapper);
-  transition: transform 0.3s ease;
-  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  /* Робимо кнопку квадратною */
+  aspect-ratio: 1 / 1 !important;
 }
 
 .thumb-btn:hover {
+  box-shadow: 0 0.625rem 1.25rem rgb(0 0 0 / 20%);
   transform: translateY(-0.3125rem);
 }
 
+/* Сама картинка прев'ю */
 .thumb-img {
-  display: block;
   width: 100%;
   height: 100%;
   transition: transform 0.5s ease;
+
+  /* Заповнюємо квадрат без деформації */
   object-fit: cover;
+  object-position: center;
 }
 
 .thumb-btn:hover .thumb-img {
-  transform: scale(1.08);
+  transform: scale(1.1); /* Ефект наближення при наведенні */
 }
 
 @media (max-width: 47.9375rem) {

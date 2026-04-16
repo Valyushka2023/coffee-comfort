@@ -8,7 +8,6 @@ const GalleryModal = ({ isOpen, onClose, image }) => {
 
   if (!image) return null;
 
-  // Обробка жестів для мобільних (свайп вниз)
   const handleTouchStart = e => {
     setTouchStart(e.targetTouches[0].clientY);
   };
@@ -18,7 +17,6 @@ const GalleryModal = ({ isOpen, onClose, image }) => {
     const touchEnd = e.targetTouches[0].clientY;
     const distance = touchEnd - touchStart;
 
-    // Якщо свайп вниз більше ніж на 100px — закриваємо вікно
     if (distance > 100) {
       onClose();
       setTouchStart(null);
@@ -40,6 +38,7 @@ const GalleryModal = ({ isOpen, onClose, image }) => {
           src={image.src}
           alt={image.alt || 'Gallery image'}
           className={css['full-img']}
+          draggable="false" // Забороняємо перетягування
         />
       </div>
     </BaseModal>

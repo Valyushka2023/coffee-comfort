@@ -41,8 +41,10 @@
 @media (max-width: 47.9375rem) {
   .gallery-specific-modal {
     width: 95vw !important;
-    height: 60vh !important;
+    height: auto !important;
+  }
 
-    /* padding: 1rem !important; */
+  .img-wrapper {
+    height: auto;
   }
 }

@@ -107,13 +107,25 @@
   transform: scale(1.1); /* Ефект наближення при наведенні */
 }
 
+@media (max-width: 74.9375rem) {
+  .gallery-container {
+    padding-inline: 1.35rem;
+  }
+}
+
+@media (max-width: 61.9375rem) {
+  .gallery-container {
+    padding-inline: 1.2rem;
+  }
+}
+
 @media (max-width: 47.9375rem) {
   .gallery-section {
     padding: 3rem 0;
   }
 
   .gallery-container {
-    padding-inline: 1.25rem;
+    padding-inline: 1.05rem;
   }
 
   .grid {
@@ -133,7 +145,7 @@
 
 @media (max-width: 29.9375rem) {
   .gallery-container {
-    padding-inline: 1rem;
+    padding-inline: 0.9rem;
   }
 
   .grid {

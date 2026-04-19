@@ -78,7 +78,6 @@ const FormBooking = () => {
       : t('atmosphere.not_selected');
 
     const bookingData = {
-      camperId: '64f1a2b3c4d5e6f7a8b9c0d1',
       name: currentFormData.name.trim(),
       email: currentFormData.email.trim(),
       phone: currentFormData.phone.trim(),

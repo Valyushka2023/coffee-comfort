@@ -1,0 +1,184 @@
+@keyframes header-slide-down {
+  0% {
+    transform: translateY(-100%); /* Починає за межами екрана зверху */
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0); /* Зупиняється на своєму місці */
+    opacity: 1;
+  }
+}
+
+@keyframes header-scale-in {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 2. Поява зі зсувом вгору (Slide Up) */
+
+@keyframes slide-up {
+  from {
+    transform: translateY(var(--slide-distance, 1.875rem));
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 3. Поява зі зсувом збоку (Slide In Right) */
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 4. Легке збільшення (Zoom In) — для зображень або іконок */
+@keyframes zoom-in {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 5. Пульсація (Pulse) — для акценту на кнопках (нескінченна) */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 6. "Похитування" (Shake) — якщо користувач ввів щось невірно */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-0.3125rem);
+  }
+
+  75% {
+    transform: translateX(0.3125rem);
+  }
+}
+
+/* 7. Сценарій ScaleIn (для іконок успіху та чекбоксів) */
+@keyframes scale-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Анімація пульсації */
+@keyframes pulse-grow {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0.625rem var(--icon-map-color, gold));
+  }
+
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 0.625rem var(--icon-map-color, gold));
+  }
+
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0.625rem var(--icon-map-color, gold));
+  }
+}
+
+/* Анімація для виїзду панелі меню справа */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Анімація для почергової появи посилань знизу вгору */
+@keyframes slide-up {
+  from {
+    transform: translateY(1.875rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Інші ваші анімації залишаються без змін, просто без :global */
+@keyframes zoom-in {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

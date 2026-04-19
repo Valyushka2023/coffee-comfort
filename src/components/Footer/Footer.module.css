@@ -1,3 +1,5 @@
+@import url('../../styles/animate.css');
+
 .footer-section {
   background-color: var(--header-footer-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
@@ -124,6 +126,7 @@
   height: 0.0625rem;
   margin: 0 auto;
   background-color: var(--divider-color, #444);
+  transition: background-color 0.3s ease;
 }
 
 .footer-bottom {

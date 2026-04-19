@@ -48,7 +48,7 @@ const Contacts = () => {
         </div>
 
         {/* ПРАВА ЧАСТИНА: Нова форма з валідацією та повідомленням про успіх */}
-        <div className={css['contact-form-container']}>
+        <div className={css['contacts-form-container']}>
           <FormBooking />
         </div>
       </div>

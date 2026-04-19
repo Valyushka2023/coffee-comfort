@@ -1,3 +1,5 @@
+@import url('../../../styles/animate.css');
+
 .form {
   display: flex;
   flex: 1;
@@ -145,6 +147,10 @@
   letter-spacing: 0.056rem;
   white-space: nowrap;
   color: var(--error-color);
+
+  --slide-distance: -0.3125rem;
+
+  animation: slide-up 0.2s ease-out both;
 }
 
 .error-popup::before {
@@ -208,6 +214,7 @@
   border-radius: 50%;
   font-size: 2.5rem;
   color: var(--color-white);
+  animation: scale-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .title-success-form {

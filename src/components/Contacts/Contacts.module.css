@@ -1,3 +1,5 @@
+@import url('../../styles/animate.css');
+
 .contacts-section {
   position: relative;
   padding: 4rem 0;
@@ -7,7 +9,8 @@
     var(--section-border-bottom-color);
   transition:
     background-color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -38,7 +41,7 @@
   z-index: 9999 !important;
 }
 
-.contact-form-container {
+.contacts-form-container {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -72,6 +75,7 @@
 }
 
 .info-icon {
+  display: inline-block;
   flex-shrink: 0;
   margin-right: 1rem;
   transition:
@@ -80,7 +84,7 @@
   filter: drop-shadow(0 0.125rem 0.25rem rgb(0 0 0 / 10%));
 }
 
-.contacts-adress,
+.contacts-address,
 .contacts-hours {
   display: none;
 }
@@ -99,24 +103,8 @@
 }
 
 .map-pin-animated {
-  animation: pin-pulse 2s infinite ease-in-out;
-}
-
-@keyframes pin-pulse {
-  0% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0 var(--icon-map-color));
-  }
-
-  50% {
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 0.625rem var(--icon-map-color));
-  }
-
-  100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0 var(--icon-map-color));
-  }
+  display: inline-block !important;
+  animation: pulse-grow 2s infinite ease-in-out !important;
 }
 
 .contacts-map iframe {
@@ -127,7 +115,7 @@
 }
 
 @media (max-width: 47.9375rem) {
-  .contact-container {
+  .contacts-container {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
@@ -135,7 +123,7 @@
   }
 
   .contacts-info,
-  .contact-form-container {
+  .contacts-form-container {
     flex: 0 0 100%;
     width: 100%;
     max-width: 100%;

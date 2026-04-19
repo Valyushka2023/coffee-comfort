@@ -1,6 +1,7 @@
 import 'modern-normalize';
 import 'overlayscrollbars/overlayscrollbars.css';
 
+import './styles/animate.css';
 import './styles/global.css';
 
 import React, { Suspense } from 'react';

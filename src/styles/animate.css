@@ -182,3 +182,16 @@
     transform: scale(1);
   }
 }
+
+/* Ключові кадри для випливання зверху вниз */
+@keyframes slide-down-fade {
+  from {
+    transform: translateY(-1.875rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

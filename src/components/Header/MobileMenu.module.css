@@ -1,116 +1,5 @@
-/* @import url('../../styles/animate.css');
-
-.mobile-link {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  height: 100vh;
-  padding: 7rem 2.5rem;
-  background-color: var(--header-footer-bg-color);
-  transition: right 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  visibility: hidden;
-}
-
-.menu.is-open {
-  animation: slide-in-right 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  visibility: visible;
-}
-
-
-.menu.is-open .mobile-link {
-  animation: slide-up 0.5s ease-out forwards;
-}
-
-.mobile-link:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.mobile-link:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.mobile-link:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.mobile-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-.mobile-link {
-  position: relative;
-  display: inline-block;
-  font-size: var(--nav-font-size);
-  font-weight: 500;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: var(--text-mobile-color);
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;
-}
-
-.mobile-link::after {
-  position: absolute;
-  bottom: -0.25rem;
-  left: 0;
-  width: 100%;
-  height: 0.0625rem;
-  background-color: var(--hover-color);
-  transition: transform 0.35s ease;
-  transform: scaleX(0);
-  transform-origin: left;
-  content: '';
-  will-change: transform;
-}
-
-.mobile-link:hover {
-  color: var(--hover-color);
-  transform: translateY(-0.0625rem);
-}
-
-.mobile-link:hover::after {
-  transform: scaleX(1);
-}
-
-.menu-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1500;
-  cursor: pointer;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgb(0 0 0 / 50%);
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.menu-backdrop.is-visible {
-  pointer-events: auto;
-  opacity: 1;
-  visibility: visible;
-}
-
-@media (max-width: 47.9376rem) {
-  .menu-backdrop {
-    display: none !important;
-  }
-} */
 @import url('../../styles/animate.css');
 
-/* 1. ПАНЕЛЬ МЕНЮ */
 .menu {
   position: fixed;
   top: 0;
@@ -127,13 +16,11 @@
   will-change: transform;
 }
 
-/* ВІДКРИТТЯ */
 .menu.is-open {
   animation: slide-in-right 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   visibility: visible;
 }
 
-/* 2. НАВ */
 .mobile-nav {
   display: flex;
   flex-direction: column;
@@ -141,7 +28,6 @@
   gap: 2rem;
 }
 
-/* 3. ЛІНКИ */
 .mobile-link {
   position: relative;
   display: inline-block;
@@ -151,48 +37,39 @@
   text-transform: uppercase;
   color: var(--text-mobile-color);
   transition: color 0.3s ease;
-  transform: scale(0.8);
+  transform: translateY(-1.875rem);
   opacity: 0;
+  will-change: transform, opacity;
 }
 
-/* 4. ПОЧЕРГОВІСТЬ */
 .mobile-link:nth-child(1) {
   animation-delay: 0.1s;
 }
 
 .mobile-link:nth-child(2) {
-  animation-delay: 0.2s;
+  animation-delay: 0.4s !important;
 }
 
 .mobile-link:nth-child(3) {
-  animation-delay: 0.3s;
+  animation-delay: 0.6s !important;
 }
 
 .mobile-link:nth-child(4) {
-  animation-delay: 0.4s;
+  animation-delay: 0.8s !important;
 }
 
 .mobile-link:nth-child(5) {
-  animation-delay: 0.5s;
+  animation-delay: 1s !important;
 }
 
-/* ХОВЕР */
 .mobile-link:hover {
   color: var(--hover-color);
 }
 
-/* /* НЕ ЗАПУСКАЄМО АНІМАЦІЮ ОДРАЗУ */
-.menu.is-open .mobile-link {
-  transform: scale(0.8);
-  opacity: 0;
-}
-
-/* ЗАПУСК ПІСЛЯ ВИЇЗДУ МЕНЮ */
 .menu.is-animated .mobile-link {
-  animation: header-scale-in 0.4s ease-out both;
+  animation: slide-down-fade 0.5s ease-out both;
 }
 
-/* ПІДКРЕСЛЕННЯ */
 .mobile-link::after {
   position: absolute;
   bottom: -0.25rem;
@@ -210,7 +87,6 @@
   transform: scaleX(1);
 }
 
-/* БЕКДРОП */
 .menu-backdrop {
   position: fixed;
   top: 0;
@@ -233,7 +109,6 @@
   visibility: visible;
 }
 
-/* АДАПТИВ */
 @media (max-width: 47.9375rem) {
   .menu {
     width: 40%;

@@ -245,6 +245,24 @@
   }
 }
 
+@media (max-width: 47.9375rem) {
+  .success-wrapper {
+    /* Додатково: переконуємося, що контейнер стоїть знизу */
+    margin-top: auto;
+
+    /* 3. Зупиняємо форму на відстані 2rem від низу */
+
+    /* Використовуємо margin, щоб не ламати логіку translateY(0) в анімації */
+    margin-bottom: 2rem;
+
+    /* 1. Робимо анімацію повільнішою */
+    animation-duration: 1.5s;
+
+    /* 2. Перевизначаємо дистанцію: форма випливе "здалеку" (знизу екрана) */
+    --slide-distance: 100vh;
+  }
+}
+
 @media (max-width: 29.9375rem) {
   .label-input-wrapper {
     flex-direction: column;

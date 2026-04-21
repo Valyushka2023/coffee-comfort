@@ -8,6 +8,7 @@ import formBookingEN from '../locales/en/form_booking.json';
 import headerEN from '../locales/en/header.json';
 import heroEN from '../locales/en/hero.json';
 import menuEN from '../locales/en/menu.json';
+import contactsEN from '../locales/en/contacts.json';
 import galleryEN from '../locales/en/gallery.json';
 import reviewsEN from '../locales/en/reviews.json';
 import reviewFormModalEN from '../locales/en/review_form_modal.json';
@@ -26,6 +27,7 @@ import formBookingUK from '../locales/uk/form_booking.json';
 import headerUK from '../locales/uk/header.json';
 import heroUK from '../locales/uk/hero.json';
 import menuUK from '../locales/uk/menu.json';
+import contactsUK from '../locales/uk/contacts.json';
 import galleryUK from '../locales/uk/gallery.json';
 import reviewsUK from '../locales/uk/reviews.json';
 import reviewFormModalUK from '../locales/uk/review_form_modal.json';
@@ -47,6 +49,7 @@ const resources = {
     hero: heroEN,
     menu: menuEN,
     gallery: galleryEN,
+    contacts: contactsEN,
     reviews: reviewsEN,
     review_form_modal: reviewFormModalEN,
     footer: footerEN,
@@ -66,6 +69,7 @@ const resources = {
     hero: heroUK,
     menu: menuUK,
     gallery: galleryUK,
+    contacts: contactsUK,
     reviews: reviewsUK,
     review_form_modal: reviewFormModalUK,
     footer: footerUK,

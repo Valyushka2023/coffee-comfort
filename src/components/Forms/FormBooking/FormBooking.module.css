@@ -175,37 +175,43 @@
   color: var(--error-color);
 }
 
+/* .success-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 25rem;
+  overflow: hidden;
+  background-color: var(--color-light-brown) !important;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
+  animation: slide-up 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+} */
+.success-wrapper {
+  position: fixed;
+  bottom: calc(2rem + env(safe-area-inset-bottom));
+  left: 50%;
+  z-index: 2000;
+  width: calc(100% - 2rem);
+  max-width: 30rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translate(-50%, 100%);
+  animation: slide-up-fixed 0.5s ease forwards;
+  will-change: transform, opacity;
+}
+
 @keyframes slide-up-fixed {
   from {
-    /* Зберігаємо центр по X (-50%) і виносимо за екран по Y (100vh) */
-    transform: translate(-50%, 100vh);
+    transform: translate(-50%, 100%);
     opacity: 0;
   }
 
   to {
-    /* Повертаємо в нульову точку відносно bottom: 2rem */
     transform: translate(-50%, 0);
     opacity: 1;
   }
-}
-
-.success-wrapper {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  z-index: 9999;
-  width: 90%;
-  max-width: 25rem;
-  padding: 1rem;
-  background-color: var(--color-light-brown) !important;
-  border-radius: 1rem;
-  box-shadow: 0 0.625rem 1.875rem rgb(0 0 0 / 30%);
-
-  /* Початковий стан до старту анімації (щоб не блимало) */
-  transform: translate(-50%, 100vh);
-
-  /* Використовуємо саме нову анімацію */
-  animation: slide-up-fixed 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .success-container {
@@ -267,8 +273,8 @@
 
 @media (max-width: 47.9375rem) {
   .success-wrapper {
-    /* На десктопі можна зробити ширшою або змінити позицію */
-    max-width: 3.125rem;
+    bottom: 2rem;
+    width: calc(100% - 1.5rem);
   }
 }
 

@@ -175,8 +175,9 @@
   color: var(--error-color);
 }
 
-/* .success-wrapper {
-  position: fixed;
+/* 
+.success-wrapper {
+  position: relative;
   bottom: 2rem;
   display: flex;
   width: 100%;
@@ -188,18 +189,17 @@
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
   animation: slide-up 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 } */
+
 .success-wrapper {
   position: fixed;
   bottom: calc(2rem + env(safe-area-inset-bottom));
   left: 50%;
-  z-index: 2000;
+  z-index: 9999;
   width: calc(100% - 2rem);
-  max-width: 30rem;
-  max-height: 80vh;
-  overflow-y: auto;
+  max-width: 28rem;
+  background: transparent;
   transform: translate(-50%, 100%);
   animation: slide-up-fixed 0.5s ease forwards;
-  will-change: transform, opacity;
 }
 
 @keyframes slide-up-fixed {

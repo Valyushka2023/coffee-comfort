@@ -126,14 +126,16 @@ const FormBooking = () => {
     setIsSuccess(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
   if (isSuccess) {
     return (
       <div className={css['success-wrapper']}>
         <div className={css['success-container']}>
           <div className={css['success-icon']}>✓</div>
+
           <h3 className={css['title-success-form']}>{t('success_title')}</h3>
+
           <p className={css['text-success-form']}>{t('success_message')}</p>
+
           <Button variant="primary" onClick={handleCloseSuccess}>
             {t('back_button')}
           </Button>

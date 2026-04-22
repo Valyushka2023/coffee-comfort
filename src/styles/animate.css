@@ -5,7 +5,7 @@
   }
 
   100% {
-    transform: translateY(0); /* Зупиняється на своєму місці */
+    transform: translateY(0);
     opacity: 1;
   }
 }
@@ -27,7 +27,7 @@
   }
 }
 
-/* 2. Поява зі зсувом вгору (Slide Up) */
+/* Поява зі зсувом вгору (Slide Up) */
 
 @keyframes slide-up {
   from {
@@ -41,7 +41,7 @@
   }
 }
 
-/* 3. Поява зі зсувом збоку (Slide In Right) */
+/* Поява зі зсувом збоку (Slide In Right) */
 
 @keyframes slide-in-right {
   from {
@@ -55,7 +55,7 @@
   }
 }
 
-/* 4. Легке збільшення (Zoom In) — для зображень або іконок */
+/* Легке збільшення (Zoom In) — для зображень або іконок */
 @keyframes zoom-in {
   from {
     transform: scale(0.8);
@@ -63,12 +63,12 @@
   }
 
   to {
-    transform: scale(1);
+    transform: scale(1.15);
     opacity: 1;
   }
 }
 
-/* 5. Пульсація (Pulse) — для акценту на кнопках (нескінченна) */
+/* Пульсація (Pulse) — для акценту на кнопках (нескінченна) */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -83,7 +83,7 @@
   }
 }
 
-/* 6. "Похитування" (Shake) — якщо користувач ввів щось невірно */
+/* "Похитування" (Shake) — якщо користувач ввів щось невірно */
 @keyframes shake {
   0%,
   100% {
@@ -99,7 +99,7 @@
   }
 }
 
-/* 7. Сценарій ScaleIn (для іконок успіху та чекбоксів) */
+/* Сценарій ScaleIn (для іконок успіху та чекбоксів) */
 @keyframes scale-in {
   from {
     transform: scale(0);
@@ -130,19 +130,6 @@
   }
 }
 
-/* Анімація для виїзду панелі меню справа */
-@keyframes slide-in-right {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
 /* Анімація для почергової появи посилань знизу вгору */
 @keyframes slide-up {
   from {
@@ -153,33 +140,6 @@
   to {
     transform: translateY(0);
     opacity: 1;
-  }
-}
-
-/* Інші ваші анімації залишаються без змін, просто без :global */
-@keyframes zoom-in {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1);
   }
 }
 

@@ -129,6 +129,10 @@
     max-width: 100%;
   }
 
+  .contacts-info {
+    align-items: center;
+  }
+
   .contacts-map {
     width: 100%;
     height: 18.75rem;

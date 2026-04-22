@@ -1,10 +1,13 @@
 @import url('../../styles/animate.css');
 
 .selector-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+
+  /* overflow: visible; */
   text-align: center;
 }
 
@@ -77,7 +80,7 @@
 }
 
 .modal-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 2000;
@@ -93,6 +96,8 @@
 }
 
 .modal-content {
+  --slide-distance: 2rem;
+
   position: relative;
   width: 100%;
   max-width: 28rem;

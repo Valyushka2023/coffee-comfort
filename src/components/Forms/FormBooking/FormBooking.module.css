@@ -1,6 +1,7 @@
 @import url('../../../styles/animate.css');
 
 .form {
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -133,6 +134,8 @@
 }
 
 .error-popup {
+  --slide-distance: -0.3125rem;
+
   position: absolute;
   top: calc(100% + 0.25rem);
   left: 0;
@@ -147,9 +150,6 @@
   letter-spacing: 0.056rem;
   white-space: nowrap;
   color: var(--error-color);
-
-  --slide-distance: -0.3125rem;
-
   animation: slide-up 0.2s ease-out both;
 }
 
@@ -177,9 +177,9 @@
 
 .success-wrapper {
   display: flex;
-  flex: 1; /* 🔥 ключове */
+  flex: 1;
   width: 100%;
-  max-width: 100%; /* щоб не звужувався */
+  max-width: 100%;
   margin-top: 1rem;
   box-sizing: border-box;
   animation: success-fade-in 0.4s ease forwards;
@@ -251,13 +251,6 @@
     font-size: 1.2rem;
   }
 }
-
-/* @media (max-width: 47.9375rem) {
-  .success-wrapper {
-    bottom: 2rem;
-    width: calc(100% - 1.5rem);
-  }
-} */
 
 @media (max-width: 29.9375rem) {
   .label-input-wrapper {

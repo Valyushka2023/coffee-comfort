@@ -1,3 +1,88 @@
+// import { useEffect } from 'react';
+// import { createPortal } from 'react-dom';
+// import PropTypes from 'prop-types';
+// import clsx from 'clsx';
+// import CloseButton from '../../Ui/Buttons/CloseButton/CloseButton.jsx';
+// import css from './BaseModal.module.css';
+
+// const BaseModal = ({
+//   isOpen,
+//   onClose,
+//   children,
+//   title,
+//   className,
+//   showCloseButton = true,
+// }) => {
+//   useEffect(() => {
+//     const handleKeyDown = e => {
+//       if (e.key === 'Escape') onClose();
+//     };
+//     if (isOpen) document.addEventListener('keydown', handleKeyDown);
+//     return () => document.removeEventListener('keydown', handleKeyDown);
+//   }, [isOpen, onClose]);
+
+//   useEffect(() => {
+//     if (isOpen) {
+//       document.body.style.overflow = 'hidden';
+//     } else {
+//       document.body.style.overflow = '';
+//     }
+//     return () => {
+//       document.body.style.overflow = '';
+//     };
+//   }, [isOpen]);
+
+//   if (!isOpen) return null;
+
+//   return createPortal(
+//     <div className={css['wrapper']}>
+//       {/* Overlay тепер просто фон, що закриває все під собою */}
+//       <div
+//         className={css['overlay']}
+//         onClick={onClose}
+//         role="button"
+//         tabIndex={0}
+//         onKeyDown={e => e.key === 'Enter' && onClose()}
+//         aria-label="Close modal"
+//       />
+
+//       {/* Контейнер модалки тепер центрується флексом у wrapper */}
+//       <div
+//         className={clsx(css['modal'], className)}
+//         role="dialog"
+//         aria-modal="true"
+//       >
+//         {showCloseButton && (
+//           <div
+//             className={clsx(
+//               css['close-btn'],
+//               className && css['gallery-close-btn']
+//             )}
+//           >
+//             <CloseButton onClick={onClose} />
+//           </div>
+//         )}
+
+//         {title && <h3 className={css['modal-title']}>{title}</h3>}
+
+//         {/* Контент модалки */}
+//         <div className={css['modal-content']}>{children}</div>
+//       </div>
+//     </div>,
+//     document.body
+//   );
+// };
+
+// BaseModal.propTypes = {
+//   isOpen: PropTypes.bool.isRequired,
+//   onClose: PropTypes.func.isRequired,
+//   children: PropTypes.node.isRequired,
+//   title: PropTypes.string,
+//   className: PropTypes.string,
+//   showCloseButton: PropTypes.bool,
+// };
+
+// export default BaseModal;
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -12,6 +97,7 @@ const BaseModal = ({
   title,
   className,
   showCloseButton = true,
+  disablePortal = false, // Новий проп
 }) => {
   useEffect(() => {
     const handleKeyDown = e => {
@@ -22,21 +108,25 @@ const BaseModal = ({
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+    // Блокуємо скрол body тільки якщо це глобальна модалка
+    if (!disablePortal) {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
     }
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [isOpen, disablePortal]);
 
   if (!isOpen) return null;
 
-  return createPortal(
-    <div className={css['wrapper']}>
-      {/* Overlay тепер просто фон, що закриває все під собою */}
+  const modalContent = (
+    <div
+      className={clsx(css['wrapper'], disablePortal && css['local-wrapper'])}
+    >
       <div
         className={css['overlay']}
         onClick={onClose}
@@ -46,7 +136,6 @@ const BaseModal = ({
         aria-label="Close modal"
       />
 
-      {/* Контейнер модалки тепер центрується флексом у wrapper */}
       <div
         className={clsx(css['modal'], className)}
         role="dialog"
@@ -65,12 +154,17 @@ const BaseModal = ({
 
         {title && <h3 className={css['modal-title']}>{title}</h3>}
 
-        {/* Контент модалки */}
         <div className={css['modal-content']}>{children}</div>
       </div>
-    </div>,
-    document.body
+    </div>
   );
+
+  // Рендеримо або в портал, або прямо в DOM-дерево компонента
+  if (disablePortal) {
+    return modalContent;
+  }
+
+  return createPortal(modalContent, document.body);
 };
 
 BaseModal.propTypes = {
@@ -80,6 +174,7 @@ BaseModal.propTypes = {
   title: PropTypes.string,
   className: PropTypes.string,
   showCloseButton: PropTypes.bool,
+  disablePortal: PropTypes.bool,
 };
 
 export default BaseModal;

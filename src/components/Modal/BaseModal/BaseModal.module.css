@@ -1,4 +1,4 @@
-.wrapper {
+/* .wrapper {
   position: fixed;
   z-index: 1000;
   display: flex;
@@ -17,6 +17,125 @@
   background-color: var(--overlay-bg);
   inset: 0;
   backdrop-filter: blur(var(--overlay-blur));
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 26.25rem;
+  max-height: fit-content;
+  padding: 2.5rem 1.8125rem 1.8125rem;
+  box-sizing: border-box;
+  background-color: var(--contact-form-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: 1rem;
+  animation: slide-in-up 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.modal-title {
+  flex-shrink: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--text-reviews-color);
+}
+
+.modal-content {
+  width: 100%;
+  overflow-y: visible;
+}
+
+.close-btn {
+  position: absolute !important;
+  top: 0.75rem !important;
+  right: 0.75rem !important;
+  z-index: 20;
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(1.875rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.close-btn.gallery-close-btn {
+  top: 1rem !important;
+  right: 1rem !important;
+  z-index: 999 !important;
+  background: transparent !important;
+  filter: drop-shadow(0 0 0.125rem #000)
+    drop-shadow(0 0 0.3125rem rgb(0 0 0 / 80%)) !important;
+}
+
+.close-btn.gallery-close-btn :global(.base-close-button) {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  font-size: 2.5rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  color: #fff !important;
+}
+
+.close-btn.gallery-close-btn:hover :global(.base-close-button) {
+  color: #fff !important;
+  transform: scale(1.1);
+}
+
+@media (max-height: 28.125rem) {
+  .wrapper {
+    align-items: flex-start;
+    padding: 2rem 1rem;
+  }
+
+  .modal {
+    margin-top: 0;
+  }
+} */
+.wrapper {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow-y: auto;
+  pointer-events: auto;
+  inset: 0;
+}
+
+/* Новий клас для локальної модалки */
+.local-wrapper {
+  position: absolute; /* Позиціонування відносно .form */
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1rem; /* Має збігатися з радіусом форми */
+  inset: 0;
+}
+
+.overlay {
+  position: fixed;
+  z-index: -1;
+  cursor: pointer;
+  background-color: var(--overlay-bg);
+  inset: 0;
+  backdrop-filter: blur(var(--overlay-blur));
+}
+
+/* Оверлей тепер теж підлаштовується під батька */
+.local-wrapper .overlay {
+  position: absolute;
 }
 
 .modal {

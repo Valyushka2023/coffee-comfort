@@ -1,4 +1,4 @@
-.modal-content {
+/* .modal-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,5 +75,75 @@
 
   .modal-img {
     aspect-ratio: 1 / 1.1;
+  }
+} */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.img-container {
+  width: 100%;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  box-shadow: 0 0.625rem 1.875rem rgb(0 0 0 / 30%);
+}
+
+.modal-img {
+  display: block;
+  width: 100%;
+
+  /* Зменшуємо висоту, щоб влізло у форму */
+  max-height: 40vh;
+  min-height: auto;
+  transition: transform 0.3s ease;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.modal-footer {
+  width: 100%;
+  padding: 0 0.5rem;
+}
+
+.modal-title {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: pre-line;
+  color: var(--text-form-review-color);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.flex-btn {
+  flex: 1;
+}
+
+@media (max-width: 47.9375rem) {
+  .modal-img {
+    max-height: 35vh;
+    aspect-ratio: 4 / 3;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }

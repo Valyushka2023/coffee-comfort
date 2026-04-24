@@ -151,7 +151,7 @@
   letter-spacing: 0.056rem;
   white-space: nowrap;
   color: var(--error-color);
-  animation: slide-up 0.2s ease-out both;
+  animation: slide-in-up 0.2s ease-out both;
 }
 
 .error-popup::before {
@@ -183,7 +183,7 @@
   max-width: 100%;
   margin-top: 1rem;
   box-sizing: border-box;
-  animation: success-fade-in 0.4s ease forwards;
+  animation: fade-in 0.4s ease forwards;
 }
 
 .success-container {

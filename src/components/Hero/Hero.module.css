@@ -1,3 +1,5 @@
+@import url('../../styles/animate.css');
+
 .hero-section {
   position: relative;
   z-index: 1;
@@ -20,7 +22,7 @@
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
-  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-bottom 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .hero-overlay {
@@ -48,27 +50,31 @@
 .hero-title {
   margin-bottom: 1.5rem;
   text-transform: uppercase;
-  animation: fade-slide-up 0.9s ease-out 0.2s forwards;
+  animation: slide-in-up 0.9s ease-out 0.2s forwards;
   opacity: 0;
 }
 
 .hero-subtitle {
+  --final-opacity: 0.9;
+
   width: 100%;
   max-width: 100%;
   margin-right: auto;
   margin-bottom: 2.5rem;
   margin-left: auto;
   text-transform: uppercase;
-  animation: fade-slide-up 0.9s ease-out forwards;
+  animation: slide-in-up 0.9s ease-out forwards;
   animation-delay: 0.4s;
   opacity: 0;
 }
 
 .hero-links {
+  --slide-distance: 1.875rem;
+
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  animation: fade-slide-up 0.9s ease-out forwards;
+  animation: slide-in-up 0.9s ease-out forwards;
   animation-delay: 0.6s;
   opacity: 0;
 }
@@ -111,8 +117,9 @@
 
 .arrow-wrapper {
   animation: arrow-move 1.6s ease-out 1s forwards;
-  opacity: 0;
-  visibility: hidden;
+
+  /* opacity: 0;
+  visibility: hidden; */
 }
 
 .arrow {
@@ -122,44 +129,6 @@
   border-right: 0.1875rem solid var(--color-beige);
   border-bottom: 0.1875rem solid var(--color-beige);
   transform: rotate(45deg);
-}
-
-@keyframes fade-slide-up {
-  from {
-    transform: translateY(1.5rem);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes arrow-move {
-  0% {
-    transform: translateY(-1rem);
-    opacity: 0;
-    visibility: visible;
-  }
-
-  100% {
-    transform: translateY(0.5rem);
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-@keyframes fade-slide-up-custom {
-  from {
-    transform: translateY(1.5rem);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 0.9;
-  }
 }
 
 @media (max-width: 61.9375rem) {

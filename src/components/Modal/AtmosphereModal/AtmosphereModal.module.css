@@ -99,7 +99,7 @@
   width: 100%;
 
   /* Зменшуємо висоту, щоб влізло у форму */
-  max-height: 40vh;
+  max-height: 80vh;
   min-height: auto;
   transition: transform 0.3s ease;
   aspect-ratio: 16 / 10;

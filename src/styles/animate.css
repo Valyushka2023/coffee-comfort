@@ -1,37 +1,23 @@
-@keyframes header-slide-down {
-  0% {
-    transform: translateY(-100%); /* Починає за межами екрана зверху */
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes header-scale-in {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-
-  60% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Поява зі зсувом вгору (Slide Up) */
-
-@keyframes slide-up {
+/* Масштабування та прозорість з ... до ... */
+@keyframes scale-in {
   from {
-    transform: translateY(var(--slide-distance, 1.875rem));
+    /* Початковий стан: масштаб та прозорість */
+    transform: scale(var(--scale-offset, 0.85));
+    opacity: var(--opacity-from, 0);
+  }
+
+  to {
+    /* Кінцевий стан: стандартний розмір та видимість */
+    transform: scale(var(--scale-to, 1));
+    opacity: var(--opacity-to, 1);
+  }
+}
+
+/* М'ягка поява із сувом вниз */
+@keyframes slide-in-bottom {
+  from {
+    /* -1.25rem дає дуже делікатний рух. Якщо об'єкт їде вниз, то початкова точка має бути від’ємною  */
+    transform: translateY(var(--slide-distance, -1.25rem));
     opacity: 0;
   }
 
@@ -41,11 +27,28 @@
   }
 }
 
-/* Поява зі зсувом збоку (Slide In Right) */
+/* М'ягка поява із сувом вгору */
+@keyframes slide-in-up {
+  from {
+    /* Починаємо НИЖЧЕ фінальної точки на 1.5rem. Якщо об'єкт їде вгору, то початкова точка має бути плюсовою */
+    transform: translateY(var(--slide-offset, 1.5rem));
+    opacity: 0;
+  }
 
+  to {
+    /* Приходимо в свою точку */
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* М'ягка поява  вправо */
 @keyframes slide-in-right {
   from {
-    transform: translateX(100%);
+    /* Щоб рухатися ВПРАВО на своє місце, 
+       починаємо ЛІВОРУЧ (від'ємне значення) 
+    */
+    transform: translateX(var(--slide-offset, -1.5rem));
     opacity: 0;
   }
 
@@ -55,103 +58,91 @@
   }
 }
 
-/* Легке збільшення (Zoom In) — для зображень або іконок */
-@keyframes zoom-in {
+/* М'ягка поява  вліво */
+@keyframes slide-in-left {
   from {
-    transform: scale(0.8);
+    /* Щоб рухатися ВЛІВо на своє місце,
+       починаємо праворуч (плюсове значення) */
+    transform: translateX(var(--slide-offset, 1.5rem));
     opacity: 0;
   }
 
   to {
-    transform: scale(1.15);
+    transform: translateX(0);
     opacity: 1;
   }
 }
 
-/* Пульсація (Pulse) — для акценту на кнопках (нескінченна) */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
+/* Класичний Zoom (З'явлення зсередини, ідеальний для іконок або кнопок.)  */
+@keyframes zoom-in {
+  from {
+    /* Починаємо з меншого */
+    transform: scale(var(--zoom-offset, 0.8));
+    opacity: 0;
   }
 
-  50% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1);
+  to {
+    transform: scale(var(--zoom-to, 1));
+    opacity: 1;
   }
 }
 
-/* "Похитування" (Shake) — якщо користувач ввів щось невірно */
+/*  Циклічна пульсація */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(var(--pulse-offset, 1));
+  }
+
+  50% {
+    transform: scale(var(--pulse-max, 1.05));
+  }
+}
+
+/*  Тремтіння */
 @keyframes shake {
+  /* Початкова та кінцева точка — елемент стоїть рівно */
   0%,
   100% {
     transform: translateX(0);
   }
 
-  25% {
-    transform: translateX(-0.3125rem);
+  /* Коливання вліво та вправо */
+  20%,
+  60% {
+    transform: translateX(calc(-1 * var(--shake-offset, 0.3125rem)));
   }
 
-  75% {
-    transform: translateX(0.3125rem);
+  40%,
+  80% {
+    transform: translateX(var(--shake-offset, 0.3125rem));
   }
 }
 
-/* Сценарій ScaleIn (для іконок успіху та чекбоксів) */
-@keyframes scale-in {
+/* Рух стрілки */
+@keyframes arrow-move {
   from {
-    transform: scale(0);
+    /* Початкова точка зверху */
+    transform: translateY(var(--arrow-offset, -1rem));
+    opacity: 0;
+
+    to {
+      /* Кінцева точка на місці */
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+/* М'яке занурення, плавне заповнення простору */
+@keyframes fade-in {
+  from {
+    /* Починаємо з повної прозорості */
     opacity: 0;
   }
 
   to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Анімація пульсації */
-@keyframes pulse-grow {
-  0% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0.625rem var(--icon-map-color, gold));
-  }
-
-  50% {
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 0.625rem var(--icon-map-color, gold));
-  }
-
-  100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0.625rem var(--icon-map-color, gold));
-  }
-}
-
-/* Анімація для почергової появи посилань знизу вгору */
-@keyframes slide-up {
-  from {
-    transform: translateY(1.875rem);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Ключові кадри для випливання зверху вниз */
-@keyframes slide-down-fade {
-  from {
-    transform: translateY(-1.875rem);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
+    /* Кінцевий стан (елемент стане видимим) */
     opacity: 1;
   }
 }

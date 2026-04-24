@@ -17,7 +17,7 @@
 }
 
 .menu.is-open {
-  animation: slide-in-right 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: slide-in-left 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   visibility: visible;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .menu.is-animated .mobile-link {
-  animation: slide-down-fade 0.5s ease-out both;
+  animation: slide-in-bottom 0.5s ease-out both;
 }
 
 .mobile-link::after {

@@ -92,6 +92,7 @@
   overflow: hidden;
   border-radius: 1.25rem;
   box-shadow: 0 0.625rem 1.875rem rgb(0 0 0 / 30%);
+  touch-action: pinch-zoom;
 }
 
 .modal-img {
@@ -99,8 +100,11 @@
   width: 100%;
 
   /* Зменшуємо висоту, щоб влізло у форму */
-  max-height: 80vh;
-  min-height: auto;
+  max-height: 90vh;
+
+  /* min-height: auto; */
+
+  min-height: 30rem;
   transition: transform 0.3s ease;
   aspect-ratio: 16 / 10;
   object-fit: cover;
@@ -114,7 +118,7 @@
 .modal-title {
   margin-bottom: 1rem;
   font-size: 1.2rem;
-  line-height: 1.2;
+  line-height: 1.3;
   text-align: center;
   text-transform: uppercase;
   white-space: pre-line;
@@ -135,6 +139,7 @@
 @media (max-width: 47.9375rem) {
   .modal-img {
     max-height: 35vh;
+    min-height: auto;
     aspect-ratio: 4 / 3;
   }
 

@@ -83,7 +83,7 @@ const Menu = () => {
           </nav>
         )}
 
-        <div className={css['menu-grid-container']}>
+        <div className={css['menu-grid-container']} key={activeCategory}>
           {loading ? (
             /* Скелетони під час завантаження */
             <div className={css['menu-items-grid']}>
@@ -94,25 +94,32 @@ const Menu = () => {
               ))}
             </div>
           ) : filteredMenu.length > 0 ? (
-            filteredMenu.map(section => (
-              <div
-                key={section.categoryKey}
-                className={css['menu-category-block']}
-              >
-                <h4 className={css['category-title']}>
-                  <span>{t(`categories.${section.categoryKey}`)}</span>
-                </h4>
-                <div className={css['menu-items-grid']}>
-                  {section.items.map(item => (
-                    <CardMenu
-                      key={item._id}
-                      item={item}
-                      formatPrice={formatPrice}
-                    />
-                  ))}
+            filteredMenu.map(
+              (
+                section,
+                index // Додаємо index тут
+              ) => (
+                <div
+                  key={section.categoryKey}
+                  className={css['menu-category-block']}
+                  style={{ '--i': index }} // Передаємо індекс у CSS
+                >
+                  <h4 className={css['category-title']}>
+                    <span>{t(`categories.${section.categoryKey}`)}</span>
+                  </h4>
+                  {/* ... далі твій код сітки з товарами */}
+                  <div className={css['menu-items-grid']}>
+                    {section.items.map(item => (
+                      <CardMenu
+                        key={item._id}
+                        item={item}
+                        formatPrice={formatPrice}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))
+              )
+            )
           ) : (
             <div className={css['no-data']}>{t('no_data')}</div>
           )}

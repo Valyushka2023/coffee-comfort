@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -16,16 +16,13 @@ import {
 
 import css from './ReviewFormModal.module.css';
 
-const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
+const ReviewFormModal = ({ isOpen, onClose, onSuccess }) => {
   const { t } = useTranslation(['review_form_modal', 'validation']);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const fields = useMemo(
     () => [
-      {
-        name: 'name',
-        placeholder: t('name_placeholder'),
-        component: 'input',
-      },
+      { name: 'name', placeholder: t('name_placeholder'), component: 'input' },
       {
         name: 'text',
         placeholder: t('text_placeholder'),
@@ -47,23 +44,15 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
   const handleFormSubmit = async formData => {
     try {
       await sendReviewRequest({
-        name: {
-          uk: formData.name.trim(),
-          en: formData.name.trim(),
-        },
-
-        text: {
-          uk: formData.text.trim(),
-          en: formData.text.trim(),
-        },
+        name: { uk: formData.name.trim(), en: formData.name.trim() },
+        text: { uk: formData.text.trim(), en: formData.text.trim() },
         rating: formData.rating,
       });
 
+      setIsSuccess(true);
       resetForm();
-      onSuccess();
     } catch (error) {
-      console.error('❌ Error sending feedback:', error);
-      alert(t('error_sending_review') || 'Error sending. Try again.');
+      console.error('❌ Error sending review:', error);
     }
   };
 
@@ -83,78 +72,122 @@ const ReviewModal = ({ isOpen, onClose, onSuccess }) => {
   );
 
   const handleClose = useCallback(() => {
-    resetForm();
     onClose();
-  }, [resetForm, onClose]);
+
+    if (isSuccess) {
+      // Даємо модалці повністю закритися (скинути overflow: hidden)
+      setTimeout(() => {
+        const reviewsSection = document.getElementById('reviews');
+        if (reviewsSection) {
+          // Використовуємо scrollTo для більшої точності
+          const yOffset = -100; // Відступ зверху, щоб заголовок не ховався під хедер
+          const y =
+            reviewsSection.getBoundingClientRect().top +
+            window.pageYOffset +
+            yOffset;
+
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        if (onSuccess) onSuccess();
+        setIsSuccess(false);
+        resetForm();
+      }, 350); // Трохи більша затримка, щоб BaseModal встиг очистити body
+    } else {
+      setTimeout(() => {
+        setIsSuccess(false);
+        resetForm();
+      }, 300);
+    }
+  }, [onClose, isSuccess, onSuccess, resetForm]);
 
   return (
     <BaseModal
       isOpen={isOpen}
       onClose={handleClose}
-      title={t('title', 'YOUR OPINION')}
+      title={isSuccess ? null : t('title', 'ВАША ДУМКА')}
+      className={clsx(isSuccess && css['is-success-state'])}
+      showCloseButton={!isSuccess}
     >
-      <form className={css['form']} onSubmit={handleSubmit} noValidate>
-        <div className={css['rating-field-container']}>
-          <StarRating
-            value={Number(formData.rating)}
-            onChange={value => handleDateChange(value, 'rating')}
-            error={hasAttemptedSubmit && errors.rating}
-          />
+      {isSuccess ? (
+        <div className={css['success-container']}>
+          <div className={css['success-icon']}>✓</div>
+          <h3 className={css['title-success-form']}>
+            {t('success_title', 'Дякуємо!')}
+          </h3>
+          <p className={css['text-success-form']}>
+            {t('success_message', 'Ваш відгук дуже важливий для нас.')}
+          </p>
+          <div className={css['element-sending']}>
+            <Button variant="primary" onClick={handleClose} isFixedWidth={true}>
+              {t('back_button', 'ЗАКРИТИ')}
+            </Button>
+          </div>
         </div>
-        <div className={css['inputs-area-form']}>
-          {fields.map(field => (
-            <div
-              key={field.name}
-              className={css['field-input-and-field-error']}
+      ) : (
+        <form className={css['form']} onSubmit={handleSubmit} noValidate>
+          <div className={css['rating-field-container']}>
+            <StarRating
+              value={Number(formData.rating)}
+              onChange={value => handleDateChange(value, 'rating')}
+              error={hasAttemptedSubmit && errors.rating}
+            />
+          </div>
+          <div className={css['inputs-area-form']}>
+            {fields.map(field => (
+              <div
+                key={field.name}
+                className={css['field-input-and-field-error']}
+              >
+                {field.component === 'textarea' ? (
+                  <textarea
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    className={clsx(css['field-area'], {
+                      [css['field-error']]:
+                        hasAttemptedSubmit && errors[field.name],
+                    })}
+                    value={formData[field.name]}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <input
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    className={clsx(css['field-input'], {
+                      [css['field-error']]:
+                        hasAttemptedSubmit && errors[field.name],
+                    })}
+                    value={formData[field.name]}
+                    onChange={handleInputChange}
+                  />
+                )}
+                {hasAttemptedSubmit && errors[field.name] && (
+                  <p className={css['error-popup']}>{errors[field.name]}</p>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className={css['element-sending']}>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={isSubmitting}
+              isFixedWidth={true}
             >
-              {field.component === 'textarea' ? (
-                <textarea
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  className={clsx(css['field-area'], {
-                    [css['field-error']]:
-                      hasAttemptedSubmit && errors[field.name],
-                  })}
-                  value={formData[field.name]}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <input
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  className={clsx(css['field-input'], {
-                    [css['field-error']]:
-                      hasAttemptedSubmit && errors[field.name],
-                  })}
-                  value={formData[field.name]}
-                  onChange={handleInputChange}
-                />
-              )}
-              {hasAttemptedSubmit && errors[field.name] && (
-                <p className={css['error-popup']}>{errors[field.name]}</p>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className={css['element-sending']}>
-          <Button
-            variant="primary"
-            type="submit"
-            disabled={isSubmitting}
-            isFixedWidth={true}
-          >
-            {isSubmitting ? t('processing') : t('submit_btn')}
-          </Button>
-        </div>
-      </form>
+              {isSubmitting ? t('processing') : t('submit_btn')}
+            </Button>
+          </div>
+        </form>
+      )}
     </BaseModal>
   );
 };
 
-ReviewModal.propTypes = {
+ReviewFormModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
 };
 
-export default ReviewModal;
+export default ReviewFormModal;

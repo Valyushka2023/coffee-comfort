@@ -85,3 +85,86 @@
   border-width: 0.3125rem;
   content: '';
 }
+
+/* КЛЮЧОВИЙ КЛАС: Прибираємо все зайве з BaseModal */
+.is-success-state {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Обнуляємо внутрішній div модалки (modal-content у вашому BaseModal) */
+.is-success-state div[class*='modal-content'] {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.success-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  /* Робимо падінги тут, щоб коричневий фон був великим */
+  padding: 3rem 2rem;
+  background-color: var(--form-success-bg-color);
+  border-radius: 1.25rem;
+  text-align: center;
+  animation: success-fade-in 0.4s ease forwards;
+}
+
+@keyframes success-fade-in {
+  from {
+    transform: translateY(0.625rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.success-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1rem;
+  background-color: var(--form-icon-success-bg-color);
+  border: 0.125rem solid var(--color-white) !important;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  color: var(--color-white);
+
+  /* Анімація для галочки */
+  animation: scale-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.title-success-form {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-light-brown);
+}
+
+.text-success-form {
+  max-width: 20rem;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-light-brown);
+}

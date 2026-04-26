@@ -1,12 +1,13 @@
 {
   "errors": {
-    "comment_too_long": "Comment must be no longer than 150 characters",
-
+    "required": "Please fill in this field",
+    "name_length": "Name must be between 2 and 20 characters",
     "invalid_email": "Invalid email format",
     "invalid_phone": "Invalid phone number format",
-    "name_length": "Name must be between 2 and 20 characters",
+    "phone_plus_required": "Номер телефону повинен починатися з +",
+    "date_in_past": "Дата та час не можуть бути у минулому",
+    "comment_too_long": "Comment must be no longer than 150 characters",
     "rating_required": "Please provide a star rating",
-    "required": "Please fill in this field",
     "invalid_end_date": "End date must be later than start date"
   }
 }

@@ -258,7 +258,7 @@ import {
   validateName,
   validateEmail,
   validatePhone,
-  validateRequired,
+  validateBookingDate,
   validateComment,
 } from '../../../utils/index.js';
 import css from './FormBooking.module.css';
@@ -317,7 +317,7 @@ const FormBooking = () => {
       name: v => validateName(v, t),
       email: v => validateEmail(v, t),
       phone: v => validatePhone(v, t),
-      bookingStartDate: v => validateRequired(v, t),
+      bookingStartDate: v => validateBookingDate(v, t),
       comment: v => validateComment(v, t, true),
       selectedZone: () => null,
     }),

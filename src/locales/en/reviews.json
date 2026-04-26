@@ -7,9 +7,20 @@
   "google_cta": "Want to see more reviews?",
   "read_on_google": "Read all reviews on Google",
   "reviews_count_one": "{{count}} review",
+  "reviews_count_few": "{{count}} reviews",
+  "reviews_count_many": "{{count}} reviews",
   "reviews_count_other": "{{count}} reviews",
-
   "reviews": {
     "read_more": "Read more..."
+  },
+  "review_form_modal": {
+    "title": "Your opinion",
+    "name_placeholder": "Your name (2-20 characters)",
+    "text_placeholder": "Your comment (max. 150 characters)...",
+    "submit_btn": "Send",
+    "processing": "Sending...",
+    "success_title": "Thank you!",
+    "success_message": "Your feedback is very important to us.",
+    "back_button": "CLOSE"
   }
 }

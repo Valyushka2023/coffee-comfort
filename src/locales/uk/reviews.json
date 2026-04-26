@@ -10,8 +10,17 @@
   "reviews_count_few": "{{count}} відгуки",
   "reviews_count_many": "{{count}} відгуків",
   "reviews_count_other": "{{count}} відгуку",
-
   "reviews": {
     "read_more": "Читати далі..."
+  },
+  "review_form_modal": {
+    "title": "ВАША ДУМКА",
+    "name_placeholder": "Ваше ім'я (2-20 символів)",
+    "text_placeholder": "Ваш коментар (максимум 150 символів)",
+    "submit_btn": "НАДІСЛАТИ",
+    "processing": "Надсилаємо...",
+    "success_title": "Дякуємо!",
+    "success_message": "Ваш відгук дуже важливий для нас.",
+    "back_button": "ЗАКРИТИ"
   }
 }

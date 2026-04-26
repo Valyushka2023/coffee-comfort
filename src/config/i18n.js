@@ -11,7 +11,7 @@ import menuEN from '../locales/en/menu.json';
 import contactsEN from '../locales/en/contacts.json';
 import galleryEN from '../locales/en/gallery.json';
 import reviewsEN from '../locales/en/reviews.json';
-import reviewFormModalEN from '../locales/en/review_form_modal.json';
+// import reviewFormModalEN from '../locales/en/review_form_modal.json';
 import footerEN from '../locales/en/footer.json';
 import starRatingEN from '../locales/en/star_rating.json';
 import cardMenuEN from '../locales/en/card_menu.json';
@@ -30,7 +30,7 @@ import menuUK from '../locales/uk/menu.json';
 import contactsUK from '../locales/uk/contacts.json';
 import galleryUK from '../locales/uk/gallery.json';
 import reviewsUK from '../locales/uk/reviews.json';
-import reviewFormModalUK from '../locales/uk/review_form_modal.json';
+// import reviewFormModalUK from '../locales/uk/review_form_modal.json';
 import footerUK from '../locales/uk/footer.json';
 import starRatingUK from '../locales/uk/star_rating.json';
 import cardMenuUK from '../locales/uk/card_menu.json';
@@ -51,7 +51,7 @@ const resources = {
     gallery: galleryEN,
     contacts: contactsEN,
     reviews: reviewsEN,
-    review_form_modal: reviewFormModalEN,
+    // review_form_modal: reviewFormModalEN,
     footer: footerEN,
     star_rating: starRatingEN,
     card_menu: cardMenuEN,
@@ -71,7 +71,7 @@ const resources = {
     gallery: galleryUK,
     contacts: contactsUK,
     reviews: reviewsUK,
-    review_form_modal: reviewFormModalUK,
+    // review_form_modal: reviewFormModalUK,
     footer: footerUK,
     star_rating: starRatingUK,
     card_menu: cardMenuUK,

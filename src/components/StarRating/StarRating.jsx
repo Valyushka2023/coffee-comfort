@@ -14,7 +14,7 @@ const StarRating = ({
   accessible = true,
   readOnly = false,
 }) => {
-  const { t } = useTranslation('star_rating');
+  const { t } = useTranslation('reviews');
 
   const handleClick = starValue => {
     if (readOnly || !onChange) return;
@@ -25,7 +25,7 @@ const StarRating = ({
     <div className={clsx(css['wrapper'], { [css['read-only']]: readOnly })}>
       {!readOnly && (
         <label htmlFor={name} className={css['label']}>
-          {t('rating', 'Rating')}*
+          {t('rating', 'Rating')}*{' '}
         </label>
       )}
 

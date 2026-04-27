@@ -1,3 +1,5 @@
+@import url('../../../../styles/animate.css');
+
 .theme-toggle-btn {
   display: flex;
   justify-content: center;
@@ -18,32 +20,28 @@
 .theme-icon-md-light {
   font-size: 1.4rem;
   color: var(--toggle-theme-icon-color);
-  animation: sun-glow 3s infinite ease-in-out;
-  filter: drop-shadow(0 0 0.3125rem rgb(255 204 51 / 60%));
+
+  /* Викликаємо новий сценарій */
+  animation: glow-pulse 3s infinite ease-in-out;
+
+  /* Перевизначаємо змінні Animate спеціально під цю іконку */
+  --glow-color: rgb(255 204 51 / 60%);
+  --glow-scale-to: 1.2;
+  --glow-size-max: 0.75rem;
 }
 
 .theme-icon-md-dark {
   font-size: 1.4rem;
   color: var(--toggle-theme-icon-color);
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 0 0.125rem rgb(212 163 115 / 30%));
-}
 
-@keyframes sun-glow {
-  0% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0.1875rem rgb(255 204 51 / 40%));
-  }
+  /* Викликаємо новий сценарій */
+  animation: glow-pulse 3s infinite ease-in-out;
 
-  50% {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 0.75rem rgb(255 204 51 / 80%));
-  }
-
-  100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0.1875rem rgb(255 204 51 / 40%));
-  }
+  /* Перевизначаємо змінні Animate спеціально під цю іконку */
+  --glow-color: rgb(212 163 115 / 30%);
+  --glow-scale-from: 0.9;
+  --glow-scale-to: 1.1;
+  --glow-size-max: 0.75rem;
 }
 
 @media (max-width: 74.9375rem) {

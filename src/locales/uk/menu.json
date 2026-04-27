@@ -1,6 +1,7 @@
 {
   "menu_title": "Наше меню",
   "menu_subtitle": "Кожен ковток це ритуал, який об'єднує людей",
+  "currency_symbol": "грн",
   "categories": {
     "all": "Все",
     "drinks": "Напої",

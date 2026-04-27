@@ -8,14 +8,11 @@ import formBookingEN from '../locales/en/form_booking.json';
 import headerEN from '../locales/en/header.json';
 import heroEN from '../locales/en/hero.json';
 import menuEN from '../locales/en/menu.json';
+import cardMenuEN from '../locales/en/card_menu.json';
 import contactsEN from '../locales/en/contacts.json';
 import galleryEN from '../locales/en/gallery.json';
 import reviewsEN from '../locales/en/reviews.json';
-// import reviewFormModalEN from '../locales/en/review_form_modal.json';
 import footerEN from '../locales/en/footer.json';
-import starRatingEN from '../locales/en/star_rating.json';
-import cardMenuEN from '../locales/en/card_menu.json';
-import contentReviewsEN from '../locales/en/content_reviews.json';
 import fullScreenImageModalEN from '../locales/en/full_screen_image_modal.json';
 import callbackModalEN from '../locales/en/callback_modal.json';
 import validationEN from '../locales/en/validation.json';
@@ -27,18 +24,15 @@ import formBookingUK from '../locales/uk/form_booking.json';
 import headerUK from '../locales/uk/header.json';
 import heroUK from '../locales/uk/hero.json';
 import menuUK from '../locales/uk/menu.json';
+import cardMenuUK from '../locales/uk/card_menu.json';
 import contactsUK from '../locales/uk/contacts.json';
 import galleryUK from '../locales/uk/gallery.json';
 import reviewsUK from '../locales/uk/reviews.json';
-// import reviewFormModalUK from '../locales/uk/review_form_modal.json';
 import footerUK from '../locales/uk/footer.json';
-import starRatingUK from '../locales/uk/star_rating.json';
-import cardMenuUK from '../locales/uk/card_menu.json';
-import contentReviewsUK from '../locales/uk/content_reviews.json';
 import fullScreenImageModalUK from '../locales/uk/full_screen_image_modal.json';
 import callbackModalUK from '../locales/uk/callback_modal.json';
 import validationUK from '../locales/uk/validation.json';
-import errorComponentUK from '../locales/uk/error_component.json'; // Додано
+import errorComponentUK from '../locales/uk/error_component.json';
 
 const resources = {
   en: {
@@ -48,14 +42,11 @@ const resources = {
     header: headerEN,
     hero: heroEN,
     menu: menuEN,
+    card_menu: cardMenuEN,
     gallery: galleryEN,
     contacts: contactsEN,
     reviews: reviewsEN,
-    // review_form_modal: reviewFormModalEN,
     footer: footerEN,
-    star_rating: starRatingEN,
-    card_menu: cardMenuEN,
-    content_reviews: contentReviewsEN,
     full_screen_image_modal: fullScreenImageModalEN,
     callback_modal: callbackModalEN,
     validation: validationEN,
@@ -68,14 +59,11 @@ const resources = {
     header: headerUK,
     hero: heroUK,
     menu: menuUK,
+    card_menu: cardMenuUK,
     gallery: galleryUK,
     contacts: contactsUK,
     reviews: reviewsUK,
-    // review_form_modal: reviewFormModalUK,
     footer: footerUK,
-    star_rating: starRatingUK,
-    card_menu: cardMenuUK,
-    content_reviews: contentReviewsUK,
     full_screen_image_modal: fullScreenImageModalUK,
     callback_modal: callbackModalUK,
     validation: validationUK,

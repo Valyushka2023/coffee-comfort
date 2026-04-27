@@ -9,7 +9,12 @@
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
-  animation: header-slide-down 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+  /* НОВА АНІМАЦІЯ */
+  animation: scale-in 0.9s ease-out both;
+
+  --scale-offset: 0.98; /* Ледь помітне збільшення для солідності */
+
   contain: paint;
 }
 
@@ -148,16 +153,6 @@
   animation: shimmer 1.5s infinite;
 }
 
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 .more-btn-container {
   display: flex;
   justify-content: center;
@@ -213,7 +208,7 @@
 }
 
 .coffee-bean4 {
-  right: 15%;
+  right: 20%;
   bottom: 2%;
   width: 4.375rem;
   height: 4.375rem;
@@ -222,7 +217,7 @@
 
 .coffee-bean5 {
   bottom: 1%;
-  left: 15%;
+  left: 20%;
   width: 5.625rem;
   height: 5.625rem;
   transform: rotate(-45deg);

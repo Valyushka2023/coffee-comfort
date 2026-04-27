@@ -1,6 +1,7 @@
 {
   "menu_title": "Our menu",
   "menu_subtitle": "Every sip is a ritual that unites people",
+  "currency_symbol": "UAH",
   "categories": {
     "all": "All",
     "drinks": "Drinks",

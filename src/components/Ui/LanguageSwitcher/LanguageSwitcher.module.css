@@ -12,6 +12,7 @@
   padding: 0;
   background: none;
   border: none;
+  outline: none;
   font-family: var(--btn-font-family, 'Montserrat', sans-serif);
   font-size: 1rem;
   font-weight: 700;
@@ -20,7 +21,12 @@
   letter-spacing: 0.05em;
   color: var(--tertiary-color);
   transition: all 0.3s ease;
-  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.language-en:active,
+.language-uk:active {
+  transform: none;
 }
 
 .active {

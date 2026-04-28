@@ -199,7 +199,7 @@
   text-align: center;
 }
 
-@keyframes success-fade-in {
+/* @keyframes success-fade-in {
   from {
     transform: translateY(0.625rem);
     opacity: 0;
@@ -209,7 +209,7 @@
     transform: translateY(0);
     opacity: 1;
   }
-}
+} */
 
 .success-icon {
   display: flex;

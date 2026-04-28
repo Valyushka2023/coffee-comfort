@@ -20,6 +20,7 @@
   letter-spacing: 0.05em;
   color: var(--tertiary-color);
   transition: all 0.3s ease;
+  user-select: none;
 }
 
 .active {

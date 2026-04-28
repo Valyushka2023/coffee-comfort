@@ -9,8 +9,16 @@
   background-color: transparent;
   border: none;
   border-radius: 50%;
+  outline: none;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   user-select: none;
+  -webkit-tap-highlight-color: transparent; /* 🔥 прибирає відблиск на мобільних */
+}
+
+.theme-toggle-btn:active {
+  background: transparent;
+  box-shadow: none;
+  transform: none; /* або залиш, якщо хочеш ефект кліку */
 }
 
 .theme-toggle-btn:hover {

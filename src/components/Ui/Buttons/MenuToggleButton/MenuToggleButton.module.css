@@ -7,10 +7,18 @@
   cursor: pointer;
   background: none;
   border: none;
+  outline: none;
   color: var(--button-burger-icon-color);
   transition:
     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
     color 0.3s ease;
+  -webkit-tap-highlight-color: transparent; /* 🔥 головне */
+}
+
+.burger-button:active {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
 }
 
 .icon {

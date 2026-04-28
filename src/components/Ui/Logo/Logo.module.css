@@ -1,3 +1,5 @@
+@import url('../../../styles/animate.css');
+
 .logo {
   display: flex;
   align-items: center;
@@ -66,22 +68,6 @@
   height: 1.125rem;
   animation-duration: 3s;
   animation-delay: 1.2s;
-}
-
-@keyframes steam {
-  0% {
-    transform: translate(-50%, 0.3125rem);
-    opacity: 0;
-  }
-
-  40% {
-    opacity: 0.6;
-  }
-
-  100% {
-    transform: translate(-30%, -2.1875rem);
-    opacity: 0;
-  }
 }
 
 .logo:hover {

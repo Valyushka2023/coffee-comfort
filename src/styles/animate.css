@@ -176,3 +176,37 @@
     transform: translateX(100%);
   }
 }
+
+/* Анімація пари (диму) */
+
+@keyframes steam {
+  0% {
+    transform: translate(-50%, var(--steam-start-y, 0.3125rem));
+    opacity: 0;
+  }
+
+  40% {
+    opacity: var(--steam-opacity, 0.6);
+  }
+
+  100% {
+    transform: translate(-30%, var(--steam-end-y, -2.1875rem));
+    opacity: 0;
+  }
+}
+
+/* @keyframes steam {
+  0% {
+    transform: translate(-50%, 0.3125rem);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translate(-30%, -2.1875rem);
+    opacity: 0;
+  }
+} */

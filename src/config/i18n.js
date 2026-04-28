@@ -8,7 +8,7 @@ import formBookingEN from '../locales/en/form_booking.json';
 import headerEN from '../locales/en/header.json';
 import heroEN from '../locales/en/hero.json';
 import menuEN from '../locales/en/menu.json';
-import cardMenuEN from '../locales/en/card_menu.json';
+// import cardMenuEN from '../locales/en/card_menu.json';
 import contactsEN from '../locales/en/contacts.json';
 import galleryEN from '../locales/en/gallery.json';
 import reviewsEN from '../locales/en/reviews.json';
@@ -24,7 +24,7 @@ import formBookingUK from '../locales/uk/form_booking.json';
 import headerUK from '../locales/uk/header.json';
 import heroUK from '../locales/uk/hero.json';
 import menuUK from '../locales/uk/menu.json';
-import cardMenuUK from '../locales/uk/card_menu.json';
+// import cardMenuUK from '../locales/uk/card_menu.json';
 import contactsUK from '../locales/uk/contacts.json';
 import galleryUK from '../locales/uk/gallery.json';
 import reviewsUK from '../locales/uk/reviews.json';
@@ -42,7 +42,7 @@ const resources = {
     header: headerEN,
     hero: heroEN,
     menu: menuEN,
-    card_menu: cardMenuEN,
+
     gallery: galleryEN,
     contacts: contactsEN,
     reviews: reviewsEN,
@@ -59,7 +59,7 @@ const resources = {
     header: headerUK,
     hero: heroUK,
     menu: menuUK,
-    card_menu: cardMenuUK,
+
     gallery: galleryUK,
     contacts: contactsUK,
     reviews: reviewsUK,

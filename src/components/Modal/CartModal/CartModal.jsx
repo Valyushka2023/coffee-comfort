@@ -169,7 +169,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+// import axios from 'axios';
 import {
   FiX,
   FiTrash2,
@@ -181,6 +181,7 @@ import {
   FiClock,
 } from 'react-icons/fi';
 import { removeFromCart, addToCart, clearCart } from '../../../redux/cartSlice';
+import { sendOrderRequest } from '../../../services/api';
 import css from './CartModal.module.css';
 
 const CartModal = ({ isOpen, onClose }) => {
@@ -253,9 +254,7 @@ const CartModal = ({ isOpen, onClose }) => {
   };
 
   const handleOrder = async () => {
-    // Валідація часу перед відправкою
     if (!validatePickupTime(pickupTime)) return;
-
     if (items.length === 0 || !name || !phone) return;
 
     setIsLoading(true);
@@ -273,26 +272,65 @@ const CartModal = ({ isOpen, onClose }) => {
         totalAmount: totalAmount,
       };
 
-      const response = await axios.post(
-        'http://localhost:5001/api/orders',
-        orderData
-      );
+      // ВИКОРИСТОВУЄМО СЕРВІС ЗАМІСТЬ AXIOS.POST
+      const data = await sendOrderRequest(orderData);
 
-      if (response.status === 201 || response.status === 200) {
-        setOrderNum(response.data.orderNumber || response.data._id.slice(-4));
-        setIsOrdered(true);
+      // Тепер дані приходять безпосередньо з сервісу (там уже витягнуто response.data)
+      setOrderNum(data.orderNumber || data._id.slice(-4));
+      setIsOrdered(true);
 
-        setTimeout(() => {
-          dispatch(clearCart());
-        }, 500);
-      }
+      setTimeout(() => {
+        dispatch(clearCart());
+      }, 500);
     } catch (error) {
       console.error('Помилка при оформленні замовлення:', error);
-      alert('Вибачте, сталася помилка. Перевірте з’єднання з сервером.');
+      alert(error.message || 'Вибачте, сталася помилка.');
     } finally {
       setIsLoading(false);
     }
   };
+
+  // const handleOrder = async () => {
+
+  //   if (!validatePickupTime(pickupTime)) return;
+
+  //   if (items.length === 0 || !name || !phone) return;
+
+  //   setIsLoading(true);
+  //   try {
+  //     const orderData = {
+  //       customerName: name,
+  //       customerPhone: phone,
+  //       pickupTime: pickupTime,
+  //       items: items.map(item => ({
+  //         _id: item._id || item.id,
+  //         name: item.name,
+  //         price: item.price,
+  //         quantity: item.quantity,
+  //       })),
+  //       totalAmount: totalAmount,
+  //     };
+
+  //     const response = await axios.post(
+  //       'http://localhost:5001/api/orders',
+  //       orderData
+  //     );
+
+  //     if (response.status === 201 || response.status === 200) {
+  //       setOrderNum(response.data.orderNumber || response.data._id.slice(-4));
+  //       setIsOrdered(true);
+
+  //       setTimeout(() => {
+  //         dispatch(clearCart());
+  //       }, 500);
+  //     }
+  //   } catch (error) {
+  //     console.error('Помилка при оформленні замовлення:', error);
+  //     alert('Вибачте, сталася помилка. Перевірте з’єднання з сервером.');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   if (!isOpen) return null;
 

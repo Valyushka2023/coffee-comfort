@@ -17,6 +17,7 @@ const ENDPOINTS = {
   REVIEWS: '/reviews',
   CALLBACKS: '/callbacks',
   MENU: '/menu',
+  ORDERS: '/orders',
 };
 
 const handleError = (error, defaultMessage) => {
@@ -82,5 +83,16 @@ export const fetchMenuRequest = async () => {
     return data;
   } catch (error) {
     handleError(error, 'Error loading menu');
+  }
+};
+// ======================
+// ORDERS
+// ======================
+export const sendOrderRequest = async orderData => {
+  try {
+    const { data } = await api.post(ENDPOINTS.ORDERS, orderData);
+    return data;
+  } catch (error) {
+    handleError(error, 'Error creating order');
   }
 };

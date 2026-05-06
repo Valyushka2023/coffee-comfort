@@ -43,9 +43,9 @@
   transform: rotate(180deg) scale(1.1);
 }
 
-.burger-button:active {
+/* .burger-button:active {
   transform: scale(0.9);
-}
+} */
 
 @media (max-width: 61.9375rem) {
   .icon {

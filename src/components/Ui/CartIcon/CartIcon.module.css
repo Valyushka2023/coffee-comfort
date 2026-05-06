@@ -1,0 +1,43 @@
+.cart-icon-wrapper {
+  /* Головне виправлення: залишаємо тільки fixed */
+  position: fixed;
+  right: 6.5rem;
+  bottom: 1.875rem;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 3.75rem;
+  height: 3.75rem;
+  background: #d35400;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0.625rem 1.5625rem rgb(211 84 0 / 40%);
+  color: white;
+  transition: all 0.3s ease;
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cart-icon-wrapper:hover {
+  background: #e67e22;
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.badge {
+  /* Для бейджа relative не потрібен, він позиціонується відносно wrapper */
+  position: absolute;
+  top: -0.3125rem;
+  right: -0.3125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #2c3e50;
+  border: 0.125rem solid white;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: white;
+}

@@ -2,6 +2,8 @@
   "menu_title": "Наше меню",
   "menu_subtitle": "Кожен ковток це ритуал, який об'єднує людей",
   "currency_symbol": "грн",
+  "show_more": "Показати ще",
+  "collapse": "Згорнути",
   "categories": {
     "all": "Все",
     "drinks": "Напої",
@@ -11,6 +13,16 @@
   "ui": {
     "top": "ТОП"
   },
+
+  "menu_modal": {
+    "order_now": "ЗАМОВИТИ ЗАРАЗ",
+    "close": "ЗАКРИТИ"
+  },
+  "cart_modal": {
+    "your_order": "Ваше замовлення",
+    "empty_cart": "Ваш кошик порожній"
+  },
+
   "loading": "Завантаження...",
   "no_data": "Меню порожнє."
 }

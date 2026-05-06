@@ -128,6 +128,42 @@
   animation: shimmer 1.5s infinite;
 }
 
+.controls-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  margin-top: 1.875rem;
+}
+
+.load-more-btn,
+.collapse-btn {
+  cursor: pointer;
+  padding: 0.625rem 1.5625rem;
+  background: transparent;
+  border: 0.125rem solid #6f4e37; /* кавовий колір */
+  border-radius: 1.25rem;
+  font-weight: 600;
+  color: #6f4e37;
+  transition: all 0.3s ease;
+}
+
+.load-more-btn:hover {
+  background: #6f4e37;
+  color: #fff;
+  transform: translateY(-0.125rem);
+}
+
+.collapse-btn {
+  border-color: #999;
+  color: #999;
+}
+
+.collapse-btn:hover {
+  background: #999;
+  color: #fff;
+}
+
 .bean {
   position: absolute;
   z-index: 0;

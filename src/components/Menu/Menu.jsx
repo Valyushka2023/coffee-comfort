@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import CardMenu from '../Ui/Cards/CardMenu/CardMenu.jsx';
+import MenuModal from '../Modal/MenuModal/MenuModal.jsx'; // Імпортуємо нову модалку
 import css from './Menu.module.css';
 
 const Menu = () => {
@@ -9,6 +10,8 @@ const Menu = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [visibleCounts, setVisibleCounts] = useState({});
 
   const formatPrice = price => {
     const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
@@ -24,8 +27,8 @@ const Menu = () => {
           import.meta.env.VITE_API_URL || 'https://coffee-comfort.onrender.com';
         const response = await axios.get(`${baseUrl}/api/menu`);
         setMenuItems(response.data);
-      } catch (err) {
-        console.error('Error loading menu:', err);
+      } catch (error) {
+        console.error('Error loading menu:', error);
       } finally {
         setLoading(false);
       }
@@ -33,24 +36,49 @@ const Menu = () => {
     fetchMenu();
   }, []);
 
+  useEffect(() => {
+    const handleEscapeKey = event => {
+      if (event.key === 'Escape') setSelectedItem(null);
+    };
+    if (selectedItem) window.addEventListener('keydown', handleEscapeKey);
+    return () => window.removeEventListener('keydown', handleEscapeKey);
+  }, [selectedItem]);
+
+  const handleShowMore = categoryKey => {
+    setVisibleCounts(prev => ({
+      ...prev,
+      [categoryKey]: (prev[categoryKey] || 4) + 4,
+    }));
+  };
+
+  const handleCollapse = categoryKey => {
+    setVisibleCounts(prev => ({ ...prev, [categoryKey]: 4 }));
+  };
+
+  // Логіка, що робити при натисканні кнопки "Обрати" в модалці
+  const handleSelectItem = item => {
+    console.log('Товар обрано:', item);
+    // Тут ви можете додати товар до кошика або відкрити форму бронювання
+    setSelectedItem(null);
+  };
+
   const categories = useMemo(() => {
-    const dbCategories = [
-      ...new Set(menuItems.map(item => item.categoryKey).filter(Boolean)),
-    ];
-    return ['all', ...dbCategories];
+    const allKeys = menuItems.map(item => item.categoryKey).filter(Boolean);
+    return ['all', ...new Set(allKeys)];
   }, [menuItems]);
 
   const filteredMenu = useMemo(() => {
     const grouped = categories
-      .filter(cat => cat !== 'all')
-      .map(catKey => ({
-        categoryKey: catKey,
-        items: menuItems.filter(item => item.categoryKey === catKey),
+      .filter(key => key !== 'all')
+      .map(key => ({
+        categoryKey: key,
+        items: menuItems.filter(item => item.categoryKey === key),
       }))
       .filter(section => section.items.length > 0);
 
-    if (activeCategory === 'all') return grouped;
-    return grouped.filter(section => section.categoryKey === activeCategory);
+    return activeCategory === 'all'
+      ? grouped
+      : grouped.filter(s => s.categoryKey === activeCategory);
   }, [menuItems, activeCategory, categories]);
 
   return (
@@ -66,18 +94,15 @@ const Menu = () => {
           <div className={`${css.bean} ${css['coffee-bean3']}`}></div>
         </header>
 
-        {/* Навігація фільтрів */}
         {!loading && (
           <nav className={css['menu-filter']}>
-            {categories.map(catKey => (
+            {categories.map(key => (
               <button
-                key={catKey}
-                onClick={() => setActiveCategory(catKey)}
-                className={`${css['filter-btn']} ${
-                  activeCategory === catKey ? css.active : ''
-                }`}
+                key={key}
+                onClick={() => setActiveCategory(key)}
+                className={`${css['filter-btn']} ${activeCategory === key ? css.active : ''}`}
               >
-                {t(`categories.${catKey}`)}
+                {t(`categories.${key}`)}
               </button>
             ))}
           </nav>
@@ -85,46 +110,70 @@ const Menu = () => {
 
         <div className={css['menu-grid-container']} key={activeCategory}>
           {loading ? (
-            /* Скелетони під час завантаження */
             <div className={css['menu-items-grid']}>
-              {[...Array(6)].map((_, index) => (
-                <div key={index} className={css['skeleton-card']}>
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className={css['skeleton-card']}>
                   <div className={css['skeleton-shimmer']}></div>
                 </div>
               ))}
             </div>
-          ) : filteredMenu.length > 0 ? (
-            filteredMenu.map(
-              (
-                section,
-                index // Додаємо index тут
-              ) => (
+          ) : (
+            filteredMenu.map((section, index) => {
+              const currentLimit = visibleCounts[section.categoryKey] || 4;
+              const hasMore = section.items.length > currentLimit;
+              const visibleItems = section.items.slice(0, currentLimit);
+
+              return (
                 <div
                   key={section.categoryKey}
                   className={css['menu-category-block']}
-                  style={{ '--i': index }} // Передаємо індекс у CSS
+                  style={{ '--i': index }}
                 >
                   <h4 className={css['category-title']}>
                     <span>{t(`categories.${section.categoryKey}`)}</span>
                   </h4>
-                  {/* ... далі твій код сітки з товарами */}
                   <div className={css['menu-items-grid']}>
-                    {section.items.map(item => (
+                    {visibleItems.map(item => (
                       <CardMenu
                         key={item._id}
                         item={item}
                         formatPrice={formatPrice}
+                        onOpenModal={() => setSelectedItem(item)}
                       />
                     ))}
                   </div>
+                  <div className={css['controls-wrapper']}>
+                    {hasMore && (
+                      <button
+                        className={css['load-more-btn']}
+                        onClick={() => handleShowMore(section.categoryKey)}
+                      >
+                        {t('show_more')}
+                      </button>
+                    )}
+                    {currentLimit > 4 && (
+                      <button
+                        className={css['collapse-btn']}
+                        onClick={() => handleCollapse(section.categoryKey)}
+                      >
+                        {t('collapse')}
+                      </button>
+                    )}
+                  </div>
                 </div>
-              )
-            )
-          ) : (
-            <div className={css['no-data']}>{t('no_data')}</div>
+              );
+            })
           )}
         </div>
       </div>
+
+      {/* Викликаємо новий компонент модалки */}
+      <MenuModal
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+        onSelect={handleSelectItem}
+        formatPrice={formatPrice}
+      />
     </section>
   );
 };

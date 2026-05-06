@@ -2,14 +2,31 @@
 import { useTranslation } from 'react-i18next';
 import css from './CardMenu.module.css';
 
-const CardMenu = ({ item, formatPrice }) => {
-  const { i18n } = useTranslation('card_menu');
+const CardMenu = ({ item, formatPrice, onOpenModal }) => {
+  // const { i18n } = useTranslation('card_menu');
+  const { t, i18n } = useTranslation('card_menu');
+
   const name = item.name?.[i18n.language] || item.name?.uk || item.key;
   const description =
     item.description?.[i18n.language] || item.description?.uk || '';
 
+  // Функція для обробки натискання клавіш Enter або Space
+  const handleKeyDown = event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onOpenModal();
+    }
+  };
+
   return (
-    <div className={css['menu-card']}>
+    <div
+      className={css['menu-card']}
+      onClick={onOpenModal}
+      onKeyDown={handleKeyDown} // Додаємо цей рядок
+      role="button"
+      tabIndex="0"
+      aria-label={t('view_details', { defaultValue: 'View details' })} // Покращуємо доступність
+    >
       <div className={css['item-photo-wrapper']}>
         <img
           src={item.img || '/images/default-coffee.webp'}
@@ -32,3 +49,4 @@ const CardMenu = ({ item, formatPrice }) => {
 };
 
 export default CardMenu;
+/**/

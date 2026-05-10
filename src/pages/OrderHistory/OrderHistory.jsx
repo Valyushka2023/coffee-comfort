@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { fetchOrdersRequest } from '../../services/api'; // Переконайся, що в api.js є запит на /history
 import css from './OrderHistory.module.css';
 
 const OrderHistory = () => {

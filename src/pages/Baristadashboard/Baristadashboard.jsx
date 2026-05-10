@@ -3,8 +3,6 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { fetchOrdersRequest, updateOrderStatus } from '../../services/api';
 import {
   FiClock,
-  // FiUser,
-  // FiPhone,
   FiCheckCircle,
   FiAlertCircle,
   FiPackage,

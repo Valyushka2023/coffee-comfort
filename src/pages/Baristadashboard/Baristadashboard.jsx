@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { fetchOrdersRequest, updateOrderStatus } from '../../services/api';
 import {
@@ -10,7 +11,6 @@ import {
 } from 'react-icons/fi';
 import css from './Baristadashboard.module.css';
 
-// Звук сповіщення (файл має бути в public/sounds/notification.mp3)
 const notificationSound = new Audio('/sounds/notification.mp3');
 
 const BaristaDashboard = () => {
@@ -25,14 +25,9 @@ const BaristaDashboard = () => {
       isFetching.current = true;
       try {
         const data = await fetchOrdersRequest();
-
-        // Звукове сповіщення, якщо з'явилися НОВІ замовлення
         if (!isInitial && data.length > orders.length) {
-          notificationSound
-            .play()
-            .catch(() => console.log('Звук заблоковано браузером'));
+          notificationSound.play().catch(() => {});
         }
-
         setOrders(data || []);
         setLastUpdate(new Date());
       } catch (error) {
@@ -53,35 +48,31 @@ const BaristaDashboard = () => {
 
   const handleCompleteOrder = async orderId => {
     try {
-      // 1. Оновлюємо статус у базі на 'completed'
       await updateOrderStatus(orderId, { status: 'completed' });
-
-      // 2. Видаляємо локально зі списку активних
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
-      console.error('Помилка при завершенні замовлення:', error);
-      alert('Не вдалося оновити статус у базі даних');
+      console.error(error);
+      alert('Не вдалося оновити статус');
     }
   };
 
-  if (loading) {
-    return <div className={css.loader}>⏳ Завантаження замовлень...</div>;
-  }
+  if (loading) return <div className={css.loader}>⏳ Завантаження...</div>;
 
   return (
     <div className={css['container-style']}>
       <header className={css['header-style']}>
-        <h1>☕ Панель бариста</h1>
-        <p>
-          Останнє оновлення:{' '}
-          {lastUpdate ? lastUpdate.toLocaleTimeString() : '—'}
-        </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <img src="/logo.png" alt="logo" style={{ width: '40px' }} />{' '}
+          {/* Приклад використання лого */}
+          <h1>Панель бариста</h1>
+        </div>
+        <p>Останнє оновлення: {lastUpdate?.toLocaleTimeString()}</p>
       </header>
 
       <div className={css['grid-style']}>
         {orders.length === 0 ? (
           <div className={css['empty-state']}>
-            <h3>Активних замовлень поки немає 😴</h3>
+            <h3>Активних замовлень немає 😴</h3>
           </div>
         ) : (
           orders.map(order => (
@@ -97,22 +88,20 @@ const BaristaDashboard = () => {
   );
 };
 
-// Окремий компонент для картки, щоб таймер оновлювався незалежно
 const OrderCard = ({ order, onComplete }) => {
   const [minutesWait, setMinutesWait] = useState(0);
 
   useEffect(() => {
-    const calcTime = () => {
-      const start = new Date(order.createdAt);
-      const now = new Date();
-      setMinutesWait(Math.floor((now - start) / 60000));
+    const calc = () => {
+      setMinutesWait(
+        Math.floor((new Date() - new Date(order.createdAt)) / 60000)
+      );
     };
-    calcTime();
-    const interval = setInterval(calcTime, 60000);
-    return () => clearInterval(interval);
+    calc();
+    const i = setInterval(calc, 60000);
+    return () => clearInterval(i);
   }, [order.createdAt]);
 
-  // Якщо замовлення висить понад 10 хв — воно стає "терміновим"
   const isUrgent = minutesWait >= 10;
 
   return (
@@ -126,16 +115,15 @@ const OrderCard = ({ order, onComplete }) => {
         <span
           className={`${css['time-style']} ${isUrgent ? css['urgent-text'] : ''}`}
         >
-          <FiClock /> {minutesWait} хв очікування
+          <FiClock /> {minutesWait} хв
         </span>
       </div>
 
-      {/* СТАТУС ОПЛАТИ */}
       <div className={order.isPaid ? css['paid-badge'] : css['unpaid-badge']}>
         {order.isPaid ? (
           <>
-            <FiCheckCircle /> ОПЛАЧЕНО
-          </>
+            <FiCreditCard /> ОПЛАЧЕНО
+          </> // Тепер FiCreditCard використовується!
         ) : (
           <>
             <FiAlertCircle /> ОПЛАТА ПРИ ОТРИМАННІ
@@ -153,8 +141,8 @@ const OrderCard = ({ order, onComplete }) => {
       </div>
 
       <ul className={css['items-list-style']}>
-        {order.items.map((item, index) => (
-          <li key={index} className={css['item-style']}>
+        {order.items.map((item, i) => (
+          <li key={i} className={css['item-style']}>
             <span className={css['quantity-style']}>{item.quantity} x</span>
             <span>{item.name?.uk || item.name}</span>
           </li>
@@ -169,7 +157,7 @@ const OrderCard = ({ order, onComplete }) => {
           onClick={() => onComplete(order._id)}
           className={css['button-style']}
         >
-          <FiCheckCircle /> Готово
+          <FiCheckCircle /> ГОТОВО
         </button>
       </div>
     </div>

@@ -4,8 +4,8 @@ import Loader from '../Ui/Loader/Loader.jsx';
 
 // Ліниве завантаження сторінок
 const Home = lazy(() => import('../../pages/Home/Home.jsx'));
-const BaristaDashboard = lazy(
-  () => import('../../pages/BaristaDashboard/BaristaDashboard.jsx')
+const Baristadashboard = lazy(
+  () => import('../../pages/Baristadashboard/Baristadashboard.jsx')
 );
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             {/* Нова сторінка для бариста (буде доступна за посиланням /dashboard-staff) */}
-            <Route path="/dashboard-staff" element={<BaristaDashboard />} />
+            <Route path="/dashboard-staff" element={<Baristadashboard />} />
 
             {/* Сторінка 404 (якщо введено неправильну адресу) */}
             <Route

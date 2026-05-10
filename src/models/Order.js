@@ -1,46 +1,39 @@
-// import mongoose from 'mongoose';
-
-// const orderSchema = new mongoose.Schema({
-//   items: [
-//     {
-//       _id: { type: String, required: true },
-//       name: { uk: String, en: String },
-//       price: Number,
-//       quantity: Number,
-//     },
-//   ],
-//   totalAmount: { type: Number, required: true },
-//   status: { type: String, default: 'new' }, // new, preparing, ready, completed
-//   createdAt: { type: Date, default: Date.now },
-// });
-
-// // Замість module.exports використовуємо export default
-// const Order = mongoose.model('Order', orderSchema);
-// export default Order;
-/**/
 import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
   orderNumber: {
     type: String,
-    default: () => Math.floor(1000 + Math.random() * 9000),
-  }, // Випадкові 4 цифри
+    // Генеруємо 4-значний номер, якщо він не переданий
+    default: () => Math.floor(1000 + Math.random() * 9000).toString(),
+  },
   customerName: { type: String, required: true },
   customerPhone: { type: String, required: true },
   pickupTime: { type: String },
   items: [
     {
       _id: { type: String, required: true },
-      name: { uk: String, en: String },
-      price: Number,
-      quantity: Number,
+      name: {
+        uk: { type: String },
+        en: { type: String },
+      },
+      price: { type: Number },
+      quantity: { type: Number },
     },
   ],
   totalAmount: { type: Number, required: true },
-  status: { type: String, default: 'new' }, // new, preparing, ready, completed
+  // Статус замовлення: new (нове), preparing (готується), completed (виконано)
+  status: {
+    type: String,
+    enum: ['new', 'preparing', 'ready', 'completed'],
+    default: 'new',
+  },
+  // НОВЕ ПОЛЕ: чи оплачено замовлення
+  isPaid: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: { type: Date, default: Date.now },
 });
 
-// Замість module.exports використовуємо export default
 const Order = mongoose.model('Order', orderSchema);
 export default Order;

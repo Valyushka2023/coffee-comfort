@@ -107,3 +107,14 @@ export const fetchOrdersRequest = async () => {
     handleError(error, 'Error loading orders');
   }
 };
+
+// ДОДАЙТЕ ЦЕЙ МЕТОД СЮДИ:
+export const updateOrderStatus = async (orderId, updates) => {
+  try {
+    // Використовуємо api (з уже налаштованим baseURL) та ENDPOINTS.ORDERS
+    const { data } = await api.patch(`${ENDPOINTS.ORDERS}/${orderId}`, updates);
+    return data;
+  } catch (error) {
+    handleError(error, 'Error updating order status');
+  }
+};

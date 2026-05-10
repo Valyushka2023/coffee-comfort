@@ -108,3 +108,31 @@
   font-weight: bold;
   color: #dc3545;
 }
+
+/* Картка в режимі очікування клієнта */
+.ready-card {
+  background-color: #f0fff4 !important; /* Ніжно-зелений фон */
+  border-left: 0.3125rem solid #2ecc71 !important; /* Зелений колір */
+  box-shadow: none;
+  animation: none !important; /* Вимикаємо мигання */
+}
+
+/* Кнопка архівування */
+.archive-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+  padding: 0.625rem 1.25rem;
+  background-color: #34495e;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.archive-button:hover {
+  background-color: #2c3e50;
+}

@@ -19,6 +19,7 @@ const ENDPOINTS = {
   CALLBACKS: '/callbacks',
   MENU: '/menu',
   ORDERS: '/orders',
+  HISTORY: '/orders/history',
 };
 
 const handleError = (error, defaultMessage) => {

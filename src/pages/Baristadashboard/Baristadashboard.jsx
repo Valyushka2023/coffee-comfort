@@ -53,7 +53,7 @@ const BaristaDashboard = () => {
   // Крок 2: Замовлення видано клієнту (зникає)
   const handleArchive = async orderId => {
     try {
-      await updateOrderStatus(orderId, { status: 'completed' });
+      await updateOrderStatus(orderId, { status: 'completed', isPaid: true });
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
       console.error(error);

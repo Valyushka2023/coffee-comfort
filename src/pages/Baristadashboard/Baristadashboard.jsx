@@ -35,7 +35,6 @@ const BaristaDashboard = () => {
     return () => clearInterval(interval);
   }, [getOrders]);
 
-  // Крок 1: Замовлення підготовлено (зміна кольору)
   const handleSetReady = async orderId => {
     try {
       await updateOrderStatus(orderId, { status: 'ready' });
@@ -50,14 +49,17 @@ const BaristaDashboard = () => {
     }
   };
 
-  // Крок 2: Замовлення видано клієнту (зникає)
   const handleArchive = async orderId => {
     try {
-      await updateOrderStatus(orderId, { status: 'completed', isPaid: true });
+      // КРИТИЧНО: Передаємо і статус, і оплату
+      await updateOrderStatus(orderId, {
+        status: 'completed',
+        isPaid: true,
+      });
+
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
-      console.error(error);
-      alert('Не вдалося видалити замовлення');
+      console.error('Помилка оновлення:', error);
     }
   };
 
@@ -104,7 +106,7 @@ const OrderCard = ({ order, onReady, onArchive }) => {
     >
       <div className={css['header-card-style']}>
         <span className={css['order-number-style']}>
-          #{order._id.slice(-4).toUpperCase()}
+          #{order.orderNumber || order._id.slice(-4).toUpperCase()}
         </span>
         <span className={css['time-style']}>
           <FiClock /> {minutesWait} хв

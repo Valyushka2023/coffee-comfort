@@ -9,9 +9,8 @@ const OrderHistory = () => {
   useEffect(() => {
     const getHistory = async () => {
       try {
-        // Використовуємо функцію, яка йде на /orders/history
         const data = await fetchOrderHistoryRequest();
-        console.log('Дані з бази:', data); // Додай цей рядок, щоб побачити відповідь у консолі браузера
+        console.log('Дані з бази:', data);
         setHistory(data || []);
       } catch (error) {
         console.error('Помилка завантаження історії:', error);
@@ -22,7 +21,6 @@ const OrderHistory = () => {
     getHistory();
   }, []);
 
-  // Розрахунок загальної виручки
   const totalRevenue = history.reduce(
     (sum, order) => sum + (order.totalPrice || 0),
     0
@@ -58,7 +56,7 @@ const OrderHistory = () => {
           {history.map(order => (
             <tr key={order._id}>
               <td>{new Date(order.updatedAt).toLocaleString('uk-UA')}</td>
-              <td>#{order._id.slice(-6).toUpperCase()}</td>
+              <td>#{order.orderNumber || order._id.slice(-4).toUpperCase()}</td>
               <td>
                 <ul className={css.itemList}>
                   {order.items.map((item, i) => (
@@ -71,8 +69,16 @@ const OrderHistory = () => {
               </td>
               <td>{order.totalPrice} грн</td>
               <td>
-                <span className={order.isPaid ? css.paid : css.unpaid}>
-                  {order.isPaid ? 'Оплачено' : 'Борг'}
+                <span
+                  className={
+                    order.isPaid || order.status === 'completed'
+                      ? css.paid
+                      : css.unpaid
+                  }
+                >
+                  {order.isPaid || order.status === 'completed'
+                    ? 'Оплачено'
+                    : 'Борг'}
                 </span>
               </td>
             </tr>

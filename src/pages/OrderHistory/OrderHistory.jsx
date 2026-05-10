@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { fetchOrderHistoryRequest } from '../../services/api';
 import css from './OrderHistory.module.css';
 
 const OrderHistory = () => {
@@ -8,10 +9,10 @@ const OrderHistory = () => {
   useEffect(() => {
     const getHistory = async () => {
       try {
-        // Якщо в api.js немає окремої функції, можна викликати напряму через axios або змінити api.js
-        const response = await fetch('/api/orders/history'); // або твоя функція
-        const data = await response.json();
-        setHistory(data);
+        // Використовуємо функцію, яка йде на /orders/history
+        const data = await fetchOrderHistoryRequest();
+        console.log('Дані з бази:', data); // Додай цей рядок, щоб побачити відповідь у консолі браузера
+        setHistory(data || []);
       } catch (error) {
         console.error('Помилка завантаження історії:', error);
       } finally {

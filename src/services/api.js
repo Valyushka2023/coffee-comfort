@@ -124,8 +124,7 @@ export const updateOrderStatus = async (orderId, updates) => {
 // ======================
 export const fetchOrderHistoryRequest = async () => {
   try {
-    // Звертаємося до /orders/history
-    const { data } = await api.get(`${ENDPOINTS.ORDERS}/history`);
+    const { data } = await api.get(ENDPOINTS.HISTORY);
     return data;
   } catch (error) {
     handleError(error, 'Error loading order history');

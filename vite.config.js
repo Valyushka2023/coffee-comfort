@@ -3,10 +3,19 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  // Додаємо блок test для налаштування середовища Vitest
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:10000', // Адреса вашого бекенду
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+
   test: {
-    globals: true, // Дозволяє використовувати describe, it, expect без імпорту
-    environment: 'jsdom', // Це саме те налаштування, яке вирішує помилку 'document is not defined'
-    setupFiles: './src/setupTests.js', // Шлях до файлу налаштувань (якщо ви його створите)
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.js',
   },
 });

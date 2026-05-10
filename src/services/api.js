@@ -5,6 +5,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 if (!BASE_URL) {
   console.error('⚠️ ERROR: VITE_API_URL is not set in Vercel settings!');
 }
+
 const api = axios.create({
   baseURL: `${BASE_URL}/api`,
   headers: {
@@ -85,6 +86,7 @@ export const fetchMenuRequest = async () => {
     handleError(error, 'Error loading menu');
   }
 };
+
 // ======================
 // ORDERS
 // ======================
@@ -94,5 +96,14 @@ export const sendOrderRequest = async orderData => {
     return data;
   } catch (error) {
     handleError(error, 'Error creating order');
+  }
+};
+
+export const fetchOrdersRequest = async () => {
+  try {
+    const { data } = await api.get(ENDPOINTS.ORDERS);
+    return data;
+  } catch (error) {
+    handleError(error, 'Error loading orders');
   }
 };

@@ -9,12 +9,6 @@
   box-sizing: border-box;
 }
 
-/* html {
-  width: 100%;
-  overflow-x: hidden; 
-  scroll-behavior: smooth;
-} */
-
 html {
   width: 100%;
   height: auto; /* Не ставте 100%, щоб не обмежувати висоту прокрутки */

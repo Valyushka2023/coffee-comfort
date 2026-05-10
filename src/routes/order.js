@@ -5,14 +5,13 @@ const router = express.Router();
 
 /**
  * GET: Отримання замовлень
- * Ми додаємо фільтрацію, щоб бариста бачив лише актуальні (не завершені) замовлення.
+ * Тепер включаємо статус 'ready', щоб замовлення не зникало після підготовки.
  */
 router.get('/', async (req, res) => {
   try {
-    // Шукаємо замовлення зі статусом 'new' або 'preparing'
-    // Це важливо, щоб виконані замовлення не висіли на панелі вічно
+    // Додаємо 'ready' у список статусів, які бачить бариста
     const orders = await Order.find({
-      status: { $in: ['new', 'preparing'] },
+      status: { $in: ['new', 'preparing', 'ready'] },
     }).sort({ createdAt: -1 });
 
     res.status(200).json(orders);
@@ -27,8 +26,6 @@ router.get('/', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   try {
-    // При створенні за замовчуванням status буде 'new',
-    // а isPaid можна передавати з фронтенду (якщо оплата онлайн)
     const newOrder = new Order({
       ...req.body,
       status: req.body.status || 'new',
@@ -45,17 +42,18 @@ router.post('/', async (req, res) => {
 
 /**
  * PATCH: Оновлення статусу або оплати
- * Саме цей метод викликатиме кнопка "ГОТОВО" на фронтенді
  */
 router.patch('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { status, isPaid } = req.body;
 
+    // Якщо status === 'completed', замовлення автоматично зникне з панелі бариста
+    // при наступному оновленні через фільтр у GET запиті вище.
     const updatedOrder = await Order.findByIdAndUpdate(
       id,
       { $set: { status, isPaid } },
-      { new: true } // Повертає вже оновлений документ
+      { new: true }
     );
 
     if (!updatedOrder) {
@@ -70,8 +68,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 /**
- * GET: Історія замовлень (опціонально)
- * Якщо захочете зробити окрему сторінку з архівом виконаних замовлень
+ * GET: Історія замовлень
  */
 router.get('/history', async (req, res) => {
   try {
@@ -80,8 +77,7 @@ router.get('/history', async (req, res) => {
       .sort({ createdAt: -1 });
     res.status(200).json(history);
   } catch (error) {
-    // Виправляємо помилку ESLint, використовуючи змінну error для логування
-    console.error('Помилка при отриманні замовлень:', error);
+    console.error('Помилка при отриманні історії:', error);
     res.status(500).json({ message: 'Помилка сервера при завантаженні' });
   }
 });

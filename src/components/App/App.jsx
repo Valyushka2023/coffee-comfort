@@ -7,6 +7,10 @@ const Home = lazy(() => import('../../pages/Home/Home.jsx'));
 const Baristadashboard = lazy(
   () => import('../../pages/Baristadashboard/Baristadashboard.jsx')
 );
+// 1. Додаємо імпорт нової сторінки історії
+const OrderHistory = lazy(
+  () => import('../../pages/OrderHistory/OrderHistory.jsx')
+);
 
 function App() {
   return (
@@ -19,13 +23,16 @@ function App() {
       <main className="page-fade">
         <Suspense fallback={<Loader type="container" />}>
           <Routes>
-            {/* Головна сторінка для клієнтів (ваше поточне меню) */}
+            {/* Головна сторінка для клієнтів */}
             <Route path="/" element={<Home />} />
 
-            {/* Нова сторінка для бариста (буде доступна за посиланням /dashboard-staff) */}
+            {/* Панель бариста */}
             <Route path="/dashboard-staff" element={<Baristadashboard />} />
 
-            {/* Сторінка 404 (якщо введено неправильну адресу) */}
+            {/* 2. Додаємо новий маршрут для історії замовлень */}
+            <Route path="/history" element={<OrderHistory />} />
+
+            {/* Сторінка 404 */}
             <Route
               path="*"
               element={

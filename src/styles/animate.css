@@ -166,6 +166,23 @@
   }
 }
 
+/* Зміна кольору */
+
+/* Плавне переливання кольору фону */
+@keyframes bg-glow {
+  0% {
+    background-color: #fff;
+  }
+
+  50% {
+    background-color: #fff0f0; /* Легкий пастельний червоний відтінок */
+  }
+
+  100% {
+    background-color: #fff;
+  }
+}
+
 /* Cкелетон */
 @keyframes shimmer {
   0% {

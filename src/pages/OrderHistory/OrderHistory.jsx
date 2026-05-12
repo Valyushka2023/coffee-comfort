@@ -116,10 +116,10 @@ const OrderHistory = () => {
       try {
         // Отримуємо і загальну історію, і статистику за вибрану дату одночасно
         const [historyRes, statsRes] = await Promise.all([
-          API.get('/api/orders/history'),
-          API.get(`/api/orders/stats?date=${selectedDate}`),
+          API.get('/orders/history'),
+          API.get(`/orders/stats?date=${selectedDate}`),
         ]);
-
+        API.get('/orders/history');
         setHistory(historyRes.data || []);
         setStats(statsRes.data || []);
       } catch (error) {

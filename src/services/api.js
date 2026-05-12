@@ -20,6 +20,7 @@ const ENDPOINTS = {
   MENU: '/menu',
   ORDERS: '/orders',
   HISTORY: '/orders/history',
+  STATS: '/orders/stats',
 };
 
 const handleError = (error, defaultMessage) => {
@@ -128,5 +129,19 @@ export const fetchOrderHistoryRequest = async () => {
     return data;
   } catch (error) {
     handleError(error, 'Error loading order history');
+  }
+};
+// ======================
+// ANALYTICS (STATS)
+// ======================
+export const fetchOrderStatsRequest = async date => {
+  try {
+    // Передаємо дату як query-параметр: /api/orders/stats?date=2026-05-12
+    const { data } = await api.get(ENDPOINTS.STATS, {
+      params: { date },
+    });
+    return data;
+  } catch (error) {
+    handleError(error, 'Error loading analytics data');
   }
 };

@@ -104,6 +104,21 @@ import express from 'express';
 import Order from '../models/Order.js';
 
 const router = express.Router();
+/**
+ * POST: Створення нового замовлення
+ */
+router.post('/', async (req, res) => {
+  try {
+    const newOrder = new Order(req.body);
+    const savedOrder = await newOrder.save();
+    res.status(201).json(savedOrder);
+  } catch (error) {
+    console.error('❌ Помилка при створенні замовлення:', error);
+    res
+      .status(400)
+      .json({ message: 'Помилка валідації або даних', error: error.message });
+  }
+});
 
 /**
  * GET: Аналітика продажів за обрану дату

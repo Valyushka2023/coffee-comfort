@@ -104,7 +104,7 @@ const CartModal = ({ isOpen, onClose }) => {
           price: item.price,
           quantity: item.quantity,
         })),
-        totalAmount: totalAmount,
+        totalPrice: totalAmount, // Змінено з totalAmount на totalPrice для бекенду
       };
 
       const data = await sendOrderRequest(orderData);

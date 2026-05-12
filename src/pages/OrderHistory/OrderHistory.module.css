@@ -50,6 +50,86 @@
   list-style: none;
 }
 
+/* .paid {
+  font-weight: bold;
+  color: #27ae60;
+} */
+
+/* .unpaid {
+  font-weight: bold;
+  color: #e74c3c;
+} */
+
+.loader {
+  padding: 3rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.filter-wrapper {
+  display: inline-block;
+  margin-top: 0.9375rem;
+  padding:
+    0,
+    625rem 1.25rem;
+  background: #f1f1f1;
+  border-radius: 0.625rem;
+}
+
+.date-input {
+  cursor: pointer;
+  margin-left: 0.625rem;
+  padding: 0.3125rem 0.625rem;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.3125rem;
+  font-family: inherit;
+}
+
+.stats-section {
+  margin: 1.25rem 0;
+}
+
+.stats-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.9375rem;
+}
+
+.total-badge {
+  padding: 0.5rem 0.9375rem;
+  background: #27ae60;
+  border-radius: 1.25rem;
+  font-weight: bold;
+  color: white;
+}
+
+.stats-table {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 10%);
+  border-collapse: collapse;
+}
+
+.stats-table th {
+  padding: 0.75rem;
+  background: #34495e;
+  color: white;
+}
+
+.stats-table td {
+  padding: 0.75rem;
+  border-bottom: 0.0625rem solid #eee;
+  text-align: center;
+}
+
+.divider {
+  margin: 2.5rem 0;
+  border: 0;
+  border-top: 0.125rem dashed #ddd;
+}
+
 .paid {
   font-weight: bold;
   color: #27ae60;
@@ -58,10 +138,4 @@
 .unpaid {
   font-weight: bold;
   color: #e74c3c;
-}
-
-.loader {
-  padding: 3rem;
-  font-size: 1.5rem;
-  text-align: center;
 }

@@ -94,7 +94,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'; // Використовуємо для запитів
 import css from './OrderHistory.module.css';
+// Використовуємо вашу зміну з .env.
+// Додаємо /api, якщо ваш бекенд очікує цей префікс
+const API_URL =
+  import.meta.env.VITE_API_URL || 'https://coffee-comfort.onrender.com';
 
+const API = axios.create({
+  baseURL: `${API_URL}/api`,
+});
 const OrderHistory = () => {
   const [history, setHistory] = useState([]);
   const [stats, setStats] = useState([]);
@@ -109,8 +116,8 @@ const OrderHistory = () => {
       try {
         // Отримуємо і загальну історію, і статистику за вибрану дату одночасно
         const [historyRes, statsRes] = await Promise.all([
-          axios.get('/api/orders/history'),
-          axios.get(`/api/orders/stats?date=${selectedDate}`),
+          API.get('/api/orders/history'),
+          API.get(`/api/orders/stats?date=${selectedDate}`),
         ]);
 
         setHistory(historyRes.data || []);

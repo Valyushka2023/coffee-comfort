@@ -7,7 +7,8 @@ import bookingRouters from './src/routes/bookingRouters.js';
 import reviewRouters from './src/routes/reviewsRouters.js';
 import menuRouters from './src/routes/menuRouters.js';
 import callbackRouters from './src/routes/callbackRouters.js';
-import orderRoutes from './src/routes/order.js';
+import orderRouters from './src/routes/orderRouters.js';
+import ingredientRouters from './src/routes/ingredientRouters.js';
 
 dotenv.config();
 
@@ -21,7 +22,8 @@ app.use('/api/bookings', bookingRouters);
 app.use('/api/reviews', reviewRouters);
 app.use('/api/menu', menuRouters);
 app.use('/api/callbacks', callbackRouters);
-app.use('/api/orders', orderRoutes);
+app.use('/api/orders', orderRouters);
+app.use('/api/ingredients', ingredientRouters);
 
 // Обробка 404
 app.use((req, res) => {

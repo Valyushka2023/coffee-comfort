@@ -2,15 +2,16 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Loader from '../Ui/Loader/Loader.jsx';
 
-// Ліниве завантаження сторінок
+// Ліниве завантаження сторінок (Lazy Loading)
 const Home = lazy(() => import('../../pages/Home/Home.jsx'));
 const Baristadashboard = lazy(
   () => import('../../pages/Baristadashboard/Baristadashboard.jsx')
 );
-// 1. Додаємо імпорт нової сторінки історії
 const OrderHistory = lazy(
   () => import('../../pages/OrderHistory/OrderHistory.jsx')
 );
+// Виправлено: тепер Inventory завантажується ліниво, як і інші сторінки
+const Inventory = lazy(() => import('../../pages/Inventory/Inventory.jsx'));
 
 function App() {
   return (
@@ -29,15 +30,19 @@ function App() {
             {/* Панель бариста */}
             <Route path="/dashboard-staff" element={<Baristadashboard />} />
 
-            {/* 2. Додаємо новий маршрут для історії замовлень */}
+            {/* Маршрут для історії замовлень (адмінка/бухгалтер) */}
             <Route path="/history" element={<OrderHistory />} />
+
+            {/* Маршрут для інвентаризації залишків (склад) */}
+            <Route path="/inventory" element={<Inventory />} />
 
             {/* Сторінка 404 */}
             <Route
               path="*"
               element={
                 <div style={{ textAlign: 'center', marginTop: '50px' }}>
-                  Сторінку не знайдено
+                  <h1>404</h1>
+                  <p>Сторінку не знайдено</p>
                 </div>
               }
             />

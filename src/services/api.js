@@ -3,10 +3,10 @@ import axios from 'axios';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 if (!BASE_URL) {
-  console.error('⚠️ ERROR: VITE_API_URL is not set in Vercel settings!');
+  console.error('⚠️ ERROR: VITE_API_URL is not set!');
 }
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: `${BASE_URL}/api`,
   headers: {
     'Content-Type': 'application/json',
@@ -21,6 +21,7 @@ const ENDPOINTS = {
   ORDERS: '/orders',
   HISTORY: '/orders/history',
   STATS: '/orders/stats',
+  INVENTORY: '/ingredients',
 };
 
 const handleError = (error, defaultMessage) => {
@@ -33,11 +34,38 @@ const handleError = (error, defaultMessage) => {
 };
 
 // ======================
+// INVENTORY
+// ======================
+
+export const fetchIngredientsRequest = async () => {
+  try {
+    const { data } = await api.get(ENDPOINTS.INVENTORY);
+    return data;
+  } catch (error) {
+    handleError(error, 'Error loading inventory');
+  }
+};
+
+export const updateIngredientRequest = async (id, quantity) => {
+  try {
+    const { data } = await api.patch(`${ENDPOINTS.INVENTORY}/${id}`, {
+      quantity,
+    });
+
+    return data;
+  } catch (error) {
+    handleError(error, 'Error updating ingredient');
+  }
+};
+
+// ======================
 // BOOKINGS
 // ======================
+
 export const sendBookingRequest = async bookingData => {
   try {
     const { data } = await api.post(ENDPOINTS.BOOKINGS, bookingData);
+
     return data;
   } catch (error) {
     handleError(error, 'Booking error');
@@ -47,9 +75,11 @@ export const sendBookingRequest = async bookingData => {
 // ======================
 // CALLBACK
 // ======================
+
 export const sendCallbackRequest = async callbackData => {
   try {
     const { data } = await api.post(ENDPOINTS.CALLBACKS, callbackData);
+
     return data;
   } catch (error) {
     handleError(error, 'Call order error');
@@ -59,9 +89,11 @@ export const sendCallbackRequest = async callbackData => {
 // ======================
 // REVIEWS
 // ======================
+
 export const sendReviewRequest = async reviewData => {
   try {
     const { data } = await api.post(ENDPOINTS.REVIEWS, reviewData);
+
     return data;
   } catch (error) {
     handleError(error, 'Error sending feedback');
@@ -71,6 +103,7 @@ export const sendReviewRequest = async reviewData => {
 export const fetchReviewsRequest = async () => {
   try {
     const { data } = await api.get(ENDPOINTS.REVIEWS);
+
     return data;
   } catch (error) {
     handleError(error, 'Error loading reviews');
@@ -80,9 +113,11 @@ export const fetchReviewsRequest = async () => {
 // ======================
 // MENU
 // ======================
+
 export const fetchMenuRequest = async () => {
   try {
     const { data } = await api.get(ENDPOINTS.MENU);
+
     return data;
   } catch (error) {
     handleError(error, 'Error loading menu');
@@ -92,9 +127,11 @@ export const fetchMenuRequest = async () => {
 // ======================
 // ORDERS
 // ======================
+
 export const sendOrderRequest = async orderData => {
   try {
     const { data } = await api.post(ENDPOINTS.ORDERS, orderData);
+
     return data;
   } catch (error) {
     handleError(error, 'Error creating order');
@@ -104,44 +141,51 @@ export const sendOrderRequest = async orderData => {
 export const fetchOrdersRequest = async () => {
   try {
     const { data } = await api.get(ENDPOINTS.ORDERS);
+
     return data;
   } catch (error) {
     handleError(error, 'Error loading orders');
   }
 };
 
-// ДОДАЙТЕ ЦЕЙ МЕТОД СЮДИ:
 export const updateOrderStatus = async (orderId, updates) => {
   try {
-    // Використовуємо api (з уже налаштованим baseURL) та ENDPOINTS.ORDERS
     const { data } = await api.patch(`${ENDPOINTS.ORDERS}/${orderId}`, updates);
+
     return data;
   } catch (error) {
     handleError(error, 'Error updating order status');
   }
 };
+
 // ======================
 // HISTORY
 // ======================
+
 export const fetchOrderHistoryRequest = async () => {
   try {
     const { data } = await api.get(ENDPOINTS.HISTORY);
+
     return data;
   } catch (error) {
     handleError(error, 'Error loading order history');
   }
 };
+
 // ======================
 // ANALYTICS (STATS)
 // ======================
+
 export const fetchOrderStatsRequest = async date => {
   try {
-    // Передаємо дату як query-параметр: /api/orders/stats?date=2026-05-12
     const { data } = await api.get(ENDPOINTS.STATS, {
       params: { date },
     });
+
     return data;
   } catch (error) {
     handleError(error, 'Error loading analytics data');
   }
 };
+
+export default api;

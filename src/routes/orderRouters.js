@@ -2,99 +2,116 @@
 // import Order from '../models/Order.js';
 
 // const router = express.Router();
+// /**
+//  * POST: Створення нового замовлення
+//  */
+// router.post('/', async (req, res) => {
+//   try {
+//     const newOrder = new Order(req.body);
+//     const savedOrder = await newOrder.save();
+//     res.status(201).json(savedOrder);
+//   } catch (error) {
+//     console.error('❌ Помилка при створенні замовлення:', error);
+//     res
+//       .status(400)
+//       .json({ message: 'Помилка валідації або даних', error: error.message });
+//   }
+// });
+
+// /**
+//  * GET: Аналітика продажів за обрану дату
+//  * Повертає згруповані дані: назва страви, кількість, сума.
+//  */
+// router.get('/stats', async (req, res) => {
+//   try {
+//     const { date } = req.query; // Очікуємо "YYYY-MM-DD"
+//     if (!date) return res.status(400).json({ message: 'Дата не вказана' });
+
+//     const startOfDay = new Date(date);
+//     startOfDay.setHours(0, 0, 0, 0);
+
+//     const endOfDay = new Date(date);
+//     endOfDay.setHours(23, 59, 59, 999);
+
+//     const stats = await Order.aggregate([
+//       {
+//         // Відфільтровуємо лише завершені замовлення за конкретний проміжок часу
+//         $match: {
+//           status: 'completed',
+//           updatedAt: { $gte: startOfDay, $lte: endOfDay },
+//         },
+//       },
+//       {
+//         // "Розпаковуємо" масив страв
+//         $unwind: '$items',
+//       },
+//       {
+//         // Групуємо за назвою (UK) та рахуємо суми
+//         $group: {
+//           _id: '$items.name.uk',
+//           totalQuantity: { $sum: '$items.quantity' },
+//           totalPrice: {
+//             $sum: { $multiply: ['$items.price', '$items.quantity'] },
+//           },
+//         },
+//       },
+//       {
+//         $sort: { totalQuantity: -1 }, // Найпопулярніші зверху
+//       },
+//     ]);
+
+//     res.status(200).json(stats);
+//   } catch (error) {
+//     console.error('❌ Помилка аналітики:', error);
+//     res.status(500).json({ message: 'Помилка сервера при формуванні звіту' });
+//   }
+// });
 
 // /**
 //  * GET: Актуальні замовлення для бариста
-//  * Повертає замовлення зі статусами 'new', 'preparing' та 'ready'.
 //  */
 // router.get('/', async (req, res) => {
 //   try {
 //     const orders = await Order.find({
 //       status: { $in: ['new', 'preparing', 'ready'] },
 //     }).sort({ createdAt: -1 });
-
 //     res.status(200).json(orders);
 //   } catch (error) {
-//     console.error('❌ Помилка при отриманні активних замовлень:', error);
-//     res
-//       .status(500)
-//       .json({ message: 'Помилка сервера при отриманні замовлень' });
+//     console.error(error);
+//     res.status(500).json({ message: 'Помилка сервера' });
 //   }
 // });
 
 // /**
-//  * GET: Історія завершених замовлень
-//  * Використовується на сторінці звітів (OrderHistory.jsx).
+//  * GET: Історія замовлень (останні 100)
 //  */
 // router.get('/history', async (req, res) => {
 //   try {
-//     // Шукаємо лише замовлення зі статусом 'completed'
 //     const history = await Order.find({ status: 'completed' })
-//       .limit(100) // Збільшив ліміт до 100 для кращої звітності
-//       .sort({ updatedAt: -1 }); // Сортуємо за часом видачі (updatedAt)
-
+//       .limit(100)
+//       .sort({ updatedAt: -1 });
 //     res.status(200).json(history);
 //   } catch (error) {
-//     console.error('❌ Помилка при отриманні історії замовлень:', error);
-//     res
-//       .status(500)
-//       .json({ message: 'Помилка сервера при завантаженні історії' });
+//     console.error(error);
+//     res.status(500).json({ message: 'Помилка історії' });
 //   }
 // });
 
 // /**
-//  * POST: Створення нового замовлення
-//  */
-// router.post('/', async (req, res) => {
-//   try {
-//     // Розрахунок totalPrice, якщо він не прийшов з фронтенду
-//     const items = req.body.items || [];
-//     const calculatedTotal = items.reduce(
-//       (acc, item) => acc + item.price * item.quantity,
-//       0
-//     );
-
-//     const newOrder = new Order({
-//       ...req.body,
-//       totalPrice: req.body.totalPrice || calculatedTotal,
-//       status: req.body.status || 'new',
-//       isPaid: req.body.isPaid || false,
-//     });
-
-//     await newOrder.save();
-//     res.status(201).json(newOrder);
-//   } catch (error) {
-//     console.error('❌ Помилка при створенні замовлення:', error);
-//     res.status(400).json({ message: 'Помилка при створенні замовлення' });
-//   }
-// });
-
-// /**
-//  * PATCH: Оновлення статусу або оплати
-//  * Викликається при натисканні "Підготовлено" (ready) або "Видано" (completed).
+//  * PATCH: Оновлення статусу
 //  */
 // router.patch('/:id', async (req, res) => {
 //   try {
-//     const { id } = req.params;
 //     const { status, isPaid } = req.body;
-
 //     const updatedOrder = await Order.findByIdAndUpdate(
-//       id,
+//       req.params.id,
 //       { $set: { status, isPaid } },
-//       { new: true, runValidators: true }
+//       { new: true }
 //     );
-
-//     if (!updatedOrder) {
-//       return res.status(404).json({ message: 'Замовлення не знайдено' });
-//     }
-
 //     res.status(200).json(updatedOrder);
 //   } catch (error) {
-//     console.error(
-//       `❌ Помилка при оновленні замовлення ${req.params.id}:`,
-//       error
-//     );
-//     res.status(500).json({ message: 'Помилка сервера при оновленні статусу' });
+//     console.error(error);
+//     res.status(500).json({ message: 'Помилка оновлення' });
 //   }
 // });
 
@@ -102,8 +119,28 @@
 /**/
 import express from 'express';
 import Order from '../models/Order.js';
+import Ingredient from '../models/Ingredient.js';
 
 const router = express.Router();
+
+// Словник рецептів: назва напою (uk) має збігатися з назвою в меню
+const RECIPES = {
+  'Кава в зернах (Arabica)': [
+    { name: 'Кава в зернах (Arabica)', amount: 0.018 },
+  ], // для чистого еспресо
+  Капучино: [
+    { name: 'Кава в зернах (Arabica)', amount: 0.018 },
+    { name: 'Молоко 2.5%', amount: 0.2 },
+  ],
+  Лате: [
+    { name: 'Кава в зернах (Arabica)', amount: 0.018 },
+    { name: 'Молоко 2.5%', amount: 0.25 },
+  ],
+  'Сироп Карамель': [{ name: 'Сироп Карамель', amount: 1 }], // списання 1 одиниці (порції або шт)
+  'Стаканчики 250мл': [{ name: 'Стаканчики 250мл', amount: 1 }],
+  'Цукор в стіках': [{ name: 'Цукор в стіках', amount: 2 }],
+};
+
 /**
  * POST: Створення нового замовлення
  */
@@ -116,56 +153,7 @@ router.post('/', async (req, res) => {
     console.error('❌ Помилка при створенні замовлення:', error);
     res
       .status(400)
-      .json({ message: 'Помилка валідації або даних', error: error.message });
-  }
-});
-
-/**
- * GET: Аналітика продажів за обрану дату
- * Повертає згруповані дані: назва страви, кількість, сума.
- */
-router.get('/stats', async (req, res) => {
-  try {
-    const { date } = req.query; // Очікуємо "YYYY-MM-DD"
-    if (!date) return res.status(400).json({ message: 'Дата не вказана' });
-
-    const startOfDay = new Date(date);
-    startOfDay.setHours(0, 0, 0, 0);
-
-    const endOfDay = new Date(date);
-    endOfDay.setHours(23, 59, 59, 999);
-
-    const stats = await Order.aggregate([
-      {
-        // Відфільтровуємо лише завершені замовлення за конкретний проміжок часу
-        $match: {
-          status: 'completed',
-          updatedAt: { $gte: startOfDay, $lte: endOfDay },
-        },
-      },
-      {
-        // "Розпаковуємо" масив страв
-        $unwind: '$items',
-      },
-      {
-        // Групуємо за назвою (UK) та рахуємо суми
-        $group: {
-          _id: '$items.name.uk',
-          totalQuantity: { $sum: '$items.quantity' },
-          totalPrice: {
-            $sum: { $multiply: ['$items.price', '$items.quantity'] },
-          },
-        },
-      },
-      {
-        $sort: { totalQuantity: -1 }, // Найпопулярніші зверху
-      },
-    ]);
-
-    res.status(200).json(stats);
-  } catch (error) {
-    console.error('❌ Помилка аналітики:', error);
-    res.status(500).json({ message: 'Помилка сервера при формуванні звіту' });
+      .json({ message: 'Помилка валідації', error: error.message });
   }
 });
 
@@ -179,41 +167,71 @@ router.get('/', async (req, res) => {
     }).sort({ createdAt: -1 });
     res.status(200).json(orders);
   } catch (error) {
-    console.error(error);
+    console.error('❌ Помилка при створенні замовлення:', error);
     res.status(500).json({ message: 'Помилка сервера' });
   }
 });
 
 /**
- * GET: Історія замовлень (останні 100)
- */
-router.get('/history', async (req, res) => {
-  try {
-    const history = await Order.find({ status: 'completed' })
-      .limit(100)
-      .sort({ updatedAt: -1 });
-    res.status(200).json(history);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Помилка історії' });
-  }
-});
-
-/**
- * PATCH: Оновлення статусу
+ * PATCH: Оновлення статусу та автоматичне списання складу
  */
 router.patch('/:id', async (req, res) => {
   try {
     const { status, isPaid } = req.body;
+    const orderId = req.params.id;
+
+    // Знаходимо поточне замовлення в базі
+    const order = await Order.findById(orderId);
+    if (!order)
+      return res.status(404).json({ message: 'Замовлення не знайдено' });
+
+    // ЛОГІКА СПИСАННЯ: Якщо статус змінюється на 'completed'
+    if (status === 'completed' && order.status !== 'completed') {
+      console.log(`📦 Починаємо списання для замовлення #${order.orderNumber}`);
+
+      for (const item of order.items) {
+        const itemName = item.name.uk;
+        const recipe = RECIPES[itemName];
+
+        if (recipe) {
+          for (const ing of recipe) {
+            const totalAmountToSubtract = ing.amount * item.quantity;
+
+            await Ingredient.findOneAndUpdate(
+              { name: ing.name },
+              { $inc: { quantity: -totalAmountToSubtract } }
+            );
+            console.log(`✅ Списано: ${ing.name} (${totalAmountToSubtract})`);
+          }
+        }
+      }
+    }
+
+    // Оновлюємо статус в БД
     const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.id,
+      orderId,
       { $set: { status, isPaid } },
       { new: true }
     );
+
     res.status(200).json(updatedOrder);
   } catch (error) {
-    console.error(error);
+    console.error('❌ Помилка оновлення:', error);
     res.status(500).json({ message: 'Помилка оновлення' });
+  }
+});
+
+/**
+ * DELETE: Скасування замовлення баристою
+ */
+router.delete('/:id', async (req, res) => {
+  try {
+    // Ми не видаляємо замовлення зовсім, а ставимо статус 'cancelled' для історії
+    await Order.findByIdAndUpdate(req.params.id, { status: 'cancelled' });
+    res.status(200).json({ message: 'Замовлення скасовано' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Помилка скасування' });
   }
 });
 

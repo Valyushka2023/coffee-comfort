@@ -157,6 +157,45 @@ router.post('/', async (req, res) => {
 });
 
 /**
+ * GET: Аналітика продажів (Повернуто!)
+ */
+router.get('/stats', async (req, res) => {
+  try {
+    const { date } = req.query;
+    if (!date) return res.status(400).json({ message: 'Дата не вказана' });
+
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const stats = await Order.aggregate([
+      {
+        $match: {
+          status: 'completed',
+          updatedAt: { $gte: startOfDay, $lte: endOfDay },
+        },
+      },
+      { $unwind: '$items' },
+      {
+        $group: {
+          _id: '$items.name.uk',
+          totalQuantity: { $sum: '$items.quantity' },
+          totalPrice: {
+            $sum: { $multiply: ['$items.price', '$items.quantity'] },
+          },
+        },
+      },
+      { $sort: { totalQuantity: -1 } },
+    ]);
+    res.status(200).json(stats);
+  } catch (error) {
+    console.error('❌ Помилка аналітики:', error);
+    res.status(500).json({ message: 'Помилка сервера при формуванні звіту' });
+  }
+});
+
+/**
  * GET: Актуальні замовлення для бариста
  */
 router.get('/', async (req, res) => {
@@ -166,55 +205,10 @@ router.get('/', async (req, res) => {
     }).sort({ createdAt: -1 });
     res.status(200).json(orders);
   } catch (error) {
-    console.error('❌ Помилка завантаження замовлень:', error);
+    console.error('❌ Помилка завантаження:', error);
     res.status(500).json({ message: 'Помилка сервера' });
   }
 });
-
-/**
- * PATCH: Оновлення статусу та автоматичне списання складу
- */
-router.patch('/:id', async (req, res) => {
-  try {
-    const { status, isPaid } = req.body;
-    const orderId = req.params.id;
-
-    const order = await Order.findById(orderId);
-    if (!order) {
-      return res.status(404).json({ message: 'Замовлення не знайдено' });
-    }
-
-    if (status === 'completed' && order.status !== 'completed') {
-      console.log(`📦 Починаємо списання для замовлення #${order.orderNumber}`);
-      for (const item of order.items) {
-        const itemName = item.name.uk;
-        const recipe = RECIPES[itemName];
-        if (recipe) {
-          for (const ing of recipe) {
-            const totalAmountToSubtract = ing.amount * item.quantity;
-            await Ingredient.findOneAndUpdate(
-              { name: ing.name },
-              { $inc: { quantity: -totalAmountToSubtract } }
-            );
-            console.log(`✅ Списано: ${ing.name} (${totalAmountToSubtract})`);
-          }
-        }
-      }
-    }
-
-    // Оновлюємо статус в БД
-    const updatedOrder = await Order.findByIdAndUpdate(
-      orderId,
-      { $set: { status, isPaid } },
-      { new: true }
-    );
-
-    res.status(200).json(updatedOrder);
-  } catch (error) {
-    console.error('❌ Помилка оновлення:', error);
-    res.status(500).json({ message: 'Помилка оновлення' });
-  }
-}); // <--- ТУТ була пропущена закриваюча дужка для router.patch
 
 /**
  * GET: Історія замовлень
@@ -227,7 +221,46 @@ router.get('/history', async (req, res) => {
     res.status(200).json(history);
   } catch (error) {
     console.error('❌ Помилка історії:', error);
-    res.status(500).json({ message: 'Помилка сервера' });
+    res.status(500).json({ message: 'Помилка історії' });
+  }
+});
+
+/**
+ * PATCH: Оновлення статусу та списання
+ */
+router.patch('/:id', async (req, res) => {
+  try {
+    const { status, isPaid } = req.body;
+    const orderId = req.params.id;
+
+    const order = await Order.findById(orderId);
+    if (!order)
+      return res.status(404).json({ message: 'Замовлення не знайдено' });
+
+    if (status === 'completed' && order.status !== 'completed') {
+      for (const item of order.items) {
+        const itemName = item.name.uk;
+        const recipe = RECIPES[itemName];
+        if (recipe) {
+          for (const ing of recipe) {
+            await Ingredient.findOneAndUpdate(
+              { name: ing.name },
+              { $inc: { quantity: -(ing.amount * item.quantity) } }
+            );
+          }
+        }
+      }
+    }
+
+    const updatedOrder = await Order.findByIdAndUpdate(
+      orderId,
+      { $set: { status, isPaid } },
+      { new: true }
+    );
+    res.status(200).json(updatedOrder);
+  } catch (error) {
+    console.error('❌ Помилка оновлення:', error);
+    res.status(500).json({ message: 'Помилка оновлення' });
   }
 });
 

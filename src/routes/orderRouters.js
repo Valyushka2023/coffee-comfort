@@ -123,11 +123,10 @@ import Ingredient from '../models/Ingredient.js';
 
 const router = express.Router();
 
-// Словник рецептів: назва напою (uk) має збігатися з назвою в меню
 const RECIPES = {
   'Кава в зернах (Arabica)': [
     { name: 'Кава в зернах (Arabica)', amount: 0.018 },
-  ], // для чистого еспресо
+  ],
   Капучино: [
     { name: 'Кава в зернах (Arabica)', amount: 0.018 },
     { name: 'Молоко 2.5%', amount: 0.2 },
@@ -136,7 +135,7 @@ const RECIPES = {
     { name: 'Кава в зернах (Arabica)', amount: 0.018 },
     { name: 'Молоко 2.5%', amount: 0.25 },
   ],
-  'Сироп Карамель': [{ name: 'Сироп Карамель', amount: 1 }], // списання 1 одиниці (порції або шт)
+  'Сироп Карамель': [{ name: 'Сироп Карамель', amount: 1 }],
   'Стаканчики 250мл': [{ name: 'Стаканчики 250мл', amount: 1 }],
   'Цукор в стіках': [{ name: 'Цукор в стіках', amount: 2 }],
 };
@@ -167,7 +166,7 @@ router.get('/', async (req, res) => {
     }).sort({ createdAt: -1 });
     res.status(200).json(orders);
   } catch (error) {
-    console.error('❌ Помилка при створенні замовлення:', error);
+    console.error('❌ Помилка завантаження замовлень:', error);
     res.status(500).json({ message: 'Помилка сервера' });
   }
 });
@@ -180,23 +179,19 @@ router.patch('/:id', async (req, res) => {
     const { status, isPaid } = req.body;
     const orderId = req.params.id;
 
-    // Знаходимо поточне замовлення в базі
     const order = await Order.findById(orderId);
-    if (!order)
+    if (!order) {
       return res.status(404).json({ message: 'Замовлення не знайдено' });
+    }
 
-    // ЛОГІКА СПИСАННЯ: Якщо статус змінюється на 'completed'
     if (status === 'completed' && order.status !== 'completed') {
       console.log(`📦 Починаємо списання для замовлення #${order.orderNumber}`);
-
       for (const item of order.items) {
         const itemName = item.name.uk;
         const recipe = RECIPES[itemName];
-
         if (recipe) {
           for (const ing of recipe) {
             const totalAmountToSubtract = ing.amount * item.quantity;
-
             await Ingredient.findOneAndUpdate(
               { name: ing.name },
               { $inc: { quantity: -totalAmountToSubtract } }
@@ -219,14 +214,28 @@ router.patch('/:id', async (req, res) => {
     console.error('❌ Помилка оновлення:', error);
     res.status(500).json({ message: 'Помилка оновлення' });
   }
+}); // <--- ТУТ була пропущена закриваюча дужка для router.patch
+
+/**
+ * GET: Історія замовлень
+ */
+router.get('/history', async (req, res) => {
+  try {
+    const history = await Order.find({ status: 'completed' })
+      .limit(100)
+      .sort({ updatedAt: -1 });
+    res.status(200).json(history);
+  } catch (error) {
+    console.error('❌ Помилка історії:', error);
+    res.status(500).json({ message: 'Помилка сервера' });
+  }
 });
 
 /**
- * DELETE: Скасування замовлення баристою
+ * DELETE: Скасування замовлення
  */
 router.delete('/:id', async (req, res) => {
   try {
-    // Ми не видаляємо замовлення зовсім, а ставимо статус 'cancelled' для історії
     await Order.findByIdAndUpdate(req.params.id, { status: 'cancelled' });
     res.status(200).json({ message: 'Замовлення скасовано' });
   } catch (error) {

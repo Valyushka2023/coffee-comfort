@@ -266,13 +266,19 @@ const OrderHistory = () => {
     loadAllData();
   }, [selectedDate]);
 
+  // ОНОВЛЕНА ФУНКЦІЯ ЕКСПОРТУ: ГЕНЕРУЄ ДВІ ВКЛАДКИ
   const exportToExcel = () => {
     if (history.length === 0 && stats.length === 0) {
       alert('Немає даних для експорту');
       return;
     }
+
+    // Створюємо нову робочу книгу Excel
     const workbook = XLSX.utils.book_new();
 
+    // ==========================================
+    // 1. ФОРМУЄМО ВКЛАДКУ "Історія чеків"
+    // ==========================================
     const historyData = history.map(order => ({
       'Дата видачі': new Date(order.updatedAt).toLocaleString('uk-UA'),
       '№ чека': order.orderNumber || order._id.slice(-4).toUpperCase(),
@@ -284,8 +290,53 @@ const OrderHistory = () => {
     }));
 
     const historySheet = XLSX.utils.json_to_sheet(historyData);
+
+    // Налаштування гарної ширини колонок для першої вкладки
+    historySheet['!cols'] = [
+      { wch: 20 }, // Дата видачі
+      { wch: 12 }, // № чека
+      { wch: 50 }, // Страви
+      { wch: 12 }, // Сума (грн)
+      { wch: 12 }, // Статус
+    ];
     XLSX.utils.book_append_sheet(workbook, historySheet, 'Історія чеків');
-    XLSX.writeFile(workbook, `Report_${selectedDate}.xlsx`);
+
+    // ==========================================
+    // 2. ФОРМУЄМО ВКЛАДКУ "Підсумок за день"
+    // ==========================================
+    const statsData = stats.map(item => ({
+      'Назва страви': item._id,
+      'Продано (шт)': item.totalQuantity,
+      'Загальна сума (грн)': item.totalPrice,
+    }));
+
+    // Рахуємо фінальну виручку за масивом статистики
+    const totalDayRevenueCalculated = stats.reduce(
+      (sum, item) => sum + item.totalPrice,
+      0
+    );
+
+    // Додаємо підсумковий рядок в самий кінець таблиці
+    statsData.push({
+      'Назва страви': 'РАЗОМ ЗА ДЕНЬ:',
+      'Продано (шт)': '',
+      'Загальна сума (грн)': totalDayRevenueCalculated,
+    });
+
+    const statsSheet = XLSX.utils.json_to_sheet(statsData);
+
+    // Налаштування ширини колонок для другої вкладки
+    statsSheet['!cols'] = [
+      { wch: 30 }, // Назва страви
+      { wch: 15 }, // Продано (шт)
+      { wch: 20 }, // Загальна сума (грн)
+    ];
+    XLSX.utils.book_append_sheet(workbook, statsSheet, 'Підсумок за день');
+
+    // ==========================================
+    // 3. ЗБЕРЕЖЕННЯ ГОТОВОГО ФАЙЛУ
+    // ==========================================
+    XLSX.writeFile(workbook, `Coffee_Comfort_Report_${selectedDate}.xlsx`);
   };
 
   const totalDayRevenue = stats.reduce((sum, item) => sum + item.totalPrice, 0);
@@ -298,10 +349,9 @@ const OrderHistory = () => {
       <header className={css.header}>
         <h1>📊 Звітність та Історія</h1>
         <div className={css.filterWrapper}>
-          {/* Додаємо атрибут htmlFor, який збігається з id інпуту */}
           <label htmlFor="history-date-picker">Аналітика за день: </label>
           <input
-            id="history-date-picker" // Додаємо id
+            id="history-date-picker"
             type="date"
             value={selectedDate}
             onChange={e => setSelectedDate(e.target.value)}

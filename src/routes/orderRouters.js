@@ -273,7 +273,11 @@ router.patch('/:id', async (req, res) => {
 
         if (recipe) {
           for (const ing of recipe) {
-            const totalDeduction = ing.amount * item.quantity;
+            // РОЗРАХУНОК З ОКРУГЛЕННЯМ: Запобігає появі хвостів на кшталт 28.900000000000002
+            const totalDeduction = Number(
+              (ing.amount * item.quantity).toFixed(3)
+            );
+
             await Ingredient.findOneAndUpdate(
               { name: ing.name },
               { $inc: { quantity: -totalDeduction } }
@@ -290,12 +294,12 @@ router.patch('/:id', async (req, res) => {
     );
     res.status(200).json(updatedOrder);
   } catch (error) {
-    console.error(error);
+    console.error('❌ Помилка оновлення статусу/списання:', error);
     res.status(500).json({ message: 'Помилка оновлення' });
   }
 });
 
-// GET: Історія замовлень (виправлено фільтр)
+// GET: Історія замовлень
 router.get('/history', async (req, res) => {
   try {
     const history = await Order.find({
@@ -336,6 +340,7 @@ router.get('/stats', async (req, res) => {
           },
         },
       },
+      { $sort: { totalQuantity: -1 } }, // Сортування від популярніших до менш популярних
     ]);
     res.status(200).json(stats);
   } catch (error) {
@@ -344,7 +349,7 @@ router.get('/stats', async (req, res) => {
   }
 });
 
-// Інші маршрути (GET /, POST /, DELETE /:id) залишаються без змін
+// POST: Створення замовлення
 router.post('/', async (req, res) => {
   try {
     const newOrder = new Order(req.body);
@@ -355,6 +360,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// GET: Активні замовлення для табло бариста
 router.get('/', async (req, res) => {
   try {
     const orders = await Order.find({

@@ -310,7 +310,7 @@ const OrderHistory = () => {
       'Загальна сума (грн)': item.totalPrice,
     }));
 
-    // Рахуємо фінальну виручку за масивом статистики
+    // Рахуємо фінальну編曲у за масивом статистики
     const totalDayRevenueCalculated = stats.reduce(
       (sum, item) => sum + item.totalPrice,
       0
@@ -348,15 +348,19 @@ const OrderHistory = () => {
     <div className={css.container}>
       <header className={css.header}>
         <h1>📊 Звітність та Історія</h1>
+
+        {/* ВИПРАВЛЕНИЙ БЛОК ДЛЯ ОРГАНІЗАЦІЇ ДУЖЕ СУВОРОГО ESLINT */}
         <div className={css.filterWrapper}>
-          <label htmlFor="history-date-picker">Аналітика за день: </label>
-          <input
-            id="history-date-picker"
-            type="date"
-            value={selectedDate}
-            onChange={e => setSelectedDate(e.target.value)}
-            className={css.dateInput}
-          />
+          <label htmlFor="history-date-picker">
+            Аналітика за день:
+            <input
+              id="history-date-picker"
+              type="date"
+              value={selectedDate}
+              onChange={e => setSelectedDate(e.target.value)}
+              className={css.dateInput}
+            />
+          </label>
         </div>
       </header>
 

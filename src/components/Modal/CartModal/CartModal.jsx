@@ -17,7 +17,7 @@ import { sendOrderRequest } from '../../../services/api';
 import css from './CartModal.module.css';
 
 const CartModal = ({ isOpen, onClose }) => {
-  // Додаємо i18n, щоб знати поточну активну мову додатка
+  // Використовуємо i18n для відстеження активної мови
   const { t, i18n } = useTranslation('menu');
   const dispatch = useDispatch();
 
@@ -31,8 +31,7 @@ const CartModal = ({ isOpen, onClose }) => {
 
   const { items, totalAmount } = useSelector(state => state.cart);
 
-  // Визначаємо поточну мову для відображення страв (зазвичай 'uk' або 'en')
-  // Слайсимо на випадок, якщо мова повернеться у форматі 'en-US'
+  // Визначаємо поточну мову (uk або en)
   const currentLang = (i18n.language || 'uk').slice(0, 2);
 
   const handleKeyDown = useCallback(
@@ -75,24 +74,14 @@ const CartModal = ({ isOpen, onClose }) => {
 
     const minRequiredTime = new Date(now.getTime() + 15 * 60000);
     if (chosenTime < minRequiredTime) {
-      alert(
-        t(
-          'cart_modal.errors.too_early',
-          'Please select a time no earlier than 15 minutes from now.'
-        )
-      );
+      alert(t('cart_modal.errors.too_early'));
       return false;
     }
 
     const openTime = 8;
     const closeTime = 21;
     if (hours < openTime || hours >= closeTime) {
-      alert(
-        t(
-          'cart_modal.errors.working_hours',
-          `Sorry, the cafe is open from ${openTime}:00 to ${closeTime}:00.`
-        )
-      );
+      alert(t('cart_modal.errors.working_hours'));
       return false;
     }
 
@@ -129,10 +118,7 @@ const CartModal = ({ isOpen, onClose }) => {
       setPickupTime('');
     } catch (error) {
       console.error('Error when placing an order:', error);
-      alert(
-        error.message ||
-          t('cart_modal.errors.generic', 'Sorry, an error occurred.')
-      );
+      alert(error.message || t('cart_modal.errors.generic'));
     } finally {
       setIsLoading(false);
     }
@@ -148,7 +134,7 @@ const CartModal = ({ isOpen, onClose }) => {
         type="button"
         className={css['backdrop-button']}
         onClick={onClose}
-        aria-label={t('cart_modal.close_modal', 'Close modal')}
+        aria-label={t('cart_modal.close_modal')}
       />
 
       <div
@@ -158,9 +144,7 @@ const CartModal = ({ isOpen, onClose }) => {
         tabIndex={-1}
       >
         <div className={css['header']}>
-          <h2 className={css['modal-title']}>
-            {t('cart_modal.your_order', 'Your order')}
-          </h2>
+          <h2 className={css['modal-title']}>{t('cart_modal.your_order')}</h2>
           <button className={css['close-icon']} onClick={onClose} type="button">
             <FiX size={24} />
           </button>
@@ -171,24 +155,21 @@ const CartModal = ({ isOpen, onClose }) => {
             <div className={css['success-container']}>
               <FiCheckCircle size={80} color="#2ecc71" />
               <h2 className={css['success-title']}>
-                {t('cart_modal.thank_you', 'Thank you!')}
+                {t('cart_modal.thank_you')}
               </h2>
               <p className={css['order-number-label']}>
-                {t('cart_modal.order_number', 'Your order number:')}
+                {t('cart_modal.order_number')}
               </p>
               <div className={css['order-number-badge']}>#{orderNum}</div>
               <p className={css['warning-text']}>
-                {t(
-                  'cart_modal.warning_hold',
-                  '⚠️ We hold the order for 20 minutes, after which it will be canceled.'
-                )}
+                {t('cart_modal.warning_hold')}
               </p>
               <button
                 className={css['order-btn']}
                 onClick={onClose}
                 type="button"
               >
-                {t('cart_modal.understood', 'Understood')}
+                {t('cart_modal.understood')}
               </button>
             </div>
           ) : items.length === 0 ? (
@@ -199,7 +180,6 @@ const CartModal = ({ isOpen, onClose }) => {
             <>
               <ul className={css['items-list']}>
                 {items.map(item => {
-                  // Динамічно беремо назву страви залежно від мови
                   const itemTitle =
                     item.name?.[currentLang] || item.name?.uk || 'Item';
 
@@ -213,7 +193,7 @@ const CartModal = ({ isOpen, onClose }) => {
                       <div className={css['item-info']}>
                         <h4 className={css['item-title']}>{itemTitle}</h4>
                         <p className={css['item-price']}>
-                          {item.price} {t('cart_modal.currency', 'грн')}
+                          {item.price} {t('cart_modal.currency')}
                         </p>
                         <div className={css['controls']}>
                           <button
@@ -245,7 +225,7 @@ const CartModal = ({ isOpen, onClose }) => {
                   <FiUser className={css['form-icon']} />
                   <input
                     type="text"
-                    placeholder={t('cart_modal.placeholder_name', 'Your name')}
+                    placeholder={t('cart_modal.placeholder_name')}
                     value={name}
                     onChange={e => setName(e.target.value)}
                     className={css['input-field']}
@@ -256,10 +236,7 @@ const CartModal = ({ isOpen, onClose }) => {
                   <FiPhone className={css['form-icon']} />
                   <input
                     type="tel"
-                    placeholder={t(
-                      'cart_modal.placeholder_phone',
-                      'Phone number'
-                    )}
+                    placeholder={t('cart_modal.placeholder_phone')}
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
                     className={css['input-field']}
@@ -271,11 +248,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     htmlFor="pickup-time"
                     className={css['time-input-label']}
                   >
-                    <FiClock size={14} />{' '}
-                    {t(
-                      'cart_modal.pickup_time_label',
-                      'Preferred time (optional):'
-                    )}
+                    <FiClock size={14} /> {t('cart_modal.pickup_time_label')}
                   </label>
                   <input
                     id="pickup-time"
@@ -290,9 +263,9 @@ const CartModal = ({ isOpen, onClose }) => {
 
               <div className={css['checkout-section']}>
                 <div className={css['total-row']}>
-                  <span>{t('cart_modal.total', 'Total:')}</span>
+                  <span>{t('cart_modal.total')}</span>
                   <span>
-                    {totalAmount} {t('cart_modal.currency', 'грн')}
+                    {totalAmount} {t('cart_modal.currency')}
                   </span>
                 </div>
                 <button
@@ -302,15 +275,15 @@ const CartModal = ({ isOpen, onClose }) => {
                   disabled={isLoading || isFormInvalid}
                 >
                   {isLoading
-                    ? t('cart_modal.sending', 'Sending...')
-                    : t('cart_modal.place_order', 'Place an order')}
+                    ? t('cart_modal.sending')
+                    : t('cart_modal.place_order')}
                 </button>
                 <button
                   type="button"
                   className={css['cancel-btn']}
                   onClick={() => dispatch(clearCart())}
                 >
-                  <FiTrash2 /> {t('cart_modal.clear_cart_btn', 'Empty cart')}
+                  <FiTrash2 /> {t('cart_modal.clear_cart_btn')}
                 </button>
               </div>
             </>

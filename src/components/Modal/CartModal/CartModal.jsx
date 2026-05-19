@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -57,7 +54,6 @@ const CartModal = ({ isOpen, onClose }) => {
     };
   }, [isOpen, handleKeyDown]);
 
-  // Скидаємо стан успіху при відкритті модалки
   useEffect(() => {
     if (isOpen) {
       setIsOrdered(false);
@@ -74,14 +70,24 @@ const CartModal = ({ isOpen, onClose }) => {
 
     const minRequiredTime = new Date(now.getTime() + 15 * 60000);
     if (chosenTime < minRequiredTime) {
-      alert('Будь ласка, обирайте час не раніше ніж за 15 хвилин від зараз.');
+      alert(
+        t(
+          'cart_modal.errors.too_early',
+          'Please select a time no earlier than 15 minutes from now.'
+        )
+      );
       return false;
     }
 
     const openTime = 8;
     const closeTime = 21;
     if (hours < openTime || hours >= closeTime) {
-      alert(`Вибачте, кав'ярня працює з ${openTime}:00 до ${closeTime}:00.`);
+      alert(
+        t(
+          'cart_modal.errors.working_hours',
+          `Sorry, the cafe is open from ${openTime}:00 to ${closeTime}:00.`
+        )
+      );
       return false;
     }
 
@@ -104,7 +110,7 @@ const CartModal = ({ isOpen, onClose }) => {
           price: item.price,
           quantity: item.quantity,
         })),
-        totalPrice: totalAmount, // Змінено з totalAmount на totalPrice для бекенду
+        totalPrice: totalAmount,
       };
 
       const data = await sendOrderRequest(orderData);
@@ -117,8 +123,11 @@ const CartModal = ({ isOpen, onClose }) => {
       setPhone('');
       setPickupTime('');
     } catch (error) {
-      console.error('Помилка при оформленні замовлення:', error);
-      alert(error.message || 'Вибачте, сталася помилка.');
+      console.error('Error when placing an order:', error);
+      alert(
+        error.message ||
+          t('cart_modal.errors.generic', 'Sorry, an error occurred.')
+      );
     } finally {
       setIsLoading(false);
     }
@@ -126,64 +135,56 @@ const CartModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  const isFormInvalid = !name.trim() || !phone.trim() || items.length === 0;
+
   return (
-    <div className={css.overlay} onClick={onClose}>
+    <div className={css['overlay']}>
+      {/* Прозора кнопка на весь екран для закриття модалки при кліку поза нею */}
+      <button
+        type="button"
+        className={css['backdrop-button']}
+        onClick={onClose}
+        aria-label={t('cart_modal.close_modal', 'Close modal')}
+      />
+
       <div
-        className={css.drawer}
-        onClick={e => e.stopPropagation()}
+        className={css['drawer']}
         role="dialog"
         aria-modal="true"
-        tabIndex="-1"
+        tabIndex={-1}
       >
-        <div className={css.header}>
-          <h2 className={css['modal-title']}>{t('cart_modal.your_order')}</h2>
+        <div className={css['header']}>
+          <h2 className={css['modal-title']}>
+            {t('cart_modal.your_order', 'Your order')}
+          </h2>
           <button className={css['close-icon']} onClick={onClose} type="button">
             <FiX size={24} />
           </button>
         </div>
 
-        <div className={css.content}>
+        <div className={css['content']}>
           {isOrdered ? (
-            <div
-              style={{
-                textAlign: 'center',
-                marginTop: '30px',
-                padding: '20px',
-              }}
-            >
+            <div className={css['success-container']}>
               <FiCheckCircle size={80} color="#2ecc71" />
-              <h2 style={{ color: '#2c3e50' }}>Дякуємо, {name}!</h2>
-              <p style={{ fontSize: '1.2rem' }}>Ваш номер замовлення:</p>
-              <div
-                style={{
-                  background: '#f1c40f',
-                  display: 'inline-block',
-                  padding: '10px 20px',
-                  borderRadius: '10px',
-                  fontSize: '2rem',
-                  fontWeight: 'bold',
-                  margin: '10px 0',
-                }}
-              >
-                #{orderNum}
-              </div>
-              <p
-                style={{
-                  color: '#e67e22',
-                  fontWeight: 'bold',
-                  marginTop: '20px',
-                }}
-              >
-                ⚠️ Ми тримаємо замовлення 20 хвилин, після чого воно буде
-                розформоване.
+              <h2 className={css['success-title']}>
+                {t('cart_modal.thank_you', 'Thank you!')}
+              </h2>
+              <p className={css['order-number-label']}>
+                {t('cart_modal.order_number', 'Your order number:')}
+              </p>
+              <div className={css['order-number-badge']}>#{orderNum}</div>
+              <p className={css['warning-text']}>
+                {t(
+                  'cart_modal.warning_hold',
+                  '⚠️ We hold the order for 20 minutes, after which it will be canceled.'
+                )}
               </p>
               <button
                 className={css['order-btn']}
                 onClick={onClose}
-                style={{ marginTop: '20px' }}
                 type="button"
               >
-                Зрозумів
+                {t('cart_modal.understood', 'Understood')}
               </button>
             </div>
           ) : items.length === 0 ? (
@@ -192,34 +193,23 @@ const CartModal = ({ isOpen, onClose }) => {
             </p>
           ) : (
             <>
-              <ul
-                className={css.itemsList}
-                style={{ listStyle: 'none', padding: 0, margin: 0 }}
-              >
+              <ul className={css['items-list']}>
                 {items.map(item => (
-                  <li key={item._id || item.id} className={css.item}>
+                  <li key={item._id || item.id} className={css['item']}>
                     <img
                       src={item.img}
-                      alt={item.name?.uk}
-                      className={css['item-img']}
+                      alt={item.name?.uk || 'item'}
+                      className={css['item-image']}
                     />
-                    <div style={{ flex: 1 }}>
-                      <h4 style={{ margin: 0 }}>{item.name?.uk}</h4>
-                      <p
-                        style={{
-                          margin: '5px 0',
-                          color: '#d35400',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        {item.price} грн
-                      </p>
-                      <div className={css.controls}>
+                    <div className={css['item-info']}>
+                      <h4 className={css['item-title']}>{item.name?.uk}</h4>
+                      <p className={css['item-price']}>{item.price} грн</p>
+                      <div className={css['controls']}>
                         <button
                           onClick={() =>
                             dispatch(removeFromCart(item._id || item.id))
                           }
-                          className={css.countBtn}
+                          className={css['count-btn']}
                           type="button"
                         >
                           <FiMinus />
@@ -227,7 +217,7 @@ const CartModal = ({ isOpen, onClose }) => {
                         <span>{item.quantity}</span>
                         <button
                           onClick={() => dispatch(addToCart(item))}
-                          className={css.countBtn}
+                          className={css['count-btn']}
                           type="button"
                         >
                           <FiPlus />
@@ -238,65 +228,42 @@ const CartModal = ({ isOpen, onClose }) => {
                 ))}
               </ul>
 
-              <div style={{ padding: '20px 0', borderTop: '1px solid #eee' }}>
-                <div style={{ marginBottom: '15px', position: 'relative' }}>
-                  <FiUser
-                    style={{
-                      position: 'absolute',
-                      left: '10px',
-                      top: '12px',
-                      color: '#95a5a6',
-                    }}
-                  />
+              <div className={css['form-group']}>
+                <div className={css['form-group']}>
+                  <FiUser className={css['form-icon']} />
                   <input
                     type="text"
-                    placeholder="Ваше ім'я"
+                    placeholder={t('cart_modal.placeholder_name', 'Your name')}
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 10px 10px 35px',
-                      borderRadius: '8px',
-                      border: '1px solid #ddd',
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '15px', position: 'relative' }}>
-                  <FiPhone
-                    style={{
-                      position: 'absolute',
-                      left: '10px',
-                      top: '12px',
-                      color: '#95a5a6',
-                    }}
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Номер телефону"
-                    value={phone}
-                    onChange={e => setPhone(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 10px 10px 35px',
-                      borderRadius: '8px',
-                      border: '1px solid #ddd',
-                    }}
+                    className={css['input-field']}
                   />
                 </div>
 
-                <div style={{ marginTop: '15px' }}>
+                <div className={css['form-group']}>
+                  <FiPhone className={css['form-icon']} />
+                  <input
+                    type="tel"
+                    placeholder={t(
+                      'cart_modal.placeholder_phone',
+                      'Phone number'
+                    )}
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)}
+                    className={css['input-field']}
+                  />
+                </div>
+
+                <div className={css['form-group']}>
                   <label
                     htmlFor="pickup-time"
-                    style={{
-                      marginBottom: '5px',
-                      fontSize: '0.9rem',
-                      color: '#7f8c8d',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '5px',
-                    }}
+                    className={css['time-input-label']}
                   >
-                    <FiClock size={14} /> Бажаний час (необов&apos;язково):
+                    <FiClock size={14} />{' '}
+                    {t(
+                      'cart_modal.pickup_time_label',
+                      "Бажаний час (необов'язково):"
+                    )}
                   </label>
                   <input
                     id="pickup-time"
@@ -304,70 +271,32 @@ const CartModal = ({ isOpen, onClose }) => {
                     value={pickupTime}
                     min={minTimeStr}
                     onChange={e => setPickupTime(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '10px',
-                      borderRadius: '8px',
-                      border: '1px solid #ddd',
-                      fontSize: '1rem',
-                      fontFamily: 'inherit',
-                    }}
+                    className={css['time-input-field']}
                   />
                 </div>
               </div>
 
-              <div
-                style={{
-                  marginTop: 'auto',
-                  paddingTop: '10px',
-                  borderTop: '2px solid #eee',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '1.2rem',
-                    fontWeight: 'bold',
-                    marginBottom: '15px',
-                  }}
-                >
-                  <span>Всього:</span>
+              <div className={css['checkout-section']}>
+                <div className={css['total-row']}>
+                  <span>{t('cart_modal.total', 'Total:')}</span>
                   <span>{totalAmount} грн</span>
                 </div>
                 <button
                   type="button"
                   className={css['order-btn']}
                   onClick={handleOrder}
-                  disabled={
-                    isLoading ||
-                    !name.trim() ||
-                    !phone.trim() ||
-                    items.length === 0
-                  }
-                  style={{
-                    opacity:
-                      !name.trim() || !phone.trim() || items.length === 0
-                        ? 0.6
-                        : 1,
-                  }}
+                  disabled={isLoading || isFormInvalid}
                 >
-                  {isLoading ? 'Відправка...' : 'Оформити замовлення'}
+                  {isLoading
+                    ? t('cart_modal.sending', 'Sending...')
+                    : t('cart_modal.place_order', 'Place an order')}
                 </button>
                 <button
                   type="button"
                   className={css['cancel-btn']}
                   onClick={() => dispatch(clearCart())}
-                  style={{
-                    width: '100%',
-                    background: 'none',
-                    border: 'none',
-                    color: '#95a5a6',
-                    marginTop: '10px',
-                    cursor: 'pointer',
-                  }}
                 >
-                  <FiTrash2 /> Очистити кошик
+                  <FiTrash2 /> {t('cart_modal.clear_cart_btn', 'Empty cart')}
                 </button>
               </div>
             </>

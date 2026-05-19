@@ -11,7 +11,10 @@
   height: 100%;
   background: rgb(0 0 0 / 50%);
 
-  /* Використовуємо fade-in з вашого файлу для плавного фону */
+  /* Стилі для скидання дефолтного вигляду кнопки-оверлею */
+  border: none;
+  font-family: inherit;
+  text-align: left;
   animation: fade-in 0.3s ease-out;
   backdrop-filter: blur(0.25rem);
 }
@@ -25,10 +28,6 @@
   padding: 1.5625rem;
   background: white;
   box-shadow: -0.3125rem 0 0.9375rem rgb(0 0 0 / 10%);
-
-  /* Використовуємо вашу анімацію slide-in-left */
-
-  /* Вона додасть руху м'якості та прозорості (opacity) */
   animation: slide-in-left 0.4s ease-out;
 }
 
@@ -48,6 +47,44 @@
   overflow-y: auto;
 }
 
+.success-container {
+  margin-top: 1.875rem;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.success-title {
+  margin-top: 1rem;
+  color: #2c3e50;
+}
+
+.order-number-label {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.order-number-badge {
+  display: inline-block;
+  margin: 0.625rem 0;
+  padding: 0.625rem 1.25rem;
+  background: #f1c40f;
+  border-radius: 0.625rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.warning-text {
+  margin-top: 1.25rem;
+  font-weight: bold;
+  color: #e67e22;
+}
+
+.items-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .item {
   display: flex;
   gap: 0.9375rem;
@@ -56,7 +93,21 @@
   border-bottom: 0.0625rem solid #f9f9f9;
 }
 
-.item-img {
+.item-info {
+  flex: 1;
+}
+
+.item-title {
+  margin: 0;
+}
+
+.item-price {
+  margin: 0.3125rem 0;
+  font-weight: bold;
+  color: #d35400;
+}
+
+.item-image {
   width: 4.375rem;
   height: 4.375rem;
   border-radius: 0.625rem;
@@ -84,6 +135,59 @@
   background: #bdc3c7;
 }
 
+.form-group {
+  position: relative;
+  margin-bottom: 0.9375rem;
+}
+
+.form-icon {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.625rem;
+  color: #95a5a6;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.625rem 0.625rem 0.625rem 2.1875rem;
+  border: 0.0625rem solid #ddd;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.time-input-label {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+  margin-bottom: 0.3125rem;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.time-input-field {
+  width: 100%;
+  padding: 0.625rem;
+  border: 0.0625rem solid #ddd;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.checkout-section {
+  margin-top: auto;
+  padding-top: 0.625rem;
+  border-top: 0.125rem solid #eee;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.9375rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .order-btn {
   cursor: pointer;
   width: 100%;
@@ -95,11 +199,31 @@
   font-size: 1rem;
   font-weight: bold;
   color: white;
-  transition: background 0.3s;
+  transition:
+    background 0.3s,
+    opacity 0.3s;
 }
 
-.order-btn:hover {
+.order-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.order-btn:hover:not(:disabled) {
   background: #e67e22;
+}
+
+.cancel-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.625rem;
+  background: none;
+  border: none;
+  color: #95a5a6;
 }
 
 .close-icon {

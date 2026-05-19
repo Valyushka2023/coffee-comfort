@@ -1,0 +1,19 @@
+{
+  "cart_modal.errors.too_early": "Будь ласка, обирайте час не раніше ніж за 15 хвилин від зараз.",
+  "cart_modal.errors.working_hours": "Вибачте, кав'ярня працює з",
+  "cart_modal.errors.generic": "Вибачте, сталася помилка.",
+  "cart_modal.close_modal": "Закрити модальне вікно",
+  "cart_modal.your_order": "Ваше замовлення",
+  "cart_modal.thank_you": "Дякуємо!",
+  "cart_modal.order_number": "Ваш номер замовлення:",
+
+  "cart_modal.understood": "Зрозуміло",
+  "cart_modal.empty_cart": "",
+  "cart_modal.placeholder_name": "Ваше ім'я",
+  "cart_modal.placeholder_phone": "Номер телефону",
+  "cart_modal.pickup_time_label": "Бажаний час (необов'язково):",
+  "cart_modal.total": "Всього:",
+  "cart_modal.sending": "Відправка...",
+  "cart_modal.place_order'": "Оформити замовлення",
+  "cart_modal.clear_cart_btn": "Очистити кошик"
+}

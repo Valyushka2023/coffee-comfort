@@ -17,8 +17,9 @@ import { sendOrderRequest } from '../../../services/api';
 import css from './CartModal.module.css';
 
 const CartModal = ({ isOpen, onClose }) => {
-  // Використовуємо i18n для відстеження активної мови
-  const { t, i18n } = useTranslation('menu');
+  // Змінено простір імен на дефолтний або прибрано взагалі,
+  // щоб коректно читався корінь "cart_modal" з вашого JSON
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
   const [isOrdered, setIsOrdered] = useState(false);
@@ -31,7 +32,6 @@ const CartModal = ({ isOpen, onClose }) => {
 
   const { items, totalAmount } = useSelector(state => state.cart);
 
-  // Визначаємо поточну мову (uk або en)
   const currentLang = (i18n.language || 'uk').slice(0, 2);
 
   const handleKeyDown = useCallback(
@@ -263,6 +263,7 @@ const CartModal = ({ isOpen, onClose }) => {
 
               <div className={css['checkout-section']}>
                 <div className={css['total-row']}>
+                  {/* Розділено теги, щоб уникнути злиття тексту та змінних */}
                   <span>{t('cart_modal.total')}</span>
                   <span>
                     {totalAmount} {t('cart_modal.currency')}

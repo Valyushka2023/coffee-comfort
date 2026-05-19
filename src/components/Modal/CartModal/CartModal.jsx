@@ -17,7 +17,8 @@ import { sendOrderRequest } from '../../../services/api';
 import css from './CartModal.module.css';
 
 const CartModal = ({ isOpen, onClose }) => {
-  const { t } = useTranslation('menu');
+  // Додаємо i18n, щоб знати поточну активну мову додатка
+  const { t, i18n } = useTranslation('menu');
   const dispatch = useDispatch();
 
   const [isOrdered, setIsOrdered] = useState(false);
@@ -29,6 +30,10 @@ const CartModal = ({ isOpen, onClose }) => {
   const [minTimeStr, setMinTimeStr] = useState('');
 
   const { items, totalAmount } = useSelector(state => state.cart);
+
+  // Визначаємо поточну мову для відображення страв (зазвичай 'uk' або 'en')
+  // Слайсимо на випадок, якщо мова повернеться у форматі 'en-US'
+  const currentLang = (i18n.language || 'uk').slice(0, 2);
 
   const handleKeyDown = useCallback(
     e => {
@@ -139,7 +144,6 @@ const CartModal = ({ isOpen, onClose }) => {
 
   return (
     <div className={css['overlay']}>
-      {/* Прозора кнопка на весь екран для закриття модалки при кліку поза нею */}
       <button
         type="button"
         className={css['backdrop-button']}
@@ -194,38 +198,46 @@ const CartModal = ({ isOpen, onClose }) => {
           ) : (
             <>
               <ul className={css['items-list']}>
-                {items.map(item => (
-                  <li key={item._id || item.id} className={css['item']}>
-                    <img
-                      src={item.img}
-                      alt={item.name?.uk || 'item'}
-                      className={css['item-image']}
-                    />
-                    <div className={css['item-info']}>
-                      <h4 className={css['item-title']}>{item.name?.uk}</h4>
-                      <p className={css['item-price']}>{item.price} грн</p>
-                      <div className={css['controls']}>
-                        <button
-                          onClick={() =>
-                            dispatch(removeFromCart(item._id || item.id))
-                          }
-                          className={css['count-btn']}
-                          type="button"
-                        >
-                          <FiMinus />
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button
-                          onClick={() => dispatch(addToCart(item))}
-                          className={css['count-btn']}
-                          type="button"
-                        >
-                          <FiPlus />
-                        </button>
+                {items.map(item => {
+                  // Динамічно беремо назву страви залежно від мови
+                  const itemTitle =
+                    item.name?.[currentLang] || item.name?.uk || 'Item';
+
+                  return (
+                    <li key={item._id || item.id} className={css['item']}>
+                      <img
+                        src={item.img}
+                        alt={itemTitle}
+                        className={css['item-image']}
+                      />
+                      <div className={css['item-info']}>
+                        <h4 className={css['item-title']}>{itemTitle}</h4>
+                        <p className={css['item-price']}>
+                          {item.price} {t('cart_modal.currency', 'грн')}
+                        </p>
+                        <div className={css['controls']}>
+                          <button
+                            onClick={() =>
+                              dispatch(removeFromCart(item._id || item.id))
+                            }
+                            className={css['count-btn']}
+                            type="button"
+                          >
+                            <FiMinus />
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button
+                            onClick={() => dispatch(addToCart(item))}
+                            className={css['count-btn']}
+                            type="button"
+                          >
+                            <FiPlus />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
 
               <div className={css['form-group']}>
@@ -262,7 +274,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     <FiClock size={14} />{' '}
                     {t(
                       'cart_modal.pickup_time_label',
-                      "Бажаний час (необов'язково):"
+                      'Preferred time (optional):'
                     )}
                   </label>
                   <input
@@ -279,7 +291,9 @@ const CartModal = ({ isOpen, onClose }) => {
               <div className={css['checkout-section']}>
                 <div className={css['total-row']}>
                   <span>{t('cart_modal.total', 'Total:')}</span>
-                  <span>{totalAmount} грн</span>
+                  <span>
+                    {totalAmount} {t('cart_modal.currency', 'грн')}
+                  </span>
                 </div>
                 <button
                   type="button"

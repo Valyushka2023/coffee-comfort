@@ -64,10 +64,10 @@ const MenuModal = ({ item, onClose, formatPrice }) => {
             type="button"
           >
             {/* Беремо переклад ключа order_now */}
-            {t('order_now') || 'Обрати'}
+            {t('order_now') || 'ORDER'}
           </button>
           <button className={css['cancel-btn']} onClick={onClose} type="button">
-            {t('close') || 'Закрити'}
+            {t('close') || 'CLOSE'}
           </button>
         </div>
       </div>

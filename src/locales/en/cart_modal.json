@@ -1,19 +1,24 @@
 {
-  "cart_modal.errors.too_early": "Please select a time no earlier than 15 minutes from now.",
-  "cart_modal.errors.working_hours": "Sorry, the cafe is open from",
-  "cart_modal.errors.generic": "Sorry, an error occurred.",
-  "cart_modal.close_modal": "Close modal",
-  "cart_modal.your_order": "Your order",
-  "cart_modal.thank_you": "Thank you!",
-  "cart_modal.order_number": "Your order number:",
-
-  "cart_modal.understood": "Understood",
-  "cart_modal.empty_cart": "",
-  "cart_modal.placeholder_name": "Your name",
-  "cart_modal.placeholder_phone": "Phone number",
-  "cart_modal.pickup_time_label": "Preferred time (optional):",
-  "cart_modal.total": "Total:",
-  "cart_modal.sending": "Sending...",
-  "cart_modal.place_order'": "Place an order",
-  "cart_modal.clear_cart_btn": "Empty cart"
+  "cart_modal": {
+    "errors": {
+      "too_early": "Please select a time no earlier than 15 minutes from now.",
+      "working_hours": "Sorry, the cafe is open from 8:00 to 21:00.",
+      "generic": "Sorry, an error occurred."
+    },
+    "close_modal": "Close modal",
+    "your_order": "Your order",
+    "thank_you": "Thank you!",
+    "order_number": "Your order number:",
+    "warning_hold": "⚠️We hold the order for 20 minutes, after which it will be canceled.",
+    "understood": "Understood",
+    "empty_cart": "Your cart is empty",
+    "placeholder_name": "Your name",
+    "placeholder_phone": "Phone number",
+    "pickup_time_label": "Preferred time (optional):",
+    "currency": "UAH",
+    "total": "Total:",
+    "sending": "Sending...",
+    "place_order": "Place an order",
+    "clear_cart_btn": "Empty cart"
+  }
 }

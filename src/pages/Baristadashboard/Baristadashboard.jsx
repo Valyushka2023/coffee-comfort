@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { fetchOrdersRequest, updateOrderStatus } from '../../services/api';
-import axios from 'axios'; // Переконайтеся, що axios імпортовано, або додайте метод в api.js
+import { useTranslation } from 'react-i18next';
+import {
+  fetchOrdersRequest,
+  updateOrderStatus,
+  deleteOrderRequest,
+} from '../../services/api';
 import {
   FiClock,
   FiCheckCircle,
@@ -12,7 +16,9 @@ import {
 
 import css from './Baristadashboard.module.css';
 
-const BaristaDashboard = () => {
+const Baristadashboard = () => {
+  const { t, i18n } = useTranslation('baristadashboard');
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const isFetching = useRef(false);
@@ -47,13 +53,12 @@ const BaristaDashboard = () => {
       );
     } catch (error) {
       console.error(error);
-      alert('Не вдалося оновити статус');
+      alert(t('errorUpdateStatus', 'Не вдалося оновити статус'));
     }
   };
 
   const handleArchive = async orderId => {
     try {
-      // При цьому виклику бекенд тепер автоматично спише інгредієнти
       await updateOrderStatus(orderId, {
         status: 'completed',
         isPaid: true,
@@ -61,29 +66,30 @@ const BaristaDashboard = () => {
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
       console.error('Помилка оновлення:', error);
+      alert(t('errorUpdateStatus', 'Не вдалося оновити статус'));
     }
   };
 
   const handleCancelOrder = async orderId => {
-    if (!window.confirm('Скасувати це замовлення?')) return;
+    if (!window.confirm(t('confirmCancel', 'Скасувати це замовлення?'))) return;
     try {
-      // Якщо у вас в api.js ще немає deleteOrder, можна викликати axios напряму
-      await axios.delete(
-        `https://coffee-comfort.onrender.com/api/orders/${orderId}`
-      );
+      await deleteOrderRequest(orderId);
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
       console.error('Помилка скасування:', error);
-      alert('Не вдалося скасувати замовлення');
+      alert(t('errorCancel', 'Не вдалося скасувати замовлення'));
     }
   };
 
-  if (loading) return <div className={css.loader}>⏳ Завантаження...</div>;
+  if (loading)
+    return (
+      <div className={css.loader}>⏳ {t('loading', 'Завантаження...')}</div>
+    );
 
   return (
     <div className={css['container-style']}>
       <header className={css['header-style']}>
-        <h1>☕ Панель бариста</h1>
+        <h1>☕ {t('title', 'Панель бариста')}</h1>
       </header>
       <div className={css['grid-style']}>
         {orders.map(order => (
@@ -93,6 +99,8 @@ const BaristaDashboard = () => {
             onReady={handleSetReady}
             onArchive={handleArchive}
             onCancel={handleCancelOrder}
+            t={t}
+            currentLang={i18n.language} // 1. Передаємо поточну мову сюди
           />
         ))}
       </div>
@@ -100,7 +108,8 @@ const BaristaDashboard = () => {
   );
 };
 
-const OrderCard = ({ order, onReady, onArchive, onCancel }) => {
+// 2. Приймаємо currentLang ось тут у круглых дужках
+const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
   const [minutesWait, setMinutesWait] = useState(0);
   const isReady = order.status === 'ready';
 
@@ -126,12 +135,12 @@ const OrderCard = ({ order, onReady, onArchive, onCancel }) => {
         </span>
         <div className={css['header-actions']}>
           <span className={css['time-style']}>
-            <FiClock /> {minutesWait} хв
+            <FiClock /> {minutesWait} {t('minutesMin', 'хв')}
           </span>
           <button
             className={css['cancel-btn']}
             onClick={() => onCancel(order._id)}
-            title="Скасувати"
+            title={t('cancel', 'Скасувати')}
           >
             <FiTrash2 />
           </button>
@@ -140,7 +149,9 @@ const OrderCard = ({ order, onReady, onArchive, onCancel }) => {
 
       <div className={order.isPaid ? css['paid-badge'] : css['unpaid-badge']}>
         {order.isPaid ? <FiCheckCircle /> : <FiAlertCircle />}{' '}
-        {order.isPaid ? 'ОПЛАЧЕНО' : 'ОПЛАТА ПРИ ОТРИМАННІ'}
+        {order.isPaid
+          ? t('paid', 'ОПЛАЧЕНО')
+          : t('payOnDelivery', 'ОПЛАТА ПРИ ОТРИМАННІ')}
       </div>
 
       <div className={css['customer-info-style']}>
@@ -150,12 +161,20 @@ const OrderCard = ({ order, onReady, onArchive, onCancel }) => {
         <p>{order.customerPhone}</p>
       </div>
 
+      {/* 3. Оновлена розмітка списку страв із гнучким визначенням мови */}
       <ul className={css['items-list-style']}>
-        {order.items.map((item, i) => (
-          <li key={i}>
-            {item.quantity} x {item.name?.uk || item.name}
-          </li>
-        ))}
+        {order.items.map((item, i) => {
+          const itemName =
+            typeof item.name === 'object'
+              ? item.name[currentLang] || item.name['uk'] || item.name['en']
+              : item.name;
+
+          return (
+            <li key={i}>
+              {item.quantity} x {itemName}
+            </li>
+          );
+        })}
       </ul>
 
       <div className={css['footer-style']}>
@@ -164,14 +183,14 @@ const OrderCard = ({ order, onReady, onArchive, onCancel }) => {
             onClick={() => onReady(order._id)}
             className={css['button-style']}
           >
-            <FiPackage /> Підготовлено
+            <FiPackage /> {t('btnReady', 'Підготовлено')}
           </button>
         ) : (
           <button
             onClick={() => onArchive(order._id)}
             className={css['archive-button']}
           >
-            ✅ Видано клієнту
+            ✅ {t('btnArchived', 'Видано клієнту')}
           </button>
         )}
       </div>
@@ -179,4 +198,4 @@ const OrderCard = ({ order, onReady, onArchive, onCancel }) => {
   );
 };
 
-export default BaristaDashboard;
+export default Baristadashboard;

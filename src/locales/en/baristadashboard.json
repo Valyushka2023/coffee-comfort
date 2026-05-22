@@ -1,0 +1,13 @@
+{
+  "title": "Barista Dashboard",
+  "loading": "Loading...",
+  "minutesMin": "min",
+  "cancel": "Cancel",
+  "paid": "PAID",
+  "payOnDelivery": "PAY ON DELIVERY",
+  "btnReady": "Ready for Pickup",
+  "btnArchived": "Served to Customer",
+  "confirmCancel": "Are you sure you want to cancel this order?",
+  "errorUpdateStatus": "Failed to update status",
+  "errorCancel": "Failed to cancel order"
+}

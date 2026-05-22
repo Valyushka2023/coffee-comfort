@@ -12,21 +12,25 @@ import {
   FiPhone,
   FiClock,
 } from 'react-icons/fi';
+
 import { removeFromCart, addToCart, clearCart } from '../../../redux/cartSlice';
+
 import { sendOrderRequest } from '../../../services/api';
+
 import css from './CartModal.module.css';
 
 const CartModal = ({ isOpen, onClose }) => {
-  // Змінено простір імен на дефолтний або прибрано взагалі,
-  // щоб коректно читався корінь "cart_modal" з вашого JSON
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('cart_modal');
+
   const dispatch = useDispatch();
 
   const [isOrdered, setIsOrdered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [pickupTime, setPickupTime] = useState('');
+
   const [orderNum, setOrderNum] = useState(null);
   const [minTimeStr, setMinTimeStr] = useState('');
 
@@ -35,25 +39,36 @@ const CartModal = ({ isOpen, onClose }) => {
   const currentLang = (i18n.language || 'uk').slice(0, 2);
 
   const handleKeyDown = useCallback(
-    e => {
-      if (e.key === 'Escape') onClose();
+    event => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
     },
     [onClose]
   );
 
   useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
-
-      const now = new Date();
-      now.setMinutes(now.getMinutes() + 15);
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      setMinTimeStr(`${h}:${m}`);
+    if (!isOpen) {
+      return undefined;
     }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    document.body.style.overflow = 'hidden';
+
+    const now = new Date();
+
+    now.setMinutes(now.getMinutes() + 15);
+
+    const hours = String(now.getHours()).padStart(2, '0');
+
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    setMinTimeStr(`${hours}:${minutes}`);
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+
       document.body.style.overflow = 'unset';
     };
   }, [isOpen, handleKeyDown]);
@@ -65,23 +80,32 @@ const CartModal = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   const validatePickupTime = time => {
-    if (!time) return true;
+    if (!time) {
+      return true;
+    }
 
     const [hours, minutes] = time.split(':').map(Number);
-    const now = new Date();
-    const chosenTime = new Date();
-    chosenTime.setHours(hours, minutes, 0, 0);
 
-    const minRequiredTime = new Date(now.getTime() + 15 * 60000);
-    if (chosenTime < minRequiredTime) {
-      alert(t('cart_modal.errors.too_early'));
+    const now = new Date();
+
+    const selectedTime = new Date();
+
+    selectedTime.setHours(hours, minutes, 0, 0);
+
+    const minimumTime = new Date(now.getTime() + 15 * 60 * 1000);
+
+    if (selectedTime < minimumTime) {
+      alert(t('errors.too_early'));
+
       return false;
     }
 
-    const openTime = 8;
-    const closeTime = 21;
-    if (hours < openTime || hours >= closeTime) {
-      alert(t('cart_modal.errors.working_hours'));
+    const openHour = 8;
+    const closeHour = 21;
+
+    if (hours < openHour || hours >= closeHour) {
+      alert(t('errors.working_hours'));
+
       return false;
     }
 
@@ -89,127 +113,164 @@ const CartModal = ({ isOpen, onClose }) => {
   };
 
   const handleOrder = async () => {
-    if (!validatePickupTime(pickupTime)) return;
-    if (items.length === 0 || !name.trim() || !phone.trim()) return;
+    if (!validatePickupTime(pickupTime)) {
+      return;
+    }
+
+    if (items.length === 0) {
+      return;
+    }
+
+    if (!name.trim()) {
+      return;
+    }
+
+    if (!phone.trim()) {
+      return;
+    }
 
     setIsLoading(true);
+
     try {
       const orderData = {
-        customerName: name,
-        customerPhone: phone,
-        pickupTime: pickupTime,
+        customerName: name.trim(),
+        customerPhone: phone.trim(),
+        pickupTime,
+
         items: items.map(item => ({
           _id: item._id || item.id,
           name: item.name,
           price: item.price,
           quantity: item.quantity,
         })),
+
         totalPrice: totalAmount,
       };
 
       const data = await sendOrderRequest(orderData);
 
       setOrderNum(data.orderNumber || (data._id ? data._id.slice(-4) : 'XXXX'));
+
       setIsOrdered(true);
 
       dispatch(clearCart());
+
       setName('');
       setPhone('');
       setPickupTime('');
     } catch (error) {
-      console.error('Error when placing an order:', error);
-      alert(error.message || t('cart_modal.errors.generic'));
+      console.error('Error while placing order:', error);
+
+      alert(error?.message || t('errors.generic'));
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   const isFormInvalid = !name.trim() || !phone.trim() || items.length === 0;
 
   return (
-    <div className={css['overlay']}>
+    <div className={css.overlay}>
       <button
         type="button"
         className={css['backdrop-button']}
         onClick={onClose}
-        aria-label={t('cart_modal.close_modal')}
+        aria-label={t('close_modal')}
       />
 
       <div
-        className={css['drawer']}
+        className={css.drawer}
         role="dialog"
         aria-modal="true"
+        aria-labelledby="cart-modal-title"
         tabIndex={-1}
       >
-        <div className={css['header']}>
-          <h2 className={css['modal-title']}>{t('cart_modal.your_order')}</h2>
-          <button className={css['close-icon']} onClick={onClose} type="button">
+        <div className={css.header}>
+          <h2 id="cart-modal-title" className={css['modal-title']}>
+            {t('your_order')}
+          </h2>
+
+          <button
+            type="button"
+            className={css['close-icon']}
+            onClick={onClose}
+            aria-label={t('close_modal')}
+          >
             <FiX size={24} />
           </button>
         </div>
 
-        <div className={css['content']}>
+        <div className={css.content}>
           {isOrdered ? (
             <div className={css['success-container']}>
               <FiCheckCircle size={80} color="#2ecc71" />
-              <h2 className={css['success-title']}>
-                {t('cart_modal.thank_you')}
-              </h2>
-              <p className={css['order-number-label']}>
-                {t('cart_modal.order_number')}
-              </p>
+
+              <h2 className={css['success-title']}>{t('thank_you')}</h2>
+
+              <p className={css['order-number-label']}>{t('order_number')}</p>
+
               <div className={css['order-number-badge']}>#{orderNum}</div>
-              <p className={css['warning-text']}>
-                {t('cart_modal.warning_hold')}
-              </p>
+
+              <p className={css['warning-text']}>{t('warning_hold')}</p>
+
               <button
+                type="button"
                 className={css['order-btn']}
                 onClick={onClose}
-                type="button"
               >
-                {t('cart_modal.understood')}
+                {t('understood')}
               </button>
             </div>
           ) : items.length === 0 ? (
-            <p className={css['modal-description']}>
-              {t('cart_modal.empty_cart')}
-            </p>
+            <p className={css['modal-description']}>{t('empty_cart')}</p>
           ) : (
             <>
               <ul className={css['items-list']}>
                 {items.map(item => {
                   const itemTitle =
-                    item.name?.[currentLang] || item.name?.uk || 'Item';
+                    item.name?.[currentLang] ||
+                    item.name?.uk ||
+                    item.name?.en ||
+                    'Item';
 
                   return (
-                    <li key={item._id || item.id} className={css['item']}>
+                    <li key={item._id || item.id} className={css.item}>
                       <img
                         src={item.img}
                         alt={itemTitle}
                         className={css['item-image']}
                       />
+
                       <div className={css['item-info']}>
                         <h4 className={css['item-title']}>{itemTitle}</h4>
+
                         <p className={css['item-price']}>
-                          {item.price} {t('cart_modal.currency')}
+                          {item.price} {t('currency')}
                         </p>
-                        <div className={css['controls']}>
+
+                        <div className={css.controls}>
                           <button
+                            type="button"
+                            className={css['count-btn']}
                             onClick={() =>
                               dispatch(removeFromCart(item._id || item.id))
                             }
-                            className={css['count-btn']}
-                            type="button"
+                            aria-label={t('decrease_quantity')}
                           >
                             <FiMinus />
                           </button>
+
                           <span>{item.quantity}</span>
+
                           <button
-                            onClick={() => dispatch(addToCart(item))}
-                            className={css['count-btn']}
                             type="button"
+                            className={css['count-btn']}
+                            onClick={() => dispatch(addToCart(item))}
+                            aria-label={t('increase_quantity')}
                           >
                             <FiPlus />
                           </button>
@@ -220,25 +281,27 @@ const CartModal = ({ isOpen, onClose }) => {
                 })}
               </ul>
 
-              <div className={css['form-group']}>
+              <div className={css['form-wrapper']}>
                 <div className={css['form-group']}>
                   <FiUser className={css['form-icon']} />
+
                   <input
                     type="text"
-                    placeholder={t('cart_modal.placeholder_name')}
                     value={name}
-                    onChange={e => setName(e.target.value)}
+                    onChange={event => setName(event.target.value)}
+                    placeholder={t('placeholder_name')}
                     className={css['input-field']}
                   />
                 </div>
 
                 <div className={css['form-group']}>
                   <FiPhone className={css['form-icon']} />
+
                   <input
                     type="tel"
-                    placeholder={t('cart_modal.placeholder_phone')}
                     value={phone}
-                    onChange={e => setPhone(e.target.value)}
+                    onChange={event => setPhone(event.target.value)}
+                    placeholder={t('placeholder_phone')}
                     className={css['input-field']}
                   />
                 </div>
@@ -248,14 +311,17 @@ const CartModal = ({ isOpen, onClose }) => {
                     htmlFor="pickup-time"
                     className={css['time-input-label']}
                   >
-                    <FiClock size={14} /> {t('cart_modal.pickup_time_label')}
+                    <FiClock size={14} />
+
+                    <span>{t('pickup_time_label')}</span>
                   </label>
+
                   <input
                     id="pickup-time"
                     type="time"
                     value={pickupTime}
                     min={minTimeStr}
-                    onChange={e => setPickupTime(e.target.value)}
+                    onChange={event => setPickupTime(event.target.value)}
                     className={css['time-input-field']}
                   />
                 </div>
@@ -263,28 +329,30 @@ const CartModal = ({ isOpen, onClose }) => {
 
               <div className={css['checkout-section']}>
                 <div className={css['total-row']}>
-                  {/* Розділено теги, щоб уникнути злиття тексту та змінних */}
-                  <span>{t('cart_modal.total')}</span>
+                  <span>{t('total')}</span>
+
                   <span>
-                    {totalAmount} {t('cart_modal.currency')}
+                    {totalAmount} {t('currency')}
                   </span>
                 </div>
+
                 <button
                   type="button"
                   className={css['order-btn']}
                   onClick={handleOrder}
                   disabled={isLoading || isFormInvalid}
                 >
-                  {isLoading
-                    ? t('cart_modal.sending')
-                    : t('cart_modal.place_order')}
+                  {isLoading ? t('sending') : t('place_order')}
                 </button>
+
                 <button
                   type="button"
                   className={css['cancel-btn']}
                   onClick={() => dispatch(clearCart())}
                 >
-                  <FiTrash2 /> {t('cart_modal.clear_cart_btn')}
+                  <FiTrash2 />
+
+                  <span>{t('clear_cart_btn')}</span>
                 </button>
               </div>
             </>

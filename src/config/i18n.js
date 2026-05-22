@@ -9,6 +9,8 @@ import headerEN from '../locales/en/header.json';
 import heroEN from '../locales/en/hero.json';
 import menuEN from '../locales/en/menu.json';
 import cartModalEN from '../locales/en/cart_modal.json';
+import orderHistoryEN from '../locales/en/order_history.json';
+import BaristadashboardEN from '../locales/en/baristadashboard.json';
 // import cardMenuEN from '../locales/en/card_menu.json';
 import contactsEN from '../locales/en/contacts.json';
 import galleryEN from '../locales/en/gallery.json';
@@ -26,6 +28,8 @@ import headerUK from '../locales/uk/header.json';
 import heroUK from '../locales/uk/hero.json';
 import menuUK from '../locales/uk/menu.json';
 import cartModalUK from '../locales/uk/cart_modal.json';
+import orderHistoryUK from '../locales/uk/order_history.json';
+import BaristadashboardUK from '../locales/uk/baristadashboard.json';
 // import cardMenuUK from '../locales/uk/card_menu.json';
 import contactsUK from '../locales/uk/contacts.json';
 import galleryUK from '../locales/uk/gallery.json';
@@ -45,6 +49,8 @@ const resources = {
     hero: heroEN,
     menu: menuEN,
     cart_modal: cartModalEN,
+    order_history: orderHistoryEN,
+    baristadashboard: BaristadashboardEN,
     gallery: galleryEN,
     contacts: contactsEN,
     reviews: reviewsEN,
@@ -62,6 +68,8 @@ const resources = {
     hero: heroUK,
     menu: menuUK,
     cart_modal: cartModalUK,
+    order_history: orderHistoryUK,
+    baristadashboard: BaristadashboardUK,
     gallery: galleryUK,
     contacts: contactsUK,
     reviews: reviewsUK,

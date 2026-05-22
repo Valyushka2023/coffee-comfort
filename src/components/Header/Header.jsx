@@ -19,22 +19,22 @@ const Header = ({ onToggleMenu, isMenuOpen }) => {
 
         <nav className={css['header-links']}>
           <a href="#menu" className={css['header-link']}>
-            {t('menu_header-link', 'Menu')}
+            {t('menu')}
           </a>
           <a href="#about" className={css['header-link']}>
-            {t('about_header_link', 'About us')}
+            {t('about')}
           </a>
           <a href="#gallery" className={css['header-link']}>
-            {t('gallery_header_link', 'Gallery')}
+            {t('gallery')}
           </a>
           <a href="#contacts" className={css['header-link']}>
-            {t('contacts_header_link', 'Contacts')}
+            {t('contacts')}
           </a>
         </nav>
 
         <div className={css['actions-wrapper']}>
           <a href="#contacts" className={css['header-cta-link']}>
-            {t('cta_booking', 'Book a table')}
+            {t('cta_booking')}
           </a>
           <div className={css['settings-group']}>
             <ThemeToggle />

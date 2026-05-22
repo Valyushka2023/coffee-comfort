@@ -20,6 +20,7 @@ const ENDPOINTS = {
   MENU: '/menu',
   ORDERS: '/orders',
   HISTORY: '/orders/history',
+  BARISTA: '/orders/dashboard',
   STATS: '/orders/stats',
   INVENTORY: '/ingredients',
 };
@@ -157,7 +158,14 @@ export const updateOrderStatus = async (orderId, updates) => {
     handleError(error, 'Error updating order status');
   }
 };
-
+export const deleteOrderRequest = async orderId => {
+  try {
+    const { data } = await api.delete(`${ENDPOINTS.ORDERS}/${orderId}`);
+    return data;
+  } catch (error) {
+    handleError(error, 'Помилка скасування замовлення');
+  }
+};
 // ======================
 // HISTORY
 // ======================
@@ -171,7 +179,18 @@ export const fetchOrderHistoryRequest = async () => {
     handleError(error, 'Error loading order history');
   }
 };
+// ======================
+// BARISTA DASHBOARD
+// ======================
 
+export const fetchBaristaDashboardRequest = async () => {
+  try {
+    const { data } = await api.get(ENDPOINTS.BARISTA);
+    return data;
+  } catch (error) {
+    handleError(error, 'Помилка завантаження дашборду баристи');
+  }
+};
 // ======================
 // ANALYTICS (STATS)
 // ======================

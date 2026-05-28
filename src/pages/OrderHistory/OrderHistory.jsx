@@ -10,7 +10,7 @@ import css from './OrderHistory.module.css';
 const OrderHistory = () => {
   const { t, i18n } = useTranslation('order_history');
 
-  const currentLanguage = i18n.language || 'uk';
+  const currentLanguage = (i18n.language || 'uk').substring(0, 2);
 
   const [history, setHistory] = useState([]);
   const [stats, setStats] = useState([]);
@@ -213,7 +213,7 @@ const OrderHistory = () => {
   }
 
   return (
-    <div className={css.container}>
+    <div className={css['container']}>
       <header className={css.header}>
         <h1>📊 {t('title')}</h1>
 

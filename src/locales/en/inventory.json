@@ -1,0 +1,14 @@
+{
+  "title": "Stock & Inventory",
+  "loading": "Loading data...",
+  "noData": "The inventory is currently empty.",
+  "columns": {
+    "product": "Product",
+    "balans": "Balance",
+    "actions": "Actions"
+  },
+  "warning": {
+    "restock": "Restock required!"
+  },
+  "updateError": "Failed to update stock. Please try again."
+}

@@ -1,100 +1,141 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import api from '../../services/api.js';
 import css from './Inventory.module.css';
 
 const Inventory = () => {
+  const { t, i18n } = useTranslation('inventory');
   const [ingredients, setIngredients] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchIngredients = async () => {
-    try {
-      const res = await api.get('/ingredients');
-      setIngredients(res.data || []);
-    } catch (error) {
-      console.error('Помилка завантаження складу:', error);
-    }
-  };
+  // Визначаємо дві літери мови (uk чи en)
+  const lang = (i18n.language || 'uk').substring(0, 2);
 
   useEffect(() => {
-    fetchIngredients();
-  }, []);
+    const loadData = async () => {
+      try {
+        const res = await api.get('/ingredients');
 
-  const handleUpdate = async (id, newQuantity) => {
-    if (newQuantity < 0) return; // Захист від від'ємної кількості
+        // 🚨 ЛОГ №1: Перевіряємо що саме прилетіло з сервера у res.data
+        console.log('=== ЛОГ 1: ДАНІ З БЕКЕНДУ ===');
+        console.log('Поточна мова з i18n:', i18n.language);
+        console.log('Обрізана мова (lang):', lang);
+        console.log('Масив даних (res.data):', res.data);
+        if (res.data && res.data.length > 0) {
+          console.log(
+            "Перший сирий об'єкт з бази повністю:",
+            JSON.stringify(res.data[0], null, 2)
+          );
+        }
+        console.log('=================================');
 
-    // Округляємо нове значення до 3 знаків, щоб уникнути системних помилок JS при ручному редагуванні
-    const roundedQuantity = Number(newQuantity.toFixed(3));
+        setIngredients(res.data || []);
+      } catch (err) {
+        console.error('Помилка завантаження інгредієнтів:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadData();
+  }, [lang, i18n.language]); // Додали залежності, щоб логи оновлювалися при зміні мови
+
+  const changeQuantity = async (id, currentQty, step) => {
+    const targetQty = currentQty + step;
+    if (targetQty < 0) return;
 
     try {
-      await api.patch(`/ingredients/${id}`, { quantity: roundedQuantity });
-      fetchIngredients();
-    } catch (error) {
-      console.error('Помилка оновлення:', error);
-      alert('Не вдалося оновити склад');
+      const res = await api.patch(`/ingredients/${id}`, {
+        quantity: targetQty,
+      });
+
+      setIngredients(prev =>
+        prev.map(item =>
+          item._id === id ? { ...item, quantity: res.data.quantity } : item
+        )
+      );
+    } catch (err) {
+      console.error('Не вдалося оновити кількість:', err);
+      alert(t('updateError'));
     }
   };
 
-  // Функція для красивого відображення чисел (без зайвих нулів та хвостів розрахунків)
-  const formatQuantity = val => {
-    if (typeof val !== 'number') return val;
-    // Округляємо максимум до 3 знаків (для кг/л) і перетворюємо назад у число, щоб прибрати нулі в кінці (наприклад, 5.000 -> 5)
-    return Number(val.toFixed(3));
-  };
+  if (isLoading) {
+    return <div className={css.centerText}>{t('loading')}</div>;
+  }
 
   return (
     <div className={css.container}>
-      <h2>🥛 Склад та Залишки</h2>
-      <table className={css['inventory-table']}>
-        <thead>
-          <tr>
-            <th>Продукт</th>
-            <th>Залишок</th>
-            <th>Дії</th>
-          </tr>
-        </thead>
-        <tbody>
-          {ingredients.length > 0 ? (
-            ingredients.map(item => (
-              <tr
-                key={item._id}
-                className={
-                  item.quantity <= item.minLimit ? css['low-stock'] : ''
-                }
-              >
-                <td>{item.name}</td>
-                <td>
-                  <span className={css.amount}>
-                    {/* Використовуємо функцію форматування замість чистого item.quantity */}
-                    {formatQuantity(item.quantity)} {item.unit}
-                  </span>
-                  {item.quantity <= item.minLimit && (
-                    <div className={css.warning}>Потрібна закупка!</div>
-                  )}
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    onClick={() => handleUpdate(item._id, item.quantity + 1)}
-                  >
-                    + 1
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleUpdate(item._id, item.quantity - 1)}
-                  >
-                    - 1
-                  </button>
-                </td>
-              </tr>
-            ))
-          ) : (
+      <h2>🥛 {t('title')}</h2>
+
+      {ingredients.length === 0 ? (
+        <div className={css.centerText}>{t('noData')}</div>
+      ) : (
+        <table className={css['inventory-table']}>
+          <thead>
             <tr>
-              <td colSpan="3" style={{ textAlign: 'center' }}>
-                Завантаження...
-              </td>
+              <th>{t('columns.product')}</th>
+              <th>{t('columns.balans')}</th>
+              <th>{t('columns.actions')}</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {ingredients.map((item, index) => {
+              const isLow = item.quantity <= item.minLimit;
+
+              // Безпечно беремо мову
+              const displayName = item.name?.[lang] || item.name?.uk || '—';
+              const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
+
+              // 🚨 ЛОГ №2: Логуємо кожен рядок індивідуально, щоб побачити чому виходить прочерк
+              if (index === 0) {
+                console.log(`=== ЛОГ 2: АНАЛІЗ РЯДКА №${index + 1} ===`);
+                console.log("Весь об'єкт item:", item);
+                console.log(
+                  'Шукаємо поле name для мови:',
+                  lang,
+                  '->',
+                  item.name?.[lang]
+                );
+                console.log('Фолбек на uk:', item.name?.uk);
+                console.log('Фінальне значення displayName:', displayName);
+                console.log('=========================================');
+              }
+
+              return (
+                <tr key={item._id} className={isLow ? css['low-stock'] : ''}>
+                  <td className={css.productName}>{displayName}</td>
+                  <td>
+                    <span className={css.amount}>
+                      {Number(item.quantity.toFixed(3))} {displayUnit}
+                    </span>
+                    {isLow && (
+                      <div className={css.warning}>{t('warning.restock')}</div>
+                    )}
+                  </td>
+                  <td className={css.actionsCell}>
+                    <button
+                      type="button"
+                      className={css.btnPlus}
+                      onClick={() => changeQuantity(item._id, item.quantity, 1)}
+                    >
+                      + 1
+                    </button>
+                    <button
+                      type="button"
+                      className={css.btnMinus}
+                      onClick={() =>
+                        changeQuantity(item._id, item.quantity, -1)
+                      }
+                    >
+                      - 1
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

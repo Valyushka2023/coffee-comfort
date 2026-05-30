@@ -1,127 +1,187 @@
-/* src/pages/Inventory/Inventory.module.css */
-
 .container {
-  max-width: 56.25rem;
-  margin: 1.875rem auto;
-  padding: 1.5625rem;
-  background-color: #fff;
-  border-radius: 0.75rem;
-  box-shadow: 0 0.25rem 1.25rem rgb(0 0 0 / 8%);
-  font-family: Inter, sans-serif;
-}
-
-.container h2 {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.625rem;
-  margin-bottom: 1.5625rem;
-  font-size: 1.8rem;
+  max-width: 35rem;
+  margin: 1.25rem auto;
+  padding: 0 1rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: var(--color-gray-dark);
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 1.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-gray-dark);
+}
+
+.date-badge {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-gray-dark);
+}
+
+.export-btn {
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-gold);
+  background-color: #48bb78;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-gray-dark);
+  transition: background-color 0.1s ease;
+}
+
+.export-btn:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.center-text {
+  padding: 2.5rem;
+  font-size: 1.1rem;
   text-align: center;
-  color: #2c3e50;
 }
 
 .inventory-table {
   width: 100%;
+  max-width: 45rem;
   overflow: hidden;
-  border: 0.0625rem solid #e0e0e0;
+  background-color: var(--color-light-beige);
   border-radius: 0.5rem;
-  border-collapse: separate;
-  border-spacing: 0;
+  box-shadow: 0 0.0625rem 0.1875rem rgb(0 0 0 / 5%);
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 0.875rem 1rem;
+  font-size: 0.95rem;
+  vertical-align: middle;
+  word-wrap: break-word;
 }
 
 .inventory-table th {
-  padding: 0.9375rem;
-  background-color: #34495e;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-align: left;
+  background-color: var(--color-dark-beige);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.0312rem;
-  color: white;
+  color: var(--color-gray-dark);
 }
 
 .inventory-table td {
-  padding: 0.9375rem;
-  border-bottom: 0.0625rem solid #f0f0f0;
-  color: #444;
-  vertical-align: middle;
+  border-bottom: 0.0625rem solid var(--color-light-beige);
 }
 
-/* Стилізація кількості */
+.inventory-table tbody tr:nth-child(even) {
+  background-color: var(--color-beige);
+}
+
+.inventory-table th:nth-child(1),
+.inventory-table td:nth-child(1) {
+  width: 40%;
+  text-align: left;
+}
+
+.inventory-table th:nth-child(2),
+.inventory-table td:nth-child(2) {
+  width: 30%;
+  text-align: center;
+}
+
+.inventory-table th:nth-child(3),
+.inventory-table td:nth-child(3) {
+  width: 30%;
+  text-align: right;
+}
+
+.product-name {
+  font-weight: 500;
+}
+
 .amount {
-  display: inline-block;
-  padding: 0.25rem 0.625rem;
-  background: #f8f9fa;
-  border-radius: 0.375rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #2c3e50;
-}
-
-/* Повідомлення про закупку */
-.warning {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  margin-top: 0.3125rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #e74c3c;
-}
-
-/* Рядок, коли товар закінчується */
-.low-stock {
-  background-color: #fff5f5;
-}
-
-.low-stock td:first-child {
-  border-left: 0.25rem solid #e74c3c;
-}
-
-/* Кнопки дій — ТУТ ПРОВЕДЕНО ОСНОВНІ ВИПРАВЛЕННЯ */
-.inventory-table td:last-child {
-  display: flex;
-  gap: 0.625rem;
-}
-
-/* 1. Загальні стилі кнопки */
-.inventory-table button {
-  cursor: pointer;
-  min-width: 2.8125rem;
-  padding: 0.5rem 0.875rem;
-  border: none;
-  border-radius: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #edf2f7;
+  border-radius: 0.25rem;
   font-weight: 600;
-  transition: all 0.2s ease;
+  font-variant-numeric: tabular-nums;
 }
 
-/* 2. Конкретні кольори для кожної кнопки */
-.inventory-table button:first-child {
-  background-color: #27ae60;
-  color: white;
+.actions-cell {
+  justify-content: right;
+  align-items: right;
+  gap: 0.5rem;
 }
 
-.inventory-table button:last-child {
-  background-color: #ecf0f1;
-  color: #7f8c8d;
+.btn-plus,
+.btn-minus {
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.1s ease;
 }
 
-/* 3. Ефекти наведення (Hover) в самому кінці для вищої специфічності */
-.inventory-table button:first-child:hover {
-  background-color: #219150;
-  transform: translateY(-0.0625rem);
+.btn-plus {
+  background-color: #48bb78;
+  color: #fff;
 }
 
-.inventory-table button:last-child:hover {
-  background-color: #bdc3c7;
-  color: #2c3e50;
+.btn-plus:hover {
+  background-color: var(--hover-bg-color);
 }
 
-/* Адаптивність для мобільних пристроїв */
+.btn-minus {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+
+.btn-minus:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.low-stock {
+  background-color: #fff5f5 !important;
+}
+
+.warning {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.375rem;
+  background-color: #fed7d7;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e53e3e;
+}
+
 @media (max-width: 47.9375rem) {
   .container {
+    justify-content: center;
+    align-items: center;
     margin: 0.625rem;
     padding: 0.9375rem;
   }

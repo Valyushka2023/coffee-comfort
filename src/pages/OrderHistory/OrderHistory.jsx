@@ -9,8 +9,8 @@ import css from './OrderHistory.module.css';
 
 const OrderHistory = () => {
   const { t, i18n } = useTranslation('order_history');
-
   const currentLanguage = (i18n.language || 'uk').substring(0, 2);
+  const isUk = currentLanguage === 'uk';
 
   const [history, setHistory] = useState([]);
   const [stats, setStats] = useState([]);
@@ -24,12 +24,9 @@ const OrderHistory = () => {
   useEffect(() => {
     const loadAllData = async () => {
       setLoading(true);
-
       try {
         const historyData = await fetchOrderHistoryRequest();
         const statsData = await fetchOrderStatsRequest(selectedDate);
-
-        // console.log('📊 STATS DATA:', statsData);
 
         setHistory(historyData || []);
         setStats(statsData || []);
@@ -48,133 +45,94 @@ const OrderHistory = () => {
   // ПЕРЕКЛАД НАЗВ СТРАВ
   // ==========================================
   const getDishName = dish => {
-    // Якщо прийшов об'єкт перекладів
     if (typeof dish === 'object' && dish !== null) {
       return dish[currentLanguage] || dish.uk || dish.en;
     }
 
-    // Fallback для старих записів у БД
     const translations = {
-      'Флет-вайт': {
-        uk: 'Флет-вайт',
-        en: 'Flat white',
-      },
-
-      Капучино: {
-        uk: 'Капучино',
-        en: 'Cappuccino',
-      },
-
-      Американо: {
-        uk: 'Американо',
-        en: 'Americano',
-      },
-
-      Латте: {
-        uk: 'Латте',
-        en: 'Latte',
-      },
-
-      Мокка: {
-        uk: 'Мокка',
-        en: 'Mocha',
-      },
-
-      Макіато: {
-        uk: 'Макіато',
-        en: 'Macchiato',
-      },
-
-      Млинці: {
-        uk: 'Млинці',
-        en: 'Pancakes',
-      },
-
-      Чізкейк: {
-        uk: 'Чізкейк',
-        en: 'Cheesecake',
-      },
-
-      Круасан: {
-        uk: 'Круасан',
-        en: 'Croissant',
-      },
-
-      Булочка: {
-        uk: 'Булочка',
-        en: 'Bun',
-      },
-
-      Кекс: {
-        uk: 'Кекс',
-        en: 'Cupcake',
-      },
-
-      Ватрушки: {
-        uk: 'Ватрушки',
-        en: 'Cheese buns',
-      },
+      'Флет-вайт': { uk: 'Флет-вайт', en: 'Flat white' },
+      Капучино: { uk: 'Капучино', en: 'Cappuccino' },
+      Американо: { uk: 'Американо', en: 'Americano' },
+      Латте: { uk: 'Латте', en: 'Latte' },
+      Мокка: { uk: 'Мокка', en: 'Mocha' },
+      Макіато: { uk: 'Макіато', en: 'Macchiato' },
+      Млинці: { uk: 'Млинці', en: 'Pancakes' },
+      Чізкейк: { uk: 'Чізкейк', en: 'Cheesecake' },
+      Круасан: { uk: 'Круасан', en: 'Croissant' },
+      Булочка: { uk: 'Булочка', en: 'Bun' },
+      Кекс: { uk: 'Кекс', en: 'Cupcake' },
+      Ватрушки: { uk: 'Ватрушки', en: 'Cheese buns' },
     };
 
     return translations[dish]?.[currentLanguage] || dish;
   };
 
   // ==========================================
-  // EXPORT EXCEL
+  // НАДІЙНИЙ ЕКСПОРТ В EXCEL З ДАТАМИ В ШАПЦІ
   // ==========================================
   const exportToExcel = () => {
     if (history.length === 0 && stats.length === 0) {
-      alert(t('noDataToExport'));
+      alert(t('no_data_to_export'));
       return;
     }
 
     const workbook = XLSX.utils.book_new();
+    const currentDateTime = new Date().toLocaleString(isUk ? 'uk-UA' : 'en-US');
+    const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
+      isUk ? 'uk-UA' : 'en-US'
+    );
 
-    // ==========================================
-    // ІСТОРІЯ ЧЕКІВ
-    // ==========================================
+    // Спільна шапка інформації для обох аркушів файлу
+    const getHeaderInfo = sheetTitle => [
+      [sheetTitle],
+      [`${t('analytics_per_day')} ${formattedSelectedDate}`],
+      [`${t('excel.generated_at', 'Formed on date')}: ${currentDateTime}`],
+      [], // Порожній відступ
+    ];
+
+    // ------------------------------------------
+    // АРКУШ 1: ІСТОРІЯ ЧЕКІВ
+    // ------------------------------------------
+    const historyHeader = getHeaderInfo(t('excel.sheet-check-history'));
+    const historySheet = XLSX.utils.aoa_to_sheet(historyHeader);
+
     const historyData = history.map(order => ({
-      [t('excel.dateOfIssue')]: new Date(order.updatedAt).toLocaleString(
-        currentLanguage === 'uk' ? 'uk-UA' : 'en-US'
+      [t('excel.date_of_issue')]: new Date(order.updatedAt).toLocaleString(
+        isUk ? 'uk-UA' : 'en-US'
       ),
-
-      [t('excel.checkNumber')]:
+      [t('excel.check_number')]:
         order.orderNumber || order._id.slice(-4).toUpperCase(),
-
       [t('excel.dishes')]: order.items
         .map(item => `${getDishName(item.name)} (${item.quantity} ${t('pcs')})`)
         .join(', '),
-
-      [t('excel.amount')]: order.totalPrice,
-
+      [t('excel.amount')]: `${order.totalPrice} ${t('currency')}`,
       [t('excel.status')]: order.isPaid ? t('paid') : t('debt'),
     }));
 
-    const historySheet = XLSX.utils.json_to_sheet(historyData);
-
+    XLSX.utils.sheet_add_json(historySheet, historyData, { origin: 4 });
     historySheet['!cols'] = [
-      { wch: 20 },
+      { wch: 22 },
       { wch: 15 },
-      { wch: 40 },
+      { wch: 45 },
       { wch: 15 },
       { wch: 15 },
     ];
-
     XLSX.utils.book_append_sheet(
       workbook,
       historySheet,
-      t('excel.sheetCheckHistory')
+      t('excel.sheet-check-history')
     );
 
-    // ==========================================
-    // ПІДСУМОК ЗА ДЕНЬ
-    // ==========================================
+    // ------------------------------------------
+    // АРКУШ 2: ПІДСУМОК ЗА ДЕНЬ
+    // ------------------------------------------
+    const statsHeader = getHeaderInfo(t('excel.sheet_day_summary'));
+    const statsSheet = XLSX.utils.aoa_to_sheet(statsHeader);
+
     const statsData = stats.map(item => ({
-      [t('excel.dishName')]: getDishName(item._id),
-
-      [t('excel.soldPcs')]: item.totalQuantity,
-
-      [t('excel.totalAmount')]: item.totalPrice,
+      [t('excel.dish_name')]: getDishName(item._id),
+      [t('excel.sold_pcs')]: item.totalQuantity,
+      [t('excel.total_amount')]: `${item.totalPrice} ${t('currency')}`,
     }));
 
     const totalDayRevenueCalculated = stats.reduce(
@@ -182,45 +140,44 @@ const OrderHistory = () => {
       0
     );
 
+    // Додаємо підсумковий рядок «Разом за день»
     statsData.push({
-      [t('excel.dishName')]: t('excel.totalPerDay'),
-
-      [t('excel.soldPcs')]: '',
-
-      [t('excel.totalAmount')]: totalDayRevenueCalculated,
+      [t('excel.dish_name')]: t('excel.total_per_day'),
+      [t('excel.sold_pcs')]: '',
+      [t('excel.total_amount')]:
+        `${totalDayRevenueCalculated} ${t('currency')}`,
     });
 
-    const statsSheet = XLSX.utils.json_to_sheet(statsData);
-
-    statsSheet['!cols'] = [{ wch: 30 }, { wch: 15 }, { wch: 20 }];
-
+    XLSX.utils.sheet_add_json(statsSheet, statsData, { origin: 4 });
+    statsSheet['!cols'] = [{ wch: 32 }, { wch: 15 }, { wch: 20 }];
     XLSX.utils.book_append_sheet(
       workbook,
       statsSheet,
-      t('excel.sheetDaySummary')
+      t('excel.sheet_day_summary')
     );
 
-    // ==========================================
-    // ЗБЕРЕЖЕННЯ EXCEL
-    // ==========================================
+    // Зберігання звіту
     XLSX.writeFile(workbook, `Coffee_Comfort_Report_${selectedDate}.xlsx`);
   };
 
   const totalDayRevenue = stats.reduce((sum, item) => sum + item.totalPrice, 0);
 
   if (loading && history.length === 0) {
-    return <div className={css.loader}>{t('loading')}</div>;
+    return <div className={css['loader']}>{t('loading')}</div>;
   }
+
+  const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
+    isUk ? 'uk-UA' : 'en-US'
+  );
 
   return (
     <div className={css['container']}>
-      <header className={css.header}>
+      <header className={css['header']}>
         <h1>📊 {t('title')}</h1>
 
         <div className={css['filter-wrapper']}>
           <label htmlFor="history-date-picker">
-            {t('analyticsPerDay')}
-
+            {t('analytics_per_day')}
             <input
               id="history-date-picker"
               type="date"
@@ -236,11 +193,7 @@ const OrderHistory = () => {
       <section className={css['stats-section']}>
         <div className={css['stats-summary']}>
           <h2>
-            {t('summaryByDishes')} (
-            {new Date(selectedDate).toLocaleDateString(
-              currentLanguage === 'uk' ? 'uk-UA' : 'en-US'
-            )}
-            )
+            {t('summary_by_dishes')} ({formattedSelectedDate})
           </h2>
 
           <div className={css['total-badge']}>
@@ -251,20 +204,17 @@ const OrderHistory = () => {
         <table className={css['stats-table']}>
           <thead>
             <tr>
-              <th>{t('thDish')}</th>
-              <th>{t('thSoldOut')}</th>
-              <th>{t('thAmount')}</th>
+              <th>{t('th_dish')}</th>
+              <th>{t('th_sold_out')}</th>
+              <th>{t('th_amount')}</th>
             </tr>
           </thead>
-
           <tbody>
             {stats.length > 0 ? (
               stats.map((item, index) => (
                 <tr key={index}>
                   <td>{getDishName(item._id)}</td>
-
                   <td>{item.totalQuantity}</td>
-
                   <td>
                     {item.totalPrice} {t('currency')}
                   </td>
@@ -272,7 +222,7 @@ const OrderHistory = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={3}>{t('noData')}</td>
+                <td colSpan={3}>{t('no_data')}</td>
               </tr>
             )}
           </tbody>
@@ -282,41 +232,38 @@ const OrderHistory = () => {
       {/* ІСТОРІЯ ЧЕКІВ */}
       <section className={css['history-section']}>
         <div className={css['flex-header']}>
-          <h2>📜 {t('latestChecks')}</h2>
+          <h2>📜 {t('latest_checks')}</h2>
 
           <button
             type="button"
             onClick={exportToExcel}
             className={css['export-btn']}
           >
-            💾 {t('btnExport')}
+            💾 {t('btn_export')}
           </button>
         </div>
 
-        <table className={css.table}>
+        <table className={css['table']}>
           <thead>
             <tr>
-              <th>{t('thDate')}</th>
+              <th>{t('th_date')}</th>
               <th>№</th>
-              <th>{t('thDishes')}</th>
-              <th>{t('thAmount')}</th>
-              <th>{t('thPayment')}</th>
+              <th>{t('th_dishes')}</th>
+              <th>{t('th_amount')}</th>
+              <th>{t('th_payment')}</th>
             </tr>
           </thead>
-
           <tbody>
             {history.slice(0, visibleChecksCount).map(order => (
               <tr key={order._id}>
                 <td>
                   {new Date(order.updatedAt).toLocaleString(
-                    currentLanguage === 'uk' ? 'uk-UA' : 'en-US'
+                    isUk ? 'uk-UA' : 'en-US'
                   )}
                 </td>
-
                 <td>
                   #{order.orderNumber || order._id.slice(-4).toUpperCase()}
                 </td>
-
                 <td>
                   {order.items.map((item, index) => (
                     <div key={index}>
@@ -326,11 +273,9 @@ const OrderHistory = () => {
                     </div>
                   ))}
                 </td>
-
                 <td>
                   {order.totalPrice} {t('currency')}
                 </td>
-
                 <td className={order.isPaid ? css.paid : css.unpaid}>
                   {order.isPaid ? t('paid') : t('debt')}
                 </td>
@@ -347,7 +292,7 @@ const OrderHistory = () => {
               onClick={() => setVisibleChecksCount(prev => prev + 10)}
               className={css['load-more-btn']}
             >
-              🔄 {t('showMore', 'Показати більше')}
+              🔄 {t('show_more')}
             </button>
           </div>
         )}

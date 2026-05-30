@@ -1,14 +1,23 @@
 {
   "title": "Stock & Inventory",
   "loading": "Loading data...",
-  "noData": "The inventory is currently empty.",
+  "no_data": "The inventory is currently empty.",
+  "as_of_date": "As of",
+  "btn_export": "Export в Excel",
+  "update_error": "Failed to update stock. Please try again.",
   "columns": {
     "product": "Product",
     "balans": "Balance",
     "actions": "Actions"
   },
   "warning": {
-    "restock": "Restock required!"
+    "restock": "Order!"
   },
-  "updateError": "Failed to update stock. Please try again."
+  "excel": {
+    "sheet_inventory": "Inventory",
+    "generated_at": "Generated at",
+    "min_limit": "Minimum limit",
+    "status": "Status",
+    "ok": "Enough"
+  }
 }

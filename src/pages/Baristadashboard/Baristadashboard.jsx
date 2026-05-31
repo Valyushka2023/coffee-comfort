@@ -6,13 +6,7 @@ import {
   updateOrderStatus,
   deleteOrderRequest,
 } from '../../services/api';
-import {
-  FiClock,
-  FiCheckCircle,
-  FiAlertCircle,
-  FiPackage,
-  FiTrash2,
-} from 'react-icons/fi';
+import { FiClock, FiTrash2 } from 'react-icons/fi';
 
 import css from './Baristadashboard.module.css';
 
@@ -100,7 +94,7 @@ const Baristadashboard = () => {
             onArchive={handleArchive}
             onCancel={handleCancelOrder}
             t={t}
-            currentLang={i18n.language} // 1. Передаємо поточну мову сюди
+            currentLang={i18n.language}
           />
         ))}
       </div>
@@ -108,7 +102,6 @@ const Baristadashboard = () => {
   );
 };
 
-// 2. Приймаємо currentLang ось тут у круглых дужках
 const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
   const [minutesWait, setMinutesWait] = useState(0);
   const isReady = order.status === 'ready';
@@ -147,8 +140,8 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
         </div>
       </div>
 
+      {/* Тут іконки FiCheckCircle та FiAlertCircle успішно прибрані */}
       <div className={order.isPaid ? css['paid-badge'] : css['unpaid-badge']}>
-        {order.isPaid ? <FiCheckCircle /> : <FiAlertCircle />}{' '}
         {order.isPaid
           ? t('paid', 'ОПЛАЧЕНО')
           : t('payOnDelivery', 'ОПЛАТА ПРИ ОТРИМАННІ')}
@@ -161,7 +154,6 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
         <p>{order.customerPhone}</p>
       </div>
 
-      {/* 3. Оновлена розмітка списку страв із гнучким визначенням мови */}
       <ul className={css['items-list-style']}>
         {order.items.map((item, i) => {
           const itemName =
@@ -177,13 +169,23 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
         })}
       </ul>
 
+      {/* Розділювач та блок з ціною замовлення */}
+      <hr className={css['separator']} />
+      <div className={css['total-price-block']}>
+        <span className={css['total-label']}>
+          {t('totalPriceLabel', 'До сплати')}:
+        </span>
+        <span className={css['total-amount']}>{order.totalPrice} грн</span>
+      </div>
+
       <div className={css['footer-style']}>
         {!isReady ? (
+          /* Тут іконку FiPackage успішно прибрано */
           <button
             onClick={() => onReady(order._id)}
             className={css['button-style']}
           >
-            <FiPackage /> {t('btnReady', 'Підготовлено')}
+            {t('btnReady', 'Підготовлено')}
           </button>
         ) : (
           <button

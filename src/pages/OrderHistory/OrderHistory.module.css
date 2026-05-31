@@ -110,7 +110,7 @@
   border: 0.125rem solid var(--border-accent);
   border-radius: 0.5rem;
   box-shadow: 0 0.125rem 0.25rem rgb(16 185 129 / 20%);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
   color: var(--color-gray-light);
@@ -119,11 +119,11 @@
 /* Кнопка експорту */
 .export-btn {
   cursor: pointer;
-  padding: 0.625rem 2rem;
+  padding: 0.695rem 2rem;
   background-color: transparent;
   border: 0.125rem solid var(--border-accent);
   border-radius: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
@@ -214,11 +214,11 @@
 
 .load-more-btn {
   cursor: pointer;
-  padding: 0.625rem 2rem;
+  padding: 0.695rem 2rem;
   background-color: transparent;
   border: 0.125rem solid var(--border-accent);
   border-radius: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;

@@ -8,12 +8,12 @@ const router = express.Router();
 const RECIPES = {
   'Флет-вайт': [
     { name: 'Кава в зернах (Arabica)', amount: 0.018 },
-    { name: 'Молоко 2.5%', amount: 0.18 },
+    { name: 'Молоко', amount: 0.18 },
     { name: 'Стаканчики 250мл', amount: 1 },
   ],
   Капучино: [
     { name: 'Кава в зернах (Arabica)', amount: 0.018 },
-    { name: 'Молоко 2.5%', amount: 0.2 },
+    { name: 'Молоко', amount: 0.2 },
     { name: 'Стаканчики 250мл', amount: 1 },
   ],
   Американо: [
@@ -22,18 +22,18 @@ const RECIPES = {
   ],
   Латте: [
     { name: 'Кава в зернах (Arabica)', amount: 0.018 },
-    { name: 'Молоко 2.5%', amount: 0.25 },
+    { name: 'Молоко', amount: 0.25 },
     { name: 'Стаканчики 340мл', amount: 1 },
   ],
   Мокка: [
     { name: 'Кава в зернах (Arabica)', amount: 0.018 },
-    { name: 'Молоко 2.5%', amount: 0.2 },
+    { name: 'Молоко', amount: 0.2 },
     { name: 'Сироп Шоколад', amount: 1 },
     { name: 'Стаканчики 340мл', amount: 1 },
   ],
   Макіато: [
     { name: 'Кава в зернах (Arabica)', amount: 0.009 },
-    { name: 'Молоко 2.5%', amount: 0.05 },
+    { name: 'Молоко', amount: 0.05 },
     { name: 'Стаканчики 110мл', amount: 1 },
   ],
   Млинці: [{ name: 'Млинці', amount: 1 }],
@@ -68,7 +68,7 @@ router.patch('/:id', async (req, res) => {
             );
 
             await Ingredient.findOneAndUpdate(
-              { name: ing.name },
+              { 'name.uk': ing.name },
               { $inc: { quantity: -totalDeduction } }
             );
           }

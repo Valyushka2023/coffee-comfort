@@ -1,10 +1,9 @@
-/* ==========================================================================
-   КОНТЕЙНЕР ТА ШАПКА
-   ========================================================================== */
+/* КОНТЕЙНЕР ТА ШАПКА  */
 .container {
-  max-width: 75rem; /* 1200px */
+  position: relative;
+  max-width: 75rem;
   margin: 0 auto;
-  padding: 1.5rem; /* 24px */
+  padding: 1.5rem;
   font-family:
     system-ui,
     -apple-system,
@@ -18,10 +17,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem; /* 16px */
-  margin-bottom: 2rem; /* 32px */
-  padding-bottom: 1rem; /* 16px */
-  border-bottom: 0.0625rem solid rgb(0 0 0 / 10%); /* 1px */
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid rgb(0 0 0 / 10%);
   flex-wrap: wrap;
 }
 
@@ -38,45 +37,47 @@
 
 /* Фільтр дати */
 .filter-wrapper {
-  display: flex;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .filter-wrapper label {
   display: flex;
   align-items: center;
-  gap: 0.625rem; /* 10px */
-  font-size: 0.95rem;
-  font-weight: 500;
+  gap: 0.625rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .date-input {
   cursor: pointer;
-  padding: 0.5rem 0.75rem; /* 8px 12px */
+  padding: 0.625rem 2rem;
   background-color: transparent;
-  border: 0.0625rem solid rgb(0 0 0 / 15%); /* 1px */
-  border-radius: 0.5rem; /* 8px */
+  border: 0.0625rem solid var(--border-accent);
+  border-radius: 0.5rem;
   outline: none;
   font-family: inherit;
   font-size: 1rem;
-  color: inherit;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-gray-light);
   transition: border-color 0.2s ease;
 }
 
-.date-input:focus {
-  border-color: #3b82f6; /* Гарний синій акцент */
+.date-input:hover {
+  background-color: var(--bg-accent);
 }
 
-/* ==========================================================================
-   СЕКЦІЇ ТА ЗАГОЛОВКИ СЕКЦІЙ
-   ========================================================================== */
+/* СЕКЦІЇ ТА ЗАГОЛОВКИ СЕКЦІЙ */
 .stats-section,
 .history-section {
-  margin-bottom: 2rem; /* 32px */
-  padding: 1.25rem; /* 20px */
+  margin-bottom: 2rem;
+  padding: 1.25rem;
   background: rgb(0 0 0 / 2%);
-  border: 0.0625rem solid rgb(0 0 0 / 5%); /* 1px */
-  border-radius: 0.75rem; /* 12px */
+  border: 0.0625rem solid rgb(0 0 0 / 5%);
+  border-radius: 0.75rem;
 }
 
 :global(.dark) .stats-section,
@@ -90,8 +91,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.75rem; /* 12px */
-  margin-bottom: 1.25rem; /* 20px */
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -104,44 +105,43 @@
 
 /* Бадж загальної суми */
 .total-badge {
-  padding: 0.375rem 0.875rem; /* 6px 14px */
-  background-color: #10b981; /* Зелений */
-  border-radius: 1.25rem; /* 20px */
-  box-shadow: 0 0.125rem 0.25rem rgb(16 185 129 / 20%); /* 0 2px 4px */
+  padding: 0.625rem 2rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgb(16 185 129 / 20%);
   font-size: 0.95rem;
   font-weight: 600;
-  color: #fff;
+  text-transform: uppercase;
+  color: var(--color-gray-light);
 }
 
 /* Кнопка експорту */
 .export-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem; /* 6px */
   cursor: pointer;
-  padding: 0.5rem 1rem; /* 8px 16px */
-  background-color: #3b82f6; /* Синій */
-  border: none;
-  border-radius: 0.5rem; /* 8px */
+  padding: 0.625rem 2rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.5rem;
   font-size: 0.95rem;
-  font-weight: 500;
-  color: white;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-gray-light);
   transition:
     background-color 0.2s ease,
     transform 0.1s ease;
 }
 
 .export-btn:hover {
-  background-color: #2563eb;
+  background-color: var(--bg-accent);
 }
 
 .export-btn:active {
   transform: scale(0.98);
 }
 
-/* ==========================================================================
-   ТАБЛИЦІ
-   ========================================================================== */
+/* ТАБЛИЦІ */
 .stats-table,
 .table {
   width: 100%;
@@ -152,8 +152,8 @@
 
 .stats-table th,
 .table th {
-  padding: 0.75rem 1rem; /* 12px 16px */
-  border-bottom: 0.125rem solid rgb(0 0 0 / 10%); /* 2px */
+  padding: 0.75rem 1rem;
+  border-bottom: 0.125rem solid rgb(0 0 0 / 10%);
   font-weight: 600;
   color: rgb(0 0 0 / 60%);
 }
@@ -166,8 +166,8 @@
 
 .stats-table td,
 .table td {
-  padding: 0.875rem 1rem; /* 14px 16px */
-  border-bottom: 0.0625rem solid rgb(0 0 0 / 5%); /* 1px */
+  padding: 0.875rem 1rem;
+  border-bottom: 0.0625rem solid rgb(0 0 0 / 5%);
 }
 
 :global(.dark) .stats-table td,
@@ -188,56 +188,41 @@
 
 /* Перелік страв у чеку (кожна страва з нового рядка) */
 .table td div {
-  margin-bottom: 0.25rem; /* 4px */
+  margin-bottom: 0.25rem;
 }
 
 .table td div:last-child {
   margin-bottom: 0;
 }
 
-/* ==========================================================================
-   СТАТУСИ ОПЛАТИ ТА ЛОАДЕР
-   ========================================================================== */
+/* СТАТУСИ ОПЛАТИ ТА ЛОАДЕР */
 .paid {
   font-weight: 600;
-  color: #10b981;
+  color: var(--color-gray-light);
 }
 
 .unpaid {
   font-weight: 600;
-  color: #ef4444; /* Червоний */
-}
-
-/* Лоадер (завантаження) */
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 18.75rem; /* 300px */
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: rgb(0 0 0 / 50%);
-}
-
-:global(.dark) .loader {
-  color: rgb(255 255 255 / 50%);
+  color: var(--warning-color);
 }
 
 .load-more-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 1.5rem; /* 24px */
+  margin-top: 1.5rem;
 }
 
 .load-more-btn {
   cursor: pointer;
-  padding: 0.625rem 2rem; /* 10px 32px */
+  padding: 0.625rem 2rem;
   background-color: transparent;
-  border: 0.125rem solid #3b82f6; /* 2px */
-  border-radius: 0.5rem; /* 8px */
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.5rem;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #3b82f6; /* Синій колір акценту */
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-gray-light);
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
@@ -245,32 +230,17 @@
 }
 
 .load-more-btn:hover {
-  background-color: #3b82f6;
-  color: #fff;
+  background-color: var(--bg-accent);
 }
 
 .load-more-btn:active {
   transform: scale(0.98);
 }
 
-/* Адаптація під темну тему */
-:global(.dark) .load-more-btn {
-  border-color: #60a5fa;
-  color: #60a5fa; /* Трохи світліший синій для темного фону */
-}
-
-:global(.dark) .load-more-btn:hover {
-  background-color: #60a5fa;
-  color: #fff;
-}
-
-/* ==========================================================================
-   АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
-   ========================================================================== */
-@media (max-width: 48rem) {
-  /* 768px */
+/* АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ) */
+@media (max-width: 47.9375rem) {
   .container {
-    padding: 1rem; /* 16px */
+    padding: 1rem;
   }
 
   .header {
@@ -287,15 +257,14 @@
     width: 100%;
   }
 
-  /* Робимо таблиці скролі can-be-scrolled на мобільних, щоб не ламався екран */
   .stats-section,
   .history-section {
-    padding: 0.75rem; /* 12px */
+    padding: 0.75rem;
     overflow-x: auto;
   }
 
   .stats-table,
   .table {
-    min-width: 37.5rem; /* 600px — Гарантує, що стовпці не стиснуться в кашу */
+    min-width: 37.5rem;
   }
 }

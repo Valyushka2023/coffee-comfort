@@ -118,10 +118,20 @@
   --form-success-bg-color: #d4a373;
   --form-icon-success-bg-color: #5c3d2e;
   --form-button-success-bg-color: #5c3d2e;
-  --hover-bg-color: #d4a373;
+  --form-cart-icon-wrapper: #d35400;
+  --form-export-btn: #d35400;
+
+  /* --form-load-more-btn: #d35400; */
+  --border-accent: #d35400;
+  --bg-accent: #e67e22;
+
+  /* --hover-bg-color: #d4a373; */
   --hover-color: #d4a373;
   --hover-input-area-color: #fff;
   --hover-footer-color: #fff;
+  --hover-cart-icon-wrapper: #e67e22;
+  --hover-export-btn: #e67e22;
+  --hover-load-more-btn: #e67e22;
 
   /* --hover-button-color: #fff; */
   --active-color: #d4a373;

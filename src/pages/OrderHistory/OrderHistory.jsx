@@ -5,6 +5,7 @@ import {
   fetchOrderStatsRequest,
 } from '../../services/api';
 import * as XLSX from 'xlsx';
+import Loader from '../../components/Ui/Loader/Loader.jsx';
 import css from './OrderHistory.module.css';
 
 const OrderHistory = () => {
@@ -163,7 +164,7 @@ const OrderHistory = () => {
   const totalDayRevenue = stats.reduce((sum, item) => sum + item.totalPrice, 0);
 
   if (loading && history.length === 0) {
-    return <div className={css['loader']}>{t('loading')}</div>;
+    return <Loader type="container" size={60} />;
   }
 
   const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
@@ -239,7 +240,7 @@ const OrderHistory = () => {
             onClick={exportToExcel}
             className={css['export-btn']}
           >
-            💾 {t('btn_export')}
+            {t('btn_export')}
           </button>
         </div>
 
@@ -292,7 +293,7 @@ const OrderHistory = () => {
               onClick={() => setVisibleChecksCount(prev => prev + 10)}
               className={css['load-more-btn']}
             >
-              🔄 {t('show_more')}
+              {t('show_more')}
             </button>
           </div>
         )}

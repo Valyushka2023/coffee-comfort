@@ -2,7 +2,7 @@
   "title": "Order History",
   "analytics_per_day": "Analytics for the day:",
   "summary_by_dishes": "Summary by dishes",
-  "total": "Total",
+  "total": "TOTAL",
   "currency": "UAH",
   "loading": "Loading...",
   "no_data": "No data for this day",

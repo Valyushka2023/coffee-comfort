@@ -1,4 +1,4 @@
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,27 +34,27 @@
 
 .date-badge {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-gray-dark);
 }
 
 .export-btn {
-  gap: 0.5rem;
   cursor: pointer;
   margin-bottom: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--color-gold);
-  background-color: #48bb78;
-  border: none;
-  border-radius: 0.25rem;
+  padding: 0.625rem 2rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.5rem;
   font-size: 0.9rem;
   font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
   color: var(--color-gray-dark);
   transition: background-color 0.1s ease;
 }
 
 .export-btn:hover {
-  background-color: var(--hover-bg-color);
+  background-color: var(--bg-accent);
 }
 
 .center-text {
@@ -67,7 +67,7 @@
   width: 100%;
   max-width: 45rem;
   overflow: hidden;
-  background-color: var(--color-light-beige);
+  background-color: var(--color-dark-beige);
   border-radius: 0.5rem;
   box-shadow: 0 0.0625rem 0.1875rem rgb(0 0 0 / 5%);
   table-layout: fixed;
@@ -83,7 +83,8 @@
 }
 
 .inventory-table th {
-  background-color: var(--color-dark-beige);
+  background-color: var(--color-beige);
+  border-bottom: 0.125rem solid var(--color-light-beige);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.0312rem;
@@ -117,20 +118,19 @@
 }
 
 .product-name {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .amount {
   padding: 0.25rem 0.5rem;
-  background-color: #edf2f7;
+  background-color: var(--color-white);
   border-radius: 0.25rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
+
 .actions-cell {
-  justify-content: right;
-  align-items: right;
   gap: 0.5rem;
 }
 
@@ -138,7 +138,7 @@
 .btn-minus {
   cursor: pointer;
   padding: 0.375rem 0.75rem;
-  border: none;
+  border: 0.125rem solid var(--border-accent);
   border-radius: 0.25rem;
   font-size: 0.9rem;
   font-weight: 600;
@@ -146,21 +146,19 @@
 }
 
 .btn-plus {
-  background-color: #48bb78;
-  color: #fff;
+  color: var(--color-gray-light);
 }
 
 .btn-plus:hover {
-  background-color: var(--hover-bg-color);
+  background-color: var(--bg-accent);
 }
 
 .btn-minus {
-  background-color: #e2e8f0;
-  color: #4a5568;
+  color: var(--color-gray-light);
 }
 
 .btn-minus:hover {
-  background-color: var(--hover-bg-color);
+  background-color: var(--bg-accent);
 }
 
 .low-stock {
@@ -169,13 +167,17 @@
 
 .warning {
   display: inline-block;
+  justify-content: center;
+  align-items: center;
   margin-left: 0.5rem;
-  padding: 0.125rem 0.375rem;
-  background-color: #fed7d7;
+  padding: 0.25rem 0.375rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--border-accent);
   border-radius: 0.25rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #e53e3e;
+  line-height: 1;
+  color: var(--error-color);
 }
 
 @media (max-width: 47.9375rem) {
@@ -184,6 +186,290 @@
     align-items: center;
     margin: 0.625rem;
     padding: 0.9375rem;
+  }
+
+  .inventory-table th,
+  .inventory-table td {
+    padding: 0.625rem 0.5rem;
+    font-size: 0.9rem;
+  }
+} */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 45rem; /* Розширили під нову панель фільтрів */
+  margin: 1.25rem auto;
+  padding: 0 1rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: var(--color-gray-dark);
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-gray-dark);
+}
+
+.title-block h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* Нова обгортка для елементів керування */
+.filters-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Контейнер для інпуту та хрестика */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 12.5rem;
+}
+
+/* Стилізований текстовий пошук */
+.search-input {
+  width: 100%;
+  padding: 0.5rem 2.2rem 0.5rem 1rem; /* Збільшений правий паддінг для хрестика */
+  background-color: transparent;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.5rem;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: inherit;
+}
+
+/* Кнопка швидкого очищення пошуку "Хрестик" */
+.clear-search-btn {
+  position: absolute;
+  right: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.25rem;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: var(--color-gray-light);
+  transition: color 0.1s ease;
+}
+
+.clear-search-btn:hover {
+  color: var(--color-gray-dark);
+}
+
+/* Календар у стилі сторінки історії */
+.date-input {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.5rem;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+.export-btn {
+  cursor: pointer;
+  padding: 0.54rem 1.5rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-gray-dark);
+  transition: background-color 0.1s ease;
+}
+
+.export-btn:hover,
+.date-input:hover,
+.search-input:focus {
+  background-color: var(--bg-accent);
+}
+
+.center-text {
+  padding: 2.5rem;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.inventory-table {
+  width: 100%;
+  max-width: 45rem;
+  overflow: hidden;
+  background-color: var(--color-dark-beige);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.0625rem 0.1875rem rgb(0 0 0 / 5%);
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 0.875rem 1rem;
+  font-size: 0.95rem;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+.inventory-table th {
+  background-color: var(--color-beige);
+  border-bottom: 0.125rem solid var(--color-light-beige);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.0312rem;
+  color: var(--color-gray-dark);
+}
+
+.inventory-table td {
+  border-bottom: 0.0625rem solid var(--color-light-beige);
+}
+
+.inventory-table tbody tr:nth-child(even) {
+  background-color: var(--color-beige);
+}
+
+.inventory-table th:nth-child(1),
+.inventory-table td:nth-child(1) {
+  width: 42%;
+  text-align: left;
+}
+
+.inventory-table th:nth-child(2),
+.inventory-table td:nth-child(2) {
+  width: 33%;
+  text-align: center;
+}
+
+.inventory-table th:nth-child(3),
+.inventory-table td:nth-child(3) {
+  width: 25%;
+  text-align: right;
+}
+
+.product-name {
+  font-weight: 600;
+}
+
+.amount {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--color-white);
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.actions-cell {
+  gap: 0.5rem;
+}
+
+/* 1. Базові стилі для обох кнопок */
+.btn-plus,
+.btn-minus {
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.1s ease;
+}
+
+/* 2. Індивідуальні кольори (прості селектори мають йти спочатку) */
+.btn-plus {
+  color: var(--color-gray-light);
+}
+
+.btn-minus {
+  color: var(--color-gray-light);
+}
+
+/* 3. Стани disabled (лінтер просив підняти їх вище за :hover комбінації) */
+.btn-plus:disabled,
+.btn-minus:disabled {
+  cursor: not-allowed;
+  border-style: dashed; /* Виправлено "dashed" безпосередньо для border-style */
+  opacity: 0.4;
+}
+
+/* 4. Складні селектори для ховеру (завжди в самому кінці секції) */
+.btn-plus:hover:not(:disabled),
+.btn-minus:hover:not(:disabled) {
+  background-color: var(--bg-accent);
+}
+
+.low-stock {
+  background-color: #fff5f5 !important;
+}
+
+.warning {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.375rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--error-color);
+}
+
+/* АДАПТИВНІСТЬ (ЗБЕРЕЖЕНО ТВІЙ БРЕКПОІНТ) */
+@media (max-width: 47.9375rem) {
+  .container {
+    margin: 0.625rem;
+    padding: 0.9375rem;
+  }
+
+  .filters-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-wrapper {
+    width: 100%;
+  }
+
+  .search-input,
+  .date-input,
+  .export-btn {
+    width: 100%;
+    text-align: center;
   }
 
   .inventory-table th,

@@ -1,7 +1,198 @@
+// import { useState, useEffect } from 'react';
+// import { useTranslation } from 'react-i18next';
+// import api from '../../services/api.js';
+// import * as XLSX from 'xlsx';
+// import Loader from '../../components/Ui/Loader/Loader.jsx'; // Імпортовано Loader
+// import css from './Inventory.module.css';
+
+// const Inventory = () => {
+//   const { t, i18n } = useTranslation('inventory');
+//   const [ingredients, setIngredients] = useState([]);
+//   const [isLoading, setIsLoading] = useState(true);
+
+//   const lang = (i18n.language || 'uk').substring(0, 2);
+//   const isUk = lang === 'uk';
+
+//   useEffect(() => {
+//     const loadData = async () => {
+//       try {
+//         const res = await api.get('/ingredients');
+//         setIngredients(res.data || []);
+//       } catch (err) {
+//         console.error('Error loading ingredients:', err);
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     };
+//     loadData();
+//   }, [lang, i18n.language]);
+
+//   const changeQuantity = async (id, currentQty, step) => {
+//     const targetQty = currentQty + step;
+//     if (targetQty < 0) return;
+
+//     try {
+//       const res = await api.patch(`/ingredients/${id}`, {
+//         quantity: targetQty,
+//       });
+//       setIngredients(prev =>
+//         prev.map(item =>
+//           item._id === id ? { ...item, quantity: res.data.quantity } : item
+//         )
+//       );
+//     } catch (err) {
+//       console.error('Failed to update quantity:', err);
+//       alert(t('update_error'));
+//     }
+//   };
+
+//   const exportToExcel = () => {
+//     if (ingredients.length === 0) {
+//       alert(t('no_data_to_export', 'No data to export'));
+//       return;
+//     }
+
+//     const workbook = XLSX.utils.book_new();
+//     const currentDateTime = new Date().toLocaleString(isUk ? 'uk-UA' : 'en-US');
+
+//     const headerData = [
+//       [t('title', 'Composition and residues')],
+//       [`${t('excel.generated_at', 'Formed on date')}: ${currentDateTime}`],
+//       [],
+//     ];
+
+//     const worksheet = XLSX.utils.aoa_to_sheet(headerData);
+
+//     const excelData = ingredients.map(item => {
+//       const displayName = item.name?.[lang] || item.name?.uk || '—';
+//       const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
+//       const isLow = item.quantity <= item.minLimit;
+
+//       return {
+//         [t('columns.product')]: displayName,
+//         [t('columns.balans')]:
+//           `${Number(item.quantity.toFixed(3))} ${displayUnit}`,
+//         [t('excel.min_limit', 'Minimum limit')]:
+//           `${item.minLimit} ${displayUnit}`,
+//         [t('excel.status', 'Status')]: isLow
+//           ? t('warning.restock')
+//           : t('excel.ok', 'Enough'),
+//       };
+//     });
+
+//     XLSX.utils.sheet_add_json(worksheet, excelData, { origin: 3 });
+
+//     worksheet['!cols'] = [{ wch: 32 }, { wch: 15 }, { wch: 20 }, { wch: 20 }];
+
+//     XLSX.utils.book_append_sheet(
+//       workbook,
+//       worksheet,
+//       t('excel.sheet_inventory', 'Remains')
+//     );
+
+//     const dateStr = new Date().toISOString().split('T')[0];
+//     XLSX.writeFile(workbook, `Coffee_Comfort_Inventory_${dateStr}.xlsx`);
+//   };
+
+//   // Використовуємо фірмовий лоадер замість простого тексту
+//   if (isLoading) {
+//     return <Loader type="container" size={60} />;
+//   }
+
+//   const displayDate = new Date().toLocaleDateString(isUk ? 'uk-UA' : 'en-US');
+
+//   return (
+//     <div className={css['container']}>
+//       <div className={css['header-wrapper']}>
+//         <div className={css['title-block']}>
+//           <h2>🥛 {t('title')}</h2>
+
+//           <div className={css['date-badge']}>
+//             {t('as_of_date', 'As of')}: {displayDate}
+//           </div>
+//         </div>
+
+//         <button
+//           type="button"
+//           onClick={exportToExcel}
+//           className={css['export-btn']}
+//         >
+//           {t('btn_export', 'Export')} {/* 💾 видалено */}
+//         </button>
+//       </div>
+
+//       {ingredients.length === 0 ? (
+//         <div className={css['center-text']}>{t('no_data')}</div>
+//       ) : (
+//         <table className={css['inventory-table']}>
+//           <thead>
+//             <tr>
+//               <th>{t('columns.product')}</th>
+//               <th>{t('columns.balans')}</th>
+//               <th>{t('columns.actions')}</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {ingredients.map(item => {
+//               const isLow = item.quantity <= item.minLimit;
+//               const displayName = item.name?.[lang] || item.name?.uk || '—';
+//               const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
+
+//               return (
+//                 <tr key={item._id} className={isLow ? css['low-stock'] : ''}>
+//                   <td
+//                     data-label={t('columns.product')}
+//                     className={css['product-name']}
+//                   >
+//                     {displayName}
+//                   </td>
+//                   <td data-label={t('columns.balans')}>
+//                     <span className={css['amount']}>
+//                       {Number(item.quantity.toFixed(3))} {displayUnit}
+//                     </span>
+//                     {isLow && (
+//                       <div className={css['warning']}>
+//                         {t('warning.restock')}
+//                       </div>
+//                     )}
+//                   </td>
+//                   <td
+//                     data-label={t('columns.actions')}
+//                     className={css['actions-cell']}
+//                   >
+//                     <button
+//                       type="button"
+//                       className={css['btn-plus']}
+//                       onClick={() => changeQuantity(item._id, item.quantity, 1)}
+//                     >
+//                       + 1
+//                     </button>
+//                     <button
+//                       type="button"
+//                       className={css['btn-minus']}
+//                       onClick={() =>
+//                         changeQuantity(item._id, item.quantity, -1)
+//                       }
+//                     >
+//                       - 1
+//                     </button>
+//                   </td>
+//                 </tr>
+//               );
+//             })}
+//           </tbody>
+//         </table>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Inventory;
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import api from '../../services/api.js';
 import * as XLSX from 'xlsx';
+import Loader from '../../components/Ui/Loader/Loader.jsx';
 import css from './Inventory.module.css';
 
 const Inventory = () => {
@@ -9,13 +200,28 @@ const Inventory = () => {
   const [ingredients, setIngredients] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Нові стейти для фільтрації та пошуку
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toISOString().split('T')[0]
+  );
+
   const lang = (i18n.language || 'uk').substring(0, 2);
   const isUk = lang === 'uk';
 
+  // Перевірка, чи вибрано саме сьогоднішній день (для дозволу редагування)
+  const isToday = selectedDate === new Date().toISOString().split('T')[0];
+  // Функція, яка автоматично робить першу літеру заглавною
+  const capitalizeFirstLetter = text => {
+    if (!text) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
   useEffect(() => {
     const loadData = async () => {
+      setIsLoading(true);
       try {
-        const res = await api.get('/ingredients');
+        // Передаємо обрану дату на сервер параметром запиту
+        const res = await api.get(`/ingredients?date=${selectedDate}`);
         setIngredients(res.data || []);
       } catch (err) {
         console.error('Error loading ingredients:', err);
@@ -24,9 +230,12 @@ const Inventory = () => {
       }
     };
     loadData();
-  }, [lang, i18n.language]);
+  }, [lang, i18n.language, selectedDate]);
 
   const changeQuantity = async (id, currentQty, step) => {
+    // Не дозволяємо редагувати залишки за минулі дні
+    if (!isToday) return;
+
     const targetQty = currentQty + step;
     if (targetQty < 0) return;
 
@@ -41,31 +250,42 @@ const Inventory = () => {
       );
     } catch (err) {
       console.error('Failed to update quantity:', err);
-      alert(t('update_error')); // Перевірено: є в локалях
+      alert(t('update_error'));
     }
   };
 
+  // Фільтрація інгредієнтів по текстовому пошуку
+  const filteredIngredients = ingredients.filter(item => {
+    const displayName = (
+      item.name?.[lang] ||
+      item.name?.uk ||
+      ''
+    ).toLowerCase();
+    return displayName.includes(searchQuery.toLowerCase());
+  });
+
   const exportToExcel = () => {
-    if (ingredients.length === 0) {
+    if (filteredIngredients.length === 0) {
       alert(t('no_data_to_export', 'No data to export'));
       return;
     }
 
     const workbook = XLSX.utils.book_new();
     const currentDateTime = new Date().toLocaleString(isUk ? 'uk-UA' : 'en-US');
+    const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
+      isUk ? 'uk-UA' : 'en-US'
+    );
 
-    // 1. Створюємо інформаційну шапку звіту
-    // ВИПРАВЛЕНО: Використовуємо ключ 'excel.generated_at'
     const headerData = [
       [t('title', 'Composition and residues')],
+      [`${t('as_of_date', 'As of')}: ${formattedSelectedDate}`],
       [`${t('excel.generated_at', 'Formed on date')}: ${currentDateTime}`],
       [],
     ];
 
     const worksheet = XLSX.utils.aoa_to_sheet(headerData);
 
-    // 2. Формуємо масив об'єктів для таблиці
-    const excelData = ingredients.map(item => {
+    const excelData = filteredIngredients.map(item => {
       const displayName = item.name?.[lang] || item.name?.uk || '—';
       const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
       const isLow = item.quantity <= item.minLimit;
@@ -82,7 +302,7 @@ const Inventory = () => {
       };
     });
 
-    XLSX.utils.sheet_add_json(worksheet, excelData, { origin: 3 });
+    XLSX.utils.sheet_add_json(worksheet, excelData, { origin: 4 });
 
     worksheet['!cols'] = [{ wch: 32 }, { wch: 15 }, { wch: 20 }, { wch: 20 }];
 
@@ -92,38 +312,63 @@ const Inventory = () => {
       t('excel.sheet_inventory', 'Remains')
     );
 
-    const dateStr = new Date().toISOString().split('T')[0];
-    XLSX.writeFile(workbook, `Coffee_Comfort_Inventory_${dateStr}.xlsx`);
+    XLSX.writeFile(workbook, `Coffee_Comfort_Inventory_${selectedDate}.xlsx`);
   };
 
   if (isLoading) {
-    return <div className={css['center-text']}>{t('loading')}</div>;
+    return <Loader type="container" size={60} />;
   }
-
-  const displayDate = new Date().toLocaleDateString(isUk ? 'uk-UA' : 'en-US');
 
   return (
     <div className={css['container']}>
       <div className={css['header-wrapper']}>
         <div className={css['title-block']}>
           <h2>🥛 {t('title')}</h2>
-
-          <div className={css['date-badge']}>
-            {t('as_of_date', 'As of')}: {displayDate}
-          </div>
         </div>
 
-        <button
-          type="button"
-          onClick={exportToExcel}
-          className={css['export-btn']}
-        >
-          💾 {t('btn_export', 'Export')}
-        </button>
+        {/* ПАНЕЛЬ ФІЛЬТРІВ (Пошук + Календар) */}
+        <div className={css['filters-panel']}>
+          <div className={css['search-wrapper']}>
+            <input
+              type="text"
+              placeholder={t('search_placeholder', 'Пошук інгредієнта...')}
+              value={searchQuery}
+              // Перетворюємо першу літеру на заглавну перед записом у стейт
+              onChange={e =>
+                setSearchQuery(capitalizeFirstLetter(e.target.value))
+              }
+              className={css['search-input']}
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                className={css['clear-search-btn']}
+                onClick={() => setSearchQuery('')}
+                title={t('clear_search', 'Очистити пошук')}
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={e => setSelectedDate(e.target.value)}
+            className={css['date-input']}
+          />
+
+          <button
+            type="button"
+            onClick={exportToExcel}
+            className={css['export-btn']}
+          >
+            {t('btn_export', 'Export')}
+          </button>
+        </div>
       </div>
 
-      {/* ВИПРАВЛЕНО: заміна camelCase на підкреслення 'no_data' */}
-      {ingredients.length === 0 ? (
+      {filteredIngredients.length === 0 ? (
         <div className={css['center-text']}>{t('no_data')}</div>
       ) : (
         <table className={css['inventory-table']}>
@@ -135,7 +380,7 @@ const Inventory = () => {
             </tr>
           </thead>
           <tbody>
-            {ingredients.map(item => {
+            {filteredIngredients.map(item => {
               const isLow = item.quantity <= item.minLimit;
               const displayName = item.name?.[lang] || item.name?.uk || '—';
               const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
@@ -165,6 +410,7 @@ const Inventory = () => {
                     <button
                       type="button"
                       className={css['btn-plus']}
+                      disabled={!isToday}
                       onClick={() => changeQuantity(item._id, item.quantity, 1)}
                     >
                       + 1
@@ -172,6 +418,7 @@ const Inventory = () => {
                     <button
                       type="button"
                       className={css['btn-minus']}
+                      disabled={!isToday}
                       onClick={() =>
                         changeQuantity(item._id, item.quantity, -1)
                       }

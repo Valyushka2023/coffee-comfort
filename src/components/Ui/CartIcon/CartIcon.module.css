@@ -10,7 +10,7 @@
   cursor: pointer;
   width: 3.75rem;
   height: 3.75rem;
-  background: #d35400;
+  background: var(--form-cart-icon-wrapper);
   border: none;
   border-radius: 50%;
   box-shadow: 0 0.625rem 1.5625rem rgb(211 84 0 / 40%);
@@ -20,7 +20,7 @@
 }
 
 .cart-icon-wrapper:hover {
-  background: #e67e22;
+  background: var(--hover-cart-icon-wrapper);
   transform: scale(1.1) rotate(-5deg);
 }
 

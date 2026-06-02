@@ -87,7 +87,35 @@ router.patch('/:id', async (req, res) => {
     res.status(500).json({ message: 'Помилка оновлення' });
   }
 });
+// ==========================================
+// DELETE: Скасування/Видалення замовлення
+// ==========================================
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
 
+    // Шукаємо та видаляємо замовлення з бази даних MongoDB
+    const deletedOrder = await Order.findByIdAndDelete(id);
+
+    // Якщо замовлення з таким ID вже немає (наприклад, видалив інший бариста)
+    if (!deletedOrder) {
+      return res
+        .status(404)
+        .json({ message: 'Замовлення не знайдено або вже видалено' });
+    }
+
+    // Повертаємо статус 200 та інформацію про те, що все пройшло успішно
+    res.status(200).json({
+      message: 'Замовлення успішно скасовано',
+      id,
+    });
+  } catch (error) {
+    console.error('❌ Помилка під час скасування замовлення:', error);
+    res
+      .status(500)
+      .json({ message: 'Внутрішня помилка сервера при скасуванні' });
+  }
+});
 // GET: Історія замовлень
 router.get('/history', async (req, res) => {
   try {

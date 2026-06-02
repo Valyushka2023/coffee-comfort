@@ -24,9 +24,11 @@
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
-  background-color: var(--color-beige);
-  border: 0.125rem solid var(--border-accent);
+  background-color: var(--color-white) !important;
+  border: 0.125rem solid var(--border-accent) !important;
+  border-left: 0.3125rem solid var(--border-accent) !important;
   border-radius: 0.75rem;
+  box-shadow: none;
 }
 
 .header-card-style {
@@ -61,7 +63,7 @@
   background-color: var(--bg-accent);
 }
 
-.cancel-btn {
+/* .cancel-btn {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -76,6 +78,38 @@
 
 .cancel-btn:hover {
   background: rgb(231 76 60 / 10%);
+} */
+
+.cancel-btn {
+  z-index: 10; /* Щоб картка або інші елементи не перекривали кнопку */
+  display: inline-flex; /* Змінено з flex для кращого позиціонування */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.375rem; /* Трохи збільшимо область кліку */
+  background: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1.25rem;
+  color: #e74c3c;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.cancel-btn:hover {
+  background: rgb(231 76 60 / 10%);
+}
+
+.cancel-btn:active {
+  transform: scale(0.95); /* Візуальний відгук на клік */
+}
+
+/* Переконайтеся, що іконка всередині має фіксований розмір */
+.cancel-btn svg {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .loader,
@@ -129,9 +163,13 @@
 
 /* Картка в режимі очікування клієнта (Готове до видачі) */
 .ready-card {
-  background-color: #fafffb !important;
-  border: 0.125rem solid #2ecc71 !important;
-  border-left: 0.3125rem solid #2ecc71 !important;
+  background-color: var(--color-white) !important;
+
+  /* border: 0.125rem solid #2ecc71 !important; */
+  border: 0.125rem solid var(--border-accent) !important;
+
+  /* border-left: 0.3125rem solid #2ecc71 !important; */
+  border-left: 0.3125rem solid var(--border-accent) !important;
   box-shadow: none;
   animation: none !important;
 }
@@ -145,16 +183,22 @@
   cursor: pointer;
   width: 100%;
   padding: 0.625rem 1.25rem;
-  background-color: #2ecc71;
+  background-color: var(--bg-accent);
   border: none;
   border-radius: 0.5rem;
   font-weight: bold;
-  color: white;
+  color: var(--color-white);
   transition: background 0.3s;
 }
 
+/* Стиль для самої іконки-галочки */
+.archive-icon {
+  font-size: 1.2rem;
+  color: var(--color-white);
+}
+
 .archive-button:hover {
-  background-color: #27ae60;
+  background-color: var(--hover-color);
 }
 
 /* Стилі для блоку загальної вартості замовлення */

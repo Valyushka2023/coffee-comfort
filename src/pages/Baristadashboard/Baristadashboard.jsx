@@ -6,7 +6,7 @@ import {
   updateOrderStatus,
   deleteOrderRequest,
 } from '../../services/api';
-import { FiClock, FiTrash2 } from 'react-icons/fi';
+import { FiClock, FiTrash2, FiCheckSquare } from 'react-icons/fi';
 
 import css from './Baristadashboard.module.css';
 
@@ -132,7 +132,10 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
           </span>
           <button
             className={css['cancel-btn']}
-            onClick={() => onCancel(order._id)}
+            onClick={e => {
+              e.stopPropagation(); // Запобігає поширенню кліку на картку
+              onCancel(order._id);
+            }}
             title={t('cancel', 'Скасувати')}
           >
             <FiTrash2 />
@@ -192,7 +195,8 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
             onClick={() => onArchive(order._id)}
             className={css['archive-button']}
           >
-            ✅ {t('btnArchived', 'Видано клієнту')}
+            <FiCheckSquare className={css['archive-icon']} />{' '}
+            {t('btnArchived', 'Видано клієнту')}
           </button>
         )}
       </div>

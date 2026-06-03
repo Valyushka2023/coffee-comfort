@@ -6,7 +6,7 @@
   "paid": "ОПЛАЧЕНО",
   "payOnDelivery": "ОПЛАТА ПРИ ОТРИМАННІ",
   "btnReady": "Підготовлено",
-  "btnArchived": "Видано клієнту",
+  "btnArchived": "Видача клієнту",
   "confirmCancel": "Скасувати це замовлення?",
   "errorUpdateStatus": "Не вдалося оновити статус",
   "errorCancel": "Не вдалося скасувати замовлення"

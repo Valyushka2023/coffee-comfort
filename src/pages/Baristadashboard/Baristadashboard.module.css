@@ -63,23 +63,6 @@
   background-color: var(--bg-accent);
 }
 
-/* .cancel-btn {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 0.25rem;
-  background: none;
-  border: none;
-  border-radius: 0.25rem;
-  font-size: 1.2rem;
-  color: #e74c3c;
-  transition: background 0.2s;
-}
-
-.cancel-btn:hover {
-  background: rgb(231 76 60 / 10%);
-} */
-
 .cancel-btn {
   z-index: 10; /* Щоб картка або інші елементи не перекривали кнопку */
   display: inline-flex; /* Змінено з flex для кращого позиціонування */

@@ -196,7 +196,7 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
             className={css['archive-button']}
           >
             <FiCheckSquare className={css['archive-icon']} />{' '}
-            {t('btnArchived', 'Видано клієнту')}
+            {t('btnArchived', 'Issuance to customer')}
           </button>
         )}
       </div>

@@ -6,7 +6,7 @@
   "paid": "PAID",
   "payOnDelivery": "PAY ON DELIVERY",
   "btnReady": "Ready for Pickup",
-  "btnArchived": "Served to Customer",
+  "btnArchived": "Issuance to customer",
   "confirmCancel": "Are you sure you want to cancel this order?",
   "errorUpdateStatus": "Failed to update status",
   "errorCancel": "Failed to cancel order"

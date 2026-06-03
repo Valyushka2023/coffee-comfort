@@ -1,5 +1,5 @@
-.cart-icon-wrapper {
-  /* Головне виправлення: залишаємо тільки fixed */
+/* .cart-icon-wrapper {
+
   position: fixed;
   right: 6.5rem;
   bottom: 1.875rem;
@@ -25,7 +25,7 @@
 }
 
 .badge {
-  /* Для бейджа relative не потрібен, він позиціонується відносно wrapper */
+
   position: absolute;
   top: -0.3125rem;
   right: -0.3125rem;
@@ -38,6 +38,49 @@
   border: 0.125rem solid white;
   border-radius: 50%;
   font-size: 0.875rem;
+  font-weight: bold;
+  color: white;
+} */
+@import url('../../../styles/animate.css');
+
+.cart-icon-wrapper {
+  /* Змінюємо fixed на relative, щоб кнопка стала частиною Хедера */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  /* Зменшуємо розмір, щоб кнопка акуратно вписалася в Хедер */
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--form-cart-icon-wrapper);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  transition: all 0.3s ease;
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cart-icon-wrapper:hover {
+  background: var(--hover-cart-icon-wrapper);
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.badge {
+  /* Бейдж залишається absolute, але тепер він позиціонується відносно нової маленької кнопки */
+  position: absolute;
+  top: -0.2rem;
+  right: -0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: #2c3e50;
+  border: 0.125rem solid white;
+  border-radius: 50%;
+  font-size: 0.75rem;
   font-weight: bold;
   color: white;
 }

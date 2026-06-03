@@ -1,3 +1,138 @@
+// import { useState } from 'react';
+// import { useTranslation } from 'react-i18next';
+// import { useWindowScrollToTopButton } from '../../hooks/useWindowScrollToTopButton';
+
+// import Header from '../../components/Header/Header.jsx';
+// import MobileMenu from '../../components/Header/MobileMenu.jsx';
+// import Hero from '../../components/Hero/Hero.jsx';
+// import AboutUs from '../../components/AboutUs/AboutUs.jsx';
+// import Menu from '../../components/Menu/Menu.jsx';
+// import Gallery from '../../components/Gallery/Gallery.jsx';
+// import Reviews from '../../components/Reviews/Reviews.jsx';
+// import Contacts from '../../components/Contacts/Contacts.jsx';
+// import Footer from '../../components/Footer/Footer.jsx';
+// import ScrollToTopButton from '../../components/Ui/Buttons/ScrollToTopButton/ScrollToTopButton.jsx';
+// import CartIcon from '../../components/Ui/CartIcon/CartIcon.jsx';
+// import CallbackModal from '../../components/Modal/CalllbackModal/CallbackModal.jsx';
+// import ReviewFormModal from '../../components/Modal/ReviewFormModal/ReviewFormModal.jsx';
+// import CartModal from '../../components/Modal/CartModal/CartModal.jsx';
+
+// import css from './Home.module.css';
+
+// const GALLERY_IMAGES = [
+//   { id: 1, src: '/images/gallery-interior.webp', alt: 'Cozy corner' },
+//   { id: 2, src: '/images/gallery-cappuchino1.webp', alt: 'Fresh cappuccino' },
+//   { id: 3, src: '/images/gallery-interior1.webp', alt: 'Window seat' },
+//   {
+//     id: 4,
+//     src: '/images/gallery-croissant3.webp',
+//     alt: 'Freshly baked croissant',
+//   },
+//   { id: 5, src: '/images/gallery-barista.webp', alt: 'Barista at work' },
+//   { id: 6, src: '/images/gallery-details.webp', alt: 'Coffee shop details' },
+// ];
+
+// const Home = () => {
+//   const { t } = useTranslation('header');
+//   const { visible, scrollToTop } = useWindowScrollToTopButton(300);
+
+//   const NAV_ITEMS = [
+//     { href: '#menu', labelKey: 'menu_header_link', defaultLabel: 'Menu' },
+//     { href: '#about', labelKey: 'about_header_link', defaultLabel: 'About us' },
+//     {
+//       href: '#gallery',
+//       labelKey: 'gallery_header_link',
+//       defaultLabel: 'Gallery',
+//     },
+//     {
+//       href: '#contacts',
+//       labelKey: 'contacts_header_link',
+//       defaultLabel: 'Contacts',
+//     },
+//   ];
+
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const [isCallbackOpen, setCallbackOpen] = useState(false);
+//   const [isReviewOpen, setReviewOpen] = useState(false);
+//   const [isCartOpen, setIsCartOpen] = useState(false); // 2. Стан для відкриття кошика
+//   const [reviewsTrigger, setReviewsTrigger] = useState(0);
+
+//   const handleReviewSuccess = () => {
+//     setReviewOpen(false);
+//     setReviewsTrigger(prev => prev + 1);
+//   };
+
+//   const toggleMenu = () => setIsMenuOpen(prev => !prev);
+
+//   // 3. Оновлена функція для відкриття модалки кошика
+//   const handleOpenCart = () => {
+//     setIsCartOpen(true);
+//   };
+
+//   return (
+//     <>
+//       <Header isMenuOpen={isMenuOpen} onToggleMenu={toggleMenu} />
+
+//       {isMenuOpen && (
+//         <MobileMenu
+//           isOpen={isMenuOpen}
+//           onClose={() => setIsMenuOpen(false)}
+//           navItems={NAV_ITEMS}
+//           t={t}
+//         />
+//       )}
+
+//       <div className={css['container-page']}>
+//         <main>
+//           <Hero />
+//           <section id="about">
+//             <AboutUs />
+//           </section>
+//           <section id="menu">
+//             <Menu />
+//           </section>
+//           <section id="gallery">
+//             <Gallery images={GALLERY_IMAGES} />
+//           </section>
+//           <section id="reviews">
+//             <Reviews refreshTrigger={reviewsTrigger} />
+//           </section>
+//           <section id="contacts">
+//             <Contacts />
+//           </section>
+//         </main>
+
+//         <Footer
+//           onOpenReview={() => setReviewOpen(true)}
+//           onOpenCallback={() => setCallbackOpen(true)}
+//         />
+//       </div>
+
+//       {/* Кнопки фіксованого позиціонування */}
+//       <ScrollToTopButton visible={visible} onClick={scrollToTop} />
+
+//       {/* Наш новий кошик — передаємо функцію відкриття */}
+//       <CartIcon onClick={handleOpenCart} />
+
+//       {/* Модальні вікна */}
+//       <CallbackModal
+//         isOpen={isCallbackOpen}
+//         onClose={() => setCallbackOpen(false)}
+//       />
+
+//       <ReviewFormModal
+//         isOpen={isReviewOpen}
+//         onClose={() => setReviewOpen(false)}
+//         onSuccess={handleReviewSuccess}
+//       />
+
+//       {/* 4. Рендеримо модалку кошика */}
+//       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+//     </>
+//   );
+// };
+
+// export default Home;
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useWindowScrollToTopButton } from '../../hooks/useWindowScrollToTopButton';
@@ -12,10 +147,8 @@ import Reviews from '../../components/Reviews/Reviews.jsx';
 import Contacts from '../../components/Contacts/Contacts.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import ScrollToTopButton from '../../components/Ui/Buttons/ScrollToTopButton/ScrollToTopButton.jsx';
-import CartIcon from '../../components/Ui/CartIcon/CartIcon.jsx';
 import CallbackModal from '../../components/Modal/CalllbackModal/CallbackModal.jsx';
 import ReviewFormModal from '../../components/Modal/ReviewFormModal/ReviewFormModal.jsx';
-import CartModal from '../../components/Modal/CartModal/CartModal.jsx'; // 1. Додано імпорт модалки кошика
 
 import css from './Home.module.css';
 
@@ -54,7 +187,6 @@ const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCallbackOpen, setCallbackOpen] = useState(false);
   const [isReviewOpen, setReviewOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false); // 2. Стан для відкриття кошика
   const [reviewsTrigger, setReviewsTrigger] = useState(0);
 
   const handleReviewSuccess = () => {
@@ -63,11 +195,6 @@ const Home = () => {
   };
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
-
-  // 3. Оновлена функція для відкриття модалки кошика
-  const handleOpenCart = () => {
-    setIsCartOpen(true);
-  };
 
   return (
     <>
@@ -111,9 +238,6 @@ const Home = () => {
       {/* Кнопки фіксованого позиціонування */}
       <ScrollToTopButton visible={visible} onClick={scrollToTop} />
 
-      {/* Наш новий кошик — передаємо функцію відкриття */}
-      <CartIcon onClick={handleOpenCart} />
-
       {/* Модальні вікна */}
       <CallbackModal
         isOpen={isCallbackOpen}
@@ -125,9 +249,6 @@ const Home = () => {
         onClose={() => setReviewOpen(false)}
         onSuccess={handleReviewSuccess}
       />
-
-      {/* 4. Рендеримо модалку кошика */}
-      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
 };

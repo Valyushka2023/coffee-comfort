@@ -213,3 +213,66 @@
   font-weight: bold;
   color: var(--color-accent);
 }
+
+/* Контейнер пошуку у хедері */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 21.875rem;
+}
+
+/* Іконка лупи */
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  font-size: 1.1rem;
+  color: #95a5a6;
+  pointer-events: none;
+}
+
+/* Текстове поле */
+.search-input {
+  width: 100%;
+  padding: 0.55rem 2.25rem;
+  background-color: #fafafa;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.5rem;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+
+.search-input:focus {
+  background-color: #fff;
+  border-color: #d35400;
+}
+
+/* Кнопка очищення поля (хрестик) */
+.clear-search {
+  position: absolute;
+  right: 0.625rem;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: #95a5a6;
+}
+
+.clear-search:hover {
+  color: #333;
+}
+
+/* Повідомлення про відсутність результатів */
+.no-results {
+  margin: 3rem auto;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #7f8c8d;
+}

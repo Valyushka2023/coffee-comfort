@@ -213,7 +213,7 @@ import {
   updateOrderStatus,
   deleteOrderRequest,
 } from '../../services/api';
-import { FiClock, FiTrash2, FiCheckSquare, FiSearch } from 'react-icons/fi';
+import { FiClock, FiTrash2, FiSearch } from 'react-icons/fi';
 
 import css from './Baristadashboard.module.css';
 
@@ -222,7 +222,7 @@ const Baristadashboard = () => {
 
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState(''); // Новий стейт для рядка пошуку
+  const [searchQuery, setSearchQuery] = useState('');
   const isFetching = useRef(false);
 
   const getOrders = useCallback(async (isInitial = false) => {
@@ -259,11 +259,13 @@ const Baristadashboard = () => {
     }
   };
 
-  const handleArchive = async orderId => {
+  // Оновлена функція архівації: приймає і передає обраний тип оплати
+  const handleArchive = async (orderId, paymentMethod) => {
     try {
       await updateOrderStatus(orderId, {
         status: 'completed',
         isPaid: true,
+        paymentMethod, // Відправляємо "cash" або "card"
       });
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
@@ -283,29 +285,24 @@ const Baristadashboard = () => {
     }
   };
 
-  // РОЗУМНА ФІЛЬТРАЦІЯ В РЕАЛЬНОМУ ЧАСІ
   const filteredOrders = useMemo(() => {
     const cleanQuery = searchQuery.trim().toLowerCase().replace('#', '');
     if (!cleanQuery) return orders;
 
-    // Спрощена версія для порівняння цифр у телефонах
     const digitsQuery = cleanQuery.replace(/\D/g, '');
 
     return orders.filter(order => {
-      // 1. Пошук за номером замовлення
       const orderNum = String(order.orderNumber || '').toLowerCase();
       const orderIdTail = order._id ? order._id.slice(-4).toLowerCase() : '';
       if (orderNum.includes(cleanQuery) || orderIdTail.includes(cleanQuery)) {
         return true;
       }
 
-      // 2. Пошук за ім'ям клієнта
       const customerName = String(order.customerName || '').toLowerCase();
       if (customerName.includes(cleanQuery)) {
         return true;
       }
 
-      // 3. Пошук за номером телефону
       const customerPhone = String(order.customerPhone || '');
       const cleanPhone = customerPhone.replace(/\D/g, '');
       if (digitsQuery && cleanPhone.includes(digitsQuery)) {
@@ -326,7 +323,6 @@ const Baristadashboard = () => {
       <header className={css['header-style']}>
         <h1>☕ {t('title', 'Панель бариста')}</h1>
 
-        {/* НОВИЙ БЛОК: Поле пошуку замовлень */}
         <div className={css['search-wrapper']}>
           <FiSearch className={css['search-icon']} />
           <input
@@ -351,7 +347,6 @@ const Baristadashboard = () => {
         </div>
       </header>
 
-      {/* Якщо нічого не знайдено за фільтром */}
       {filteredOrders.length === 0 && searchQuery && (
         <div className={css['no-results']}>
           🔍 {t('noResults', 'Замовлень не знайдено')}
@@ -406,7 +401,7 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
           <button
             className={css['cancel-btn']}
             onClick={e => {
-              e.stopPropagation(); // Запобігає поширенню кліку на картку
+              e.stopPropagation();
               onCancel(order._id);
             }}
             title={t('cancel', 'Скасувати')}
@@ -461,13 +456,21 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
             {t('btnReady', 'Підготовлено')}
           </button>
         ) : (
-          <button
-            onClick={() => onArchive(order._id)}
-            className={css['archive-button']}
-          >
-            <FiCheckSquare className={css['archive-icon']} />{' '}
-            {t('btnArchived', 'Issuance to customer')}
-          </button>
+          /* Дві окремі кнопки для вибору типу оплати при видачі готової кави */
+          <div className={css['payment-buttons-group']}>
+            <button
+              onClick={() => onArchive(order._id, 'cash')}
+              className={`${css['archive-button']} ${css['cash-btn']}`}
+            >
+              💵 {t('btnCash', 'Готівка')}
+            </button>
+            <button
+              onClick={() => onArchive(order._id, 'card')}
+              className={`${css['archive-button']} ${css['card-btn']}`}
+            >
+              💳 {t('btnCard', 'Термінал')}
+            </button>
+          </div>
         )}
       </div>
     </div>

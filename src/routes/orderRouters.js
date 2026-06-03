@@ -249,7 +249,7 @@ router.patch('/:id', async (req, res) => {
     const { status, isPaid, paymentMethod } = req.body; // Приймаємо метод оплати з фронтенду
     const order = await Order.findById(req.params.id);
     if (!order)
-      return res.status(404).json({ message: 'Замовлення не знайдено' });
+      return res.status(404).json({ message: 'Замовлення не знадено' });
 
     if (status === 'completed' && order.status !== 'completed') {
       for (const item of order.items) {
@@ -325,38 +325,66 @@ router.get('/history', async (req, res) => {
   }
 });
 
-// GET: Аналітика (ГРУПУВАННЯ ЗА ОБ'ЄКТОМ НАЗВИ)
+// GET: Аналітика (ВИПРАВЛЕНО: ТОЧНИЙ ЛОКАЛЬНИЙ ЧАС ДЛЯ КИЄВА)
 router.get('/stats', async (req, res) => {
   try {
-    const { date } = req.query;
+    const { date } = req.query; // Отримуємо рядок типу "2026-06-04"
     if (!date) return res.status(400).json({ message: 'Дата не вказана' });
 
-    const startOfDay = new Date(date);
-    startOfDay.setHours(0, 0, 0, 0);
+    // Примусово виставляємо часовий пояс України (+03:00 для літнього часу),
+    // щоб замовлення після 00:00 рахувалися правильним днем, а не відкатувалися назад
+    const startOfDay = new Date(`${date}T00:00:00.000+03:00`);
+    const endOfDay = new Date(`${date}T23:59:59.999+03:00`);
 
-    const endOfDay = new Date(date);
-    endOfDay.setHours(23, 59, 59, 999);
-
-    const stats = await Order.aggregate([
-      {
-        $match: {
-          status: 'completed',
-          updatedAt: { $gte: startOfDay, $lte: endOfDay },
-        },
-      },
-      { $unwind: '$items' },
-      {
-        $group: {
-          _id: '$items.name',
-          totalQuantity: { $sum: '$items.quantity' },
-          totalPrice: {
-            $sum: { $multiply: ['$items.price', '$items.quantity'] },
+    // Виконуємо запити паралельно через Promise.all
+    const [dishStats, paymentStats] = await Promise.all([
+      // 1. Агрегація страв за день
+      Order.aggregate([
+        {
+          $match: {
+            status: 'completed',
+            updatedAt: { $gte: startOfDay, $lte: endOfDay },
           },
         },
-      },
-      { $sort: { totalQuantity: -1 } },
+        { $unwind: '$items' },
+        {
+          $group: {
+            _id: '$items.name',
+            totalQuantity: { $sum: '$items.quantity' },
+            totalPrice: {
+              $sum: { $multiply: ['$items.price', '$items.quantity'] },
+            },
+          },
+        },
+        { $sort: { totalQuantity: -1 } },
+      ]),
+      // 2. Агрегація фінансів (Готівка / Картка)
+      Order.aggregate([
+        {
+          $match: {
+            status: 'completed',
+            updatedAt: { $gte: startOfDay, $lte: endOfDay },
+          },
+        },
+        {
+          $group: {
+            _id: '$paymentMethod',
+            totalAmount: { $sum: '$totalPrice' },
+          },
+        },
+      ]),
     ]);
-    res.status(200).json(stats);
+
+    // Знаходимо результати підрахунку для кожного методу
+    const cashData = paymentStats.find(p => p._id === 'cash');
+    const cardData = paymentStats.find(p => p._id === 'card');
+
+    // Віддаємо структуровану відповідь на фронтенд
+    res.status(200).json({
+      dishes: dishStats,
+      cash: cashData ? cashData.totalAmount : 0,
+      card: cardData ? cardData.totalAmount : 0,
+    });
   } catch (error) {
     console.error('❌ Помилка сервера в аналітиці:', error);
     res.status(500).json({ message: 'Помилка аналітики' });

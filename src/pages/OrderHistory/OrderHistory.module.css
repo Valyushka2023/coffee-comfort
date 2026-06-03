@@ -1,4 +1,4 @@
-/* КОНТЕЙНЕР ТА ШАПКА  */
+/* КОНТЕЙНЕР ТА ШАПКА */
 .container {
   position: relative;
   max-width: 75rem;
@@ -24,7 +24,6 @@
   flex-wrap: wrap;
 }
 
-/* Якщо у вас є темна тема, цей бордер адаптується */
 :global(.dark) .header {
   border-bottom-color: rgb(255 255 255 / 10%);
 }
@@ -103,6 +102,39 @@
   font-weight: 600;
 }
 
+/* НОВІ СТИЛІ ДЛЯ КАСОВИХ БАДЖІВ */
+.badges-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.finance-badge {
+  padding: 0.625rem 1.25rem;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-gray-light);
+}
+
+.cash-badge {
+  border: 0.125rem solid #27ae60;
+}
+
+.cash-badge span {
+  color: #27ae60;
+}
+
+.card-badge {
+  border: 0.125rem solid #2980b9;
+}
+
+.card-badge span {
+  color: #2980b9;
+}
+
 /* Бадж загальної суми */
 .total-badge {
   padding: 0.625rem 2rem;
@@ -175,7 +207,6 @@
   border-bottom-color: rgb(255 255 255 / 5%);
 }
 
-/* Ефект підсвічування рядка при наведенні */
 .stats-table tbody tr:hover,
 .table tbody tr:hover {
   background-color: rgb(0 0 0 / 1%);
@@ -186,7 +217,6 @@
   background-color: rgb(255 255 255 / 1%);
 }
 
-/* Перелік страв у чеку (кожна страва з нового рядка) */
 .table td div {
   margin-bottom: 0.25rem;
 }

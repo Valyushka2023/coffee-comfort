@@ -1,13 +1,18 @@
 {
   "title": "Панель бариста",
   "loading": "Завантаження...",
-  "minutesMin": "хв",
+  "search_placeholder": "Пошук за №, ім'ям або телефоном...",
+  "no_results": "Замовлень не знайдено",
+  "minutes_min": "хв",
+  "urgent": "Терміново!",
   "cancel": "Скасувати",
   "paid": "ОПЛАЧЕНО",
-  "payOnDelivery": "ОПЛАТА ПРИ ОТРИМАННІ",
-  "btnReady": "Підготовлено",
-  "btnArchived": "Видача клієнту",
-  "confirmCancel": "Скасувати це замовлення?",
-  "errorUpdateStatus": "Не вдалося оновити статус",
-  "errorCancel": "Не вдалося скасувати замовлення"
+  "pay_on_delivery": "ОПЛАТА ПРИ ОТРИМАННІ",
+  "total_price_label": "До сплати",
+  "btn_ready": "Підготовлено",
+  "btn_cash": "Готівка",
+  "btn_card": "Термінал",
+  "confirm_cancel": "Скасувати це замовлення?",
+  "errorUpdate_status": "Не вдалося оновити статус",
+  "error_cancel": "Не вдалося скасувати замовлення"
 }

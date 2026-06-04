@@ -218,7 +218,9 @@ import { FiClock, FiTrash2, FiSearch } from 'react-icons/fi';
 import css from './Baristadashboard.module.css';
 
 const Baristadashboard = () => {
-  const { t, i18n } = useTranslation('baristadashboard');
+  // Використовуємо фіксовану українську мову для інтерфейсу бариста,
+  // але витягуємо i18n, щоб знати поточну локаль для назв страв
+  const { t, i18n } = useTranslation('baristadashboard', { lng: 'uk' });
 
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -255,33 +257,37 @@ const Baristadashboard = () => {
       );
     } catch (error) {
       console.error(error);
-      alert(t('errorUpdateStatus', 'Не вдалося оновити статус'));
+      alert(t('error_update_status', 'Failed to update status'));
     }
   };
 
-  // Оновлена функція архівації: приймає і передає обраний тип оплати
   const handleArchive = async (orderId, paymentMethod) => {
     try {
       await updateOrderStatus(orderId, {
         status: 'completed',
         isPaid: true,
-        paymentMethod, // Відправляємо "cash" або "card"
+        paymentMethod,
       });
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
       console.error('Помилка оновлення:', error);
-      alert(t('errorUpdateStatus', 'Не вдалося оновити статус'));
+      alert(t('error_update_status', 'Failed to update status'));
     }
   };
 
   const handleCancelOrder = async orderId => {
-    if (!window.confirm(t('confirmCancel', 'Скасувати це замовлення?'))) return;
+    if (
+      !window.confirm(
+        t('confirm_cancel', 'Are you sure you want to cancel this order?')
+      )
+    )
+      return;
     try {
       await deleteOrderRequest(orderId);
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
       console.error('Помилка скасування:', error);
-      alert(t('errorCancel', 'Не вдалося скасувати замовлення'));
+      alert(t('error_cancel', 'Failed to cancel order'));
     }
   };
 
@@ -314,14 +320,12 @@ const Baristadashboard = () => {
   }, [orders, searchQuery]);
 
   if (loading)
-    return (
-      <div className={css.loader}>⏳ {t('loading', 'Завантаження...')}</div>
-    );
+    return <div className={css['loader']}>⏳ {t('loading', 'Loading...')}</div>;
 
   return (
     <div className={css['container-style']}>
       <header className={css['header-style']}>
-        <h1>☕ {t('title', 'Панель бариста')}</h1>
+        <h1>☕ {t('title', 'Barista Dashboard')}</h1>
 
         <div className={css['search-wrapper']}>
           <FiSearch className={css['search-icon']} />
@@ -329,8 +333,8 @@ const Baristadashboard = () => {
             type="text"
             className={css['search-input']}
             placeholder={t(
-              'searchPlaceholder',
-              "Пошук за №, ім'ям або телефоном..."
+              'search_placeholder',
+              'Search by #, name or phone...'
             )}
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
@@ -349,7 +353,7 @@ const Baristadashboard = () => {
 
       {filteredOrders.length === 0 && searchQuery && (
         <div className={css['no-results']}>
-          🔍 {t('noResults', 'Замовлень не знайдено')}
+          🔍 {t('no_results', 'No orders found')}
         </div>
       )}
 
@@ -395,8 +399,10 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
           #{order.orderNumber || order._id.slice(-4).toUpperCase()}
         </span>
         <div className={css['header-actions']}>
-          <span className={css['time-style']}>
-            <FiClock /> {minutesWait} {t('minutesMin', 'хв')}
+          <span
+            className={`${css['time-style']} ${isUrgent ? css['urgent-text'] : ''}`}
+          >
+            <FiClock /> {minutesWait} {t('minutes_min', 'min')}
           </span>
           <button
             className={css['cancel-btn']}
@@ -404,7 +410,7 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
               e.stopPropagation();
               onCancel(order._id);
             }}
-            title={t('cancel', 'Скасувати')}
+            title={t('cancel', 'Cancel')}
           >
             <FiTrash2 />
           </button>
@@ -413,8 +419,8 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
 
       <div className={order.isPaid ? css['paid-badge'] : css['unpaid-badge']}>
         {order.isPaid
-          ? t('paid', 'ОПЛАЧЕНО')
-          : t('payOnDelivery', 'ОПЛАТА ПРИ ОТРИМАННІ')}
+          ? t('paid', 'PAID')
+          : t('pay_on_delivery', 'PAY ON DELIVERY')}
       </div>
 
       <div className={css['customer-info-style']}>
@@ -442,7 +448,7 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
       <hr className={css['separator']} />
       <div className={css['total-price-block']}>
         <span className={css['total-label']}>
-          {t('totalPriceLabel', 'До сплати')}:
+          {t('total_price_label', 'To pay')}:
         </span>
         <span className={css['total-amount']}>{order.totalPrice} грн</span>
       </div>
@@ -453,22 +459,21 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
             onClick={() => onReady(order._id)}
             className={css['button-style']}
           >
-            {t('btnReady', 'Підготовлено')}
+            {t('btn_ready', 'Ready for Pickup')}
           </button>
         ) : (
-          /* Дві окремі кнопки для вибору типу оплати при видачі готової кави */
           <div className={css['payment-buttons-group']}>
             <button
               onClick={() => onArchive(order._id, 'cash')}
               className={`${css['archive-button']} ${css['cash-btn']}`}
             >
-              💵 {t('btnCash', 'Готівка')}
+              {t('btn_cash', 'Cash')}
             </button>
             <button
               onClick={() => onArchive(order._id, 'card')}
               className={`${css['archive-button']} ${css['card-btn']}`}
             >
-              💳 {t('btnCard', 'Термінал')}
+              {t('btn_card', 'Terminal')}
             </button>
           </div>
         )}

@@ -196,31 +196,30 @@ import Loader from '../../components/Ui/Loader/Loader.jsx';
 import css from './Inventory.module.css';
 
 const Inventory = () => {
-  const { t, i18n } = useTranslation('inventory');
+  // Примусово фіксуємо українську мову для інвентаризації
+  const { t } = useTranslation('inventory', { lng: 'uk' });
   const [ingredients, setIngredients] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Нові стейти для фільтрації та пошуку
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().split('T')[0]
   );
 
-  const lang = (i18n.language || 'uk').substring(0, 2);
-  const isUk = lang === 'uk';
-
-  // Перевірка, чи вибрано саме сьогоднішній день (для дозволу редагування)
+  // const isUk = true;
+  // Завжди українська мова для звітів Excel
   const isToday = selectedDate === new Date().toISOString().split('T')[0];
-  // Функція, яка автоматично робить першу літеру заглавною
+
   const capitalizeFirstLetter = text => {
     if (!text) return '';
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
+
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
       try {
-        // Передаємо обрану дату на сервер параметром запиту
+        // Залишаємо запит на сервер без змін
         const res = await api.get(`/ingredients?date=${selectedDate}`);
         setIngredients(res.data || []);
       } catch (err) {
@@ -230,10 +229,9 @@ const Inventory = () => {
       }
     };
     loadData();
-  }, [lang, i18n.language, selectedDate]);
+  }, [selectedDate]);
 
   const changeQuantity = async (id, currentQty, step) => {
-    // Не дозволяємо редагувати залишки за минулі дні
     if (!isToday) return;
 
     const targetQty = currentQty + step;
@@ -254,13 +252,9 @@ const Inventory = () => {
     }
   };
 
-  // Фільтрація інгредієнтів по текстовому пошуку
+  // Фільтрація інгредієнтів — шукаємо виключно по українській назві (.uk)
   const filteredIngredients = ingredients.filter(item => {
-    const displayName = (
-      item.name?.[lang] ||
-      item.name?.uk ||
-      ''
-    ).toLowerCase();
+    const displayName = (item.name?.uk || '').toLowerCase();
     return displayName.includes(searchQuery.toLowerCase());
   });
 
@@ -271,9 +265,9 @@ const Inventory = () => {
     }
 
     const workbook = XLSX.utils.book_new();
-    const currentDateTime = new Date().toLocaleString(isUk ? 'uk-UA' : 'en-US');
+    const currentDateTime = new Date().toLocaleString('uk-UA');
     const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
-      isUk ? 'uk-UA' : 'en-US'
+      'uk-UA'
     );
 
     const headerData = [
@@ -286,8 +280,9 @@ const Inventory = () => {
     const worksheet = XLSX.utils.aoa_to_sheet(headerData);
 
     const excelData = filteredIngredients.map(item => {
-      const displayName = item.name?.[lang] || item.name?.uk || '—';
-      const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
+      // Завжди експортуємо назву та одиниці виміру українською мовою
+      const displayName = item.name?.uk || '—';
+      const displayUnit = item.unit?.uk || '';
       const isLow = item.quantity <= item.minLimit;
 
       return {
@@ -303,7 +298,6 @@ const Inventory = () => {
     });
 
     XLSX.utils.sheet_add_json(worksheet, excelData, { origin: 4 });
-
     worksheet['!cols'] = [{ wch: 32 }, { wch: 15 }, { wch: 20 }, { wch: 20 }];
 
     XLSX.utils.book_append_sheet(
@@ -326,14 +320,12 @@ const Inventory = () => {
           <h2>🥛 {t('title')}</h2>
         </div>
 
-        {/* ПАНЕЛЬ ФІЛЬТРІВ (Пошук + Календар) */}
         <div className={css['filters-panel']}>
           <div className={css['search-wrapper']}>
             <input
               type="text"
               placeholder={t('search_placeholder', 'Пошук інгредієнта...')}
               value={searchQuery}
-              // Перетворюємо першу літеру на заглавну перед записом у стейт
               onChange={e =>
                 setSearchQuery(capitalizeFirstLetter(e.target.value))
               }
@@ -382,8 +374,9 @@ const Inventory = () => {
           <tbody>
             {filteredIngredients.map(item => {
               const isLow = item.quantity <= item.minLimit;
-              const displayName = item.name?.[lang] || item.name?.uk || '—';
-              const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
+              // Рендеримо виключно з полів .uk
+              const displayName = item.name?.uk || '—';
+              const displayUnit = item.unit?.uk || '';
 
               return (
                 <tr key={item._id} className={isLow ? css['low-stock'] : ''}>

@@ -1,13 +1,18 @@
 {
   "title": "Barista Dashboard",
   "loading": "Loading...",
-  "minutesMin": "min",
+  "search_placeholder": "Search by #, name or phone...",
+  "no_results": "No orders found",
+  "minutes_min": "min",
+  "urgent": "Urgent!",
   "cancel": "Cancel",
   "paid": "PAID",
-  "payOnDelivery": "PAY ON DELIVERY",
-  "btnReady": "Ready for Pickup",
-  "btnArchived": "Issuance to customer",
-  "confirmCancel": "Are you sure you want to cancel this order?",
-  "errorUpdateStatus": "Failed to update status",
-  "errorCancel": "Failed to cancel order"
+  "pay_on_delivery": "PAY ON DELIVERY",
+  "total_price_label": "To pay",
+  "btn_ready": "Ready for Pickup",
+  "btn_cash": "Cash",
+  "btn_card": "Terminal",
+  "confirm_cancel": "Are you sure you want to cancel this order?",
+  "error_update_status": "Failed to update status",
+  "error_cancel": "Failed to cancel order"
 }

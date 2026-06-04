@@ -12,6 +12,8 @@
   "pcs": "шт",
   "paid": "Оплачено",
   "debt": "Борг",
+  "cash": "Готівка",
+  "card": "Terminal",
   "th_dish": "Страва",
   "th_sold_out": "Продано",
   "th_amount": "Сума",
@@ -31,6 +33,10 @@
     "total_amount": "Загальна сума",
     "total_per_day": "Разом за день",
     "sheet_day_summary": "Підсумок за день",
-    "generated_at": "Сформовано на дату"
+    "generated_at": "Сформовано на дату",
+    "card_label": "Термінал",
+    "cash_label": "Готівка",
+    "cash_total": "Всього готівкою",
+    "card_total": "Всього терміналом"
   }
 }

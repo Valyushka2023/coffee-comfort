@@ -12,6 +12,8 @@
   "pcs": "pcs",
   "paid": "Paid",
   "debt": "Debt",
+  "cash": "Cash",
+  "card": "Terminal",
   "th_dish": "Dish",
   "th_sold_out": "Sold",
   "th_amount": "Amount",
@@ -31,6 +33,10 @@
     "total_amount": "Total Amount",
     "total_per_day": "Total per day",
     "sheet_day_summary": "Daily Summary",
-    "generated_at": "Generated at"
+    "generated_at": "Generated at",
+    "card_label": "Terminal",
+    "cash_label": "Cash",
+    "cash_total": "Total cash",
+    "card_total": "Total terminal"
   }
 }

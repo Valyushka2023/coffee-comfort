@@ -175,11 +175,26 @@
   }
 
   50% {
-    background-color: #f8eb2f; /* Легкий відтінок */
+    background-color: #f8eb2f;
   }
 
   100% {
     background-color: #fff;
+  }
+}
+
+/* Анімація через внутрішню тінь (inset) */
+@keyframes shadow-glow {
+  0% {
+    box-shadow: inset 0 0 0 12.5rem var(--color-white);
+  }
+
+  50% {
+    box-shadow: inset 0 0 0 12.5rem var(--color-active); /* Колір плавно заллє картку */
+  }
+
+  100% {
+    box-shadow: inset 0 0 0 12.5rem var(--color-white);
   }
 }
 

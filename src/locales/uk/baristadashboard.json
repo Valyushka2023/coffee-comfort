@@ -10,9 +10,12 @@
   "pay_on_delivery": "ОПЛАТА ПРИ ОТРИМАННІ",
   "total_price_label": "До сплати",
   "btn_ready": "Підготовлено",
-  "btn_cash": "Готівка",
-  "btn_card": "Термінал",
+  "cash": "Готівка",
+  "card": "Термінал",
+  "btn_annul": "Анулювати замовлення",
+  "overdue_label": "Сплив час",
+  "pickup_at": "На час",
   "confirm_cancel": "Скасувати це замовлення?",
-  "errorUpdate_status": "Не вдалося оновити статус",
+  "error_update_status": "Не вдалося оновити статус",
   "error_cancel": "Не вдалося скасувати замовлення"
 }

@@ -10,8 +10,11 @@
   "pay_on_delivery": "PAY ON DELIVERY",
   "total_price_label": "To pay",
   "btn_ready": "Ready for Pickup",
-  "btn_cash": "Cash",
-  "btn_card": "Terminal",
+  "cash": "Cash",
+  "card": "Terminal",
+  "btn_annul": "Cancel order",
+  "overdue_label": "Time expired",
+  "pickup_at": "Pickup at",
   "confirm_cancel": "Are you sure you want to cancel this order?",
   "error_update_status": "Failed to update status",
   "error_cancel": "Failed to cancel order"

@@ -137,12 +137,7 @@
 /* --- ТЕРМІНОВЕ ЗАМОВЛЕННЯ (Єдина активна анімація) --- */
 
 .card-style.urgent-card {
-  background-color: #d1dc35 !important;
-
-  /* border: 0.125rem solid #d1dc35 !important; */
-
-  /* Плавна циклічна пульсація кольору та тіні */
-  animation: bg-glow 2s infinite ease-in-out;
+  animation: shadow-glow 3s infinite ease-in-out;
 }
 
 /* .urgent-text {
@@ -187,7 +182,6 @@
 
 /* Стилізація кнопки ГОТІВКА */
 .cash-btn {
-  /* background-color: #27ae60; */
   background-color: var(--color-beige);
   border: 0.125rem solid var(--border-accent);
   border-radius: 0.375rem;
@@ -203,7 +197,6 @@
 
 /* Стилізація кнопки ТЕРМІНАЛ */
 .card-btn {
-  /* background-color: #2980b9;  */
   background-color: var(--color-beige);
   border: 0.125rem solid var(--border-accent);
   border-radius: 0.375rem;
@@ -308,4 +301,30 @@
   font-size: 1.2rem;
   text-align: center;
   color: #7f8c8d;
+}
+
+/* --- ПРОТЕРМІНОВАНЕ КЛІЄНТОМ ЗАМОВЛЕННЯ (20+ хв) --- */
+
+/* Протерміноване замовлення: без анімацій, просто чіткі статичні акценти */
+.card-style.overdue-card {
+  border-left: 0.3125rem solid #c0392b !important; /* Темно-червоний лівий акцент */
+  border-color: #e74c3c !important; /* Робимо рамку картки червоною */
+  animation: none !important; /* Гарантовано вимикаємо інші анімації */
+}
+
+/* Червоний текст для таймера */
+.overdue-text {
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+/* Кнопка анулювання (залишається вашим головним тригером) */
+.annul-btn {
+  background-color: #e74c3c !important;
+  border-color: #c0392b !important;
+  color: #fff !important;
+}
+
+.annul-btn:hover {
+  background-color: #c0392b !important;
 }

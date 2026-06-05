@@ -9,8 +9,9 @@ router.get('/', async (req, res) => {
     const list = await Ingredient.find();
     res.status(200).json(list);
   } catch (error) {
-    console.error('Помилка сервера при отриманні складу:', error);
-    res.status(500).json({ message: 'Не вдалося завантажити склад' });
+    console.error('❌ Помилка сервера при отриманні складу:', error);
+    // Замість українського тексту повертаємо код помилки
+    res.status(500).json({ message: 'FETCH_INGREDIENTS_FAILED' });
   }
 });
 
@@ -20,7 +21,8 @@ router.patch('/:id', async (req, res) => {
     const { quantity } = req.body;
 
     if (typeof quantity !== 'number' || quantity < 0) {
-      return res.status(400).json({ message: 'Некоректна кількість' });
+      // Валідація кількості
+      return res.status(400).json({ message: 'INVALID_QUANTITY' });
     }
 
     // Округляємо до 3 знаків (для грамів, мілілітрів тощо)
@@ -33,13 +35,15 @@ router.patch('/:id', async (req, res) => {
     );
 
     if (!updatedItem) {
-      return res.status(404).json({ message: 'Інгредієнт не знайдено' });
+      // Якщо інгредієнт видалили або ID невірний
+      return res.status(404).json({ message: 'INGREDIENT_NOT_FOUND' });
     }
 
     res.status(200).json(updatedItem);
   } catch (error) {
-    console.error('Помилка сервера при оновленні складу:', error);
-    res.status(500).json({ message: 'Не вдалося оновити кількість' });
+    console.error('❌ Помилка сервера при оновленні складу:', error);
+    // Помилка під час оновлення в базі
+    res.status(500).json({ message: 'UPDATE_INGREDIENT_FAILED' });
   }
 });
 

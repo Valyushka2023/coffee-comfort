@@ -1,4 +1,15 @@
 {
   "error_message": "An error occurred:",
-  "retry_button": "Try again"
+  "retry_button": "Try again",
+  "errors": {
+    "ORDER_NOT_FOUND": "Order not found.",
+    "FETCH_HISTORY_FAILED": "Failed to load order history.",
+    "UNKNOWN_ERROR": "Something went wrong. Please try again.",
+    "FETCH_INGREDIENTS_FAILED": "Failed to load ingredients stock.",
+    "INVALID_QUANTITY": "Invalid quantity provided.",
+    "INGREDIENT_NOT_FOUND": "Ingredient not found in stock.",
+    "UPDATE_INGREDIENT_FAILED": "Failed to update ingredient quantity.",
+    "OUT_OF_STOCK_RESERVE": "Sorry, this quantity is out of stock or reserved. Please try ordering a smaller amount.",
+    "CREATE_ORDER_FAILED": "Failed to create the order. Please try again."
+  }
 }

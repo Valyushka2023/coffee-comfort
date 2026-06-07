@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-// Налаштування базового URL для axios (заміни на свій Render, якщо тестуєш на продакшені)
+// Базовий URL твого бекенду на Render
 const API_URL = 'https://coffee-comfort.onrender.com/api/orders';
 
 const BaristaDashboard = () => {
@@ -9,73 +9,103 @@ const BaristaDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Завантаження активних замовлень (new, preparing, ready)
-  const fetchActiveOrders = async () => {
+  // Завантаження замовлень із сервера
+  const fetchOrders = async () => {
     try {
-      setLoading(true);
       const response = await axios.get(API_URL);
-      setOrders(response.data);
+      console.log('--- ЗАВАНТАЖЕНО ЗАМОВЛЕННЯ ---', response.data);
+      // Фільтруємо, щоб бариста бачив лише активні замовлення (нові, в процесі, готові)
+      const activeOrders = response.data.filter(
+        order => order.status !== 'completed'
+      );
+      setOrders(activeOrders);
       setError(null);
     } catch (err) {
-      console.error('Помилка завантаження замовлень:', err);
-      setError('Не вдалося завантажити активні замовлення');
+      console.error('Помилка завантаження активних замовлень:', err);
+      setError('Не вдалося завантажити замовлення');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchActiveOrders();
-    // Оновлюємо список кожні 30 секунд для ефекту "реального часу"
-    const interval = setInterval(fetchActiveOrders, 30000);
+    fetchOrders();
+    const interval = setInterval(fetchOrders, 20000); // Оновлення кожні 20 секунд
     return () => clearInterval(interval);
   }, []);
 
-  // Зміна статусу на проміжний (preparing або ready)
-  const handleUpdateStatus = async (orderId, nextStatus) => {
+  // Крок 1: Зміна проміжного статусу (наприклад, з new -> preparing або з preparing -> ready)
+  const handleStatusChange = async (orderId, nextStatus) => {
     try {
-      await axios.patch(`${API_URL}/${orderId}`, { status: nextStatus });
-      // Оновлюємо стейт локально, щоб інтерфейс зреагував миттєво
-      setOrders(prevOrders =>
-        prevOrders.map(order =>
+      console.log(
+        `Відправка PATCH на оновлення статусу до: ${nextStatus} для ID: ${orderId}`
+      );
+
+      const response = await axios.patch(`${API_URL}/${orderId}`, {
+        status: nextStatus,
+      });
+
+      console.log('Успішна відповідь сервера:', response.data);
+
+      // Локально оновлюємо замовлення у стейті
+      setOrders(prev =>
+        prev.map(order =>
           order._id === orderId ? { ...order, status: nextStatus } : order
         )
       );
     } catch (err) {
       console.error('Помилка оновлення статусу:', err);
-      alert('Не вдалося оновити статус замовлення');
+      const serverMsg =
+        err.response?.data?.message || 'Невідома помилка бекенду';
+      alert(`Не вдалося оновити статус: ${serverMsg}`);
     }
   };
 
-  // Фінальне закриття замовлення баристою (Оплата та Видача)
-  const handleCompleteOrder = async (orderId, method) => {
+  // Крок 2: Фінальне закриття замовлення через Оплату (Готівка / Термінал)
+  const handlePaymentAndComplete = async (orderId, method) => {
     try {
-      await axios.patch(`${API_URL}/${orderId}`, {
+      console.log(
+        `Спроба закрити замовлення ${orderId}. Метод оплати: ${method}`
+      );
+
+      // Передаємо параметри строго за схемою: статус завершено, оплачено — true, метод збережено
+      const response = await axios.patch(`${API_URL}/${orderId}`, {
         status: 'completed',
         isPaid: true,
-        paymentMethod: method, // 'cash' або 'card' відповідно до схеми
+        paymentMethod: method, // 'cash' або 'card'
       });
 
-      // Видаляємо виконане замовлення з екрана активних
-      setOrders(prevOrders =>
-        prevOrders.filter(order => order._id !== orderId)
+      console.log(
+        'Замовлення успішно оплачене та закрите на бекенді:',
+        response.data
       );
-      alert('Замовлення успішно виконано та оплачено!');
+
+      // Видаляємо виконане замовлення з екрана баристи
+      setOrders(prev => prev.filter(order => order._id !== orderId));
+      alert(
+        `Замовлення успішно оплачено (${method === 'cash' ? 'Готівка' : 'Термінал'}) та закрите!`
+      );
     } catch (err) {
-      console.error('Помилка при закритті замовлення:', err);
-      if (err.response?.data?.message === 'INSUFFICIENT_STOCK') {
+      console.error('Помилка під час оплати/завершення замовлення:', err);
+      if (
+        err.response?.data?.message === 'INSUFFICIENT_STOCK' ||
+        err.response?.data?.message === 'OUT_OF_STOCK_RESERVE'
+      ) {
         alert(
-          `Помилка списання! На складі не вистачає інгредієнта: ${err.response.data.details}`
+          `Помилка списання! На складі не вистачає інгредієнтів: ${err.response.data.details || ''}`
         );
       } else {
-        alert('Не вдалося завершити замовлення. Перевірте залишки на складі.');
+        const errorDetails = err.response?.data?.message || err.message;
+        alert(`Не вдалося провести оплату: ${errorDetails}`);
       }
     }
   };
 
   if (loading && orders.length === 0) {
     return (
-      <div className="p-6 text-center text-xl">Завантаження замовлень...</div>
+      <div className="p-6 text-center text-xl">
+        Оновлення списку замовлень...
+      </div>
     );
   }
 
@@ -84,19 +114,13 @@ const BaristaDashboard = () => {
       <h1 className="mb-6 text-3xl font-bold text-center">Панель баристи ☕</h1>
 
       {error && (
-        <div className="p-4 mb-6 text-center text-red-700 bg-red-100 rounded-lg">
-          {error}{' '}
-          <button
-            onClick={fetchActiveOrders}
-            className="ml-2 underline font-semibold"
-          >
-            Повторити
-          </button>
+        <div className="p-4 mb-4 text-red-700 bg-red-100 rounded text-center">
+          {error}
         </div>
       )}
 
       {orders.length === 0 ? (
-        <p className="text-center text-stone-500 text-lg">
+        <p className="text-center text-stone-500">
           Зараз немає активних замовлень. Відпочиньте! 😊
         </p>
       ) : (
@@ -107,13 +131,12 @@ const BaristaDashboard = () => {
               className="p-5 bg-white rounded-xl shadow-md border border-stone-200 flex flex-col justify-between"
             >
               <div>
-                {/* Шапка картки замовлення */}
                 <div className="flex justify-between items-center mb-3">
                   <span className="text-xl font-bold text-amber-700">
                     #{order.orderNumber || order._id.slice(-4)}
                   </span>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${
+                    className={`px-2.5 py-1 rounded-full text-xs font-bold uppercase ${
                       order.status === 'new'
                         ? 'bg-blue-100 text-blue-800'
                         : order.status === 'preparing'
@@ -125,49 +148,39 @@ const BaristaDashboard = () => {
                       ? 'Нове'
                       : order.status === 'preparing'
                         ? 'Готується'
-                        : 'Готово'}
+                        : 'Очікує видачі'}
                   </span>
                 </div>
 
-                {/* Дані клієнта */}
-                <div className="mb-4 text-sm text-stone-600">
-                  <p className="font-semibold text-stone-900 text-base">
+                <div className="mb-3 text-sm">
+                  <p className="font-bold text-base text-stone-900">
                     {order.customerName}
                   </p>
-                  <p>{order.customerPhone}</p>
+                  <p className="text-stone-500">{order.customerPhone}</p>
                   {order.pickupTime && (
-                    <p className="mt-1 text-amber-600 font-medium">
-                      🕒 Час виклику: {order.pickupTime}
+                    <p className="text-amber-600 mt-1">
+                      🕒 На час: {order.pickupTime}
                     </p>
                   )}
                 </div>
 
-                <hr className="mb-3 border-stone-200" />
+                <hr className="my-2 border-stone-200" />
 
-                {/* Список товарів у чеку */}
-                <div className="space-y-2 mb-4">
+                <div className="space-y-1 mb-4">
                   {order.items?.map(item => (
                     <div
                       key={item._id}
                       className="flex justify-between text-sm"
                     >
-                      <span>
-                        <span className="font-medium text-stone-900">
-                          {item.name?.uk || item.name}
-                        </span>
-                        <span className="text-xs text-stone-400 block">
-                          slug: {item.slug}
-                        </span>
+                      <span className="text-stone-800">
+                        {item.name?.uk || item.name}
                       </span>
-                      <span className="font-semibold text-stone-700">
-                        x{item.quantity}
-                      </span>
+                      <span className="font-semibold">x{item.quantity}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Нижня частина з ціною та кнопками дій */}
               <div>
                 <div className="flex justify-between items-center mb-4 pt-2 border-t border-dashed border-stone-200">
                   <span className="text-stone-500 text-sm">До сплати:</span>
@@ -176,12 +189,12 @@ const BaristaDashboard = () => {
                   </span>
                 </div>
 
-                {/* Логіка кнопок керування статусом */}
+                {/* Динамічні кнопки керування статусом */}
                 <div className="space-y-2">
                   {order.status === 'new' && (
                     <button
-                      onClick={() => handleUpdateStatus(order._id, 'preparing')}
-                      className="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-medium transition"
+                      onClick={() => handleStatusChange(order._id, 'preparing')}
+                      className="w-full py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-medium transition"
                     >
                       Почати готувати ⏳
                     </button>
@@ -189,24 +202,28 @@ const BaristaDashboard = () => {
 
                   {order.status === 'preparing' && (
                     <button
-                      onClick={() => handleUpdateStatus(order._id, 'ready')}
-                      className="w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition"
+                      onClick={() => handleStatusChange(order._id, 'ready')}
+                      className="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition"
                     >
-                      Приготовано (В очікуванні) 🎉
+                      Приготовано / Очікує клієнта 🎉
                     </button>
                   )}
 
-                  {order.status === 'ready' && (
+                  {(order.status === 'ready' || !order.status) && (
                     <div className="grid grid-cols-2 gap-2">
                       <button
-                        onClick={() => handleCompleteOrder(order._id, 'cash')}
-                        className="py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium text-sm transition"
+                        onClick={() =>
+                          handlePaymentAndComplete(order._id, 'cash')
+                        }
+                        className="py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition"
                       >
                         💵 Готівка
                       </button>
                       <button
-                        onClick={() => handleCompleteOrder(order._id, 'card')}
-                        className="py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-medium text-sm transition"
+                        onClick={() =>
+                          handlePaymentAndComplete(order._id, 'card')
+                        }
+                        className="py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-medium transition"
                       >
                         💳 Термінал
                       </button>

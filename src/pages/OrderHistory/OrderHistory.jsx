@@ -9,7 +9,9 @@ import Loader from '../../components/Ui/Loader/Loader.jsx';
 import css from './OrderHistory.module.css';
 
 const OrderHistory = () => {
-  const { t } = useTranslation('order_history', { lng: 'uk' });
+  const { t, i18n } = useTranslation('order_history');
+  const currentLanguage = (i18n.language || 'uk').substring(0, 2);
+  const isUk = currentLanguage === 'uk';
 
   const [history, setHistory] = useState([]);
   const [dishStats, setDishStats] = useState([]);
@@ -27,17 +29,8 @@ const OrderHistory = () => {
       setLoading(true);
       try {
         const historyData = await fetchOrderHistoryRequest();
-
         const statsData = await fetchOrderStatsRequest(selectedDate);
-        console.log('📊 STATS DATA:', statsData);
-        console.log('📊 DISHES:', statsData.dishes);
-        console.log('📜 HISTORY:', historyData);
-        console.log(
-          '📜 HISTORY FILTERED:',
-          historyData.filter(
-            order => getOrderLocalDateString(order.updatedAt) === selectedDate
-          )
-        );
+
         setHistory(historyData || []);
 
         if (
@@ -74,17 +67,10 @@ const OrderHistory = () => {
   };
 
   const getDishName = dish => {
-    if (!dish) return '';
-    if (typeof dish === 'string') return dish;
-
-    if (typeof dish === 'object') {
-      if (dish.uk || dish.en) return dish.uk || dish.en;
-      if (dish.name) {
-        if (typeof dish.name === 'object') return dish.name.uk || dish.name.en;
-        return dish.name;
-      }
+    if (typeof dish === 'object' && dish !== null) {
+      return dish[currentLanguage] || dish.uk || dish.en;
     }
-    return String(dish);
+    return dish;
   };
 
   const exportToExcel = () => {
@@ -94,9 +80,9 @@ const OrderHistory = () => {
     }
 
     const workbook = XLSX.utils.book_new();
-    const currentDateTime = new Date().toLocaleString('uk-UA');
+    const currentDateTime = new Date().toLocaleString(isUk ? 'uk-UA' : 'en-US');
     const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
-      'uk-UA'
+      isUk ? 'uk-UA' : 'en-US'
     );
 
     const getHeaderInfo = sheetTitle => [
@@ -130,7 +116,7 @@ const OrderHistory = () => {
       return {
         [t('excel.date_of_issue', 'Date of Issue')]: new Date(
           order.updatedAt
-        ).toLocaleString('uk-UA'),
+        ).toLocaleString(isUk ? 'uk-UA' : 'en-US'),
         [t('excel.check_number', 'Receipt No.')]:
           order.orderNumber || order._id.slice(-4).toUpperCase(),
         [t('excel.dishes', 'Dishes')]: order.items
@@ -166,9 +152,7 @@ const OrderHistory = () => {
     const statsSheet = XLSX.utils.aoa_to_sheet(statsHeader);
 
     const statsData = dishStats.map(item => ({
-      // ФІКС: тепер надійно беремо назву з об'єкта name, який приходить з бекенду
-      [t('excel.dish_name', 'Dish Name')]:
-        getDishName(item.name) || getDishName(item._id),
+      [t('excel.dish_name', 'Dish Name')]: getDishName(item._id),
       [t('excel.sold_pcs', 'Sold (pcs)')]: item.totalQuantity,
       [t('excel.total_amount', 'Total Amount')]:
         `${item.totalPrice} ${t('currency', 'UAH')}`,
@@ -224,7 +208,7 @@ const OrderHistory = () => {
   }
 
   const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
-    'uk-UA'
+    isUk ? 'uk-UA' : 'en-US'
   );
 
   return (
@@ -254,13 +238,13 @@ const OrderHistory = () => {
           </h2>
           <div className={css['badges-container']}>
             <div className={`${css['finance-badge']} ${css['cash-badge']}`}>
-              {t('cash', 'Cash')}:{' '}
+              💵 {t('cash', 'Cash')}:{' '}
               <span>
                 {cashRevenue} {t('currency', 'UAH')}
               </span>
             </div>
             <div className={`${css['finance-badge']} ${css['card-badge']}`}>
-              {t('card', 'Terminal')}:{' '}
+              💳 {t('card', 'Terminal')}:{' '}
               <span>
                 {cardRevenue} {t('currency', 'UAH')}
               </span>
@@ -283,8 +267,7 @@ const OrderHistory = () => {
             {dishStats.length > 0 ? (
               dishStats.map((item, index) => (
                 <tr key={index}>
-                  {/* ФІКС: передаємо об'єкт назви у функцію */}
-                  <td>{getDishName(item.name) || getDishName(item._id)}</td>
+                  <td>{getDishName(item._id)}</td>
                   <td>{item.totalQuantity}</td>
                   <td>
                     {item.totalPrice} {t('currency', 'UAH')}
@@ -332,7 +315,11 @@ const OrderHistory = () => {
               .slice(0, visibleChecksCount)
               .map(order => (
                 <tr key={order._id}>
-                  <td>{new Date(order.updatedAt).toLocaleString('uk-UA')}</td>
+                  <td>
+                    {new Date(order.updatedAt).toLocaleString(
+                      isUk ? 'uk-UA' : 'en-US'
+                    )}
+                  </td>
                   <td>
                     #{order.orderNumber || order._id.slice(-4).toUpperCase()}
                   </td>

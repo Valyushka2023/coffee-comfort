@@ -4,331 +4,169 @@ import Ingredient from '../models/Ingredient.js';
 
 const router = express.Router();
 
-// Об'єкт рецептів (ключі — це slug, name.en або українська назва страви)
+// Об'єкт рецептів (назви мають точно відповідати полю name.uk у БД товарів)
 const RECIPES = {
-  'flat-white': [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-    { nameUk: 'Молоко', amount: 0.18, safetyStock: 0.5 },
-    { nameUk: 'Стаканчики 250мл', amount: 1, safetyStock: 5 },
+  'Флет-вайт': [
+    { name: 'Кава в зернах (Arabica)', amount: 0.018 },
+    { name: 'Молоко', amount: 0.18 },
+    { name: 'Стаканчики 250мл', amount: 1 },
   ],
-  cappuccino: [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-    { nameUk: 'Молоко', amount: 0.2, safetyStock: 0.5 },
-    { nameUk: 'Стаканчики 250мл', amount: 1, safetyStock: 5 },
-  ],
-  americano: [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-    { nameUk: 'Стаканчики 110мл', amount: 1, safetyStock: 5 },
-  ],
-  latte: [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-    { nameUk: 'Молоко', amount: 0.25, safetyStock: 0.5 },
-    { nameUk: 'Стаканчики 340мл', amount: 1, safetyStock: 5 },
-  ],
-  mocha: [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-    { nameUk: 'Молоко', amount: 0.2, safetyStock: 0.5 },
-    { nameUk: 'Сироп Шоколад', amount: 1, safetyStock: 2 },
-    { nameUk: 'Стаканчики 340мл', amount: 1, safetyStock: 5 },
-  ],
-  macchiato: [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.009, safetyStock: 0.05 },
-    { nameUk: 'Молоко', amount: 0.05, safetyStock: 0.5 },
-    { nameUk: 'Стаканчики 110мл', amount: 1, safetyStock: 5 },
-  ],
-  pancakes: [{ nameUk: 'Млинці', amount: 1, safetyStock: 2 }],
-  cheesecake: [{ nameUk: 'Чізкейк', amount: 1, safetyStock: 2 }],
-  croissant: [{ nameUk: 'Круасан', amount: 1, safetyStock: 2 }],
-  bun: [{ nameUk: 'Булочка', amount: 1, safetyStock: 2 }],
-  muffin: [{ nameUk: 'Кекс', amount: 1, safetyStock: 2 }],
-  vatrushka: [{ nameUk: 'Ватрушки', amount: 1, safetyStock: 2 }],
-  'caramel-syrup': [{ nameUk: 'Сироп Карамель', amount: 1, safetyStock: 1 }],
-  'sugar-sticks': [{ nameUk: 'Цукор в стіках', amount: 2, safetyStock: 10 }],
-
-  // Фолбеки для українських назв та сирих рядків із кошика
-  'Кава в зернах (Arabica)': [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-  ],
-  Млинці: [{ nameUk: 'Млинці', amount: 1, safetyStock: 2 }],
-  Чізкейк: [{ nameUk: 'Чізкейк', amount: 1, safetyStock: 2 }],
-  Круасан: [{ nameUk: 'Круасан', amount: 1, safetyStock: 2 }],
-  Булочка: [{ nameUk: 'Булочка', amount: 1, safetyStock: 2 }],
-  Кекс: [{ nameUk: 'Кекс', amount: 1, safetyStock: 2 }],
-  Ватрушки: [{ nameUk: 'Ватрушки', amount: 1, safetyStock: 2 }],
   Капучино: [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-    { nameUk: 'Молоко', amount: 0.2, safetyStock: 0.5 },
-    { nameUk: 'Стаканчики 250мл', amount: 1, safetyStock: 5 },
+    { name: 'Кава в зернах (Arabica)', amount: 0.018 },
+    { name: 'Молоко', amount: 0.2 },
+    { name: 'Стаканчики 250мл', amount: 1 },
+  ],
+  Американо: [
+    { name: 'Кава в зернах (Arabica)', amount: 0.018 },
+    { name: 'Стаканчики 110мл', amount: 1 },
   ],
   Латте: [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-    { nameUk: 'Молоко', amount: 0.25, safetyStock: 0.5 },
-    { nameUk: 'Стаканчики 340мл', amount: 1, safetyStock: 5 },
+    { name: 'Кава в зернах (Arabica)', amount: 0.018 },
+    { name: 'Молоко', amount: 0.25 },
+    { name: 'Стаканчики 340мл', amount: 1 },
   ],
-  'Флет-вайт': [
-    { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
-    { nameUk: 'Молоко', amount: 0.18, safetyStock: 0.5 },
-    { nameUk: 'Стаканчики 250мл', amount: 1, safetyStock: 5 },
+  Мокка: [
+    { name: 'Кава в зернах (Arabica)', amount: 0.018 },
+    { name: 'Молоко', amount: 0.2 },
+    { name: 'Сироп Шоколад', amount: 1 },
+    { name: 'Стаканчики 340мл', amount: 1 },
   ],
+  Макіато: [
+    { name: 'Кава в зернах (Arabica)', amount: 0.009 },
+    { name: 'Молоко', amount: 0.05 },
+    { name: 'Стаканчики 110мл', amount: 1 },
+  ],
+  Млинці: [{ name: 'Млинці', amount: 1 }],
+  Чізкейк: [{ name: 'Чізкейк', amount: 1 }],
+  Круасан: [{ name: 'Круасан', amount: 1 }],
+  Булочка: [{ name: 'Булочка', amount: 1 }],
+  Кекс: [{ name: 'Кекс', amount: 1 }],
+  Ватрушки: [{ name: 'Ватрушки', amount: 1 }],
+  'Сироп Карамель': [{ name: 'Сироп Карамель', amount: 1 }],
+  'Цукор в стіках': [{ name: 'Цукор в стіках', amount: 2 }],
 };
 
-// Розумна та безпечна функція пошуку рецепту
-function findRecipe(item) {
-  if (!item) return null;
-
-  // 1. Шукаємо за slug (якщо він є і є рядком)
-  if (item.slug && typeof item.slug === 'string') {
-    const slugKey = item.slug.toLowerCase();
-    if (RECIPES[slugKey]) return RECIPES[slugKey];
-  }
-
-  // 2. Шукаємо за name.en (якщо назва — це об'єкт і є поле en)
-  if (item.name && typeof item.name === 'object' && item.name.en) {
-    const enKey = String(item.name.en).toLowerCase();
-    if (RECIPES[enKey]) return RECIPES[enKey];
-  }
-
-  // 3. Шукаємо за name.uk (якщо назва — це об'єкт і є pole uk)
-  if (item.name && typeof item.name === 'object' && item.name.uk) {
-    if (RECIPES[item.name.uk]) return RECIPES[item.name.uk];
-  }
-
-  // 4. Якщо name — це просто звичайний рядок (наприклад, з кошика фронтенду)
-  if (item.name && typeof item.name === 'string') {
-    if (RECIPES[item.name]) return RECIPES[item.name];
-    const stringKey = item.name.toLowerCase();
-    if (RECIPES[stringKey]) return RECIPES[stringKey];
-  }
-
-  return null;
-}
-
-// Обчислення інгредієнтів
-function calculateTotalIngredientsForOrder(items) {
-  const totals = {};
-  if (!Array.isArray(items)) return totals;
-
-  for (const item of items) {
-    const recipe = findRecipe(item);
-
-    if (recipe) {
-      for (const ing of recipe) {
-        const neededForPosition = Number(
-          (ing.amount * item.quantity).toFixed(3)
-        );
-        if (!totals[ing.nameUk]) {
-          totals[ing.nameUk] = {
-            amount: 0,
-            safetyStock: ing.safetyStock || 0,
-          };
-        }
-        totals[ing.nameUk].amount += neededForPosition;
-      }
-    } else {
-      console.warn(`⚠️ Рецепт для страви не знайдено:`, item);
-    }
-  }
-  return totals;
-}
-
-// =======================================================
-// POST: Створення замовлення (БЕЗПЕЧНЕ)
-// =======================================================
-router.post('/', async (req, res) => {
-  try {
-    const { items } = req.body;
-
-    if (items && Array.isArray(items)) {
-      const totalIngredientsNeeded = calculateTotalIngredientsForOrder(items);
-
-      for (const [nameUk, data] of Object.entries(totalIngredientsNeeded)) {
-        const currentIngredient = await Ingredient.findOne({
-          'name.uk': nameUk,
-        });
-
-        if (!currentIngredient) {
-          return res
-            .status(400)
-            .json({ message: 'OUT_OF_STOCK_RESERVE', details: nameUk });
-        }
-
-        const minAllowed = data.safetyStock;
-        const remainsAfterValidation = currentIngredient.quantity - data.amount;
-
-        if (remainsAfterValidation < minAllowed) {
-          return res
-            .status(400)
-            .json({ message: 'OUT_OF_STOCK_RESERVE', details: nameUk });
-        }
-      }
-    }
-
-    const newOrder = new Order(req.body);
-    const savedOrder = await newOrder.save();
-    res.status(201).json(savedOrder);
-  } catch (error) {
-    console.error('❌ Помилка створення замовлення:', error);
-    res.status(400).json({ message: 'CREATE_ORDER_FAILED' });
-  }
-});
-
-// =======================================================
-// PATCH: Оновлення статусу та безпечне списання складників
-// =======================================================
+// PATCH: Оновлення статусу, типу оплати та автоматичне списання інгредієнтів
 router.patch('/:id', async (req, res) => {
   try {
-    const { status, isPaid, paymentMethod } = req.body;
+    const { status, isPaid, paymentMethod } = req.body; // Приймаємо метод оплати з фронтенду
     const order = await Order.findById(req.params.id);
+    if (!order)
+      return res.status(404).json({ message: 'Замовлення не знадено' });
 
-    if (!order) {
-      return res.status(404).json({ message: 'ORDER_NOT_FOUND' });
-    }
+    if (status === 'completed' && order.status !== 'completed') {
+      for (const item of order.items) {
+        // Очищення назви від зайвих пробілів/переносів
+        const itemName = item.name.uk.replace(/\s+/g, ' ').trim();
+        const recipe = RECIPES[itemName];
 
-    // Якщо замовлення переводять у статус "виконано" і воно ще не було виконане раніше
-    if (status === 'completed' && order.status !== 'completed' && order.items) {
-      console.log(
-        `=== 📦 СПИСАННЯ ДЛЯ ЧЕКУ №${order.orderNumber || order._id} ===`
-      );
+        if (recipe) {
+          for (const ing of recipe) {
+            // РОЗРАХУНОК З ОКРУГЛЕННЯМ
+            const totalDeduction = Number(
+              (ing.amount * item.quantity).toFixed(3)
+            );
 
-      const totalIngredientsNeeded = calculateTotalIngredientsForOrder(
-        order.items
-      );
-      const updatedIngredientsRollback = [];
-
-      try {
-        for (const [nameUk, data] of Object.entries(totalIngredientsNeeded)) {
-          const totalDeduction = Number(data.amount.toFixed(3));
-          console.log(`Спробуємо списати: ${nameUk} -> ${totalDeduction}`);
-
-          const updated = await Ingredient.findOneAndUpdate(
-            {
-              'name.uk': nameUk,
-              quantity: { $gte: totalDeduction },
-            },
-            { $inc: { quantity: -totalDeduction } },
-            { new: true }
-          );
-
-          if (!updated) {
-            console.error(`❌ Не вистачає інгредієнта на складі: ${nameUk}`);
-            throw new Error(`INSUFFICIENT_STOCK:${nameUk}`);
+            await Ingredient.findOneAndUpdate(
+              { 'name.uk': ing.name },
+              { $inc: { quantity: -totalDeduction } }
+            );
           }
-
-          updatedIngredientsRollback.push({ nameUk, amount: totalDeduction });
         }
-      } catch (stockError) {
-        console.log('↩️ Робимо відкат (Rollback) змін на складі...');
-        for (const rolled of updatedIngredientsRollback) {
-          await Ingredient.findOneAndUpdate(
-            { 'name.uk': rolled.nameUk },
-            { $inc: { quantity: rolled.amount } }
-          );
-        }
-
-        const missingItemName = stockError.message.split(':')[1] || 'Товар';
-        return res.status(400).json({
-          message: 'INSUFFICIENT_STOCK',
-          details: missingItemName,
-        });
       }
     }
 
+    // Оновлюємо замовлення, додаючи тип оплати (cash/card) у документ БД
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
       { $set: { status, isPaid, paymentMethod } },
       { new: true }
     );
-
-    console.log('✅ Статус успішно оновлено на completed!');
     res.status(200).json(updatedOrder);
   } catch (error) {
     console.error('❌ Помилка оновлення статусу/списання:', error);
-    res.status(500).json({ message: 'UPDATE_FAILED' });
+    res.status(500).json({ message: 'Помилка оновлення' });
   }
 });
 
-// =======================================================
-// DELETE: Скасування замовлення
-// =======================================================
+// DELETE: Скасування/Видалення замовлення
 router.delete('/:id', async (req, res) => {
   try {
-    const deletedOrder = await Order.findByIdAndDelete(req.params.id);
-    if (!deletedOrder)
-      return res.status(404).json({ message: 'ORDER_NOT_FOUND' });
-    res
-      .status(200)
-      .json({ message: 'ORDER_CANCELLED_SUCCESSFULLY', id: req.params.id });
+    const { id } = req.params;
+    const deletedOrder = await Order.findByIdAndDelete(id);
+
+    if (!deletedOrder) {
+      return res
+        .status(404)
+        .json({ message: 'Замовлення не знайдено або вже видалено' });
+    }
+
+    res.status(200).json({
+      message: 'Замовлення успішно скасовано',
+      id,
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'CANCEL_FAILED' });
+    console.error('❌ Помилка під час скасування замовлення:', error);
+    res
+      .status(500)
+      .json({ message: 'Внутрішня помилка сервера при скасуванні' });
   }
 });
 
-// =======================================================
-// GET: Історія виконаних замовлень
-// =======================================================
+// GET: Історія замовлень (ВИПРАВЛЕНО: Тільки завершені та оплачені чеки)
 router.get('/history', async (req, res) => {
   try {
-    const history = await Order.find({ status: 'completed', isPaid: true })
-      .limit(100)
+    const history = await Order.find({
+      status: 'completed',
+      isPaid: true,
+    })
+      .limit(50)
       .sort({ updatedAt: -1 });
     res.status(200).json(history);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'FETCH_HISTORY_FAILED' });
+    console.error('❌ Помилка завантаження історії:', error);
+    res.status(500).json({ message: 'Помилка завантаження історії' });
   }
 });
 
-// =======================================================
-// GET: Статистика та аналітика за день (з правильним групуванням)
-// =======================================================
+// GET: Аналітика (ВИПРАВЛЕНО: ТОЧНИЙ ЛОКАЛЬНИЙ ЧАС ДЛЯ КИЄВА)
 router.get('/stats', async (req, res) => {
   try {
-    const { date } = req.query;
-    if (!date) return res.status(400).json({ message: 'DATE_REQUIRED' });
+    const { date } = req.query; // Отримуємо рядок типу "2026-06-04"
+    if (!date) return res.status(400).json({ message: 'Дата не вказана' });
 
+    // Примусово виставляємо часовий пояс України (+03:00 для літнього часу),
+    // щоб замовлення після 00:00 рахувалися правильним днем, а не відкатувалися назад
     const startOfDay = new Date(`${date}T00:00:00.000+03:00`);
     const endOfDay = new Date(`${date}T23:59:59.999+03:00`);
 
+    // Виконуємо запити паралельно через Promise.all
     const [dishStats, paymentStats] = await Promise.all([
+      // 1. Агрегація страв за день
       Order.aggregate([
         {
           $match: {
             status: 'completed',
-            isPaid: true,
             updatedAt: { $gte: startOfDay, $lte: endOfDay },
           },
         },
         { $unwind: '$items' },
         {
           $group: {
-            _id: { $ifNull: ['$items.name.uk', '$items.name'] },
-            nameUk: { $first: { $ifNull: ['$items.name.uk', '$items.name'] } },
-            nameEn: { $first: { $ifNull: ['$items.name.en', '$items.slug'] } },
+            _id: '$items.name',
             totalQuantity: { $sum: '$items.quantity' },
             totalPrice: {
               $sum: { $multiply: ['$items.price', '$items.quantity'] },
             },
           },
         },
-        {
-          $project: {
-            _id: 1,
-            totalQuantity: 1,
-            totalPrice: 1,
-            name: {
-              uk: '$nameUk',
-              en: { $ifNull: ['$nameEn', '$nameUk'] },
-            },
-          },
-        },
         { $sort: { totalQuantity: -1 } },
       ]),
+      // 2. Агрегація фінансів (Готівка / Картка)
       Order.aggregate([
         {
           $match: {
             status: 'completed',
-            isPaid: true,
             updatedAt: { $gte: startOfDay, $lte: endOfDay },
           },
         },
@@ -341,23 +179,34 @@ router.get('/stats', async (req, res) => {
       ]),
     ]);
 
+    // Знаходимо результати підрахунку для кожного методу
     const cashData = paymentStats.find(p => p._id === 'cash');
     const cardData = paymentStats.find(p => p._id === 'card');
 
+    // Віддаємо структуровану відповідь на фронтенд
     res.status(200).json({
       dishes: dishStats,
       cash: cashData ? cashData.totalAmount : 0,
       card: cardData ? cardData.totalAmount : 0,
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'STATS_FAILED' });
+    console.error('❌ Помилка сервера в аналітиці:', error);
+    res.status(500).json({ message: 'Помилка аналітики' });
   }
 });
 
-// =======================================================
-// GET: Активні замовлення для Панелі баристи
-// =======================================================
+// POST: Створення замовлення
+router.post('/', async (req, res) => {
+  try {
+    const newOrder = new Order(req.body);
+    const savedOrder = await newOrder.save();
+    res.status(201).json(savedOrder);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// GET: Активні замовлення для табло бариста
 router.get('/', async (req, res) => {
   try {
     const orders = await Order.find({
@@ -366,7 +215,7 @@ router.get('/', async (req, res) => {
     res.status(200).json(orders);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'FETCH_ORDERS_FAILED' });
+    res.status(500).json({ message: 'Помилка завантаження' });
   }
 });
 

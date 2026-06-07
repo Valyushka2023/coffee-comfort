@@ -1,242 +1,281 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+/* eslint-disable react/prop-types */
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import {
+  fetchOrdersRequest,
+  updateOrderStatus,
+  deleteOrderRequest,
+} from '../../services/api';
+import { FiClock, FiTrash2, FiSearch } from 'react-icons/fi';
 
-// Базовий URL твого бекенду на Render
-const API_URL = 'https://coffee-comfort.onrender.com/api/orders';
+import css from './Baristadashboard.module.css';
 
-const BaristaDashboard = () => {
+const Baristadashboard = () => {
+  const { t, i18n } = useTranslation('baristadashboard');
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const isFetching = useRef(false);
 
-  // Завантаження замовлень із сервера
-  const fetchOrders = async () => {
+  const getOrders = useCallback(async (isInitial = false) => {
+    if (isFetching.current) return;
+    isFetching.current = true;
     try {
-      const response = await axios.get(API_URL);
-      console.log('--- ЗАВАНТАЖЕНО ЗАМОВЛЕННЯ ---', response.data);
-      // Фільтруємо, щоб бариста бачив лише активні замовлення (нові, в процесі, готові)
-      const activeOrders = response.data.filter(
-        order => order.status !== 'completed'
-      );
-      setOrders(activeOrders);
-      setError(null);
-    } catch (err) {
-      console.error('Помилка завантаження активних замовлень:', err);
-      setError('Не вдалося завантажити замовлення');
+      const data = await fetchOrdersRequest();
+      setOrders(data || []);
+    } catch (error) {
+      console.error('Помилка завантаження:', error);
     } finally {
-      setLoading(false);
+      isFetching.current = false;
+      if (isInitial) setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchOrders();
-    const interval = setInterval(fetchOrders, 20000); // Оновлення кожні 20 секунд
-    return () => clearInterval(interval);
   }, []);
 
-  // Крок 1: Зміна проміжного статусу (наприклад, з new -> preparing або з preparing -> ready)
-  const handleStatusChange = async (orderId, nextStatus) => {
+  useEffect(() => {
+    getOrders(true);
+    const interval = setInterval(() => getOrders(false), 15000);
+    return () => clearInterval(interval);
+  }, [getOrders]);
+
+  const handleSetReady = async orderId => {
     try {
-      console.log(
-        `Відправка PATCH на оновлення статусу до: ${nextStatus} для ID: ${orderId}`
-      );
-
-      const response = await axios.patch(`${API_URL}/${orderId}`, {
-        status: nextStatus,
-      });
-
-      console.log('Успішна відповідь сервера:', response.data);
-
-      // Локально оновлюємо замовлення у стейті
+      await updateOrderStatus(orderId, { status: 'ready' });
       setOrders(prev =>
         prev.map(order =>
-          order._id === orderId ? { ...order, status: nextStatus } : order
+          order._id === orderId ? { ...order, status: 'ready' } : order
         )
       );
-    } catch (err) {
-      console.error('Помилка оновлення статусу:', err);
-      const serverMsg =
-        err.response?.data?.message || 'Невідома помилка бекенду';
-      alert(`Не вдалося оновити статус: ${serverMsg}`);
+    } catch (error) {
+      console.error(error);
+      alert(t('errorUpdateStatus', 'Не вдалося оновити статус'));
     }
   };
 
-  // Крок 2: Фінальне закриття замовлення через Оплату (Готівка / Термінал)
-  const handlePaymentAndComplete = async (orderId, method) => {
+  const handleArchive = async (orderId, paymentMethod) => {
     try {
-      console.log(
-        `Спроба закрити замовлення ${orderId}. Метод оплати: ${method}`
-      );
-
-      // Передаємо параметри строго за схемою: статус завершено, оплачено — true, метод збережено
-      const response = await axios.patch(`${API_URL}/${orderId}`, {
+      await updateOrderStatus(orderId, {
         status: 'completed',
         isPaid: true,
-        paymentMethod: method, // 'cash' або 'card'
+        paymentMethod,
       });
-
-      console.log(
-        'Замовлення успішно оплачене та закрите на бекенді:',
-        response.data
-      );
-
-      // Видаляємо виконане замовлення з екрана баристи
       setOrders(prev => prev.filter(order => order._id !== orderId));
-      alert(
-        `Замовлення успішно оплачено (${method === 'cash' ? 'Готівка' : 'Термінал'}) та закрите!`
-      );
-    } catch (err) {
-      console.error('Помилка під час оплати/завершення замовлення:', err);
-      if (
-        err.response?.data?.message === 'INSUFFICIENT_STOCK' ||
-        err.response?.data?.message === 'OUT_OF_STOCK_RESERVE'
-      ) {
-        alert(
-          `Помилка списання! На складі не вистачає інгредієнтів: ${err.response.data.details || ''}`
-        );
-      } else {
-        const errorDetails = err.response?.data?.message || err.message;
-        alert(`Не вдалося провести оплату: ${errorDetails}`);
-      }
+    } catch (error) {
+      console.error('Помилка оновлення:', error);
+      alert(t('errorUpdateStatus', 'Не вдалося оновити статус'));
     }
   };
 
-  if (loading && orders.length === 0) {
+  const handleCancelOrder = async orderId => {
+    if (!window.confirm(t('confirmCancel', 'Скасувати це замовлення?'))) return;
+    try {
+      await deleteOrderRequest(orderId);
+      setOrders(prev => prev.filter(order => order._id !== orderId));
+    } catch (error) {
+      console.error('Помилка скасування:', error);
+      alert(t('errorCancel', 'Не вдалося скасувати замовлення'));
+    }
+  };
+
+  const filteredOrders = useMemo(() => {
+    const cleanQuery = searchQuery.trim().toLowerCase().replace('#', '');
+    if (!cleanQuery) return orders;
+
+    const digitsQuery = cleanQuery.replace(/\D/g, '');
+
+    return orders.filter(order => {
+      const orderNum = String(order.orderNumber || '').toLowerCase();
+      const orderIdTail = order._id ? order._id.slice(-4).toLowerCase() : '';
+      if (orderNum.includes(cleanQuery) || orderIdTail.includes(cleanQuery)) {
+        return true;
+      }
+
+      const customerName = String(order.customerName || '').toLowerCase();
+      if (customerName.includes(cleanQuery)) {
+        return true;
+      }
+
+      const customerPhone = String(order.customerPhone || '');
+      const cleanPhone = customerPhone.replace(/\D/g, '');
+      if (digitsQuery && cleanPhone.includes(digitsQuery)) {
+        return true;
+      }
+
+      return false;
+    });
+  }, [orders, searchQuery]);
+
+  if (loading)
     return (
-      <div className="p-6 text-center text-xl">
-        Оновлення списку замовлень...
-      </div>
+      <div className={css['loader']}>⏳ {t('loading', 'Завантаження...')}</div>
     );
-  }
 
   return (
-    <div className="p-6 min-h-screen bg-stone-100 text-stone-800">
-      <h1 className="mb-6 text-3xl font-bold text-center">Панель баристи ☕</h1>
+    <div className={css['container-style']}>
+      <header className={css['header-style']}>
+        <h1>☕ {t('title', 'Панель бариста')}</h1>
 
-      {error && (
-        <div className="p-4 mb-4 text-red-700 bg-red-100 rounded text-center">
-          {error}
-        </div>
-      )}
-
-      {orders.length === 0 ? (
-        <p className="text-center text-stone-500">
-          Зараз немає активних замовлень. Відпочиньте! 😊
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {orders.map(order => (
-            <div
-              key={order._id}
-              className="p-5 bg-white rounded-xl shadow-md border border-stone-200 flex flex-col justify-between"
+        <div className={css['search-wrapper']}>
+          <FiSearch className={css['search-icon']} />
+          <input
+            type="text"
+            className={css['search-input']}
+            placeholder={t(
+              'searchPlaceholder',
+              "Пошук за №, ім'ям або телефоном..."
+            )}
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              className={css['clear-search']}
+              onClick={() => setSearchQuery('')}
             >
-              <div>
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-xl font-bold text-amber-700">
-                    #{order.orderNumber || order._id.slice(-4)}
-                  </span>
-                  <span
-                    className={`px-2.5 py-1 rounded-full text-xs font-bold uppercase ${
-                      order.status === 'new'
-                        ? 'bg-blue-100 text-blue-800'
-                        : order.status === 'preparing'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-purple-100 text-purple-800'
-                    }`}
-                  >
-                    {order.status === 'new'
-                      ? 'Нове'
-                      : order.status === 'preparing'
-                        ? 'Готується'
-                        : 'Очікує видачі'}
-                  </span>
-                </div>
+              ×
+            </button>
+          )}
+        </div>
+      </header>
 
-                <div className="mb-3 text-sm">
-                  <p className="font-bold text-base text-stone-900">
-                    {order.customerName}
-                  </p>
-                  <p className="text-stone-500">{order.customerPhone}</p>
-                  {order.pickupTime && (
-                    <p className="text-amber-600 mt-1">
-                      🕒 На час: {order.pickupTime}
-                    </p>
-                  )}
-                </div>
-
-                <hr className="my-2 border-stone-200" />
-
-                <div className="space-y-1 mb-4">
-                  {order.items?.map(item => (
-                    <div
-                      key={item._id}
-                      className="flex justify-between text-sm"
-                    >
-                      <span className="text-stone-800">
-                        {item.name?.uk || item.name}
-                      </span>
-                      <span className="font-semibold">x{item.quantity}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center mb-4 pt-2 border-t border-dashed border-stone-200">
-                  <span className="text-stone-500 text-sm">До сплати:</span>
-                  <span className="text-xl font-extrabold text-stone-900">
-                    {order.totalPrice} грн
-                  </span>
-                </div>
-
-                {/* Динамічні кнопки керування статусом */}
-                <div className="space-y-2">
-                  {order.status === 'new' && (
-                    <button
-                      onClick={() => handleStatusChange(order._id, 'preparing')}
-                      className="w-full py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-medium transition"
-                    >
-                      Почати готувати ⏳
-                    </button>
-                  )}
-
-                  {order.status === 'preparing' && (
-                    <button
-                      onClick={() => handleStatusChange(order._id, 'ready')}
-                      className="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition"
-                    >
-                      Приготовано / Очікує клієнта 🎉
-                    </button>
-                  )}
-
-                  {(order.status === 'ready' || !order.status) && (
-                    <div className="grid grid-cols-2 gap-2">
-                      <button
-                        onClick={() =>
-                          handlePaymentAndComplete(order._id, 'cash')
-                        }
-                        className="py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition"
-                      >
-                        💵 Готівка
-                      </button>
-                      <button
-                        onClick={() =>
-                          handlePaymentAndComplete(order._id, 'card')
-                        }
-                        className="py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-medium transition"
-                      >
-                        💳 Термінал
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
+      {filteredOrders.length === 0 && searchQuery && (
+        <div className={css['no-results']}>
+          🔍 {t('noResults', 'Замовлень не знайдено')}
         </div>
       )}
+
+      <div className={css['grid-style']}>
+        {filteredOrders.map(order => (
+          <OrderCard
+            key={order._id}
+            order={order}
+            onReady={handleSetReady}
+            onArchive={handleArchive}
+            onCancel={handleCancelOrder}
+            t={t}
+            currentLang={i18n.language}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default BaristaDashboard;
+const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
+  const [minutesWait, setMinutesWait] = useState(0);
+  const isReady = order.status === 'ready';
+
+  useEffect(() => {
+    const calc = () =>
+      setMinutesWait(
+        Math.floor((new Date() - new Date(order.createdAt)) / 60000)
+      );
+    calc();
+    const i = setInterval(calc, 60000);
+    return () => clearInterval(i);
+  }, [order.createdAt]);
+
+  const isUrgent = minutesWait >= 10 && !isReady;
+
+  return (
+    <div
+      className={`${css['card-style']} ${isUrgent ? css['urgent-card'] : ''} ${isReady ? css['ready-card'] : ''}`}
+    >
+      <div className={css['header-card-style']}>
+        <span className={css['order-number-style']}>
+          #{order.orderNumber || order._id.slice(-4).toUpperCase()}
+        </span>
+        <div className={css['header-actions']}>
+          {isUrgent && (
+            <span
+              className={css['urgent-text']}
+              style={{ fontSize: '0.85rem', textTransform: 'uppercase' }}
+            >
+              ⚠️ {t('urgent', 'Терміново!')}
+            </span>
+          )}
+          <span
+            className={`${css['time-style']} ${isUrgent ? css['urgent-text'] : ''}`}
+          >
+            <FiClock /> {minutesWait} {t('minutesMin', 'хв')}
+          </span>
+          <button
+            className={css['cancel-btn']}
+            onClick={e => {
+              e.stopPropagation();
+              onCancel(order._id);
+            }}
+            title={t('cancel', 'Скасувати')}
+          >
+            <FiTrash2 />
+          </button>
+        </div>
+      </div>
+
+      <div className={order.isPaid ? css['paid-badge'] : css['unpaid-badge']}>
+        {order.isPaid
+          ? t('paid', 'ОПЛАЧЕНО')
+          : t('payOnDelivery', 'ОПЛАТА ПРИ ОТРИМАННІ')}
+      </div>
+
+      <div className={css['customer-info-style']}>
+        <p>
+          <strong>{order.customerName}</strong>
+        </p>
+        <p>{order.customerPhone}</p>
+      </div>
+
+      <ul className={css['items-list-style']}>
+        {order.items.map((item, i) => {
+          const itemName =
+            typeof item.name === 'object'
+              ? item.name[currentLang] || item.name['uk'] || item.name['en']
+              : item.name;
+
+          return (
+            <li key={i}>
+              {item.quantity} x {itemName}
+            </li>
+          );
+        })}
+      </ul>
+
+      <hr className={css['separator']} />
+      <div className={css['total-price-block']}>
+        <span className={css['total-label']}>
+          {t('totalPriceLabel', 'До сплати')}:
+        </span>
+        <span className={css['total-amount']}>{order.totalPrice} грн</span>
+      </div>
+
+      <div className={css['footer-style']}>
+        {!isReady ? (
+          <button
+            onClick={() => onReady(order._id)}
+            className={css['button-style']}
+          >
+            {t('btnReady', 'Підготовлено')}
+          </button>
+        ) : (
+          <div className={css['payment-buttons-group']}>
+            <button
+              onClick={() => onArchive(order._id, 'cash')}
+              className={`${css['archive-button']} ${css['cash-btn']}`}
+            >
+              💵 {t('btnCash', 'Готівка')}
+            </button>
+            <button
+              onClick={() => onArchive(order._id, 'card')}
+              className={`${css['archive-button']} ${css['card-btn']}`}
+            >
+              💳 {t('btnCard', 'Термінал')}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Baristadashboard;

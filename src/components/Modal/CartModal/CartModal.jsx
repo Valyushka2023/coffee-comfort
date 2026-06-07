@@ -501,12 +501,36 @@ const CartModal = ({ isOpen, onClose }) => {
         customerPhone: phone.trim(),
         pickupTime,
 
-        items: items.map(item => ({
-          _id: item._id || item.id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        })),
+        // === ПОВНИЙ ФІКС ВАРІАНТУ 2 (БЕЗ СКОРОЧЕНЬ) ===
+        items: items.map(item => {
+          // 1. Визначаємо базову назву для створення безпечного slug
+          let nameForSlug = 'item';
+          if (item.name) {
+            if (typeof item.name === 'string') {
+              nameForSlug = item.name;
+            } else if (item.name.uk) {
+              nameForSlug = item.name.uk;
+            } else if (item.name.en) {
+              nameForSlug = item.name.en;
+            }
+          }
+
+          // 2. Генеруємо чистий латинізований або локальний slug без пробілів та спецсимволів
+          const generatedSlug = nameForSlug
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-zа-яєіїґ0-9\s-]/g, '')
+            .replace(/\s+/g, '-');
+
+          // 3. Повертаємо об'єкт, який гарантовано містить коректний slug для бази даних
+          return {
+            _id: item._id || item.id,
+            slug: item.slug || generatedSlug,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          };
+        }),
 
         totalPrice: totalAmount,
       };
@@ -576,6 +600,7 @@ const CartModal = ({ isOpen, onClose }) => {
                 type="button"
                 className={css['order-btn']}
                 onClick={onClose}
+                aria-label={t('understood')}
               >
                 {t('understood')}
               </button>
@@ -650,7 +675,7 @@ const CartModal = ({ isOpen, onClose }) => {
                 <div className={css['form-group']}>
                   <FiPhone className={css['form-icon']} />
                   <input
-                    type="tel"
+                    type="text"
                     value={phone}
                     onChange={event => setPhone(event.target.value)}
                     placeholder="+380XXXXXXXXX"

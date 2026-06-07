@@ -80,6 +80,7 @@
 .menu-category-block {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   width: 100%;
   margin-bottom: 5rem;
   transition: none !important;

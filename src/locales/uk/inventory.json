@@ -1,23 +1,26 @@
 {
-  "title": "Склад та залишки",
+  "title": "Запаси та інвентар",
   "loading": "Завантаження даних...",
-  "no_data": "На складі немає жодного товару.",
+  "no_data": "Запаси наразі порожні.",
   "as_of_date": "Станом на",
-  "btn_export": "Експорт в Excel",
-  "update_error": "Не вдалося оновити склад. Спробуйте ще раз.",
+  "btn_export": "Експорт до Excel",
+  "update_error": "Не вдалося оновити запаси. Спробуйте ще раз",
+  "no_data_to_export": "Немає даних для експорту",
+  "search_placeholder": "Шукати інгредієнт...",
+  "clear_search": "Очистити пошук",
   "columns": {
-    "product": "Продукт",
-    "balans": "Залишок",
+    "product": "Товар",
+    "balans": "Баланс",
     "actions": "Дії"
   },
   "warning": {
     "restock": "Замовити!"
   },
   "excel": {
-    "sheet_inventory": "Залишки",
-    "generated_at": "Сформовано на дату",
+    "sheet_inventory": "Інвентаризація",
+    "generated_at": "Згенеровано о",
     "min_limit": "Мінімальний ліміт",
-    "status": "Статус",
+    "status": "Стан",
     "ok": "Достатньо"
   }
 }

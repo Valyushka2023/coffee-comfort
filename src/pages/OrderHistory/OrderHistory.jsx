@@ -9,9 +9,11 @@ import Loader from '../../components/Ui/Loader/Loader.jsx';
 import css from './OrderHistory.module.css';
 
 const OrderHistory = () => {
-  const { t, i18n } = useTranslation('order_history');
-  const currentLanguage = (i18n.language || 'uk').substring(0, 2);
-  const isUk = currentLanguage === 'uk';
+  // Примусово фіксуємо українську мову для цього компонента
+  const { t, i18n } = useTranslation('order_history', { lng: 'uk' });
+
+  // Тепер currentLanguage гарантовано буде 'uk', бо ми зафіксували її вище
+  const currentLanguage = i18n.language || 'uk';
 
   const [history, setHistory] = useState([]);
   const [dishStats, setDishStats] = useState([]);
@@ -66,13 +68,21 @@ const OrderHistory = () => {
     return `${year}-${month}-${day}`;
   };
 
+  // const getDishName = dish => {
+  //   if (typeof dish === 'object' && dish !== null) {
+  //     // Використовуємо поточну мову з i18n (зараз це 'uk')
+  //     return dish[currentLanguage] || dish.uk || dish.en;
+  //   }
+  //   return dish;
+  // };
   const getDishName = dish => {
     if (typeof dish === 'object' && dish !== null) {
-      return dish[currentLanguage] || dish.uk || dish.en;
+      // ПРИМУСОВО: спочатку беремо українську назву з бази,
+      // якщо її немає — англійську, якщо і її немає — пустий рядок
+      return dish.uk || dish.en || '';
     }
     return dish;
   };
-
   const exportToExcel = () => {
     if (history.length === 0 && dishStats.length === 0) {
       alert(t('no_data_to_export', 'No data to export!'));
@@ -80,9 +90,12 @@ const OrderHistory = () => {
     }
 
     const workbook = XLSX.utils.book_new();
-    const currentDateTime = new Date().toLocaleString(isUk ? 'uk-UA' : 'en-US');
+
+    // Локаль динамічно підлаштовується під i18n.language
+    const localeStr = currentLanguage === 'uk' ? 'uk-UA' : 'en-US';
+    const currentDateTime = new Date().toLocaleString(localeStr);
     const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
-      isUk ? 'uk-UA' : 'en-US'
+      localeStr
     );
 
     const getHeaderInfo = sheetTitle => [
@@ -116,7 +129,7 @@ const OrderHistory = () => {
       return {
         [t('excel.date_of_issue', 'Date of Issue')]: new Date(
           order.updatedAt
-        ).toLocaleString(isUk ? 'uk-UA' : 'en-US'),
+        ).toLocaleString(localeStr),
         [t('excel.check_number', 'Receipt No.')]:
           order.orderNumber || order._id.slice(-4).toUpperCase(),
         [t('excel.dishes', 'Dishes')]: order.items
@@ -207,8 +220,9 @@ const OrderHistory = () => {
     return <Loader type="container" size={60} />;
   }
 
+  // Динамічне форматування дати для рендеру інтерфейсу сторінки
   const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
-    isUk ? 'uk-UA' : 'en-US'
+    currentLanguage === 'uk' ? 'uk-UA' : 'en-US'
   );
 
   return (
@@ -238,13 +252,13 @@ const OrderHistory = () => {
           </h2>
           <div className={css['badges-container']}>
             <div className={`${css['finance-badge']} ${css['cash-badge']}`}>
-              💵 {t('cash', 'Cash')}:{' '}
+              {t('cash', 'Cash')}:{' '}
               <span>
                 {cashRevenue} {t('currency', 'UAH')}
               </span>
             </div>
             <div className={`${css['finance-badge']} ${css['card-badge']}`}>
-              💳 {t('card', 'Terminal')}:{' '}
+              {t('card', 'Terminal')}:{' '}
               <span>
                 {cardRevenue} {t('currency', 'UAH')}
               </span>
@@ -317,7 +331,7 @@ const OrderHistory = () => {
                 <tr key={order._id}>
                   <td>
                     {new Date(order.updatedAt).toLocaleString(
-                      isUk ? 'uk-UA' : 'en-US'
+                      currentLanguage === 'uk' ? 'uk-UA' : 'en-US'
                     )}
                   </td>
                   <td>

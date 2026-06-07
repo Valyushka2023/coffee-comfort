@@ -3,8 +3,11 @@
   "loading": "Loading data...",
   "no_data": "The inventory is currently empty.",
   "as_of_date": "As of",
-  "btn_export": "Export в Excel",
+  "btn_export": "Export to Excel",
   "update_error": "Failed to update stock. Please try again.",
+  "no_data_to_export": "No data to export",
+  "search_placeholder": "Search ingredient...",
+  "clear_search": "Clear search",
   "columns": {
     "product": "Product",
     "balans": "Balance",

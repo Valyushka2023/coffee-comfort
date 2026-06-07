@@ -1,3 +1,4 @@
+/* Оверлей (затемнення) — ідеальне центрування */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -7,147 +8,212 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
-  padding: 1, 25rem;
-  background: rgb(0 0 0 / 70%);
-  animation: fadeIn 0.3s ease;
-  backdrop-filter: blur(0.25rem);
+  height: 100vh;
+  padding: 1rem;
+  background: rgb(0 0 0 / 50%);
 }
 
+/* Контентне вікно модалки */
 .modal-content {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 31.25rem;
+
+  /* Загальна висота залишається стрункою та фіксованою */
+  height: 35rem;
+  max-width: 26rem;
   overflow: hidden;
   background: #fff;
-  border-radius: 1.25rem;
-  box-shadow: 0 0.9375rem 1.875rem rgb(0 0 0 / 30%);
-  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 1.5rem;
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 25%);
 }
 
+/* Кнопка закриття (хрестик) поверх картинки */
 .close-icon {
   position: absolute;
-  top: 0.9375rem;
-  right: 0.9375rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 2.1875rem;
-  height: 2.1875rem;
-  background: rgb(255 255 255 / 80%);
+  width: 2.2rem;
+  height: 2.2rem;
+  background: rgb(255 255 255 / 85%);
   border: none;
   border-radius: 50%;
-  font-size: 1.75rem;
-  color: #333;
-  transition: all 0.2s ease;
+  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%);
+  font-size: 1.1rem;
+  color: #1f2937;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+  backdrop-filter: blur(0.25rem);
 }
 
 .close-icon:hover {
-  background: #e74c3c;
-  color: #fff;
-}
-
-.image-wrapper {
-  width: 100%;
-  height: 15.625rem;
-  overflow: hidden;
-}
-
-.modal-image {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.5s ease;
-  object-fit: cover;
-}
-
-.modal-content:hover .modal-image {
+  background: #fff;
   transform: scale(1.05);
 }
 
+/* Тіло модалки (Картинка + Інфо) */
+.modal-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 📸 ЩЕ БІЛЬШЕ ФОТО СТРАВИ */
+.modal-image {
+  width: 100%;
+
+  /* 🔥 Збільшили з 20rem до 23rem! Тепер фото домінує та займає більшу частину вікна */
+  height: 23rem;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* 📝 МАКСИМАЛЬНО СТИСНУТИЙ БЛОК З ТЕКСТОМ */
 .modal-info {
-  padding: 1.5625rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center; /* Центрує контент вертикально в затиснутому просторі */
+
+  /* 🔥 Зменшили верхній відступ з 1.5rem до 1rem і нижній до мінімуму */
+  padding: 1rem 1.75rem 0.25rem;
 }
 
-.modal-title {
-  margin-bottom: 0.625rem;
-  font-family: Montserrat, sans-serif; /* Використовуйте свій шрифт */
-  font-size: 1.8rem;
-  color: #2c3e50;
+/* РЯДОК: НАЗВА + ЦІНА */
+.modal-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  /* 🔥 Зменшили відступ знизу, щоб опис піджався ближче */
+  margin-bottom: 0.4rem;
 }
 
-.modal-description {
-  margin-bottom: 1.25rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #7f8c8d;
-}
-
-.modal-price {
-  font-size: 1.5rem;
+/* Назва страви */
+.modal-info h3 {
+  margin: 0;
+  font-size: 1.35rem; /* Трохи компактніший акуратний шрифт */
   font-weight: 700;
-  color: #d35400; /* Кавовий/оранжевий колір */
+  text-align: left;
+  letter-spacing: -0.02em;
+  color: #111827;
 }
 
+/* Ціна */
+.modal-price {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+  color: #e07a5f;
+}
+
+/* Короткий опис страви */
+.modal-description {
+  /* 🔥 Оскільки місця менше, зменшили max-height до 3.2rem (приблизно 2 рядочки тексту) */
+  max-height: 3.2rem;
+  margin: 0;
+  padding-right: 0.25rem;
+  overflow-y: auto;
+  font-size: 0.9rem; /* Трохи компактніший текст для балансу */
+  line-height: 1.4;
+  text-align: left;
+  color: #6b7280; /* М'якший колір */
+}
+
+/* Тонкий скролбар для опису */
+.modal-description::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.modal-description::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0.625rem;
+}
+
+.modal-description::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 0.625rem;
+}
+
+/* 👥 КОМПАКТНІ КНОПКИ ЗНИЗУ */
 .modal-actions {
   display: flex;
-  gap: 0.9375rem;
-  padding: 0 1.5625rem 1.5625rem;
+  gap: 0.75rem;
+
+  /* 🔥 Зменшили відступи навколо кнопок з 1.5rem до 1.25rem, щоб уся плашка сіла нижче */
+  padding: 0.75rem 1.75rem 1.5rem;
+  background: #fff;
 }
 
-.order-btn,
+.select-btn,
 .cancel-btn {
   flex: 1;
   cursor: pointer;
-  padding: 0.75rem;
+  padding: 0.8rem 1rem;
   border: none;
-  border-radius: 0.75rem;
-  font-size: 1rem;
+  border-radius: 0.85rem;
+  font-size: 0.85rem; /* Трохи акуратніший розмір шрифту */
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   transition: all 0.2s ease;
 }
 
-.order-btn {
-  background: #d35400;
+.select-btn {
+  background: #1f2937;
   color: #fff;
 }
 
-.order-btn:hover {
-  background: #e67e22;
-  box-shadow: 0 0.3125rem 0.9375rem rgb(211 84 0 / 30%);
-  transform: translateY(-0.125rem);
+.select-btn:hover {
+  background: #111827;
 }
 
 .cancel-btn {
-  background: #ecf0f1;
-  color: #7f8c8d;
+  background: #f3f4f6;
+  color: #4b5563;
 }
 
 .cancel-btn:hover {
-  background: #bdc3c7;
-  color: #2c3e50;
+  background: #e5e7eb;
 }
 
-/* Адаптивність для телефонів */
+/* 📱 Адаптивність для мобільних */
 @media (max-width: 29.9375rem) {
   .modal-content {
-    display: flex;
-    flex-direction: column;
-    max-height: 90vh;
-    margin: 0.625rem;
+    height: 32rem;
+    margin: 1rem;
+    border-radius: 1.25rem;
   }
 
-  .image-wrapper {
-    height: 11.25rem;
+  .modal-image {
+    /* На мобільних теж піднімаємо висоту фото для тримання пропорції */
+    height: 19rem;
   }
 
-  .modal-title {
-    font-size: 1.4rem;
+  .modal-info {
+    padding: 0.85rem 1.25rem 0;
+  }
+
+  .modal-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .modal-price {
+    font-size: 1.15rem;
   }
 
   .modal-actions {
-    flex-direction: column;
+    padding: 0.75rem 1.25rem 1.25rem;
   }
 }

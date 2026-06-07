@@ -1,193 +1,3 @@
-// import { useState, useEffect } from 'react';
-// import { useTranslation } from 'react-i18next';
-// import api from '../../services/api.js';
-// import * as XLSX from 'xlsx';
-// import Loader from '../../components/Ui/Loader/Loader.jsx'; // Імпортовано Loader
-// import css from './Inventory.module.css';
-
-// const Inventory = () => {
-//   const { t, i18n } = useTranslation('inventory');
-//   const [ingredients, setIngredients] = useState([]);
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   const lang = (i18n.language || 'uk').substring(0, 2);
-//   const isUk = lang === 'uk';
-
-//   useEffect(() => {
-//     const loadData = async () => {
-//       try {
-//         const res = await api.get('/ingredients');
-//         setIngredients(res.data || []);
-//       } catch (err) {
-//         console.error('Error loading ingredients:', err);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-//     loadData();
-//   }, [lang, i18n.language]);
-
-//   const changeQuantity = async (id, currentQty, step) => {
-//     const targetQty = currentQty + step;
-//     if (targetQty < 0) return;
-
-//     try {
-//       const res = await api.patch(`/ingredients/${id}`, {
-//         quantity: targetQty,
-//       });
-//       setIngredients(prev =>
-//         prev.map(item =>
-//           item._id === id ? { ...item, quantity: res.data.quantity } : item
-//         )
-//       );
-//     } catch (err) {
-//       console.error('Failed to update quantity:', err);
-//       alert(t('update_error'));
-//     }
-//   };
-
-//   const exportToExcel = () => {
-//     if (ingredients.length === 0) {
-//       alert(t('no_data_to_export', 'No data to export'));
-//       return;
-//     }
-
-//     const workbook = XLSX.utils.book_new();
-//     const currentDateTime = new Date().toLocaleString(isUk ? 'uk-UA' : 'en-US');
-
-//     const headerData = [
-//       [t('title', 'Composition and residues')],
-//       [`${t('excel.generated_at', 'Formed on date')}: ${currentDateTime}`],
-//       [],
-//     ];
-
-//     const worksheet = XLSX.utils.aoa_to_sheet(headerData);
-
-//     const excelData = ingredients.map(item => {
-//       const displayName = item.name?.[lang] || item.name?.uk || '—';
-//       const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
-//       const isLow = item.quantity <= item.minLimit;
-
-//       return {
-//         [t('columns.product')]: displayName,
-//         [t('columns.balans')]:
-//           `${Number(item.quantity.toFixed(3))} ${displayUnit}`,
-//         [t('excel.min_limit', 'Minimum limit')]:
-//           `${item.minLimit} ${displayUnit}`,
-//         [t('excel.status', 'Status')]: isLow
-//           ? t('warning.restock')
-//           : t('excel.ok', 'Enough'),
-//       };
-//     });
-
-//     XLSX.utils.sheet_add_json(worksheet, excelData, { origin: 3 });
-
-//     worksheet['!cols'] = [{ wch: 32 }, { wch: 15 }, { wch: 20 }, { wch: 20 }];
-
-//     XLSX.utils.book_append_sheet(
-//       workbook,
-//       worksheet,
-//       t('excel.sheet_inventory', 'Remains')
-//     );
-
-//     const dateStr = new Date().toISOString().split('T')[0];
-//     XLSX.writeFile(workbook, `Coffee_Comfort_Inventory_${dateStr}.xlsx`);
-//   };
-
-//   // Використовуємо фірмовий лоадер замість простого тексту
-//   if (isLoading) {
-//     return <Loader type="container" size={60} />;
-//   }
-
-//   const displayDate = new Date().toLocaleDateString(isUk ? 'uk-UA' : 'en-US');
-
-//   return (
-//     <div className={css['container']}>
-//       <div className={css['header-wrapper']}>
-//         <div className={css['title-block']}>
-//           <h2>🥛 {t('title')}</h2>
-
-//           <div className={css['date-badge']}>
-//             {t('as_of_date', 'As of')}: {displayDate}
-//           </div>
-//         </div>
-
-//         <button
-//           type="button"
-//           onClick={exportToExcel}
-//           className={css['export-btn']}
-//         >
-//           {t('btn_export', 'Export')} {/* 💾 видалено */}
-//         </button>
-//       </div>
-
-//       {ingredients.length === 0 ? (
-//         <div className={css['center-text']}>{t('no_data')}</div>
-//       ) : (
-//         <table className={css['inventory-table']}>
-//           <thead>
-//             <tr>
-//               <th>{t('columns.product')}</th>
-//               <th>{t('columns.balans')}</th>
-//               <th>{t('columns.actions')}</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {ingredients.map(item => {
-//               const isLow = item.quantity <= item.minLimit;
-//               const displayName = item.name?.[lang] || item.name?.uk || '—';
-//               const displayUnit = item.unit?.[lang] || item.unit?.uk || '';
-
-//               return (
-//                 <tr key={item._id} className={isLow ? css['low-stock'] : ''}>
-//                   <td
-//                     data-label={t('columns.product')}
-//                     className={css['product-name']}
-//                   >
-//                     {displayName}
-//                   </td>
-//                   <td data-label={t('columns.balans')}>
-//                     <span className={css['amount']}>
-//                       {Number(item.quantity.toFixed(3))} {displayUnit}
-//                     </span>
-//                     {isLow && (
-//                       <div className={css['warning']}>
-//                         {t('warning.restock')}
-//                       </div>
-//                     )}
-//                   </td>
-//                   <td
-//                     data-label={t('columns.actions')}
-//                     className={css['actions-cell']}
-//                   >
-//                     <button
-//                       type="button"
-//                       className={css['btn-plus']}
-//                       onClick={() => changeQuantity(item._id, item.quantity, 1)}
-//                     >
-//                       + 1
-//                     </button>
-//                     <button
-//                       type="button"
-//                       className={css['btn-minus']}
-//                       onClick={() =>
-//                         changeQuantity(item._id, item.quantity, -1)
-//                       }
-//                     >
-//                       - 1
-//                     </button>
-//                   </td>
-//                 </tr>
-//               );
-//             })}
-//           </tbody>
-//         </table>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Inventory;
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import api from '../../services/api.js';
@@ -206,8 +16,6 @@ const Inventory = () => {
     new Date().toISOString().split('T')[0]
   );
 
-  // const isUk = true;
-  // Завжди українська мова для звітів Excel
   const isToday = selectedDate === new Date().toISOString().split('T')[0];
 
   const capitalizeFirstLetter = text => {
@@ -219,7 +27,6 @@ const Inventory = () => {
     const loadData = async () => {
       setIsLoading(true);
       try {
-        // Залишаємо запит на сервер без змін
         const res = await api.get(`/ingredients?date=${selectedDate}`);
         setIngredients(res.data || []);
       } catch (err) {
@@ -248,11 +55,11 @@ const Inventory = () => {
       );
     } catch (err) {
       console.error('Failed to update quantity:', err);
-      alert(t('update_error'));
+      alert(t('update_error', 'Failed to update stock. Please try again.'));
     }
   };
 
-  // Фільтрація інгредієнтів — шукаємо виключно по українській назві (.uk)
+  // Фільтрація інгредієнтів — за українською назвою (.uk)
   const filteredIngredients = ingredients.filter(item => {
     const displayName = (item.name?.uk || '').toLowerCase();
     return displayName.includes(searchQuery.toLowerCase());
@@ -271,28 +78,27 @@ const Inventory = () => {
     );
 
     const headerData = [
-      [t('title', 'Composition and residues')],
+      [t('title', 'Stock & Inventory')],
       [`${t('as_of_date', 'As of')}: ${formattedSelectedDate}`],
-      [`${t('excel.generated_at', 'Formed on date')}: ${currentDateTime}`],
+      [`${t('excel.generated_at', 'Generated at')}: ${currentDateTime}`],
       [],
     ];
 
     const worksheet = XLSX.utils.aoa_to_sheet(headerData);
 
     const excelData = filteredIngredients.map(item => {
-      // Завжди експортуємо назву та одиниці виміру українською мовою
       const displayName = item.name?.uk || '—';
       const displayUnit = item.unit?.uk || '';
       const isLow = item.quantity <= item.minLimit;
 
       return {
-        [t('columns.product')]: displayName,
-        [t('columns.balans')]:
+        [t('columns.product', 'Product')]: displayName,
+        [t('columns.balans', 'Balance')]:
           `${Number(item.quantity.toFixed(3))} ${displayUnit}`,
         [t('excel.min_limit', 'Minimum limit')]:
           `${item.minLimit} ${displayUnit}`,
         [t('excel.status', 'Status')]: isLow
-          ? t('warning.restock')
+          ? t('warning.restock', 'Order!')
           : t('excel.ok', 'Enough'),
       };
     });
@@ -303,7 +109,7 @@ const Inventory = () => {
     XLSX.utils.book_append_sheet(
       workbook,
       worksheet,
-      t('excel.sheet_inventory', 'Remains')
+      t('excel.sheet_inventory', 'Inventory')
     );
 
     XLSX.writeFile(workbook, `Coffee_Comfort_Inventory_${selectedDate}.xlsx`);
@@ -317,14 +123,14 @@ const Inventory = () => {
     <div className={css['container']}>
       <div className={css['header-wrapper']}>
         <div className={css['title-block']}>
-          <h2>🥛 {t('title')}</h2>
+          <h2>🥛 {t('title', 'Stock & Inventory')}</h2>
         </div>
 
         <div className={css['filters-panel']}>
           <div className={css['search-wrapper']}>
             <input
               type="text"
-              placeholder={t('search_placeholder', 'Пошук інгредієнта...')}
+              placeholder={t('search_placeholder', 'Search ingredient...')}
               value={searchQuery}
               onChange={e =>
                 setSearchQuery(capitalizeFirstLetter(e.target.value))
@@ -336,7 +142,7 @@ const Inventory = () => {
                 type="button"
                 className={css['clear-search-btn']}
                 onClick={() => setSearchQuery('')}
-                title={t('clear_search', 'Очистити пошук')}
+                title={t('clear_search', 'Clear search')}
               >
                 ✕
               </button>
@@ -355,49 +161,50 @@ const Inventory = () => {
             onClick={exportToExcel}
             className={css['export-btn']}
           >
-            {t('btn_export', 'Export')}
+            {t('btn_export', 'Export to Excel')}
           </button>
         </div>
       </div>
 
       {filteredIngredients.length === 0 ? (
-        <div className={css['center-text']}>{t('no_data')}</div>
+        <div className={css['center-text']}>
+          {t('no_data', 'The inventory is currently empty.')}
+        </div>
       ) : (
         <table className={css['inventory-table']}>
           <thead>
             <tr>
-              <th>{t('columns.product')}</th>
-              <th>{t('columns.balans')}</th>
-              <th>{t('columns.actions')}</th>
+              <th>{t('columns.product', 'Product')}</th>
+              <th>{t('columns.balans', 'Balance')}</th>
+              <th>{t('columns.actions', 'Actions')}</th>
             </tr>
           </thead>
           <tbody>
             {filteredIngredients.map(item => {
               const isLow = item.quantity <= item.minLimit;
-              // Рендеримо виключно з полів .uk
               const displayName = item.name?.uk || '—';
               const displayUnit = item.unit?.uk || '';
 
               return (
                 <tr key={item._id} className={isLow ? css['low-stock'] : ''}>
                   <td
-                    data-label={t('columns.product')}
+                    data-label={t('columns.product', 'Product')}
                     className={css['product-name']}
                   >
                     {displayName}
                   </td>
-                  <td data-label={t('columns.balans')}>
+                  <td data-label={t('columns.balans', 'Balance')}>
                     <span className={css['amount']}>
                       {Number(item.quantity.toFixed(3))} {displayUnit}
                     </span>
                     {isLow && (
                       <div className={css['warning']}>
-                        {t('warning.restock')}
+                        {t('warning.restock', 'Order!')}
                       </div>
                     )}
                   </td>
                   <td
-                    data-label={t('columns.actions')}
+                    data-label={t('columns.actions', 'Actions')}
                     className={css['actions-cell']}
                   >
                     <button

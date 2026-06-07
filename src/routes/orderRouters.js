@@ -4,7 +4,7 @@ import Ingredient from '../models/Ingredient.js';
 
 const router = express.Router();
 
-// Об'єкт рецептів (ключі — це slug, name.en або назва страви)
+// Об'єкт рецептів (ключі — це slug, name.en або українська назва страви)
 const RECIPES = {
   'flat-white': [
     { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
@@ -45,7 +45,7 @@ const RECIPES = {
   'caramel-syrup': [{ nameUk: 'Сироп Карамель', amount: 1, safetyStock: 1 }],
   'sugar-sticks': [{ nameUk: 'Цукор в стіках', amount: 2, safetyStock: 10 }],
 
-  // ДОДАТКОВІ ФОЛБЕКИ (якщо з фронтенду прилітає українська назва прямо як ключ)
+  // Фолбеки для українських назв та сирих рядків із кошика
   'Кава в зернах (Arabica)': [
     { nameUk: 'Кава в зернах (Arabica)', amount: 0.018, safetyStock: 0.05 },
   ],
@@ -72,28 +72,32 @@ const RECIPES = {
   ],
 };
 
-// Розумна функція пошуку рецепту
+// Розумна та безпечна функція пошуку рецепту
 function findRecipe(item) {
   if (!item) return null;
 
-  // 1. Пробуємо знайти за slug
-  if (item.slug && RECIPES[item.slug.toLowerCase()]) {
-    return RECIPES[item.slug.toLowerCase()];
+  // 1. Шукаємо за slug (якщо він є)
+  if (item.slug && typeof item.slug === 'string') {
+    const slugKey = item.slug.toLowerCase();
+    if (RECIPES[slugKey]) return RECIPES[slugKey];
   }
 
-  // 2. Пробуємо знайти за name.en
-  if (item.name && item.name.en && RECIPES[item.name.en.toLowerCase()]) {
-    return RECIPES[item.name.en.toLowerCase()];
+  // 2. Шукаємо за name.en (якщо назва — це об'єкт і є поле en)
+  if (item.name && typeof item.name === 'object' && item.name.en) {
+    const enKey = item.name.en.toLowerCase();
+    if (RECIPES[enKey]) return RECIPES[enKey];
   }
 
-  // 3. Пробуємо знайти за name.uk
-  if (item.name && item.name.uk && RECIPES[item.name.uk]) {
-    return RECIPES[item.name.uk];
+  // 3. Шукаємо за name.uk (якщо назва — це об'єкт і є поле uk)
+  if (item.name && typeof item.name === 'object' && item.name.uk) {
+    if (RECIPES[item.name.uk]) return RECIPES[item.name.uk];
   }
 
-  // 4. Якщо name — це просто рядок
-  if (typeof item.name === 'string' && RECIPES[item.name]) {
-    return RECIPES[item.name];
+  // 4. Якщо name — це просто звичайний рядок (наприклад, з кошика фронтенду)
+  if (item.name && typeof item.name === 'string') {
+    if (RECIPES[item.name]) return RECIPES[item.name];
+    const stringKey = item.name.toLowerCase();
+    if (RECIPES[stringKey]) return RECIPES[stringKey];
   }
 
   return null;
@@ -126,7 +130,7 @@ function calculateTotalIngredientsForOrder(items) {
 }
 
 // =======================================================
-// POST: Створення замовлення
+// POST: Створення замовлення (з перевіркою залишків)
 // =======================================================
 router.post('/', async (req, res) => {
   try {
@@ -237,7 +241,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 // =======================================================
-// DELETE, GET HISTORY, GET ACTIVE ORDERS
+// DELETE: Скасування замовлення
 // =======================================================
 router.delete('/:id', async (req, res) => {
   try {
@@ -253,6 +257,9 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// =======================================================
+// GET: Історія виконаних замовлень
+// =======================================================
 router.get('/history', async (req, res) => {
   try {
     const history = await Order.find({ status: 'completed', isPaid: true })
@@ -265,6 +272,9 @@ router.get('/history', async (req, res) => {
   }
 });
 
+// =======================================================
+// GET: Статистика та аналітика за день (з правильним групуванням)
+// =======================================================
 router.get('/stats', async (req, res) => {
   try {
     const { date } = req.query;
@@ -285,11 +295,23 @@ router.get('/stats', async (req, res) => {
         { $unwind: '$items' },
         {
           $group: {
-            _id: '$items.name.uk',
-            name: { $first: '$items.name' },
+            _id: { $ifNull: ['$items.name.uk', '$items.name'] },
+            nameUk: { $first: { $ifNull: ['$items.name.uk', '$items.name'] } },
+            nameEn: { $first: { $ifNull: ['$items.name.en', '$items.slug'] } },
             totalQuantity: { $sum: '$items.quantity' },
             totalPrice: {
               $sum: { $multiply: ['$items.price', '$items.quantity'] },
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            totalQuantity: 1,
+            totalPrice: 1,
+            name: {
+              uk: '$nameUk',
+              en: { $ifNull: ['$nameEn', '$nameUk'] },
             },
           },
         },
@@ -326,6 +348,9 @@ router.get('/stats', async (req, res) => {
   }
 });
 
+// =======================================================
+// GET: Активні замовлення для Панелі баристи
+// =======================================================
 router.get('/', async (req, res) => {
   try {
     const orders = await Order.find({

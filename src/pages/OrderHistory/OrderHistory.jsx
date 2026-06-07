@@ -9,10 +9,7 @@ import Loader from '../../components/Ui/Loader/Loader.jsx';
 import css from './OrderHistory.module.css';
 
 const OrderHistory = () => {
-  // Примусово фіксуємо українську мову для історії замовлень
   const { t } = useTranslation('order_history', { lng: 'uk' });
-  // const isUk = true;
-  // Завжди true, оскільки інтерфейс лише український
 
   const [history, setHistory] = useState([]);
   const [dishStats, setDishStats] = useState([]);
@@ -30,8 +27,17 @@ const OrderHistory = () => {
       setLoading(true);
       try {
         const historyData = await fetchOrderHistoryRequest();
-        const statsData = await fetchOrderStatsRequest(selectedDate);
 
+        const statsData = await fetchOrderStatsRequest(selectedDate);
+        console.log('📊 STATS DATA:', statsData);
+        console.log('📊 DISHES:', statsData.dishes);
+        console.log('📜 HISTORY:', historyData);
+        console.log(
+          '📜 HISTORY FILTERED:',
+          historyData.filter(
+            order => getOrderLocalDateString(order.updatedAt) === selectedDate
+          )
+        );
         setHistory(historyData || []);
 
         if (
@@ -67,12 +73,18 @@ const OrderHistory = () => {
     return `${year}-${month}-${day}`;
   };
 
-  // Завжди беремо українську назву страви для звіту
   const getDishName = dish => {
-    if (typeof dish === 'object' && dish !== null) {
-      return dish.uk || dish.en;
+    if (!dish) return '';
+    if (typeof dish === 'string') return dish;
+
+    if (typeof dish === 'object') {
+      if (dish.uk || dish.en) return dish.uk || dish.en;
+      if (dish.name) {
+        if (typeof dish.name === 'object') return dish.name.uk || dish.name.en;
+        return dish.name;
+      }
     }
-    return dish;
+    return String(dish);
   };
 
   const exportToExcel = () => {
@@ -154,7 +166,9 @@ const OrderHistory = () => {
     const statsSheet = XLSX.utils.aoa_to_sheet(statsHeader);
 
     const statsData = dishStats.map(item => ({
-      [t('excel.dish_name', 'Dish Name')]: getDishName(item._id),
+      // ФІКС: тепер надійно беремо назву з об'єкта name, який приходить з бекенду
+      [t('excel.dish_name', 'Dish Name')]:
+        getDishName(item.name) || getDishName(item._id),
       [t('excel.sold_pcs', 'Sold (pcs)')]: item.totalQuantity,
       [t('excel.total_amount', 'Total Amount')]:
         `${item.totalPrice} ${t('currency', 'UAH')}`,
@@ -240,13 +254,13 @@ const OrderHistory = () => {
           </h2>
           <div className={css['badges-container']}>
             <div className={`${css['finance-badge']} ${css['cash-badge']}`}>
-              💵 {t('cash', 'Cash')}:{' '}
+              {t('cash', 'Cash')}:{' '}
               <span>
                 {cashRevenue} {t('currency', 'UAH')}
               </span>
             </div>
             <div className={`${css['finance-badge']} ${css['card-badge']}`}>
-              💳 {t('card', 'Terminal')}:{' '}
+              {t('card', 'Terminal')}:{' '}
               <span>
                 {cardRevenue} {t('currency', 'UAH')}
               </span>
@@ -269,7 +283,8 @@ const OrderHistory = () => {
             {dishStats.length > 0 ? (
               dishStats.map((item, index) => (
                 <tr key={index}>
-                  <td>{getDishName(item._id)}</td>
+                  {/* ФІКС: передаємо об'єкт назви у функцію */}
+                  <td>{getDishName(item.name) || getDishName(item._id)}</td>
                   <td>{item.totalQuantity}</td>
                   <td>
                     {item.totalPrice} {t('currency', 'UAH')}

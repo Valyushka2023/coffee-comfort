@@ -120,19 +120,25 @@
 }
 
 .cash-badge {
-  border: 0.125rem solid #27ae60;
+  border: 0.125rem solid var(--border-accent);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .cash-badge span {
-  color: #27ae60;
+  color: var(--color-accent);
 }
 
 .card-badge {
-  border: 0.125rem solid #2980b9;
+  border: 0.125rem solid var(--border-accent);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .card-badge span {
-  color: #2980b9;
+  color: var(--color-accent);
 }
 
 /* Бадж загальної суми */
@@ -142,10 +148,10 @@
   border: 0.125rem solid var(--border-accent);
   border-radius: 0.5rem;
   box-shadow: 0 0.125rem 0.25rem rgb(16 185 129 / 20%);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--color-gray-light);
+  color: var(--color-accent);
 }
 
 /* Кнопка експорту */

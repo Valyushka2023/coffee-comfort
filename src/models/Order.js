@@ -36,6 +36,9 @@ const orderSchema = new mongoose.Schema(
     items: [
       {
         _id: { type: String, required: true },
+        // === КРИТИЧНИЙ ФІКС: Додано поле slug ===
+        // Воно необхідне для зв'язку з об'єктом RECIPES на бекенді та правильного групування в аналітиці
+        slug: { type: String, required: true, trim: true },
         name: {
           uk: { type: String },
           en: { type: String },

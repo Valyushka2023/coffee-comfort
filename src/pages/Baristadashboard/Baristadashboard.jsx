@@ -201,6 +201,7 @@ const Baristadashboard = () => {
         isPaid: true,
         paymentMethod,
       });
+      console.log('✅ COMPLETED ORDER:', updatedOrder);
       setOrders(prev => prev.filter(order => order._id !== orderId));
     } catch (error) {
       console.error('Помилка оновлення:', error);

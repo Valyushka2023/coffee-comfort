@@ -76,7 +76,7 @@ const RECIPES = {
 function findRecipe(item) {
   if (!item) return null;
 
-  // 1. Шукаємо за slug (якщо він є)
+  // 1. Шукаємо за slug (якщо він є і є рядком)
   if (item.slug && typeof item.slug === 'string') {
     const slugKey = item.slug.toLowerCase();
     if (RECIPES[slugKey]) return RECIPES[slugKey];
@@ -84,11 +84,11 @@ function findRecipe(item) {
 
   // 2. Шукаємо за name.en (якщо назва — це об'єкт і є поле en)
   if (item.name && typeof item.name === 'object' && item.name.en) {
-    const enKey = item.name.en.toLowerCase();
+    const enKey = String(item.name.en).toLowerCase();
     if (RECIPES[enKey]) return RECIPES[enKey];
   }
 
-  // 3. Шукаємо за name.uk (якщо назва — це об'єкт і є поле uk)
+  // 3. Шукаємо за name.uk (якщо назва — це об'єкт і є pole uk)
   if (item.name && typeof item.name === 'object' && item.name.uk) {
     if (RECIPES[item.name.uk]) return RECIPES[item.name.uk];
   }
@@ -106,6 +106,8 @@ function findRecipe(item) {
 // Обчислення інгредієнтів
 function calculateTotalIngredientsForOrder(items) {
   const totals = {};
+  if (!Array.isArray(items)) return totals;
+
   for (const item of items) {
     const recipe = findRecipe(item);
 
@@ -130,29 +132,34 @@ function calculateTotalIngredientsForOrder(items) {
 }
 
 // =======================================================
-// POST: Створення замовлення (з перевіркою залишків)
+// POST: Створення замовлення (БЕЗПЕЧНЕ)
 // =======================================================
 router.post('/', async (req, res) => {
   try {
     const { items } = req.body;
-    const totalIngredientsNeeded = calculateTotalIngredientsForOrder(items);
 
-    for (const [nameUk, data] of Object.entries(totalIngredientsNeeded)) {
-      const currentIngredient = await Ingredient.findOne({ 'name.uk': nameUk });
+    if (items && Array.isArray(items)) {
+      const totalIngredientsNeeded = calculateTotalIngredientsForOrder(items);
 
-      if (!currentIngredient) {
-        return res
-          .status(400)
-          .json({ message: 'OUT_OF_STOCK_RESERVE', details: nameUk });
-      }
+      for (const [nameUk, data] of Object.entries(totalIngredientsNeeded)) {
+        const currentIngredient = await Ingredient.findOne({
+          'name.uk': nameUk,
+        });
 
-      const minAllowed = data.safetyStock;
-      const remainsAfterValidation = currentIngredient.quantity - data.amount;
+        if (!currentIngredient) {
+          return res
+            .status(400)
+            .json({ message: 'OUT_OF_STOCK_RESERVE', details: nameUk });
+        }
 
-      if (remainsAfterValidation < minAllowed) {
-        return res
-          .status(400)
-          .json({ message: 'OUT_OF_STOCK_RESERVE', details: nameUk });
+        const minAllowed = data.safetyStock;
+        const remainsAfterValidation = currentIngredient.quantity - data.amount;
+
+        if (remainsAfterValidation < minAllowed) {
+          return res
+            .status(400)
+            .json({ message: 'OUT_OF_STOCK_RESERVE', details: nameUk });
+        }
       }
     }
 
@@ -178,7 +185,7 @@ router.patch('/:id', async (req, res) => {
     }
 
     // Якщо замовлення переводять у статус "виконано" і воно ще не було виконане раніше
-    if (status === 'completed' && order.status !== 'completed') {
+    if (status === 'completed' && order.status !== 'completed' && order.items) {
       console.log(
         `=== 📦 СПИСАННЯ ДЛЯ ЧЕКУ №${order.orderNumber || order._id} ===`
       );

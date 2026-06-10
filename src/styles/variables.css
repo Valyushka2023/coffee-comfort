@@ -99,7 +99,11 @@
   --color-dark-beige: #f8f4ec; /* Темно-бежевий як пісок, rgb(248 244 236 / 100%)  */
   --color-latte-coffee-50: rgb(212 163 115 / 50%);
   --color-light-brown-80: rgb(92 61 46 / 80%);
-  --color-light-gray-50: rgb(244 241 234 / 50%); /* світло-сірий на 50% */
+  --color-light-gray-50: rgb(87 84 79 / 50%);
+
+  /* --color-light-gray-50: rgb(244 241 234 / 50%); */
+
+  /* світло-сірий на 50% */
   --color-light-gray-80: rgb(244 241 234 / 80%); /* світло-сірий на 50% */
   --color-light-gray-100: rgb(244 241 234 / 100%); /* світло-сірий на 100% */
   --color-dark-gray-50: rgb(107 105 101 / 50%); /* темно-сірий на 50% */

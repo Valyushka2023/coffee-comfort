@@ -9,4 +9,6 @@ export { Instagram as InstagramIcon } from './Instagram.jsx';
 export { Facebook as FacebookIcon } from './Facebook.jsx';
 export { Phone as PhoneIcon } from './Phone.jsx';
 export { StarIcon } from './StarIcon.jsx';
+
+export { Search as SearchIcon } from './Search.jsx';
 export { default as ReviewIcon } from './ReviewIcon';

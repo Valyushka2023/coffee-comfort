@@ -10,8 +10,88 @@
 .header-style {
   margin-bottom: 1.875rem;
   padding-bottom: 0.625rem;
-  border-bottom: 0.125rem solid var(--color-gray-light);
-  color: var(--color-gray-light);
+  border-bottom: 0.125rem solid var(--divider-color);
+  color: var(--color-brown);
+}
+
+h1 {
+  color: var(--color-brown);
+}
+
+/* Контейнер пошуку у хедері */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 27.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  display: flex;
+  align-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  color: var(--color-dark-gray-80);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.field-input-search {
+  display: block;
+  width: 100%;
+
+  /* 1. Задаємо фіксовану висоту замість вертикальних padding */
+  height: 3rem;
+
+  /* 2. Обнуляємо верхній/нижній відступи, залишаємо тільки бокові (справа і зліва) */
+  padding: 0 3rem;
+  box-sizing: border-box;
+  border: 0.0625rem solid var(--divider-color);
+  border-radius: 0.5rem;
+  outline: none;
+  font-family: inherit;
+  font-size: 1.3rem;
+  color: var(--color-brown);
+  transition: border-color 0.3s ease;
+}
+
+.field-input-search:focus {
+  border-color: var(--color-accent);
+}
+
+.field-input-search::placeholder {
+  color: var(--color-dark-gray-80);
+  opacity: 1;
+}
+
+.clear-search {
+  position: absolute;
+  top: 50%; /* 3. Додаємо центрування для кнопки очищення "х", щоб вона теж не стрибала */
+  right: 0.625rem;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-brown);
+  transform: translateY(-50%);
+}
+
+.clear-search:hover {
+  color: var(--color-accent);
+}
+
+.no-results {
+  margin: 3rem auto;
+  font-size: 1.3rem;
+  text-align: center;
+  color: var(--color-brown);
 }
 
 .grid-style {
@@ -37,6 +117,10 @@
   align-items: center;
   margin-bottom: 0.9375rem;
 }
+
+/* .order-number-style {
+  
+} */
 
 .header-actions {
   display: inline-flex;
@@ -242,65 +326,6 @@
   font-size: 1.125rem;
   font-weight: bold;
   color: var(--color-accent);
-}
-
-/* Контейнер пошуку у хедері */
-.search-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 21.875rem;
-}
-
-.search-icon {
-  position: absolute;
-  left: 0.75rem;
-  font-size: 1.1rem;
-  color: #95a5a6;
-  pointer-events: none;
-}
-
-.search-input {
-  width: 100%;
-  padding: 0.55rem 2.25rem;
-  background-color: #fafafa;
-  border: 0.0625rem solid #ccc;
-  border-radius: 0.5rem;
-  outline: none;
-  font-family: inherit;
-  font-size: 0.95rem;
-  transition:
-    border-color 0.2s,
-    background-color 0.2s;
-}
-
-.search-input:focus {
-  background-color: #fff;
-  border-color: #d35400;
-}
-
-.clear-search {
-  position: absolute;
-  right: 0.625rem;
-  cursor: pointer;
-  padding: 0;
-  background: none;
-  border: none;
-  font-size: 1.3rem;
-  line-height: 1;
-  color: #95a5a6;
-}
-
-.clear-search:hover {
-  color: #333;
-}
-
-.no-results {
-  margin: 3rem auto;
-  font-size: 1.2rem;
-  text-align: center;
-  color: #7f8c8d;
 }
 
 /* --- ПРОТЕРМІНОВАНЕ КЛІЄНТОМ ЗАМОВЛЕННЯ (20+ хв) --- */

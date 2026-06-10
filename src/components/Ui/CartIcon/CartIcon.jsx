@@ -5,7 +5,7 @@ import css from './CartIcon.module.css';
 // eslint-disable-next-line react/prop-types
 const CartIcon = ({ onClick }) => {
   const items = useSelector(state => state.cart.items); // Додано дужки (state)
-  console.log('Товари в Redux:', items);
+  console.log('Products in Redux', items);
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
@@ -13,12 +13,12 @@ const CartIcon = ({ onClick }) => {
       type="button" // Тепер це правильний семантичний елемент
       className={css['cart-icon-wrapper']}
       onClick={() => {
-        console.log('Клік по іконці кошика');
+        console.log('Click on the basket icon');
         onClick();
       }}
-      aria-label="Кошик"
+      aria-label="Basket"
     >
-      <FiShoppingCart size={30} />
+      <FiShoppingCart size={25} />
       {totalItems > 0 && <span className={css['badge']}>{totalItems}</span>}
     </button>
   );

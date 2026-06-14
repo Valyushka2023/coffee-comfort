@@ -115,13 +115,13 @@
 .card-style.overdue-card {
   background-color: #fff5f5; /* Ніжно-червоний фон для уваги */
   border-left: 0.3125rem solid var(--error-color, #dc3545);
-  border-color: var(--error-color, #dc3545);
+  border-color: var(--error-color);
   animation: none;
 }
 
 .urgent-time {
   font-weight: bold;
-  color: var(--error-color, #dc3545);
+  color: var(--error-color);
 }
 
 /* КНОПКИ ДІЙ */
@@ -339,4 +339,31 @@
   background-color: #dc3545 !important;
   border-color: #dc3545 !important;
   color: var(--color-white) !important;
+}
+
+.pickup-time-badge-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0.625rem;
+}
+
+.pickup-tag {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Якщо замовлення на конкретний час — м'який синій колір */
+.pickup-tag.scheduled {
+  background-color: #e0f2fe;
+  border: 0.0625rem solid #bae6fd;
+  color: #0369a1;
+}
+
+/* Якщо замовлення "на зараз" — стриманий помаранчевий/жовтий колір */
+.pickup-tag.asap {
+  background-color: #fef3c7;
+  border: 0.0625rem solid #fde68a;
+  color: #d97706;
 }

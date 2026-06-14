@@ -27,6 +27,7 @@
   background: none;
   border: none;
   color: #d32a00;
+  color: aqua;
 }
 
 .drawer {
@@ -99,6 +100,7 @@
   margin: 0.625rem 0;
   padding: 0.625rem 1.25rem;
   background: #f1c40f;
+  background-color: var(--color-beige);
   border-radius: 0.625rem;
   font-size: 2rem;
   font-weight: bold;
@@ -229,7 +231,7 @@
 /* Підвищуємо специфічність замість використання шкідливого !important */
 .field-input.field-error,
 .field-input-time.field-error {
-  border-color: #d32a00;
+  border-color: var(--error-color);
 }
 
 /* Інтеграція календаря (Datepicker) */
@@ -255,14 +257,14 @@
   z-index: 110;
   margin: 0;
   padding: 0.3125rem 0.625rem;
-  background-color: #fff;
-  border: 0.0625rem solid #d32a00;
+  background-color: var(--color-white);
+  border: 0.0625rem solid var(--error-color);
   border-radius: 0.25rem;
   box-shadow: 0 0.125rem 0.3125rem rgb(0 0 0 / 15%);
   font-size: 0.85rem;
   font-weight: bold;
   white-space: nowrap;
-  color: #d32a00;
+  color: var(--error-color);
   animation: fade-in 0.2s ease-out;
 }
 
@@ -271,7 +273,7 @@
   position: absolute;
   bottom: 100%;
   left: 0.9375rem;
-  border-color: transparent transparent #d32a00;
+  border-color: transparent transparent var(--error-color);
   border-style: solid;
   border-width: 0.3125rem;
   content: '';
@@ -283,7 +285,7 @@
   bottom: 100%;
   left: 0.9375rem;
   margin-left: 0.0625rem;
-  border-color: transparent transparent #fff;
+  border-color: transparent transparent var(--color-white);
   border-style: solid;
   border-width: 0.25rem;
   content: '';
@@ -338,7 +340,7 @@
   width: 100%;
   margin-top: 0.9375rem;
   padding: 0.9375rem;
-  background: #d35400;
+  background: var(--color-accent);
   border: none;
   border-radius: 0.785rem;
   font-size: 1rem;

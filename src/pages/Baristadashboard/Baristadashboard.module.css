@@ -2,7 +2,7 @@
 
 .container-style {
   min-height: 100vh;
-  padding: 1.25rem;
+  padding: 1rem;
   background-color: var(--color-beige);
   font-family: sans-serif;
 }
@@ -14,11 +14,30 @@
   color: var(--color-brown);
 }
 
-h1 {
+.title {
   color: var(--color-brown);
 }
 
-/* Контейнер пошуку у хедері */
+.grid-style {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+  gap: 1rem;
+}
+
+.loader,
+.empty-state {
+  padding: 3.125rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.no-results {
+  margin: 3rem auto;
+  font-size: 1.3rem;
+  text-align: center;
+  color: var(--color-brown);
+}
+
 .search-wrapper {
   position: relative;
   display: flex;
@@ -44,11 +63,7 @@ h1 {
 .field-input-search {
   display: block;
   width: 100%;
-
-  /* 1. Задаємо фіксовану висоту замість вертикальних padding */
   height: 3rem;
-
-  /* 2. Обнуляємо верхній/нижній відступи, залишаємо тільки бокові (справа і зліва) */
   padding: 0 3rem;
   box-sizing: border-box;
   border: 0.0625rem solid var(--divider-color);
@@ -71,13 +86,13 @@ h1 {
 
 .clear-search {
   position: absolute;
-  top: 50%; /* 3. Додаємо центрування для кнопки очищення "х", щоб вона теж не стрибала */
+  top: 50%;
   right: 0.625rem;
   cursor: pointer;
   padding: 0;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   line-height: 1;
   color: var(--color-brown);
   transform: translateY(-50%);
@@ -85,271 +100,4 @@ h1 {
 
 .clear-search:hover {
   color: var(--color-accent);
-}
-
-.no-results {
-  margin: 3rem auto;
-  font-size: 1.3rem;
-  text-align: center;
-  color: var(--color-brown);
-}
-
-.grid-style {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
-  gap: 1.25rem;
-}
-
-.card-style {
-  display: flex;
-  flex-direction: column;
-  padding: 1.25rem;
-  background-color: var(--color-white) !important;
-  border: 0.125rem solid var(--border-accent) !important;
-  border-left: 0.3125rem solid var(--border-accent) !important;
-  border-radius: 0.75rem;
-  box-shadow: none;
-}
-
-.header-card-style {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.9375rem;
-}
-
-/* .order-number-style {
-  
-} */
-
-.header-actions {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-.button-style {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  width: 100%;
-  padding: 0.625rem 1.25rem;
-  background-color: var(--color-beige);
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.5rem;
-  font-weight: bold;
-  color: var(--color-gray-light);
-  transition: background 0.3s;
-}
-
-.button-style:hover {
-  background-color: var(--bg-accent);
-  color: var(--color-white);
-}
-
-.cancel-btn {
-  z-index: 10;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  padding: 0.375rem;
-  background: transparent;
-  border: none;
-  border-radius: 0.25rem;
-  font-size: 1.25rem;
-  color: #e74c3c;
-  transition:
-    background 0.2s,
-    transform 0.1s;
-}
-
-.cancel-btn:hover {
-  background: rgb(231 76 60 / 10%);
-}
-
-.cancel-btn:active {
-  transform: scale(0.95);
-}
-
-.cancel-btn svg {
-  display: block;
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.loader,
-.empty-state {
-  padding: 3.125rem;
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-/* Статус оплати */
-.paid-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.3125rem;
-  margin-bottom: 0.625rem;
-  padding: 0.5rem 0.75rem;
-  background-color: var(--color-beige);
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.375rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #155724;
-}
-
-.unpaid-badge {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.3125rem;
-  margin-bottom: 0.625rem;
-  padding: 0.3125rem 0.625rem;
-  background-color: var(--color-beige);
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.375rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--color-accent);
-}
-
-/* --- ТЕРМІНОВЕ ЗАМОВЛЕННЯ (Єдина активна анімація) --- */
-
-.card-style.urgent-card {
-  animation: shadow-glow 3s infinite ease-in-out;
-}
-
-/* .urgent-text {
-  font-weight: bold;
-  color: #dc3545;
-} */
-
-/* Картка в режимі очікування клієнта */
-.ready-card {
-  background-color: var(--color-white) !important;
-  border: 0.125rem solid var(--border-accent) !important;
-  border-left: 0.3125rem solid var(--border-accent) !important;
-  box-shadow: none;
-  animation: none !important;
-}
-
-/* Новий контейнер роздільних кнопок оплати */
-.payment-buttons-group {
-  display: flex;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-/* Спільна база для кнопок архівації */
-.archive-button {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  gap: 0.3rem;
-  cursor: pointer;
-  padding: 0.625rem 0.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: var(--color-white);
-  transition:
-    opacity 0.2s,
-    transform 0.1s;
-}
-
-/* Стилізація кнопки ГОТІВКА */
-.cash-btn {
-  background-color: var(--color-beige);
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.375rem;
-  font-size: 1rem;
-  color: var(--color-gray-light);
-}
-
-.cash-btn:hover {
-  background-color: var(--bg-accent);
-  transform: translateY(-0.0625rem);
-  opacity: 0.9;
-}
-
-/* Стилізація кнопки ТЕРМІНАЛ */
-.card-btn {
-  background-color: var(--color-beige);
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.375rem;
-  font-size: 1rem;
-  color: var(--color-gray-light);
-}
-
-.card-btn:hover {
-  background-color: var(--bg-accent);
-  transform: translateY(-0.0625rem);
-  opacity: 0.9;
-}
-
-.archive-button:active {
-  transform: translateY(0);
-}
-
-/* Блок загальної вартості замовлення */
-.separator {
-  margin: 0.75rem 0;
-  border: 0;
-  border-top: 0.0625rem dashed #e0e0e0;
-}
-
-.total-price-block {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
-  padding: 0.3125rem 0.625rem;
-  background-color: var(--color-beige);
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.375rem;
-}
-
-.total-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-gray-light);
-}
-
-.total-amount {
-  font-size: 1.125rem;
-  font-weight: bold;
-  color: var(--color-accent);
-}
-
-/* --- ПРОТЕРМІНОВАНЕ КЛІЄНТОМ ЗАМОВЛЕННЯ (20+ хв) --- */
-
-/* Протерміноване замовлення: без анімацій, просто чіткі статичні акценти */
-.card-style.overdue-card {
-  border-left: 0.3125rem solid #c0392b !important; /* Темно-червоний лівий акцент */
-  border-color: #e74c3c !important; /* Робимо рамку картки червоною */
-  animation: none !important; /* Гарантовано вимикаємо інші анімації */
-}
-
-/* Червоний текст для таймера */
-.overdue-text {
-  font-weight: bold;
-  color: #e74c3c;
-}
-
-/* Кнопка анулювання (залишається вашим головним тригером) */
-.annul-btn {
-  background-color: #e74c3c !important;
-  border-color: #c0392b !important;
-  color: #fff !important;
-}
-
-.annul-btn:hover {
-  background-color: #c0392b !important;
 }

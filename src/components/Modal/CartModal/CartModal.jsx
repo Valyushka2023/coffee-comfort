@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import {
   FiX,
   FiTrash2,
@@ -15,6 +16,7 @@ import {
 
 import { removeFromCart, addToCart, clearCart } from '../../../redux/cartSlice';
 import { sendOrderRequest } from '../../../services/api';
+import { validateName, validatePhone } from '../../../utils/index.js';
 import css from './CartModal.module.css';
 
 const CartModal = ({ isOpen, onClose }) => {
@@ -28,11 +30,25 @@ const CartModal = ({ isOpen, onClose }) => {
   const [phone, setPhone] = useState('');
   const [pickupTime, setPickupTime] = useState('');
 
+  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
+  const [phoneError, setPhoneError] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [timeError, setTimeError] = useState('');
+
   const [orderNum, setOrderNum] = useState(null);
-  const [minTimeStr, setMinTimeStr] = useState('');
 
   const { items, totalAmount } = useSelector(state => state.cart);
   const currentLang = (i18n.language || 'uk').slice(0, 2);
+
+  // Моніторинг рендерів та стану полів
+  useEffect(() => {
+    console.log('[CART MODAL MONITOR]:', {
+      phone,
+      phoneError,
+      hasAttemptedSubmit,
+      isCartEmpty: items.length === 0,
+    });
+  }, [phone, phoneError, hasAttemptedSubmit, items.length]);
 
   const handleKeyDown = useCallback(
     event => {
@@ -44,18 +60,10 @@ const CartModal = ({ isOpen, onClose }) => {
   );
 
   useEffect(() => {
-    if (!isOpen) {
-      return undefined;
-    }
+    if (!isOpen) return undefined;
 
     document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
-
-    const now = new Date();
-    now.setMinutes(now.getMinutes() + 15);
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    setMinTimeStr(`${hours}:${minutes}`);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
@@ -66,11 +74,16 @@ const CartModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       setIsOrdered(false);
+      setPhoneError('');
+      setNameError('');
+      setTimeError('');
+      setHasAttemptedSubmit(false);
     }
   }, [isOpen]);
 
   const validatePickupTime = time => {
     if (!time) {
+      setTimeError('');
       return true;
     }
 
@@ -82,7 +95,8 @@ const CartModal = ({ isOpen, onClose }) => {
     const minimumTime = new Date(now.getTime() + 15 * 60 * 1000);
 
     if (selectedTime < minimumTime) {
-      alert(t('errors.too_early'));
+      const errMsg = t('errors.too_early') || 'Занадто ранній час';
+      setTimeError(errMsg);
       return false;
     }
 
@@ -90,27 +104,102 @@ const CartModal = ({ isOpen, onClose }) => {
     const closeHour = 21;
 
     if (hours < openHour || hours >= closeHour) {
-      alert(t('errors.working_hours'));
+      const errMsg = t('errors.working_hours') || 'Ми зачинені в цей час';
+      setTimeError(errMsg);
       return false;
     }
 
+    setTimeError('');
     return true;
   };
 
-  const handleOrder = async () => {
-    if (!validatePickupTime(pickupTime)) {
+  const handlePhoneChange = event => {
+    let input = event.target.value;
+
+    if (input === '' || input === '+380') {
+      setPhone(input);
+      setPhoneError(
+        hasAttemptedSubmit
+          ? t('errors.phone_required') || 'Введіть номер телефону'
+          : ''
+      );
       return;
     }
 
-    if (items.length === 0) {
-      return;
+    if (!input.startsWith('+380')) {
+      const digits = input.replace(/\D/g, '');
+      if (digits.startsWith('380')) {
+        input = '+' + digits;
+      } else {
+        input = '+380' + digits.replace(/^0+/, '');
+      }
     }
 
-    if (!name.trim()) {
-      return;
-    }
+    const prefix = '+380';
+    const dynamicPart = input.slice(4).replace(/\D/g, '').slice(0, 9); // Обмежуємо довжину до 9 цифр
+    const fullPhone = prefix + dynamicPart;
 
-    if (!phone.trim()) {
+    setPhone(fullPhone);
+
+    if (fullPhone.length < 13) {
+      // Якщо переклад не знайдено, виведеться зрозумілий текст українською
+      const fallbackError =
+        t('errors.invalid_phone') === 'errors.invalid_phone'
+          ? 'Невірний формат номера телефону'
+          : t('errors.invalid_phone') || 'Невірний формат номера телефону';
+
+      setPhoneError(fallbackError);
+    } else {
+      const error = validatePhone(fullPhone, t);
+      setPhoneError(error || '');
+    }
+  };
+
+  const handlePhoneFocus = () => {
+    if (!phone) {
+      setPhone('+380');
+    }
+  };
+
+  const handleNameChange = event => {
+    const value = event.target.value;
+    setName(value);
+
+    if (hasAttemptedSubmit) {
+      const error = validateName(value, t);
+      setNameError(error || '');
+    }
+  };
+
+  const handleTimeChange = event => {
+    const value = event.target.value;
+    setPickupTime(value);
+
+    if (hasAttemptedSubmit) {
+      validatePickupTime(value);
+    }
+  };
+
+  const handleOrder = async e => {
+    if (e && e.preventDefault) e.preventDefault();
+
+    setHasAttemptedSubmit(true);
+
+    const nameErr = validateName(name, t);
+    let phoneErr = validatePhone(phone, t);
+    const isTimeValid = validatePickupTime(pickupTime);
+
+    if (!phoneErr && phone.length < 13) {
+      phoneErr =
+        t('errors.invalid_phone') === 'errors.invalid_phone'
+          ? 'Невірний формат номера телефону'
+          : t('errors.invalid_phone') || 'Невірний формат номера телефону';
+    }
+    setNameError(nameErr || '');
+    setPhoneError(phoneErr || '');
+
+    if (nameErr || phoneErr || !isTimeValid || items.length === 0) {
+      console.log('Order blocked by frontend validation.');
       return;
     }
 
@@ -121,10 +210,7 @@ const CartModal = ({ isOpen, onClose }) => {
         customerName: name.trim(),
         customerPhone: phone.trim(),
         pickupTime,
-
-        // === ПОВНИЙ ФІКС ВАРІАНТУ 2 (БЕЗ СКОРОЧЕНЬ) ===
         items: items.map(item => {
-          // 1. Визначаємо базову назву для створення безпечного slug
           let nameForSlug = 'item';
           if (item.name) {
             if (typeof item.name === 'string') {
@@ -136,14 +222,12 @@ const CartModal = ({ isOpen, onClose }) => {
             }
           }
 
-          // 2. Генеруємо чистий латинізований або локальний slug без пробілів та спецсимволів
           const generatedSlug = nameForSlug
             .toLowerCase()
             .trim()
             .replace(/[^a-zа-яєіїґ0-9\s-]/g, '')
             .replace(/\s+/g, '-');
 
-          // 3. Повертаємо об'єкт, який гарантовано містить коректний slug для бази даних
           return {
             _id: item._id || item.id,
             slug: item.slug || generatedSlug,
@@ -152,7 +236,6 @@ const CartModal = ({ isOpen, onClose }) => {
             quantity: item.quantity,
           };
         }),
-
         totalPrice: totalAmount,
       };
 
@@ -164,19 +247,18 @@ const CartModal = ({ isOpen, onClose }) => {
       setName('');
       setPhone('');
       setPickupTime('');
+      setHasAttemptedSubmit(false);
     } catch (error) {
-      console.error('Error while placing order:', error);
+      console.error('API Error during placement:', error);
       alert(error?.message || t('errors.generic'));
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
-  const isFormInvalid = !name.trim() || !phone.trim() || items.length === 0;
+  const isButtonDisabled = isLoading || items.length === 0;
 
   return (
     <div className={css['overlay']}>
@@ -229,7 +311,11 @@ const CartModal = ({ isOpen, onClose }) => {
           ) : items.length === 0 ? (
             <p className={css['modal-description']}>{t('empty_cart')}</p>
           ) : (
-            <>
+            <form
+              onSubmit={handleOrder}
+              noValidate
+              className={css['checkout-form-container']}
+            >
               <ul className={css['items-list']}>
                 {items.map(item => {
                   const itemTitle =
@@ -282,30 +368,50 @@ const CartModal = ({ isOpen, onClose }) => {
               </ul>
 
               <div className={css['form-wrapper']}>
+                {/* ІМ'Я */}
                 <div className={css['form-group']}>
-                  <FiUser className={css['form-icon']} />
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={event => setName(event.target.value)}
-                    placeholder={t('placeholder_name')}
-                    className={css['field-input']}
-                  />
+                  <div className={css['field-input-and-field-error']}>
+                    <FiUser className={css['form-icon']} />
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={handleNameChange}
+                      autoComplete="off"
+                      placeholder={t('placeholder_name') || "Ваше ім'я"}
+                      className={clsx(
+                        css['field-input'],
+                        hasAttemptedSubmit && nameError && css['field-error']
+                      )}
+                    />
+                    {hasAttemptedSubmit && nameError && (
+                      <p className={css['error-popup']}>{nameError}</p>
+                    )}
+                  </div>
                 </div>
 
+                {/* ТЕЛЕФОН */}
                 <div className={css['form-group']}>
-                  <FiPhone className={css['form-icon']} />
-                  <input
-                    type="text"
-                    value={phone}
-                    onChange={event => setPhone(event.target.value)}
-                    placeholder="+380XXXXXXXXX"
-                    pattern="^\+380\d{9}$"
-                    className={css['field-input']}
-                    required
-                  />
+                  <div className={css['field-input-and-field-error']}>
+                    <FiPhone className={css['form-icon']} />
+                    <input
+                      type="tel"
+                      value={phone}
+                      onChange={handlePhoneChange}
+                      onFocus={handlePhoneFocus}
+                      autoComplete="off"
+                      placeholder="+380XXXXXXXXX"
+                      className={clsx(
+                        css['field-input'],
+                        hasAttemptedSubmit && phoneError && css['field-error']
+                      )}
+                    />
+                    {hasAttemptedSubmit && phoneError && (
+                      <p className={css['error-popup']}>{phoneError}</p>
+                    )}
+                  </div>
                 </div>
 
+                {/* БАЖАНИЙ ЧАС */}
                 <div className={css['form-group']}>
                   <label
                     htmlFor="pickup-time"
@@ -315,14 +421,21 @@ const CartModal = ({ isOpen, onClose }) => {
                     <span>{t('pickup_time_label')}</span>
                   </label>
 
-                  <input
-                    id="pickup-time"
-                    type="time"
-                    value={pickupTime}
-                    min={minTimeStr}
-                    onChange={event => setPickupTime(event.target.value)}
-                    className={css['field-input-time']}
-                  />
+                  <div className={css['field-input-and-field-error']}>
+                    <input
+                      id="pickup-time"
+                      type="time"
+                      value={pickupTime}
+                      onChange={handleTimeChange}
+                      className={clsx(
+                        css['field-input-time'],
+                        hasAttemptedSubmit && timeError && css['field-error']
+                      )}
+                    />
+                    {hasAttemptedSubmit && timeError && (
+                      <p className={css['error-popup']}>{timeError}</p>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -335,10 +448,9 @@ const CartModal = ({ isOpen, onClose }) => {
                 </div>
 
                 <button
-                  type="button"
+                  type="submit"
                   className={css['order-btn']}
-                  onClick={handleOrder}
-                  disabled={isLoading || isFormInvalid}
+                  disabled={isButtonDisabled}
                 >
                   {isLoading ? t('sending') : t('place_order')}
                 </button>
@@ -346,13 +458,16 @@ const CartModal = ({ isOpen, onClose }) => {
                 <button
                   type="button"
                   className={css['cancel-btn']}
-                  onClick={() => dispatch(clearCart())}
+                  onClick={e => {
+                    e.preventDefault();
+                    dispatch(clearCart());
+                  }}
                 >
                   <FiTrash2 />
                   <span>{t('clear_cart_btn')}</span>
                 </button>
               </div>
-            </>
+            </form>
           )}
         </div>
       </div>

@@ -9,11 +9,7 @@
   justify-content: flex-end;
   width: 100%;
   height: 100%;
-
-  /* background: rgb(0 0 0 / 50%); */
   background-color: rgb(0 0 0 / 50%);
-
-  /* Стилі для скидання дефолтного вигляду кнопки-оверлею */
   border: none;
   font-family: inherit;
   text-align: left;
@@ -22,10 +18,20 @@
 }
 
 .backdrop-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
   color: #d32a00;
 }
 
 .drawer {
+  position: relative;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -49,6 +55,16 @@
   color: var(--color-brown);
 }
 
+.close-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #333;
+}
+
 .close-icon svg {
   color: var(--color-brown);
 }
@@ -61,6 +77,7 @@
   overflow-y: auto;
 }
 
+/* Секція успішного замовлення */
 .success-container {
   margin-top: 1.875rem;
   padding: 1.25rem;
@@ -69,7 +86,6 @@
 
 .success-title {
   margin-top: 1rem;
-  color: var(--text-mobile-color);
   color: #d32a00;
 }
 
@@ -94,6 +110,7 @@
   color: var(--warning-color);
 }
 
+/* Список товарів */
 .items-list {
   margin: 0;
   padding: 0;
@@ -131,6 +148,7 @@
   object-fit: cover;
 }
 
+/* Кнопки керування кількістю */
 .controls {
   display: flex;
   align-items: center;
@@ -145,16 +163,8 @@
   cursor: pointer;
   padding: 0.3125rem;
   box-sizing: border-box;
-
-  /* background: #ecf0f1; */
-
-  /* background-color: var(--color-dark-gray-20); */
-
-  /* border: none; */
   border: 0.0625rem solid var(--divider-color);
   border-radius: var(--radius-sm);
-
-  /* border-radius: 0.3125rem; */
   transition: 0.2s;
 }
 
@@ -162,35 +172,49 @@
   background: #bdc3c7;
 }
 
+/* Елементи форми та обгортки */
+.checkout-form-container {
+  display: contents;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .form-group {
   position: relative;
   margin-bottom: 0.9375rem;
 }
 
+.field-input-and-field-error {
+  position: relative;
+  width: 100%;
+}
+
+/* Абсолютне позиціонування іконки всередині інпуту */
 .form-icon {
   position: absolute;
   top: 50%;
-  left: 0.875rem;
-  font-size: 1.3rem;
-  color: var(--color-dark-gray-80);
+  left: 0.75rem;
+  z-index: 2;
+  color: #888;
   transform: translateY(-50%);
   pointer-events: none;
 }
 
+/* Інпут з відступом зліва під іконку */
 .field-input {
-  display: block;
   width: 100%;
-  padding: 0.75rem 0.75rem 0.75rem 2.75rem;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem !important;
   box-sizing: border-box;
-  border: 0.0625rem solid var(--divider-color);
-  border-radius: var(--radius-sm);
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
   outline: none;
   font-family: inherit;
-  font-size: 1.3rem;
-
-  /* font-weight: 400; */
+  font-size: 1rem;
   color: var(--color-brown);
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease;
 }
 
 .field-input:focus {
@@ -202,6 +226,70 @@
   opacity: 1;
 }
 
+/* Підвищуємо специфічність замість використання шкідливого !important */
+.field-input.field-error,
+.field-input-time.field-error {
+  border-color: #d32a00;
+}
+
+/* Інтеграція календаря (Datepicker) */
+.field-input-and-field-error :global(.react-datepicker-wrapper),
+.field-input-and-field-error :global(.react-datepicker__input-container) {
+  display: block;
+  width: 100%;
+}
+
+.field-input-and-field-error
+  :global(.react-datepicker__input-container)
+  input::placeholder {
+  font-size: 1rem;
+  color: var(--text-reviews-color);
+  opacity: 0.6;
+}
+
+/* Спливаюча хмаринка помилки під інпутом (уніфікована) */
+.error-popup {
+  position: absolute;
+  top: 100%;
+  left: 1.25rem;
+  z-index: 110;
+  margin: 0;
+  padding: 0.3125rem 0.625rem;
+  background-color: #fff;
+  border: 0.0625rem solid #d32a00;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.3125rem rgb(0 0 0 / 15%);
+  font-size: 0.85rem;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #d32a00;
+  animation: fade-in 0.2s ease-out;
+}
+
+/* Зовнішня стрілочка хмаринки */
+.error-popup::before {
+  position: absolute;
+  bottom: 100%;
+  left: 0.9375rem;
+  border-color: transparent transparent #d32a00;
+  border-style: solid;
+  border-width: 0.3125rem;
+  content: '';
+}
+
+/* Внутрішня біла стрілочка хмаринки */
+.error-popup::after {
+  position: absolute;
+  bottom: 100%;
+  left: 0.9375rem;
+  margin-left: 0.0625rem;
+  border-color: transparent transparent #fff;
+  border-style: solid;
+  border-width: 0.25rem;
+  content: '';
+}
+
+/* Поля для вибору бажаного часу */
 .label-input-time {
   display: flex;
   align-items: center;
@@ -220,9 +308,7 @@
   border-radius: var(--radius-sm);
   outline: none;
   font-family: inherit;
-  font-size: 1.3rem;
-
-  /* font-weight: 400; */
+  font-size: 1rem;
   color: var(--color-brown);
   transition: border-color 0.3s ease;
 }
@@ -231,6 +317,7 @@
   border-color: var(--color-accent);
 }
 
+/* Нижня секція оформлення замовлення */
 .checkout-section {
   margin-top: auto;
   padding-top: 0.625rem;
@@ -268,7 +355,6 @@
 }
 
 .order-btn:hover:not(:disabled) {
-  /* background: var(--hover-color); */
   background-color: var(--hover-color);
 }
 
@@ -282,13 +368,5 @@
   margin-top: 0.625rem;
   background: none;
   border: none;
-  color: #95a5a6;
   color: var(--color-dark-gray-80);
-}
-
-.close-icon {
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #333;
 }

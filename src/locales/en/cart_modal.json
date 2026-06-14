@@ -8,7 +8,7 @@
   "empty_cart": "Your cart is empty",
   "placeholder_name": "Your name",
   "placeholder_phone": "Phone number",
-  "pickup_time_label": "Preferred time (optional):",
+  "pickup_time_label": "Preferred time (if needed):",
   "currency": "UAH",
   "total": "Total:",
   "sending": "Sending...",
@@ -21,6 +21,8 @@
   "errors": {
     "too_early": "The pickup time must be at least 15 minutes from now.",
     "working_hours": "Orders are accepted from 08:00 to 21:00.",
-    "generic": "An error occurred while placing the order."
+    "generic": "An error occurred while placing the order.",
+    "invalid_phone": "Invalid phone number format",
+    "phone_required": "Please enter a phone number"
   }
 }

@@ -1,0 +1,342 @@
+@import url('../../../../styles//animate.css');
+
+.card-style {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--color-white);
+  border: 0.125rem solid var(--border-accent);
+  border-left: 0.3125rem solid var(--border-accent);
+  border-radius: 0.75rem;
+  box-shadow: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.header-card-style {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 2rem;
+  margin-bottom: 0.9375rem;
+  padding: 0;
+}
+
+.order-number-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.15rem 0;
+  font-size: 1rem;
+}
+
+.order-number-style {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-brown);
+}
+
+.urgent-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.15rem 0;
+  border-radius: 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--error-color);
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.15rem 0;
+}
+
+.time-style {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-brown);
+}
+
+.clock-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--color-brown);
+}
+
+/* СТАНИ КАРТКИ */
+
+/* 1. Термінова картка (готується > 10 хв) — починає мигати жовто-гарячим */
+.card-style.urgent-card {
+  border-color: #f39c12;
+  animation: shadow-glow 2s infinite ease-in-out;
+  border-left-color: #e67e22;
+}
+
+/* Анімація миготіння підсвічуванням */
+
+/* @keyframes shadow-glow {
+  0% {
+    background-color: var(--color-white);
+    box-shadow: 0 0 0.3125rem rgb(230 126 34 / 20%);
+  }
+
+  50% {
+    background-color: #fff9f2; /* Легкий теплий відтінок при миготінні */
+
+/* box-shadow: 0 0 1.25rem rgb(230 126 34 / 60%);
+
+  100% {
+    background-color: var(--color-white);
+    box-shadow: 0 0 0.3125rem rgb(230 126 34 / 20%);
+  } */
+
+.ready-card {
+  background-color: var(--color-white);
+  border: 0.125rem solid var(--border-accent);
+  border-left: 0.3125rem solid var(--border-accent);
+  box-shadow: none;
+  animation: none;
+}
+
+/* 3. Протермінована картка (лежить готовою > 20 хв) — ліва лінія стає червоною */
+.card-style.overdue-card {
+  background-color: #fff5f5; /* Ніжно-червоний фон для уваги */
+  border-left: 0.3125rem solid var(--error-color, #dc3545);
+  border-color: var(--error-color, #dc3545);
+  animation: none;
+}
+
+.urgent-time {
+  font-weight: bold;
+  color: var(--error-color, #dc3545);
+}
+
+/* КНОПКИ ДІЙ */
+.delete-btn {
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.15rem 0;
+  background: transparent;
+  border: none;
+  border-radius: 0.25rem;
+
+  /* font-size: 1rem; */
+  color: var(--color-gray-light);
+
+  /* transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.1s; */
+  transition: all 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  color: var(--error-color);
+}
+
+.delete-btn:active {
+  transform: scale(0.95);
+}
+
+.delete-btn svg {
+  display: block;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* СТАТУС ПЛАТЕЖУ */
+.paid-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+  margin-bottom: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--color-beige);
+  background-color: aqua;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #155724;
+}
+
+.unpaid-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3125rem;
+  margin-bottom: 0.625rem;
+  padding: 0.3125rem 0.625rem;
+  background-color: var(--color-beige);
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+/* ІНФОРМАЦІЯ ПРО КЛІЄНТА */
+.customer-info-style {
+  margin-bottom: 0.75rem;
+}
+
+.customer-info-style p {
+  margin: 0.25rem 0;
+}
+
+/* ЗАМОВЛЕННЯ ТОВАРІВ */
+.items-list-style {
+  flex: 1;
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.items-list-style li {
+  margin-bottom: 0.25rem;
+  color: var(--color-gray-light);
+}
+
+/* ЗАГАЛЬНА ЦІНА */
+.separator {
+  margin: 0.75rem 0;
+  border: 0;
+  border-top: 0.0625rem dashed var(--color-beige);
+}
+
+.total-price-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.3125rem 0.625rem;
+  background-color: var(--color-beige);
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.375rem;
+}
+
+.total-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-gray-light);
+}
+
+.total-amount {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+/* ФУТЕР ТА КНОПКИ */
+.footer-style {
+  margin-top: auto;
+}
+
+.button-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--color-beige);
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.5rem;
+  font-weight: bold;
+  color: var(--color-gray-light);
+
+  /* transition:
+    background 0.3s,
+    color 0.3s; */
+  transition: all 0.3s ease-in-out;
+}
+
+.button-style:hover {
+  background-color: var(--bg-accent);
+  color: var(--color-white);
+}
+
+.payment-buttons-group {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.archive-button {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  padding: 0.625rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition:
+    opacity 0.2s,
+    transform 0.1s;
+}
+
+.archive-button:active {
+  transform: translateY(0);
+}
+
+.cash-btn,
+.card-btn {
+  background-color: var(--color-beige);
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  color: var(--color-gray-light);
+}
+
+.cash-btn:hover,
+.card-btn:hover {
+  background-color: var(--bg-accent);
+  color: var(--color-white);
+  transform: translateY(-0.0625rem);
+  opacity: 0.9;
+}
+
+/* Новий бейдж для протермінованого замовлення */
+.overdue-badge {
+  display: flex;
+  align-items: center;
+  padding: 0.15rem 0.4rem;
+  background-color: #f8d7da;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #721c24;
+}
+
+/* Стиль для кнопки анулювання замовлення */
+.cancel-order-btn {
+  background-color: #f8d7da !important;
+  border-color: #f5c6cb !important;
+  color: #721c24 !important;
+}
+
+.cancel-order-btn:hover {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: var(--color-white) !important;
+}

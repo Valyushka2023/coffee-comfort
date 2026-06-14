@@ -1,20 +1,16 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-// import { useDispatch } from 'react-redux';
 import {
   fetchOrdersRequest,
   updateOrderStatus,
   deleteOrderRequest,
 } from '../../services/api';
-// import { FiClock, FiTrash2, FiSearch } from 'react-icons/fi';
-import { FiClock, FiTrash2 } from 'react-icons/fi';
 import { Search } from '../../components/Icons/Search.jsx';
+import OrderCard from '../../components/Ui/Cards/OrderCard/OrderCard.jsx';
 
 import css from './Baristadashboard.module.css';
 
 const Baristadashboard = () => {
-  // ПРИМУСОВО фіксуємо українську мову для панелі баристи
   const { t } = useTranslation('baristadashboard', {
     lng: 'uk',
     useSuspense: true,
@@ -42,7 +38,7 @@ const Baristadashboard = () => {
   useEffect(() => {
     getOrders(true);
     const interval = setInterval(() => getOrders(false), 15000);
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); // Тепер назви однакові
   }, [getOrders]);
 
   const handleSetReady = async orderId => {
@@ -126,7 +122,6 @@ const Baristadashboard = () => {
         <h1>☕ {t('title', 'Barista Dashboard')}</h1>
 
         <div className={css['search-wrapper']}>
-          {/* <FiSearch className={css['search-icon']} /> */}
           <Search className={css['search-icon']} />
           <input
             type="text"
@@ -162,127 +157,9 @@ const Baristadashboard = () => {
             onArchive={handleArchive}
             onCancel={handleCancelOrder}
             t={t}
-            currentLang="uk" // Фіксуємо українську мову для картки замовлення
+            currentLang="uk"
           />
         ))}
-      </div>
-    </div>
-  );
-};
-
-const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
-  const [minutesWait, setMinutesWait] = useState(0);
-  const isReady = order.status === 'ready';
-
-  useEffect(() => {
-    const calc = () =>
-      setMinutesWait(
-        Math.floor((new Date() - new Date(order.createdAt)) / 60000)
-      );
-    calc();
-    const i = setInterval(calc, 60000);
-    return () => clearInterval(i);
-  }, [order.createdAt]);
-
-  const isUrgent = minutesWait >= 10 && !isReady;
-
-  return (
-    <div
-      className={`${css['card-style']} ${isUrgent ? css['urgent-card'] : ''} ${isReady ? css['ready-card'] : ''}`}
-    >
-      <div className={css['header-card-style']}>
-        <span className={css['order-number-style']}>
-          #{order.orderNumber || order._id.slice(-4).toUpperCase()}
-        </span>
-        <div className={css['header-actions']}>
-          {isUrgent && (
-            <span
-              className={css['urgent-text']}
-              style={{ fontSize: '0.85rem', textTransform: 'uppercase' }}
-            >
-              ⚠️ {t('urgent', 'Urgent!')}
-            </span>
-          )}
-          <span
-            className={`${css['time-style']} ${isUrgent ? css['urgent-text'] : ''}`}
-          >
-            <FiClock /> {minutesWait} {t('minutes_min', 'min')}
-          </span>
-          <button
-            className={css['cancel-btn']}
-            onClick={e => {
-              e.stopPropagation();
-              onCancel(order._id);
-            }}
-            title={t('cancel', 'Cancel')}
-          >
-            <FiTrash2 />
-          </button>
-        </div>
-      </div>
-
-      <div className={order.isPaid ? css['paid-badge'] : css['unpaid-badge']}>
-        {order.isPaid
-          ? t('paid', 'PAID')
-          : t('pay_on_delivery', 'PAY ON DELIVERY')}
-      </div>
-
-      <div className={css['customer-info-style']}>
-        <p>
-          <strong>{order.customerName}</strong>
-        </p>
-        <p>{order.customerPhone}</p>
-      </div>
-
-      <ul className={css['items-list-style']}>
-        {order.items.map((item, i) => {
-          // Завжди використовуємо 'uk', оскільки панель адміністрування локальна
-          const cleanLang = (currentLang || 'uk').substring(0, 2);
-          const itemName =
-            typeof item.name === 'object'
-              ? item.name[cleanLang] || item.name['uk'] || item.name['en']
-              : item.name;
-
-          return (
-            <li key={i}>
-              {item.quantity} x {itemName}
-            </li>
-          );
-        })}
-      </ul>
-
-      <hr className={css['separator']} />
-      <div className={css['total-price-block']}>
-        <span className={css['total-label']}>
-          {t('total_price_label', 'To pay')}:
-        </span>
-        <span className={css['total-amount']}>{order.totalPrice} грн</span>
-      </div>
-
-      <div className={css['footer-style']}>
-        {!isReady ? (
-          <button
-            onClick={() => onReady(order._id)}
-            className={css['button-style']}
-          >
-            {t('btn_ready', 'Ready for Pickup')}
-          </button>
-        ) : (
-          <div className={css['payment-buttons-group']}>
-            <button
-              onClick={() => onArchive(order._id, 'cash')}
-              className={`${css['archive-button']} ${css['cash-btn']}`}
-            >
-              {t('cash', 'Cash')}
-            </button>
-            <button
-              onClick={() => onArchive(order._id, 'card')}
-              className={`${css['archive-button']} ${css['card-btn']}`}
-            >
-              {t('card', 'Terminal')}
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

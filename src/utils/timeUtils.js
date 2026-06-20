@@ -24,7 +24,7 @@ export const generateAvailableSlots = (
   // Кав'ярня працює. Змінено на 23:59 для можливості тестування ввечері.
   // Потім зможете повернути на 22:00, коли проект піде в продакшен.
   const endTime = new Date();
-  endTime.setHours(22, 0, 0, 0);
+  endTime.setHours(23, 59, 0, 0);
 
   // Якщо найближчий доступний час вже пізніше закриття — слотів немає
   if (startTime > endTime) return [];

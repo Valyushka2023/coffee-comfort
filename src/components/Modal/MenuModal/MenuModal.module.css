@@ -1,6 +1,6 @@
 /* Оверлей (затемнення) — ідеальне центрування */
 .modal-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -8,7 +8,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100%; /* Змінено з 100vh на 100%, щоб покрити всю секцію */
+  min-height: 100%; /* Запобіжник для надійності */
   padding: 1rem;
   background: rgb(0 0 0 / 50%);
 }
@@ -19,17 +20,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  /* Загальна висота залишається стрункою та фіксованою */
   height: 35rem;
   max-width: 26rem;
   overflow: hidden;
-  background: #fff;
+  background-color: var(--color-white);
   border-radius: 1.5rem;
   box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 25%);
 }
 
-/* Кнопка закриття (хрестик) поверх картинки */
 .close-icon {
   position: absolute;
   top: 1rem;
@@ -39,14 +37,14 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 2.2rem;
-  height: 2.2rem;
-  background: rgb(255 255 255 / 85%);
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--color-light-gray-100);
   border: none;
   border-radius: 50%;
-  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%);
-  font-size: 1.1rem;
-  color: #1f2937;
+  box-shadow: 0 0.25rem 0.5rem var(--shadow-circle);
+  font-size: 1.5rem;
+  color: var(--color-light-brown);
   transition:
     background 0.2s,
     transform 0.2s;
@@ -54,7 +52,7 @@
 }
 
 .close-icon:hover {
-  background: #fff;
+  background: var(--color-white);
   transform: scale(1.05);
 }
 
@@ -66,25 +64,21 @@
   overflow: hidden;
 }
 
-/* 📸 ЩЕ БІЛЬШЕ ФОТО СТРАВИ */
+/* ЩЕ БІЛЬШЕ ФОТО СТРАВИ */
 .modal-image {
   width: 100%;
-
-  /* 🔥 Збільшили з 20rem до 23rem! Тепер фото домінує та займає більшу частину вікна */
   height: 23rem;
   object-fit: cover;
   object-position: center center;
 }
 
-/* 📝 МАКСИМАЛЬНО СТИСНУТИЙ БЛОК З ТЕКСТОМ */
+/* МАКСИМАЛЬНО СТИСНУТИЙ БЛОК З ТЕКСТОМ */
 .modal-info {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: center; /* Центрує контент вертикально в затиснутому просторі */
-
-  /* 🔥 Зменшили верхній відступ з 1.5rem до 1rem і нижній до мінімуму */
-  padding: 1rem 1.75rem 0.25rem;
+  justify-content: center;
+  padding: 0 1rem 1rem;
 }
 
 /* РЯДОК: НАЗВА + ЦІНА */
@@ -93,19 +87,17 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-
-  /* 🔥 Зменшили відступ знизу, щоб опис піджався ближче */
   margin-bottom: 0.4rem;
 }
 
 /* Назва страви */
 .modal-info h3 {
   margin: 0;
-  font-size: 1.35rem; /* Трохи компактніший акуратний шрифт */
+  font-size: 1.35rem;
   font-weight: 700;
   text-align: left;
   letter-spacing: -0.02em;
-  color: #111827;
+  color: var(--color-light-brown);
 }
 
 /* Ціна */
@@ -115,23 +107,23 @@
   font-weight: 700;
   text-align: right;
   white-space: nowrap;
-  color: #e07a5f;
+  color: var(--color-accent);
 }
 
 /* Короткий опис страви */
 .modal-description {
-  /* 🔥 Оскільки місця менше, зменшили max-height до 3.2rem (приблизно 2 рядочки тексту) */
   max-height: 3.2rem;
   margin: 0;
   padding-right: 0.25rem;
   overflow-y: auto;
-  font-size: 0.9rem; /* Трохи компактніший текст для балансу */
+  font-size: 1rem;
   line-height: 1.4;
   text-align: left;
-  color: #6b7280; /* М'якший колір */
+  color: var(--color-gray-light);
 }
 
 /* Тонкий скролбар для опису */
+
 .modal-description::-webkit-scrollbar {
   width: 0.25rem;
 }
@@ -150,10 +142,8 @@
 .modal-actions {
   display: flex;
   gap: 0.75rem;
-
-  /* 🔥 Зменшили відступи навколо кнопок з 1.5rem до 1.25rem, щоб уся плашка сіла нижче */
-  padding: 0.75rem 1.75rem 1.5rem;
-  background: #fff;
+  padding: 0 1rem 1rem;
+  background-color: var(--color-white);
 }
 
 .select-btn,
@@ -163,7 +153,7 @@
   padding: 0.8rem 1rem;
   border: none;
   border-radius: 0.85rem;
-  font-size: 0.85rem; /* Трохи акуратніший розмір шрифту */
+  font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -171,21 +161,28 @@
 }
 
 .select-btn {
-  background: #1f2937;
-  color: #fff;
+  background-color: var(--button-review-menu-bg-color);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: var(--btn-radius, 2rem);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  color: var(--color-dark-brown);
 }
 
 .select-btn:hover {
-  background: #111827;
+  background-color: var(--color-light-brown);
+  color: var(--color-white);
 }
 
 .cancel-btn {
-  background: #f3f4f6;
-  color: #4b5563;
+  background-color: var(--color-light-gray-100);
+  border: 0.0625rem solid var(--button-border-color);
+  border-radius: var(--btn-radius, 2rem);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  color: var(--color-dark-brown);
 }
 
 .cancel-btn:hover {
-  background: #e5e7eb;
+  background-color: var(--color-white);
 }
 
 /* 📱 Адаптивність для мобільних */
@@ -197,7 +194,6 @@
   }
 
   .modal-image {
-    /* На мобільних теж піднімаємо висоту фото для тримання пропорції */
     height: 19rem;
   }
 

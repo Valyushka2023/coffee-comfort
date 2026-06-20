@@ -80,7 +80,6 @@
 .success-container {
   margin-top: 1.875rem;
   padding: 1.25rem;
-  background-color: aqua;
   text-align: center;
 }
 
@@ -109,7 +108,7 @@
 .warning-text {
   margin-top: 1.25rem;
   font-weight: bold;
-  color: var(--warning-color);
+  color: var(--color-accent);
 }
 
 /* Список товарів */
@@ -372,4 +371,17 @@
   background: none;
   border: none;
   color: var(--color-dark-gray-80);
+}
+
+.pickup-time-text {
+  display: inline-block;
+  margin: 0.625rem 0;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--color-active);
+  border-radius: 0.625rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-brown);
 }

@@ -3,7 +3,7 @@
 .menu-section {
   position: relative;
   padding: 4rem 0;
-  overflow: hidden;
+  overflow: visible;
   background-color: var(--body-bg-color);
   border-bottom: 0.0625rem solid var(--section-border-bottom-color);
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
@@ -142,7 +142,7 @@
   cursor: pointer;
   padding: 0.625rem 1.5625rem;
   background: transparent;
-  border: 0.125rem solid #6f4e37; /* кавовий колір */
+  border: 0.125rem solid #6f4e37;
   border-radius: 1.25rem;
   font-weight: 600;
   color: #6f4e37;

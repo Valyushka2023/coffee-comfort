@@ -14,11 +14,19 @@
 
 .header-card-style {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 1rem;
   min-height: 2rem;
   margin-bottom: 0.9375rem;
   padding: 0;
+}
+
+.blok1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .order-number-wrapper {
@@ -51,6 +59,13 @@
   color: var(--error-color);
 }
 
+.blok2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .header-actions {
   display: flex;
   justify-content: space-between;
@@ -73,35 +88,24 @@
 .clock-icon {
   width: 1.1rem;
   height: 1.1rem;
+  font-size: 1.1rem;
   color: var(--color-brown);
+}
+
+.waiting-text {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--color-accent);
 }
 
 /* СТАНИ КАРТКИ */
 
 /* 1. Термінова картка (готується > 10 хв) — починає мигати жовто-гарячим */
 .card-style.urgent-card {
-  border-color: #f39c12;
+  border-color: var(--border-accent);
   animation: shadow-glow 2s infinite ease-in-out;
-  border-left-color: #e67e22;
+  border-left-color: var(--bg-accent);
 }
-
-/* Анімація миготіння підсвічуванням */
-
-/* @keyframes shadow-glow {
-  0% {
-    background-color: var(--color-white);
-    box-shadow: 0 0 0.3125rem rgb(230 126 34 / 20%);
-  }
-
-  50% {
-    background-color: #fff9f2; /* Легкий теплий відтінок при миготінні */
-
-/* box-shadow: 0 0 1.25rem rgb(230 126 34 / 60%);
-
-  100% {
-    background-color: var(--color-white);
-    box-shadow: 0 0 0.3125rem rgb(230 126 34 / 20%);
-  } */
 
 .ready-card {
   background-color: var(--color-white);
@@ -113,7 +117,7 @@
 
 /* 3. Протермінована картка (лежить готовою > 20 хв) — ліва лінія стає червоною */
 .card-style.overdue-card {
-  background-color: #fff5f5; /* Ніжно-червоний фон для уваги */
+  background-color: #fff5f5;
   border-left: 0.3125rem solid var(--error-color, #dc3545);
   border-color: var(--error-color);
   animation: none;
@@ -132,17 +136,9 @@
   align-items: center;
   cursor: pointer;
   padding: 0.15rem 0;
-  background: transparent;
   border: none;
   border-radius: 0.25rem;
-
-  /* font-size: 1rem; */
   color: var(--color-gray-light);
-
-  /* transition:
-    background 0.2s,
-    color 0.2s,
-    transform 0.1s; */
   transition: all 0.2s ease-in-out;
 }
 
@@ -168,7 +164,6 @@
   margin-bottom: 0.625rem;
   padding: 0.5rem 0.75rem;
   background-color: var(--color-beige);
-  background-color: aqua;
   border: 0.125rem solid var(--border-accent);
   border-radius: 0.375rem;
   font-size: 1rem;
@@ -261,10 +256,6 @@
   border-radius: 0.5rem;
   font-weight: bold;
   color: var(--color-gray-light);
-
-  /* transition:
-    background 0.3s,
-    color 0.3s; */
   transition: all 0.3s ease-in-out;
 }
 
@@ -344,21 +335,28 @@
 .pickup-time-badge-container {
   display: flex;
   align-items: center;
-  margin-left: 0.625rem;
 }
 
 .pickup-tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.375rem;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: bold;
 }
 
 /* Якщо замовлення на конкретний час — м'який синій колір */
 .pickup-tag.scheduled {
-  background-color: #e0f2fe;
-  border: 0.0625rem solid #bae6fd;
-  color: #0369a1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-beige);
+  border: 0.0625rem solid var(--border-accent);
+  font-size: 1.1rem;
+  color: var(--color-accent);
 }
 
 /* Якщо замовлення "на зараз" — стриманий помаранчевий/жовтий колір */

@@ -111,8 +111,9 @@
   --color-dark-gray-100: rgb(107 105 101 / 100%);
   --color-terracotta-15: rgb(212 157 101 / 15%);
   --color-white-50: rgb(255 255 255 / 50%); /* Білий на 50% */
+  --color-white-85: rgb(255 255 255 / 85%); /* Білий на 85% */
   --color-black-50: rgb(0 0 0 / 50%); /* Чорний на 50% */
-  --color-white-20: rgb(255 255 255 / 20%); /* Біли1 на 20% */
+  --color-white-20: rgb(255 255 255 / 20%); /* Білий на 20% */
   --color-black-20: rgb(0 0 0 / 20%); /* Чорний на 20% */
   --color-muted-white: 150 150 150;
   --color-pure-white: 255 255 255;

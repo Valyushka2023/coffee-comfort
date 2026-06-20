@@ -44,6 +44,15 @@ const Menu = () => {
     return () => window.removeEventListener('keydown', handleEscapeKey);
   }, [selectedItem]);
 
+  useEffect(() => {
+    if (selectedItem) {
+      const menuSection = document.querySelector(`.${css['menu-section']}`);
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [selectedItem]);
+
   const handleShowMore = categoryKey => {
     setVisibleCounts(prev => ({
       ...prev,

@@ -4,9 +4,8 @@ import { FiClock, FiTrash2 } from 'react-icons/fi';
 import css from './OrderCard.module.css';
 
 const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
-  const [minutesWait, setMinutesWait] = useState(0);
+  const [minutesUntilPickup, setMinutesUntilPickup] = useState(0);
   const [minutesSinceReady, setMinutesSinceReady] = useState(0);
-  const [minutesUntilPickup, setMinutesUntilPickup] = useState(null);
 
   const isReady = order.status === 'ready';
 
@@ -14,54 +13,42 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
     const calc = () => {
       const now = new Date();
 
-      // 1. Хвилини від моменту створення (для звичайного таймера)
-      setMinutesWait(Math.floor((now - new Date(order.createdAt)) / 60000));
+      // 1. Отримуємо точну дату, на яку клієнт замовив (дедлайн)
+      let deadlineDate;
 
-      // 2. Хвилини від моменту готовності (для етапу видачі)
-      if (isReady && order.updatedAt) {
-        setMinutesSinceReady(
-          Math.floor((now - new Date(order.updatedAt)) / 60000)
+      if (order.expirationDeadline) {
+        deadlineDate = new Date(order.expirationDeadline);
+      } else if (order.pickupTime && order.pickupTime.trim() !== '') {
+        const [hours, minutes] = order.pickupTime.split(':').map(Number);
+        deadlineDate = new Date(order.createdAt);
+        deadlineDate.setHours(hours, minutes, 0, 0);
+      } else {
+        // ЗАПОБІЖНИК: 20 хвилин від створення, якщо нічого не вказано
+        deadlineDate = new Date(
+          new Date(order.createdAt).getTime() + 20 * 60000
         );
       }
 
-      // 3. Розрахунок часу до бажаного отримання (якщо вказано pickupTime)
-      if (order.pickupTime) {
-        const [hours, minutes] = order.pickupTime.split(':').map(Number);
-        const pickupDate = new Date();
-        pickupDate.setHours(hours, minutes, 0, 0);
+      // 2. Розрахунок для СТАТУСУ "ГОТУЄТЬСЯ" (скільки хвилин залишилось до дедлайну)
+      const diffMs = deadlineDate.getTime() - now.getTime();
+      setMinutesUntilPickup(Math.floor(diffMs / 60000));
 
-        // Рахуємо різницю в хвилинах між бажаним часом і "зараз"
-        const diffMs = pickupDate - now;
-        setMinutesUntilPickup(Math.floor(diffMs / 60000));
-      } else {
-        setMinutesUntilPickup(null);
+      // 3. Розрахунок для СТАТУСУ "ГОТОВО" (скільки замовлення вже чекає клієнта від часу дедлайну)
+      if (isReady) {
+        const diffSinceReadyMs = now.getTime() - deadlineDate.getTime();
+        // Math.max(0, ...), щоб не показувати від'ємні хвилини, якщо приготували раніше часу
+        setMinutesSinceReady(Math.max(0, Math.floor(diffSinceReadyMs / 60000)));
       }
     };
 
     calc();
     const intervalId = setInterval(calc, 60000);
     return () => clearInterval(intervalId);
-  }, [order.createdAt, order.updatedAt, order.pickupTime, isReady]);
+  }, [order.createdAt, order.pickupTime, order.expirationDeadline, isReady]);
 
-  // --- НОВА РОЗУМНА ЛОГІКА СТАТУСІВ ---
-
-  // Замовлення термінове якщо:
-  // - Оформлено "на зараз" і готується понад 10 хв.
-  // - АБО оформлено "на час" і до отримання залишилося менше 15 хвилин.
-  const isUrgent =
-    !isReady &&
-    (order.pickupTime
-      ? minutesUntilPickup !== null && minutesUntilPickup <= 15
-      : minutesWait >= 10);
-
-  // Замовлення протерміноване (під анулювання) якщо:
-  // - Воно готове і оформлене "на зараз" та лежить понад 20 хв.
-  // - АБО воно готове, оформлене "на час", і поточний час перевалив за бажаний час більш ніж на 20 хв.
-  const isOverdue =
-    isReady &&
-    (order.pickupTime
-      ? minutesUntilPickup !== null && minutesUntilPickup <= -20
-      : minutesSinceReady >= 20);
+  // --- СТАТУСИ ---
+  const isUrgent = !isReady && minutesUntilPickup <= 15;
+  const isOverdue = isReady && minutesSinceReady >= 20;
 
   return (
     <div
@@ -71,48 +58,56 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
         ${isOverdue ? css['overdue-card'] : ''}`}
     >
       <div className={css['header-card-style']}>
-        <div className={css['order-number-wrapper']}>
-          <span className={css['order-number-style']}>
-            # {order.orderNumber || order._id.slice(-4).toUpperCase()}
-          </span>
-          {isUrgent && (
+        <div className={css['blok1']}>
+          <div className={css['order-number-wrapper']}>
+            <span className={css['order-number-style']}>
+              # {order.orderNumber || order._id.slice(-4).toUpperCase()}
+            </span>
+            {/* {isUrgent && (
             <span className={css['urgent-badge']}>
               {t('urgent', 'Urgent!')}
             </span>
-          )}
-        </div>
+          )} */}
+          </div>
 
-        {/* ВІЗУАЛІЗАЦІЯ БАЖАНОГО ЧАСУ ДЛЯ БАРИСТИ */}
-        {order.pickupTime && (
           <div className={css['pickup-time-badge-container']}>
             <span className={`${css['pickup-tag']} ${css['scheduled']}`}>
-              ⏰ На {order.pickupTime}
+              ⏰ На {order.pickupTime || 'найближчий час'}
             </span>
           </div>
-        )}
-
-        <div className={css['header-actions']}>
-          <span
-            className={`${css['time-style']} ${isUrgent || isOverdue ? css['urgent-time'] : ''}`}
-          >
-            <FiClock className={css['clock-icon']} />
-            <span>
-              {isReady ? minutesSinceReady : minutesWait}{' '}
-              {t('minutes_min', 'min')}
-            </span>
-          </span>
         </div>
-        <div>
-          <button
-            className={css['delete-btn']}
-            onClick={e => {
-              e.stopPropagation();
-              onCancel(order._id);
-            }}
-            title={t('delete', 'Delete')}
-          >
-            <FiTrash2 />
-          </button>
+        <div className={css['blok2']}>
+          <div className={css['header-actions']}>
+            <span
+              className={`${css['time-style']} ${isUrgent || isOverdue ? css['urgent-time'] : ''}`}
+            >
+              <FiClock className={css['clock-icon']} />
+              <span>
+                {isReady ? (
+                  <>
+                    {minutesSinceReady} {t('minutes_min', 'min')}{' '}
+                    <span className={css['waiting-text']}>(чекаємо 20 хв)</span>
+                  </>
+                ) : minutesUntilPickup > 0 ? (
+                  `готовність через ${minutesUntilPickup} хв`
+                ) : (
+                  `запізнення ${Math.abs(minutesUntilPickup)} хв`
+                )}
+              </span>
+            </span>
+          </div>
+          <div>
+            <button
+              className={css['delete-btn']}
+              onClick={e => {
+                e.stopPropagation();
+                onCancel(order._id);
+              }}
+              title={t('delete', 'Delete')}
+            >
+              <FiTrash2 />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -154,7 +149,6 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
       </div>
 
       <div className={css['footer-style']}>
-        {/* Крок 1: Якщо не готове — кнопка "Підготовлено" */}
         {!isReady && (
           <button
             onClick={() => onReady(order._id)}
@@ -164,7 +158,6 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
           </button>
         )}
 
-        {/* Крок 2: Якщо готове, але НЕ анульоване — вибір оплати */}
         {isReady && !isOverdue && (
           <div className={css['payment-buttons-group']}>
             <button
@@ -182,7 +175,6 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
           </div>
         )}
 
-        {/* Крок 3: Кнопка Анулювання замовлення */}
         {isReady && isOverdue && (
           <button
             onClick={() => onCancel(order._id)}

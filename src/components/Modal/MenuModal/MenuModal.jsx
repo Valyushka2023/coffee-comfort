@@ -10,7 +10,7 @@ const MenuModal = ({ item, onClose, formatPrice }) => {
   const { t, i18n } = useTranslation('menu', { keyPrefix: 'menu_modal' });
   const dispatch = useDispatch();
 
-  // 🔥 Стейт для відстеження завантаження картинки
+  // Стейт для відстеження завантаження картинки
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // Скидаємо стейт завантаження, якщо раптом item змінився
@@ -78,7 +78,7 @@ const MenuModal = ({ item, onClose, formatPrice }) => {
           />
 
           <div className={css['modal-info']}>
-            {/* 🔥 НОВИЙ БЛОК: Назва та ціна тепер в одному рядку */}
+            {/* НОВИЙ БЛОК: Назва та ціна тепер в одному рядку */}
             <div className={css['modal-header-row']}>
               <h3>{dishName}</h3>
               <span className={css['modal-price']}>

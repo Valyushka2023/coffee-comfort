@@ -3,12 +3,12 @@
   "your_order": "Your order",
   "thank_you": "Thank you!",
   "order_number": "Your order number:",
-  "warning_hold": "⚠️We hold the order for 20 minutes, after which it will be canceled.",
+  "warning_hold": "⚠️Pick up your order at the selected time or within 20 minutes after it. After the deadline for picking up your order, it will be canceled.",
   "understood": "Understood",
   "empty_cart": "Your cart is empty",
   "placeholder_name": "Your name",
   "placeholder_phone": "Phone number",
-  "pickup_time_label": "Preferred time (if needed):",
+  "pickup_time_label": "Preferred time:",
   "currency": "UAH",
   "total": "Total:",
   "sending": "Sending...",
@@ -19,8 +19,8 @@
   "increase_quantity": "Increase quantity",
 
   "errors": {
-    "too_early": "The pickup time must be at least 15 minutes from now.",
-    "working_hours": "Orders are accepted from 08:00 to 21:00.",
+    "too_early": "Choose another time.",
+    "working_hours": "Accepting orders from 08:00 to 21:00.",
     "generic": "An error occurred while placing the order.",
     "invalid_phone": "Invalid phone number format",
     "phone_required": "Please enter a phone number"

@@ -16,8 +16,6 @@
   width: 100%;
   max-width: 75rem;
   padding: 1.5rem 0;
-
-  /* background-color: aquamarine; */
   color: var(--tertiary-color);
   flex-wrap: wrap;
   margin-inline: auto;
@@ -136,7 +134,6 @@
   padding-bottom: 0.625rem;
   font-size: 0.8rem;
   text-align: center;
-  color: red;
   color: var(--color-gray-light);
   opacity: 0.7;
 }

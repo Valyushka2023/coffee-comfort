@@ -573,34 +573,42 @@ const CartModal = ({ isOpen, onClose }) => {
   const [timeError, setTimeError] = useState('');
 
   const [orderNum, setOrderNum] = useState(null);
-  const [activeOrderNum, setActiveOrderNum] = useState(null);
+  const [activeOrders, setActiveOrders] = useState([]); // Тепер тут зберігається масив замовлень
 
   const { items, totalAmount } = useSelector(state => state.cart);
   const currentLang = (i18n.language || 'uk').slice(0, 2);
 
   const [busySlots, setBusySlots] = useState([]);
 
-  // Перевіряємо наявність активного замовлення при відкритті кошика
+  // Зчитуємо ВСІ активні замовлення за останні 2 години
   useEffect(() => {
     if (!isOpen) return;
 
-    const checkActiveOrder = () => {
-      const stored = localStorage.getItem('lastOrder');
+    const checkActiveOrders = () => {
+      const stored = localStorage.getItem('activeOrders');
       if (stored) {
         try {
           const parsed = JSON.parse(stored);
-          if (Date.now() - parsed.timestamp < 2 * 60 * 60 * 1000) {
-            setActiveOrderNum(parsed.number);
+          if (Array.isArray(parsed)) {
+            // Фільтруємо лише ті, яким менше 2 годин
+            const validOrders = parsed.filter(
+              order => Date.now() - order.timestamp < 2 * 60 * 60 * 1000
+            );
+            setActiveOrders(validOrders);
+            // Оновлюємо localStorage, якщо застарілі замовлення відсіялись
+            if (validOrders.length !== parsed.length) {
+              localStorage.setItem('activeOrders', JSON.stringify(validOrders));
+            }
             return;
           }
         } catch (e) {
-          console.error('Error parsing lastOrder from localStorage', e);
+          console.error('Error parsing activeOrders from localStorage', e);
         }
       }
-      setActiveOrderNum(null);
+      setActiveOrders([]);
     };
 
-    checkActiveOrder();
+    checkActiveOrders();
   }, [isOpen]);
 
   // Отримуємо зайняті слоти
@@ -618,23 +626,12 @@ const CartModal = ({ isOpen, onClose }) => {
     return generateAvailableSlots(10, busySlots);
   }, [busySlots]);
 
-  // Автоматично виставляємо перший слот, якщо час ще не обрано користувачем
+  // Автоматично виставляємо перший слот
   useEffect(() => {
     if (isOpen && timeSlots.length > 0 && !pickupTime) {
       setPickupTime(timeSlots[0].value);
     }
   }, [isOpen, timeSlots, pickupTime]);
-
-  // Моніторинг рендерів
-  useEffect(() => {
-    console.log('[CART MODAL MONITOR]:', {
-      phone,
-      phoneError,
-      pickupTime,
-      hasAttemptedSubmit,
-      isCartEmpty: items.length === 0,
-    });
-  }, [phone, phoneError, pickupTime, hasAttemptedSubmit, items.length]);
 
   const handleKeyDown = useCallback(
     event => {
@@ -657,7 +654,7 @@ const CartModal = ({ isOpen, onClose }) => {
     };
   }, [isOpen, handleKeyDown]);
 
-  // БЕЗПЕЧНЕ керування станами вікна: очищуємо поля ТІЛЬКИ при закритті вікна
+  // Очищення полів при закритті вікна
   useEffect(() => {
     if (isOpen) {
       setIsOrdered(false);
@@ -672,7 +669,6 @@ const CartModal = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  // НАДІЙНА ВАЛІДАЦІЯ ЧАСУ (Порівняння у хвилинах від початку доби)
   const validatePickupTime = time => {
     if (!time) {
       setTimeError('');
@@ -684,8 +680,6 @@ const CartModal = ({ isOpen, onClose }) => {
 
     const now = new Date();
     const currentInMinutes = now.getHours() * 60 + now.getMinutes();
-
-    // 10 хвилин — мінімальний час на приготування кави закладом
     const minimumTimeRequired = currentInMinutes + 10;
 
     if (selectedInMinutes < minimumTimeRequired) {
@@ -694,8 +688,8 @@ const CartModal = ({ isOpen, onClose }) => {
       return false;
     }
 
-    const openMinutes = 8 * 60; // 08:00
-    const closeMinutes = 21 * 60; // 21:00
+    const openMinutes = 8 * 60;
+    const closeMinutes = 21 * 60;
 
     if (selectedInMinutes < openMinutes || selectedInMinutes >= closeMinutes) {
       const errMsg = t('errors.working_hours') || 'Ми зачинені в цей час';
@@ -740,7 +734,6 @@ const CartModal = ({ isOpen, onClose }) => {
         t('errors.invalid_phone') === 'errors.invalid_phone'
           ? 'Невірний формат номера телефону'
           : t('errors.invalid_phone') || 'Невірний формат номера телефону';
-
       setPhoneError(fallbackError);
     } else {
       const error = validatePhone(fullPhone, t);
@@ -749,15 +742,12 @@ const CartModal = ({ isOpen, onClose }) => {
   };
 
   const handlePhoneFocus = () => {
-    if (!phone) {
-      setPhone('+380');
-    }
+    if (!phone) setPhone('+380');
   };
 
   const handleNameChange = event => {
     const value = event.target.value;
     setName(value);
-
     if (hasAttemptedSubmit) {
       const error = validateName(value, t);
       setNameError(error || '');
@@ -767,10 +757,7 @@ const CartModal = ({ isOpen, onClose }) => {
   const handleTimeChange = event => {
     const value = event.target.value;
     setPickupTime(value);
-
-    if (hasAttemptedSubmit) {
-      validatePickupTime(value);
-    }
+    if (hasAttemptedSubmit) validatePickupTime(value);
   };
 
   const handleOrder = async e => {
@@ -791,12 +778,17 @@ const CartModal = ({ isOpen, onClose }) => {
     setNameError(nameErr || '');
     setPhoneError(phoneErr || '');
 
-    if (nameErr || phoneErr || !isTimeValid || items.length === 0) {
-      console.log('Order blocked by frontend validation.');
-      return;
-    }
+    if (nameErr || phoneErr || !isTimeValid || items.length === 0) return;
 
     setIsLoading(true);
+
+    // Зберігаємо копію елементів для відображення в деталях активного замовлення
+    const itemsSnapshot = items.map(item => ({
+      id: item._id || item.id,
+      title:
+        item.name?.[currentLang] || item.name?.uk || item.name?.en || 'Item',
+      quantity: item.quantity,
+    }));
 
     try {
       const orderData = {
@@ -806,21 +798,15 @@ const CartModal = ({ isOpen, onClose }) => {
         items: items.map(item => {
           let nameForSlug = 'item';
           if (item.name) {
-            if (typeof item.name === 'string') {
-              nameForSlug = item.name;
-            } else if (item.name.uk) {
-              nameForSlug = item.name.uk;
-            } else if (item.name.en) {
-              nameForSlug = item.name.en;
-            }
+            if (typeof item.name === 'string') nameForSlug = item.name;
+            else if (item.name.uk) nameForSlug = item.name.uk;
+            else if (item.name.en) nameForSlug = item.name.en;
           }
-
           const generatedSlug = nameForSlug
             .toLowerCase()
             .trim()
             .replace(/[^a-zа-яєіїґ0-9\s-]/g, '')
             .replace(/\s+/g, '-');
-
           return {
             _id: item._id || item.id,
             slug: item.slug || generatedSlug,
@@ -837,16 +823,19 @@ const CartModal = ({ isOpen, onClose }) => {
         data.orderNumber || (data._id ? data._id.slice(-4) : 'XXXX');
 
       setOrderNum(generatedOrderNum);
-      setIsOrdered(true);
+      setIsOrdered(true); // Тепер успішно зафіксується!
 
-      // Оновлюємо також стейт активного замовлення для відображення в цій же сесії
-      setActiveOrderNum(generatedOrderNum);
-
-      const orderInfo = {
+      // Додаємо нове замовлення до масиву існуючих замовлень
+      const newOrderInfo = {
         number: generatedOrderNum,
+        time: pickupTime || t('closest_time', 'Найближчий час'),
+        items: itemsSnapshot,
         timestamp: Date.now(),
       };
-      localStorage.setItem('lastOrder', JSON.stringify(orderInfo));
+
+      const updatedOrders = [...activeOrders, newOrderInfo];
+      setActiveOrders(updatedOrders);
+      localStorage.setItem('activeOrders', JSON.stringify(updatedOrders));
       window.dispatchEvent(new Event('orderUpdated'));
 
       dispatch(clearCart());
@@ -855,8 +844,7 @@ const CartModal = ({ isOpen, onClose }) => {
       console.error('API Error during placement:', error);
       alert(error?.message || t('errors.generic'));
     } finally {
-      setIsOrdered(false); // Скидаємо, якщо сталася помилка, але при успіху вона лишається true завдяки коду вище
-      setIsLoading(false);
+      setIsLoading(false); // ВИПРАВЛЕНО: тут більше немає скидання `setIsOrdered(false)`
     }
   };
 
@@ -884,7 +872,6 @@ const CartModal = ({ isOpen, onClose }) => {
           <h2 id="cart-modal-title" className={css['modal-title']}>
             {t('your_order')}
           </h2>
-
           <button
             type="button"
             className={css['close-icon']}
@@ -896,14 +883,34 @@ const CartModal = ({ isOpen, onClose }) => {
         </div>
 
         <div className={css['content']}>
-          {/* Спільна плашка інформації про активне замовлення всередині кошика */}
-          {activeOrderNum && !isOrdered && (
-            <div className={css['active-order-banner']}>
-              <FiClock className={css['banner-icon']} size={16} />
-              <span>
-                {t('active_order_text', 'У вас є активне замовлення:')}{' '}
-                <strong>#{activeOrderNum}</strong>
-              </span>
+          {/* Деталізований блок активних замовлень (показується ТІЛЬКИ коли не горить екран успіху) */}
+          {activeOrders.length > 0 && !isOrdered && (
+            <div className={css['active-orders-container']}>
+              <h3 className={css['active-orders-title']}>
+                <FiClock className={css['banner-icon']} size={16} />
+                {t('active_orders_heading', 'Ваші поточні замовлення:')}
+              </h3>
+              <ul className={css['active-orders-list']}>
+                {activeOrders.map(order => (
+                  <li key={order.number} className={css['active-order-item']}>
+                    <div className={css['active-order-header']}>
+                      <span>
+                        Замовлення <strong>#{order.number}</strong>
+                      </span>
+                      <span className={css['active-order-time']}>
+                        {order.time}
+                      </span>
+                    </div>
+                    <ul className={css['active-order-subitems']}>
+                      {order.items.map((item, idx) => (
+                        <li key={idx}>
+                          {item.title} — <strong>{item.quantity} шт.</strong>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 
@@ -949,7 +956,6 @@ const CartModal = ({ isOpen, onClose }) => {
                     item.name?.uk ||
                     item.name?.en ||
                     'Item';
-
                   return (
                     <li key={item._id || item.id} className={css.item}>
                       <img
@@ -957,13 +963,11 @@ const CartModal = ({ isOpen, onClose }) => {
                         alt={itemTitle}
                         className={css['item-image']}
                       />
-
                       <div className={css['item-info']}>
                         <h4 className={css['item-title']}>{itemTitle}</h4>
                         <p className={css['item-price']}>
                           {item.price} {t('currency')}
                         </p>
-
                         <div className={css.controls}>
                           <button
                             type="button"
@@ -975,9 +979,7 @@ const CartModal = ({ isOpen, onClose }) => {
                           >
                             <FiMinus />
                           </button>
-
                           <span>{item.quantity}</span>
-
                           <button
                             type="button"
                             className={css['count-btn']}
@@ -993,8 +995,8 @@ const CartModal = ({ isOpen, onClose }) => {
                 })}
               </ul>
 
+              {/* Форма замовлення */}
               <div className={css['form-wrapper']}>
-                {/* ІМ'Я */}
                 <div className={css['form-group']}>
                   <div className={css['field-input-and-field-error']}>
                     <FiUser className={css['form-icon']} />
@@ -1015,7 +1017,6 @@ const CartModal = ({ isOpen, onClose }) => {
                   </div>
                 </div>
 
-                {/* ТЕЛЕФОН */}
                 <div className={css['form-group']}>
                   <div className={css['field-input-and-field-error']}>
                     <FiPhone className={css['form-icon']} />
@@ -1037,7 +1038,6 @@ const CartModal = ({ isOpen, onClose }) => {
                   </div>
                 </div>
 
-                {/* БАЖАНИЙ ЧАС */}
                 <div className={css['form-group']}>
                   <label
                     htmlFor="pickup-time-select"
@@ -1048,7 +1048,6 @@ const CartModal = ({ isOpen, onClose }) => {
                       {t('pickup_time_label') || 'Оберіть час отримання:'}
                     </span>
                   </label>
-
                   <div className={css['field-input-and-field-error']}>
                     <select
                       id="pickup-time-select"
@@ -1085,7 +1084,6 @@ const CartModal = ({ isOpen, onClose }) => {
                     {totalAmount} {t('currency')}
                   </span>
                 </div>
-
                 <button
                   type="submit"
                   className={css['order-btn']}
@@ -1093,7 +1091,6 @@ const CartModal = ({ isOpen, onClose }) => {
                 >
                   {isLoading ? t('sending') : t('place_order')}
                 </button>
-
                 <button
                   type="button"
                   className={css['cancel-btn']}

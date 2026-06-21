@@ -123,7 +123,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgb(255 255 255 / 50%),
+    var(--color-white-50),
     transparent
   );
   animation: shimmer 1.5s infinite;
@@ -155,17 +155,6 @@
   color: var(--color-white);
   transform: translateY(-0.125rem);
 }
-
-/* .collapse-btn {
-  border-color: var(--color-light-brown);
-  color: var(--color-light-brown);
-} */
-
-/* .collapse-btn:hover {
-  background-color: var(--color-light-brown);
-  color: var(--color-white);
-  transform: translateY(-0.125rem);
-} */
 
 .bean {
   position: absolute;

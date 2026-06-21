@@ -1,7 +1,7 @@
 .gallery-specific-modal {
   --close-btn-size: 2.5rem;
-  --button-close-icon-color: #ffff;
-  --button-hover-close-color: #d4a373;
+  --button-close-icon-color: var(--color-white);
+  --button-hover-close-color: var(--color-latte-coffee);
 
   position: relative;
   display: flex !important;
@@ -13,7 +13,7 @@
   max-height: 90vh !important;
   padding: 0 !important;
   overflow: hidden !important;
-  background-color: #111;
+  background-color: var(--color-black);
   border-radius: 1.5rem;
 }
 

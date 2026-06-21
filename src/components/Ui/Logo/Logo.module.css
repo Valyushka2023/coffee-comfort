@@ -10,7 +10,7 @@
   text-decoration: none;
   text-transform: uppercase;
   color: var(--logo-primary-color);
-  text-shadow: 0 0 0.9375rem rgb(212 163 115 / 0%);
+  text-shadow: 0 0 0.9375rem var(--color-latte-coffee-0);
   transition:
     color 0.3s ease,
     text-shadow 0.3s ease;
@@ -35,7 +35,7 @@
   display: block;
   width: 2em;
   height: 2em;
-  box-shadow: 0 0 0.75rem rgb(212 163 115 / 0%);
+  box-shadow: 0 0 0.75rem var(--color-latte-coffee-0);
   transition: box-shadow 0.3s ease;
   aspect-ratio: 1 / 1;
   will-change: box-shadow;
@@ -71,11 +71,11 @@
 }
 
 .logo:hover {
-  text-shadow: 0 0 0.5rem rgb(212 163 115 / 40%);
+  text-shadow: 0 0 0.5rem var(--color-latte-coffee-40);
 }
 
 .logo:hover .logo-coffee-cap img {
-  box-shadow: 0 0 0.75rem rgb(212 163 115 / 50%);
+  box-shadow: 0 0 0.75rem var(--color-latte-coffee-50);
 }
 
 @media (max-width: 74.9375rem) {

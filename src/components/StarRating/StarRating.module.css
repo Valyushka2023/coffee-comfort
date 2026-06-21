@@ -28,14 +28,14 @@
 }
 
 .field-error {
-  border-bottom-color: var(--error-color, #ff4d4d);
+  border-bottom-color: var(--error-color);
 }
 
 .star {
   display: inline-flex;
   border-radius: 0.25rem;
   outline: none;
-  color: var(--star-inactive-default, #918989);
+  color: var(--star-inactive-default);
   transition:
     transform 0.2s ease,
     color 0.2s ease,
@@ -50,7 +50,7 @@
 }
 
 .star.filled {
-  color: var(--star-active-default, #fc3);
+  color: var(--star-active-default);
   opacity: 1;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .wrapper:not(.read-only) .star:focus-visible {
-  box-shadow: 0 0 0 0.125rem var(--star-active-default, #fc3);
+  box-shadow: 0 0 0 0.125rem var(--star-active-default);
   transform: scale(1.1);
   opacity: 1;
 }

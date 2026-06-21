@@ -97,6 +97,9 @@
   /* Бурштиновий колір як сонячне сяйво */
   --color-light-beige: #fdfaf5; /* Світло-бежевий як топлене молоко,rgb(253 250 245 / 100%)  */
   --color-dark-beige: #f8f4ec; /* Темно-бежевий як пісок, rgb(248 244 236 / 100%)  */
+  --color-latte-coffee-0: rgb(212 163 115 / 0%);
+  --color-latte-coffee-30: rgb(212 163 115 / 30%);
+  --color-latte-coffee-40: rgb(212 163 115 / 40%);
   --color-latte-coffee-50: rgb(212 163 115 / 50%);
   --color-light-brown-80: rgb(92 61 46 / 80%);
   --color-light-gray-50: rgb(87 84 79 / 50%);
@@ -112,10 +115,19 @@
   --color-terracotta-15: rgb(212 157 101 / 15%);
   --color-white-50: rgb(255 255 255 / 50%); /* Білий на 50% */
   --color-white-85: rgb(255 255 255 / 85%); /* Білий на 85% */
+  --color-white-80: rgb(255 255 255 / 80%); /* Білий на 80% */
+  --color-white-70: rgb(255 255 255 / 70%); /* Білий на 70% */
+  --color-black-10: rgb(0 0 0 / 10%); /* Чорний на 10% */
   --color-black-50: rgb(0 0 0 / 50%); /* Чорний на 50% */
   --color-black-85: rgb(0 0 0 / 85%); /* Чорний на 85% */
+  --color-black-80: rgb(0 0 0 / 80%); /* Чорний на 85% */
   --color-white-20: rgb(255 255 255 / 20%); /* Білий на 20% */
   --color-black-20: rgb(0 0 0 / 20%); /* Чорний на 20% */
+  --color-black-30: rgb(0 0 0 / 30%); /* Чорний на 30% */
+  --color-black-40: rgb(0 0 0 / 40%); /* Чорний на 40% */
+  --color-black-70: rgb(0 0 0 / 70%); /* Чорний на 70% */
+  --color-red-5: rgb(228 179 184 / 5%);
+  --color-red-15: rgb(243 165 173 / 15%);
   --color-muted-white: 150 150 150;
   --color-pure-white: 255 255 255;
 

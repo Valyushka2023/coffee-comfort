@@ -25,7 +25,8 @@
   overflow: hidden;
   background-color: var(--color-white);
   border-radius: 1.5rem;
-  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 25%);
+
+  /* box-shadow: 0 1rem 2.5rem var(--color-black-50)); */
 }
 
 .close-icon {
@@ -42,7 +43,7 @@
   background-color: var(--color-light-gray-100);
   border: none;
   border-radius: 50%;
-  box-shadow: 0 0.25rem 0.5rem var(--shadow-circle);
+  box-shadow: 0 0.25rem 0.5rem var(--color-black-50);
   font-size: 1.5rem;
   color: var(--color-light-brown);
   transition:
@@ -157,32 +158,44 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all 0.2s ease;
+
+  /* transition: all 0.2s ease; */
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .select-btn {
-  background-color: var(--button-review-menu-bg-color);
-  border: 0.0625rem solid var(--button-border-color);
+  background-color: var(--color-latte-coffee);
+  border: 0.0625rem solid var(--color-white);
   border-radius: var(--btn-radius, 2rem);
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  box-shadow: 0 0.25rem 0.9375rem var(--color-black-50);
   color: var(--color-dark-brown);
+
+  /* transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease; */
 }
 
 .select-btn:hover {
   background-color: var(--color-light-brown);
   color: var(--color-white);
+  transform: scale(1.05);
 }
 
 .cancel-btn {
   background-color: var(--color-light-gray-100);
   border: 0.0625rem solid var(--button-border-color);
   border-radius: var(--btn-radius, 2rem);
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  box-shadow: 0 0.25rem 0.9375rem var(--color-black-50);
   color: var(--color-dark-brown);
 }
 
 .cancel-btn:hover {
   background-color: var(--color-white);
+  transform: scale(1.05);
 }
 
 /* 📱 Адаптивність для мобільних */

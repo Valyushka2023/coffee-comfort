@@ -131,8 +131,7 @@
   --border-accent: #d35400;
   --bg-accent: #e67e22;
   --color-accent: #d35400;
-
-  /* --hover-bg-color: #d4a373; */
+  --hover-bg-color: #d4a373;
   --hover-color: #d4a373;
   --hover-input-area-color: #fff;
   --hover-footer-color: #fff;
@@ -287,6 +286,8 @@
   --button-review-close-color: var(--color-light-brown);
   --button-cta-bg-color: var(--color-latte-coffee);
   --button-cta-color: var(--color-dark-brown1);
+  --button-up-bg-color: var(--color-latte-coffee);
+  --button-up-color: var(--color-light-brown);
   --button-form-bg-color: var(--color-light-brown);
   --button-form-color: var(--color-white);
   --filter-btn-bg-color: var(--color-latte-coffee);
@@ -337,7 +338,7 @@
   /* box-shadow color */
   --shadow-icon-circle: var(--color-white-50);
   --shadow-circle: var(--color-white-50);
-  --shadow-up-button: var(--color-black-50);
+  --shadow-up-button: var(--color-white-50);
 
   /* --shadow-menu: var(--color-white-50); */
   --shadow-image-wrapper: var(--color-white-20);

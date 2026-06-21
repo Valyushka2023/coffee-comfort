@@ -142,28 +142,30 @@
   cursor: pointer;
   padding: 0.625rem 1.5625rem;
   background: transparent;
-  border: 0.125rem solid #6f4e37;
+  border: 0.125rem solid var(--color-light-brown);
   border-radius: 1.25rem;
   font-weight: 600;
-  color: #6f4e37;
+  color: var(--color-light-brown);
   transition: all 0.3s ease;
 }
 
-.load-more-btn:hover {
-  background: #6f4e37;
-  color: #fff;
+.load-more-btn:hover,
+.collapse-btn:hover {
+  background-color: var(--color-light-brown);
+  color: var(--color-white);
   transform: translateY(-0.125rem);
 }
 
-.collapse-btn {
-  border-color: #999;
-  color: #999;
-}
+/* .collapse-btn {
+  border-color: var(--color-light-brown);
+  color: var(--color-light-brown);
+} */
 
-.collapse-btn:hover {
-  background: #999;
-  color: #fff;
-}
+/* .collapse-btn:hover {
+  background-color: var(--color-light-brown);
+  color: var(--color-white);
+  transform: translateY(-0.125rem);
+} */
 
 .bean {
   position: absolute;

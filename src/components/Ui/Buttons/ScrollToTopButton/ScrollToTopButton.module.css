@@ -10,7 +10,9 @@
   width: 3.5rem;
   height: 3.5rem;
   background-color: var(--button-up-bg-color);
-  border: none;
+
+  /* border: none; */
+  border: 0.0625rem solid var(--color-white);
   border-radius: 50%;
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-up-button);
   color: var(--button-up-color);
@@ -20,7 +22,9 @@
     background-color 0.3s ease;
   transform: translateY(1.25rem);
   pointer-events: none;
+  user-select: none;
   opacity: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .visible {

@@ -10,11 +10,16 @@
   width: 2.35rem;
   height: 2.35rem;
   background-color: var(--bg-accent);
-  border: none;
+
+  /* border: none; */
+  border: 0.0625rem solid var(--color-white);
   border-radius: 50%;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-up-button);
   color: var(--color-white);
   transition: all 0.3s ease;
   animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .cart-icon-wrapper:hover {

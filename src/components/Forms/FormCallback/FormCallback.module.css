@@ -1,0 +1,72 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.inputs-area-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  width: 100%;
+}
+
+.field-input-and-field-error {
+  position: relative;
+  width: 100%;
+}
+
+.field-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background-color: var(--field-input-area-review-br-color);
+  border: 0.0625rem solid transparent;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-input-area-color);
+  transition: border-color 0.3s;
+}
+
+.field-input:focus {
+  border-color: var(--hover-input-area-color);
+  outline: none;
+}
+
+.field-error {
+  border-color: var(--error-color) !important;
+}
+
+.element-sending {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.error-popup {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--body-bg-color);
+  border: 0.0625rem solid var(--error-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--box-shadow);
+  font-size: 0.9rem;
+  letter-spacing: 0.056rem;
+  white-space: nowrap;
+  color: var(--error-color);
+}
+
+.error-popup::before {
+  position: absolute;
+  bottom: 100%;
+  left: 0.625rem;
+  border-color: transparent transparent var(--error-color) transparent;
+  border-style: solid;
+  border-width: 0.3125rem;
+  content: '';
+}

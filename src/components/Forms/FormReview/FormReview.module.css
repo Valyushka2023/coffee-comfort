@@ -5,6 +5,14 @@
   gap: 1.5rem;
 }
 
+.rating-field-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
 .inputs-area-form {
   display: flex;
   flex-direction: column;
@@ -14,7 +22,12 @@
 
 .field-input-and-field-error {
   position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
+  min-width: 0;
 }
 
 .field-input,

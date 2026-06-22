@@ -12,8 +12,8 @@ import Reviews from '../../components/Reviews/Reviews.jsx';
 import Contacts from '../../components/Contacts/Contacts.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import ScrollToTopButton from '../../components/Ui/Buttons/ScrollToTopButton/ScrollToTopButton.jsx';
-import CallbackModal from '../../components/Modal/CallbackModal/CallbackModal.jsx';
-import ReviewFormModal from '../../components/Modal/ReviewFormModal/ReviewFormModal.jsx';
+import ModalFormCallback from '../../components/Modal/ModalFormCallback/ModalFormCallback.jsx';
+import ModalFormReview from '../../components/Modal/ModalFormReview/ModalFormReview.jsx';
 
 import css from './Home.module.css';
 
@@ -104,12 +104,12 @@ const Home = () => {
       <ScrollToTopButton visible={visible} onClick={scrollToTop} />
 
       {/* Модальні вікна */}
-      <CallbackModal
+      <ModalFormCallback
         isOpen={isCallbackOpen}
         onClose={() => setCallbackOpen(false)}
       />
 
-      <ReviewFormModal
+      <ModalFormReview
         isOpen={isReviewOpen}
         onClose={() => setReviewOpen(false)}
         onSuccess={handleReviewSuccess}

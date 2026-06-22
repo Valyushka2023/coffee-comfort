@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import BaseModal from '../BaseModal/BaseModal.jsx';
 import useForm from '../../../hooks/useForm.js';
 import { sendCallbackRequest } from '../../../services/api.js';
-import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
+import Button from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
 import { validateName, validatePhone } from '../../../utils/validators.js';
 
 import css from './CallbackModal.module.css';

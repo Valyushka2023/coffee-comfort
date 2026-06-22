@@ -6,8 +6,8 @@ import clsx from 'clsx';
 import BaseModal from '../BaseModal/BaseModal.jsx';
 import useForm from '../../../hooks/useForm.js';
 import { sendReviewRequest } from '../../../services/api.js';
-import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
-import StarRating from '../../StarRating/StarRating.jsx';
+import Button from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
+import StarRating from '../../Ui/StarRating/StarRating.jsx';
 import {
   validateName,
   validateComment,

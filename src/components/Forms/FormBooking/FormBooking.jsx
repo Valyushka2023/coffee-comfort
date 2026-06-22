@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import uk from 'date-fns/locale/uk';
 import en from 'date-fns/locale/en-US';
 import { sendBookingRequest } from '../../../services/api.js';
-import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
+import BaseButton from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
 import AtmosphereSelector from '../../../components/AtmosphereSelector/AtmosphereSelector.jsx';
 import AtmosphereModal from '../../Modal/AtmosphereModal/AtmosphereModal.jsx';
 import {
@@ -135,9 +135,9 @@ const FormBooking = () => {
           <div className={css['success-icon']}>✓</div>
           <h3 className={css['title-success-form']}>{t('success_title')}</h3>
           <p className={css['text-success-form']}>{t('success_message')}</p>
-          <Button variant="primary" onClick={handleCloseSuccess}>
+          <BaseButton variant="primary" onClick={handleCloseSuccess}>
             {t('back_button')}
-          </Button>
+          </BaseButton>
         </div>
       </div>
     );
@@ -227,14 +227,14 @@ const FormBooking = () => {
         {submissionError && (
           <p className={css['general-error-popup']}>{t('submit_error')}</p>
         )}
-        <Button
+        <BaseButton
           variant="primary"
           type="submit"
           disabled={isSubmitting}
           isFixedWidth={true}
         >
           {isSubmitting ? t('sending') : t('send')}
-        </Button>
+        </BaseButton>
       </div>
 
       {previewZone && (

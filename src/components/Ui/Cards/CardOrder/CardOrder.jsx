@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import { FiClock, FiTrash2 } from 'react-icons/fi';
-import css from './OrderCard.module.css';
+import css from './CardOrder.module.css';
 
-const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
+const CardOrder = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
   const [minutesUntilPickup, setMinutesUntilPickup] = useState(0);
   const [minutesSinceReady, setMinutesSinceReady] = useState(0);
 
@@ -188,4 +188,4 @@ const OrderCard = ({ order, onReady, onArchive, onCancel, t, currentLang }) => {
   );
 };
 
-export default OrderCard;
+export default CardOrder;

@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import StarRating from '../StarRating/StarRating.jsx';
-import Button from '../Ui/Buttons/BaseButton/Button.jsx';
+import StarRating from '../../components/Ui/StarRating/StarRating.jsx';
+import Button from '../Ui/Buttons/BaseButton/BaseButton.jsx';
 import CardReview from '../Ui/Cards/CardReview/CardReview.jsx';
 import { fetchReviewsRequest } from '../../services/api.js';
 import css from './Reviews.module.css';

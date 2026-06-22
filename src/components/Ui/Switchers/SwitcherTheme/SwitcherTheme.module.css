@@ -1,6 +1,6 @@
 @import url('../../../../styles/animate.css');
 
-.theme-toggle-btn {
+.switcher-theme-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,13 +16,13 @@
   /* -webkit-tap-highlight-color: transparent; */
 }
 
-.theme-toggle-btn:active {
+.switcher-theme-btn:active {
   background: transparent;
   box-shadow: none;
   transform: none; /* або залиш, якщо хочеш ефект кліку */
 }
 
-.theme-toggle-btn:hover {
+.switcher-theme-btn:hover {
   background-color: rgb(255 204 51 / 10%);
   transform: scale(1.1) rotate(45deg);
 }

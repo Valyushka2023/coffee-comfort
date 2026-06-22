@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import BaseModal from '../BaseModal/BaseModal.jsx';
-import StarRating from '../../StarRating/StarRating.jsx';
+import StarRating from '../../Ui/StarRating/StarRating.jsx';
 import Avatar from '../../Ui/Avatars/Avatar.jsx';
 import css from './ReviewCardModal.module.css';
 

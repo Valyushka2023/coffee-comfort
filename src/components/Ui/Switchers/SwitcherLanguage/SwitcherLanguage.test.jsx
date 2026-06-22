@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi, describe, it, expect } from 'vitest';
-import LanguageSwitcher from './LanguageSwitcher';
+import SwitcherLanguage from './SwitcherLanguage';
 
 const mockChangeLanguage = vi.fn();
 
@@ -13,9 +13,9 @@ vi.mock('react-i18next', () => ({
   }),
 }));
 
-describe('LanguageSwitcher', () => {
+describe('SwitcherLanguage', () => {
   it('викликає зміну мови на "uk" при натисканні на кнопку UK', () => {
-    render(<LanguageSwitcher />);
+    render(<SwitcherLanguage />);
 
     const ukButton = screen.getByText('UK');
 
@@ -25,7 +25,7 @@ describe('LanguageSwitcher', () => {
   });
 
   it('викликає зміну мови на "en" при натисканні на кнопку EN', () => {
-    render(<LanguageSwitcher />);
+    render(<SwitcherLanguage />);
 
     const enButton = screen.getByText('EN');
 

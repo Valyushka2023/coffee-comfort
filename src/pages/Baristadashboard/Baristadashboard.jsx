@@ -6,7 +6,7 @@ import {
   deleteOrderRequest,
 } from '../../services/api';
 import { Search } from '../../components/Icons/Search.jsx';
-import OrderCard from '../../components/Ui/Cards/OrderCard/OrderCard.jsx';
+import CardOrder from '../../components/Ui/Cards/CardOrder/CardOrder.jsx';
 
 import css from './Baristadashboard.module.css';
 
@@ -150,7 +150,7 @@ const Baristadashboard = () => {
 
       <div className={css['grid-style']}>
         {filteredOrders.map(order => (
-          <OrderCard
+          <CardOrder
             key={order._id}
             order={order}
             onReady={handleSetReady}

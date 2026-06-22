@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'; // Додали useRef
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import BaseModal from '../BaseModal/BaseModal.jsx';
-import Button from '../../Ui/Buttons/BaseButton/Button.jsx';
+import Button from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
 import css from './AtmosphereModal.module.css';
 
 const AtmosphereModal = ({ isOpen, onClose, zone, onConfirm }) => {

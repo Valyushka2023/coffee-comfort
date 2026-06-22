@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import StarRating from '../../../StarRating/StarRating.jsx';
+import StarRating from '../../StarRating/StarRating.jsx';
 import Avatar from '../../Avatars/Avatar.jsx';
 import ReviewCardModal from '../../../Modal/ReviewCardModal/ReviewCardModal.jsx';
 import css from './CardReview.module.css';

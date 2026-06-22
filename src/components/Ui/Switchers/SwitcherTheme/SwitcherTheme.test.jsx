@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import ThemeToggle from './ThemeToggle';
+import SwitcherTheme from './SwitcherTheme.jsx';
 
-describe('ThemeToggle', () => {
+describe('SwitcherTheme', () => {
   beforeEach(() => {
     localStorage.clear();
     document.body.className = '';
@@ -10,7 +10,7 @@ describe('ThemeToggle', () => {
   });
 
   it('змінює тему при кліку на кнопку', () => {
-    render(<ThemeToggle />);
+    render(<SwitcherTheme />);
 
     const button = screen.getByLabelText('Switch topic');
 

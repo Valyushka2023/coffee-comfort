@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { StarIcon } from '../Icons';
+import { StarIcon } from '../../Icons';
 import css from './StarRating.module.css';
 
 const StarRating = ({

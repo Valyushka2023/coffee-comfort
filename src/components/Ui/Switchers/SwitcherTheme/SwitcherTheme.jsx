@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { SunIcon, MoonIcon } from '../../../Icons/index.js';
-import css from './ThemeToggle.module.css';
+import css from './SwitcherTheme.module.css';
 
-const ThemeToggle = () => {
+const SwitcherTheme = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === 'dark';
   });
 
-  const toggleTheme = () => {
+  const switcherTheme = () => {
     setIsDarkTheme(prev => !prev);
   };
 
@@ -24,8 +24,8 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className={css['theme-toggle-btn']}
-      onClick={toggleTheme}
+      className={css['switcher-theme-btn']}
+      onClick={switcherTheme}
       aria-label="Switch topic"
     >
       {isDarkTheme ? (
@@ -37,4 +37,4 @@ const ThemeToggle = () => {
   );
 };
 
-export default ThemeToggle;
+export default SwitcherTheme;

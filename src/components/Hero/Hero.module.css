@@ -92,7 +92,8 @@
     opacity 0.3s ease,
     border-bottom 0.3s ease;
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
+
+  /* -webkit-tap-highlight-color: transparent; */
 }
 
 .hero-link:hover {

@@ -331,8 +331,8 @@
 }
 
 .cancel-order-btn:hover {
-  background-color: var(--color-error) !important;
-  border-color: var(--color-error) !important;
+  background-color: var(--error-color) !important;
+  border-color: var(--error-collor) !important;
   color: var(--color-white) !important;
 }
 

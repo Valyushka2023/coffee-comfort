@@ -19,7 +19,8 @@
     border-color 0.3s ease,
     color 0.3s ease;
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
+
+  /* -webkit-tap-highlight-color: transparent; */
 }
 
 .small {
@@ -81,7 +82,7 @@
 }
 
 .default:hover:not(:disabled) {
-  background-color: rgb(255 255 255 / 10%);
+  background-color: var(--color-white-10);
   border-color: var(--button-hover-bg-color);
   transform: translateY(-0.1875rem);
 }

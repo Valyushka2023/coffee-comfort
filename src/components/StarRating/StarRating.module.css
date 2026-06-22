@@ -42,7 +42,8 @@
     opacity 0.2s ease;
   user-select: none;
   opacity: 1;
-  -webkit-tap-highlight-color: transparent;
+
+  /* -webkit-tap-highlight-color: transparent; */
 }
 
 .star svg {

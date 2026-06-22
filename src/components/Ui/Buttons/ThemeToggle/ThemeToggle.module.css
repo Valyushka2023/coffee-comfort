@@ -12,7 +12,8 @@
   outline: none;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   user-select: none;
-  -webkit-tap-highlight-color: transparent; /* 🔥 прибирає відблиск на мобільних */
+
+  /* -webkit-tap-highlight-color: transparent; */
 }
 
 .theme-toggle-btn:active {

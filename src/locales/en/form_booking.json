@@ -15,6 +15,7 @@
   "success_message": "Your table is booked. We will call you back soon.",
   "back_button": "Close",
   "send": "Send",
+  "clear_form_btn": "Clear form",
   "sending": "Sending...",
   "submit_error": "Submission error. Please try again.",
   "atmosphere": {

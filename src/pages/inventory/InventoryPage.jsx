@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import api from '../../services/api.js';
 import * as XLSX from 'xlsx';
 import Loader from '../../components/Ui/Loader/Loader.jsx';
-import css from './Inventory.module.css';
+import css from './InventoryPage.module.css';
 
-const Inventory = () => {
+const InventoryPage = () => {
   // Примусово фіксуємо українську мову для інвентаризації
   const { t } = useTranslation('inventory', { lng: 'uk' });
   const [ingredients, setIngredients] = useState([]);
@@ -236,4 +236,4 @@ const Inventory = () => {
   );
 };
 
-export default Inventory;
+export default InventoryPage;

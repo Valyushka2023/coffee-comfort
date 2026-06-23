@@ -6,9 +6,9 @@ import {
 } from '../../services/api';
 import * as XLSX from 'xlsx';
 import Loader from '../../components/Ui/Loader/Loader.jsx';
-import css from './OrderHistory.module.css';
+import css from './OrderHistoryPage.module.css';
 
-const OrderHistory = () => {
+const OrderHistoryPage = () => {
   // Примусово фіксуємо українську мову для цього компонента
   const { t, i18n } = useTranslation('order_history', { lng: 'uk' });
 
@@ -382,4 +382,4 @@ const OrderHistory = () => {
   );
 };
 
-export default OrderHistory;
+export default OrderHistoryPage;

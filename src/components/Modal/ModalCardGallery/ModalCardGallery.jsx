@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import BaseModal from '../BaseModal/BaseModal.jsx';
-import css from './GalleryModal.module.css';
+import css from './ModalCardGallery.module.css';
 
-const GalleryModal = ({ isOpen, onClose, image }) => {
+const ModalCardGallery = ({ isOpen, onClose, image }) => {
   const [touchStart, setTouchStart] = useState(null);
 
   if (!image) return null;
@@ -45,7 +45,7 @@ const GalleryModal = ({ isOpen, onClose, image }) => {
   );
 };
 
-GalleryModal.propTypes = {
+ModalCardGallery.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   image: PropTypes.shape({
@@ -54,4 +54,4 @@ GalleryModal.propTypes = {
   }),
 };
 
-export default GalleryModal;
+export default ModalCardGallery;

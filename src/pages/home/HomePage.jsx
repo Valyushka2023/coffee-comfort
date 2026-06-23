@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useWindowScrollToTopButton } from '../../hooks/useWindowScrollToTopButton';
 
 import Header from '../../components/Header/Header.jsx';
-import MobileMenu from '../../components/Header/MobileMenu.jsx';
+import MobileMenu from '../../components/Header/HeaderMobileMenu.jsx';
 import Hero from '../../components/Hero/Hero.jsx';
 import AboutUs from '../../components/AboutUs/AboutUs.jsx';
 import Menu from '../../components/Menu/Menu.jsx';
@@ -15,7 +15,7 @@ import ScrollToTopButton from '../../components/Ui/Buttons/ScrollToTopButton/Scr
 import ModalFormCallback from '../../components/Modal/ModalFormCallback/ModalFormCallback.jsx';
 import ModalFormReview from '../../components/Modal/ModalFormReview/ModalFormReview.jsx';
 
-import css from './Home.module.css';
+import css from './HomePage.module.css';
 
 const GALLERY_IMAGES = [
   { id: 1, src: '/images/gallery-interior.webp', alt: 'Cozy corner' },
@@ -30,7 +30,7 @@ const GALLERY_IMAGES = [
   { id: 6, src: '/images/gallery-details.webp', alt: 'Coffee shop details' },
 ];
 
-const Home = () => {
+const HomePage = () => {
   const { t } = useTranslation('header');
   const { visible, scrollToTop } = useWindowScrollToTopButton(300);
 
@@ -118,4 +118,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import BaseModal from '../BaseModal/BaseModal.jsx';
 import StarRating from '../../Ui/StarRating/StarRating.jsx';
 import Avatar from '../../Ui/Avatars/Avatar.jsx';
-import css from './ReviewCardModal.module.css';
+import css from './ModalCardReview.module.css';
 
-const ReviewCardModal = ({
+const ModalCardReview = ({
   isOpen,
   onClose,
   review,
@@ -36,7 +36,7 @@ const ReviewCardModal = ({
   );
 };
 
-ReviewCardModal.propTypes = {
+ModalCardReview.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   review: PropTypes.shape({
@@ -51,4 +51,4 @@ ReviewCardModal.propTypes = {
   formatDate: PropTypes.func.isRequired,
 };
 
-export default ReviewCardModal;
+export default ModalCardReview;

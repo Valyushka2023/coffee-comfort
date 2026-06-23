@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import css from './MobileMenu.module.css';
+import css from './HeaderMobileMenu.module.css';
 
-const MobileMenu = ({ isOpen, onClose, navItems, t }) => {
+const HeaderMobileMenu = ({ isOpen, onClose, navItems, t }) => {
   const [isAnimated, setIsAnimated] = useState(false);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const MobileMenu = ({ isOpen, onClose, navItems, t }) => {
   );
 };
 
-MobileMenu.propTypes = {
+HeaderMobileMenu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   navItems: PropTypes.arrayOf(
@@ -78,4 +78,4 @@ MobileMenu.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default MobileMenu;
+export default HeaderMobileMenu;

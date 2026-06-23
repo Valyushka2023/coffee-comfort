@@ -8,7 +8,7 @@ import SwitcherTheme from '../Ui/Switchers/SwitcherTheme/SwitcherTheme.jsx';
 import SwitcherLanguage from '../Ui/Switchers/SwitcherLanguage/SwitcherLanguage.jsx';
 import MenuToggleButton from '../../components/Ui/Buttons/MenuToggleButton/MenuToggleButton.jsx';
 import CartIcon from '../../components/Ui/CartIcon/CartIcon.jsx';
-import CartModal from '../../components/Modal/CartModal/CartModal.jsx';
+import ModalCart from '../Modal/ModalCart/ModalCart.jsx';
 
 import css from './Header.module.css';
 
@@ -58,7 +58,7 @@ const Header = ({ onToggleMenu, isMenuOpen }) => {
       </header>
 
       {/* Модальне вікно кошика рендериться тут */}
-      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <ModalCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
 };

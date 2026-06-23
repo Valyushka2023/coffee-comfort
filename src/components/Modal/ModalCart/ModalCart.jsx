@@ -29,12 +29,16 @@ import {
   FiClock,
 } from 'react-icons/fi';
 
-import { removeFromCart, addToCart, clearCart } from '../../../redux/cartSlice';
-import { sendOrderRequest } from '../../../services/api';
+import {
+  removeFromCart,
+  addToCart,
+  clearCart,
+} from '../../../redux/cartSlice.js';
+import { sendOrderRequest } from '../../../services/api.js';
 import { validateName, validatePhone } from '../../../utils/index.js';
-import css from './CartModal.module.css';
+import css from './ModalCart.module.css';
 
-const CartModal = ({ isOpen, onClose }) => {
+const ModalCart = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation('cart_modal');
   const dispatch = useDispatch();
 
@@ -640,9 +644,9 @@ const CartModal = ({ isOpen, onClose }) => {
   );
 };
 
-CartModal.propTypes = {
+ModalCart.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-export default CartModal;
+export default ModalCart;

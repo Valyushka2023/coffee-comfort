@@ -8,9 +8,9 @@ import {
 import { Search } from '../../components/Icons/Search.jsx';
 import CardOrder from '../../components/Ui/Cards/CardOrder/CardOrder.jsx';
 
-import css from './Baristadashboard.module.css';
+import css from './BaristaDashboardPage.module.css';
 
-const Baristadashboard = () => {
+const BaristaDashboardPage = () => {
   const { t } = useTranslation('baristadashboard', {
     lng: 'uk',
     useSuspense: true,
@@ -165,4 +165,4 @@ const Baristadashboard = () => {
   );
 };
 
-export default Baristadashboard;
+export default BaristaDashboardPage;

@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import CardMenu from '../Ui/Cards/CardMenu/CardMenu.jsx';
-import MenuModal from '../Modal/MenuModal/MenuModal.jsx'; // Імпортуємо нову модалку
+import ModalCardMenu from '../Modal/ModalCardMenu/ModalCardMenu.jsx'; // Імпортуємо нову модалку
 import css from './Menu.module.css';
 
 const Menu = () => {
@@ -141,7 +141,7 @@ const Menu = () => {
                   <h4 className={css['category-title']}>
                     <span>{t(`categories.${section.categoryKey}`)}</span>
                   </h4>
-                  <div className={css['menu-items-grid']}>
+                  <div className={css['grid-cards-menu']}>
                     {visibleItems.map(item => (
                       <CardMenu
                         key={item._id}
@@ -177,7 +177,7 @@ const Menu = () => {
       </div>
 
       {/* Викликаємо новий компонент модалки */}
-      <MenuModal
+      <ModalCardMenu
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
         onSelect={handleSelectItem}

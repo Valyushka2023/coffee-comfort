@@ -49,4 +49,3 @@ const CardMenu = ({ item, formatPrice, onOpenModal }) => {
 };
 
 export default CardMenu;
-/**/

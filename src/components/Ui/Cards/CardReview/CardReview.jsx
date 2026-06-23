@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import StarRating from '../../StarRating/StarRating.jsx';
 import Avatar from '../../Avatars/Avatar.jsx';
-import ReviewCardModal from '../../../Modal/ReviewCardModal/ReviewCardModal.jsx';
+import ModalCardReview from '../../../Modal/ModalCardReview/ModalCardReview.jsx';
 import css from './CardReview.module.css';
 
 const ReviewCard = ({ review, currentLang, formatDate }) => {
@@ -57,7 +57,7 @@ const ReviewCard = ({ review, currentLang, formatDate }) => {
       </div>
 
       {/* Модальне вікно з повним текстом */}
-      <ReviewCardModal
+      <ModalCardReview
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         review={{ ...review, name, text }}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import GalleryModal from '../Modal/GalleryModal/GalleryModal.jsx';
+import ModalCardGallery from '../Modal/ModalCardGallery/ModalCardGallery.jsx';
 import css from './Gallery.module.css';
 
 const Gallery = ({ images = [] }) => {
@@ -41,7 +41,7 @@ const Gallery = ({ images = [] }) => {
           </p>
         </header>
 
-        <div className={css['grid']}>
+        <div className={css['grid-cards-gallery']}>
           {images.map(img => (
             <button
               key={img.id}
@@ -59,7 +59,7 @@ const Gallery = ({ images = [] }) => {
           ))}
         </div>
       </div>{' '}
-      <GalleryModal
+      <ModalCardGallery
         isOpen={!!selectedImg}
         onClose={() => setSelectedImg(null)}
         image={selectedImg}

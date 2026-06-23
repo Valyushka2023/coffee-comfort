@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import BaseModal from '../BaseModal/BaseModal.jsx';
 import Button from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
-import css from './AtmosphereModal.module.css';
+import css from './ModalCardAtmosphere.module.css';
 
-const AtmosphereModal = ({ isOpen, onClose, zone, onConfirm }) => {
+const ModalCardAtmosphere = ({ isOpen, onClose, zone, onConfirm }) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const { t } = useTranslation('form_booking');
   const imgRef = useRef(null); // Реф для картинки
@@ -121,7 +121,7 @@ const AtmosphereModal = ({ isOpen, onClose, zone, onConfirm }) => {
   );
 };
 
-AtmosphereModal.propTypes = {
+ModalCardAtmosphere.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   zone: PropTypes.shape({
@@ -131,4 +131,4 @@ AtmosphereModal.propTypes = {
   onConfirm: PropTypes.func.isRequired,
 };
 
-export default AtmosphereModal;
+export default ModalCardAtmosphere;

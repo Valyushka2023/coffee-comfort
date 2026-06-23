@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartSlice';
 import Loader from '../../Ui/Loader/Loader.jsx'; // Переконайся, що шлях до лоадера правильний
-import css from './MenuModal.module.css';
+import css from './ModalCardMenu.module.css';
 
-const MenuModal = ({ item, onClose, formatPrice }) => {
+const ModalCardMenu = ({ item, onClose, formatPrice }) => {
   const { t, i18n } = useTranslation('menu', { keyPrefix: 'menu_modal' });
   const dispatch = useDispatch();
 
@@ -109,4 +109,4 @@ const MenuModal = ({ item, onClose, formatPrice }) => {
   );
 };
 
-export default MenuModal;
+export default ModalCardMenu;

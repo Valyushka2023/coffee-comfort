@@ -95,7 +95,7 @@
   color: var(--color-header-link);
 }
 
-.menu-items-grid {
+.grid-cards-menu {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));

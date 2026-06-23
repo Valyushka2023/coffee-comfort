@@ -1,5 +1,59 @@
 @import url('../../../styles/animate.css');
 
+.success-wrapper {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 1rem;
+  box-sizing: border-box;
+  animation: fade-in 0.4s ease forwards;
+}
+
+.success-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  background-color: var(--form-success-bg-color);
+  border-radius: 1rem;
+  box-shadow: 0 0.625rem 1.875rem rgb(0 0 0 / 15%);
+  text-align: center;
+}
+
+.success-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.375rem;
+  height: 4.375rem;
+  margin-bottom: 1.25rem;
+  background-color: var(--form-icon-success-bg-color);
+  border: 0.0625rem solid var(--color-white) !important;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  color: var(--color-white);
+  animation: scale-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.title-success-form {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-light-brown);
+}
+
+.text-success-form {
+  max-width: 20rem;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-light-brown);
+}
+
 .form {
   position: relative;
   display: flex;
@@ -176,58 +230,61 @@
   color: var(--error-color);
 }
 
-.success-wrapper {
+/* .element-sending {
   display: flex;
-  flex: 1;
-  width: 100%;
-  max-width: 100%;
-  margin-top: 1rem;
-  box-sizing: border-box;
-  animation: fade-in 0.4s ease forwards;
-}
 
-.success-container {
-  display: flex;
+
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 2rem 1.5rem;
-  background-color: var(--form-success-bg-color);
-  border-radius: 1rem;
-  box-shadow: 0 0.625rem 1.875rem rgb(0 0 0 / 15%);
-  text-align: center;
-}
+  margin-top: 1.5625rem;
+} */
 
-.success-icon {
+/* Контейнер для кнопок, аналогічний more-btn-container з відгуків */
+
+/* .buttons-group {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 4.375rem;
-  height: 4.375rem;
-  margin-bottom: 1.25rem;
-  background-color: var(--form-icon-success-bg-color);
-  border: 0.0625rem solid var(--color-white) !important;
-  border-radius: 50%;
-  font-size: 2.5rem;
-  color: var(--color-white);
-  animation: scale-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  gap: 0.9375rem;
+  width: 100%;
+} */
+
+/* Якщо екран більший (десктоп), вибудовуємо кнопки в один ряд */
+
+@media (min-width: 48rem) {
+  .element-sending {
+    display: flex;
+    justify-content: center;
+    gap: 3.25rem;
+  }
+
+  .buttons-group {
+    display: flex;
+    justify-content: center;
+    gap: 2.25rem;
+  }
 }
 
-.title-success-form {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color-light-brown);
+/* Стиль для текстової кнопки очищення */
+.clear-form-btn {
+  cursor: pointer;
+  padding: 0.625rem 0.9375rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: underline;
+  color: #8e8e8e; /* Спокійний сірий колір, щоб кнопка не перетягувала увагу */
+  transition: color 0.2s ease;
 }
 
-.text-success-form {
-  max-width: 20rem;
-  margin: 0 auto 2rem;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--color-light-brown);
+.clear-form-btn:hover {
+  color: #e53e3e; /* Стає м'яко-червоною при наведенні, натякаючи на скидання */
+}
+
+.clear-form-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 @media (max-width: 61.9375rem) {

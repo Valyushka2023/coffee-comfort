@@ -218,73 +218,25 @@
   content: '';
 }
 
-.element-sending {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-}
-
 .general-error-popup {
   margin-bottom: 1rem;
   text-align: center;
   color: var(--error-color);
 }
 
-/* .element-sending {
+.element-sending {
   display: flex;
-
-
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  gap: 3.25rem;
   width: 100%;
-  margin-top: 1.5625rem;
-} */
+  margin: 0 auto;
+  text-align: center;
+}
 
-/* Контейнер для кнопок, аналогічний more-btn-container з відгуків */
-
-/* .buttons-group {
+.buttons-group {
   display: flex;
-  align-items: center;
-  gap: 0.9375rem;
-  width: 100%;
-} */
-
-/* Якщо екран більший (десктоп), вибудовуємо кнопки в один ряд */
-
-@media (min-width: 48rem) {
-  .element-sending {
-    display: flex;
-    justify-content: center;
-    gap: 3.25rem;
-  }
-
-  .buttons-group {
-    display: flex;
-    justify-content: center;
-    gap: 2.25rem;
-  }
-}
-
-/* Стиль для текстової кнопки очищення */
-.clear-form-btn {
-  cursor: pointer;
-  padding: 0.625rem 0.9375rem;
-  background: none;
-  border: none;
-  font-size: 1rem;
-  font-weight: 500;
-  text-decoration: underline;
-  color: #8e8e8e; /* Спокійний сірий колір, щоб кнопка не перетягувала увагу */
-  transition: color 0.2s ease;
-}
-
-.clear-form-btn:hover {
-  color: #e53e3e; /* Стає м'яко-червоною при наведенні, натякаючи на скидання */
-}
-
-.clear-form-btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+  justify-content: center;
+  gap: 2.25rem;
 }
 
 @media (max-width: 61.9375rem) {
@@ -299,6 +251,16 @@
 }
 
 @media (max-width: 29.9375rem) {
+  .element-sending {
+    display: block;
+  }
+
+  .buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .label-input-wrapper {
     flex-direction: column;
     align-items: flex-start;
@@ -307,7 +269,7 @@
   .label {
     max-width: 100%;
     padding: 0;
-    word-wrap: none;
+    word-wrap: normal;
   }
 
   .label-area-wrapper {

@@ -1,0 +1,1 @@
+import{j as n}from"./index-ChKwlKfZ.js";const s="_container_1vc3p_1",t={container:s};function e(){return n.jsxs("div",{className:t.container,children:[n.jsx("h1",{children:"404"}),n.jsx("p",{children:"Сторінку не знайдено"})]})}export{e as default};

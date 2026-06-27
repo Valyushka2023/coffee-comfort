@@ -12,7 +12,7 @@ const HeaderMobileMenu = ({ isOpen, onClose, navItems, t }) => {
     if (isOpen) {
       timerId = setTimeout(() => {
         setIsAnimated(true);
-      }, 600); // час анімації меню
+      }, 600);
     } else {
       setIsAnimated(false);
     }
@@ -79,100 +79,3 @@ HeaderMobileMenu.propTypes = {
 };
 
 export default HeaderMobileMenu;
-/**/
-// import { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
-// import clsx from 'clsx';
-// import css from './HeaderMobileMenu.module.css';
-
-// const HeaderMobileMenu = ({ isOpen, onClose, navItems, t }) => {
-//   const [isAnimated, setIsAnimated] = useState(false);
-
-//   useEffect(() => {
-//     let timerId;
-
-//     if (isOpen) {
-//       timerId = setTimeout(() => {
-//         setIsAnimated(true);
-//       }, 600);
-//     } else {
-//       setIsAnimated(false);
-//     }
-
-//     return () => {
-//       if (timerId) clearTimeout(timerId);
-//     };
-//   }, [isOpen]);
-
-//   const handleKeyDown = event => {
-//     if (event.key === 'Enter' || event.key === 'Escape') {
-//       onClose();
-//     }
-//   };
-
-//   // Проста функція повернення назад в історії браузера
-//   const handleBackClick = () => {
-//     window.history.back();
-//     onClose();
-//   };
-
-//   return (
-//     <>
-//       <div
-//         className={clsx(
-//           css.menu,
-//           isOpen && css['is-open'],
-//           isAnimated && css['is-animated']
-//         )}
-//       >
-//         <nav className={css['mobile-nav']}>
-//           {navItems.map(item => (
-//             <a
-//               key={item.href}
-//               href={item.href}
-//               className={css['mobile-link']}
-//               onClick={onClose}
-//             >
-//               {t(item.labelKey, item.defaultLabel)}
-//             </a>
-//           ))}
-//         </nav>
-
-//         {/* Тут залишаємо ТІЛЬКИ сервісну кнопку "Назад" */}
-//         <div className={css['service-actions']}>
-//           <button
-//             type="button"
-//             className={css['service-btn']}
-//             onClick={handleBackClick}
-//           >
-//             ⬅️ {t('go_back_menu', 'Назад')}
-//           </button>
-//         </div>
-//       </div>
-
-//       <div
-//         className={clsx(css['menu-backdrop'], isOpen && css['is-visible'])}
-//         onClick={onClose}
-//         onKeyDown={handleKeyDown}
-//         role="button"
-//         tabIndex={0}
-//         aria-label="Close menu"
-//       />
-//     </>
-//   );
-// };
-
-// HeaderMobileMenu.propTypes = {
-//   isOpen: PropTypes.bool.isRequired,
-//   onClose: PropTypes.func.isRequired,
-//   navItems: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       href: PropTypes.string.isRequired,
-//       labelKey: PropTypes.string.isRequired,
-//       defaultLabel: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-//   t: PropTypes.func.isRequired,
-// };
-
-// export default HeaderMobileMenu;

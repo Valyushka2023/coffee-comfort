@@ -48,8 +48,6 @@
   color: var(--text-mobile-color);
   transition: color 0.3s ease;
   user-select: none;
-
-  /* -webkit-tap-highlight-color: transparent; */
 }
 
 .header-link:hover {
@@ -108,8 +106,6 @@
     transform 0.3s ease,
     background-color 0.3s ease;
   user-select: none;
-
-  /* -webkit-tap-highlight-color: transparent; */
 }
 
 .header-cta-link:focus-visible {

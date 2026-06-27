@@ -109,17 +109,13 @@
   visibility: visible;
 }
 
-.service-actions {
+/* .service-actions {
   display: flex;
   flex-direction: column;
-
-  /* Переконайся, що вирівнювання йде по лівому краю (flex-start) */
   align-items: flex-start;
   gap: 1.25rem;
   margin-top: 3rem;
   padding-top: 1.5rem;
-
-  /* Додаємо такий самий відступ зліва, як і у пунктів меню, щоб лінії збігалися */
   padding-left: 1.5rem;
   border-top: 0.0625rem solid rgb(0 0 0 / 8%);
 }
@@ -128,8 +124,6 @@
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-
-  /* Скидаємо можливі авто-відступи, які могли центрувати кнопку */
   margin: 0;
   padding: 0;
   background: none;
@@ -145,8 +139,8 @@
 
 .service-btn:hover,
 .service-btn:active {
-  color: var(--color-light-brown); /* Колір стає активним при взаємодії */
-}
+  color: var(--color-light-brown); 
+} */
 
 @media (max-width: 47.9375rem) {
   .menu {

@@ -9,10 +9,7 @@ import Loader from '../../components/Ui/Loader/Loader.jsx';
 import css from './OrderHistoryPage.module.css';
 
 const OrderHistoryPage = () => {
-  // Примусово фіксуємо українську мову для цього компонента
   const { t, i18n } = useTranslation('order_history', { lng: 'uk' });
-
-  // Тепер currentLanguage гарантовано буде 'uk', бо ми зафіксували її вище
   const currentLanguage = i18n.language || 'uk';
 
   const [history, setHistory] = useState([]);
@@ -22,7 +19,11 @@ const OrderHistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [visibleChecksCount, setVisibleChecksCount] = useState(10);
 
-  const [selectedDate, setSelectedDate] = useState(
+  // Стейты для диапазона дат (по умолчанию ставим сегодняшний день для обоих)
+  const [startDate, setStartDate] = useState(
+    new Date().toISOString().split('T')[0]
+  );
+  const [endDate, setEndDate] = useState(
     new Date().toISOString().split('T')[0]
   );
 
@@ -30,8 +31,9 @@ const OrderHistoryPage = () => {
     const loadAllData = async () => {
       setLoading(true);
       try {
-        const historyData = await fetchOrderHistoryRequest();
-        const statsData = await fetchOrderStatsRequest(selectedDate);
+        // 🚀 ПЕРЕДАЄМО ДАТИ В ОБИДВА ЗАПИТИ НА БЕКЕНД
+        const historyData = await fetchOrderHistoryRequest(startDate, endDate);
+        const statsData = await fetchOrderStatsRequest(startDate, endDate);
 
         setHistory(historyData || []);
 
@@ -58,7 +60,7 @@ const OrderHistoryPage = () => {
     };
 
     loadAllData();
-  }, [selectedDate]);
+  }, [startDate, endDate]); // Перезапуск працюватиме ідеально
 
   const getOrderLocalDateString = dateInput => {
     const localDate = new Date(dateInput);
@@ -68,21 +70,18 @@ const OrderHistoryPage = () => {
     return `${year}-${month}-${day}`;
   };
 
-  // const getDishName = dish => {
-  //   if (typeof dish === 'object' && dish !== null) {
-  //     // Використовуємо поточну мову з i18n (зараз це 'uk')
-  //     return dish[currentLanguage] || dish.uk || dish.en;
-  //   }
-  //   return dish;
-  // };
   const getDishName = dish => {
     if (typeof dish === 'object' && dish !== null) {
-      // ПРИМУСОВО: спочатку беремо українську назву з бази,
-      // якщо її немає — англійську, якщо і її немає — пустий рядок
       return dish.uk || dish.en || '';
     }
     return dish;
   };
+
+  // Проверка: входит ли дата заказа в выбранный диапазон
+  const isOrderInSelectedRange = orderDateStr => {
+    return orderDateStr >= startDate && orderDateStr <= endDate;
+  };
+
   const exportToExcel = () => {
     if (history.length === 0 && dishStats.length === 0) {
       alert(t('no_data_to_export', 'No data to export!'));
@@ -90,19 +89,23 @@ const OrderHistoryPage = () => {
     }
 
     const workbook = XLSX.utils.book_new();
-
-    // Локаль динамічно підлаштовується під i18n.language
     const localeStr = currentLanguage === 'uk' ? 'uk-UA' : 'en-US';
     const currentDateTime = new Date().toLocaleString(localeStr);
-    const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
+
+    const formattedStartDate = new Date(startDate).toLocaleDateString(
       localeStr
     );
+    const formattedEndDate = new Date(endDate).toLocaleDateString(localeStr);
+
+    // Строка периода для заголовка Excel
+    const periodString =
+      startDate === endDate
+        ? formattedStartDate
+        : `${formattedStartDate} — ${formattedEndDate}`;
 
     const getHeaderInfo = sheetTitle => [
       [sheetTitle],
-      [
-        `${t('analytics_per_day', 'Analytics for the day:')} ${formattedSelectedDate}`,
-      ],
+      [`${t('analytics_period', 'Period:')} ${periodString}`],
       [`${t('excel.generated_at', 'Generated at')}: ${currentDateTime}`],
       [],
     ];
@@ -113,8 +116,9 @@ const OrderHistoryPage = () => {
     );
     const historySheet = XLSX.utils.aoa_to_sheet(historyHeader);
 
+    // Фильтруем чеки по диапазону дат
     const historyFilteredByDate = history.filter(order => {
-      return getOrderLocalDateString(order.updatedAt) === selectedDate;
+      return isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt));
     });
 
     const historyData = historyFilteredByDate.map(order => {
@@ -158,9 +162,9 @@ const OrderHistoryPage = () => {
       t('excel.sheet-check-history', 'Receipt History')
     );
 
-    // АРКУШ 2: ПІДСУМОК ЗА ДЕНЬ
+    // АРКУШ 2: ПІДСУМОК ЗА ПЕРІОД
     const statsHeader = getHeaderInfo(
-      t('excel.sheet_day_summary', 'Daily Summary')
+      t('excel.sheet_day_summary', 'Summary for Period')
     );
     const statsSheet = XLSX.utils.aoa_to_sheet(statsHeader);
 
@@ -197,7 +201,7 @@ const OrderHistoryPage = () => {
     });
     statsData.push({
       [t('excel.dish_name', 'Dish Name')]:
-        `🔥 ${t('excel.total_per_day', 'Total per day')}`,
+        `🔥 ${t('excel.total_per_day', 'Total for period')}`,
       [t('excel.sold_pcs', 'Sold (pcs)')]: '',
       [t('excel.total_amount', 'Total Amount')]:
         `${totalDayRevenueCalculated} ${t('currency', 'UAH')}`,
@@ -208,10 +212,12 @@ const OrderHistoryPage = () => {
     XLSX.utils.book_append_sheet(
       workbook,
       statsSheet,
-      t('excel.sheet_day_summary', 'Daily Summary')
+      t('excel.sheet_day_summary', 'Summary for Period')
     );
 
-    XLSX.writeFile(workbook, `Coffee_Comfort_Report_${selectedDate}.xlsx`);
+    const fileDateName =
+      startDate === endDate ? startDate : `${startDate}_to_${endDate}`;
+    XLSX.writeFile(workbook, `Coffee_Comfort_Report_${fileDateName}.xlsx`);
   };
 
   const totalDayRevenue = cashRevenue + cardRevenue;
@@ -220,26 +226,40 @@ const OrderHistoryPage = () => {
     return <Loader type="container" size={60} />;
   }
 
-  // Динамічне форматування дати для рендеру інтерфейсу сторінки
-  const formattedSelectedDate = new Date(selectedDate).toLocaleDateString(
-    currentLanguage === 'uk' ? 'uk-UA' : 'en-US'
-  );
+  const localeStr = currentLanguage === 'uk' ? 'uk-UA' : 'en-US';
+  const formattedStartDate = new Date(startDate).toLocaleDateString(localeStr);
+  const formattedEndDate = new Date(endDate).toLocaleDateString(localeStr);
+  const renderPeriodTitle =
+    startDate === endDate
+      ? formattedStartDate
+      : `${formattedStartDate} — ${formattedEndDate}`;
 
   return (
     <div className={css['container']}>
       <header className={css['header']}>
         <h1>📊 {t('title', 'Order History')}</h1>
         <div className={css['filter-wrapper']}>
-          <label htmlFor="history-date-picker">
-            {t('analytics_per_day', 'Analytics for the day:')}
+          <div className={css['date-picker-group']}>
+            <label htmlFor="start-date-picker">З:</label>
             <input
-              id="history-date-picker"
+              id="start-date-picker"
               type="date"
-              value={selectedDate}
-              onChange={e => setSelectedDate(e.target.value)}
+              value={startDate}
+              onChange={e => setStartDate(e.target.value)}
               className={css['date-input']}
             />
-          </label>
+          </div>
+          <div className={css['date-picker-group']}>
+            <label htmlFor="end-date-picker">По:</label>
+            <input
+              id="end-date-picker"
+              type="date"
+              value={endDate}
+              onChange={e => setEndDate(e.target.value)}
+              min={startDate} // Не позволяет выбрать дату окончания раньше даты начала
+              className={css['date-input']}
+            />
+          </div>
         </div>
       </header>
 
@@ -247,8 +267,7 @@ const OrderHistoryPage = () => {
       <section className={css['stats-section']}>
         <div className={css['stats-summary']}>
           <h2>
-            {t('summary_by_dishes', 'Summary by dishes')} (
-            {formattedSelectedDate})
+            {t('summary_by_dishes', 'Summary by dishes')} ({renderPeriodTitle})
           </h2>
           <div className={css['badges-container']}>
             <div className={`${css['finance-badge']} ${css['cash-badge']}`}>
@@ -290,7 +309,7 @@ const OrderHistoryPage = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={3}>{t('no_data', 'No data for this day')}</td>
+                <td colSpan={3}>{t('no_data', 'No data for this period')}</td>
               </tr>
             )}
           </tbody>
@@ -322,18 +341,13 @@ const OrderHistoryPage = () => {
           </thead>
           <tbody>
             {history
-              .filter(
-                order =>
-                  getOrderLocalDateString(order.updatedAt) === selectedDate
+              .filter(order =>
+                isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt))
               )
               .slice(0, visibleChecksCount)
               .map(order => (
                 <tr key={order._id}>
-                  <td>
-                    {new Date(order.updatedAt).toLocaleString(
-                      currentLanguage === 'uk' ? 'uk-UA' : 'en-US'
-                    )}
-                  </td>
+                  <td>{new Date(order.updatedAt).toLocaleString(localeStr)}</td>
                   <td>
                     #{order.orderNumber || order._id.slice(-4).toUpperCase()}
                   </td>
@@ -364,8 +378,8 @@ const OrderHistoryPage = () => {
           </tbody>
         </table>
 
-        {history.filter(
-          order => getOrderLocalDateString(order.updatedAt) === selectedDate
+        {history.filter(order =>
+          isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt))
         ).length > visibleChecksCount && (
           <div className={css['load-more-wrapper']}>
             <button

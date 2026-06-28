@@ -24,7 +24,7 @@ const AtmosphereSelector = ({ selectedZone, onSelectClick }) => {
             <button
               type="button"
               className={css['zone-card']}
-              onClick={() => onSelectClick(zone)} // Викликаємо проп від батька
+              onClick={() => onSelectClick(zone)}
             >
               <div
                 className={clsx(css['img-wrapper'], {

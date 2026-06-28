@@ -437,10 +437,11 @@
 }
 
 .active-order-time {
-  padding: 0.15rem 0.5rem;
-  background-color: #fef9e7;
+  padding: 0;
+
+  /* background-color: #fef9e7; */
   border-radius: 1rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #d35400;
 }
@@ -455,6 +456,35 @@
 
 .active-order-subitems li {
   margin-bottom: 0.15rem;
+}
+
+/* Блок для вертикального розміщення номера та імені */
+.active-order-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%; /* розтягуємо блок на всю ширину замовлення */
+}
+
+/* Рядок, який вирівняє номер і час по одній лінії */
+.active-order-top-row {
+  display: flex;
+  justify-content: space-between; /* номер притисне до лівого краю, час — до правого */
+  align-items: center; /* вирівнювання по центру по вертикалі */
+  width: 100%;
+}
+
+.active-order-number {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.active-order-customer {
+  margin-top: 0.125rem; /* легкий відступ від верхнього рядка */
+  font-size: 0.825rem;
+
+  /* font-style: italic; */
+  color: #666;
 }
 
 @keyframes pulse-icon {

@@ -1,17 +1,11 @@
-// Що отримаєте після цих змін
-
+/**
 // ✅ Бариста натиснув "Скасувати" → статус cancelled
-
 // ✅ Клієнт відкрив кошик → замовлення автоматично зникло
-
 // ✅ Якщо кошик відкритий — перевірка кожні 30 секунд
-
 // ✅ Якщо замовлення виконане (completed) — також зникне
-
 // ✅ Якщо замовлення старше 40 хвилин — автоматично очищається з localStorage
-
 // ✅ localStorage повністю очищається, коли активних замовлень більше немає
-/**/
+**/
 import { generateAvailableSlots } from '../../../utils/timeUtils.js';
 import { useEffect, useCallback, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -61,6 +55,7 @@ const ModalCart = ({ isOpen, onClose }) => {
   const currentLang = (i18n.language || 'uk').slice(0, 2);
 
   const [busySlots, setBusySlots] = useState([]);
+
   const syncActiveOrders = useCallback(async () => {
     const stored = localStorage.getItem('activeOrders');
 
@@ -128,7 +123,7 @@ const ModalCart = ({ isOpen, onClose }) => {
     }
   }, []);
 
-  // Атоматична синхронізація активних замовлень клієнта з сервером
+  // Автоматична синхронізація активних замовлень клієнта з сервером
   useEffect(() => {
     if (!isOpen) return;
 
@@ -363,6 +358,7 @@ const ModalCart = ({ isOpen, onClose }) => {
       const newOrderInfo = {
         id: data._id, // Зберігаємо повний ID для подальшої валідації статусів
         number: generatedOrderNum,
+        customerName: name.trim(), // 🚀 ЗБЕРІГАЄМО ІМ'Я ДЛЯ ОФІСНОГО ВІДЖЕТА
         time: pickupTime || t('closest_time', 'Найближчий час'),
         items: itemsSnapshot,
         timestamp: Date.now(),
@@ -428,12 +424,29 @@ const ModalCart = ({ isOpen, onClose }) => {
                 {activeOrders.map(order => (
                   <li key={order.number} className={css['active-order-item']}>
                     <div className={css['active-order-header']}>
-                      <span>
-                        Замовлення <strong>#{order.number}</strong>
-                      </span>
-                      <span className={css['active-order-time']}>
-                        {order.time}
-                      </span>
+                      {/* Новий контейнер для правильного групування елементів */}
+                      <div className={css['active-order-info-block']}>
+                        {/* Верхній рядок: Номер ліворуч, час праворуч */}
+                        <div className={css['active-order-top-row']}>
+                          <span className={css['active-order-number']}>
+                            Замовлення{' '}
+                            <strong>
+                              {'# '}
+                              {order.number}
+                            </strong>
+                          </span>
+                          <span className={css['active-order-time']}>
+                            {order.time}
+                          </span>
+                        </div>
+
+                        {/* Нижній рядок: Ім'я клієнта залишається знизу */}
+                        {order.customerName && (
+                          <span className={css['active-order-customer']}>
+                            {order.customerName}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <ul className={css['active-order-subitems']}>
                       {order.items.map((item, idx) => (

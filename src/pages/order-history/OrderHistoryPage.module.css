@@ -34,25 +34,29 @@
   font-weight: 700;
 }
 
-/* Фільтр дати */
+/* Фільтр дат (Група) */
 .filter-wrapper {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: 1.5rem; /* Збільшений відступ між двома інпутами */
+  flex-wrap: wrap;
+}
+
+.date-picker-group {
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.filter-wrapper label {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
+.date-picker-group label {
   font-size: 1rem;
   font-weight: 600;
 }
 
 .date-input {
   cursor: pointer;
-  padding: 0.625rem 2rem;
+  padding: 0.625rem 1.5rem;
   background-color: transparent;
   border: 0.0625rem solid var(--border-accent);
   border-radius: 0.5rem;
@@ -102,7 +106,7 @@
   font-weight: 600;
 }
 
-/* НОВІ СТИЛІ ДЛЯ КАСОВИХ БАДЖІВ */
+/* БАДЖІ */
 .badges-container {
   display: flex;
   align-items: center;
@@ -119,17 +123,7 @@
   color: var(--color-gray-light);
 }
 
-.cash-badge {
-  border: 0.125rem solid var(--border-accent);
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.cash-badge span {
-  color: var(--color-accent);
-}
-
+.cash-badge,
 .card-badge {
   border: 0.125rem solid var(--border-accent);
   font-size: 1.1rem;
@@ -137,11 +131,11 @@
   text-transform: uppercase;
 }
 
+.cash-badge span,
 .card-badge span {
   color: var(--color-accent);
 }
 
-/* Бадж загальної суми */
 .total-badge {
   padding: 0.625rem 2rem;
   background-color: transparent;
@@ -231,7 +225,6 @@
   margin-bottom: 0;
 }
 
-/* СТАТУСИ ОПЛАТИ ТА ЛОАДЕР */
 .paid {
   font-weight: 600;
   color: var(--color-gray-light);
@@ -273,7 +266,7 @@
   transform: scale(0.98);
 }
 
-/* АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ) */
+/* АДАПТИВНІСТЬ */
 @media (max-width: 47.9375rem) {
   .container {
     padding: 1rem;
@@ -285,12 +278,19 @@
   }
 
   .filter-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
     width: 100%;
   }
 
-  .filter-wrapper label {
+  .date-picker-group {
     justify-content: space-between;
     width: 100%;
+  }
+
+  .date-input {
+    width: 70%;
   }
 
   .stats-section,

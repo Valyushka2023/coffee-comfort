@@ -170,13 +170,27 @@ export const deleteOrderRequest = async orderId => {
 // HISTORY
 // ======================
 
-export const fetchOrderHistoryRequest = async () => {
+// export const fetchOrderHistoryRequest = async () => {
+//   try {
+//     const { data } = await api.get(ENDPOINTS.HISTORY);
+
+//     return data;
+//   } catch (error) {
+//     handleError(error, 'Error loading order history');
+//   }
+// };
+export const fetchOrderHistoryRequest = async (startDate, endDate) => {
   try {
-    const { data } = await api.get(ENDPOINTS.HISTORY);
+    console.log('SEND TO HISTORY');
+    console.log({ startDate, endDate });
+
+    const { data } = await api.get(ENDPOINTS.HISTORY, {
+      params: { startDate, endDate },
+    });
 
     return data;
   } catch (error) {
-    handleError(error, 'Error loading order history');
+    handleError(error, 'Помилка історії');
   }
 };
 // ======================
@@ -195,16 +209,29 @@ export const fetchBaristaDashboardRequest = async () => {
 // ANALYTICS (STATS)
 // ======================
 
-export const fetchOrderStatsRequest = async date => {
+// export const fetchOrderStatsRequest = async date => {
+//   try {
+//     const { data } = await api.get(ENDPOINTS.STATS, {
+//       params: { date },
+//     });
+
+//     return data;
+//   } catch (error) {
+//     handleError(error, 'Error loading analytics data');
+//   }
+// };
+export const fetchOrderStatsRequest = async (startDate, endDate) => {
   try {
+    console.log('SEND TO STATS');
+    console.log({ startDate, endDate });
+
     const { data } = await api.get(ENDPOINTS.STATS, {
-      params: { date },
+      params: { startDate, endDate },
     });
 
     return data;
   } catch (error) {
-    handleError(error, 'Error loading analytics data');
+    handleError(error, 'Помилка завантаження аналітики');
   }
 };
-
 export default api;

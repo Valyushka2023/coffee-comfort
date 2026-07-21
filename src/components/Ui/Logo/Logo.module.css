@@ -9,8 +9,8 @@
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
-  color: var(--logo-primary-color);
-  text-shadow: 0 0 0.9375rem var(--color-latte-coffee-0);
+  color: var(--header-logo-primary);
+  text-shadow: 0 0 0.9375rem var(--header-logo-shadow-color);
   transition:
     color 0.3s ease,
     text-shadow 0.3s ease;
@@ -21,7 +21,7 @@
 
 .logo-secondary {
   display: inline-block;
-  color: var(--logo-secondary-color);
+  color: var(--header-logo-secondary);
 }
 
 .logo-coffee-cap {
@@ -35,12 +35,13 @@
   display: block;
   width: 2em;
   height: 2em;
-  box-shadow: 0 0 0.75rem var(--color-latte-coffee-0);
+  box-shadow: 0 0 0.75rem var(--header-logo-shadow);
   transition: box-shadow 0.3s ease;
   aspect-ratio: 1 / 1;
   will-change: box-shadow;
 }
 
+/* 1. БАЗОВІ СТИЛІ ПАРИ (Спочатку йдуть загальні селектори) */
 .logo-coffee-cap::before,
 .logo-coffee-cap::after {
   position: absolute;
@@ -50,9 +51,9 @@
   height: 1.375rem;
   background: linear-gradient(
     to top,
-    rgb(var(--steam-color) / 0%) 0%,
-    rgb(var(--steam-color) / 80%) 50%,
-    rgb(var(--steam-color) / 0%) 100%
+    rgb(var(--header-logo-steam-channels) / 0%) 0%,
+    rgb(var(--header-logo-steam-channels) / 80%) 50%,
+    rgb(var(--header-logo-steam-channels) / 0%) 100%
   );
   border-radius: 50%;
   animation: steam 2.5s infinite ease-in-out;
@@ -70,12 +71,27 @@
   animation-delay: 1.2s;
 }
 
+/* 2. СПЕЦИФІЧНІ СТИЛІ ДЛЯ ТЕМНОЇ ТЕМИ (Нижче у файлі, щоб лінтер був задоволений) */
+.dark-theme .logo-coffee-cap::before,
+.dark-theme .logo-coffee-cap::after {
+  /* Збільшуємо щільність до 100% у піку, щоб пару не «з'їдало» темне тло */
+  background: linear-gradient(
+    to top,
+    rgb(var(--header-logo-steam-channels) / 0%) 0%,
+    rgb(var(--header-logo-steam-channels) / 100%) 50%,
+    rgb(var(--header-logo-steam-channels) / 0%) 100%
+  );
+
+  /* Зменшуємо розмиття, щоб краї не танули в темряві */
+  filter: blur(0.1rem);
+}
+
 .logo:hover {
-  text-shadow: 0 0 0.5rem var(--color-latte-coffee-40);
+  text-shadow: 0 0 0.5rem var(--header-logo-shadow-hover);
 }
 
 .logo:hover .logo-coffee-cap img {
-  box-shadow: 0 0 0.75rem var(--color-latte-coffee-50);
+  box-shadow: 0 0 0.75rem var(--header-logo-shadow-hover);
 }
 
 @media (max-width: 74.9375rem) {
@@ -96,14 +112,14 @@
   }
 
   .logo-coffee-cap img {
-    width: 1.8;
-    height: 1.8;
+    width: 1.8rem;
+    height: 1.8rem;
   }
 }
 
 @media (max-width: 47.9375rem) {
   .logo-coffee-cap img {
-    width: 1.5;
+    width: 1.5rem;
     height: 1.5rem;
   }
 
@@ -116,7 +132,7 @@
 
 @media (max-width: 29.9375rem) {
   .logo-coffee-cap img {
-    width: 1.2;
+    width: 1.2rem;
     height: 1.2rem;
   }
 }

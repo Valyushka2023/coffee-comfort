@@ -7,9 +7,10 @@
   width: 3.125rem;
   height: 3.125rem;
   overflow: hidden;
-  background-color: var(--avatar-bg-color);
+  background-color: var(--avatar-bg);
+  border: 0.0625rem solid var(--border-btn);
   border-radius: 50%;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-circle-global);
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--avatar-color);

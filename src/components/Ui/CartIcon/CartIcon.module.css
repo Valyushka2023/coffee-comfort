@@ -1,7 +1,6 @@
 @import url('../../../styles/animate.css');
 
-.cart-icon-wrapper {
-  /* Змінюємо fixed на relative, щоб кнопка стала частиною Хедера */
+.btn-cart-icon {
   position: relative;
   display: flex;
   justify-content: center;
@@ -9,19 +8,46 @@
   cursor: pointer;
   width: 2.35rem;
   height: 2.35rem;
-  background-color: var(--bg-accent);
-  border: 0.0625rem solid var(--color-white);
+  background-color: var(--btn-cart-icon-bg);
+  border: 0.125rem solid var(--border-btn);
   border-radius: 50%;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-up-button);
-  color: var(--color-white);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-btn);
+  color: var(--btn-cart-icon-color);
   transition: all 0.3s ease;
   animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   user-select: none;
 }
 
-.cart-icon-wrapper:hover {
-  background-color: var(--hover-color);
+.btn-cart-icon:focus-visible {
+  box-shadow:
+    0 0 0 0.25rem var(--btn-cta-bg),
+    0 0 0 0.375rem var(--hover-btn-bg),
+    0 0.25rem 0.9375rem var(--shadow-btn);
+  outline: none;
+}
+
+/* При ховері кнопки міняємо тільки фон, а трансформацію прибираємо звідси... */
+.btn-cart-icon:hover {
+  background-color: var(--hover-btn-cart-icon-bg);
+}
+
+.btn-cart-icon svg {
+  color: var(--header-cart-icon);
+
+  /* ...і додаємо transition для SVG, щоб він крутився плавно! */
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+/* ...і переносимо трансформацію суто на SVG! */
+.btn-cart-icon:hover svg {
   transform: scale(1.1) rotate(-5deg);
+}
+
+.btn-cart-icon:hover svg,
+.btn-cart-icon:focus-visible svg {
+  color: var(--header-cart-icon-hover);
 }
 
 .badge {
@@ -33,10 +59,14 @@
   align-items: center;
   width: 1.45rem;
   height: 1.45rem;
-  background-color: var(--color-light-brown);
-  border: 0.125rem solid var(--color-white);
+  background-color: var(--header-cart-badge-bg);
+  border: 0.125rem solid var(--border-btn);
   border-radius: 50%;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-btn);
   font-size: 0.75rem;
   font-weight: bold;
-  color: var(--color-white);
+  color: var(--header-cart-badge-text);
+
+  /* Перестраховка: щоб анімація кошика взагалі ніяк не смикала бейдж */
+  transform: none !important;
 }

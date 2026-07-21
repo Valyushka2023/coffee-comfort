@@ -19,7 +19,7 @@
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--tertiary-color);
+  color: var(--header-lang-text);
   transition: all 0.3s ease;
 }
 
@@ -28,27 +28,31 @@
   transform: none;
 }
 
+/* Активна мова */
 .active {
   cursor: default;
-  color: var(--active-color) !important;
-  text-shadow: 0 0 0.625rem var(--color-latte-coffee-30);
+  color: var(--header-lang-active) !important;
+  text-shadow: 0 0 0.625rem rgb(var(--latte-channels) / 30%);
 }
 
+/* Роздільник (коса риска) */
 .separator {
   cursor: default;
   margin: 0 0.25rem;
   font-family: var(--btn-font-family, 'Montserrat', sans-serif);
   font-size: 1.1rem;
   font-weight: 300;
-  color: var(--primary-color);
+  color: var(--header-lang-divider);
 }
 
+/* Ховер ефекти суто для неактивних мов */
 .language-en:not(.active):hover,
 .language-uk:not(.active):hover {
-  color: var(--hover-color);
+  color: var(--header-lang-hover);
   transform: translateY(-0.0625rem);
 }
 
+/* Лінія підкресления при ховері */
 .language-en:not(.active)::after,
 .language-uk:not(.active)::after {
   position: absolute;
@@ -56,7 +60,10 @@
   left: 0;
   width: 100%;
   height: 0.125rem;
-  background-color: var(--hover-color);
+  background-color: var(
+    --state-active-global
+  ); /* Змінено: фірмовий колір активності (latte) */
+
   transition: transform 0.3s ease;
   transform: scaleX(0);
   transform-origin: left;
@@ -73,6 +80,7 @@
   transform: scale(1);
 }
 
+/* Адаптивність */
 @media (max-width: 61.9375rem) {
   .lang-switcher {
     gap: 0.12rem;

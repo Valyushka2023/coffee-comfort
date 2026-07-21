@@ -1,21 +1,23 @@
+@import url('../../styles/animate.css');
+
 .reviews-section {
   position: relative;
   padding: 4rem 0;
   overflow: hidden;
-  background-color: var(--body-bg-color);
-  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
-  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
-    var(--section-border-bottom-color);
+  background-color: var(--section-bg);
+  border-bottom: 0.0625rem solid var(--border-section-bottom);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem var(--border-section-bottom);
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
-
-  /* НОВА АНІМАЦІЯ */
   animation: scale-in 0.9s ease-out both;
 
-  --scale-offset: 0.98; /* Ледь помітне збільшення для солідності */
+  --scale-offset: 0.98;
+  --opacity-from: 0;
+  --opacity-to: 1;
 
   contain: paint;
+  will-change: transform, opacity;
 }
 
 .reviews-container {
@@ -41,7 +43,7 @@
 
 .reviews-title {
   text-transform: uppercase;
-  color: var(--primary-color);
+  color: var(--section-text);
 }
 
 .average-rating-block {
@@ -57,12 +59,12 @@
   font-size: 3.5rem;
   font-weight: 800;
   line-height: 1;
-  color: var(--primary-color);
+  color: var(--section-text);
 }
 
 .rating-count-label {
   font-size: 1rem;
-  color: var(--tertiary-color);
+  color: var(--section-text);
   opacity: 0.8;
 }
 
@@ -80,7 +82,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    var(--color-light-brown),
+    var(--bg-underline),
     transparent
   );
 }
@@ -88,7 +90,7 @@
 .ornament {
   display: flex;
   align-items: center;
-  color: var(--primary-color);
+  color: var(--bg-underline);
 }
 
 .reviews-items-grid {
@@ -103,6 +105,7 @@
 }
 
 /* --- СКЕЛЕТОНИ ДЛЯ ВІДГУКІВ --- */
+
 .skeleton-review-card {
   position: relative;
   display: flex;
@@ -112,29 +115,29 @@
   height: 11.25rem;
   padding: 1.5rem;
   overflow: hidden;
-  background-color: var(--section-border-bottom-color);
+  background-color: var(--skeleton-card-bg);
   border-radius: 1rem;
-  opacity: 0.3;
+  opacity: 0.8;
 }
 
 .skeleton-header {
   width: 60%;
   height: 1.2rem;
-  background-color: var(--primary-color);
+  background-color: var(--skeleton-element-bg);
   border-radius: 0.25rem;
 }
 
 .skeleton-line {
   width: 100%;
   height: 0.8rem;
-  background-color: var(--tertiary-color);
+  background-color: var(--skeleton-element-bg);
   border-radius: 0.25rem;
 }
 
 .skeleton-line-short {
   width: 80%;
   height: 0.8rem;
-  background-color: var(--tertiary-color);
+  background-color: var(--skeleton-element-bg);
   border-radius: 0.25rem;
 }
 
@@ -147,13 +150,13 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgb(255 255 255 / 50%),
+    var(--skeleton-element-glow),
     transparent
   );
   animation: shimmer 1.5s infinite;
 }
 
-.more-btn-container {
+.actions-wrapper {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
@@ -170,7 +173,7 @@
 .external-text {
   margin-bottom: 1.5rem;
   font-style: italic;
-  color: var(--tertiary-color);
+  color: var(--section-text);
 }
 
 .bean {
@@ -180,7 +183,8 @@
   background-repeat: no-repeat;
   background-size: contain;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.9;
+  filter: brightness(1.6) drop-shadow(0 0 0.5rem var(--coffee-bean-icon));
 }
 
 .coffee-bean1 {

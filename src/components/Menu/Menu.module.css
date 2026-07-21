@@ -4,10 +4,9 @@
   position: relative;
   padding: 4rem 0;
   overflow: visible;
-  background-color: var(--body-bg-color);
-  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
-  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
-    var(--section-border-bottom-color);
+  background-color: var(--section-bg);
+  border-bottom: 0.0625rem solid var(--border-section-bottom);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem var(--border-section-bottom);
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
@@ -37,7 +36,7 @@
 
 .menu-title {
   text-transform: uppercase;
-  color: var(--primary-color);
+  color: var(--section-text);
 }
 
 .menu-filter {
@@ -48,29 +47,44 @@
   flex-wrap: wrap;
 }
 
+/* ==========================================================
+   Унікальні стилі кнопки фільтра (Додаються поверх .primary)
+   ========================================================== */
+
 .filter-btn {
   position: relative;
-  cursor: pointer;
   min-width: 8rem;
   padding: 0.625rem 1.5rem;
-  background-color: var(--button-review-menu-bg-color);
-  border: 0.0625rem solid var(--button-border-color);
-  border-radius: var(--btn-radius, 2rem);
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
-  color: var(--color-header-link);
-  transition: all 0.3s ease;
   user-select: none;
 }
 
-.filter-btn.active::after {
+/* Сама кнопка в активному стані */
+.filter-btn.active {
+  background-color: var(--hover-btn-bg);
+  color: var(--hover-btn-color);
+}
+
+/* Лінія підкреслення активного фільтра */
+
+/* .filter-btn.active::after {
   position: absolute;
   right: 20%;
   bottom: 0.5rem;
   left: 20%;
   height: 0.125rem;
-  background-color: var(--color-header-link);
+  background-color: var(--btn-cta-color);
+  transition: background-color 0.3s ease;
   content: '';
+} */
+
+/* Зміна кольору лінії при наведенні на вже активну кнопку */
+.filter-btn.active:hover::after {
+  background-color: var(--hover-btn-color);
 }
+
+/* ==========================================
+   Сітка меню та решта елементів
+   ========================================== */
 
 .menu-grid-container {
   width: 100%;
@@ -92,7 +106,7 @@
 
 .category-title {
   text-transform: uppercase;
-  color: var(--color-header-link);
+  color: var(--section-filter-text);
 }
 
 .grid-cards-menu {
@@ -109,7 +123,9 @@
   width: 100%;
   height: 7.5rem;
   overflow: hidden;
-  background-color: var(--section-border-bottom-color);
+
+  /* background-color: var(--section-border-bottom-color); */
+  background-color: var(--color-skeleton-card-bg);
   border-radius: 1rem;
   opacity: 0.3;
 }
@@ -123,13 +139,13 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--color-white-50),
+    var(--color-skeleton-static-glow),
     transparent
   );
   animation: shimmer 1.5s infinite;
 }
 
-.controls-wrapper {
+.actions-wrapper {
   display: flex;
   justify-content: center;
   gap: 1.25rem;
@@ -137,25 +153,7 @@
   margin-top: 1.875rem;
 }
 
-.load-more-btn,
-.collapse-btn {
-  cursor: pointer;
-  padding: 0.625rem 1.5625rem;
-  background: transparent;
-  border: 0.125rem solid var(--color-light-brown);
-  border-radius: 1.25rem;
-  font-weight: 600;
-  color: var(--color-light-brown);
-  transition: all 0.3s ease;
-}
-
-.load-more-btn:hover,
-.collapse-btn:hover {
-  background-color: var(--color-light-brown);
-  color: var(--color-white);
-  transform: translateY(-0.125rem);
-}
-
+/* Декоративні зерна */
 .bean {
   position: absolute;
   z-index: 0;
@@ -163,7 +161,8 @@
   background-repeat: no-repeat;
   background-size: contain;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.9;
+  filter: brightness(1.6) drop-shadow(0 0 0.5rem var(--coffee-bean-icon));
 }
 
 .coffee-bean1 {

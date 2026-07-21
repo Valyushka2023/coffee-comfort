@@ -253,7 +253,7 @@ const FormBooking = () => {
             isFixedWidth={true}
             onClick={resetForm}
           >
-            {t('clear_form_btn', 'Очистити форму')}
+            {t('clear_form_btn', 'Clear form')}
           </BaseButton>
         </div>
       </div>

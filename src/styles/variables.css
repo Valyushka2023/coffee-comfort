@@ -1,11 +1,13 @@
-/* CSS-змінні */
-
 :root {
+  /* ==========================================================================
+     1. ГЛОБАЛЬНІ НЕ-КОЛІРНІ НАЛАШТУВАННЯ (OVERLAYS, DIMENSIONS, SPACING)
+     ========================================================================== */
+
   /* Overlay */
   --overlay-bg: rgb(0 0 0 / 70%);
   --overlay-blur: 0.25rem;
 
-  /* --- ДИЗАЙН-СИСТЕМА КНОПОК --- */
+  /* Дизайн-система кнопок */
   --btn-font-family: 'Montserrat', sans-serif;
   --btn-font-weight: 600;
   --btn-height: 3rem;
@@ -13,26 +15,16 @@
   --btn-font-size: 1rem;
   --btn-min-width: 13.75rem;
 
-  /* --- ДИЗАЙН-СИСТЕМА ПОСИЛАНЬ--- */
+  /* Налаштування для CloseButton (додаємо сюди) */
+  --close-btn-size: 1.8rem;
+  --close-btn-size-tablet: 1.5rem;
+  --close-btn-size-mobile: 1.2rem;
+
+  /* Дизайн-система посилань */
   --link-font-size: 1rem;
   --link-font-weight: 600;
 
-  /* --- ПАЛІТРА КОЛЬОРІВ --- */
-  --color-amber: #d4a373;
-  --color-gray-dark: #4a4a4a;
-  --color-gray-light: #615b5b;
-  --color-star-active: #fc3;
-  --color-active: #fc3; /* Глобальний колір зірок */
-
-  /* --- СЕМАНТИЧНІ ЗМІННІ РЕЙТИНГУ --- */
-
-  /* Ці змінні можна буде перевизначати в окремих файлах */
-  --star-active-default: var(--color-star-active);
-  --star-inactive-default: var(--color-gray-light);
-
-  /* Dimensions */
-
-  /* padding */
+  /* Padding (Layout) */
   --padding-xl: 0 4rem; /* max-width: 1440px, padding-desktop */
   --padding-lg: 0 2.5rem; /* max-width: 1199px, padding-laptop */
   --padding-md: 0 1.5rem; /* max-width: 991px, padding-tablet */
@@ -40,7 +32,7 @@
   --padding-xs: 0 1rem; /* max-width: 479px, padding-mobile */
   --padding-min: 0 0.5rem; /* max-width: 359px, padding-mobile */
 
-  /* padding form */
+  /* Padding Form */
   --padding-form-xl: 4rem; /* 64px */
   --padding-form-lg: 2.5rem; /* 40px */
   --padding-form-md: 1.5rem; /* 32px */
@@ -48,315 +40,527 @@
   --padding-form-xs: 1rem; /* 16px */
   --padding-form-min: 0.5rem; /* 8px */
 
-  /* spacing */
+  /* Spacing */
   --spacing-sm: 0.25rem; /* 4px */
   --spacing-md: 0.375rem; /* 6px */
   --spacing-lg: 1.125rem; /* 18px */
 
-  /* gap */
+  /* Gap */
   --gap-xl: 4rem; /* 64px */
   --gap-lg: 2.5rem; /* 40px */
-  --gap-md: 1.5rem; /* 24x */
-  --gap-sm: 1.25rem; /* 20x */
-  --gap-xs: 1rem; /* 16x */
+  --gap-md: 1.5rem; /* 24px */
+  --gap-sm: 1.25rem; /* 20px */
+  --gap-xs: 1rem; /* 16px */
 
-  /* border */
+  /* Borders & Radius */
   --radius-sm: 0.375rem; /* 6px */
   --radius-md: 0.75rem; /* 12px */
   --radius-lg: 1.25rem; /* 20px */
   --radius-full: 624.9375rem; /* 9999px */
 
-  /* image */
+  /* Images & Forms sizes */
   --image-min-height: 19.5rem; /* 312px */
-
-  /* form */
   --form-max-width-xl: 39rem; /* 624px */
   --form-max-width-lg: 33.6875rem; /* 539px */
   --form-max-width-md: 28.6875rem; /* 459px */
 
-  /******************************************************  */
+  /* =======
+     РІВЕНЬ 1А: БАЗОВІ КАНАЛИ КОЛЬОРІВ (RAW CHANNELS)
+     ====== */
 
-  /* Palette colors COFFEE COMFORT */
+  /* Канали для активної зірочки  */
+  --star-active-channels: 255 204 51;
 
-  /* Primary colors */
-  --color-white: #fff; /* Білий колір, rgb(255 255 255 / 100%) */
-  --color-black: #000; /* Чорний колір, rgb(0 0 0 / 100%) */
-  --color-brown: #1a1512; /* Коричневий колір як дуже темна кава, rgb(26 21 18 / 100%) */
-  --color-gold: #d49d65; /* Золотистий колір, rgb(212 157 101 / 100%) */
-  --color-gray: #4a4a4a; /* Сірий колір як графіт, rgb(74 74 74 / 100%) */
-  --color-beige: #f4f1ea; /* Бежевий колір, rgb(244 241 234 / 100%) */
+  /* Канали для неактивної зірочки */
+  --star-inactive-channels: 133 112 112;
 
-  /* Shades */
-  --color-light-brown: #5c3d2e; /* Глибокий коричневий як шоколад, rgb(92 61 46 / 100%) */
-  --color-dark-brown: #141110; /* Вугільний з теплим підтоном  як еспресо, rgb(20 17 16 / 100%) */
-  --color-dark-brown1: #121212; /* Глибокий матовий темний як чорна кава, rgb(18 18 18 / 100%) */
-  --color-latte-coffee: #d4a373; /* Світло-золотистий як мускатний горіх, rgb(212 163 115 / 100%) */
+  /* Канали для інших брендів (для контексту) */
+  --brand-fb-channels: 24 119 242;
+  --brand-ig-channels: 225 48 108;
+  --white-channels: 255 255 255;
+  --black-channels: 0 0 0;
+  --brown-channels: 26 21 18;
+  --gold-channels: 212 157 101;
+  --beige-channels: 244 241 234;
+  --light-brown-channels: 92 61 46;
+  --dark-brown-channels: 20 17 16;
+  --dark-brown1-channels: 18 18 18;
+  --latte-channels: 212 163 115;
+  --gray-dark-channels: 74 74 74;
+  --gray-light-channels: 97 91 91;
 
-  /* --color-amber: #fc3; */
+  /* --light-gray-channels: 244 241 234; */
+  --dark-gray-channels: 107 105 101;
+  --light-beige-channels: 253 250 245;
+  --dark-beige-channels: 248 244 236;
+  --graphitic-channels: 46 47 66;
+  --anthracite-channels: 87 84 79;
+  --terracotta-channels: 212 157 101;
+  --espresso-brown-channels: 117 45 6;
+  --tan-channels: 210 180 140;
+  --sys-red-channels: 220 38 38;
+  --accent-pink-channels: 243 165 173;
+  --accent-orange-channels: 211 84 0;
+  --accent-bright-channels: 230 126 34;
+  --warning-orange-channels: 255 152 0;
+  --ochre-channels: 202 138 4;
+  --pure-gold-channels: 255 215 0;
+  --slate-light-channels: 226 232 240;
+  --sys-green-channels: 55 206 44;
 
-  /* Бурштиновий колір як сонячне сяйво */
-  --color-light-beige: #fdfaf5; /* Світло-бежевий як топлене молоко,rgb(253 250 245 / 100%)  */
-  --color-dark-beige: #f8f4ec; /* Темно-бежевий як пісок, rgb(248 244 236 / 100%)  */
-  --color-latte-coffee-0: rgb(212 163 115 / 0%);
-  --color-latte-coffee-30: rgb(212 163 115 / 30%);
-  --color-latte-coffee-40: rgb(212 163 115 / 40%);
-  --color-latte-coffee-50: rgb(212 163 115 / 50%);
-  --color-light-brown-80: rgb(92 61 46 / 80%);
-  --color-light-gray-50: rgb(87 84 79 / 50%);
+  /* --slate-dark-channels: 30 41 59; */
 
-  /* --color-light-gray-50: rgb(244 241 234 / 50%); */
+  /* ==========================================================================
+/* ==========================================================================
+     РІВЕНЬ 1Б: СПЕЦИФІЧНІ ТОКЕНИ КОМПОНЕНТІВ (COMPONENT TOKENS)
+     ========================================================================== */
 
-  /* світло-сірий на 50% */
-  --color-light-gray-80: rgb(244 241 234 / 80%); /* світло-сірий на 50% */
-  --color-light-gray-100: rgb(244 241 234 / 100%); /* світло-сірий на 100% */
-  --color-dark-gray-50: rgb(107 105 101 / 50%); /* темно-сірий на 50% */
-  --color-dark-gray-80: rgb(107 105 101 / 80%); /* темно-сірий на 50% */
-  --color-dark-gray-100: rgb(107 105 101 / 100%);
-  --color-terracotta-15: rgb(212 157 101 / 15%);
-  --color-white-50: rgb(255 255 255 / 50%); /* Білий на 50% */
-  --color-white-10: rgb(255 255 255 / 10%); /* Білий на 10% */
-  --color-white-85: rgb(255 255 255 / 85%); /* Білий на 85% */
-  --color-white-80: rgb(255 255 255 / 80%); /* Білий на 80% */
-  --color-white-70: rgb(255 255 255 / 70%); /* Білий на 70% */
-  --color-black-10: rgb(0 0 0 / 10%); /* Чорний на 10% */
-  --color-black-50: rgb(0 0 0 / 50%); /* Чорний на 50% */
-  --color-black-85: rgb(0 0 0 / 85%); /* Чорний на 85% */
-  --color-black-80: rgb(0 0 0 / 80%); /* Чорний на 85% */
-  --color-white-20: rgb(255 255 255 / 20%); /* Білий на 20% */
-  --color-black-20: rgb(0 0 0 / 20%); /* Чорний на 20% */
-  --color-black-30: rgb(0 0 0 / 30%); /* Чорний на 30% */
-  --color-black-40: rgb(0 0 0 / 40%); /* Чорний на 40% */
-  --color-black-70: rgb(0 0 0 / 70%); /* Чорний на 70% */
-  --color-red-5: rgb(228 179 184 / 5%);
-  --color-red-15: rgb(243 165 173 / 15%);
-  --color-muted-white: 150 150 150;
-  --color-pure-white: 255 255 255;
+  /* Рейтинг (Рейтингові зірочки) */
+  --rating-star-active: rgb(
+    var(--star-active-channels)
+  ); /* канали мають бути на рівні 1а */
 
-  /*************************************  */
+  --rating-star-inactive: rgb(
+    var(--star-inactive-channels)
+  ); /* канали мають бути на рівні 1а */
 
-  /* Elements whose colors do not change */
-  --form-success-bg-color: #d4a373;
-  --form-icon-success-bg-color: #5c3d2e;
-  --form-button-success-bg-color: #5c3d2e;
-  --form-cart-icon-wrapper: #d35400;
-  --form-export-btn: #d35400;
+  /* Брендові елементи (Соціальні мережі) */
+  --brand-fb-bg: rgb(var(--brand-fb-channels));
+  --brand-ig-bg: rgb(var(--brand-ig-channels));
 
-  /* --form-load-more-btn: #d35400; */
-  --border-accent: #d35400;
-  --bg-accent: #e67e22;
-  --color-accent: #d35400;
-  --hover-bg-color: #d4a373;
-  --hover-color: #d4a373;
-  --hover-input-area-color: #fff;
-  --hover-footer-color: #fff;
-  --hover-cart-icon-wrapper: #e67e22;
-  --hover-export-btn: #e67e22;
-  --hover-load-more-btn: #e67e22;
+  /* Специфічні елементи інтерфейсу */
+  --map-marker-icon: rgb(var(--sys-red-channels));
+  --coffee-bean-icon: rgb(var(--tan-channels) / 40%);
+  --badge-bg: rgb(var(--beige-channels));
 
-  /* --hover-button-color: #fff; */
-  --active-color: #d4a373;
-  --error-color: #ff4d4f; /* Класичний червоний для помилок */
-  --warning-color: #ff9800; /* Помаранчевий для попереджень */
+  /* Глобальні системні статуси (перенаправлені в семантичні токени) */
+  --status-error: rgb(var(--sys-red-channels));
+  --status-warning: rgb(var(--warning-orange-channels));
+  --status-success: rgb(var(--sys-green-channels));
 
-  /************************************* */
+  /* Специфічні інтерфейсні акценти (замість абстрактних orange/bright) */
+  --accent-primary: rgb(var(--accent-orange-channels));
+  --accent-highlight: rgb(var(--accent-bright-channels));
 
-  /* LIGHT THEME  */
+  /* Компонент: Скелетон (Skeleton Loader) */
+  --skeleton-card-bg: rgb(var(--latte-channels) / 50%);
+  --skeleton-element-bg: rgb(var(--light-brown-channels));
+  --skeleton-element-glow: rgb(var(--slate-light-channels) / 50%);
 
-  /* bg color */
-  --header-footer-bg-color: var(--color-dark-beige);
-  --body-bg-color: var(--color-light-beige);
-  --underline-bg-color: var(--color-light-brown);
-  --underline-bg-filter-btn-color: var(--color-light-brown);
-  --modal-content-bg-color: var(--color-light-beige);
-  --contact-form-bg-color: var(--color-light-brown);
-  --field-input-booking-br-color: var(--color-light-brown);
-  --field-input-area-review-br-color: var(--color-latte-coffee);
-  --reviews-card-bg-color: var(--color-light-brown);
+  /* Компонент: Спливаюче вікно помилок (Error Popup) */
+  --error-popup-bg: rgb(var(--white-channels));
 
-  /* color */
-  --primary-color: var(--color-light-brown);
-  --secondary-color: var(--color-gold);
-  --tertiary-color: var(--color-gray);
-  --quaternary-color: var(--color-latte-coffee);
-  --quinary-color: var(--color-light-brown);
-  --placeholder-booking-color: var(--color-light-gray-50);
-  --placeholder-review-color: var(--color-light-brown-80);
-  --color-header-link: var(--color-light-brown);
+  /* Компонент: Кнопка повтору (Retry Button) */
+  --retry-btn-text: rgb(var(--white-channels));
 
-  /* logo color */
-  --logo-primary-color: var(--color-light-brown);
-  --logo-secondary-color: var(--color-latte-coffee);
-  --steam-color: var(--color-muted-white);
+  /* Компонент: Модальне вікно картки меню */
+  --modal-menu-bg: rgb(var(--white-channels));
+  --modal-menu-fg: rgb(var(--dark-brown1-channels));
+  --modal-menu-border: rgb(var(--white-channels));
+  --modal-menu-shadow: rgb(var(--black-channels) / 50%);
 
-  /* button, button-icon color, button-hover */
-  --toggle-theme-icon-color: var(--color-light-brown);
-  --button-hover-bg-color: var(--color-light-brown);
-  --button-hover-color: var(--color-white);
-  --button-hover-close-color: var(--color-latte-coffee);
-  --button-footer-hover-color: var(--color-latte-coffee);
-  --button-burger-icon-color: var(--color-light-brown);
-  --button-close-icon-color: var(--color-white);
-  --button-review-close-color: var(--color-white);
-  --button-cta-bg-color: var(--color-latte-coffee);
-  --button-form-bg-color: var(--color-latte-coffee);
-  --button-form-color: var(--color-brown);
-  --button-cta-color: var(--color-white);
-  --button-up-bg-color: var(--color-latte-coffee);
-  --button-up-color: var(--color-light-brown);
-  --button-google-bg-color: var(--color-light-brown);
-  --button-google-color: var(--color-beige);
-  --button-review-menu-bg-color: var(--color-latte-coffee);
-  --button-review-color: var(--color-brown);
-  --filter-btn-bg-color: var(--color-latte-coffee);
-  --filter-btn-color: var(--color-light-brown);
-  --top-badge-bg-color: var(--color-latte-coffee);
-  --top-badge-color: var(--color-light-brown);
-  --item-description-color: var(--color-dark-gray-80);
-  --contact-submit-btn-bg-color: var(--color-latte-coffee);
-  --contact-input-textarea-bg-color: var(--color-latte-coffee);
-  --text-form-booking-color: var(--color-brown);
-  --text-form-review-color: var(--color-white);
-  --text-alt-color: var(--color-brown);
-  --text-reviews-color: var(--color-white);
-  --text-input-area-color: var(--color-brown);
-  --text-atmosphere-color: var(--color-latte-coffee);
-  --text-atmosphere-modal-color: var(--color-white);
-  --text-mobile-color: var(--color-light-brown);
-  --text-form-label-color: var(--color-brown);
+  /* Компонент: Бічні панелі (Бургер-меню / Кошик) */
+  --sidebar-bg: rgb(var(--white-channels));
+  --sidebar-active-bg: rgb(var(--latte-channels));
+  --sidebar-fg: rgb(var(--dark-brown1-channels));
+  --sidebar-fg-muted: rgb(var(--gray-dark-channels));
+  --sidebar-divider: rgb(var(--dark-brown1-channels) / 15%);
+  --sidebar-border: rgb(var(--dark-brown1-channels) / 20%);
+  --sidebar-placeholder: rgb(var(--brown-channels) / 40%);
 
-  /* icon, label color */
-  --icon-circle-bg-color: var(--color-light-brown);
-  --icon-circle-color: var(--color-white);
-  --circle-label-bg-color: var(--color-gold);
-  --circle-label-color: var(--color-white);
-  --reviews-text-color: var(--color-white);
-  --icon-map-color: #dc2626; /* Насичений червоний */
-  --icon-clock-color: #ca8a04; /* Колір "Охра" */
-  --icon-social-color: var(--color-light-brown);
-  --avatar-bg-color: var(--color-latte-coffee);
-  --avatar-color: var(--color-dark-brown);
+  /* Інтерактивні елементи та кнопки всередині сайдбара */
+  --sidebar-btn-bg: rgb(var(--accent-orange-channels));
+  --sidebar-btn-text: rgb(var(--white-channels));
+  --sidebar-btn-hover: rgb(var(--espresso-brown-channels));
+  --sidebar-hover-bg: rgb(var(--beige-channels));
 
-  /* divider.  border color */
-  --divider-color: var(--color-black-20);
-  --section-border-bottom-color: var(--color-latte-coffee-50);
-  --circle-big-border-color: var(--color-white);
-  --circle-medium-border-color: var(--color-light-gray-50);
-  --circle-small-border-color: var(--color-dark-gray-50);
-  --input-textarea-border-color: var(--color-light-brown);
-  --button-border-color: var(--color-white);
+  /* Блок активних замовлень (Banner/Notification inside sidebar) */
+  --sidebar-info-banner-bg: rgb(var(--light-beige-channels));
+  --sidebar-info-banner-border: rgb(var(--ochre-channels) / 40%);
+  --sidebar-info-banner-icon: rgb(var(--ochre-channels));
+  --sidebar-card-bg: rgb(var(--white-channels));
 
-  /* box-shadow color */
-  --shadow-icon-circle: var(--color-black-50);
-  --shadow-circle: var(--color-black-50);
-  --shadow-up-button: var(--color-black-50);
-  --shadow-footer-divider: var(--color-black-50);
+  /*
+  ==========================================================================
+     РІВЕНЬ 2: СЕМАНТИЧНІ ЗМІННІ ЗА ЗОНАМИ (LIGHT THEME — DEFAULT)
+     ========================================================================== */
 
-  /* --shadow-menu: var(--color-black-50); */
-  --shadow-image-wrapper: var(--color-black-20);
-  --shadow-modal-content: var(--color-white-20);
-  --shadow-reviews-card: var(--color-black-20);
-  --shadow-contacts-map-form: var(--color-black-50);
+  /* --------------------------------------------------------------------------
+     2.1. ХЕАДЕР (Header Zone)
+     -------------------------------------------------------------------------- */
+  --header-bg: rgb(var(--dark-beige-channels));
+  --header-text-link: rgb(var(--dark-brown1-channels));
+  --header-link-hover: rgb(var(--latte-channels));
+
+  /* Компоненти всередині хедера */
+  --header-logo-steam-channels: var(--light-brown-channels);
+  --header-logo-primary: rgb(var(--dark-brown1-channels));
+  --header-logo-secondary: rgb(var(--latte-channels));
+  --header-logo-shadow: rgb(var(--black-channels) / 15%);
+  --header-logo-shadow-hover: rgb(var(--latte-channels) / 40%);
+
+  /* Контроли хедера */
+  --header-icon-burger: rgb(var(--dark-brown1-channels));
+  --header-icon-toggle-theme: rgb(var(--dark-brown1-channels));
+  --header-toggle-glow-sun: rgb(var(--gold-channels) / 0%);
+  --header-toggle-glow-moon: rgb(var(--gray-light-channels) / 90%);
+  --header-cart-icon: rgb(var(--dark-brown1-channels));
+  --header-cart-icon-hover: rgb(var(--beige-channels));
+  --header-cart-badge-bg: rgb(var(--light-brown-channels));
+  --header-cart-badge-text: rgb(var(--beige-channels));
+  --header-lang-text: rgb(var(--dark-brown1-channels));
+  --header-lang-active: rgb(var(--latte-channels));
+  --header-lang-hover: rgb(var(--light-brown-channels));
+  --header-lang-divider: rgb(var(--black-channels) / 30%);
+
+  /* --------------------------------------------------------------------------
+     2.2. ФУТЕР (Footer Zone)
+     -------------------------------------------------------------------------- */
+  --footer-bg: rgb(var(--dark-beige-channels));
+  --footer-text: rgb(var(--dark-brown1-channels));
+  --footer-text-copyright: rgb(var(--dark-gray-channels) / 90%);
+  --footer-subtext: rgb(var(--espresso-brown-channels));
+  --footer-hover: rgb(var(--dark-brown-channels));
+
+  /* Елементи футера */
+  --footer-icon-clock: rgb(var(--ochre-channels));
+  --footer-icon-social: rgb(var(--light-brown-channels));
+
+  /* Контроли футера */
+  --footer-trigger-callback: rgb(var(--light-brown-channels));
+  --footer-trigger-review: rgb(var(--light-brown-channels));
+  --footer-shadow-divider: rgb(var(--black-channels) / 50%);
+
+  /* --------------------------------------------------------------------------
+     2.3. ГОЛОВНИЙ КОНТЕНТ ТА СЕКЦІЇ (Main & Sections База)
+     -------------------------------------------------------------------------- */
+  --section-bg: rgb(var(--light-beige-channels));
+  --section-hero-text: rgb(var(--beige-channels));
+  --section-text: rgb(var(--light-brown-channels));
+  --section-filter-bg: rgb(var(--light-brown-channels));
+  --section-filter-text: rgb(var(--light-brown-channels));
+  --section-subtext: rgb(var(--gold-channels));
+  --text-main-muted: rgb(var(--gray-dark-channels));
+
+  /* Ізольований виняток: картка меню відрізняється від інших блоків */
+  --card-menu-bg: rgb(var(--terracotta-channels) / 15%);
+
+  /* Декоративні елементи секцій */
+  --bg-underline: rgb(var(--light-brown-channels));
+  --bg-underline-filter: rgb(var(--light-brown-channels));
+  --border-section-bottom: rgb(var(--latte-channels) / 50%);
+  --shadow-border-section-bottom: rgb(var(--latte-channels) / 50%);
+  --shadow-wrapper-image: rgb(var(--black-channels) / 20%);
+
+  /* --- Блоки: форми, форми в модальних вікнах, картки (крім меню) --- */
+  --bg-block-primary: rgb(var(--light-brown-channels));
+  --bg-block-secondary: rgb(var(--latte-channels));
+  --text-block-primary: rgb(var(--white-channels));
+  --text-block-secondary: rgb(var(--brown-channels));
+  --color-placeholder-primary: rgb(var(--white-channels) / 80%);
+  --color-placeholder-secondary: rgb(var(--brown-channels) / 80%);
+
+  /* --- Ефекти та межі для БЛОКІВ --- */
+  --border-block: rgb(var(--white-channels));
+  --shadow-block: rgb(var(--black-channels) / 50%);
+
+  /* --- Специфічний компонент секцій: Картки відгуків (Reviews) --- */
+
+  /* --text-atmosphere: rgb(var(--latte-channels)); */
+
+  /* --shadow-card-reviews: rgb(
+    var(--black-channels) / 20%
+  );  */
+
+  /* --- Специфічний компонент секцій: Форми (Booking / Contacts) --- */
+
+  /* --text-form-label: var(--text-block-dark); */
+
+  /* --text-form-booking: var(--text-block-dark); */
+
+  /* --text-form-input: var(--text-block-dark); */
+
+  /* --border-form-input: var(--bg-block); */
+
+  /* --color-placeholder-booking: var(--color-placeholder); */
+
+  /* --shadow-form-map: rgb(var(--black-channels) / 50%); */
+
+  /* --------------------------------------------------------------------------
+     2.4. МОДАЛЬНІ ВІКНА ТА ОВЕРЛЕЇ (Modals & Overlays)
+     -------------------------------------------------------------------------- */
+
+  /* --modal-bg: rgb(var(--light-beige-channels)); */
+
+  /* --modal-text-input: var(--text-block-dark); */
+
+  /* --modal-text-atmosphere: var(--text-block); */
+
+  /* --modal-icon-close: rgb(var(--white-channels)); */
+
+  /* --modal-icon-close-hover: rgb(var(--latte-channels)); */
+
+  /* --modal-shadow: rgb(var(--white-channels) / 20%); */
+
+  /* --mobile-menu-text: rgb(var(--light-brown-channels)); */
+
+  /* --------------------------------------------------------------------------
+     2.5. ГЛОБАЛЬНІ КНОПКИ ТА КОНТРОЛИ (Універсальні елементи UI)
+     -------------------------------------------------------------------------- */
+
+  /* Кнопка дії (Замовлення, надіслати,  відфільтрувати,  показати,  тощо...) */
+  --btn-cta-bg: rgb(var(--latte-channels));
+  --btn-cta-fg: rgb(var(--dark-brown1-channels));
+
+  /* Кнопка - іконка ) */
+  --btn-cta-ic: rgb(var(--white-channels));
+
+  /* Інші кнопки */
+
+  /* --btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
+
+  /* --btn-cart-icon-color: rgb(var(--dark-brown1-channels)); */
+
+  /* --badge-cart-icon-bg: rgb(var(--accent-bright-channels)); */
+
+  /* --btn-form-bg: rgb(var(--latte-channels)); */
+
+  /* --btn-form-color: rgb(var(--brown-channels)); */
+
+  /* --btn-up-bg: rgb(var(--latte-channels)); */
+
+  /* --btn-up-color: rgb(var(--light-brown-channels)); */
+
+  /* --btn-google-bg: rgb(var(--light-brown-channels)); */
+
+  /* --btn-google-color: rgb(var(--beige-channels)); */
+
+  /* --btn-filter-bg: rgb(var(--latte-channels)); */
+
+  /* --btn-filter-color: rgb(var(--light-brown-channels)); */
+
+  /* --btn-review-menu-bg: rgb(var(--latte-channels)); */
+
+  /* --btn-review-color: rgb(var(--brown-channels)); */
+
+  /* Глобальні стани Hover & Active */
+  --hover-btn-bg: rgb(var(--light-brown-channels));
+  --hover-btn-fg: rgb(var(--white-channels));
+
+  /* --hover-input-area-bg: rgb(var(--white-channels)); */
+
+  /* --hover-btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
+
+  /* --hover-export-btn-bg: rgb(var(--accent-bright-channels)); */
+
+  /* --state-active-global: rgb(var(--latte-channels)); */
+  --btn-close-hover: rgb(var(--latte-channels));
+
+  /* --btn-close-active: rgb(var(--latte-channels)); */
+
+  /* Межі та Тіні кнопок/контролів */
+
+  /* --border-divider: rgb(var(--black-channels) / 20%); */
+
+  /* --border-btn: rgb(var(--white-channels)); */
+
+  /* --border-accent-element: var(--accent-primary); */
+
+  /* --shadow-btn: rgb(var(--black-channels) / 50%); */
+
+  /* Глобальні іконки-маркери */
+
+  /* --icon-map: var(--status-error); */
+
+  /* --icon-clock: rgb(var(--ochre-channels)); */
+  --icon-circle-bg: rgb(var(--light-brown-channels));
+  --icon-circle-color: rgb(var(--white-channels));
+  --shadow-icon-circle: rgb(var(--black-channels) / 50%);
+  --shadow-circle-global: rgb(var(--black-channels) / 50%);
+
+  /* Аватари, Бейджі, Кола */
+  --avatar-bg: rgb(var(--latte-channels));
+  --avatar-color: rgb(var(--dark-brown-channels));
+
+  /* --badge-top-bg: rgb(var(--latte-channels)); */
+
+  /* --badge-top-color: rgb(var(--light-brown-channels)); */
+  --label-circle-bg: rgb(var(--gold-channels));
+  --label-circle-color: rgb(var(--white-channels));
+  --border-circle-big: rgb(var(--white-channels));
+  --border-circle-medium: rgb(var(--gray-dark-channels) / 60%);
+  --border-circle-small: rgb(var(--gray-light-channels) / 80%);
 }
 
+/* ==========================================================================
+     РІВЕНЬ 2 (ТЕМНА ТЕМА): ПЕРЕВИЗНАЧЕННЯ СЕМАНТИКИ (DARK THEME)
+     ========================================================================== */
 .dark-theme {
-  /************************************* */
+  /* --- 2.1. ХЕАДЕР (Темна тема) --- */
+  --header-bg: rgb(var(--dark-brown1-channels));
+  --header-text-link: rgb(var(--beige-channels));
+  --header-link-hover: rgb(var(--latte-channels));
 
-  /* DARK THEME */
+  /* Компоненти всередині хедера */
+  --header-logo-steam-channels: var(--beige-channels);
+  --header-logo-primary: rgb(var(--beige-channels));
+  --header-logo-secondary: rgb(var(--latte-channels));
+  --header-logo-shadow: rgb(var(--latte-channels) / 30%);
+  --header-logo-shadow-hover: rgb(var(--gold-channels) / 60%);
 
-  /* bg color */
-  --header-footer-bg-color: var(--color-dark-brown1);
-  --body-bg-color: var(--color-dark-brown);
-  --underline-bg-color: var(--color-gold);
-  --underline-bg-filter-btn-color: var(--color-light-brown);
-  --modal-content-bg-color: var(--color-light-beige);
-  --contact-form-bg-color: var(--color-latte-coffee);
-  --field-input-booking-br-color: var(--color-latte-coffee);
-  --field-input-area-review-br-color: var(--color-light-brown);
-  --reviews-card-bg-color: var(--color-latte-coffee);
+  /* Контроли хедера */
+  --header-icon-burger: rgb(var(--beige-channels));
+  --header-icon-toggle-theme: rgb(var(--latte-channels));
+  --header-toggle-glow-sun: rgb(var(--gold-channels) / 90%);
+  --header-toggle-glow-moon: rgb(var(--gray-light-channels) / 0%);
+  --header-cart-icon: rgb(var(--beige-channels));
+  --header-cart-icon-hover: rgb(var(--dark-brown1-channels));
+  --header-cart-badge-bg: rgb(var(--accent-bright-channels));
+  --header-cart-badge-text: rgb(var(--beige-channels));
+  --header-lang-text: rgb(var(--beige-channels));
+  --header-lang-active: rgb(var(--gold-channels));
+  --header-lang-hover: rgb(var(--white-channels));
+  --header-lang-divider: rgb(var(--white-channels) / 70%);
 
-  /* color */
-  --primary-color: var(--color-gold);
-  --secondary-color: var(--color-light-brown);
-  --tertiary-color: var(--color-light-beige);
-  --quaternary-color: var(--color-latte-coffee);
-  --quinary-color: var(--color-latte-coffee);
-  --placeholder-booking-color: var(--color-light-brown-80);
-  --placeholder-review-color: var(--color-light-gray-50);
-  --color-header-link: var(--color-white);
+  /* --- 2.2. ФУТЕР (Темна тема) --- */
+  --footer-bg: rgb(var(--dark-brown1-channels));
+  --footer-text: rgb(var(--beige-channels));
+  --footer-text-copyright: rgb(var(--white-channels) / 50%);
+  --footer-subtext: rgb(var(--latte-channels));
+  --footer-hover: rgb(var(--beige-channels));
 
-  /* logo color */
-  --logo-primary-color: var(--color-beige);
-  --logo-secondary-color: var(--color-latte-coffee);
-  --steam-color: var(--color-pure-white);
+  /* Елементи футера */
+  --footer-icon-clock: rgb(var(--pure-gold-channels));
+  --footer-icon-social: rgb(var(--latte-channels));
 
-  /* button, button-icon color, button-hover */
-  --toggle-theme-icon-color: var(--color-amber);
-  --button-hover-bg-color: var(--color-latte-coffee);
-  --button-hover-color: var(--color-brown);
-  --button-hover-close-color: var(--color-white);
-  --button-footer-hover-color: var(--color-white);
-  --button-burger-icon-color: var(--color-beige);
-  --button-close-icon-color: var(--color-brown);
-  --button-review-close-color: var(--color-light-brown);
-  --button-cta-bg-color: var(--color-latte-coffee);
-  --button-cta-color: var(--color-dark-brown1);
-  --button-up-bg-color: var(--color-latte-coffee);
-  --button-up-color: var(--color-light-brown);
-  --button-form-bg-color: var(--color-light-brown);
-  --button-form-color: var(--color-white);
-  --filter-btn-bg-color: var(--color-latte-coffee);
-  --filter-btn-color: var(--color-light-brown);
-  --button-google-bg-color: var(--color-latte-coffee);
-  --button-google-color: var(--color-brown);
-  --button-review-menu-bg-color: var(--color-light-brown);
-  --button-review-color: var(--color-white);
-  --top-badge-bg-color: var(--color-latte-coffee);
-  --top-badge-color: var(--color-light-brown);
-  --item-description-color: var(--color-light-gray-80);
-  --contact-submit-btn-bg-color: var(--color-light-brown);
-  --contact-input-textarea-bg-color: var(--color-light-brown);
-  --text-form-booking-color: var(--color-white);
-  --text-form-review-color: var(--color-brown);
-  --text-alt-color: var(--color-white);
-  --text-reviews-color: var(--color-dark-brown1);
-  --text-input-area-color: var(--color-white);
-  --text-atmosphere-color: var(--color-white);
-  --text-atmosphere-modal-color: var(--color-light-brown);
-  --text-mobile-color: var(--color-white);
-  --text-form-label-color: var(--color-white);
+  /* Контроли  футера */
+  --footer-trigger-callback: rgb(var(--latte-channels));
+  --footer-trigger-review: rgb(var(--latte-channels));
+  --footer-shadow-divider: rgb(var(--white-channels) / 50%);
 
-  /* icon, label color */
-  --icon-circle-bg-color: var(--color-gold);
-  --icon-circle-color: var(--color-black);
-  --circle-label-bg-color: var(--color-gold);
-  --circle-label-color: var(--color-black);
+  /* --- 2.3. ГОЛОВНИЙ КОНТЕНТ ТА СЕКЦІЇ (Темна тема) --- */
+  --section-bg: rgb(var(--dark-brown-channels));
+  --section-text: rgb(var(--gold-channels));
+  --section-filter-text: rgb(var(--beige-channels));
+  --section-subtext: rgb(var(--light-brown-channels));
+  --text-main-muted: rgb(var(--light-beige-channels));
 
-  /* --reviews-card-bg-color: var(--color-gold); */
+  /* Декоративні елементи секцій */
+  --bg-underline: rgb(var(--gold-channels));
+  --shadow-wrapper-image: rgb(var(--white-channels) / 20%);
 
-  --reviews-text-color: var(--color-black);
-  --icon-map-color: #ff6b6b; /*  Червоний */
-  --icon-clock-color: #ffd700; /* Чисте золото */
-  --icon-social-color: var(--color-latte-coffee);
-  --avatar-bg-color: var(--color-light-brown);
-  --avatar-color: var(--color-latte-coffee);
+  /* --- Блоки: форми, форми в модальних вікнах, картки (крім меню) --- */
+  --bg-block-primary: rgb(var(--latte-channels));
+  --bg-block-secondary: rgb(var(--light-brown-channels));
+  --text-block-primary: rgb(var(--dark-brown1-channels));
+  --text-block-secondary: rgb(var(--beige-channels));
+  --color-placeholder-primary: rgb(var(--dark-brown1-channels) / 80%);
+  --color-placeholder-secondary: rgb(var(--beige-channels) / 80%);
 
-  /* divider, border color */
-  --divider-color: var(--color-white-20);
-  --section-border-bottom-color: var(--color-latte-coffee-50);
-  --circle-big-border-color: var(--color-white);
-  --circle-medium-border-color: var(--color-light-gray-50);
-  --circle-small-border-color: var(--color-dark-gray-50);
-  --input-textarea-border-color: var(--color-light-brown);
-  --button-border-color: var(--color-white);
+  /* --- Ефекти та межі для БЛОКІВ --- */
+  --border-block: rgb(var(--white-channels));
+  --shadow-block: rgb(var(--white-channels) / 50%);
 
-  /* box-shadow color */
-  --shadow-icon-circle: var(--color-white-50);
-  --shadow-circle: var(--color-white-50);
-  --shadow-up-button: var(--color-white-50);
+  /* Компонент: Картки відгуків у темній темі (інверсія) */
 
-  /* --shadow-menu: var(--color-white-50); */
-  --shadow-image-wrapper: var(--color-white-20);
-  --shadow-modal-content: var(--color-white-20);
-  --shadow-reviews-card: var(--color-white-20);
-  --shadow-contacts-map-form: var(--color-white-50);
+  /* --bg-card-reviews: rgb(var(--latte-channels));
+    --text-card-reviews: rgb(var(--dark-brown1-channels)); */
+
+  /* --text-atmosphere: rgb(var(--white-channels)); */
+
+  /* --shadow-card-reviews: rgb(var(--white-channels) / 20%); */
+
+  /* --color-placeholder-review: rgb(var(--light-gray-channels) / 50%); */
+
+  /* Компонент: Форми у темній темі */
+
+  /* --bg-form-contact: rgb(var(--latte-channels)); */
+
+  /* --text-form-label: rgb(var(--white-channels)); */
+
+  /* --text-form-booking: rgb(var(--white-channels)); */
+
+  /* --text-form-input: rgb(var(--white-channels)); */
+
+  /* --color-placeholder-booking: rgb(var(--light-brown-channels) / 80%); */
+
+  /* --shadow-form-map: rgb(var(--white-channels) / 50%); */
+
+  /* --- 2.4. МОДАЛЬНІ ВІКНА ТА ОВЕРЛЕЇ (Темна тема) --- */
+
+  /* --modal-bg: rgb(var(--dark-brown-channels)); */
+
+  /* --modal-text-input: rgb(var(--white-channels)); */
+
+  /* --modal-text-atmosphere: rgb(var(--light-brown-channels)); */
+
+  /* --modal-icon-close: rgb(var(--brown-channels)); */
+
+  /* --modal-icon-close-hover: rgb(var(--white-channels)); */
+
+  /* --modal-shadow: rgb(var(--white-channels) / 20%); */
+
+  /* --mobile-menu-text: rgb(var(--white-channels)); */
+
+  /* --- 2.5. ГЛОБАЛЬНІ КНОПКИ ТА КОНТРОЛИ (Темна тема) --- */
+
+  /* --btn-cta-bg: rgb(var(--latte-channels)); */
+  --btn-cta-bg: rgb(var(--light-brown-channels));
+  --btn-cta-fg: rgb(var(--beige-channels));
+
+  /* Кнопка  іконка ) */
+  --btn-cta-ic: rgb(var(--dark-brown1-channels));
+
+  /*  Інші кнопки */
+
+  /* --btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
+
+  /* --btn-cart-icon-color: rgb(var(--beige-channels)); */
+
+  /* --btn-form-bg: rgb(var(--light-brown-channels)); */
+
+  /* --btn-form-color: rgb(var(--white-channels)); */
+
+  /* --btn-google-bg: rgb(var(--latte-channels)); */
+
+  /* --btn-google-color: rgb(var(--brown-channels)); */
+
+  /* --btn-filter-bg: rgb(var(--light-brown-channels)); */
+
+  /* --btn-filter-color: rgb(var(--beige-channels)); */
+
+  /* --btn-review-menu-bg: rgb(var(--light-brown-channels)); */
+
+  /* --btn-review-color: rgb(var(--white-channels)); */
+  --btn-contact-submit-bg: rgb(var(--light-brown-channels));
+
+  /* Зміни ховерів та станів */
+  --hover-btn-bg: rgb(var(--latte-channels));
+  --hover-btn-color: rgb(var(--dark-brown-channels));
+  --btn-close-hover: rgb(var(--beige-channels));
+
+  /* Межі та Тіні кнопок/контролів */
+
+  /* --border-divider: rgb(var(--white-channels) / 20%); */
+
+  /* --shadow-btn: rgb(var(--white-channels) / 80%); */
+
+  /* --btn-close-active: rgb(var(--latte-channels)); */
+
+  /* Глобальні іконки та ефекти свічення */
+
+  /* --icon-clock: rgb(var(--pure-gold-channels)); */
+  --icon-circle-bg: rgb(var(--gold-channels));
+  --icon-circle-color: rgb(var(--dark-brown-channels));
+  --shadow-icon-circle: rgb(var(--white-channels) / 50%);
+  --shadow-circle-global: rgb(var(--white-channels) / 50%);
+
+  /* Аватари та Лейбли */
+  --avatar-bg: rgb(var(--light-brown-channels));
+  --label-circle-bg: rgb(var(--gold-channels));
+  --avatar-color: rgb(var(--white-channels));
+  --label-circle-color: rgb(var(--black-channels));
+  --border-circle-big: rgb(var(--white-channels));
+  --border-circle-medium: rgb(var(--gray-dark-channels) / 60%);
+  --border-circle-small: rgb(var(--gray-light-channels) / 80%);
 }

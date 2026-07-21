@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import StarRating from '../../StarRating/StarRating.jsx';
 import Avatar from '../../Avatars/Avatar.jsx';
 import ModalCardReview from '../../../Modal/ModalCardReview/ModalCardReview.jsx';
+import Button from '..//..//..//Ui/Buttons/BaseButton/BaseButton.jsx';
 import css from './CardReview.module.css';
 
 const ReviewCard = ({ review, currentLang, formatDate }) => {
@@ -33,14 +34,21 @@ const ReviewCard = ({ review, currentLang, formatDate }) => {
         <p className={css['text-review']}>{text}</p>
 
         {isLongText && (
-          <button
-            type="button"
-            className={css['read-more-btn']}
+          // <button
+          //   type="button"
+          //   className={css['read-more-btn']}
+          //   onClick={() => setIsModalOpen(true)}
+          // >
+          //   {/* Використовуємо ключ перекладу */}
+          //   {t('reviews:reviews.read_more')}
+          // </button>
+          <Button
+            variant="link" // або той варіант, який робить її схожою на посилання "Читати далі"
             onClick={() => setIsModalOpen(true)}
+            className={css['read-more-btn']}
           >
-            {/* Використовуємо ключ перекладу */}
             {t('reviews:reviews.read_more')}
-          </button>
+          </Button>
         )}
 
         <div className={css['card-review-footer']}>

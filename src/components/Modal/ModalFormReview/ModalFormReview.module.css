@@ -27,7 +27,8 @@
   align-items: center;
   width: 100%;
   padding: 3rem 2rem;
-  background-color: var(--form-success-bg-color);
+  background-color: var(--bg-block-primary);
+  border: 0.0625rem solid var(--border-block);
   border-radius: 1.25rem;
   text-align: center;
   animation: fade-in-up 0.4s ease forwards;
@@ -40,11 +41,11 @@
   width: 4.5rem;
   height: 4.5rem;
   margin-bottom: 1rem;
-  background-color: var(--form-icon-success-bg-color);
-  border: 0.125rem solid var(--color-white) !important;
+  background-color: var(--badge-bg);
+  border: 0.125rem solid var(--border-block);
   border-radius: 50%;
   font-size: 2.5rem;
-  color: var(--color-white);
+  color: var(--status-success);
   animation: scale-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -53,7 +54,7 @@
   margin-bottom: 0.5rem;
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--color-light-brown);
+  color: var(--text-block-primary);
 }
 
 .text-success-form {
@@ -61,5 +62,5 @@
   margin: 0 auto 2rem;
   font-size: 1.1rem;
   line-height: 1.6;
-  color: var(--color-light-brown);
+  color: var(--text-block-primary);
 }

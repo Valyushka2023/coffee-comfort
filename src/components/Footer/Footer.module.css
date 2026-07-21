@@ -1,8 +1,8 @@
 @import url('../../styles/animate.css');
 
 .footer-section {
-  background-color: var(--header-footer-bg-color);
-  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  background-color: var(--footer-bg);
+  border-bottom: 0.0625rem solid var(--border-section-bottom);
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
@@ -16,7 +16,6 @@
   width: 100%;
   max-width: 75rem;
   padding: 1.5rem 0;
-  color: var(--tertiary-color);
   flex-wrap: wrap;
   margin-inline: auto;
 }
@@ -30,6 +29,7 @@
   gap: 0.625rem;
   min-width: 12.5rem;
   margin: 0;
+  text-align: left;
 }
 
 .column-title {
@@ -37,34 +37,41 @@
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
+  color: var(--footer-text);
 }
 
 .footer-column .column-title:first-child {
   margin-bottom: 1rem;
 }
 
-.footer-item,
-.callback-link,
-.review-trigger,
-.social-icons a {
+.footer-column-item {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  outline: none;
+  gap: 0.625rem;
+  font-size: 0.95rem;
   text-decoration: none;
+  color: var(--footer-subtext);
   transition:
     transform 0.3s ease,
     color 0.3s ease;
   user-select: none;
 }
 
-.footer-item {
-  gap: 0.625rem;
-  font-size: 0.95rem;
-  color: var(--primary-color);
+/* ФАРБУВАННЯ ІКОНОК ЧЕРЕЗ СТИЛІ */
+.item-address svg {
+  color: var(--map-marker-icon);
 }
 
-.callback-link,
+.item-hours svg {
+  color: var(--color-icon-clock, var(--footer-subtext));
+}
+
+.callback-trigger,
 .review-trigger {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   gap: 0.625rem;
   cursor: pointer;
   padding: 0;
@@ -75,43 +82,12 @@
   text-decoration: underline;
   text-transform: uppercase;
   word-spacing: 0.35rem;
-  color: var(--primary-color);
+  color: var(--footer-subtext);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+  user-select: none;
   text-underline-offset: 0.25rem;
-}
-
-.social-icons a {
-  color: var(--icon-social-color);
-}
-
-.footer-item:focus,
-.callback-link:focus,
-.review-trigger:focus {
-  outline: none !important;
-  color: var(--primary-color) !important;
-}
-
-.social-icons a:focus {
-  outline: none !important;
-  color: var(--icon-social-color) !important;
-}
-
-.footer-item:active,
-.callback-link:active,
-.review-trigger:active,
-.social-icons a:active {
-  color: var(--button-footer-hover-color) !important;
-  transition: transform 0.1s ease;
-  transform: scale(0.95) !important;
-}
-
-@media (hover: hover) {
-  .footer-item:not(.no-hover):hover,
-  .callback-link:hover,
-  .review-trigger:hover,
-  .social-icons a:hover {
-    color: var(--button-footer-hover-color);
-    transform: translateY(-0.1875rem);
-  }
 }
 
 .social-icons {
@@ -120,11 +96,51 @@
   gap: 0.9375rem;
 }
 
+.social-icons a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--footer-subtext);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+/* ЭФЕКТИ НАВЕДЕННЯ */
+@media (hover: hover) {
+  .footer-column-item:not(.no-hover):hover,
+  .callback-trigger:hover,
+  .review-trigger:hover {
+    color: var(--footer-hover);
+    transform: translateY(-0.1875rem);
+  }
+
+  .social-icons a.social-icons-fb:hover {
+    color: var(--brand-fb-bg);
+    transform: translateY(-0.1875rem);
+  }
+
+  .social-icons a.social-icons-ig:hover {
+    color: var(--brand-ig-bg);
+    transform: translateY(-0.1875rem);
+  }
+}
+
+/* АКТИВНІ СТАНИ КЛІКУ */
+.footer-column-item:active,
+.callback-trigger:active,
+.review-trigger:active,
+.social-icons a:active {
+  transition: transform 0.1s ease;
+  transform: scale(0.95);
+}
+
 .footer-divider {
   width: calc(100% - 3.75rem);
   height: 0.0625rem;
   margin: 0 auto;
-  background-color: var(--divider-color);
+  background-color: var(--border-divider);
+  box-shadow: 0 0.125rem 0.375rem var(--footer-shadow-divider);
   transition: background-color 0.3s ease;
 }
 
@@ -133,10 +149,11 @@
   padding-bottom: 0.625rem;
   font-size: 0.8rem;
   text-align: center;
-  color: var(--color-gray-light);
+  color: var(--footer-text-copyright);
   opacity: 0.7;
 }
 
+/* АДАПТИВНІСТЬ */
 @media (max-width: 74.9375rem) {
   .footer-container {
     gap: 3rem;

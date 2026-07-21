@@ -1,20 +1,20 @@
+// import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import {
+  MapPinIcon,
+  ClockIcon,
+  PhoneIcon,
   InstagramIcon,
   FacebookIcon,
-  MapPinIcon,
-  PhoneIcon,
-  ClockIcon,
   ReviewIcon,
-} from '../Icons';
+} from '..//Icons';
 import css from './Footer.module.css';
 
 const Footer = ({ onOpenReview, onOpenCallback }) => {
   const { t } = useTranslation('footer');
   const currentYear = new Date().getFullYear();
 
-  // Функція для зняття фокусу при кліку
   const handleTouchFocus = e => {
     e.currentTarget.blur();
   };
@@ -29,14 +29,16 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
           </h4>
           <a
             href="#contacts-section"
-            className={css['footer-item']}
+            className={`${css['footer-column-item']} ${css['item-address']}`}
             onClick={handleTouchFocus}
           >
-            <MapPinIcon size={18} color="var(--icon-map-color)" />
+            <MapPinIcon size={18} />
             <span>{t('address', '12 Coffee St, Kyiv')}</span>
           </a>
-          <div className={`${css['footer-item']} ${css['no-hover']}`}>
-            <ClockIcon size={18} color="var(--icon-clock-color)" />
+          <div
+            className={`${css['footer-column-item']} ${css['item-hours']} ${css['no-hover']}`}
+          >
+            <ClockIcon size={18} />
             <span>{t('hours', 'ПН-НД: 08:00 - 21:00')}</span>
           </div>
         </div>
@@ -48,7 +50,7 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
           </h4>
           <a
             href="tel:+380000000000"
-            className={css['footer-item']}
+            className={css['footer-column-item']}
             onClick={handleTouchFocus}
           >
             <PhoneIcon size={18} />
@@ -56,7 +58,7 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
           </a>
           <button
             type="button"
-            className={css['callback-link']}
+            className={css['callback-trigger']}
             onClick={e => {
               onOpenCallback();
               handleTouchFocus(e);
@@ -74,16 +76,17 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
           <div className={css['social-icons']}>
             <a
               href="https://instagram.com"
+              className={css['social-icons-ig']}
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
-              /* Використовуємо pointerUp для надійності на тач-скрінах */
               onPointerUp={e => setTimeout(() => e.currentTarget.blur(), 50)}
             >
               <InstagramIcon size={24} />
             </a>
             <a
               href="https://facebook.com"
+              className={css['social-icons-fb']}
               target="_blank"
               rel="noreferrer"
               aria-label="Facebook"

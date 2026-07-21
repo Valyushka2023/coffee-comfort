@@ -13,14 +13,14 @@
 .text-review-modal {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  border-top: 0.125rem solid var(--color-light-gray-50);
-  border-bottom: 0.125rem solid var(--color-light-gray-50);
+  border-top: 0.125rem solid var(--border-block);
+  border-bottom: 0.125rem solid var(--border-block);
   font-size: 1.1rem;
   font-style: italic;
   line-height: 1.6;
   text-align: justify;
   white-space: pre-wrap;
-  color: var(--text-reviews-color);
+  color: var(--text-block-primary);
   text-justify: inter-word;
   hyphens: auto;
 }
@@ -47,11 +47,11 @@
 
 .author-name-modal {
   font-size: 1.1rem;
-  color: var(--text-reviews-color);
+  color: var(--text-block-primary);
 }
 
 .date-modal {
   font-size: 1rem;
-  color: var(--text-reviews-color);
+  color: var(--text-block-primary);
   opacity: 0.8;
 }

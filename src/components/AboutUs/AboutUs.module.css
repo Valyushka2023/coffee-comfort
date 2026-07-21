@@ -3,13 +3,13 @@
 .about-section {
   position: relative;
   padding: 3rem 0;
-  background-color: var(--body-bg-color);
-  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
-  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
-    var(--section-border-bottom-color);
+  background-color: var(--section-bg);
+  border-bottom: 0.0625rem solid var(--border-section-bottom);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem var(--border-section-bottom);
   transition:
     background-color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   animation: slide-in-bottom 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -17,7 +17,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  gap: var(--gap-xl);
   width: 100%;
   max-width: 75rem;
   margin-inline: auto;
@@ -41,14 +41,16 @@
 .about-title {
   margin-bottom: 1.5625rem;
   text-transform: uppercase;
-  color: var(--primary-color);
+  color: var(--section-text);
+  transition: color 0.3s ease;
 }
 
 .about-history {
   margin-bottom: 2.5rem;
   font-size: 1.1rem;
   line-height: 1.8;
-  color: var(--tertiary-color);
+  color: var(--text-main-muted);
+  transition: color 0.3s ease;
 }
 
 .about-features {
@@ -59,13 +61,14 @@
 .about-card {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: var(--gap-xs);
   margin-bottom: 1.5625rem;
-  padding: 1rem;
-  border-radius: 0.75rem;
+  padding: var(--padding-form-xs);
+  border-radius: var(--radius-md);
   transition:
     transform 0.3s ease,
-    background-color 0.3s ease;
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .about-icon-circle {
@@ -74,10 +77,14 @@
   justify-content: center;
   align-items: center;
   padding: 0.75rem;
-  background-color: var(--icon-circle-bg-color);
-  border-radius: 50%;
+  background-color: var(--icon-circle-bg);
+  border-radius: var(--radius-full);
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
   color: var(--icon-circle-color);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .about-accent-title {
@@ -86,12 +93,14 @@
   font-size: 1.15rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--primary-color);
+  color: var(--section-text);
+  transition: color 0.3s ease;
 }
 
 .about-features p {
   margin: 0.25rem 0 0;
-  color: var(--tertiary-color);
+  color: var(--text-main-muted);
+  transition: color 0.3s ease;
 }
 
 .about-image-composition {
@@ -104,13 +113,17 @@
   position: absolute;
   cursor: pointer;
   overflow: hidden;
-  border: 0.5rem solid var(--color-white);
-  border-radius: 50%;
-  box-shadow: 0 0.625rem 1.875rem var(--shadow-circle);
+  border-style: solid;
+  border-width: 0.5rem;
+
+  /* border: 0.5rem solid var(--border-circle-big); */
+  border-radius: var(--radius-full);
+  box-shadow: 0 0.625rem 1.875rem var(--shadow-circle-global);
   outline: none;
   transition:
     transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
     opacity 0.8s ease,
+    border-color 0.3s ease,
     box-shadow 0.4s ease;
 }
 
@@ -145,7 +158,7 @@
   left: 5.125rem;
   width: 18.75rem;
   height: 18.75rem;
-  border-color: var(--circle-big-border-color);
+  border-color: var(--border-circle-big);
 }
 
 .is-visible .about-circle-big {
@@ -161,7 +174,7 @@
   right: 4rem;
   width: 9.375rem;
   height: 9.375rem;
-  border-color: var(--circle-small-border-color);
+  border-color: var(--border-circle-small);
 }
 
 .is-visible .about-circle-small {
@@ -173,7 +186,7 @@
   bottom: 1.25rem;
   width: 13.75rem;
   height: 13.75rem;
-  border-color: var(--circle-medium-border-color);
+  border-color: var(--border-circle-medium);
 }
 
 .is-visible .about-circle-medium {
@@ -185,11 +198,14 @@
   bottom: 20%;
   left: 50%;
   padding: 0.3125rem 0.9375rem;
-  background-color: var(--circle-label-bg-color);
-  border-radius: 1.25rem;
+  background-color: var(--label-circle-bg);
+  border-radius: var(--radius-lg);
   white-space: nowrap;
-  color: var(--circle-label-color);
-  transition: opacity 0.3s;
+  color: var(--label-circle-color);
+  transition:
+    opacity 0.3s,
+    background-color 0.3s,
+    color 0.3s;
   transform: translateX(-50%);
   pointer-events: none;
   opacity: 0;
@@ -200,6 +216,10 @@
   opacity: 1;
 }
 
+/* ==========================================================================
+   АДАПТИВНІ СТИЛІ ТА ХОВЕРИ
+   ========================================================================== */
+
 @media (max-width: 74.9375rem) {
   .about-card {
     flex-direction: column;
@@ -209,8 +229,8 @@
 
 @media (min-width: 75rem) {
   .about-card:hover {
-    background-color: var(--color-terracotta-15);
-    box-shadow: 0 0.25rem 0.9375rem rgb(0 0 0 / 5%);
+    background-color: rgb(var(--terracotta-channels) / 15%);
+    box-shadow: 0 0.25rem 0.9375rem var(--shadow-image-wrapper);
     transform: translateY(-0.125rem);
   }
 }
@@ -218,8 +238,9 @@
 @media (max-width: 61.9375rem) {
   .about-container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--gap-md);
     text-align: center;
+    padding-inline: var(--padding-md);
   }
 
   .about-card {

@@ -1,5 +1,9 @@
 @import url('../../../styles/animate.css');
 
+/* ==========================================================================
+   1. ОВЕРЛЕЙ ТА ОСНОВНИЙ КОНТЕЙНЕР
+   ========================================================================== */
+
 .overlay {
   position: fixed;
   top: 0;
@@ -9,12 +13,12 @@
   justify-content: flex-end;
   width: 100%;
   height: 100%;
-  background-color: var(--color-black-50);
+  background-color: var(--overlay-bg);
   border: none;
   font-family: inherit;
   text-align: left;
   animation: fade-in 0.3s ease-out;
-  backdrop-filter: blur(0.25rem);
+  backdrop-filter: blur(var(--overlay-blur));
 }
 
 .backdrop-button {
@@ -36,22 +40,27 @@
   width: 100%;
   height: 100%;
   max-width: 25rem;
-  padding: 1.5625rem;
-  background-color: var(--color-white);
-  box-shadow: -0.3125rem 0 0.9375rem var(--color-black-10);
+  padding: 1.5rem;
+  background-color: var(--sidebar-bg);
   animation: slide-in-left 0.4s ease-out;
 }
+
+/* ==========================================================================
+   2. ХЕДЕР ТА ШАПКА
+   ========================================================================== */
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 0.9375rem;
-  border-bottom: 0.0125rem solid var(--divider-color);
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid var(--sidebar-divider);
 }
 
 .modal-title {
-  color: var(--color-brown);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sidebar-fg);
 }
 
 .close-icon {
@@ -61,11 +70,12 @@
   cursor: pointer;
   background: none;
   border: none;
-  color: var(--color-dark-brown);
+  color: var(--sidebar-fg);
+  transition: opacity 0.2s ease;
 }
 
-.close-icon svg {
-  color: var(--color-dark-brown);
+.close-icon:hover {
+  opacity: 0.7;
 }
 
 .content {
@@ -76,42 +86,10 @@
   overflow-y: auto;
 }
 
-/* Секція успішного замовлення */
-.success-container {
-  margin-top: 1.875rem;
-  padding: 1.25rem;
-  text-align: center;
-}
+/* ==========================================================================
+   3. СПИСОК ТОВАРІВ ТА ЕЛЕМЕНТИ У КОШИКУ
+   ========================================================================== */
 
-.success-title {
-  margin-top: 1rem;
-  color: var(--color-dark-brown);
-}
-
-.order-number-label {
-  margin: 0.5rem 0;
-  font-size: 1.2rem;
-  color: var(--color-dark-brown);
-}
-
-.order-number-badge {
-  display: inline-block;
-  margin: 0.625rem 0;
-  padding: 0.625rem 1.25rem;
-  background-color: var(--color-active);
-  border-radius: 0.625rem;
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--color-dark-brown);
-}
-
-.warning-text {
-  margin-top: 1.25rem;
-  font-weight: bold;
-  color: var(--color-accent);
-}
-
-/* Список товарів */
 .items-list {
   margin: 0;
   padding: 0;
@@ -120,60 +98,154 @@
 
 .item {
   display: flex;
-  gap: 0.9375rem;
+  gap: 1rem;
   margin-bottom: 1.25rem;
-  padding-bottom: 0.9375rem;
-  border-bottom: 0.0125rem solid var(--divider-color);
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid var(--sidebar-divider);
+}
+
+.item-image {
+  width: 5rem;
+  height: 5rem;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
 }
 
 .item-info {
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .item-title {
   margin: 0;
-  font-size: 1.2rem;
-  color: var(--color-dark-brown);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--sidebar-fg);
 }
 
 .item-price {
-  margin: 0.3125rem 0;
-  font-weight: bold;
-  color: var(--color-accent);
+  margin: 0.25rem 0;
+  font-weight: 700;
+  color: var(--accent-primary);
 }
 
-.item-image {
-  width: 5.375rem;
-  height: 5.375rem;
-  border-radius: 0.625rem;
-  object-fit: cover;
-}
-
-/* Кнопки керування кількістю */
 .controls {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  font-size: 1rem;
-  color: var(--color-dark-brown);
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--sidebar-fg);
 }
 
 .count-btn {
   display: flex;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
-  padding: 0.3125rem;
-  box-sizing: border-box;
-  border: 0.0625rem solid var(--divider-color);
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: transparent;
+  border: 0.0625rem solid var(--sidebar-border);
   border-radius: var(--radius-sm);
-  transition: 0.2s;
+  color: var(--sidebar-fg);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .count-btn:hover {
-  background-color: var(--hover-color);
+  background-color: var(--sidebar-hover-bg);
+  border-color: var(--sidebar-fg);
 }
 
-/* Елементи форми та обгортки */
+/* ==========================================================================
+   4. БЛОК АКТИВНИХ ЗАМОВЛЕНЬ (СПЕЦ-ІНФО)
+   ========================================================================== */
+
+.active-orders-container {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  background-color: var(--sidebar-info-banner-bg);
+  border: 0.0625rem solid var(--sidebar-info-banner-border);
+  border-radius: var(--radius-md);
+}
+
+.active-orders-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--sidebar-fg);
+}
+
+.banner-icon {
+  color: var(--sidebar-info-banner-icon);
+
+  /* color: aquamarine; */
+  animation: pulse-icon 2s infinite alternate;
+}
+
+.active-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.active-order-item {
+  padding: 0.75rem;
+  background-color: var(--sidebar-card-bg);
+  border-left: 0.25rem solid var(--accent-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0.125rem 0.375rem rgb(0 0 0 / 4%);
+}
+
+.active-order-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.active-order-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active-order-number {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--sidebar-fg);
+}
+
+.active-order-time {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.active-order-customer {
+  font-size: 0.825rem;
+  color: var(--sidebar-fg-muted);
+}
+
+.active-order-subitems {
+  margin: 0.5rem 0 0;
+  padding-left: 1.15rem;
+  font-size: 0.825rem;
+  color: var(--sidebar-fg-muted);
+}
+
+/* ==========================================================================
+   5. ФОРМА ОФОРМЛЕННЯ ТА ІНПУТИ
+   ========================================================================== */
+
 .checkout-form-container {
   display: contents;
 }
@@ -185,7 +257,7 @@
 
 .form-group {
   position: relative;
-  margin-bottom: 0.9375rem;
+  margin-bottom: 1rem;
 }
 
 .field-input-and-field-error {
@@ -193,171 +265,147 @@
   width: 100%;
 }
 
-/* Абсолютне позиціонування іконки всередині інпуту */
 .form-icon {
   position: absolute;
   top: 50%;
   left: 0.75rem;
   z-index: 2;
-  color: var(--color-dark-gray-80);
+  color: var(--sidebar-fg-muted);
   transform: translateY(-50%);
   pointer-events: none;
 }
 
-/* Інпут з відступом зліва під іконку */
-.field-input {
+.field-input,
+.field-input-time {
   width: 100%;
-  padding: 0.75rem 0.75rem 0.75rem 2.5rem !important;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
   box-sizing: border-box;
-  border: 0.0625rem solid var(--color-dark-gray-50);
-  border-radius: 0.25rem;
+  background-color: var(--sidebar-bg);
+  border: 0.0625rem solid var(--sidebar-border);
+  border-radius: var(--radius-sm);
   outline: none;
   font-family: inherit;
-  font-size: 1.1rem;
-  color: var(--color-brown);
+  font-size: 1rem;
+  color: var(--sidebar-fg);
   transition: border-color 0.2s ease;
 }
 
-.field-input:focus {
-  border-color: var(--color-accent);
+.field-input-time {
+  padding-left: 0.75rem;
 }
 
-.field-input::placeholder {
-  color: var(--color-dark-gray-80);
-  opacity: 1;
+.label-input-time {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem; /* Додаємо чіткий відступ */
+  margin-bottom: 0.375rem;
+  font-size: 0.95rem;
+  color: var(--sidebar-fg);
 }
 
-/* Підвищуємо специфічність замість використання шкідливого !important */
+.label-input-time svg {
+  color: var(--sidebar-fg-muted); /* або var(--accent-primary) */
+}
+
+.field-input:focus,
+.field-input-time:focus {
+  border-color: var(--accent-primary);
+}
+
+.field-input::placeholder,
+.field-input-time::placeholder {
+  color: var(--sidebar-placeholder);
+}
+
 .field-input.field-error,
 .field-input-time.field-error {
-  border-color: var(--error-color);
+  border-color: var(--status-error);
 }
 
-/* Інтеграція календаря (Datepicker) */
-.field-input-and-field-error :global(.react-datepicker-wrapper),
-.field-input-and-field-error :global(.react-datepicker__input-container) {
-  display: block;
-  width: 100%;
-}
-
-.field-input-and-field-error
-  :global(.react-datepicker__input-container)
-  input::placeholder {
-  font-size: 1rem;
-  color: var(--text-reviews-color);
-  opacity: 0.6;
-}
-
-/* Спливаюча хмаринка помилки під інпутом (уніфікована) */
+/* Спливаюче вікно помилки */
 .error-popup {
   position: absolute;
-  top: 100%;
-  left: 1.25rem;
+  top: calc(100% + 0.25rem);
+  left: 0.5rem;
   z-index: 110;
-  margin: 0;
-  padding: 0.3125rem 0.625rem;
-  background-color: var(--color-white);
-  border: 0.0625rem solid var(--error-color);
-  border-radius: 0.25rem;
-  box-shadow: 0 0.125rem 0.3125rem rgb(0 0 0 / 15%);
-  font-size: 0.85rem;
-  font-weight: bold;
-  white-space: nowrap;
-  color: var(--error-color);
+  padding: 0.35rem 0.65rem;
+  background-color: var(--error-popup-bg);
+  border: 0.0625rem solid var(--status-error);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--status-error);
   animation: fade-in 0.2s ease-out;
 }
 
 /* Зовнішня стрілочка хмаринки */
+
 .error-popup::before {
   position: absolute;
   bottom: 100%;
   left: 0.9375rem;
-  border-color: transparent transparent var(--error-color);
+  border-color: transparent transparent var(--status-error);
   border-style: solid;
-  border-width: 0.3125rem;
+  border-width: 0.5125rem;
   content: '';
 }
 
 /* Внутрішня біла стрілочка хмаринки */
+
 .error-popup::after {
   position: absolute;
   bottom: 100%;
   left: 0.9375rem;
   margin-left: 0.0625rem;
-  border-color: transparent transparent var(--color-white);
+  border-color: transparent transparent var(--status-error);
   border-style: solid;
   border-width: 0.25rem;
   content: '';
 }
 
-/* Поля для вибору бажаного часу */
-.label-input-time {
-  display: flex;
-  align-items: center;
-  gap: 0.3125rem;
-  margin-bottom: 0.3125rem;
-  font-size: 1rem;
-  color: var(--color-dark-gray-80);
-}
+/* ==========================================================================
+   6. ФУТЕР ТА ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
+   ========================================================================== */
 
-.field-input-time {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  box-sizing: border-box;
-  border: 0.0625rem solid var(--divider-color);
-  border-radius: var(--radius-sm);
-  outline: none;
-  font-family: inherit;
-  font-size: 1rem;
-  color: var(--color-dark-brown);
-  transition: border-color 0.3s ease;
-}
-
-.field-input-time:focus {
-  border-color: var(--color-accent);
-}
-
-/* Нижня секція оформлення замовлення */
 .checkout-section {
   margin-top: auto;
-  padding-top: 0.625rem;
-  border-top: 0.0125rem solid var(--divider-color);
+  padding-top: 1rem;
+  border-top: 0.0625rem solid var(--sidebar-divider);
 }
 
 .total-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.9375rem;
+  margin-bottom: 1rem;
   font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--color-accent);
+  font-weight: 700;
+  color: var(--accent-primary);
 }
 
 .order-btn {
   cursor: pointer;
   width: 100%;
-  margin-top: 0.9375rem;
-  padding: 0.9375rem;
-  background-color: var(--color-accent);
+  min-height: var(--btn-height);
+  background-color: var(--sidebar-btn-bg);
   border: none;
-  border-radius: 0.785rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--color-white);
+  border-radius: var(--btn-radius);
+  font-family: var(--btn-font-family);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  color: var(--sidebar-btn-text);
   transition:
-    background 0.3s,
-    opacity 0.3s;
+    background-color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .order-btn:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .order-btn:hover:not(:disabled) {
-  background-color: var(--hover-color);
-  color: var(--color-dark-brown);
+  background-color: var(--sidebar-btn-hover);
 }
 
 .cancel-btn {
@@ -367,124 +415,42 @@
   gap: 0.5rem;
   cursor: pointer;
   width: 100%;
-  margin-top: 0.625rem;
+  margin-top: 0.75rem;
   background: none;
   border: none;
-  color: var(--color-dark-gray-80);
+  font-size: 0.9rem;
+  color: var(--sidebar-fg-muted);
+  transition: color 0.2s ease;
 }
 
-.pickup-time-text {
-  display: inline-block;
-  margin: 0.625rem 0;
-  padding: 0.625rem 1.25rem;
-  background-color: var(--color-active);
-  border-radius: 0.625rem;
+.cancel-btn:hover {
+  color: var(--sidebar-fg);
+}
+
+/* ==========================================================================
+   7. СЕКЦІЯ УСПІШНОГО ЗАМОВЛЕННЯ
+   ========================================================================== */
+
+.success-container {
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.success-title {
+  margin-top: 1rem;
   font-size: 1.3rem;
-  font-weight: bold;
+  color: var(--sidebar-fg);
+}
+
+.order-number-badge {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--sidebar-active-bg);
+  border-radius: var(--radius-sm);
+  font-size: 1.8rem;
   font-weight: 700;
-  line-height: 1;
-  color: var(--color-brown);
-}
-
-.active-orders-container {
-  margin-bottom: 1.25rem;
-  padding: 0.875rem 1rem;
-  background-color: var(--bg-primary, #fcfaf4);
-  border: 0.0625rem solid #f1c40f;
-  border-radius: 0.75rem;
-  box-shadow: 0 0.25rem 0.75rem rgb(241 196 15 / 8%);
-}
-
-.active-orders-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #2c3e50;
-}
-
-.banner-icon {
-  color: #f39c12;
-  animation: pulse-icon 2s infinite alternate;
-}
-
-.active-orders-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.active-order-item {
-  padding: 0.6rem 0.85rem;
-  background-color: #fff;
-  border-left: 0.25rem solid #f1c40f;
-  border-radius: 0.35rem;
-  box-shadow: 0 0.125rem 0.375rem rgb(0 0 0 / 4%);
-}
-
-.active-order-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.35rem;
-  font-size: 0.875rem;
-  color: #34495e;
-}
-
-.active-order-time {
-  padding: 0;
-
-  /* background-color: #fef9e7; */
-  border-radius: 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #d35400;
-}
-
-.active-order-subitems {
-  margin: 0;
-  padding-left: 1.15rem;
-  font-size: 0.825rem;
-  color: #7f8c8d;
-  list-style: square;
-}
-
-.active-order-subitems li {
-  margin-bottom: 0.15rem;
-}
-
-/* Блок для вертикального розміщення номера та імені */
-.active-order-info-block {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  width: 100%; /* розтягуємо блок на всю ширину замовлення */
-}
-
-/* Рядок, який вирівняє номер і час по одній лінії */
-.active-order-top-row {
-  display: flex;
-  justify-content: space-between; /* номер притисне до лівого краю, час — до правого */
-  align-items: center; /* вирівнювання по центру по вертикалі */
-  width: 100%;
-}
-
-.active-order-number {
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.active-order-customer {
-  margin-top: 0.125rem; /* легкий відступ від верхнього рядка */
-  font-size: 0.825rem;
-
-  /* font-style: italic; */
-  color: #666;
+  color: var(--accent-primary);
 }
 
 @keyframes pulse-icon {

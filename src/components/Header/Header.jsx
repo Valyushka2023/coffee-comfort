@@ -40,7 +40,7 @@ const Header = ({ onToggleMenu, isMenuOpen }) => {
           </nav>
 
           <div className={css['actions-wrapper']}>
-            <a href="#contacts" className={css['header-cta-link']}>
+            <a href="#contacts" className={css['header-cta']}>
               {t('cta_booking')}
             </a>
 

@@ -21,37 +21,39 @@
 }
 
 .switcher-theme-btn:hover {
-  background-color: rgb(255 204 51 / 10%);
+  /* Фон видалено, залишено лише акцентовану трансформацію */
   transform: scale(1.1) rotate(45deg);
 }
 
 .theme-icon-md-light {
   font-size: 1.4rem;
-  color: var(--toggle-theme-icon-color);
+  color: var(--header-icon-toggle-theme);
 
-  /* Викликаємо новий сценарій */
+  /* Викликаємо сценарій анімації */
   animation: glow-pulse 3s infinite ease-in-out;
 
-  /* Перевизначаємо змінні Animate спеціально під цю іконку */
-  --glow-color: rgb(255 204 51 / 60%);
+  /* Використовуємо канали золота для свічення сонечка */
+  --glow-color: var(--header-toggle-glow-sun);
   --glow-scale-to: 1.2;
   --glow-size-max: 0.75rem;
 }
 
 .theme-icon-md-dark {
   font-size: 1.4rem;
-  color: var(--toggle-theme-icon-color);
+  color: var(--header-icon-toggle-theme);
 
-  /* Викликаємо новий сценарій */
+  /* Викликаємо сценарій анімації */
   animation: glow-pulse 3s infinite ease-in-out;
 
-  /* Перевизначаємо змінні Animate спеціально під цю іконку */
-  --glow-color: rgb(212 163 115 / 30%);
-  --glow-scale-from: 0.9;
+  /* Використовуємо канали latte для свічення місяця */
+  --glow-color: var(--header-toggle-glow-moon);
+
+  /* --glow-scale-from: 0.9; */
   --glow-scale-to: 1.1;
   --glow-size-max: 0.75rem;
 }
 
+/* --- МЕДІА ЗАПИТИ --- */
 @media (max-width: 74.9375rem) {
   .theme-icon-md-light,
   .theme-icon-md-dark {

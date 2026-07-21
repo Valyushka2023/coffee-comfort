@@ -4,17 +4,18 @@
   flex-direction: column;
   height: 100%;
   padding: 1.25rem 2rem;
-  background-color: var(--reviews-card-bg-color);
+  background-color: var(--bg-block-primary);
+  border: 0.0625rem solid var(--border-block);
   border-radius: 1rem;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
-  color: var(--reviews-text-color);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-block);
+  color: var(--text-block-primary);
   transition:
     transform 0.4s ease,
     box-shadow 0.4s ease;
 }
 
 .card-review:hover {
-  box-shadow: 0 0.5rem 1.5rem var(--shadow-icon-circle);
+  box-shadow: 0 0.5rem 1.5rem var(--shadow-block);
   transform: translateY(-0.5rem);
 }
 
@@ -34,7 +35,7 @@
   font-style: italic;
   line-height: 1.3;
   text-align: justify;
-  color: var(--text-reviews-color);
+  color: var(--text-block-primary);
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -65,12 +66,12 @@
 
 .author-name {
   font-size: 1.1rem;
-  color: var(--text-reviews-color);
+  color: var(--text-block-primary);
 }
 
 .date {
   font-size: 1rem;
-  color: var(--text-reviews-color);
+  color: var(--text-block-primary);
   opacity: 0.8;
 }
 
@@ -83,6 +84,7 @@
 
 .read-more-btn {
   cursor: pointer;
+  width: 100%;
   margin-bottom: 0.5rem;
   padding: 0;
   background: none;
@@ -90,7 +92,7 @@
   font-family: inherit;
   font-size: 0.8rem;
   text-align: left;
-  color: var(--text-reviews-color);
+  color: var(--color-placeholder-primary);
   opacity: 0.5;
 }
 

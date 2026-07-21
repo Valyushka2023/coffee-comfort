@@ -1,3 +1,5 @@
+@import url('../../../styles/animate.css');
+
 .form {
   display: flex;
   flex-direction: column;
@@ -20,11 +22,11 @@
 .field-input {
   width: 100%;
   padding: 0.85rem 1rem;
-  background-color: var(--field-input-area-review-br-color);
+  background-color: var(--bg-block-secondary);
   border: 0.0625rem solid transparent;
   border-radius: 0.75rem;
   font-size: 1rem;
-  color: var(--text-input-area-color);
+  color: var(--text-block-secondary);
   transition: border-color 0.3s;
 }
 
@@ -34,7 +36,37 @@
 }
 
 .field-error {
-  border-color: var(--error-color) !important;
+  border-color: var(--status-error);
+}
+
+.error-popup {
+  --slide-distance: -0.3125rem;
+
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--error-popup-bg);
+  border: 0.0625rem solid var(--status-error);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-block);
+  font-size: 0.9rem;
+  letter-spacing: 0.056rem;
+  white-space: nowrap;
+  color: var(--status-error);
+  animation: slide-in-up 0.2s ease-out both;
+}
+
+.error-popup::before {
+  position: absolute;
+  bottom: 100%;
+  left: 0.625rem;
+  border-color: transparent transparent var(--status-error) transparent;
+  border-style: solid;
+  border-width: 0.5125rem;
+  content: '';
 }
 
 .element-sending {
@@ -42,31 +74,4 @@
   justify-content: center;
   width: 100%;
   margin-top: 0.5rem;
-}
-
-.error-popup {
-  position: absolute;
-  top: calc(100% + 0.25rem);
-  left: 0;
-  z-index: 100;
-  margin: 0;
-  padding: 0.25rem 0.5rem;
-  background-color: var(--body-bg-color);
-  border: 0.0625rem solid var(--error-color);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--box-shadow);
-  font-size: 0.9rem;
-  letter-spacing: 0.056rem;
-  white-space: nowrap;
-  color: var(--error-color);
-}
-
-.error-popup::before {
-  position: absolute;
-  bottom: 100%;
-  left: 0.625rem;
-  border-color: transparent transparent var(--error-color) transparent;
-  border-style: solid;
-  border-width: 0.3125rem;
-  content: '';
 }

@@ -12,7 +12,7 @@
   inset: 0;
 }
 
-/* Новий клас для локальної модалки */
+/* Локальна модалка (без порталу) */
 .local-wrapper {
   position: absolute;
   z-index: 100;
@@ -32,7 +32,6 @@
   backdrop-filter: blur(var(--overlay-blur));
 }
 
-/* Оверлей тепер теж підлаштовується під батька */
 .local-wrapper .overlay {
   position: absolute;
 }
@@ -46,8 +45,8 @@
   max-height: fit-content;
   padding: 2.5rem 1.8125rem 1.8125rem;
   box-sizing: border-box;
-  background-color: var(--contact-form-bg-color);
-  border: 0.0625rem solid var(--button-border-color);
+  background-color: var(--bg-block-primary);
+  border: 0.0625rem solid var(--border-block);
   border-radius: 1rem;
   animation: slide-in-up 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
@@ -58,7 +57,7 @@
   line-height: 1.2;
   text-align: center;
   text-transform: uppercase;
-  color: var(--text-reviews-color);
+  color: var(--text-block-primary);
 }
 
 .modal-content {
@@ -66,35 +65,12 @@
   overflow-y: visible;
 }
 
+/* Обгортка кнопки закриття */
 .close-btn {
-  position: absolute !important;
-  top: 0.75rem !important;
-  right: 0.75rem !important;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
   z-index: 20;
-}
-
-.close-btn.gallery-close-btn {
-  top: 1rem !important;
-  right: 1rem !important;
-  z-index: 999 !important;
-  background: transparent !important;
-  filter: drop-shadow(0 0 0.125rem var(--color-black))
-    drop-shadow(0 0 0.3125rem var(--color-black-80)) !important;
-}
-
-.close-btn.gallery-close-btn :global(.base-close-button) {
-  display: block !important;
-  width: auto !important;
-  height: auto !important;
-  font-size: 2.5rem !important;
-  font-weight: 900 !important;
-  line-height: 1 !important;
-  color: var(--color-white) !important;
-}
-
-.close-btn.gallery-close-btn:hover :global(.base-close-button) {
-  color: var(--color-white) !important;
-  transform: scale(1.1);
 }
 
 @media (max-height: 28.125rem) {

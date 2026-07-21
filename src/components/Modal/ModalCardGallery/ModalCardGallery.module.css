@@ -1,72 +1,74 @@
-.gallery-specific-modal {
-  --close-btn-size: 2.5rem;
-  --button-close-icon-color: var(--color-white);
-  --button-hover-close-color: var(--color-latte-coffee);
-
+.gallery-modal {
   position: relative;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 90vw !important;
-  height: auto !important;
-  max-width: 35rem !important;
-  max-height: 90vh !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  background-color: var(--color-black);
-  border-radius: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  height: auto;
+  max-width: 35rem;
+  max-height: 90vh;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--overlay-bg);
+  border-radius: var(--radius-lg);
 }
 
-.gallery-specific-modal :global(.base-close-button) {
-  font-weight: 900 !important;
-  color: var(--button-close-icon-color) !important;
-  transform: scale(1.2);
-  -webkit-text-stroke: 0.05rem currentcolor;
+/* Кастомізація базової кнопки під круглу підкладку (Frosted Glass) */
+.gallery-close-btn {
+  /* Фіксовані розміри круглої підкладки */
+  width: 2.75rem;
+  height: 2.75rem;
+
+  /* Статичний фон і рамка (не змінюються від теми) */
+  background-color: var(--badge-bg);
+  border: 0.0625rem solid var(--badge-bg);
+  border-radius: var(--radius-full, 50%);
+
+  /* Анімація суто для трансформації/масштабування підкладки */
+  transition: transform 0.2s ease;
+  backdrop-filter: blur(0.25rem);
+
+  /* 🌟 Перевизначаємо змінні кольорів для хрестика */
+  --btn-cta-ic: rgb(var(--dark-brown-channels));
+  --btn-close-hover: rgb(var(--latte-channels));
 }
 
-.gallery-specific-modal :global(.base-close-button:hover) {
-  color: var(--button-hover-close-color) !important;
-  transform: scale(1.3);
-  -webkit-text-stroke: 0.06rem currentcolor;
-}
-
-.gallery-specific-modal :global(.modal-content) {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
+/* Контент галереї */
+.gallery-modal :global(.modal-content) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .img-wrapper {
-  display: flex !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
-  aspect-ratio: 1 / 1 !important;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
 }
 
 .full-img {
   display: block;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
+/* Адаптивність */
 @media (max-width: 74.9375rem) {
-  .gallery-specific-modal {
-    --close-btn-size: 2.4rem;
-
-    width: 90vmin !important;
-    height: 90vmin !important;
-    max-width: 35rem !important;
-    max-height: 35rem !important;
+  .gallery-modal {
+    width: 90vmin;
+    height: 90vmin;
+    max-width: 35rem;
+    max-height: 35rem;
   }
-}
 
-@media (max-width: 47.9375rem) {
-  .gallery-specific-modal {
-    --close-btn-size: 2rem;
+  .gallery-close-btn {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }

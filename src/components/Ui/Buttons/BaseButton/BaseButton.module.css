@@ -36,55 +36,77 @@
   min-width: 13.75rem;
 }
 
+/* ==========================================
+   1. БАЗОВІ КЛАСИ (Спочатку описуємо чисті .primary та .default)
+   ========================================== */
+
 .primary {
-  background-color: var(--button-review-menu-bg-color);
-  border: 0.0625rem solid var(--button-border-color);
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-icon-circle);
+  cursor: pointer;
+  padding: 0.625rem 1.5625rem;
+  background-color: var(--btn-cta-bg);
+  border: 0.0625rem solid var(--border-btn);
+  border-radius: var(--border-radius, 2rem);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-btn);
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--button-form-color);
-}
-
-.primary:hover:not(:disabled) {
-  background-color: var(--button-hover-bg-color);
-  color: var(--button-hover-color);
-  transform: translateY(-0.1875rem);
-  filter: brightness(1.1);
-}
-
-.active {
-  background-color: var(--button-hover-bg-color);
-  border-bottom: 0.125rem solid var(--primary-color);
-  color: var(--button-hover-color);
-}
-
-/* Оновлено: додали селектор з атрибутом [disabled] для надійності */
-.button:disabled,
-.button[disabled] {
-  cursor: not-allowed;
-  background-color: var(--button-disabled-bg-color);
-  box-shadow: none;
-  color: var(--button-disabled-text-color);
-  transform: none;
-  filter: none;
-}
-
-.button:active:not(:disabled) {
-  transform: scale(0.95);
+  color: var(--btn-cta-fg);
+  transition: all 0.3s ease;
 }
 
 .default {
   background-color: transparent;
-  border: 0.0625rem solid var(--button-review-menu-bg-color);
+  border: 0.0625rem solid var(--border-btn);
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--text-form-review-color);
+  color: var(--btn-cta-fg);
+  transition: all 0.3s ease;
+}
+
+/* ==========================================
+   2. СТАН DISABLED (Для обох кнопок)
+   ========================================== */
+
+.primary:disabled,
+.primary[disabled],
+.default:disabled,
+.default[disabled] {
+  cursor: not-allowed;
+  background-color: var(--button-disabled-bg-color);
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--button-disabled-text-color);
+  transform: none !important;
+  filter: none;
+}
+
+/* ==========================================
+   3. СТАНИ HOVER ТА ACTIVE (Йдуть після базових і disabled)
+   ========================================== */
+
+.primary:hover:not(:disabled) {
+  background-color: var(--hover-btn-bg);
+  color: var(--hover-btn-color);
+  transform: translateY(-0.1875rem);
+  filter: brightness(1.1);
 }
 
 .default:hover:not(:disabled) {
   background-color: var(--color-white-10);
-  border-color: var(--button-hover-bg-color);
+  border-color: var(--hover-btn-bg);
   transform: translateY(-0.1875rem);
+}
+
+/* Ефект натискання (кліку) */
+.primary:active:not(:disabled),
+.default:active:not(:disabled) {
+  transform: translateY(-0.1875rem) scale(0.97);
+}
+
+/* Стан активного перемикача */
+.active {
+  background-color: var(--hover-btn-bg);
+  border-color: var(--hover-btn-bg);
+  color: var(--hover-btn-color);
 }
 
 @media (max-width: 47.9375rem) {

@@ -3,10 +3,9 @@
 .contacts-section {
   position: relative;
   padding: 4rem 0;
-  background-color: var(--body-bg-color);
-  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
-  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
-    var(--section-border-bottom-color);
+  background-color: var(--section-bg);
+  border-bottom: 0.0625rem solid var(--border-section-bottom);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem var(--border-section-bottom);
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease,
@@ -25,21 +24,7 @@
   flex-wrap: wrap;
 }
 
-.contacts-info {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow: visible;
-}
-
-.react-datepicker-popper {
-  z-index: 9999 !important;
-}
-
+.contacts-info,
 .contacts-form-container {
   display: flex;
   flex: 1;
@@ -47,13 +32,21 @@
   box-sizing: border-box;
 }
 
+.contacts-info {
+  min-height: 100%;
+  overflow: visible;
+}
+
+.react-datepicker-popper {
+  z-index: 9999 !important;
+}
+
 .contacts-title {
   margin-top: -0.4375rem;
   margin-bottom: 3.5rem;
-  padding-top: 0;
   line-height: 1;
   text-transform: uppercase;
-  color: var(--primary-color);
+  color: var(--section-text);
 }
 
 .contacts-item {
@@ -63,14 +56,22 @@
   gap: 0.75rem;
   margin-bottom: 3rem;
   font-size: 1.1rem;
-  color: var(--tertiary-color);
+  color: var(--section-text);
   transition: color 0.3s ease;
 }
 
-.item-map,
-.item-clock {
+.item-row {
   display: flex;
   align-items: center;
+}
+
+/* ФАРБУВАННЯ ІКОНОК ЧЕРЕЗ СТИЛІ */
+.row-map svg {
+  color: var(--map-marker-icon);
+}
+
+.row-clock svg {
+  color: var(--color-icon-clock);
 }
 
 .info-icon {
@@ -81,11 +82,6 @@
     transform 0.3s ease,
     filter 0.3s ease;
   filter: drop-shadow(0 0.125rem 0.25rem rgb(0 0 0 / 10%));
-}
-
-.contacts-address,
-.contacts-hours {
-  display: none;
 }
 
 .contacts-item:hover .info-icon {
@@ -101,6 +97,7 @@
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
 }
 
+/* АНІМАЦІЯ ПІНА (Залишається виключно в контактах) */
 .map-pin-animated {
   --pulse-offset: 0.8;
   --pulse-max: 1.2;
@@ -116,6 +113,7 @@
   border: 0;
 }
 
+/* АДАПТИВНІСТЬ */
 @media (max-width: 47.9375rem) {
   .contacts-container {
     flex-direction: column;

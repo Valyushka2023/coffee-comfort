@@ -133,7 +133,7 @@ const Reviews = ({ refreshTrigger }) => {
               )}
             </div>
 
-            <div className={css['more-btn-container']}>
+            <div className={css['actions-wrapper']}>
               {visibleCount < reviews.length && (
                 <Button
                   variant="primary"

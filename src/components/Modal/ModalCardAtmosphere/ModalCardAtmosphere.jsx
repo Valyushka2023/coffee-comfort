@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'; // Додали useRef
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import BaseModal from '../BaseModal/BaseModal.jsx';
-import Button from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
+import BaseButton from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
 import css from './ModalCardAtmosphere.module.css';
 
 const ModalCardAtmosphere = ({ isOpen, onClose, zone, onConfirm }) => {
@@ -97,22 +97,28 @@ const ModalCardAtmosphere = ({ isOpen, onClose, zone, onConfirm }) => {
                 __html: t(`atmosphere.zones.${zone.id}`),
               }}
             />
-            <div className={css['modal-buttons']}>
-              <Button
-                variant="default"
-                onClick={onClose}
-                className={css['flex-btn']}
-              >
-                {t('back_button')}
-              </Button>
-
-              <Button
+            <div className={css['buttons-group']}>
+              {/* Кнопка закриття */}
+              <BaseButton
                 variant="primary"
-                className={css['flex-btn']}
+                type="button"
+                isFixedWidth={true}
+                className={css['compact-btn']}
+                onClick={onClose}
+              >
+                {t('back_button', 'Close')}
+              </BaseButton>
+
+              {/* Кнопка вибору */}
+              <BaseButton
+                variant="primary"
+                type="button"
+                isFixedWidth={true}
+                className={css['compact-btn']}
                 onClick={handleConfirm}
               >
-                {t('atmosphere.select_button')}
-              </Button>
+                {t('atmosphere.select_button', 'Select')}
+              </BaseButton>
             </div>
           </div>
         )}

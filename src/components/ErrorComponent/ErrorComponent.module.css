@@ -3,20 +3,30 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: var(--gap-xs);
   height: 12.5rem;
 }
 
 .error-message {
   margin-bottom: 1rem;
   font-size: 1.2rem;
-  color: var(--primary-color);
+  color: var(--status-error);
 }
 
 .retry-button {
   cursor: pointer;
-  padding: 0.5rem;
-  background-color: var(--bg-accent);
+  height: var(--btn-height);
+  padding: 0 1.5rem;
+  background-color: var(--accent-highlight);
   border: none;
-  font-size: 1.2rem;
-  color: var(--color-white);
+  border-radius: var(--btn-radius);
+  font-family: var(--btn-font-family);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  color: rgb(var(--retry-btn-text));
+  transition: background-color 0.2s ease;
+}
+
+.retry-button:hover {
+  background-color: var(--accent-primary);
 }

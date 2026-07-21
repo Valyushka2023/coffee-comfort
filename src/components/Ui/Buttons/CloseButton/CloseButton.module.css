@@ -4,47 +4,36 @@
   align-items: center;
   cursor: pointer;
   padding: 0;
-  background: none;
+  background: transparent;
   border: none;
-  font-size: var(--close-btn-size, 1.5rem) !important;
-  font-weight: 900;
+  font-size: var(--close-btn-size, 1.8rem);
+  font-weight: 400;
   line-height: 1;
-  color: var(--button-close-icon-color);
+  color: var(--btn-cta-ic);
   transition:
     color 0.2s ease,
     transform 0.2s ease;
 }
 
 .base-close-button:hover {
-  color: var(--button-hover-close-color);
-  transform: scale(1.05);
+  color: var(--btn-close-hover);
+  transform: scale(1.3);
 }
 
 .base-close-button:active {
-  color: var(--active-color);
-  transform: scale(0.95);
+  /* color: var(--btn-close-active); */
+  transform: scale(0.9);
 }
 
+/* Адаптивність розміру хрестика */
 @media (max-width: 74.9375rem) {
   .base-close-button {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 61.9375rem) {
-  .base-close-button {
-    font-size: 1.1rem;
+    font-size: var(--close-btn-size-tablet, 1.5rem);
   }
 }
 
 @media (max-width: 47.9375rem) {
   .base-close-button {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 29.9375rem) {
-  .base-close-button {
-    font-size: 0.9rem;
+    font-size: var(--close-btn-size-mobile, 1.2rem);
   }
 }

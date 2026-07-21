@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import Button from '../Ui/Buttons/BaseButton/BaseButton.jsx';
 import CardMenu from '../Ui/Cards/CardMenu/CardMenu.jsx';
 import ModalCardMenu from '../Modal/ModalCardMenu/ModalCardMenu.jsx'; // Імпортуємо нову модалку
 import css from './Menu.module.css';
@@ -106,13 +107,21 @@ const Menu = () => {
         {!loading && (
           <nav className={css['menu-filter']}>
             {categories.map(key => (
-              <button
+              // <button
+              //   key={key}
+              //   onClick={() => setActiveCategory(key)}
+              //   className={`${css['filter-btn']} ${activeCategory === key ? css.active : ''}`}
+              // >
+              //   {t(`categories.${key}`)}
+              // </button>
+              <Button
                 key={key}
-                onClick={() => setActiveCategory(key)}
+                variant="primary" // або який проп ви там використовуєте
                 className={`${css['filter-btn']} ${activeCategory === key ? css.active : ''}`}
+                onClick={() => setActiveCategory(key)}
               >
                 {t(`categories.${key}`)}
-              </button>
+              </Button>
             ))}
           </nav>
         )}
@@ -151,22 +160,24 @@ const Menu = () => {
                       />
                     ))}
                   </div>
-                  <div className={css['controls-wrapper']}>
+                  <div className={css['actions-wrapper']}>
                     {hasMore && (
-                      <button
-                        className={css['load-more-btn']}
+                      <Button
+                        variant="primary"
+                        isFixedWidth={true}
                         onClick={() => handleShowMore(section.categoryKey)}
                       >
-                        {t('show_more')}
-                      </button>
+                        {t('show_more', 'SHOW MORE')}
+                      </Button>
                     )}
                     {currentLimit > 4 && (
-                      <button
-                        className={css['collapse-btn']}
+                      <Button
+                        variant="primary"
+                        isFixedWidth={true}
                         onClick={() => handleCollapse(section.categoryKey)}
                       >
-                        {t('collapse')}
-                      </button>
+                        {t('collapse', 'COLLAPSE')}
+                      </Button>
                     )}
                   </div>
                 </div>

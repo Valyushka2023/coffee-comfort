@@ -6,33 +6,45 @@ import css from './ModalCardGallery.module.css';
 const ModalCardGallery = ({ isOpen, onClose, image }) => {
   const [touchStart, setTouchStart] = useState(null);
 
-  if (!image) return null;
+  // Безпечна перевірка: якщо немає зображення або src — не рендеримо
+  if (!isOpen || !image?.src) return null;
 
   const handleTouchStart = e => {
+    // Фіксуємо початкову позицію першого дотику
     setTouchStart(e.targetTouches[0].clientY);
   };
 
   const handleTouchMove = e => {
-    if (!touchStart) return;
+    if (touchStart === null) return;
+
     const touchEnd = e.targetTouches[0].clientY;
     const distance = touchEnd - touchStart;
 
+    // Свайп вниз більше ніж на 100px
     if (distance > 100) {
       onClose();
-      setTouchStart(null);
+      setTouchStart(null); // Очищаємо після успішного закриття
     }
+  };
+
+  const handleTouchEnd = () => {
+    // Обов'язково скидаємо стан, якщо користувач відпустив палець (навіть якщо не досвайпав)
+    setTouchStart(null);
   };
 
   return (
     <BaseModal
       isOpen={isOpen}
       onClose={onClose}
-      className={css['gallery-specific-modal']}
+      className={css['gallery-modal']}
+      closeBtnClassName={css['gallery-close-btn']}
     >
       <div
         className={css['img-wrapper']}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd} // Для випадків, коли тач переривається системою
       >
         <img
           src={image.src}

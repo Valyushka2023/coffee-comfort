@@ -11,7 +11,7 @@ const CartIcon = ({ onClick }) => {
   return (
     <button
       type="button" // Тепер це правильний семантичний елемент
-      className={css['cart-icon-wrapper']}
+      className={css['btn-cart-icon']}
       onClick={() => {
         console.log('Click on the basket icon');
         onClick();

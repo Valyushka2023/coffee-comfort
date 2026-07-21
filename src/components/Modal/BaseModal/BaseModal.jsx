@@ -11,8 +11,9 @@ const BaseModal = ({
   children,
   title,
   className,
+  closeBtnClassName,
   showCloseButton = true,
-  disablePortal = false, // Новий проп
+  disablePortal = false,
 }) => {
   useEffect(() => {
     const handleKeyDown = e => {
@@ -23,7 +24,6 @@ const BaseModal = ({
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    // Блокуємо скрол body тільки якщо це глобальна модалка
     if (!disablePortal) {
       if (isOpen) {
         document.body.style.overflow = 'hidden';
@@ -57,13 +57,8 @@ const BaseModal = ({
         aria-modal="true"
       >
         {showCloseButton && (
-          <div
-            className={clsx(
-              css['close-btn'],
-              className && css['gallery-close-btn']
-            )}
-          >
-            <CloseButton onClick={onClose} />
+          <div className={css['close-btn']}>
+            <CloseButton onClick={onClose} className={closeBtnClassName} />
           </div>
         )}
 
@@ -74,7 +69,6 @@ const BaseModal = ({
     </div>
   );
 
-  // Рендеримо або в портал, або прямо в DOM-дерево компонента
   if (disablePortal) {
     return modalContent;
   }
@@ -88,6 +82,7 @@ BaseModal.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
   className: PropTypes.string,
+  closeBtnClassName: PropTypes.string,
   showCloseButton: PropTypes.bool,
   disablePortal: PropTypes.bool,
 };

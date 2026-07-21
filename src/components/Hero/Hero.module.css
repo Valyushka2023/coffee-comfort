@@ -11,14 +11,18 @@
   height: auto;
   min-height: 90vh;
   background-image:
-    linear-gradient(rgb(46 47 66 / 30%), rgb(46 47 66 / 30%)),
+    linear-gradient(
+      rgb(var(--graphitic-channels) / 30%),
+      rgb(var(--graphitic-channels) / 30%)
+    ),
     url('/images/Hero.webp');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border-bottom: 0.0625rem solid var(--section-border-bottom-color);
+  border-bottom: -0.0625rem solid var(--border-section-bottom);
+  box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem var(--border-section-bottom);
   text-align: center;
-  color: var(--color-beige);
+  color: var(--section-hero-text);
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease;
@@ -31,10 +35,15 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  background:
-    linear-gradient(to bottom, var(--color-black-30)), var(--color-black-70);
+
+  /* Виправлено: очищено старі дублі та застосовано єдиний правильний формат каналу чорного кольору */
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--black-channels) / 20%),
+    rgb(var(--black-channels) / 20%)
+  );
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem
-    var(--section-border-bottom-color);
+    var(--shadow-border-section-bottom);
 }
 
 .hero-container {
@@ -83,50 +92,27 @@
 .hero-link {
   padding: 0.5rem;
   border-bottom: 0.125rem solid transparent;
-  font-size: var(--link-font-size, 1rem);
-  font-weight: var(--link-font-weight, 600);
+  font-size: var(--link-font-size);
+  font-weight: var(--link-font-weight);
   text-decoration: none;
   text-transform: uppercase;
-  color: var(--color-beige);
   transition:
     opacity 0.3s ease,
-    border-bottom 0.3s ease;
+    border-bottom-color 0.3s ease;
   user-select: none;
 }
 
 .hero-link:hover {
-  opacity: 0.7;
-  border-bottom-color: var(--color-beige);
+  border-bottom-color: rgb(var(--beige-channels));
 }
 
 .hero-link:active {
   transform: translateY(0.0625rem);
-  opacity: 0.5;
 }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: 1.25rem;
-  left: 50%;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform: translateX(-50%);
-}
-
-.arrow-wrapper {
-  animation: arrow-move 1.6s ease-out 1s forwards;
-}
-
-.arrow {
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  border-right: 0.1875rem solid var(--color-beige);
-  border-bottom: 0.1875rem solid var(--color-beige);
-  transform: rotate(45deg);
-}
+/* ==========================================================================
+   АДАПТИВНІ СТИЛІ (MEDIA QUERIES) — Оптимізовано під нові змінні
+   ========================================================================== */
 
 @media (max-width: 61.9375rem) {
   .hero-title {
@@ -152,7 +138,7 @@
   }
 
   .hero-subtitle {
-    padding-inline: 1rem;
+    padding-inline: var(--padding-form-xs);
   }
 }
 
@@ -164,6 +150,8 @@
   .hero-links {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+
+    /* Виправлено: використано системний малий зазор */
+    gap: var(--spacing-min, 0.5rem);
   }
 }

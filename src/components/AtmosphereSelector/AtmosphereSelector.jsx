@@ -37,9 +37,9 @@ const AtmosphereSelector = ({ selectedZone, onSelectClick }) => {
                   className={css['zone-img']}
                 />
               </div>
-              <div className={css['label-container']}>
+              <div className={css['caption-container']}>
                 <span
-                  className={clsx(css['zone-label'], {
+                  className={clsx(css['zone-caption'], {
                     [css['active-text']]: selectedZone === zone.id,
                   })}
                   dangerouslySetInnerHTML={{

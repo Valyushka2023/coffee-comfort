@@ -1,3 +1,5 @@
+@import url('../../../styles/animate.css');
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -9,7 +11,7 @@
   display: block;
   font-size: 1.1rem;
   font-weight: 500;
-  color: var(--text-form-review-color);
+  color: var(--text-block-primary);
 }
 
 .field-container {
@@ -28,14 +30,14 @@
 }
 
 .field-error {
-  border-bottom-color: var(--error-color);
+  border-color: var(--status-error);
 }
 
 .star {
   display: inline-flex;
   border-radius: 0.25rem;
   outline: none;
-  color: var(--star-inactive-default);
+  color: var(--rating-star-inactive);
   transition:
     transform 0.2s ease,
     color 0.2s ease,
@@ -49,7 +51,7 @@
 }
 
 .star.filled {
-  color: var(--star-active-default);
+  color: var(--rating-star-active);
   opacity: 1;
 }
 
@@ -65,20 +67,23 @@
 }
 
 .error-popup {
+  --slide-distance: -0.3125rem;
+
   position: absolute;
   top: calc(100% + 0.25rem);
   left: 0;
   z-index: 100;
   margin: 0;
   padding: 0.25rem 0.5rem;
-  background-color: var(--body-bg-color);
-  border: 0.0625rem solid var(--error-color);
+  background-color: var(--error-popup-bg);
+  border: 0.0625rem solid var(--status-error);
   border-radius: var(--radius-sm);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--shadow-block);
   font-size: 0.9rem;
   letter-spacing: 0.056rem;
   white-space: nowrap;
-  color: var(--error-color);
+  color: var(--status-error);
+  animation: slide-in-up 0.2s ease-out both;
   pointer-events: none;
 }
 
@@ -86,8 +91,8 @@
   position: absolute;
   bottom: 100%;
   left: 0.625rem;
-  border-color: transparent transparent var(--error-color) transparent;
+  border-color: transparent transparent var(--status-error) transparent;
   border-style: solid;
-  border-width: 0.3125rem;
+  border-width: 0.5125rem;
   content: '';
 }

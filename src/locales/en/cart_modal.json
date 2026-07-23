@@ -17,6 +17,14 @@
 
   "decrease_quantity": "Decrease quantity",
   "increase_quantity": "Increase quantity",
+  "active_orders_title": "Your active orders",
+  "active_orders_heading": "Your current orders",
+  "title": "Order",
+  "pcs": "pcs",
+  "order_placed_title": "Order Placed",
+  "order_number_label": "Order Number",
+  "pickup_time_confirm": "Pickup Time",
+  "CLOSE_BTN": "Close",
 
   "errors": {
     "too_early": "Choose another time.",

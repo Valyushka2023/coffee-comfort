@@ -2,7 +2,7 @@
 
 .about-section {
   position: relative;
-  padding: 3rem 0;
+  padding: 4rem 0;
   background-color: var(--section-bg);
   border-bottom: 0.0625rem solid var(--border-section-bottom);
   box-shadow: inset 0 -0.625rem 0.625rem -0.3125rem var(--border-section-bottom);

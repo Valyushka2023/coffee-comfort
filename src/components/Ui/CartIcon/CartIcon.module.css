@@ -6,50 +6,42 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 2.35rem;
-  height: 2.35rem;
-  background-color: var(--btn-cart-icon-bg);
-  border: 0.125rem solid var(--border-btn);
-  border-radius: 50%;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-btn);
-  color: var(--btn-cart-icon-color);
+  width: 2.8rem;
+  height: 2.8rem;
+
+  /* Токени Рівня 1Б */
+  background-color: var(--cart-btn-bg);
+  border: 0.125rem solid var(--cart-btn-border);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0.25rem 0.9375rem var(--cart-btn-shadow);
+  color: var(--cart-btn-fg);
   transition: all 0.3s ease;
   animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   user-select: none;
 }
 
-.btn-cart-icon:focus-visible {
-  box-shadow:
-    0 0 0 0.25rem var(--btn-cta-bg),
-    0 0 0 0.375rem var(--hover-btn-bg),
-    0 0.25rem 0.9375rem var(--shadow-btn);
-  outline: none;
+.btn-cart-icon:hover {
+  background-color: var(--cart-btn-bg-hover);
+  color: var(--cart-btn-fg-hover);
 }
 
-/* При ховері кнопки міняємо тільки фон, а трансформацію прибираємо звідси... */
-.btn-cart-icon:hover {
-  background-color: var(--hover-btn-cart-icon-bg);
+.btn-cart-icon:focus-visible {
+  box-shadow: 0 0 0.5rem var(--cart-btn-focus-outline);
+  outline: 0.125rem solid var(--cart-btn-focus-outline);
+  outline-offset: 0.25rem;
 }
 
 .btn-cart-icon svg {
-  color: var(--header-cart-icon);
-
-  /* ...і додаємо transition для SVG, щоб він крутився плавно! */
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* ...і переносимо трансформацію суто на SVG! */
 .btn-cart-icon:hover svg {
-  transform: scale(1.1) rotate(-5deg);
+  transform: scale(1.15) rotate(-5deg);
 }
 
-.btn-cart-icon:hover svg,
-.btn-cart-icon:focus-visible svg {
-  color: var(--header-cart-icon-hover);
-}
-
+/* Бейдж кількості товарів */
 .badge {
   position: absolute;
   top: -0.2rem;
@@ -57,16 +49,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.45rem;
-  height: 1.45rem;
-  background-color: var(--header-cart-badge-bg);
-  border: 0.125rem solid var(--border-btn);
-  border-radius: 50%;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-btn);
+  width: 1.65rem;
+  height: 1.65rem;
+
+  /* Токени Рівня 1Б */
+  background-color: var(--cart-badge-bg);
+  border: 0.125rem solid var(--cart-badge-border);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0.25rem 0.5rem var(--cart-badge-shadow);
   font-size: 0.75rem;
   font-weight: bold;
-  color: var(--header-cart-badge-text);
+  color: var(--cart-badge-fg);
 
-  /* Перестраховка: щоб анімація кошика взагалі ніяк не смикала бейдж */
+  /* Перестраховка від анімацій кошика */
   transform: none !important;
 }

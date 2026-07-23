@@ -68,14 +68,17 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  width: 1.25rem;
+  height: 1.25rem;
   background: none;
   border: none;
-  color: var(--sidebar-fg);
+  color: var(--sidebar-ic);
   transition: opacity 0.2s ease;
 }
 
 .close-icon:hover {
-  opacity: 0.7;
+  color: var(--sidebar-ic-hover);
+  transform: scale(1.25);
 }
 
 .content {
@@ -149,7 +152,7 @@
   background-color: transparent;
   border: 0.0625rem solid var(--sidebar-border);
   border-radius: var(--radius-sm);
-  color: var(--sidebar-fg);
+  color: var(--sidebar-ic);
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
@@ -157,7 +160,6 @@
 
 .count-btn:hover {
   background-color: var(--sidebar-hover-bg);
-  border-color: var(--sidebar-fg);
 }
 
 /* ==========================================================================
@@ -168,8 +170,8 @@
   margin-bottom: 1.25rem;
   padding: 1rem;
   background-color: var(--sidebar-info-banner-bg);
-  border: 0.0625rem solid var(--sidebar-info-banner-border);
-  border-radius: var(--radius-md);
+  border: 0.0625rem solid var(--sidebar-border);
+  border-radius: var(--radius-sm);
 }
 
 .active-orders-title {
@@ -177,16 +179,14 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 500;
   color: var(--sidebar-fg);
 }
 
 .banner-icon {
-  color: var(--sidebar-info-banner-icon);
-
-  /* color: aquamarine; */
   animation: pulse-icon 2s infinite alternate;
+  stroke: var(--accent-primary);
 }
 
 .active-orders-list {
@@ -200,10 +200,9 @@
 
 .active-order-item {
   padding: 0.75rem;
-  background-color: var(--sidebar-card-bg);
-  border-left: 0.25rem solid var(--accent-primary);
+  background-color: var(--sidebar-bg);
+  border: 0.0625rem solid var(--sidebar-border);
   border-radius: var(--radius-sm);
-  box-shadow: 0 0.125rem 0.375rem rgb(0 0 0 / 4%);
 }
 
 .active-order-info-block {
@@ -219,27 +218,32 @@
 }
 
 .active-order-number {
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--sidebar-fg);
 }
 
-.active-order-time {
-  font-size: 0.875rem;
+.order-value {
   font-weight: 600;
   color: var(--accent-primary);
 }
 
+.active-order-time {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--accent-primary);
+}
+
 .active-order-customer {
-  font-size: 0.825rem;
-  color: var(--sidebar-fg-muted);
+  font-size: 1.1rem;
+  color: var(--sidebar-fg);
 }
 
 .active-order-subitems {
   margin: 0.5rem 0 0;
   padding-left: 1.15rem;
-  font-size: 0.825rem;
-  color: var(--sidebar-fg-muted);
+  font-size: 1.1rem;
+  color: var(--sidebar-fg);
 }
 
 /* ==========================================================================
@@ -263,6 +267,7 @@
 .field-input-and-field-error {
   position: relative;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 .form-icon {
@@ -270,7 +275,7 @@
   top: 50%;
   left: 0.75rem;
   z-index: 2;
-  color: var(--sidebar-fg-muted);
+  color: var(--sidebar-ic);
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -278,7 +283,8 @@
 .field-input,
 .field-input-time {
   width: 100%;
-  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  height: 3rem;
+  padding: 0.65rem 0.75rem 0.65rem 2.5rem;
   box-sizing: border-box;
   background-color: var(--sidebar-bg);
   border: 0.0625rem solid var(--sidebar-border);
@@ -297,14 +303,14 @@
 .label-input-time {
   display: flex;
   align-items: center;
-  gap: 0.375rem; /* Додаємо чіткий відступ */
+  gap: 0.375rem;
   margin-bottom: 0.375rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--sidebar-fg);
 }
 
-.label-input-time svg {
-  color: var(--sidebar-fg-muted); /* або var(--accent-primary) */
+.clock-icon {
+  stroke: var(--accent-primary);
 }
 
 .field-input:focus,
@@ -332,7 +338,8 @@
   background-color: var(--error-popup-bg);
   border: 0.0625rem solid var(--status-error);
   border-radius: var(--radius-sm);
-  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%);
+
+  /* box-shadow: 0 0.25rem 0.5rem var(--shadow-block); */
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--status-error);
@@ -383,6 +390,11 @@
   color: var(--accent-primary);
 }
 
+.total-label {
+  font-weight: 700;
+  color: var(--sidebar-fg);
+}
+
 .order-btn {
   cursor: pointer;
   width: 100%;
@@ -393,7 +405,7 @@
   font-family: var(--btn-font-family);
   font-size: var(--btn-font-size);
   font-weight: var(--btn-font-weight);
-  color: var(--sidebar-btn-text);
+  color: var(--sidebar-btn-fg);
   transition:
     background-color 0.2s ease,
     opacity 0.2s ease;
@@ -419,12 +431,12 @@
   background: none;
   border: none;
   font-size: 0.9rem;
-  color: var(--sidebar-fg-muted);
+  color: var(--sidebar-fg);
   transition: color 0.2s ease;
 }
 
 .cancel-btn:hover {
-  color: var(--sidebar-fg);
+  color: var(--sidebar-fg-muted);
 }
 
 /* ==========================================================================
@@ -432,8 +444,16 @@
    ========================================================================== */
 
 .success-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 1.5rem 0;
   text-align: center;
+}
+
+.success-icon {
+  color: var(--status-success);
 }
 
 .success-title {
@@ -445,12 +465,24 @@
 .order-number-badge {
   display: inline-block;
   margin: 1rem 0;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--sidebar-active-bg);
+  padding: 0.5rem 1.5rem;
+  background-color: var(--sidebar-bg);
   border-radius: var(--radius-sm);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--accent-primary);
+}
+
+.pickup-time-info {
+  margin-bottom: 1rem;
+}
+
+.pickup-time-text {
+  font-size: 1.1rem;
+}
+
+.warning-text {
+  margin-bottom: 1rem;
 }
 
 @keyframes pulse-icon {

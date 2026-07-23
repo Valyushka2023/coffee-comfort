@@ -92,7 +92,7 @@
   padding: 0 0.5rem;
   background-color: var(--btn-cta-bg);
   border: 0.0625rem solid var(--border-block);
-  border-radius: var(--border-radius, 2rem);
+  border-radius: var(--radius-full);
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-block);
   font-size: var(--btn-font-size, 1rem) !important;
   font-weight: var(--btn-font-weight, 600);

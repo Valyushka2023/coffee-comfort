@@ -142,6 +142,19 @@
   --accent-primary: rgb(var(--accent-orange-channels));
   --accent-highlight: rgb(var(--accent-bright-channels));
 
+  /* Компонент: Кнопка кошика в хедері (Cart Icon & Badge) */
+  --cart-btn-bg: rgb(var(--accent-bright-channels));
+  --cart-btn-bg-hover: rgb(var(--accent-orange-channels));
+  --cart-btn-fg: rgb(var(--dark-brown1-channels));
+  --cart-btn-fg-hover: rgb(var(--white-channels));
+  --cart-btn-border: rgb(var(--white-channels));
+  --cart-btn-shadow: rgb(var(--black-channels) / 40%);
+  --cart-btn-focus-outline: rgb(var(--accent-orange-channels));
+  --cart-badge-bg: rgb(var(--sys-red-channels));
+  --cart-badge-fg: rgb(var(--white-channels));
+  --cart-badge-border: rgb(var(--white-channels));
+  --cart-badge-shadow: rgb(var(--sys-red-channels) / 50%);
+
   /* Компонент: Скелетон (Skeleton Loader) */
   --skeleton-card-bg: rgb(var(--latte-channels) / 50%);
   --skeleton-element-bg: rgb(var(--light-brown-channels));
@@ -164,19 +177,22 @@
   --sidebar-active-bg: rgb(var(--latte-channels));
   --sidebar-fg: rgb(var(--dark-brown1-channels));
   --sidebar-fg-muted: rgb(var(--gray-dark-channels));
+  --sidebar-ic: rgb(var(--dark-browm1-channels));
+  --sidebar-btn-bg: rgb(var(--accent-orange-channels));
+  --sidebar-btn-fg: rgb(var(--white-channels));
   --sidebar-divider: rgb(var(--dark-brown1-channels) / 15%);
   --sidebar-border: rgb(var(--dark-brown1-channels) / 20%);
   --sidebar-placeholder: rgb(var(--brown-channels) / 40%);
 
   /* Інтерактивні елементи та кнопки всередині сайдбара */
-  --sidebar-btn-bg: rgb(var(--accent-orange-channels));
-  --sidebar-btn-text: rgb(var(--white-channels));
+  --sidebar-ic-hover: rgb(var(--latte-channels));
   --sidebar-btn-hover: rgb(var(--espresso-brown-channels));
   --sidebar-hover-bg: rgb(var(--beige-channels));
 
   /* Блок активних замовлень (Banner/Notification inside sidebar) */
-  --sidebar-info-banner-bg: rgb(var(--light-beige-channels));
-  --sidebar-info-banner-border: rgb(var(--ochre-channels) / 40%);
+  --sidebar-info-banner-bg: rgb(var(--beige-channels));
+
+  /* --sidebar-info-banner-border: rgb(var(--ochre-channels) / 40%); */
   --sidebar-info-banner-icon: rgb(var(--ochre-channels));
   --sidebar-card-bg: rgb(var(--white-channels));
 
@@ -236,9 +252,9 @@
      -------------------------------------------------------------------------- */
   --section-bg: rgb(var(--light-beige-channels));
   --section-hero-text: rgb(var(--beige-channels));
-  --section-text: rgb(var(--light-brown-channels));
+  --section-fg: rgb(var(--light-brown-channels));
   --section-filter-bg: rgb(var(--light-brown-channels));
-  --section-filter-text: rgb(var(--light-brown-channels));
+  --section-filter-fg: rgb(var(--light-brown-channels));
   --section-subtext: rgb(var(--gold-channels));
   --text-main-muted: rgb(var(--gray-dark-channels));
 
@@ -362,11 +378,11 @@
 
   /* --border-divider: rgb(var(--black-channels) / 20%); */
 
-  /* --border-btn: rgb(var(--white-channels)); */
+  --border-btn: rgb(var(--white-channels));
 
   /* --border-accent-element: var(--accent-primary); */
 
-  /* --shadow-btn: rgb(var(--black-channels) / 50%); */
+  --shadow-btn: rgb(var(--black-channels) / 50%);
 
   /* Глобальні іконки-маркери */
 
@@ -440,8 +456,8 @@
 
   /* --- 2.3. ГОЛОВНИЙ КОНТЕНТ ТА СЕКЦІЇ (Темна тема) --- */
   --section-bg: rgb(var(--dark-brown-channels));
-  --section-text: rgb(var(--gold-channels));
-  --section-filter-text: rgb(var(--beige-channels));
+  --section-fg: rgb(var(--gold-channels));
+  --section-filter-fg: rgb(var(--beige-channels));
   --section-subtext: rgb(var(--light-brown-channels));
   --text-main-muted: rgb(var(--light-beige-channels));
 
@@ -536,14 +552,14 @@
 
   /* Зміни ховерів та станів */
   --hover-btn-bg: rgb(var(--latte-channels));
-  --hover-btn-color: rgb(var(--dark-brown-channels));
+  --hover-btn-fg: rgb(var(--dark-brown-channels));
   --btn-close-hover: rgb(var(--beige-channels));
 
   /* Межі та Тіні кнопок/контролів */
 
   /* --border-divider: rgb(var(--white-channels) / 20%); */
 
-  /* --shadow-btn: rgb(var(--white-channels) / 80%); */
+  --shadow-btn: rgb(var(--white-channels) / 80%);
 
   /* --btn-close-active: rgb(var(--latte-channels)); */
 

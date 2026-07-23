@@ -36,7 +36,7 @@
 
 .menu-title {
   text-transform: uppercase;
-  color: var(--section-text);
+  color: var(--section-fg);
 }
 
 .menu-filter {
@@ -61,7 +61,7 @@
 /* Сама кнопка в активному стані */
 .filter-btn.active {
   background-color: var(--hover-btn-bg);
-  color: var(--hover-btn-color);
+  color: var(--hover-btn-fg);
 }
 
 /* Лінія підкреслення активного фільтра */
@@ -79,7 +79,7 @@
 
 /* Зміна кольору лінії при наведенні на вже активну кнопку */
 .filter-btn.active:hover::after {
-  background-color: var(--hover-btn-color);
+  background-color: var(--hover-btn-fg);
 }
 
 /* ==========================================
@@ -106,7 +106,7 @@
 
 .category-title {
   text-transform: uppercase;
-  color: var(--section-filter-text);
+  color: var(--section-filter-fg);
 }
 
 .grid-cards-menu {

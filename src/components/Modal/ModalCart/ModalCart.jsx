@@ -13,15 +13,15 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
-  FiX,
-  FiTrash2,
-  FiPlus,
-  FiMinus,
-  FiCheckCircle,
-  FiUser,
-  FiPhone,
-  FiClock,
-} from 'react-icons/fi';
+  Close,
+  Trash,
+  Plus,
+  Minus,
+  CheckCircle,
+  User,
+  Phone,
+  Clock,
+} from '../../Icons';
 
 import {
   removeFromCart,
@@ -30,7 +30,16 @@ import {
 } from '../../../redux/cartSlice.js';
 import { sendOrderRequest } from '../../../services/api.js';
 import { validateName, validatePhone } from '../../../utils/index.js';
+// import ModalCart from './components/ModalCart';
 import css from './ModalCart.module.css';
+
+// Допоміжна функція для автоматичного перетворення перших літер слів на великі
+const capitalizeName = name => {
+  if (!name) return '';
+  return name
+    .toLowerCase()
+    .replace(/(^|[\s-])[а-яєіїґa-z]/g, letter => letter.toUpperCase());
+};
 
 const ModalCart = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation('cart_modal');
@@ -235,8 +244,14 @@ const ModalCart = ({ isOpen, onClose }) => {
   const handlePhoneChange = event => {
     let input = event.target.value;
 
-    if (input === '' || input === '+380') {
-      setPhone(input);
+    if (
+      input === '' ||
+      input === '+' ||
+      input === '+3' ||
+      input === '+38' ||
+      input === '+380'
+    ) {
+      setPhone('');
       setPhoneError(
         hasAttemptedSubmit
           ? t('errors.phone_required') || 'Введіть номер телефону'
@@ -275,12 +290,19 @@ const ModalCart = ({ isOpen, onClose }) => {
   const handlePhoneFocus = () => {
     if (!phone) setPhone('+380');
   };
-
+  const handlePhoneBlur = () => {
+    if (phone === '+380') {
+      setPhone(''); // Скидаємо, щоб показати сірий плейсхолдер
+    }
+  };
   const handleNameChange = event => {
     const value = event.target.value;
-    setName(value);
+    const formattedName = capitalizeName(value);
+
+    setName(formattedName);
+
     if (hasAttemptedSubmit) {
-      const error = validateName(value, t);
+      const error = validateName(formattedName, t);
       setNameError(error || '');
     }
   };
@@ -296,7 +318,8 @@ const ModalCart = ({ isOpen, onClose }) => {
 
     setHasAttemptedSubmit(true);
 
-    const nameErr = validateName(name, t);
+    const formattedName = capitalizeName(name.trim());
+    const nameErr = validateName(formattedName, t);
     let phoneErr = validatePhone(phone, t);
     const isTimeValid = validatePickupTime(pickupTime);
 
@@ -313,16 +336,16 @@ const ModalCart = ({ isOpen, onClose }) => {
 
     setIsLoading(true);
 
+    // ✅ Зберігаємо об'єкт із назвами на всіх мовах
     const itemsSnapshot = items.map(item => ({
       id: item._id || item.id,
-      title:
-        item.name?.[currentLang] || item.name?.uk || item.name?.en || 'Item',
+      name: item.name,
       quantity: item.quantity,
     }));
 
     try {
       const orderData = {
-        customerName: name.trim(),
+        customerName: formattedName,
         customerPhone: phone.trim(),
         pickupTime,
         items: items.map(item => {
@@ -358,7 +381,7 @@ const ModalCart = ({ isOpen, onClose }) => {
       const newOrderInfo = {
         id: data._id, // Зберігаємо повний ID для подальшої валідації статусів
         number: generatedOrderNum,
-        customerName: name.trim(), // 🚀 ЗБЕРІГАЄМО ІМ'Я ДЛЯ ОФІСНОГО ВІДЖЕТА
+        customerName: formattedName,
         time: pickupTime || t('closest_time', 'Найближчий час'),
         items: itemsSnapshot,
         timestamp: Date.now(),
@@ -409,7 +432,7 @@ const ModalCart = ({ isOpen, onClose }) => {
             onClick={onClose}
             aria-label={t('close_modal')}
           >
-            <FiX size={24} />
+            <Close size={24} />
           </button>
         </div>
 
@@ -417,20 +440,21 @@ const ModalCart = ({ isOpen, onClose }) => {
           {activeOrders.length > 0 && !isOrdered && (
             <div className={css['active-orders-container']}>
               <h3 className={css['active-orders-title']}>
-                <FiClock className={css['banner-icon']} size={16} />
+                <Clock className={css['banner-icon']} size={18} />
                 {t('active_orders_heading', 'Ваші поточні замовлення:')}
               </h3>
               <ul className={css['active-orders-list']}>
                 {activeOrders.map(order => (
-                  <li key={order.number} className={css['active-order-item']}>
+                  <li
+                    key={order.id || order.number}
+                    className={css['active-order-item']}
+                  >
                     <div className={css['active-order-header']}>
-                      {/* Новий контейнер для правильного групування елементів */}
                       <div className={css['active-order-info-block']}>
-                        {/* Верхній рядок: Номер ліворуч, час праворуч */}
                         <div className={css['active-order-top-row']}>
                           <span className={css['active-order-number']}>
-                            Замовлення{' '}
-                            <strong>
+                            {t('title', 'Замовлення')}{' '}
+                            <strong className={css['order-value']}>
                               {'# '}
                               {order.number}
                             </strong>
@@ -440,7 +464,6 @@ const ModalCart = ({ isOpen, onClose }) => {
                           </span>
                         </div>
 
-                        {/* Нижній рядок: Ім'я клієнта залишається знизу */}
                         {order.customerName && (
                           <span className={css['active-order-customer']}>
                             {order.customerName}
@@ -449,11 +472,24 @@ const ModalCart = ({ isOpen, onClose }) => {
                       </div>
                     </div>
                     <ul className={css['active-order-subitems']}>
-                      {order.items.map((item, idx) => (
-                        <li key={idx}>
-                          {item.title} — <strong>{item.quantity} шт.</strong>
-                        </li>
-                      ))}
+                      {order.items.map((item, idx) => {
+                        // 💡 Динамічно витягуємо назву страви відповідно до обраної мови
+                        const itemTitle =
+                          typeof item.name === 'object'
+                            ? item.name?.[currentLang] ||
+                              item.name?.uk ||
+                              item.name?.en
+                            : item.title || item.name || 'Item';
+
+                        return (
+                          <li key={idx}>
+                            {itemTitle} —{' '}
+                            <strong>
+                              {item.quantity} {t('pcs', 'шт.')}
+                            </strong>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </li>
                 ))}
@@ -463,7 +499,7 @@ const ModalCart = ({ isOpen, onClose }) => {
 
           {isOrdered ? (
             <div className={css['success-container']}>
-              <FiCheckCircle size={80} color="var(--bg-accent)" />
+              <CheckCircle size={80} className={css['success-icon']} />
               <h2 className={css['success-title']}>{t('thank_you')}</h2>
               <p className={css['order-number-label']}>{t('order_number')}</p>
               <div className={css['order-number-badge']}>
@@ -524,7 +560,7 @@ const ModalCart = ({ isOpen, onClose }) => {
                             }
                             aria-label={t('decrease_quantity')}
                           >
-                            <FiMinus />
+                            <Minus size={18} />
                           </button>
                           <span>{item.quantity}</span>
                           <button
@@ -533,7 +569,7 @@ const ModalCart = ({ isOpen, onClose }) => {
                             onClick={() => dispatch(addToCart(item))}
                             aria-label={t('increase_quantity')}
                           >
-                            <FiPlus />
+                            <Plus size={18} />
                           </button>
                         </div>
                       </div>
@@ -545,7 +581,7 @@ const ModalCart = ({ isOpen, onClose }) => {
               <div className={css['form-wrapper']}>
                 <div className={css['form-group']}>
                   <div className={css['field-input-and-field-error']}>
-                    <FiUser className={css['form-icon']} />
+                    <User className={css['form-icon']} size={18} />
                     <input
                       type="text"
                       value={name}
@@ -563,25 +599,24 @@ const ModalCart = ({ isOpen, onClose }) => {
                   </div>
                 </div>
 
-                <div className={css['form-group']}>
-                  <div className={css['field-input-and-field-error']}>
-                    <FiPhone className={css['form-icon']} />
-                    <input
-                      type="tel"
-                      value={phone}
-                      onChange={handlePhoneChange}
-                      onFocus={handlePhoneFocus}
-                      autoComplete="off"
-                      placeholder="+380XXXXXXXXX"
-                      className={clsx(
-                        css['field-input'],
-                        hasAttemptedSubmit && phoneError && css['field-error']
-                      )}
-                    />
-                    {hasAttemptedSubmit && phoneError && (
-                      <p className={css['error-popup']}>{phoneError}</p>
+                <div className={css['field-input-and-field-error']}>
+                  <Phone className={css['form-icon']} size={18} />
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={handlePhoneChange}
+                    onFocus={handlePhoneFocus}
+                    onBlur={handlePhoneBlur}
+                    autoComplete="off"
+                    placeholder="+380XXXXXXXXX"
+                    className={clsx(
+                      css['field-input'],
+                      hasAttemptedSubmit && phoneError && css['field-error']
                     )}
-                  </div>
+                  />
+                  {hasAttemptedSubmit && phoneError && (
+                    <p className={css['error-popup']}>{phoneError}</p>
+                  )}
                 </div>
 
                 <div className={css['form-group']}>
@@ -589,7 +624,7 @@ const ModalCart = ({ isOpen, onClose }) => {
                     htmlFor="pickup-time-select"
                     className={css['label-input-time']}
                   >
-                    <FiClock size={14} />
+                    <Clock size={18} className={css['clock-icon']} />
                     <span>
                       {t('pickup_time_label') || 'Оберіть час отримання:'}
                     </span>
@@ -604,7 +639,7 @@ const ModalCart = ({ isOpen, onClose }) => {
                         css['field-input-time'],
                         hasAttemptedSubmit && timeError && css['field-error']
                       )}
-                      style={{ paddingLeft: '16px', appearance: 'auto' }}
+                      style={{ appearance: 'auto' }}
                     >
                       {timeSlots.map(slot => (
                         <option
@@ -625,7 +660,9 @@ const ModalCart = ({ isOpen, onClose }) => {
 
               <div className={css['checkout-section']}>
                 <div className={css['total-row']}>
-                  <span>{t('total')}</span>
+                  <span className={css['total-label']}>
+                    {t('total', ' Всього')}
+                  </span>
                   <span>
                     {totalAmount} {t('currency')}
                   </span>
@@ -645,7 +682,7 @@ const ModalCart = ({ isOpen, onClose }) => {
                     dispatch(clearCart());
                   }}
                 >
-                  <FiTrash2 />
+                  <Trash size={18} />
                   <span>{t('clear_cart_btn')}</span>
                 </button>
               </div>

@@ -17,6 +17,14 @@
 
   "decrease_quantity": "Зменшити кількість",
   "increase_quantity": "Збільшити кількість",
+  "active_orders_title": "Ваші активні замовлення",
+  "active_orders_heading": "Ваші поточні замовлення",
+  "title": "Замовлення",
+  "pcs": "шт.",
+  "order_placed_title": "Замовлення оформлено",
+  "order_number_label": "Номер замовлення",
+  "pickup_time_confirm": "Час самовивозу",
+  "CLOSE_BTN": "Закрити",
 
   "errors": {
     "too_early": "Виберіть інший час.",

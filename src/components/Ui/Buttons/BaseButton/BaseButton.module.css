@@ -44,9 +44,11 @@
   cursor: pointer;
   padding: 0.625rem 1.5625rem;
   background-color: var(--btn-cta-bg);
-  border: 0.0625rem solid var(--border-btn);
-  border-radius: var(--border-radius, 2rem);
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-btn);
+  border: 0.0625rem solid var(--border-block);
+
+  /* border-radius: var(--border-radius, 2rem); */
+  border-radius: var(--radius-full);
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-block);
   font-weight: 600;
   text-transform: uppercase;
   color: var(--btn-cta-fg);
@@ -55,7 +57,7 @@
 
 .default {
   background-color: transparent;
-  border: 0.0625rem solid var(--border-btn);
+  border: 0.0625rem solid var(--border-block);
   font-weight: 600;
   text-transform: uppercase;
   color: var(--btn-cta-fg);
@@ -85,7 +87,7 @@
 
 .primary:hover:not(:disabled) {
   background-color: var(--hover-btn-bg);
-  color: var(--hover-btn-color);
+  color: var(--hover-btn-fg);
   transform: translateY(-0.1875rem);
   filter: brightness(1.1);
 }

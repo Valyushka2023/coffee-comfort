@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: var(--color-white);
-  border: 0.125rem solid var(--border-accent);
-  border-left: 0.3125rem solid var(--border-accent);
+  background-color: var(--admin-bg-card);
+  border: 0.125rem solid var(--admin-border-color);
+  border-left: 0.3125rem solid var(--admin-border-color);
   border-radius: 0.75rem;
   box-shadow: none;
   transition: all 0.3s ease-in-out;
@@ -41,7 +41,7 @@
   font-size: 1.3rem;
   font-weight: 700;
   line-height: 1;
-  color: var(--color-brown);
+  color: var(--admin-accent-primary);
 }
 
 .urgent-badge {
@@ -56,7 +56,7 @@
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
-  color: var(--error-color);
+  color: var(--admin-status-new);
 }
 
 .blok2 {
@@ -89,13 +89,13 @@
   width: 1.1rem;
   height: 1.1rem;
   font-size: 1.1rem;
-  color: var(--color-brown);
+  color: var(--clock-marker-icon);
 }
 
 .waiting-text {
   font-size: 1.1em;
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--accent-highlight);
 }
 
 /* СТАНИ КАРТКИ */

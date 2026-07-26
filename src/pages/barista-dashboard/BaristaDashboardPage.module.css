@@ -3,19 +3,19 @@
 .container-style {
   min-height: 100vh;
   padding: 1rem;
-  background-color: var(--color-beige);
+  background-color: var(--admin-bg-main);
   font-family: sans-serif;
 }
 
 .header-style {
   margin-bottom: 1.875rem;
   padding-bottom: 0.625rem;
-  border-bottom: 0.125rem solid var(--divider-color);
-  color: var(--color-brown);
+  border-bottom: 0.125rem solid var(--admin-border-color);
+  color: var(--admin-text-main);
 }
 
 .title {
-  color: var(--color-brown);
+  color: var(--admin-text-main);
 }
 
 .grid-style {
@@ -35,7 +35,7 @@
   margin: 3rem auto;
   font-size: 1.3rem;
   text-align: center;
-  color: var(--color-brown);
+  color: var(--admin-text-main);
 }
 
 .search-wrapper {
@@ -55,7 +55,7 @@
   align-items: center;
   width: 1.3rem;
   height: 1.3rem;
-  color: var(--color-dark-gray-80);
+  color: var(--admin-text-muted);
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -66,21 +66,21 @@
   height: 3rem;
   padding: 0 3rem;
   box-sizing: border-box;
-  border: 0.0625rem solid var(--divider-color);
+  border: 0.0625rem solid var(--admin-border-color);
   border-radius: 0.5rem;
   outline: none;
   font-family: inherit;
   font-size: 1.3rem;
-  color: var(--color-brown);
+  color: var(--admin-text-main);
   transition: border-color 0.3s ease;
 }
 
 .field-input-search:focus {
-  border-color: var(--color-accent);
+  border-color: var(--admin-accent-primary);
 }
 
 .field-input-search::placeholder {
-  color: var(--color-dark-gray-80);
+  color: var(--sidebar-placeholder);
   opacity: 1;
 }
 
@@ -94,10 +94,10 @@
   border: none;
   font-size: 1.8rem;
   line-height: 1;
-  color: var(--color-brown);
+  color: var(--admin-text-main);
   transform: translateY(-50%);
 }
 
 .clear-search:hover {
-  color: var(--color-accent);
+  color: var(--admin-bg-hover);
 }

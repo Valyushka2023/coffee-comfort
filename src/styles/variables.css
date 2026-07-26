@@ -188,6 +188,7 @@
   --sidebar-ic-hover: rgb(var(--latte-channels));
   --sidebar-btn-hover: rgb(var(--espresso-brown-channels));
   --sidebar-hover-bg: rgb(var(--beige-channels));
+  --sidebar-hover-fg: rgb(var(--latte-channels));
 
   /* Блок активних замовлень (Banner/Notification inside sidebar) */
   --sidebar-info-banner-bg: rgb(var(--beige-channels));
@@ -253,32 +254,38 @@
   --section-bg: rgb(var(--light-beige-channels));
   --section-hero-text: rgb(var(--beige-channels));
   --section-fg: rgb(var(--light-brown-channels));
-  --section-filter-bg: rgb(var(--light-brown-channels));
-  --section-filter-fg: rgb(var(--light-brown-channels));
   --section-subtext: rgb(var(--gold-channels));
   --text-main-muted: rgb(var(--gray-dark-channels));
+
+  /* Фільтри */
+  --section-filter-bg: rgb(var(--light-brown-channels));
+  --section-filter-fg: rgb(var(--light-brown-channels));
 
   /* Ізольований виняток: картка меню відрізняється від інших блоків */
   --card-menu-bg: rgb(var(--terracotta-channels) / 15%);
 
-  /* Декоративні елементи секцій */
-  --bg-underline: rgb(var(--light-brown-channels));
-  --bg-underline-filter: rgb(var(--light-brown-channels));
-  --border-section-bottom: rgb(var(--latte-channels) / 50%);
-  --shadow-border-section-bottom: rgb(var(--latte-channels) / 50%);
-  --shadow-wrapper-image: rgb(var(--black-channels) / 20%);
-
-  /* --- Блоки: форми, форми в модальних вікнах, картки (крім меню) --- */
+  /* --- Блоки, картки (крім меню) --- */
   --bg-block-primary: rgb(var(--light-brown-channels));
   --bg-block-secondary: rgb(var(--latte-channels));
   --text-block-primary: rgb(var(--white-channels));
   --text-block-secondary: rgb(var(--brown-channels));
-  --color-placeholder-primary: rgb(var(--white-channels) / 80%);
-  --color-placeholder-secondary: rgb(var(--brown-channels) / 80%);
 
-  /* --- Ефекти та межі для БЛОКІВ --- */
+  /* --- Ефекти, межі та тіні --- */
+  --bg-underline: rgb(var(--light-brown-channels));
+  --bg-underline-filter: rgb(var(--light-brown-channels));
+
+  /**  */
+  --border-section-bottom: rgb(var(--latte-channels) / 50%);
+  --shadow-border-section-bottom: rgb(var(--latte-channels) / 50%);
+
+  /**  */
   --border-block: rgb(var(--white-channels));
   --shadow-block: rgb(var(--black-channels) / 50%);
+  --shadow-wrapper-image: rgb(var(--black-channels) / 20%);
+
+  /* Форми вводу та плейчхолдери */
+  --color-placeholder-primary: rgb(var(--white-channels) / 80%);
+  --color-placeholder-secondary: rgb(var(--brown-channels) / 80%);
 
   /* --- Специфічний компонент секцій: Картки відгуків (Reviews) --- */
 
@@ -324,14 +331,16 @@
      2.5. ГЛОБАЛЬНІ КНОПКИ ТА КОНТРОЛИ (Універсальні елементи UI)
      -------------------------------------------------------------------------- */
 
-  /* Кнопка дії (Замовлення, надіслати,  відфільтрувати,  показати,  тощо...) */
+  /* ==========================================================================
+   2.4. КНОПКИ ТА ІНТЕРАКТИВНІ ЕЛЕМЕНТИ (Buttons & Controls)
+   ========================================================================== */
+
+  /* --- Головна кнопка дії (Call to Action / CTA) --- */
   --btn-cta-bg: rgb(var(--latte-channels));
   --btn-cta-fg: rgb(var(--dark-brown1-channels));
-
-  /* Кнопка - іконка ) */
   --btn-cta-ic: rgb(var(--white-channels));
 
-  /* Інші кнопки */
+  /* --- Специфічні кнопки (Кошик, Форми, Google, Фільтри тощо) --- */
 
   /* --btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
 
@@ -342,10 +351,6 @@
   /* --btn-form-bg: rgb(var(--latte-channels)); */
 
   /* --btn-form-color: rgb(var(--brown-channels)); */
-
-  /* --btn-up-bg: rgb(var(--latte-channels)); */
-
-  /* --btn-up-color: rgb(var(--light-brown-channels)); */
 
   /* --btn-google-bg: rgb(var(--light-brown-channels)); */
 
@@ -359,9 +364,16 @@
 
   /* --btn-review-color: rgb(var(--brown-channels)); */
 
-  /* Глобальні стани Hover & Active */
+  /* --btn-up-bg: rgb(var(--latte-channels)); */
+
+  /* --btn-up-color: rgb(var(--light-brown-channels)); */
+
+  /* Зміни ховерів та станів */
   --hover-btn-bg: rgb(var(--light-brown-channels));
   --hover-btn-fg: rgb(var(--white-channels));
+  --btn-close-hover: rgb(var(--latte-channels));
+
+  /* --btn-close-active: rgb(var(--latte-channels)); */
 
   /* --hover-input-area-bg: rgb(var(--white-channels)); */
 
@@ -370,213 +382,237 @@
   /* --hover-export-btn-bg: rgb(var(--accent-bright-channels)); */
 
   /* --state-active-global: rgb(var(--latte-channels)); */
-  --btn-close-hover: rgb(var(--latte-channels));
 
-  /* --btn-close-active: rgb(var(--latte-channels)); */
-
-  /* Межі та Тіні кнопок/контролів */
+  /* --- Межі, контури та тіні кнопок --- */
+  --border-btn: rgb(var(--white-channels));
+  --shadow-btn: rgb(var(--black-channels) / 50%);
 
   /* --border-divider: rgb(var(--black-channels) / 20%); */
 
-  --border-btn: rgb(var(--white-channels));
-
   /* --border-accent-element: var(--accent-primary); */
 
-  --shadow-btn: rgb(var(--black-channels) / 50%);
+  /* ==========================================================================
+   2.5. ДЕКОРАТИВНІ ЕЛЕМЕНТИ, ІКОНКИ ТА БЕЙДЖІ (Icons, Badges & Avatars)
+   ========================================================================== */
 
-  /* Глобальні іконки-маркери */
+  /* --- Іконки та кругові контейнери --- */
 
   /* --icon-map: var(--status-error); */
 
   /* --icon-clock: rgb(var(--ochre-channels)); */
+
   --icon-circle-bg: rgb(var(--light-brown-channels));
   --icon-circle-color: rgb(var(--white-channels));
-  --shadow-icon-circle: rgb(var(--black-channels) / 50%);
-  --shadow-circle-global: rgb(var(--black-channels) / 50%);
 
-  /* Аватари, Бейджі, Кола */
+  /* --- Аватари та Бейджі --- */
   --avatar-bg: rgb(var(--latte-channels));
   --avatar-color: rgb(var(--dark-brown-channels));
+  --label-circle-bg: rgb(var(--gold-channels));
+  --label-circle-color: rgb(var(--white-channels));
 
   /* --badge-top-bg: rgb(var(--latte-channels)); */
 
   /* --badge-top-color: rgb(var(--light-brown-channels)); */
-  --label-circle-bg: rgb(var(--gold-channels));
-  --label-circle-color: rgb(var(--white-channels));
+
+  /* --- Кругові межі (Borders) --- */
   --border-circle-big: rgb(var(--white-channels));
   --border-circle-medium: rgb(var(--gray-dark-channels) / 60%);
   --border-circle-small: rgb(var(--gray-light-channels) / 80%);
-}
 
-/* ==========================================================================
+  /* --- Тіні для кругових елементів --- */
+  --shadow-icon-circle: rgb(var(--black-channels) / 50%);
+  --shadow-circle-global: rgb(var(--black-channels) / 50%);
+
+  /* ==========================================================================
      РІВЕНЬ 2 (ТЕМНА ТЕМА): ПЕРЕВИЗНАЧЕННЯ СЕМАНТИКИ (DARK THEME)
      ========================================================================== */
-.dark-theme {
-  /* --- 2.1. ХЕАДЕР (Темна тема) --- */
-  --header-bg: rgb(var(--dark-brown1-channels));
-  --header-text-link: rgb(var(--beige-channels));
-  --header-link-hover: rgb(var(--latte-channels));
+  .dark-theme {
+    /* --- 2.1. ХЕАДЕР (Темна тема) --- */
+    --header-bg: rgb(var(--dark-brown1-channels));
+    --header-text-link: rgb(var(--beige-channels));
+    --header-link-hover: rgb(var(--latte-channels));
 
-  /* Компоненти всередині хедера */
-  --header-logo-steam-channels: var(--beige-channels);
-  --header-logo-primary: rgb(var(--beige-channels));
-  --header-logo-secondary: rgb(var(--latte-channels));
-  --header-logo-shadow: rgb(var(--latte-channels) / 30%);
-  --header-logo-shadow-hover: rgb(var(--gold-channels) / 60%);
+    /* Компоненти всередині хедера */
+    --header-logo-steam-channels: var(--beige-channels);
+    --header-logo-primary: rgb(var(--beige-channels));
+    --header-logo-secondary: rgb(var(--latte-channels));
+    --header-logo-shadow: rgb(var(--latte-channels) / 30%);
+    --header-logo-shadow-hover: rgb(var(--gold-channels) / 60%);
 
-  /* Контроли хедера */
-  --header-icon-burger: rgb(var(--beige-channels));
-  --header-icon-toggle-theme: rgb(var(--latte-channels));
-  --header-toggle-glow-sun: rgb(var(--gold-channels) / 90%);
-  --header-toggle-glow-moon: rgb(var(--gray-light-channels) / 0%);
-  --header-cart-icon: rgb(var(--beige-channels));
-  --header-cart-icon-hover: rgb(var(--dark-brown1-channels));
-  --header-cart-badge-bg: rgb(var(--accent-bright-channels));
-  --header-cart-badge-text: rgb(var(--beige-channels));
-  --header-lang-text: rgb(var(--beige-channels));
-  --header-lang-active: rgb(var(--gold-channels));
-  --header-lang-hover: rgb(var(--white-channels));
-  --header-lang-divider: rgb(var(--white-channels) / 70%);
+    /* Контроли хедера */
+    --header-icon-burger: rgb(var(--beige-channels));
+    --header-icon-toggle-theme: rgb(var(--latte-channels));
+    --header-toggle-glow-sun: rgb(var(--gold-channels) / 90%);
+    --header-toggle-glow-moon: rgb(var(--gray-light-channels) / 0%);
+    --header-cart-icon: rgb(var(--beige-channels));
+    --header-cart-icon-hover: rgb(var(--dark-brown1-channels));
+    --header-cart-badge-bg: rgb(var(--accent-bright-channels));
+    --header-cart-badge-text: rgb(var(--beige-channels));
+    --header-lang-text: rgb(var(--beige-channels));
+    --header-lang-active: rgb(var(--gold-channels));
+    --header-lang-hover: rgb(var(--white-channels));
+    --header-lang-divider: rgb(var(--white-channels) / 70%);
 
-  /* --- 2.2. ФУТЕР (Темна тема) --- */
-  --footer-bg: rgb(var(--dark-brown1-channels));
-  --footer-text: rgb(var(--beige-channels));
-  --footer-text-copyright: rgb(var(--white-channels) / 50%);
-  --footer-subtext: rgb(var(--latte-channels));
-  --footer-hover: rgb(var(--beige-channels));
+    /* --- 2.2. ФУТЕР (Темна тема) --- */
+    --footer-bg: rgb(var(--dark-brown1-channels));
+    --footer-text: rgb(var(--beige-channels));
+    --footer-text-copyright: rgb(var(--white-channels) / 50%);
+    --footer-subtext: rgb(var(--latte-channels));
+    --footer-hover: rgb(var(--beige-channels));
 
-  /* Елементи футера */
-  --footer-icon-clock: rgb(var(--pure-gold-channels));
-  --footer-icon-social: rgb(var(--latte-channels));
+    /* Елементи футера */
+    --footer-icon-clock: rgb(var(--pure-gold-channels));
+    --footer-icon-social: rgb(var(--latte-channels));
 
-  /* Контроли  футера */
-  --footer-trigger-callback: rgb(var(--latte-channels));
-  --footer-trigger-review: rgb(var(--latte-channels));
-  --footer-shadow-divider: rgb(var(--white-channels) / 50%);
+    /* Контроли  футера */
+    --footer-trigger-callback: rgb(var(--latte-channels));
+    --footer-trigger-review: rgb(var(--latte-channels));
+    --footer-shadow-divider: rgb(var(--white-channels) / 50%);
 
-  /* --- 2.3. ГОЛОВНИЙ КОНТЕНТ ТА СЕКЦІЇ (Темна тема) --- */
-  --section-bg: rgb(var(--dark-brown-channels));
-  --section-fg: rgb(var(--gold-channels));
-  --section-filter-fg: rgb(var(--beige-channels));
-  --section-subtext: rgb(var(--light-brown-channels));
-  --text-main-muted: rgb(var(--light-beige-channels));
+    /* --- 2.3. ГОЛОВНИЙ КОНТЕНТ ТА СЕКЦІЇ (Темна тема) --- */
+    --section-bg: rgb(var(--dark-brown-channels));
+    --section-hero-text: rgb(var(--beige-channels));
+    --section-fg: rgb(var(--gold-channels));
+    --section-subtext: rgb(var(--light-brown-channels));
+    --text-main-muted: rgb(var(--light-beige-channels));
 
-  /* Декоративні елементи секцій */
-  --bg-underline: rgb(var(--gold-channels));
-  --shadow-wrapper-image: rgb(var(--white-channels) / 20%);
+    /* Фільтри */
+    --section-filter-bg: rgb(var(--latte-channels));
+    --section-filter-fg: rgb(var(--beige-channels));
 
-  /* --- Блоки: форми, форми в модальних вікнах, картки (крім меню) --- */
-  --bg-block-primary: rgb(var(--latte-channels));
-  --bg-block-secondary: rgb(var(--light-brown-channels));
-  --text-block-primary: rgb(var(--dark-brown1-channels));
-  --text-block-secondary: rgb(var(--beige-channels));
-  --color-placeholder-primary: rgb(var(--dark-brown1-channels) / 80%);
-  --color-placeholder-secondary: rgb(var(--beige-channels) / 80%);
+    /* Ізольований виняток: картка меню відрізняється від інших блоків */
+    --card-menu-bg: rgb(var(--terracotta-channels) / 15%);
 
-  /* --- Ефекти та межі для БЛОКІВ --- */
-  --border-block: rgb(var(--white-channels));
-  --shadow-block: rgb(var(--white-channels) / 50%);
+    /* --- Блоки, картки (крім меню) --- */
+    --bg-block-primary: rgb(var(--latte-channels));
+    --bg-block-secondary: rgb(var(--light-brown-channels));
+    --text-block-primary: rgb(var(--dark-brown1-channels));
+    --text-block-secondary: rgb(var(--beige-channels));
 
-  /* Компонент: Картки відгуків у темній темі (інверсія) */
+    /* --- Ефекти, межі та тіні --- */
+    --bg-underline: rgb(var(--gold-channels));
+    --bg-underline-filter: rgb(var(--gold-channels));
 
-  /* --bg-card-reviews: rgb(var(--latte-channels));
+    /**  */
+    --border-section-bottom: rgb(var(--latte-channels) / 50%);
+    --shadow-border-section-bottom: rgb(var(--latte-channels) / 50%);
+
+    /**  */
+    --border-block: rgb(var(--white-channels));
+    --shadow-block: rgb(var(--white-channels) / 50%);
+    --shadow-wrapper-image: rgb(var(--white-channels) / 20%);
+
+    /* Форми вводу та плейчхолдери */
+    --color-placeholder-primary: rgb(var(--dark-brown1-channels) / 80%);
+    --color-placeholder-secondary: rgb(var(--beige-channels) / 80%);
+
+    /* Компонент: Картки відгуків у темній темі (інверсія) */
+
+    /* --bg-card-reviews: rgb(var(--latte-channels));
     --text-card-reviews: rgb(var(--dark-brown1-channels)); */
 
-  /* --text-atmosphere: rgb(var(--white-channels)); */
+    /* --text-atmosphere: rgb(var(--white-channels)); */
 
-  /* --shadow-card-reviews: rgb(var(--white-channels) / 20%); */
+    /* --shadow-card-reviews: rgb(var(--white-channels) / 20%); */
 
-  /* --color-placeholder-review: rgb(var(--light-gray-channels) / 50%); */
+    /* --color-placeholder-review: rgb(var(--light-gray-channels) / 50%); */
 
-  /* Компонент: Форми у темній темі */
+    /* Компонент: Форми у темній темі */
 
-  /* --bg-form-contact: rgb(var(--latte-channels)); */
+    /* --bg-form-contact: rgb(var(--latte-channels)); */
 
-  /* --text-form-label: rgb(var(--white-channels)); */
+    /* --text-form-label: rgb(var(--white-channels)); */
 
-  /* --text-form-booking: rgb(var(--white-channels)); */
+    /* --text-form-booking: rgb(var(--white-channels)); */
 
-  /* --text-form-input: rgb(var(--white-channels)); */
+    /* --text-form-input: rgb(var(--white-channels)); */
 
-  /* --color-placeholder-booking: rgb(var(--light-brown-channels) / 80%); */
+    /* --color-placeholder-booking: rgb(var(--light-brown-channels) / 80%); */
 
-  /* --shadow-form-map: rgb(var(--white-channels) / 50%); */
+    /* --shadow-form-map: rgb(var(--white-channels) / 50%); */
 
-  /* --- 2.4. МОДАЛЬНІ ВІКНА ТА ОВЕРЛЕЇ (Темна тема) --- */
+    /* --- 2.4. МОДАЛЬНІ ВІКНА ТА ОВЕРЛЕЇ (Темна тема) --- */
 
-  /* --modal-bg: rgb(var(--dark-brown-channels)); */
+    /* --modal-bg: rgb(var(--dark-brown-channels)); */
 
-  /* --modal-text-input: rgb(var(--white-channels)); */
+    /* --modal-text-input: rgb(var(--white-channels)); */
 
-  /* --modal-text-atmosphere: rgb(var(--light-brown-channels)); */
+    /* --modal-text-atmosphere: rgb(var(--light-brown-channels)); */
 
-  /* --modal-icon-close: rgb(var(--brown-channels)); */
+    /* --modal-icon-close: rgb(var(--brown-channels)); */
 
-  /* --modal-icon-close-hover: rgb(var(--white-channels)); */
+    /* --modal-icon-close-hover: rgb(var(--white-channels)); */
 
-  /* --modal-shadow: rgb(var(--white-channels) / 20%); */
+    /* --modal-shadow: rgb(var(--white-channels) / 20%); */
 
-  /* --mobile-menu-text: rgb(var(--white-channels)); */
+    /* --mobile-menu-text: rgb(var(--white-channels)); */
 
-  /* --- 2.5. ГЛОБАЛЬНІ КНОПКИ ТА КОНТРОЛИ (Темна тема) --- */
+    /* --- 2.5. ГЛОБАЛЬНІ КНОПКИ ТА КОНТРОЛИ (Темна тема) --- */
 
-  /* --btn-cta-bg: rgb(var(--latte-channels)); */
-  --btn-cta-bg: rgb(var(--light-brown-channels));
-  --btn-cta-fg: rgb(var(--beige-channels));
+    /* --btn-cta-bg: rgb(var(--latte-channels)); */
+    --btn-cta-bg: rgb(var(--light-brown-channels));
+    --btn-cta-fg: rgb(var(--beige-channels));
+    --btn-cta-ic: rgb(var(--dark-brown1-channels));
 
-  /* Кнопка  іконка ) */
-  --btn-cta-ic: rgb(var(--dark-brown1-channels));
+    /*  Інші кнопки */
 
-  /*  Інші кнопки */
+    /* --btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
 
-  /* --btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
+    /* --btn-cart-icon-color: rgb(var(--beige-channels)); */
 
-  /* --btn-cart-icon-color: rgb(var(--beige-channels)); */
+    /* --btn-form-bg: rgb(var(--light-brown-channels)); */
 
-  /* --btn-form-bg: rgb(var(--light-brown-channels)); */
+    /* --btn-form-color: rgb(var(--white-channels)); */
 
-  /* --btn-form-color: rgb(var(--white-channels)); */
+    /* --btn-google-bg: rgb(var(--latte-channels)); */
 
-  /* --btn-google-bg: rgb(var(--latte-channels)); */
+    /* --btn-google-color: rgb(var(--brown-channels)); */
 
-  /* --btn-google-color: rgb(var(--brown-channels)); */
+    /* --btn-filter-bg: rgb(var(--light-brown-channels)); */
 
-  /* --btn-filter-bg: rgb(var(--light-brown-channels)); */
+    /* --btn-filter-color: rgb(var(--beige-channels)); */
 
-  /* --btn-filter-color: rgb(var(--beige-channels)); */
+    /* --btn-review-menu-bg: rgb(var(--light-brown-channels)); */
 
-  /* --btn-review-menu-bg: rgb(var(--light-brown-channels)); */
+    /* --btn-review-color: rgb(var(--white-channels)); */
 
-  /* --btn-review-color: rgb(var(--white-channels)); */
-  --btn-contact-submit-bg: rgb(var(--light-brown-channels));
+    /* --btn-contact-submit-bg: rgb(var(--light-brown-channels)); */
 
-  /* Зміни ховерів та станів */
-  --hover-btn-bg: rgb(var(--latte-channels));
-  --hover-btn-fg: rgb(var(--dark-brown-channels));
-  --btn-close-hover: rgb(var(--beige-channels));
+    /* Зміни ховерів та станів */
+    --hover-btn-bg: rgb(var(--latte-channels));
+    --hover-btn-fg: rgb(var(--dark-brown-channels));
+    --btn-close-hover: rgb(var(--beige-channels));
 
-  /* Межі та Тіні кнопок/контролів */
+    /* Межі та Тіні кнопок/контролів */
 
-  /* --border-divider: rgb(var(--white-channels) / 20%); */
+    /* --border-divider: rgb(var(--white-channels) / 20%); */
 
-  --shadow-btn: rgb(var(--white-channels) / 80%);
+    /* --- Межі, контури та тіні кнопок --- */
+    --border-btn: rgb(var(--black-channels));
+    --shadow-btn: rgb(var(--white-channels) / 80%);
 
-  /* --btn-close-active: rgb(var(--latte-channels)); */
+    /* --btn-close-active: rgb(var(--latte-channels)); */
 
-  /* Глобальні іконки та ефекти свічення */
+    /* Глобальні іконки та ефекти свічення */
 
-  /* --icon-clock: rgb(var(--pure-gold-channels)); */
-  --icon-circle-bg: rgb(var(--gold-channels));
-  --icon-circle-color: rgb(var(--dark-brown-channels));
-  --shadow-icon-circle: rgb(var(--white-channels) / 50%);
-  --shadow-circle-global: rgb(var(--white-channels) / 50%);
+    /* --icon-clock: rgb(var(--pure-gold-channels)); */
+    --icon-circle-bg: rgb(var(--gold-channels));
+    --icon-circle-color: rgb(var(--dark-brown-channels));
 
-  /* Аватари та Лейбли */
-  --avatar-bg: rgb(var(--light-brown-channels));
-  --label-circle-bg: rgb(var(--gold-channels));
-  --avatar-color: rgb(var(--white-channels));
-  --label-circle-color: rgb(var(--black-channels));
-  --border-circle-big: rgb(var(--white-channels));
-  --border-circle-medium: rgb(var(--gray-dark-channels) / 60%);
-  --border-circle-small: rgb(var(--gray-light-channels) / 80%);
+    /* Аватари та Лейбли */
+    --avatar-bg: rgb(var(--light-brown-channels));
+    --avatar-color: rgb(var(--white-channels));
+    --label-circle-bg: rgb(var(--gold-channels));
+    --label-circle-color: rgb(var(--black-channels));
+
+    /* --- Кругові межі (Borders) --- */
+    --border-circle-big: rgb(var(--white-channels));
+    --border-circle-medium: rgb(var(--gray-dark-channels) / 60%);
+    --border-circle-small: rgb(var(--gray-light-channels) / 80%);
+
+    /* --- Тіні для кругових елементів --- */
+
+    --shadow-icon-circle: rgb(var(--white-channels) / 50%);
+    --shadow-circle-global: rgb(var(--white-channels) / 50%);
+  }
 }

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import Button from '../Ui/Buttons/BaseButton/BaseButton.jsx';
 import CardMenu from '../Ui/Cards/CardMenu/CardMenu.jsx';
-import ModalCardMenu from '../Modal/ModalCardMenu/ModalCardMenu.jsx'; // Імпортуємо нову модалку
+import ModalCardMenu from '../Modal/ModalCardMenu/ModalCardMenu.jsx';
 import css from './Menu.module.css';
 
 const Menu = () => {
@@ -65,10 +65,8 @@ const Menu = () => {
     setVisibleCounts(prev => ({ ...prev, [categoryKey]: 4 }));
   };
 
-  // Логіка, що робити при натисканні кнопки "Обрати" в модалці
   const handleSelectItem = item => {
     console.log('Товар обрано:', item);
-    // Тут ви можете додати товар до кошика або відкрити форму бронювання
     setSelectedItem(null);
   };
 
@@ -107,16 +105,9 @@ const Menu = () => {
         {!loading && (
           <nav className={css['menu-filter']}>
             {categories.map(key => (
-              // <button
-              //   key={key}
-              //   onClick={() => setActiveCategory(key)}
-              //   className={`${css['filter-btn']} ${activeCategory === key ? css.active : ''}`}
-              // >
-              //   {t(`categories.${key}`)}
-              // </button>
               <Button
                 key={key}
-                variant="primary" // або який проп ви там використовуєте
+                variant="primary"
                 className={`${css['filter-btn']} ${activeCategory === key ? css.active : ''}`}
                 onClick={() => setActiveCategory(key)}
               >
@@ -128,7 +119,8 @@ const Menu = () => {
 
         <div className={css['menu-grid-container']} key={activeCategory}>
           {loading ? (
-            <div className={css['menu-items-grid']}>
+            /* Змінено клас із css['menu-items-grid'] на css['grid-cards-menu'] */
+            <div className={css['grid-cards-menu']}>
               {[...Array(6)].map((_, i) => (
                 <div key={i} className={css['skeleton-card']}>
                   <div className={css['skeleton-shimmer']}></div>
@@ -187,7 +179,6 @@ const Menu = () => {
         </div>
       </div>
 
-      {/* Викликаємо новий компонент модалки */}
       <ModalCardMenu
         item={selectedItem}
         onClose={() => setSelectedItem(null)}

@@ -23,7 +23,7 @@
   margin-bottom: 1rem;
   text-align: center;
   text-transform: uppercase;
-  color: var(--section-text);
+  color: var(--section-fg);
 }
 
 .title-divider {
@@ -56,7 +56,7 @@
   font-size: 1.5rem;
   font-weight: 400;
   text-align: center;
-  color: var(--section-text);
+  color: var(--section-fg);
 }
 
 .grid-cards-gallery {

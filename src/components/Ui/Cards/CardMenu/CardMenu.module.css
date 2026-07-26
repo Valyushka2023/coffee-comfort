@@ -55,7 +55,7 @@
 .item-name {
   margin: 0;
   text-transform: uppercase;
-  color: var(--section-text);
+  color: var(--section-fg);
   overflow-wrap: break-word;
 }
 
@@ -64,7 +64,7 @@
   padding-left: 1.5rem;
   font-size: 1.1rem;
   white-space: nowrap;
-  color: var(--section-text);
+  color: var(--section-fg);
 }
 
 .item-description {

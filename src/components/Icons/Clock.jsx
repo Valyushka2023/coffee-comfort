@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const Clock = ({ size = 24, color = '#FFd700', ...props }) => (
+export const Clock = ({ size = 24, color = 'currentColor', ...props }) => (
   <svg
     width={size}
     height={size}

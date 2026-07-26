@@ -11,9 +11,9 @@
 
   /* Токени Рівня 1Б */
   background-color: var(--cart-btn-bg);
-  border: 0.125rem solid var(--cart-btn-border);
+  border: 0.175rem solid var(--cart-btn-border);
   border-radius: var(--radius-full);
-  box-shadow: 0 0.25rem 0.9375rem var(--cart-btn-shadow);
+  box-shadow: 0 0.2rem 0.9375rem var(--cart-btn-shadow);
   color: var(--cart-btn-fg);
   transition: all 0.3s ease;
   animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -21,7 +21,7 @@
 }
 
 .btn-cart-icon:hover {
-  background-color: var(--cart-btn-bg-hover);
+  /* background-color: var(--cart-btn-bg-hover); */
   color: var(--cart-btn-fg-hover);
 }
 

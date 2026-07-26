@@ -130,6 +130,7 @@
 
   /* Специфічні елементи інтерфейсу */
   --map-marker-icon: rgb(var(--sys-red-channels));
+  --clock-marker-icon: rgb(var(--ochre-channels));
   --coffee-bean-icon: rgb(var(--tan-channels) / 40%);
   --badge-bg: rgb(var(--beige-channels));
 
@@ -602,7 +603,7 @@
     /* Аватари та Лейбли */
     --avatar-bg: rgb(var(--light-brown-channels));
     --avatar-color: rgb(var(--white-channels));
-    --label-circle-bg: rgb(var(--gold-channels));
+    --label-circle-bg: rgb(var(--latte-channels));
     --label-circle-color: rgb(var(--black-channels));
 
     /* --- Кругові межі (Borders) --- */

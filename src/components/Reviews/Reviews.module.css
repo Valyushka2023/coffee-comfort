@@ -43,7 +43,7 @@
 
 .reviews-title {
   text-transform: uppercase;
-  color: var(--section-text);
+  color: var(--section-fg);
 }
 
 .average-rating-block {
@@ -59,12 +59,12 @@
   font-size: 3.5rem;
   font-weight: 800;
   line-height: 1;
-  color: var(--section-text);
+  color: var(--section-fg);
 }
 
 .rating-count-label {
   font-size: 1rem;
-  color: var(--section-text);
+  color: var(--section-fg);
   opacity: 0.8;
 }
 
@@ -173,7 +173,7 @@
 .external-text {
   margin-bottom: 1.5rem;
   font-style: italic;
-  color: var(--section-text);
+  color: var(--section-fg);
 }
 
 .bean {

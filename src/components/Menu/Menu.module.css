@@ -92,6 +92,8 @@
 }
 
 .category-title {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
   text-transform: uppercase;
   color: var(--section-filter-fg);
 }

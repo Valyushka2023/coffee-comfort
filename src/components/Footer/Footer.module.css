@@ -64,7 +64,7 @@
 }
 
 .item-hours svg {
-  color: var(--color-icon-clock, var(--footer-subtext));
+  color: var(--clock-marker-icon);
 }
 
 .callback-trigger,

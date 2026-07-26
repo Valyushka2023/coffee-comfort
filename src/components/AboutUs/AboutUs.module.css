@@ -41,14 +41,17 @@
 .about-title {
   margin-bottom: 1.5625rem;
   text-transform: uppercase;
-  color: var(--section-text);
+  color: var(--section-fg);
   transition: color 0.3s ease;
 }
 
 .about-history {
   margin-bottom: 2.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
   font-size: 1.1rem;
   line-height: 1.8;
+  text-align: center;
   color: var(--text-main-muted);
   transition: color 0.3s ease;
 }
@@ -93,7 +96,7 @@
   font-size: 1.15rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--section-text);
+  color: var(--section-fg);
   transition: color 0.3s ease;
 }
 
@@ -283,5 +286,32 @@
 
   .is-visible .about-circle {
     transform: translateY(0) scale(1) !important;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  /* .about-section {
+    margin: 0;
+    padding: 0;
+  } */
+
+  .about-container {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* .about-text-block {
+    margin: 0;
+    padding: 0;
+  } */
+
+  .about-history {
+    width: 100%;
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .about-history p {
+    text-align: center;
   }
 }

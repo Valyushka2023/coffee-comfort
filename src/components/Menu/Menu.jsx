@@ -123,6 +123,8 @@ const Menu = () => {
             <div className={css['grid-cards-menu']}>
               {[...Array(6)].map((_, i) => (
                 <div key={i} className={css['skeleton-card']}>
+                  <div className={css['skeleton-line-short']}></div>
+                  <div className={css['skeleton-line']}></div>
                   <div className={css['skeleton-shimmer']}></div>
                 </div>
               ))}

@@ -1,6 +1,7 @@
 {
   "title": "Історія замовлень",
   "analytics_per_day": "Аналітика за день:",
+  "analytics_period": "Період:",
   "summary_by_dishes": "Підсумок за стравами",
   "total": "ВСЬОГО",
   "currency": "грн",

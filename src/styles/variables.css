@@ -1,7 +1,5 @@
 :root {
-  /* ==========================================================================
-     1. ГЛОБАЛЬНІ НЕ-КОЛІРНІ НАЛАШТУВАННЯ (OVERLAYS, DIMENSIONS, SPACING)
-     ========================================================================== */
+  /*  ГЛОБАЛЬНІ НЕ-КОЛІРНІ НАЛАШТУВАННЯ  */
 
   /* Overlay */
   --overlay-bg: rgb(0 0 0 / 70%);
@@ -15,7 +13,7 @@
   --btn-font-size: 1rem;
   --btn-min-width: 13.75rem;
 
-  /* Налаштування для CloseButton (додаємо сюди) */
+  /* Налаштування для CloseButton */
   --close-btn-size: 1.8rem;
   --close-btn-size-tablet: 1.5rem;
   --close-btn-size-mobile: 1.2rem;
@@ -64,19 +62,19 @@
   --form-max-width-lg: 33.6875rem; /* 539px */
   --form-max-width-md: 28.6875rem; /* 459px */
 
-  /* =======
-     РІВЕНЬ 1А: БАЗОВІ КАНАЛИ КОЛЬОРІВ (RAW CHANNELS)
-     ====== */
+  /* КОЛІРНІ НАЛАШТУВАННЯ */
 
-  /* Канали для активної зірочки  */
+  /* РІВЕНЬ 1А: БАЗОВІ КАНАЛИ КОЛЬОРІВ (RAW CHANNELS) */
+
+  /* Канали для  зірочок  */
   --star-active-channels: 255 204 51;
-
-  /* Канали для неактивної зірочки */
   --star-inactive-channels: 133 112 112;
 
-  /* Канали для інших брендів (для контексту) */
+  /* Канали для брендових соцмереж */
   --brand-fb-channels: 24 119 242;
   --brand-ig-channels: 225 48 108;
+
+  /* Канали для іншого контексту) */
   --white-channels: 255 255 255;
   --black-channels: 0 0 0;
   --brown-channels: 26 21 18;
@@ -88,8 +86,6 @@
   --latte-channels: 212 163 115;
   --gray-dark-channels: 74 74 74;
   --gray-light-channels: 97 91 91;
-
-  /* --light-gray-channels: 244 241 234; */
   --dark-gray-channels: 107 105 101;
   --light-beige-channels: 253 250 245;
   --dark-beige-channels: 248 244 236;
@@ -108,21 +104,11 @@
   --slate-light-channels: 226 232 240;
   --sys-green-channels: 55 206 44;
 
-  /* --slate-dark-channels: 30 41 59; */
-
-  /* ==========================================================================
-/* ==========================================================================
-     РІВЕНЬ 1Б: СПЕЦИФІЧНІ ТОКЕНИ КОМПОНЕНТІВ (COMPONENT TOKENS)
-     ========================================================================== */
+  /* РІВЕНЬ 1Б: СПЕЦИФІЧНІ ТОКЕНИ КОМПОНЕНТІВ (COMPONENT TOKENS) */
 
   /* Рейтинг (Рейтингові зірочки) */
-  --rating-star-active: rgb(
-    var(--star-active-channels)
-  ); /* канали мають бути на рівні 1а */
-
-  --rating-star-inactive: rgb(
-    var(--star-inactive-channels)
-  ); /* канали мають бути на рівні 1а */
+  --rating-star-active: rgb(var(--star-active-channels));
+  --rating-star-inactive: rgb(var(--star-inactive-channels));
 
   /* Брендові елементи (Соціальні мережі) */
   --brand-fb-bg: rgb(var(--brand-fb-channels));
@@ -130,7 +116,7 @@
 
   /* Специфічні елементи інтерфейсу */
   --map-marker-icon: rgb(var(--sys-red-channels));
-  --clock-marker-icon: rgb(var(--ochre-channels));
+  --clock-marker-icon: rgb(var(--accent-orange-channels));
   --coffee-bean-icon: rgb(var(--tan-channels) / 40%);
   --badge-bg: rgb(var(--beige-channels));
 
@@ -143,7 +129,7 @@
   --accent-primary: rgb(var(--accent-orange-channels));
   --accent-highlight: rgb(var(--accent-bright-channels));
 
-  /* Компонент: Кнопка кошика в хедері (Cart Icon & Badge) */
+  /* Компонент: Кнопка кошика в хедері (Cart Icon ) */
   --cart-btn-bg: rgb(var(--accent-bright-channels));
   --cart-btn-bg-hover: rgb(var(--accent-orange-channels));
   --cart-btn-fg: rgb(var(--dark-brown1-channels));
@@ -184,12 +170,10 @@
   --sidebar-divider: rgb(var(--dark-brown1-channels) / 15%);
   --sidebar-border: rgb(var(--dark-brown1-channels) / 20%);
   --sidebar-placeholder: rgb(var(--brown-channels) / 40%);
-
-  /* Інтерактивні елементи та кнопки всередині сайдбара */
   --sidebar-ic-hover: rgb(var(--latte-channels));
   --sidebar-btn-hover: rgb(var(--espresso-brown-channels));
-  --sidebar-hover-bg: rgb(var(--beige-channels));
-  --sidebar-hover-fg: rgb(var(--latte-channels));
+  --sidebar-bg-hover: rgb(var(--beige-channels));
+  --sidebar-fg-hover: rgb(var(--latte-channels));
 
   /* Блок активних замовлень (Banner/Notification inside sidebar) */
   --sidebar-info-banner-bg: rgb(var(--beige-channels));
@@ -198,73 +182,31 @@
   --sidebar-info-banner-icon: rgb(var(--ochre-channels));
   --sidebar-card-bg: rgb(var(--white-channels));
 
-  /* Загальні дизайнерські стилі */
+  /* Загальні дизайнерські стилі  для адмінки */
+  --admin-bg-page: rgb(var(--white-channels));
+  --admin-bg-block: rgb(var(--beige-channels));
 
-  /* Основний фон робочої області (панелі баристи / адмінки) */
-  --admin-bg-main: rgb(var(--white-channels));
+  /* --admin-bg-muted: rgb(var(--gray-dark-channels) / 80%); */
+  --admin-fg-page: rgb(var(--dark-brown1-channels));
+  --admin-fg-block: rgb(var(--dark-brown1-channels));
+  --admin-fg-muted: rgb(var(--gray-dark-channels) / 50%);
+  --admin-shadow-block: 0 0.25rem 0.375rem -0.0675rem
+    rgb(var(--black-channels) / 30%);
+  --admin-border-color: rgb(var(--dark-brown1-channels) / 20%);
+  --admin-divider: rgb(var(--dark-brown1-channels) / 20%);
 
-  /* Фон для картки (наприклад, CardOrder) */
-  --admin-bg-card: rgb(var(--beige-channels));
+  /* --admin-bg-input: #09090b;
+  --admin-fg-disabled: #52525b; */
 
-  /* Фон для шапки (header), модалок або поверхневих блоків */
-  --admin-bg-surface: #202023;
+  /*  СТАТУСИ ТА АКЦЕНТИ АДМІНКИ */
+  --admin-status-new: rgb(var(--pure-gold-channels) / 20%);
+  --admin-status-ready: rgb(var(--sys-green-channels) / 10%);
+  --admin-status-cancel: rgb(var(--sys-red-channels) / 10%);
 
-  /* Фон для елементів під час наведення (hover) */
-  --admin-bg-hover: #3f3f46;
-
-  /* Фон для полів вводу (input / search) */
-  --admin-bg-input: #09090b;
-
-  /* ==========================================
-     2. ТЕКСТ ТА ІКОНКИ (TEXT & ICONS)
-     ========================================== */
-
-  /* Основний читабельний текст (заголовки, важливе) */
-  --admin-text-main: rgb(var(--dark-brown1-channels));
-
-  /* Другорядний текст (номер замовлення, час, підписи) */
-  --admin-text-muted: rgb(var(--gray-dark-channels));
-
-  /* Текст для недоступних/активних елементів */
-  --admin-text-disabled: #52525b;
-
-  /* ==========================================
-     3. РАМКИ ТА РОЗДІЛЬНИКИ (BORDERS & DIVIDERS)
-     ========================================== */
-
-  /* Стандартні рамки для карток та інпутів */
-  --admin-border-color: #3f3f46;
-
-  /* Легкі лінії-роздільники (hr, dividers) */
-  --admin-border-subtle: #27272a;
-
-  /* ==========================================
-     4. СТАТУСИ ТА АКЦЕНТИ (ACCENTS & STATUSES)
-     ========================================== */
-
-  /* Основний фірмовий колір (кнопки дій, активні стани) */
-  --admin-accent-primary: rgb(var(--accent-orange-channels));
-
-  /* Статуси замовлень */
-  --admin-status-new: rgb(
-    var(--warning-orange-channels)
-  ); /* Нове замовлення  */
-
-  --admin-status-ready: rgb(
-    var(--sys-green-channels)
-  ); /* Підготовлене замовлення  */
-
-  --admin-status-cancel: rgb(
-    var(--sys-red-channels)
-  ); /* Скасоване замовлення  */
-
-  /* ==========================================
-     5. ТІНІ ТА ЗАОКРУГЛЕННЯ (SHADOWS & RADIUS)
-     ========================================== */
-  --admin-radius-sm: 0.375rem; /* 6px — для кнопок та інпутів */
-  --admin-radius-md: 0.5rem; /* 8px — для маленьких карток */
-  --admin-radius-lg: 0.75rem; /* 12px — для великих блоків */
-  --admin-shadow-card: 0 0.25rem 0.375rem -0.0675rem rgb(0 0 0 / 30%);
+  /* КНОПКИ АДМІНКИ */
+  --admin-btn-bg: rgb(var(--accent-orange-channels));
+  --admin-btn-fg: rgb(var(--white-channels));
+  --admin-btn-hover: rgb(var(--espresso-brown-channels));
 
   /*
   ==========================================================================

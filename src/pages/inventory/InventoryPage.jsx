@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import api from '../../services/api.js';
 import * as XLSX from 'xlsx';
 import Loader from '../../components/Ui/Loader/Loader.jsx';
+import { Search } from '../../components/Icons/Search.jsx';
 import css from './InventoryPage.module.css';
 
 const InventoryPage = () => {
@@ -112,7 +113,8 @@ const InventoryPage = () => {
       t('excel.sheet_inventory', 'Inventory')
     );
 
-    XLSX.writeFile(workbook, `Coffee_Comfort_Inventory_${selectedDate}.xlsx`);
+    // XLSX.writeFile(workbook, `Coffee_Comfort_Inventory_${selectedDate}.xlsx`);
+    XLSX.writeFile(workbook, `Інвентаризація_Кав_ярні_${selectedDate}.xlsx`);
   };
 
   if (isLoading) {
@@ -122,27 +124,28 @@ const InventoryPage = () => {
   return (
     <div className={css['container']}>
       <div className={css['header-wrapper']}>
-        <div className={css['title-block']}>
-          <h2>🥛 {t('title', 'Stock & Inventory')}</h2>
-        </div>
+        <h2 className={css['title-block']}>
+          🥛 {t('title', 'Stock & Inventory')}
+        </h2>
 
         <div className={css['filters-panel']}>
           <div className={css['search-wrapper']}>
+            <Search className={css['search-icon']} />
             <input
               type="text"
+              className={css['search-input']}
               placeholder={t('search_placeholder', 'Search ingredient...')}
               value={searchQuery}
               onChange={e =>
                 setSearchQuery(capitalizeFirstLetter(e.target.value))
               }
-              className={css['search-input']}
             />
             {searchQuery && (
               <button
                 type="button"
-                className={css['clear-search-btn']}
+                className={css['clear-search']}
                 onClick={() => setSearchQuery('')}
-                title={t('clear_search', 'Clear search')}
+                // title={t('clear_search', 'Clear search')}
               >
                 ✕
               </button>

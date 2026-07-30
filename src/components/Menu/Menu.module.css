@@ -109,13 +109,45 @@
 
 /* --- СКЕЛЕТОНИ --- */
 .skeleton-card {
-  position: relative;
+  /* position: relative;
   width: 100%;
   height: 7.5rem;
   overflow: hidden;
   background-color: var(--skeleton-card-bg);
   border-radius: 1rem;
-  opacity: 0.3;
+  opacity: 0.3; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  height: 11.25rem;
+  padding: 1.5rem;
+  overflow: hidden;
+  background-color: var(--skeleton-card-bg);
+  border-radius: 1rem;
+  opacity: 0.8;
+}
+
+/* .skeleton-header {
+  width: 60%;
+  height: 1.2rem;
+  background-color: var(--skeleton-element-bg);
+  border-radius: 0.25rem;
+} */
+
+.skeleton-line-short {
+  width: 80%;
+  height: 0.8rem;
+  background-color: var(--skeleton-element-bg);
+  border-radius: 0.25rem;
+}
+
+.skeleton-line {
+  width: 100%;
+  height: 0.8rem;
+  background-color: var(--skeleton-element-bg);
+  border-radius: 0.25rem;
 }
 
 .skeleton-shimmer {

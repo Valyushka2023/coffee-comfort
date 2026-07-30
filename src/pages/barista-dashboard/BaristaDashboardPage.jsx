@@ -6,7 +6,7 @@ import {
   deleteOrderRequest,
 } from '../../services/api';
 import { Search } from '../../components/Icons/Search.jsx';
-import CardOrder from '../../components/Ui/Cards/CardOrder/CardOrder.jsx';
+import CardOrderBarista from '../../components/Ui/Cards/CardOrderBarista/CardOrderBarista.jsx';
 
 import css from './BaristaDashboardPage.module.css';
 
@@ -125,8 +125,11 @@ const BaristaDashboardPage = () => {
           <Search className={css['search-icon']} />
           <input
             type="text"
-            className={css['field-input-search']}
-            placeholder={t('search_placeholder')}
+            className={css['search-input']}
+            placeholder={t(
+              'search_placeholder',
+              'Search by #, name or phone...'
+            )}
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
           />
@@ -150,7 +153,7 @@ const BaristaDashboardPage = () => {
 
       <div className={css['grid-style']}>
         {filteredOrders.map(order => (
-          <CardOrder
+          <CardOrderBarista
             key={order._id}
             order={order}
             onReady={handleSetReady}

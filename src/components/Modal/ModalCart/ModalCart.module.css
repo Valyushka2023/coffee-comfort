@@ -310,7 +310,7 @@
 }
 
 .clock-icon {
-  stroke: var(--accent-primary);
+  stroke: var(--clock-marker-icon);
 }
 
 .field-input:focus,

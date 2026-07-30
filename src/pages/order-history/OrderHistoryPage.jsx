@@ -19,7 +19,6 @@ const OrderHistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [visibleChecksCount, setVisibleChecksCount] = useState(10);
 
-  // Стейты для диапазона дат (по умолчанию ставим сегодняшний день для обоих)
   const [startDate, setStartDate] = useState(
     new Date().toISOString().split('T')[0]
   );
@@ -31,7 +30,6 @@ const OrderHistoryPage = () => {
     const loadAllData = async () => {
       setLoading(true);
       try {
-        // 🚀 ПЕРЕДАЄМО ДАТИ В ОБИДВА ЗАПИТИ НА БЕКЕНД
         const historyData = await fetchOrderHistoryRequest(startDate, endDate);
         const statsData = await fetchOrderStatsRequest(startDate, endDate);
 
@@ -53,14 +51,14 @@ const OrderHistoryPage = () => {
 
         setVisibleChecksCount(10);
       } catch (error) {
-        console.error('❌ Data loading error:', error);
+        console.error('❌ Помилка завантаження даних:', error);
       } finally {
         setLoading(false);
       }
     };
 
     loadAllData();
-  }, [startDate, endDate]); // Перезапуск працюватиме ідеально
+  }, [startDate, endDate]);
 
   const getOrderLocalDateString = dateInput => {
     const localDate = new Date(dateInput);
@@ -77,14 +75,13 @@ const OrderHistoryPage = () => {
     return dish;
   };
 
-  // Проверка: входит ли дата заказа в выбранный диапазон
   const isOrderInSelectedRange = orderDateStr => {
     return orderDateStr >= startDate && orderDateStr <= endDate;
   };
 
   const exportToExcel = () => {
     if (history.length === 0 && dishStats.length === 0) {
-      alert(t('no_data_to_export', 'No data to export!'));
+      alert(t('no_data_to_export', 'Немає даних для експорту!'));
       return;
     }
 
@@ -97,54 +94,52 @@ const OrderHistoryPage = () => {
     );
     const formattedEndDate = new Date(endDate).toLocaleDateString(localeStr);
 
-    // Строка периода для заголовка Excel
     const periodString =
       startDate === endDate
         ? formattedStartDate
         : `${formattedStartDate} — ${formattedEndDate}`;
 
+    // ВИПРАВЛЕНО: Використовуємо ключ 'analytics_period' з доданим українським фолбеком 'Період:'
     const getHeaderInfo = sheetTitle => [
       [sheetTitle],
-      [`${t('analytics_period', 'Period:')} ${periodString}`],
-      [`${t('excel.generated_at', 'Generated at')}: ${currentDateTime}`],
+      [`${t('analytics_period', 'Період:')} ${periodString}`],
+      [`${t('excel.generated_at', 'Сформовано на дату')}: ${currentDateTime}`],
       [],
     ];
 
-    // АРКУШ 1: ІСТОРІЯ ЧЕКІВ
-    const historyHeader = getHeaderInfo(
-      t('excel.sheet-check-history', 'Receipt History')
-    );
+    // --- АРКУШ 1: ІСТОРІЯ ЧЕКІВ ---
+    const historySheetTitle = t('excel.sheet-check-history', 'Історія чеків');
+    const historyHeader = getHeaderInfo(historySheetTitle);
     const historySheet = XLSX.utils.aoa_to_sheet(historyHeader);
 
-    // Фильтруем чеки по диапазону дат
     const historyFilteredByDate = history.filter(order => {
       return isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt));
     });
 
     const historyData = historyFilteredByDate.map(order => {
-      let paymentStatusText = t('debt', 'Debt');
+      let paymentStatusText = t('debt', 'Борг');
       if (order.isPaid) {
         paymentStatusText =
           order.paymentMethod === 'card'
-            ? `${t('paid', 'Paid')} (${t('excel.card_label', 'Terminal')})`
-            : `${t('paid', 'Paid')} (${t('excel.cash_label', 'Cash')})`;
+            ? `${t('paid', 'Оплачено')} (${t('excel.card_label', 'Термінал')})`
+            : `${t('paid', 'Оплачено')} (${t('excel.cash_label', 'Готівка')})`;
       }
 
       return {
-        [t('excel.date_of_issue', 'Date of Issue')]: new Date(
+        [t('excel.date_of_issue', 'Дата видачі')]: new Date(
           order.updatedAt
         ).toLocaleString(localeStr),
-        [t('excel.check_number', 'Receipt No.')]:
+        [t('excel.check_number', '№ чека')]:
           order.orderNumber || order._id.slice(-4).toUpperCase(),
-        [t('excel.dishes', 'Dishes')]: order.items
+        [t('excel.dishes', 'Страви')]: order.items
           .map(
             item =>
-              `${getDishName(item.name)} (${item.quantity} ${t('pcs', 'pcs')})`
+              `${getDishName(item.name)} (${item.quantity} ${t('pcs', 'шт')})`
           )
           .join(', '),
-        [t('excel.amount', 'Amount')]:
-          `${order.totalPrice} ${t('currency', 'UAH')}`,
-        [t('excel.status', 'Status')]: paymentStatusText,
+        [t('excel.amount', 'Сума')]:
+          `${order.totalPrice} ${t('currency', 'грн')}`,
+        [t('excel.status', 'Статус')]: paymentStatusText,
       };
     });
 
@@ -156,23 +151,22 @@ const OrderHistoryPage = () => {
       { wch: 15 },
       { wch: 25 },
     ];
-    XLSX.utils.book_append_sheet(
-      workbook,
-      historySheet,
-      t('excel.sheet-check-history', 'Receipt History')
-    );
+    XLSX.utils.book_append_sheet(workbook, historySheet, historySheetTitle);
 
-    // АРКУШ 2: ПІДСУМОК ЗА ПЕРІОД
-    const statsHeader = getHeaderInfo(
-      t('excel.sheet_day_summary', 'Summary for Period')
+    // --- АРКУШ 2: ПІДСУМОК ЗА ПЕРІОД ---
+    // ВИПРАВЛЕНО: Замінено 'excel.sheet_day_summary' на 'excel.sheet_period_summary'
+    const statsSheetTitle = t(
+      'excel.sheet_period_summary',
+      'Підсумок за період'
     );
+    const statsHeader = getHeaderInfo(statsSheetTitle);
     const statsSheet = XLSX.utils.aoa_to_sheet(statsHeader);
 
     const statsData = dishStats.map(item => ({
-      [t('excel.dish_name', 'Dish Name')]: getDishName(item._id),
-      [t('excel.sold_pcs', 'Sold (pcs)')]: item.totalQuantity,
-      [t('excel.total_amount', 'Total Amount')]:
-        `${item.totalPrice} ${t('currency', 'UAH')}`,
+      [t('excel.dish_name', 'Назва страви')]: getDishName(item._id),
+      [t('excel.sold_pcs', 'Продано (шт)')]: item.totalQuantity,
+      [t('excel.total_amount', 'Загальна сума')]:
+        `${item.totalPrice} ${t('currency', 'грн')}`,
     }));
 
     const totalDayRevenueCalculated = dishStats.reduce(
@@ -181,43 +175,40 @@ const OrderHistoryPage = () => {
     );
 
     statsData.push({
-      [t('excel.dish_name', 'Dish Name')]: '',
-      [t('excel.sold_pcs', 'Sold (pcs)')]: '',
-      [t('excel.total_amount', 'Total Amount')]: '',
+      [t('excel.dish_name', 'Назва страви')]: '',
+      [t('excel.sold_pcs', 'Продано (шт)')]: '',
+      [t('excel.total_amount', 'Загальна сума')]: '',
     });
     statsData.push({
-      [t('excel.dish_name', 'Dish Name')]:
-        `💵 ${t('excel.cash_total', 'Total cash')}:`,
-      [t('excel.sold_pcs', 'Sold (pcs)')]: '',
-      [t('excel.total_amount', 'Total Amount')]:
-        `${cashRevenue} ${t('currency', 'UAH')}`,
+      [t('excel.dish_name', 'Назва страви')]:
+        `💵 ${t('excel.cash_total', 'Всього готівкою')}:`,
+      [t('excel.sold_pcs', 'Продано (шт)')]: '',
+      [t('excel.total_amount', 'Загальна сума')]:
+        `${cashRevenue} ${t('currency', 'грн')}`,
     });
     statsData.push({
-      [t('excel.dish_name', 'Dish Name')]:
-        `💳 ${t('excel.card_total', 'Total terminal')}:`,
-      [t('excel.sold_pcs', 'Sold (pcs)')]: '',
-      [t('excel.total_amount', 'Total Amount')]:
-        `${cardRevenue} ${t('currency', 'UAH')}`,
+      [t('excel.dish_name', 'Назва страви')]:
+        `💳 ${t('excel.card_total', 'Всього терміналом')}:`,
+      [t('excel.sold_pcs', 'Продано (шт)')]: '',
+      [t('excel.total_amount', 'Загальна сума')]:
+        `${cardRevenue} ${t('currency', 'грн')}`,
     });
+
     statsData.push({
-      [t('excel.dish_name', 'Dish Name')]:
-        `🔥 ${t('excel.total_per_day', 'Total for period')}`,
-      [t('excel.sold_pcs', 'Sold (pcs)')]: '',
-      [t('excel.total_amount', 'Total Amount')]:
-        `${totalDayRevenueCalculated} ${t('currency', 'UAH')}`,
+      [t('excel.dish_name', 'Назва страви')]:
+        `🔥 ${t('excel.total_period_day', 'Разом за період')}:`,
+      [t('excel.sold_pcs', 'Продано (шт)')]: '',
+      [t('excel.total_amount', 'Загальна сума')]:
+        `${totalDayRevenueCalculated} ${t('currency', 'грн')}`,
     });
 
     XLSX.utils.sheet_add_json(statsSheet, statsData, { origin: 4 });
     statsSheet['!cols'] = [{ wch: 32 }, { wch: 15 }, { wch: 20 }];
-    XLSX.utils.book_append_sheet(
-      workbook,
-      statsSheet,
-      t('excel.sheet_day_summary', 'Summary for Period')
-    );
+    XLSX.utils.book_append_sheet(workbook, statsSheet, statsSheetTitle);
 
     const fileDateName =
-      startDate === endDate ? startDate : `${startDate}_to_${endDate}`;
-    XLSX.writeFile(workbook, `Coffee_Comfort_Report_${fileDateName}.xlsx`);
+      startDate === endDate ? startDate : `${startDate}_до_${endDate}`;
+    XLSX.writeFile(workbook, `Звіт_Кав_ярні_${fileDateName}.xlsx`);
   };
 
   const totalDayRevenue = cashRevenue + cardRevenue;
@@ -237,7 +228,7 @@ const OrderHistoryPage = () => {
   return (
     <div className={css['container']}>
       <header className={css['header']}>
-        <h1>📊 {t('title', 'Order History')}</h1>
+        <h1>📊 {t('title', 'Історія замовлень')}</h1>
         <div className={css['filter-wrapper']}>
           <div className={css['date-picker-group']}>
             <label htmlFor="start-date-picker">З:</label>
@@ -256,7 +247,7 @@ const OrderHistoryPage = () => {
               type="date"
               value={endDate}
               onChange={e => setEndDate(e.target.value)}
-              min={startDate} // Не позволяет выбрать дату окончания раньше даты начала
+              min={startDate}
               className={css['date-input']}
             />
           </div>
@@ -267,23 +258,29 @@ const OrderHistoryPage = () => {
       <section className={css['stats-section']}>
         <div className={css['stats-summary']}>
           <h2>
-            {t('summary_by_dishes', 'Summary by dishes')} ({renderPeriodTitle})
+            {t('summary_by_dishes', 'Підсумок за стравами')} (
+            {renderPeriodTitle})
           </h2>
           <div className={css['badges-container']}>
             <div className={`${css['finance-badge']} ${css['cash-badge']}`}>
-              {t('cash', 'Cash')}:{' '}
+              {t('cash', 'Готівка')}:{' '}
               <span>
-                {cashRevenue} {t('currency', 'UAH')}
+                {cashRevenue} {t('currency', 'грн')}
               </span>
             </div>
             <div className={`${css['finance-badge']} ${css['card-badge']}`}>
-              {t('card', 'Terminal')}:{' '}
+              {t('card', 'Термінал')}:{' '}
               <span>
-                {cardRevenue} {t('currency', 'UAH')}
+                {cardRevenue} {t('currency', 'грн')}
               </span>
             </div>
             <div className={css['total-badge']}>
-              {t('total', 'TOTAL')}: {totalDayRevenue} {t('currency', 'UAH')}
+              <span className={css['badge-label']}>
+                {t('total', 'ВСЬОГО')}:
+              </span>
+              <span className={css['badge-amount']}>
+                {totalDayRevenue} {t('currency', 'грн')}
+              </span>
             </div>
           </div>
         </div>
@@ -291,9 +288,9 @@ const OrderHistoryPage = () => {
         <table className={css['stats-table']}>
           <thead>
             <tr>
-              <th>{t('th_dish', 'Dish')}</th>
-              <th>{t('th_sold_out', 'Sold')}</th>
-              <th>{t('th_amount', 'Amount')}</th>
+              <th>{t('th_dish', 'Страва')}</th>
+              <th>{t('th_sold_out', 'Продано')}</th>
+              <th>{t('th_amount', 'Сума')}</th>
             </tr>
           </thead>
           <tbody>
@@ -303,13 +300,13 @@ const OrderHistoryPage = () => {
                   <td>{getDishName(item._id)}</td>
                   <td>{item.totalQuantity}</td>
                   <td>
-                    {item.totalPrice} {t('currency', 'UAH')}
+                    {item.totalPrice} {t('currency', 'грн')}
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={3}>{t('no_data', 'No data for this period')}</td>
+                <td colSpan={3}>{t('no_data', 'Немає даних за цей період')}</td>
               </tr>
             )}
           </tbody>
@@ -319,24 +316,24 @@ const OrderHistoryPage = () => {
       {/* ІСТОРІЯ ЧЕКІВ */}
       <section className={css['history-section']}>
         <div className={css['flex-header']}>
-          <h2>📜 {t('latest_checks', 'Latest checks')}</h2>
+          <h2>📜 {t('latest_checks', 'Останні чеки')}</h2>
           <button
             type="button"
             onClick={exportToExcel}
             className={css['export-btn']}
           >
-            {t('btn_export', 'Export to Excel')}
+            {t('btn_export', 'Експорт в Ексель')}
           </button>
         </div>
 
         <table className={css['table']}>
           <thead>
             <tr>
-              <th>{t('th_date', 'Date')}</th>
+              <th>{t('th_date', 'Дата')}</th>
               <th>№</th>
-              <th>{t('th_dishes', 'Dishes')}</th>
-              <th>{t('th_amount', 'Amount')}</th>
-              <th>{t('th_payment', 'Payment')}</th>
+              <th>{t('th_dishes', 'Страви')}</th>
+              <th>{t('th_amount', 'Сума')}</th>
+              <th>{t('th_payment', 'Оплата')}</th>
             </tr>
           </thead>
           <tbody>
@@ -355,22 +352,22 @@ const OrderHistoryPage = () => {
                     {order.items.map((item, index) => (
                       <div key={index}>
                         {getDishName(item.name)} — {item.quantity}{' '}
-                        {t('pcs', 'pcs')}.
+                        {t('pcs', 'шт')}.
                       </div>
                     ))}
                   </td>
                   <td>
-                    {order.totalPrice} {t('currency', 'UAH')}
+                    {order.totalPrice} {t('currency', 'грн')}
                   </td>
                   <td>
                     {order.isPaid ? (
                       <span className={css.paid}>
                         {order.paymentMethod === 'card'
-                          ? `💳 ${t('card', 'Terminal')}`
-                          : `💵 ${t('cash', 'Cash')}`}
+                          ? `💳 ${t('card', 'Термінал')}`
+                          : `💵 ${t('cash', 'Готівка')}`}
                       </span>
                     ) : (
-                      <span className={css.unpaid}>{t('debt', 'Debt')}</span>
+                      <span className={css.unpaid}>{t('debt', 'Борг')}</span>
                     )}
                   </td>
                 </tr>
@@ -387,7 +384,7 @@ const OrderHistoryPage = () => {
               onClick={() => setVisibleChecksCount(prev => prev + 10)}
               className={css['load-more-btn']}
             >
-              {t('show_more', 'Show more')}
+              {t('show_more', 'Показати більше')}
             </button>
           </div>
         )}

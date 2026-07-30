@@ -1,6 +1,7 @@
 {
   "title": "Order History",
   "analytics_per_day": "Analytics for the day:",
+  "analytics_period": "Period:",
   "summary_by_dishes": "Summary by dishes",
   "total": "TOTAL",
   "currency": "UAH",

@@ -1,18 +1,24 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Вирівнювання за верхнім краєм */
   align-items: center;
-  max-width: 45rem;
+  max-width: 50rem;
+  min-height: 100vh;
   margin: 1.25rem auto;
   padding: 0 1rem;
+  background-color: var(--admin-bg-page);
   font-family:
     system-ui,
     -apple-system,
     sans-serif;
-  color: var(--color-gray-dark);
+  color-scheme: var(--admin-fg-page);
+
+  /* Резервує місце під scrollbar, щоб контент не зсувався горизонтально */
+  scrollbar-gutter: stable;
 }
 
+/* ------------ */
 .header-wrapper {
   display: flex;
   flex-direction: column;
@@ -21,120 +27,181 @@
   gap: 1rem;
   width: 100%;
   margin-bottom: 1.5rem;
+  border-bottom: 0.125rem solid var(--admin-border-color);
 }
 
 .title-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  color: var(--color-gray-dark);
-}
-
-.title-block h2 {
   margin: 0;
   font-size: 1.6rem;
   font-weight: 700;
 }
 
-/* Нова обгортка для елементів керування */
+/* ------------ */
 .filters-panel {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
   width: 100%;
-  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding: 0;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
 }
 
-/* Контейнер для інпуту та хрестика */
 .search-wrapper {
   position: relative;
   display: flex;
-  flex: 1;
   align-items: center;
-  min-width: 12.5rem;
+  width: 14rem;
+  height: 3rem;
+  margin-bottom: 0;
+  box-sizing: border-box;
 }
 
-/* Стилізований текстовий пошук */
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--admin-fg);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
 .search-input {
+  display: block;
+  cursor: text;
   width: 100%;
-  padding: 0.5rem 2.2rem 0.5rem 1rem; /* Збільшений правий паддінг для хрестика */
-  background-color: transparent;
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.5rem;
+  height: 100%;
+  padding: 0 2rem 0 2.4rem;
+  box-sizing: border-box;
+  background-color: var(--admin-bg-block);
+  border: 0.0625rem solid var(--admin-border-color);
+  border-radius: var(--radius-md);
   outline: none;
   font-family: inherit;
-  font-size: 0.95rem;
-  color: inherit;
+  font-size: 1rem;
+  color: var(--admin-fg-page);
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 }
 
-/* Кнопка швидкого очищення пошуку "Хрестик" */
-.clear-search-btn {
+.search-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.search-input:hover {
+  background-color: var(--admin-bg-page);
+  border-color: var(--accent-primary);
+}
+
+.search-input::placeholder {
+  color: var(--admin-fg-muted);
+  opacity: 1;
+}
+
+.clear-search {
   position: absolute;
-  right: 0.75rem;
+  top: 50%;
+  right: 0.625rem;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  padding: 0.25rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  padding: 0;
   background: none;
   border: none;
-  font-size: 0.9rem;
-  color: var(--color-gray-light);
-  transition: color 0.1s ease;
+  line-height: 1;
+  color: var(--admin-fg-page);
+  transform: translateY(-50%);
 }
 
-.clear-search-btn:hover {
-  color: var(--color-gray-dark);
+.clear-search:hover {
+  color: var(--accent-primary);
 }
 
-/* Календар у стилі сторінки історії */
+/* Календар */
 .date-input {
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  background-color: transparent;
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.5rem;
+  width: 14rem;
+  height: 3rem;
+  padding: 0 0.75rem;
+  box-sizing: border-box;
+  background-color: var(--admin-bg-block);
+  border: 0.0625rem solid var(--admin-border-color);
+  border-radius: var(--radius-md);
   outline: none;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: inherit;
+  color: var(--admin-fg-page);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.date-input:hover {
+  background-color: var(--admin-bg-page);
+  border-color: var(--accent-primary);
 }
 
 .export-btn {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  padding: 0.695rem 2rem;
-  background-color: transparent;
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
+  width: 14rem;
+  height: 3rem;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--admin-bg-block);
+  border: 0.0625rem solid var(--admin-border-color);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
   line-height: 1;
   text-transform: uppercase;
-  color: var(--color-gray-dark);
-  transition: background-color 0.1s ease;
+  color: var(--admin-fg-page);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
 }
 
-.export-btn:hover,
-.date-input:hover,
-.search-input:focus {
-  background-color: var(--bg-accent);
+.export-btn:hover {
+  background-color: var(--admin-bg-page);
+  border-color: var(--accent-primary);
 }
 
+.export-btn:active {
+  transform: scale(0.98);
+}
+
+/* ------------ */
 .center-text {
+  min-height: 15rem;
   padding: 2.5rem;
   font-size: 1.1rem;
   text-align: center;
 }
 
+/* ------------ ТАБЛИЦЯ ------------ */
 .inventory-table {
   width: 100%;
-  max-width: 45rem;
+  max-width: 100%; /* Розтягується рівно по блоку фільтрів */
   overflow: hidden;
   background-color: var(--color-dark-beige);
   border-radius: 0.5rem;
@@ -152,7 +219,7 @@
 }
 
 .inventory-table th {
-  background-color: var(--color-beige);
+  background-color: var(--admin-bg-block);
   border-bottom: 0.125rem solid var(--color-light-beige);
   font-weight: 700;
   text-transform: uppercase;
@@ -164,26 +231,56 @@
   border-bottom: 0.0625rem solid var(--color-light-beige);
 }
 
-.inventory-table tbody tr:nth-child(even) {
+/* .inventory-table tbody tr:nth-child(even) {
   background-color: var(--color-beige);
+} */
+
+/* Рядки парних порядкових номерів (2, 4, 6...) */
+.inventory-table tbody tr:nth-child(even) {
+  /* Задаємо легкий напівпрозорий темний колір (або трохи темніший бежевий) */
+  background-color: var(--admin-bg-block);
 }
 
-.inventory-table th:nth-child(1),
+/* Ефект при наведенні мишкою (hover) для зручності читання */
+
+/* .inventory-table tbody tr:hover {
+  background-color: rgb(0 0 0 / 6%);
+  transition: background-color 0.15s ease;
+} */
+
+/* 1. Товар: 40% (зліва) */
+.inventory-table th:nth-child(1) {
+  width: 34%;
+  padding-left: 2.6rem;
+
+  /* text-align: left; */
+  text-align: start;
+}
+
 .inventory-table td:nth-child(1) {
-  width: 42%;
+  width: 34%;
+  padding-left: 0.5rem;
   text-align: left;
 }
 
+/* 2. Баланс: 30% (по центру) */
 .inventory-table th:nth-child(2),
 .inventory-table td:nth-child(2) {
   width: 33%;
   text-align: center;
 }
 
-.inventory-table th:nth-child(3),
+/* 3. Дії: заголовок і чарунки */
+.inventory-table th:nth-child(3) {
+  width: 33%;
+  padding-right: 2.6rem;
+  text-align: end;
+}
+
 .inventory-table td:nth-child(3) {
-  width: 25%;
-  text-align: right;
+  width: 33%;
+  padding-right: 0.5rem;
+  text-align: right; /* Самі кнопки залишаємо вирівняними по правому краю */
 }
 
 .product-name {
@@ -198,12 +295,21 @@
   font-variant-numeric: tabular-nums;
 }
 
-.actions-cell {
+/* Центрування кнопок всередині чарунки дій */
+
+/* .actions-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.5rem;
+} */
+.actions-cell {
+  text-align: right;
 }
 
-/* 1. Базові стилі для обох кнопок */
-.btn-plus,
+/* Кнопки дій */
+
+/* .btn-plus,
 .btn-minus {
   cursor: pointer;
   padding: 0.375rem 0.75rem;
@@ -212,9 +318,24 @@
   font-size: 0.9rem;
   font-weight: 600;
   transition: all 0.1s ease;
+} */
+.btn-plus,
+.btn-minus {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 0;
+  margin-left: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  border: 0.125rem solid var(--border-accent);
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.1s ease;
 }
 
-/* 2. Індивідуальні кольори (прості селектори мають йти спочатку) */
 .btn-plus {
   color: var(--color-gray-light);
 }
@@ -223,15 +344,13 @@
   color: var(--color-gray-light);
 }
 
-/* 3. Стани disabled (лінтер просив підняти їх вище за :hover комбінації) */
 .btn-plus:disabled,
 .btn-minus:disabled {
   cursor: not-allowed;
-  border-style: dashed; /* Виправлено "dashed" безпосередньо для border-style */
+  border-style: dashed;
   opacity: 0.4;
 }
 
-/* 4. Складні селектори для ховеру (завжди в самому кінці секції) */
 .btn-plus:hover:not(:disabled),
 .btn-minus:hover:not(:disabled) {
   background-color: var(--bg-accent);
@@ -256,7 +375,7 @@
   color: var(--error-color);
 }
 
-/* АДАПТИВНІСТЬ (ЗБЕРЕЖЕНО ТВІЙ БРЕКПОІНТ) */
+/* АДАПТИВНІСТЬ */
 @media (max-width: 47.9375rem) {
   .container {
     margin: 0.625rem;

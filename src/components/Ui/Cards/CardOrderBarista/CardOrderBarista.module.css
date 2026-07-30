@@ -1,0 +1,266 @@
+@import url('../../../../styles//animate.css');
+
+.card-style {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--admin-shadow-block);
+  transition: all 0.3s ease-in-out;
+}
+
+/* (СТАТУСИ) СТАНИ КАРТКИ  */
+
+/*  Замовлення нове - жовті відтінки */
+.card-style.new-card {
+  background-color: var(--admin-status-new);
+  border: 0.125rem solid var(--admin-status-new);
+  border-left: 0.375rem solid var(--admin-status-new);
+}
+
+/*  Замовлення нове - 15 хв до замовленого часу видачі — додається пульсація */
+.card-style.urgent-card {
+  animation: bg-glow 2s infinite ease-in-out;
+}
+
+/*  Готове замовлення (Чекає видачі) — зелені відтінки */
+.card-style.ready-card {
+  background-color: var(--admin-status-ready);
+  border: 0.125rem solid var(--admin-status-ready);
+  border-left: 0.375rem solid var(--admin-status-ready);
+  animation: none;
+}
+
+/*  Протерміноване замовлення (Чекає > 20 хв) — червоні відтінки */
+.card-style.overdue-card {
+  background-color: var(--admin-status-cancel);
+  border: 0.125rem solid var(--admin-status-cancel);
+  border-left: 0.375rem solid var(--admin-status-cancel);
+  animation: none;
+}
+
+/* ==========================================
+   ЕЛЕМЕНТИ ХЕДЕРА ТА ІНФОРМАЦІЇ
+   ========================================== */
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 2rem;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+.order-number-style {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-primary);
+}
+
+.pickup-tag {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.pickup-tag.scheduled {
+  background-color: var(--admin-bg-block);
+  border: 0.0625rem solid var(--admin-border-color);
+  color: var(--accent-primary);
+}
+
+/***  */
+
+.card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.time-status-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+  background-color: aqua;
+  text-align: center;
+}
+
+.time-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.urgent-time {
+  font-weight: bold;
+  color: var(--accent-primary);
+}
+
+.clock-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-right: 1rem;
+  font-size: 1.1rem;
+  color: var(--clock-marker-icon);
+}
+
+.waiting-text {
+  margin-left: 1rem;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+/* .paid-badge {
+  display: flex;
+  align-items: center;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--status-success);
+} */
+
+.unpaid-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--accent-primary);
+}
+
+.customer-block {
+  display: flex;
+  flex-direction: column;
+  background-color: chartreuse;
+  color: var(--admin-fg-main);
+}
+
+.customer-block p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.items-list {
+  flex: 1;
+  margin: 0;
+  padding-left: 1.25rem;
+  background-color: coral;
+  font-size: 1.1rem;
+  list-style: disc;
+}
+
+.items-list-style li {
+  color: var(--admin-fg-main);
+}
+
+.total-price-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.25rem;
+  background-color: transparent;
+  background-color: deepskyblue;
+  border-top: 0.0625rem solid var(--admin-border-color);
+}
+
+.total-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--admin-fg);
+}
+
+.total-amount {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--accent-primary);
+}
+
+.card-footer {
+  /* margin-top: auto; */
+  margin-top: 1rem;
+}
+
+.button-style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--admin-btn-bg);
+  border: 0.0625rem solid var(--admin-border-color);
+  border-radius: var(--radius-md);
+  font-weight: bold;
+  color: var(--admin-btn-fg);
+  transition: all 0.3s ease-in-out;
+}
+
+.button-style:hover {
+  background-color: var(--admin-btn-hover);
+  transform: translateY(-0.0625rem);
+  opacity: 0.9;
+}
+
+.payment-buttons-group {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.payment-btn {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 0.38rem;
+  cursor: pointer;
+  padding: 0.625rem 0.5rem;
+  background-color: var(--admin-btn-bg);
+  border: 0.125rem solid var(--admin-border-color);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--admin-btn-fg);
+  transition:
+    background-color 0.2s,
+    opacity 0.2s,
+    transform 0.1s;
+}
+
+.payment-btn:hover {
+  background-color: var(--admin-btn-hover);
+  transform: translateY(-0.0625rem);
+}
+
+.payment-btn:active {
+  transform: translateY(0);
+}
+
+.cancel-order-btn {
+  background-color: var(--admin-btn-bg);
+  border: var(--admin-border-color);
+  color: var(--admin-btn-fg);
+}
+
+.cancel-order-btn:hover {
+  background-color: var(--admin-btn-hover);
+  opacity: 0.85 !important;
+}

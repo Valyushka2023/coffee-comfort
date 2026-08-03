@@ -13,7 +13,8 @@ import {
 import ModalFormReview from '../Modal/ModalFormReview/ModalFormReview.jsx';
 import ModalReviewSuccess from '../Modal/ModalReviewSuccess/ModalReviewSuccess.jsx';
 import ModalFormCallback from '../Modal/ModalFormCallback/ModalFormCallback.jsx';
-import ModalCallbackSuccess from '../Modal/ModalCallbackSuccess/ModalcalbackSuccess.jsx';
+
+import ModalCallbackSuccess from '../Modal/ModalCallbackSuccess/ModalCallbackSuccess.jsx';
 
 import css from './Footer.module.css';
 

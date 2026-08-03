@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import BaseModal from '../BaseModal/BaseModal.jsx';
 import FormCallback from '../../Forms/FormCallback/FormCallback.jsx';
 
-const ModalFormCallback = ({ isOpen, onClose }) => {
-  const { t } = useTranslation(['callback_modal']);
+const ModalFormCallback = ({ isOpen, onClose, onSuccess }) => {
+  const { t } = useTranslation(['callback_modal', 'validation']);
 
   const handleFormSubmitSuccess = () => {
-    onClose();
-    // Тут залишаємо ваш alert (або згодом замінимо на красиве success-вікно, як у відгуках)
-    window.alert(t('success_message', 'We will call you!'));
+    if (onSuccess) {
+      onSuccess();
+    } else {
+      onClose();
+    }
   };
 
   return (
@@ -19,7 +21,7 @@ const ModalFormCallback = ({ isOpen, onClose }) => {
       onClose={onClose}
       title={t('title', 'Request a call')}
     >
-      <FormCallback onSubmitSuccess={handleFormSubmitSuccess} />
+      <FormCallback onSubmitSuccess={handleFormSubmitSuccess} t={t} />
     </BaseModal>
   );
 };
@@ -27,6 +29,7 @@ const ModalFormCallback = ({ isOpen, onClose }) => {
 ModalFormCallback.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func,
 };
 
 export default ModalFormCallback;

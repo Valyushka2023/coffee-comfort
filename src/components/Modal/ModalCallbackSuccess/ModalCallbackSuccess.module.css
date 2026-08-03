@@ -1,23 +1,15 @@
-@import url('../../../styles/animate.css');
-
-.element-sending {
+/* ModalCalbackSuccess styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  margin-top: 0.5rem;
-}
-
-/* КЛЮЧОВИЙ КЛАС: Прибираємо все зайве з BaseModal */
-.is-success-state {
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-}
-
-/* Обнуляємо внутрішній div модалки (modal-content у вашому BaseModal) */
-.is-success-state div[class*='modal-content'] {
-  margin: 0 !important;
-  padding: 0 !important;
+  height: 100vh;
+  background-color: var(--overlay-bg);
 }
 
 .success-container {
@@ -26,6 +18,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 26.25rem;
   padding: 3rem 2rem;
   background-color: var(--bg-block-primary);
   border: 0.0625rem solid var(--border-block);

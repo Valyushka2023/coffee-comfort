@@ -1,5 +1,5 @@
-// import React from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 import {
   MapPinIcon,
@@ -8,15 +8,63 @@ import {
   InstagramIcon,
   FacebookIcon,
   ReviewIcon,
-} from '..//Icons';
+} from '../Icons';
+
+import ModalFormReview from '../Modal/ModalFormReview/ModalFormReview.jsx';
+import ModalReviewSuccess from '../Modal/ModalReviewSuccess/ModalReviewSuccess.jsx';
+import ModalFormCallback from '../Modal/ModalFormCallback/ModalFormCallback.jsx';
+import ModalCallbackSuccess from '../Modal/ModalCallbackSuccess/ModalcalbackSuccess.jsx';
+
 import css from './Footer.module.css';
 
-const Footer = ({ onOpenReview, onOpenCallback }) => {
+const Footer = () => {
   const { t } = useTranslation('footer');
   const currentYear = new Date().getFullYear();
 
+  // Стани для модалок відгуку
+  const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
+  const [isReviewSuccessOpen, setIsReviewSuccessOpen] = useState(false);
+
+  // Стани для модалок зворотного дзвінка
+  const [isCallbackFormOpen, setIsCallbackFormOpen] = useState(false);
+  const [isCallbackSuccessOpen, setIsCallbackSuccessOpen] = useState(false);
+
   const handleTouchFocus = e => {
     e.currentTarget.blur();
+  };
+
+  // Перемикання з форми відгуку на успіх
+  const handleReviewSuccess = () => {
+    setIsReviewFormOpen(false);
+
+    setTimeout(() => {
+      setIsReviewSuccessOpen(true);
+
+      const reviewsSection = document.getElementById('reviews');
+      if (reviewsSection) {
+        const yOffset = -100;
+        const y =
+          reviewsSection.getBoundingClientRect().top +
+          window.pageYOffset +
+          yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 150);
+  };
+
+  // Перемикання з форми дзвінка на успіх
+  const handleCallbackSuccess = () => {
+    setIsCallbackFormOpen(false);
+
+    setTimeout(() => {
+      setIsCallbackSuccessOpen(true);
+    }, 150);
+  };
+
+  // Відкриття форми зворотного дзвінка (напряму змінюємо локальний стейт)
+  const handleOpenCallbackModal = e => {
+    setIsCallbackFormOpen(true);
+    handleTouchFocus(e);
   };
 
   return (
@@ -59,10 +107,7 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
           <button
             type="button"
             className={css['callback-trigger']}
-            onClick={e => {
-              onOpenCallback();
-              handleTouchFocus(e);
-            }}
+            onClick={handleOpenCallbackModal}
           >
             {t('request_call', 'Request a call')}
           </button>
@@ -106,7 +151,7 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
             type="button"
             className={css['review-trigger']}
             onClick={e => {
-              onOpenReview();
+              setIsReviewFormOpen(true);
               handleTouchFocus(e);
             }}
           >
@@ -123,13 +168,32 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
           {t('copyright', 'Coffee House. All rights reserved.')}
         </p>
       </div>
+
+      {/* МОДАЛКИ ВІДГУКІВ */}
+      <ModalFormReview
+        isOpen={isReviewFormOpen}
+        onClose={() => setIsReviewFormOpen(false)}
+        onSuccess={handleReviewSuccess}
+      />
+
+      <ModalReviewSuccess
+        isOpen={isReviewSuccessOpen}
+        onClose={() => setIsReviewSuccessOpen(false)}
+      />
+
+      {/* МОДАЛКИ ЗВОРОТНОГО ДЗВІНКА */}
+      <ModalFormCallback
+        isOpen={isCallbackFormOpen}
+        onClose={() => setIsCallbackFormOpen(false)}
+        onSuccess={handleCallbackSuccess}
+      />
+
+      <ModalCallbackSuccess
+        isOpen={isCallbackSuccessOpen}
+        onClose={() => setIsCallbackSuccessOpen(false)}
+      />
     </footer>
   );
-};
-
-Footer.propTypes = {
-  onOpenReview: PropTypes.func.isRequired,
-  onOpenCallback: PropTypes.func.isRequired,
 };
 
 export default Footer;

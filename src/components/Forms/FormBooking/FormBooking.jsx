@@ -10,6 +10,7 @@ import { sendBookingRequest } from '../../../services/api.js';
 import BaseButton from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
 import AtmosphereSelector from '../../../components/AtmosphereSelector/AtmosphereSelector.jsx';
 import ModalCardAtmosphere from '../../Modal/ModalCardAtmosphere/ModalCardAtmosphere.jsx';
+import ModalBookingSuccess from '../../Modal/ModalBookingSuccess/ModalBookingSuccess.jsx';
 import {
   validateName,
   validateEmail,
@@ -94,7 +95,11 @@ const FormBooking = () => {
 
     try {
       const response = await sendBookingRequest(bookingData);
-      if (response) setIsSuccess(true);
+      if (response) {
+        // ВІДРАЗУ очищаємо форму і показуємо модальне вікно
+        resetForm();
+        setIsSuccess(true);
+      }
     } catch (error) {
       console.error('Submission error:', error.message);
       throw error;
@@ -120,26 +125,11 @@ const FormBooking = () => {
     [handleInputChange]
   );
 
+  // Функція закриття модалки більше НЕ викликає resetForm()!
   const handleCloseSuccess = () => {
-    resetForm();
     setIsSuccess(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  if (isSuccess) {
-    return (
-      <div className={css['success-wrapper']}>
-        <div className={css['success-container']}>
-          <div className={css['success-icon']}>✓</div>
-          <h3 className={css['title-success-form']}>{t('success_title')}</h3>
-          <p className={css['text-success-form']}>{t('success_message')}</p>
-          <BaseButton variant="primary" onClick={handleCloseSuccess}>
-            {t('back_button')}
-          </BaseButton>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <form className={css['form']} onSubmit={handleSubmit} noValidate>
@@ -234,7 +224,6 @@ const FormBooking = () => {
         )}
 
         <div className={css['buttons-group']}>
-          {/* Кнопка "Надіслати" */}
           <BaseButton
             variant="primary"
             type="submit"
@@ -244,12 +233,9 @@ const FormBooking = () => {
             {isSubmitting ? t('sending') : t('send')}
           </BaseButton>
 
-          {/* Кнопка "Очистити форму" — один в один як у відгуках */}
           <BaseButton
             variant="primary"
-            // className={css['clear-form-btn']}
             type="button"
-            disabled={isSubmitting}
             isFixedWidth={true}
             onClick={resetForm}
           >
@@ -266,6 +252,9 @@ const FormBooking = () => {
           onConfirm={handleZoneSelect}
         />
       )}
+
+      {/* Модальне вікно з Portal */}
+      <ModalBookingSuccess isOpen={isSuccess} onClose={handleCloseSuccess} />
     </form>
   );
 };

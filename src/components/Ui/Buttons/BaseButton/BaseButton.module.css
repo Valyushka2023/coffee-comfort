@@ -73,11 +73,12 @@
 .default:disabled,
 .default[disabled] {
   cursor: not-allowed;
-  background-color: var(--button-disabled-bg-color);
-  border-color: transparent;
   box-shadow: none;
-  color: var(--button-disabled-text-color);
   transform: none !important;
+  pointer-events: none;
+
+  /* Якщо змінна не задана, використовується напівпрозорість 0.5 */
+  opacity: 0.5;
   filter: none;
 }
 

@@ -51,11 +51,7 @@ const Header = ({ onToggleMenu, isMenuOpen }) => {
               {/* Іконка кошика */}
               <CartIcon onClick={() => setIsCartOpen(true)} />
 
-              <MenuToggleButton
-                isOpen={isMenuOpen}
-                onClick={onToggleMenu}
-                className={css['menu-toggle-btn']}
-              />
+              <MenuToggleButton isOpen={isMenuOpen} onClick={onToggleMenu} />
             </div>
           </div>
         </div>

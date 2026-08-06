@@ -126,7 +126,7 @@
 
 @media (max-width: 74.9375rem) {
   .header-container {
-    max-width: calc(100% - 2.75rem);
+    max-width: calc(100% - 2.5rem);
   }
 
   .header-links {
@@ -144,7 +144,7 @@
 
 @media (max-width: 61.9375rem) {
   .header-container {
-    max-width: calc(100% - 2.5rem);
+    max-width: calc(100% - 1.5rem);
   }
 
   .header-links {
@@ -166,12 +166,12 @@
 
 @media (max-width: 47.9375rem) {
   .header-container {
-    max-width: calc(100% - 2.25rem);
+    max-width: calc(100% - 1.25rem);
   }
 }
 
 @media (max-width: 29.9375rem) {
   .header-container {
-    max-width: calc(100% - 2rem);
+    max-width: calc(100% - 1rem);
   }
 }

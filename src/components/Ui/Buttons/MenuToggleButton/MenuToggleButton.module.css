@@ -63,6 +63,10 @@
 @media (max-width: 29.9375rem) {
   .header-container {
     max-width: calc(100% - 1rem);
+  }
+
+  .burger-button {
+    display: flex;
     padding: 0.25rem 0;
   }
 }

@@ -59,3 +59,9 @@
     padding: 0.25rem;
   }
 }
+
+@media (max-width: 61.9375rem) {
+  .burger-button {
+    padding: 0.25rem 0 0.25rem 0.25rem;
+  }
+}

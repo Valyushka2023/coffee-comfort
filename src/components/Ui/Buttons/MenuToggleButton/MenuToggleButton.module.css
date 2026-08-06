@@ -65,8 +65,8 @@
     max-width: calc(100% - 1rem);
   }
 
-  .burger-button {
+  /* .burger-button {
     display: flex;
     padding: 0.25rem 0;
-  }
+  } */
 }

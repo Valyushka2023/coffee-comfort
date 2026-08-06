@@ -59,3 +59,10 @@
     padding: 0.25rem;
   }
 }
+
+@media (max-width: 29.9375rem) {
+  .header-container {
+    max-width: calc(100% - 1rem);
+    padding: 0.25rem 0;
+  }
+}

@@ -175,7 +175,7 @@
     max-width: calc(100% - 1rem);
   }
 
-  .menu-toggle-btn {
+  /* .menu-toggle-btn {
     padding: 0.25rem 0;
-  }
+  } */
 }

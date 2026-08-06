@@ -174,8 +174,4 @@
   .header-container {
     max-width: calc(100% - 1rem);
   }
-
-  .actions-wrapper {
-    padding: 0.25rem 0 0.25rem 0.25rem !important;
-  }
 }

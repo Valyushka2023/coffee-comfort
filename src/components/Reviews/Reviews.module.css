@@ -227,6 +227,26 @@
   transform: rotate(-45deg);
 }
 
+@media (max-width: 74.9375rem) {
+  .reviews-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .reviews-items-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 61.9375rem) {
+  .reviews-section {
+    padding: 4rem 1.25rem;
+  }
+
+  .reviews-items-grid {
+    gap: 1.25rem;
+  }
+}
+
 @media (max-width: 47.9375rem) {
   .coffee-bean1,
   .coffee-bean2,
@@ -242,6 +262,14 @@
   .reviews-container {
     padding-inline: 0;
   }
+
+  .reviews-section {
+    padding: 4rem 1.25rem;
+  }
+
+  .reviews-items-grid {
+    gap: 1.25rem;
+  }
 }
 
 @media (max-width: 29.9375rem) {
@@ -255,6 +283,18 @@
     left: 5%;
     height: 5.625rem;
     transform: rotate(-140deg);
+  }
+
+  .reviews-section {
+    padding: 4rem 1rem;
+  }
+
+  .actions-wrapper {
+    flex-direction: column;
+  }
+
+  .reviews-items-grid {
+    gap: 1rem;
   }
 
   .more-btn-container {

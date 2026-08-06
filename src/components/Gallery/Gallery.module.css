@@ -106,50 +106,76 @@
   transform: scale(1.1); /* Ефект наближення при наведенні */
 }
 
-@media (max-width: 47.9375rem) {
+@media (max-width: 74.9375rem) {
   .gallery-section {
-    padding: 3rem 0;
+    padding: 3rem 1.5rem;
   }
 
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
-    gap: 1.25rem;
+  .grid-cards-gallery {
+    /* grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr)); */
+    gap: 1.5rem;
   }
 
-  .gallery-subtitle {
-    margin-bottom: 2rem;
-    font-size: 1.25rem;
-  }
+  @media (max-width: 61.9375rem) {
+    .gallery-section {
+      padding: 3rem 1.25rem;
+    }
 
-  .line {
-    width: 4rem;
-  }
-}
+    .grid-cards-gallery {
+      /* grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr)); */
+      gap: 1.25rem;
+    }
 
-@media (max-width: 29.9375rem) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+    @media (max-width: 47.9375rem) {
+      .gallery-section {
+        padding: 3rem 1.25rem;
+      }
 
-  .gallery-title {
-    font-size: 1.5rem;
-  }
+      .grid-cards-gallerygrid {
+        /* grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr)); */
+        gap: 1.25rem;
+      }
 
-  .gallery-subtitle {
-    padding: 0 0.5rem;
-    font-size: 1.1rem;
-  }
+      .gallery-subtitle {
+        margin-bottom: 2rem;
+        font-size: 1.25rem;
+      }
 
-  .title-divider {
-    gap: 0.75rem;
-  }
+      .line {
+        width: 4rem;
+      }
+    }
 
-  .line {
-    width: 2.5rem;
-  }
+    @media (max-width: 29.9375rem) {
+      .gallery-section {
+        padding: 1rem;
+      }
 
-  .thumb-btn {
-    border-radius: 0.75rem;
+      .grid-cards-gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .gallery-title {
+        font-size: 1.5rem;
+      }
+
+      .gallery-subtitle {
+        padding: 0 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .title-divider {
+        gap: 0.75rem;
+      }
+
+      .line {
+        width: 2.5rem;
+      }
+
+      .thumb-btn {
+        border-radius: 0.75rem;
+      }
+    }
   }
 }

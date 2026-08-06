@@ -24,11 +24,21 @@
   flex-wrap: wrap;
 }
 
-.contacts-info,
+/* .contacts-info,
 .contacts-form-container {
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: 2.5rem;
+  box-sizing: border-box;
+} */
+.contacts-info,
+.contacts-form-container {
+  display: flex;
+  flex: 1 1 0; /* Виставляє однакову базову ширину (flex-basis: 0) */
+  flex-direction: column;
+  gap: 2.5rem;
+  min-width: 0; /* Дозволяє flex-елементам стискатися нижче вмісту */
   box-sizing: border-box;
 }
 
@@ -89,9 +99,17 @@
   filter: drop-shadow(0 0.25rem 0.5rem rgb(0 0 0 / 20%));
 }
 
+/* .contacts-map {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
+} */
 .contacts-map {
   display: flex;
   flex: 1;
+  width: 100%; /* Гарантує розтягування карти по всій ширині лівої колонки */
   overflow: hidden;
   border-radius: 1rem;
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
@@ -114,8 +132,55 @@
 }
 
 /* АДАПТИВНІСТЬ */
-@media (max-width: 47.9375rem) {
+@media (max-width: 74.9375rem) {
+  .contacts-section {
+    padding: 4rem 2.5rem;
+  }
+
+  .contacts-info,
+  .contacts-form-container {
+    gap: 2.5rem;
+  }
+}
+
+/* @media (max-width: 61.9375rem) {
+  .contacts-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .contacts-info,
+  .contacts-form-container {
+    gap: 1.5rem;
+  }
+
+} */
+@media (max-width: 61.9375rem) {
+  .contacts-section {
+    padding: 4rem 1.5rem;
+  }
+
+  /* Перемикаємо в колонку на 768px */
   .contacts-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contacts-info,
+  .contacts-form-container {
+    flex: 0 0 100%;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .contacts-section {
+    padding: 4rem 1.25rem;
+  }
+
+  .contacts-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;

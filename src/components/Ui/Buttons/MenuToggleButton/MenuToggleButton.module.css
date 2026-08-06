@@ -56,7 +56,9 @@
 
   .burger-button {
     display: flex;
-    padding: 0.25rem;
+
+    /* padding: 0.25rem; */
+    padding: 0;
   }
 }
 

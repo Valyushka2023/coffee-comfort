@@ -1,5 +1,5 @@
 .container-page {
-  width: calc(100% - 3rem);
+  width: calc(100% - 4rem);
   min-height: 100vh;
   margin: 0 auto;
   padding-top: 0.0625rem;
@@ -14,24 +14,24 @@ main {
 
 @media (max-width: 74.9375rem) {
   .container-page {
-    width: calc(100% - 2.75rem);
+    width: calc(100% - 2.5rem);
   }
 }
 
 @media (max-width: 61.9375rem) {
   .container-page {
-    width: calc(100% - 2.5rem);
+    width: calc(100% - 1.5rem);
   }
 }
 
 @media (max-width: 47.9375rem) {
   .container-page {
-    width: calc(100% - 2.25rem);
+    width: calc(100% - 1.25rem);
   }
 }
 
 @media (max-width: 29.9375rem) {
   .container-page {
-    width: calc(100% - 0.2rem);
+    width: calc(100% - 1rem);
   }
 }

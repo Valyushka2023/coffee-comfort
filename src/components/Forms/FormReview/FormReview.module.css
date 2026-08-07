@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  padding: var(--padding-xs);
 }
 
 .rating-field-container {

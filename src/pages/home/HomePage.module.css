@@ -20,13 +20,15 @@ main {
 
 @media (max-width: 61.9375rem) {
   .container-page {
-    width: calc(100% - 1.5rem);
+    /* width: calc(100% - 1.5rem); */
+    width: 100%;
   }
 }
 
 @media (max-width: 47.9375rem) {
   .container-page {
-    width: calc(100% - 1.25rem);
+    /* width: calc(100% - 1.25rem); */
+    width: 100%;
   }
 }
 

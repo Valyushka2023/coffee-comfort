@@ -15,9 +15,7 @@ import {
 
 import css from './FormReview.module.css';
 
-// 1. Приймаємо 't' (який є комбінацією reviews + validation) з пропсів від батька
 const FormReview = ({ onSubmitSuccess, t: tParent }) => {
-  // Локальний хук лишаємо ТІЛЬКИ для плейсхолдерів і внутрішніх кнопок форми
   const { t } = useTranslation('reviews', { keyPrefix: 'review_form_modal' });
 
   const fields = useMemo(
@@ -32,7 +30,6 @@ const FormReview = ({ onSubmitSuccess, t: tParent }) => {
     [t]
   );
 
-  // 2. ВАЖЛИВО: Для правил валідації передаємо саме tParent, який вміє читати 'validation.json'
   const validationRules = useMemo(
     () => ({
       name: v => validateName(v, tParent),
@@ -44,16 +41,46 @@ const FormReview = ({ onSubmitSuccess, t: tParent }) => {
 
   const handleFormSubmit = async formData => {
     try {
-      await sendReviewRequest({
+      const response = await sendReviewRequest({
         name: { uk: formData.name.trim(), en: formData.name.trim() },
         text: { uk: formData.text.trim(), en: formData.text.trim() },
-        rating: formData.rating,
+        rating: Number(formData.rating),
       });
 
+      console.log('📦 Відповідь сервера:', response);
+
+      // Витягуємо чистий об'єкт відгуку з можливих рівнів вкладеності (Axios / Fetch)
+      const rawReview =
+        response?.data?.data ||
+        response?.data?.review ||
+        response?.data ||
+        response;
+
+      // Формуємо гарантовано коректну структуру відгуку для стану React
+      const formattedReview = {
+        _id: rawReview?._id || rawReview?.id || Date.now().toString(),
+        name: rawReview?.name || {
+          uk: formData.name.trim(),
+          en: formData.name.trim(),
+        },
+        text: rawReview?.text ||
+          rawReview?.comment || {
+            uk: formData.text.trim(),
+            en: formData.text.trim(),
+          },
+        rating: Number(rawReview?.rating || formData.rating),
+        createdAt:
+          rawReview?.createdAt || rawReview?.date || new Date().toISOString(),
+      };
+
       resetForm();
-      if (onSubmitSuccess) onSubmitSuccess();
+
+      // Викликаємо колбек і передаємо відформатований відгук нагору
+      if (onSubmitSuccess) {
+        onSubmitSuccess(formattedReview);
+      }
     } catch (error) {
-      console.error('❌ Error sending review:', error);
+      console.error('Помилка при відправці відгуку:', error);
     }
   };
 
@@ -127,7 +154,6 @@ const FormReview = ({ onSubmitSuccess, t: tParent }) => {
   );
 };
 
-// 3. Додаємо t до PropTypes, щоб лінтер не сварився
 FormReview.propTypes = {
   onSubmitSuccess: PropTypes.func,
   t: PropTypes.func.isRequired,

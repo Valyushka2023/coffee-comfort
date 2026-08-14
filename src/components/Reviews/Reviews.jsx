@@ -7,7 +7,7 @@ import CardReview from '../Ui/Cards/CardReview/CardReview.jsx';
 import { fetchReviewsRequest } from '../../services/api.js';
 import css from './Reviews.module.css';
 
-const Reviews = ({ refreshTrigger }) => {
+const Reviews = ({ newReview }) => {
   const { t, i18n } = useTranslation('reviews');
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,28 +15,51 @@ const Reviews = ({ refreshTrigger }) => {
 
   const currentLang = i18n.language || 'uk';
 
+  // 1. Завантаження відгуків із сервера при першому рендері
   useEffect(() => {
     const loadReviews = async () => {
       setIsLoading(true);
       try {
         const data = await fetchReviewsRequest();
-        const sortedData = data.sort(
+        const sortedData = (data || []).sort(
           (a, b) =>
             new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date)
         );
         setReviews(sortedData);
       } catch (err) {
-        console.error('Error loading reviews:', err);
+        console.error('Error fetching reviews:', err);
       } finally {
         setIsLoading(false);
       }
     };
+
     loadReviews();
-  }, [refreshTrigger]);
+  }, []);
+
+  // 2. МИТТЄВЕ додавання нового відгуку на початок масиву
+  useEffect(() => {
+    if (!newReview) return;
+    console.log('⚡ Reviews.jsx рендерить новий відгук:', newReview);
+
+    setReviews(prevReviews => {
+      const reviewId = newReview._id || newReview.id;
+
+      // Видаляємо дублікати, якщо такий ID вже є в масиві
+      const filtered = prevReviews.filter(
+        r => (r._id || r.id)?.toString() !== reviewId?.toString()
+      );
+
+      // Ставимо новий відгук НАЙПЕРШИМ
+      return [newReview, ...filtered];
+    });
+  }, [newReview]);
 
   const averageRating = useMemo(() => {
     if (reviews.length === 0) return 0;
-    const total = reviews.reduce((acc, rev) => acc + rev.rating, 0);
+    const total = reviews.reduce(
+      (acc, rev) => acc + Number(rev.rating || 0),
+      0
+    );
     return (total / reviews.length).toFixed(1);
   }, [reviews]);
 
@@ -52,29 +75,17 @@ const Reviews = ({ refreshTrigger }) => {
 
   return (
     <section id="reviews" className={css['reviews-section']}>
-      <div className={`${css['bean']} ${css['coffee-bean4']}`}></div>
-      <div className={`${css['bean']} ${css['coffee-bean5']}`}></div>
-
       <div className={css['reviews-container']}>
         <header className={css['reviews-header-wrapper']}>
           <h2 className={css['reviews-title']}>
             {t('title', 'What Customers Say')}
           </h2>
-          <div className={`${css.bean} ${css['coffee-bean1']}`}></div>
-          <div className={`${css.bean} ${css['coffee-bean2']}`}></div>
-          <div className={`${css.bean} ${css['coffee-bean3']}`}></div>
         </header>
 
         {isLoading ? (
-          /* --- СКЕЛЕТОНИ ПІД ЧАС ЗАВАНТАЖЕННЯ --- */
           <div className={css['reviews-items-grid']}>
             {[...Array(3)].map((_, index) => (
-              <div key={index} className={css['skeleton-review-card']}>
-                <div className={css['skeleton-header']}></div>
-                <div className={css['skeleton-line']}></div>
-                <div className={css['skeleton-line-short']}></div>
-                <div className={css['skeleton-shimmer']}></div>
-              </div>
+              <div key={index} className={css['skeleton-review-card']} />
             ))}
           </div>
         ) : (
@@ -84,43 +95,24 @@ const Reviews = ({ refreshTrigger }) => {
                 <span className={css['rating-big-number']}>
                   {averageRating}
                 </span>
-                <div className={css['rating-stars-wrapper']}>
-                  <StarRating
-                    value={Number(averageRating)}
-                    readOnly={true}
-                    size={28}
-                  />
-                </div>
+                <StarRating
+                  value={Number(averageRating)}
+                  readOnly={true}
+                  size={28}
+                />
                 <span className={css['rating-count-label']}>
                   {t('reviews_count', { count: reviews.length })}
                 </span>
               </div>
             )}
 
-            <div className={css['title-divider']}>
-              <div className={css['line']}></div>
-              <div className={css['ornament']}>
-                <svg width="80" height="40" viewBox="0 0 100 50">
-                  <path
-                    d="M10 25C30 5 70 45 90 25M10 25C30 45 70 5 90 25"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="50" cy="25" r="3" fill="currentColor" />
-                </svg>
-              </div>
-              <div className={css['line']}></div>
-            </div>
-
             <div className={css['reviews-items-grid']}>
               {reviews.length > 0 ? (
                 reviews
                   .slice(0, visibleCount)
-                  .map(rev => (
+                  .map((rev, index) => (
                     <CardReview
-                      key={rev._id}
+                      key={rev._id || rev.id || `rev-${index}`}
                       review={rev}
                       currentLang={currentLang}
                       formatDate={formatDate}
@@ -143,34 +135,6 @@ const Reviews = ({ refreshTrigger }) => {
                   {t('show_more', 'SHOW MORE')}
                 </Button>
               )}
-              {visibleCount > 3 && (
-                <Button
-                  variant="primary"
-                  isFixedWidth={true}
-                  onClick={() => {
-                    setVisibleCount(3);
-                    document
-                      .getElementById('reviews')
-                      ?.querySelector('h2')
-                      ?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  {t('show_less', 'COLLAPSE')}
-                </Button>
-              )}
-            </div>
-
-            <div className={css['reviews-external']}>
-              <p className={css['external-text']}>{t('google_cta')}</p>
-              <Button
-                variant="primary"
-                isFixedWidth={true}
-                onClick={() =>
-                  window.open('https://www.google.com/maps', '_blank')
-                }
-              >
-                {t('read_on_google', 'Read on Google')}
-              </Button>
             </div>
           </>
         )}
@@ -180,7 +144,7 @@ const Reviews = ({ refreshTrigger }) => {
 };
 
 Reviews.propTypes = {
-  refreshTrigger: PropTypes.number.isRequired,
+  newReview: PropTypes.object,
 };
 
 export default Reviews;

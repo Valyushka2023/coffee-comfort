@@ -14,6 +14,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 import ScrollToTopButton from '../../components/Ui/Buttons/ScrollToTopButton/ScrollToTopButton.jsx';
 import ModalFormCallback from '../../components/Modal/ModalFormCallback/ModalFormCallback.jsx';
 import ModalFormReview from '../../components/Modal/ModalFormReview/ModalFormReview.jsx';
+import ModalReviewSuccess from '../../components/Modal/ModalReviewSuccess/ModalReviewSuccess.jsx';
 
 import css from './HomePage.module.css';
 
@@ -52,11 +53,13 @@ const HomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCallbackOpen, setCallbackOpen] = useState(false);
   const [isReviewOpen, setReviewOpen] = useState(false);
-  const [reviewsTrigger, setReviewsTrigger] = useState(0);
-
-  const handleReviewSuccess = () => {
+  const [isSuccessOpen, setSuccessOpen] = useState(false);
+  const [latestReview, setLatestReview] = useState(null);
+  const handleReviewSuccess = createdReview => {
+    console.log('🔥 HomePage отримав новий відгук:', createdReview);
+    setLatestReview(createdReview);
     setReviewOpen(false);
-    setReviewsTrigger(prev => prev + 1);
+    setSuccessOpen(true);
   };
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
@@ -87,7 +90,7 @@ const HomePage = () => {
             <Gallery images={GALLERY_IMAGES} />
           </section>
           <section id="reviews">
-            <Reviews refreshTrigger={reviewsTrigger} />
+            <Reviews newReview={latestReview} />
           </section>
           <section id="contacts">
             <Contacts />
@@ -100,10 +103,8 @@ const HomePage = () => {
         />
       </div>
 
-      {/* Кнопки фіксованого позиціонування */}
       <ScrollToTopButton visible={visible} onClick={scrollToTop} />
 
-      {/* Модальні вікна */}
       <ModalFormCallback
         isOpen={isCallbackOpen}
         onClose={() => setCallbackOpen(false)}
@@ -113,6 +114,11 @@ const HomePage = () => {
         isOpen={isReviewOpen}
         onClose={() => setReviewOpen(false)}
         onSuccess={handleReviewSuccess}
+      />
+
+      <ModalReviewSuccess
+        isOpen={isSuccessOpen}
+        onClose={() => setSuccessOpen(false)}
       />
     </>
   );

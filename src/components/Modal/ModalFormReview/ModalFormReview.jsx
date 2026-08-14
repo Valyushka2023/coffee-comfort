@@ -7,11 +7,29 @@ import FormReview from '../../Forms/FormReview/FormReview.jsx';
 const ModalFormReview = ({ isOpen, onClose, onSuccess }) => {
   const { t } = useTranslation(['reviews', 'validation']);
 
-  const handleFormSubmitSuccess = () => {
-    onClose();
+  // Нормалізатор об'єкта відгуку перед передачею в батьківський стан
+  const normalizeReviewData = rawData => {
+    // Якщо прийшла axios-відповідь, беремо payload з data
+    const reviewPayload = rawData?.data || rawData || {};
+
+    return {
+      ...reviewPayload,
+      // Гарантуємо унікальний id для key в масиві
+      _id: reviewPayload._id || reviewPayload.id || `temp-${Date.now()}`,
+      // Гарантуємо наявність дати для форматування та сортування
+      createdAt:
+        reviewPayload.createdAt ||
+        reviewPayload.date ||
+        new Date().toISOString(),
+    };
+  };
+
+  const handleFormSubmitSuccess = newReviewData => {
     if (onSuccess) {
-      onSuccess();
+      const formattedReview = normalizeReviewData(newReviewData);
+      onSuccess(formattedReview);
     }
+    onClose();
   };
 
   return (
@@ -28,7 +46,7 @@ const ModalFormReview = ({ isOpen, onClose, onSuccess }) => {
 ModalFormReview.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func,
 };
 
 export default ModalFormReview;

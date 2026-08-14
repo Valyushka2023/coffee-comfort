@@ -32,6 +32,7 @@ main {
 
 @media (max-width: 29.9375rem) {
   .container-page {
-    width: calc(100% - 1rem);
+    /* width: calc(100% - 1rem); */
+    width: 100%;
   }
 }

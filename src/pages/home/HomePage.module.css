@@ -14,9 +14,9 @@ main {
 
 @media (max-width: 74.9375rem) {
   .container-page {
-    width: calc(100% - 2.5rem);
+    /* width: calc(100% - 2.5rem); */
 
-    /* width: 100%; */
+    width: 100%;
   }
 }
 

@@ -35,14 +35,15 @@ const AboutUs = () => {
     >
       <div className={css['about-container']}>
         <div className={css['about-text-block']}>
-          <h2 className={css['about-title']}>{t('title', 'Our history')}</h2>
-          <p className={css['about-history']}>
-            {t(
-              'history',
-              'Coffee Comfort started with one small dream about the perfect cup of coffee. And today our coffee is not just a drink. It is your mood, a conversation, silence or the beginning of something new.'
-            )}
-          </p>
-
+          <div className={css['about-title-card']}>
+            <h2 className={css['about-title']}>{t('title', 'Our history')}</h2>
+            <p className={css['about-history']}>
+              {t(
+                'history',
+                'Coffee Comfort started with one small dream about the perfect cup of coffee. And today our coffee is not just a drink. It is your mood, a conversation, silence or the beginning of something new.'
+              )}
+            </p>
+          </div>
           <ul className={css['about-features']}>
             <li className={css['about-card']}>
               <div className={css['about-icon-circle']}>

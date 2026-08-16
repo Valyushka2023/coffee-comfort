@@ -2,6 +2,9 @@
 
 .about-section {
   position: relative;
+
+  /* width: calc(100% - 4rem);
+  margin: 0 auto; */
   padding: 4rem 0;
   background-color: var(--section-bg);
   border-bottom: 0.0625rem solid var(--border-section-bottom);
@@ -38,8 +41,24 @@
   opacity: 1;
 }
 
+.about-title-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-xs);
+  margin-bottom: 1.5625rem;
+  padding: var(--padding-form-xs);
+  border-radius: var(--radius-md);
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
 .about-title {
   margin-bottom: 1.5625rem;
+
+  /* padding-left: var(--padding-xl); */
   text-transform: uppercase;
   color: var(--section-fg);
   transition: color 0.3s ease;

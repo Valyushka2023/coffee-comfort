@@ -1,109 +1,22 @@
-/* .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--overlay-bg);
-}
-
-.success-container {
+.success-modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 26.25rem;
-  padding: 3rem 2rem;
-  box-sizing: border-box;
-  background-color: var(--bg-block-primary);
-  border: 0.0625rem solid var(--border-block);
-  border-radius: 1.25rem;
-  text-align: center;
-  animation: fade-in-up 0.4s ease forwards;
-}
 
-.success-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 4.5rem;
-  height: 4.5rem;
-  margin-bottom: 1rem;
-  background-color: var(--badge-bg);
-  border: 0.125rem solid var(--border-block);
-  border-radius: 50%;
-  font-size: 2.5rem;
-  color: var(--status-success);
-  animation: scale-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.title-success-form {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-block-primary);
-}
-
-.text-success-form {
-  max-width: 20rem;
-  margin: 0 auto 2rem;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--text-block-primary);
-} */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  /* Геометрія та адаптивність */
   width: calc(100% - 2rem);
-  height: 100vh;
   max-width: 26.25rem;
-
-  /* Додано padding, щоб контейнер ніколи не притискався до країв екрана */
-
-  /* padding: 1rem;
-  box-sizing: border-box;  */
+  margin: 0 auto;
   padding: 2rem 1.25rem;
   box-sizing: border-box;
+
+  /* Оформлення картки */
   background-color: var(--bg-block-primary);
   border: 0.0625rem solid var(--border-block);
   border-radius: 1.25rem;
   text-align: center;
   animation: fade-in-up 0.4s ease forwards;
-}
-
-.success-container {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-
-  /* Дозволяємо адаптивну ширину з урахуванням бічних відступів */
-
-  /* width: calc(100% - 2rem);
-  max-width: 26.25rem; */
-
-  /* Адаптивний внутрішній padding для мобільних пристроїв */
-
-  /* padding: 2rem 1.25rem;
-  box-sizing: border-box;
-  background-color: var(--bg-block-primary);
-  border: 0.0625rem solid var(--border-block);
-  border-radius: 1.25rem;
-  text-align: center;
-  animation: fade-in-up 0.4s ease forwards; */
 }
 
 .success-icon {
@@ -112,8 +25,7 @@
   align-items: center;
   width: 4.5rem;
   height: 4.5rem;
-  margin: 0 auto;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem; /* Об'єднано відступи */
   background-color: var(--badge-bg);
   border: 0.125rem solid var(--border-block);
   border-radius: 50%;
@@ -129,8 +41,6 @@
   font-weight: 700;
   text-align: center;
   color: var(--text-block-primary);
-
-  /* color: blue; */
 }
 
 .text-success-form {
@@ -141,22 +51,10 @@
   line-height: 1.6;
   text-align: center;
   color: var(--text-block-primary);
-
-  /* color: aqua; */
 }
 
 .element-sending {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* margin: 0 auto; */
 }
-
-/* Медіа-запит для планшетів та десктопів (повертаємо більший padding) */
-
-/* @media (min-width: 30rem) {
-  .success-container {
-    padding: 3rem 2rem;
-  }
-} */

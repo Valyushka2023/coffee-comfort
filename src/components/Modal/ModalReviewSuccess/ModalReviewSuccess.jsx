@@ -82,9 +82,8 @@ const ModalReviewSuccess = ({ isOpen, onClose, className }) => {
       isOpen={isOpen}
       onClose={onClose}
       showCloseButton={false}
-      className={clsx(css['success-modal-override'], className)}
+      className={clsx(css['success-modal'], className)}
     >
-      {/* <div className={css['success-container']}></div> */}
       <div className={css['success-icon']}>✓</div>
       <h3 className={css['title-success-form']}>
         {t('review_form_modal.success_title')}

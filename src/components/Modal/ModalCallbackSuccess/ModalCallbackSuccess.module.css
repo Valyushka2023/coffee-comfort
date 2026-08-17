@@ -154,8 +154,9 @@
 }
 
 /* Медіа-запит для планшетів та десктопів (повертаємо більший padding) */
-@media (min-width: 30rem) {
+
+/* @media (min-width: 30rem) {
   .success-container {
     padding: 3rem 2rem;
   }
-}
+} */

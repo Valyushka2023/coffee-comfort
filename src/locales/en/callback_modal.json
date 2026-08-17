@@ -4,5 +4,6 @@
   "phone_placeholder": "+380XXXXXXXXX",
   "submit_btn": "ORDER",
   "processing": "PROCESSING...",
-  "success_message": "Thank you! We will call you back shortly."
+  "success_title": "Thank you!",
+  "success_message": " We will call you back shortly."
 }

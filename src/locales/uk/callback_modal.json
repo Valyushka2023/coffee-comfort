@@ -4,5 +4,6 @@
   "phone_placeholder": "+380XXXXXXXXX",
   "submit_btn": "ЗАМОВИТИ",
   "processing": "ОБРОБКА...",
-  "success_message": "Дякуємо! Ми зателефонуємо вам найближчим часом."
+  "success_title": "Дякуємо!",
+  "success_message": " Ми зателефонуємо вам найближчим часом."
 }

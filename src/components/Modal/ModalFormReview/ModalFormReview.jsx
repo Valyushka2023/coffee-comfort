@@ -1,33 +1,67 @@
+// import { useTranslation } from 'react-i18next';
+// import PropTypes from 'prop-types';
+
+// import BaseModal from '../BaseModal/BaseModal.jsx';
+// import FormReview from '../../Forms/FormReview/FormReview.jsx';
+// import clsx from 'clsx';
+// import css from './ModalFormReview.module.css';
+
+// const ModalFormReview = ({ isOpen, onClose, onSuccess, className }) => {
+//   const { t } = useTranslation(['reviews', 'validation']);
+
+//   const normalizeReviewData = rawData => {
+//     const payload = rawData?.data || rawData || {};
+
+//     return {
+//       ...payload,
+//       _id: payload._id || payload.id || `temp-${Date.now()}`,
+//       createdAt: payload.createdAt || payload.date || new Date().toISOString(),
+//     };
+//   };
+
+//   const handleFormSubmitSuccess = newReviewData => {
+//     if (onSuccess) {
+//       const formattedReview = normalizeReviewData(newReviewData);
+//       onSuccess(formattedReview);
+//     }
+//     onClose();
+//   };
+
+//   return (
+//     <BaseModal
+//       isOpen={isOpen}
+//       onClose={onClose}
+//       className={clsx(css['form-review-modal'], className)}
+//       title={t('review_form_modal.title')}
+//     >
+//       <FormReview onSubmitSuccess={handleFormSubmitSuccess} t={t} />
+//     </BaseModal>
+//   );
+// };
+
+// ModalFormReview.propTypes = {
+//   isOpen: PropTypes.bool.isRequired,
+//   onClose: PropTypes.func.isRequired,
+//   onSuccess: PropTypes.func,
+//   className: PropTypes.string,
+// };
+
+// export default ModalFormReview;
+/**/
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import BaseModal from '../BaseModal/BaseModal.jsx';
 import FormReview from '../../Forms/FormReview/FormReview.jsx';
+import css from './ModalFormReview.module.css';
 
-const ModalFormReview = ({ isOpen, onClose, onSuccess }) => {
-  const { t } = useTranslation(['reviews', 'validation']);
-
-  // Нормалізатор об'єкта відгуку перед передачею в батьківський стан
-  const normalizeReviewData = rawData => {
-    // Якщо прийшла axios-відповідь, беремо payload з data
-    const reviewPayload = rawData?.data || rawData || {};
-
-    return {
-      ...reviewPayload,
-      // Гарантуємо унікальний id для key в масиві
-      _id: reviewPayload._id || reviewPayload.id || `temp-${Date.now()}`,
-      // Гарантуємо наявність дати для форматування та сортування
-      createdAt:
-        reviewPayload.createdAt ||
-        reviewPayload.date ||
-        new Date().toISOString(),
-    };
-  };
+const ModalFormReview = ({ isOpen, onClose, onSuccess, className }) => {
+  const { t } = useTranslation('reviews');
 
   const handleFormSubmitSuccess = newReviewData => {
     if (onSuccess) {
-      const formattedReview = normalizeReviewData(newReviewData);
-      onSuccess(formattedReview);
+      onSuccess(newReviewData);
     }
     onClose();
   };
@@ -36,9 +70,10 @@ const ModalFormReview = ({ isOpen, onClose, onSuccess }) => {
     <BaseModal
       isOpen={isOpen}
       onClose={onClose}
+      className={clsx(css['form-review-modal'], className)}
       title={t('review_form_modal.title')}
     >
-      <FormReview onSubmitSuccess={handleFormSubmitSuccess} t={t} />
+      <FormReview onSubmitSuccess={handleFormSubmitSuccess} />
     </BaseModal>
   );
 };
@@ -47,6 +82,7 @@ ModalFormReview.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSuccess: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default ModalFormReview;

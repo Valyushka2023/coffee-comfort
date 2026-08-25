@@ -105,7 +105,6 @@ const ModalCardMenu = ({ item, onClose, formatPrice }) => {
         </div>
       </div>
     </div>
-    /* eslint-enable */
   );
 };
 

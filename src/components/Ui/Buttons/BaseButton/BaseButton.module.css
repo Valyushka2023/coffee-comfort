@@ -42,7 +42,8 @@
 
 .primary {
   cursor: pointer;
-  padding: 0.625rem 1.5625rem;
+  width: 12rem;
+  padding: 0.625rem 1.5rem;
   background-color: var(--btn-cta-bg);
   border: 0.0625rem solid var(--border-block);
 

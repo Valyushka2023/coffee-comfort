@@ -19,7 +19,9 @@
     "name_placeholder": "Ваше ім'я (2-20 символів)",
     "text_placeholder": "Ваш коментар (максимум 150 символів)",
     "submit_btn": "НАДІСЛАТИ",
-    "processing": "Надсилаємо...",
+    "processing": "Надсилаємо..."
+  },
+  "review_success_modal": {
     "success_title": "Дякуємо!",
     "success_message": "Ваш відгук дуже важливий для нас.",
     "back_button": "ЗАКРИТИ"

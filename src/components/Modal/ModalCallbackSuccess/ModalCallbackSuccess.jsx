@@ -24,7 +24,7 @@ const ModalCallbackSuccess = ({ isOpen, onClose, className }) => {
       </p>
       <div className={css['element-sending']}>
         <Button variant="primary" onClick={onClose} isFixedWidth={true}>
-          {t('back_button', 'Зрозуміло')}
+          {t('back_button', 'Understood!')}
         </Button>
       </div>
     </BaseModal>

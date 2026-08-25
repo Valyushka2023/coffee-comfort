@@ -19,7 +19,9 @@
     "name_placeholder": "Your name (2-20 characters)",
     "text_placeholder": "Your comment (max. 150 characters)...",
     "submit_btn": "Send",
-    "processing": "Sending...",
+    "processing": "Sending..."
+  },
+  "review_success_modal": {
     "success_title": "Thank you!",
     "success_message": "Your feedback is very important to us.",
     "back_button": "CLOSE"

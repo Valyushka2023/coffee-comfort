@@ -188,10 +188,6 @@
 }
 
 @media (max-width: 29.9375rem) {
-  /* .element-sending {
-    display: block;
-  } */
-
   .buttons-group {
     display: flex;
     flex-direction: column;

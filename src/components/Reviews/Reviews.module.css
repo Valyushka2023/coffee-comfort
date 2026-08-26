@@ -68,6 +68,36 @@
   opacity: 0.8;
 }
 
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2.5rem 0;
+  font-size: 1rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.spinner {
+  width: 2.375rem;
+  height: 2.375rem;
+  border: 0.25rem solid var(--color-border, #e5e5e5);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  border-top-color: var(--color-primary, #6f4e37);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .title-divider {
   display: flex;
   justify-content: center;
@@ -97,8 +127,6 @@
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr));
-
-  /* gap: 2rem 3rem; */
   gap: 1.5rem;
   width: 100%;
   grid-auto-rows: 1fr;

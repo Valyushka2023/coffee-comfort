@@ -1,4 +1,3 @@
-// import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MapPinIcon, ClockIcon } from '..//Icons';
 import FormBooking from '..//Forms/FormBooking/FormBooking.jsx';

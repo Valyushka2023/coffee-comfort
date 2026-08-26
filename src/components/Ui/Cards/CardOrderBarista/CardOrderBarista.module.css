@@ -126,15 +126,6 @@
   color: var(--accent-primary);
 }
 
-/* .paid-badge {
-  display: flex;
-  align-items: center;
-
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--status-success);
-} */
-
 .unpaid-badge {
   display: flex;
   justify-content: center;
@@ -193,7 +184,6 @@
 }
 
 .card-footer {
-  /* margin-top: auto; */
   margin-top: 1rem;
 }
 

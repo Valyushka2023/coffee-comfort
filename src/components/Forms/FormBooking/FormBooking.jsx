@@ -96,7 +96,6 @@ const FormBooking = () => {
     try {
       const response = await sendBookingRequest(bookingData);
       if (response) {
-        // ВІДРАЗУ очищаємо форму і показуємо модальне вікно
         resetForm();
         setIsSuccess(true);
       }
@@ -125,7 +124,6 @@ const FormBooking = () => {
     [handleInputChange]
   );
 
-  // Функція закриття модалки більше НЕ викликає resetForm()!
   const handleCloseSuccess = () => {
     setIsSuccess(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });

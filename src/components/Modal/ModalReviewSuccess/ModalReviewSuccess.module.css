@@ -25,7 +25,7 @@
   align-items: center;
   width: 4.5rem;
   height: 4.5rem;
-  margin: 0 auto 1rem; /* Об'єднано відступи */
+  margin: 0 auto 1rem;
   background-color: var(--badge-bg);
   border: 0.125rem solid var(--border-block);
   border-radius: 50%;
@@ -57,6 +57,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* margin: 0 auto; */
 }

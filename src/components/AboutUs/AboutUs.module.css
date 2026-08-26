@@ -2,9 +2,6 @@
 
 .about-section {
   position: relative;
-
-  /* width: calc(100% - 4rem);
-  margin: 0 auto; */
   padding: 4rem 0;
   background-color: var(--section-bg);
   border-bottom: 0.0625rem solid var(--border-section-bottom);
@@ -57,8 +54,6 @@
 
 .about-title {
   margin-bottom: 1.5625rem;
-
-  /* padding-left: var(--padding-xl); */
   text-transform: uppercase;
   color: var(--section-fg);
   transition: color 0.3s ease;
@@ -137,8 +132,6 @@
   overflow: hidden;
   border-style: solid;
   border-width: 0.5rem;
-
-  /* border: 0.5rem solid var(--border-circle-big); */
   border-radius: var(--radius-full);
   box-shadow: 0 0.625rem 1.875rem var(--shadow-circle-global);
   outline: none;

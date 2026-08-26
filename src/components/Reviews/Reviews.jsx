@@ -110,11 +110,16 @@ const Reviews = ({ newReview }) => {
         )}
 
         {isLoading ? (
-          <p>Loading...</p>
+          <div className={css['loader-container']}>
+            <div className={css['spinner']}></div>
+            <span>{t('loading', 'Завантаження відгуків...')}</span>
+          </div>
         ) : error ? (
           <p className={css['error-message']}>{error}</p>
         ) : visibleReviews.length === 0 ? (
-          <p className={css['no-reviews']}>No reviews yet.</p>
+          <p className={css['no-reviews']}>
+            {t('no_reviews', 'No reviews yet.')}
+          </p>
         ) : (
           <div className={css['reviews-items-grid']}>
             {visibleReviews.map((review, idx) => (

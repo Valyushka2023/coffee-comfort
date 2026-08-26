@@ -119,7 +119,6 @@ const Menu = () => {
 
         <div className={css['menu-grid-container']} key={activeCategory}>
           {loading ? (
-            /* Змінено клас із css['menu-items-grid'] на css['grid-cards-menu'] */
             <div className={css['grid-cards-menu']}>
               {[...Array(6)].map((_, i) => (
                 <div key={i} className={css['skeleton-card']}>

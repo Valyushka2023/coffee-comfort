@@ -61,16 +61,11 @@
 
 .grid-cards-gallery {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(18.625rem, 1fr)
-  ); /* Адаптивна сітка */
-
+  grid-template-columns: repeat(auto-fill, minmax(18.625rem, 1fr));
   gap: 1.5rem;
   padding: 1rem 0;
 }
 
-/* Кнопка-обгортка для картинки */
 .thumb-btn {
   cursor: pointer;
   padding: 0;
@@ -81,8 +76,6 @@
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-
-  /* Робимо кнопку квадратною */
   aspect-ratio: 1 / 1 !important;
 }
 
@@ -91,19 +84,16 @@
   transform: translateY(-0.3125rem);
 }
 
-/* Сама картинка прев'ю */
 .thumb-img {
   width: 100%;
   height: 100%;
   transition: transform 0.5s ease;
-
-  /* Заповнюємо квадрат без деформації */
   object-fit: cover;
   object-position: center;
 }
 
 .thumb-btn:hover .thumb-img {
-  transform: scale(1.1); /* Ефект наближення при наведенні */
+  transform: scale(1.1);
 }
 
 @media (max-width: 74.9375rem) {
@@ -112,7 +102,6 @@
   }
 
   .grid-cards-gallery {
-    /* grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr)); */
     gap: 1.5rem;
   }
 
@@ -122,7 +111,6 @@
     }
 
     .grid-cards-gallery {
-      /* grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr)); */
       gap: 1.25rem;
     }
 
@@ -132,7 +120,6 @@
       }
 
       .grid-cards-gallerygrid {
-        /* grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr)); */
         gap: 1.25rem;
       }
 

@@ -21,7 +21,6 @@
 }
 
 .btn-cart-icon:hover {
-  /* background-color: var(--cart-btn-bg-hover); */
   color: var(--cart-btn-fg-hover);
 }
 

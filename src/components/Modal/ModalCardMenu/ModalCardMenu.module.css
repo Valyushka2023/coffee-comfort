@@ -49,7 +49,6 @@
 }
 
 .close-icon:hover {
-  /* background: var(--color-white); */
   transform: scale(1.2);
 }
 
@@ -159,9 +158,6 @@
 }
 
 .select-btn:hover {
-  /* background-color: var(--color-light-brown); */
-
-  /* color: var(--color-white); */
   transform: scale(1.05);
 }
 
@@ -174,7 +170,6 @@
 }
 
 .cancel-btn:hover {
-  /* background-color: var(--color-white); */
   transform: scale(1.05);
 }
 

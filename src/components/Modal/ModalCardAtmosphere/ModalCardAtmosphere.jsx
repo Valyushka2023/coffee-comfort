@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'; // Додали useRef
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import BaseModal from '../BaseModal/BaseModal.jsx';
@@ -8,7 +8,7 @@ import css from './ModalCardAtmosphere.module.css';
 const ModalCardAtmosphere = ({ isOpen, onClose, zone, onConfirm }) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const { t } = useTranslation('form_booking');
-  const imgRef = useRef(null); // Реф для картинки
+  const imgRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) {

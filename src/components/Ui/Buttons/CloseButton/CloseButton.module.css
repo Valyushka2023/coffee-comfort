@@ -21,11 +21,9 @@
 }
 
 .base-close-button:active {
-  /* color: var(--btn-close-active); */
   transform: scale(0.9);
 }
 
-/* Адаптивність розміру хрестика */
 @media (max-width: 74.9375rem) {
   .base-close-button {
     font-size: var(--close-btn-size-tablet, 1.5rem);

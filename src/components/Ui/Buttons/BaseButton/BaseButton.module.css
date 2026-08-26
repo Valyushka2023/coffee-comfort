@@ -46,8 +46,6 @@
   padding: 0.625rem 1.5rem;
   background-color: var(--btn-cta-bg);
   border: 0.0625rem solid var(--border-block);
-
-  /* border-radius: var(--border-radius, 2rem); */
   border-radius: var(--radius-full);
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-block);
   font-weight: 600;
@@ -65,9 +63,7 @@
   transition: all 0.3s ease;
 }
 
-/* ==========================================
-   2. СТАН DISABLED (Для обох кнопок)
-   ========================================== */
+/* 2. СТАН DISABLED (Для обох кнопок) */
 
 .primary:disabled,
 .primary[disabled],
@@ -77,15 +73,11 @@
   box-shadow: none;
   transform: none !important;
   pointer-events: none;
-
-  /* Якщо змінна не задана, використовується напівпрозорість 0.5 */
   opacity: 0.5;
   filter: none;
 }
 
-/* ==========================================
-   3. СТАНИ HOVER ТА ACTIVE (Йдуть після базових і disabled)
-   ========================================== */
+/* 3. СТАНИ HOVER ТА ACTIVE (Йдуть після базових і disabled)  */
 
 .primary:hover:not(:disabled) {
   background-color: var(--hover-btn-bg);
@@ -115,8 +107,6 @@
 
 @media (max-width: 47.9375rem) {
   .fixed-width {
-    /* width: 100%; */
-
     min-width: 13.75rem;
   }
 }

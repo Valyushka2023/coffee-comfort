@@ -51,7 +51,7 @@
   height: 100vh;
   margin: 0;
   overflow: visible;
-  background-color: rgb(var(--black-channels) / 98%); /* Зв'язано з токеном */
+  background-color: rgb(var(--black-channels) / 98%);
   border-radius: 0;
   box-shadow: none;
   transform: translate(-50%, -50%);
@@ -97,10 +97,10 @@
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
-  color: rgb(var(--white-channels)); /* Зв'язано з токеном */
+  color: rgb(var(--white-channels));
   transition: all 0.3s ease;
   pointer-events: none;
-  backdrop-filter: blur(var(--overlay-blur)); /* Замінено 0.25rem на токен */
+  backdrop-filter: blur(var(--overlay-blur));
 }
 
 /* Коли активовано зум */
@@ -129,13 +129,7 @@
 
 .buttons-group {
   display: flex;
-
-  /* justify-content: center; */
-
   justify-content: space-between;
-
-  /* gap: 1.75rem; */
-
   width: 100%;
 }
 
@@ -144,8 +138,6 @@
   max-width: 100%;
   min-width: 8rem !important;
   padding: 0.625rem 2.5625rem !important;
-
-  /* font-size: 0.9rem !important; */
 }
 
 @media (max-width: 61.9375rem) {

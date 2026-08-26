@@ -4,9 +4,6 @@ import css from './ErrorComponent.module.css';
 
 const ErrorComponent = ({ errorCode, onRetry }) => {
   const { t } = useTranslation('error_component');
-
-  // Шукаємо переклад за кодом (наприклад, 'errors.ORDER_NOT_FOUND')
-  // Якщо коду немає в локалізації, виведеться сам код або дефолтне повідомлення
   const errorMessage = t(`errors.${errorCode}`, {
     defaultValue: t('errors.UNKNOWN_ERROR'),
   });

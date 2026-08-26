@@ -34,17 +34,12 @@
 }
 
 .burger-button:hover {
-  /* color: var(--hover-btn-color); */
   transform: scale(1.1);
 }
 
 .is-active:hover {
   transform: rotate(180deg) scale(1.1);
 }
-
-/* .burger-button:active {
-  transform: scale(0.9);
-} */
 
 @media (max-width: 61.9375rem) {
   .icon {
@@ -56,8 +51,6 @@
 
   .burger-button {
     display: flex;
-
-    /* padding: 0.25rem; */
     padding: 0;
   }
 }
@@ -66,9 +59,4 @@
   .header-container {
     max-width: calc(100% - 1rem);
   }
-
-  /* .burger-button {
-    display: flex;
-    padding: 0.25rem 0;
-  } */
 }

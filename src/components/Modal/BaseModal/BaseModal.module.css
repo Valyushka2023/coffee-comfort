@@ -12,7 +12,6 @@
   inset: 0;
 }
 
-/* Локальна модалка (без порталу) */
 .local-wrapper {
   position: absolute;
   z-index: 100;
@@ -66,7 +65,6 @@
   overflow-y: visible;
 }
 
-/* Обгортка кнопки закриття */
 .close-btn {
   position: absolute;
   top: 0.75rem;

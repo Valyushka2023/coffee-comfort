@@ -24,21 +24,13 @@
   flex-wrap: wrap;
 }
 
-/* .contacts-info,
-.contacts-form-container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 2.5rem;
-  box-sizing: border-box;
-} */
 .contacts-info,
 .contacts-form-container {
   display: flex;
-  flex: 1 1 0; /* Виставляє однакову базову ширину (flex-basis: 0) */
+  flex: 1 1 0;
   flex-direction: column;
   gap: 2.5rem;
-  min-width: 0; /* Дозволяє flex-елементам стискатися нижче вмісту */
+  min-width: 0;
   box-sizing: border-box;
 }
 
@@ -99,23 +91,15 @@
   filter: drop-shadow(0 0.25rem 0.5rem rgb(0 0 0 / 20%));
 }
 
-/* .contacts-map {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
-} */
 .contacts-map {
   display: flex;
   flex: 1;
-  width: 100%; /* Гарантує розтягування карти по всій ширині лівої колонки */
+  width: 100%;
   overflow: hidden;
   border-radius: 1rem;
   box-shadow: 0 0.25rem 0.9375rem var(--shadow-contacts-map-form);
 }
 
-/* АНІМАЦІЯ ПІНА (Залишається виключно в контактах) */
 .map-pin-animated {
   --pulse-offset: 0.8;
   --pulse-max: 1.2;
@@ -131,7 +115,6 @@
   border: 0;
 }
 
-/* АДАПТИВНІСТЬ */
 @media (max-width: 74.9375rem) {
   .contacts-section {
     padding: 4rem 2.5rem;
@@ -143,23 +126,11 @@
   }
 }
 
-/* @media (max-width: 61.9375rem) {
-  .contacts-section {
-    padding: 4rem 1.5rem;
-  }
-
-  .contacts-info,
-  .contacts-form-container {
-    gap: 1.5rem;
-  }
-
-} */
 @media (max-width: 61.9375rem) {
   .contacts-section {
     padding: 4rem 1.5rem;
   }
 
-  /* Перемикаємо в колонку на 768px */
   .contacts-container {
     flex-direction: column;
     align-items: center;

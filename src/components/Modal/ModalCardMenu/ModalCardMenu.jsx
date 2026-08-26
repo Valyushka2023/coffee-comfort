@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartSlice';
-import Loader from '../../Ui/Loader/Loader.jsx'; // Переконайся, що шлях до лоадера правильний
+import Loader from '../../Ui/Loader/Loader.jsx';
 import css from './ModalCardMenu.module.css';
 
 const ModalCardMenu = ({ item, onClose, formatPrice }) => {

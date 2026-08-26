@@ -292,7 +292,7 @@ const ModalCart = ({ isOpen, onClose }) => {
   };
   const handlePhoneBlur = () => {
     if (phone === '+380') {
-      setPhone(''); // Скидаємо, щоб показати сірий плейсхолдер
+      setPhone('');
     }
   };
   const handleNameChange = event => {

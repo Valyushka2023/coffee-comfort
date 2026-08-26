@@ -9,10 +9,9 @@
   animation: slide-in-bottom 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* БАЗОВИЙ КОНТЕЙНЕР (Десктоп: 4 колонки через Grid) */
 .footer-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 рівні колонки */
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   width: 100%;
   max-width: 75rem;
@@ -24,7 +23,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start; /* Усі елементи чітко по лівому краю */
+  align-items: flex-start;
   gap: 0.625rem;
   min-width: 0;
   margin: 0;
@@ -57,7 +56,6 @@
   user-select: none;
 }
 
-/* ФАРБУВАННЯ ІКОНОК ЧЕРЕЗ СТИЛІ */
 .item-address svg {
   color: var(--map-marker-icon);
 }
@@ -105,7 +103,6 @@
     color 0.3s ease;
 }
 
-/* ЕФЕКТИ НАВЕДЕННЯ */
 @media (hover: hover) {
   .footer-column-item:not(.no-hover):hover,
   .callback-trigger:hover,
@@ -125,7 +122,6 @@
   }
 }
 
-/* АКТИВНІ СТАНИ КЛІКУ */
 .footer-column-item:active,
 .callback-trigger:active,
 .review-trigger:active,
@@ -152,9 +148,6 @@
   opacity: 0.7;
 }
 
-/* --- АДАПТИВНІСТЬ --- */
-
-/* 1199px - Великі планшети / Малі ноутбуки */
 @media (max-width: 74.9375rem) {
   .footer-container {
     gap: 2rem;
@@ -162,45 +155,27 @@
   }
 }
 
-/* 991px - Планшети (Сітка 2х2 по центру екрана з фіксованими колонками) */
 @media (max-width: 61.9375rem) {
   .footer-container {
     display: grid;
-    justify-content: space-between; /* Розсуває колонки по краях контейнера */
+    justify-content: space-between;
     grid-template-columns: repeat(2, auto);
-    padding: 2rem 4rem; /* Регулюйте внутрішні поля (4rem), щоб зміщувати їх до центру */
+    padding: 2rem 4rem;
     row-gap: 2.5rem;
   }
 }
 
-/* 767px і нижче - Мобільні пристрої (1 колонка по центру) */
 @media (max-width: 47.9375rem) {
   .footer-container {
-    /* grid-template-columns: 1fr; */
     gap: 2rem;
     padding: 1.5rem 8.25rem;
   }
-
-  /* .footer-column {
-    align-items: center;
-    text-align: center;
-  } */
-
-  /* 
-  .footer-column-item,
-  .callback-trigger,
-  .review-trigger {
-    justify-content: center;
-  }
-} */
 }
 
 @media (max-width: 47.9375rem) {
   .footer-container {
     grid-template-columns: 1fr;
     gap: 2rem;
-
-    /* padding: 1.5rem 8.25rem;    */
     padding: 1.5rem 0;
   }
 

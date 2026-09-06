@@ -24,6 +24,7 @@
   "order_placed_title": "Замовлення оформлено",
   "order_number_label": "Номер замовлення",
   "pickup_time_confirm": "Час самовивозу",
+  "pickup_time_info_label": "Час отримання",
   "CLOSE_BTN": "Закрити",
 
   "errors": {

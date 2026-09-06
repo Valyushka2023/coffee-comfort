@@ -24,6 +24,7 @@
   "order_placed_title": "Order Placed",
   "order_number_label": "Order Number",
   "pickup_time_confirm": "Pickup Time",
+  "pickup_time_info_label": "Time of receipt",
   "CLOSE_BTN": "Close",
 
   "errors": {

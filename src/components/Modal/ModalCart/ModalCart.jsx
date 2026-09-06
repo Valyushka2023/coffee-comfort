@@ -508,7 +508,7 @@ const ModalCart = ({ isOpen, onClose }) => {
               </div>
               <div className={css['pickup-time-info']}>
                 <span className={css['pickup-time-text']}>
-                  {t('pickup_time_info_label', 'Час отримання:')}{' '}
+                  {t('pickup_time_info_label', 'Time of receipt:')}{' '}
                   <strong className={css['pickup-time-value']}>
                     {pickupTime || t('closest_time', 'Найближчий час')}
                   </strong>

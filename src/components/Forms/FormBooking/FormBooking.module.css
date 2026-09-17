@@ -117,6 +117,18 @@
   opacity: 0.6;
 }
 
+/* Перекриваємо білий фон автозаповнення браузера (розміщено в кінці для Stylelint) */
+.field-input:-webkit-autofill,
+.field-input:-webkit-autofill:hover,
+.field-input:-webkit-autofill:focus,
+.field-area:-webkit-autofill,
+.field-area:-webkit-autofill:hover,
+.field-area:-webkit-autofill:focus {
+  box-shadow: 0 0 0 62.5rem var(--bg-block-primary) inset;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: var(--text-block-primary);
+}
+
 .field-input-and-field-error :global(.react-datepicker-wrapper),
 .field-input-and-field-error :global(.react-datepicker__input-container) {
   display: block;

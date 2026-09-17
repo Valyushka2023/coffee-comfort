@@ -1,3 +1,264 @@
+// import { useState, useMemo, useCallback } from 'react';
+// import { useTranslation } from 'react-i18next';
+// import useForm from '../../../hooks/useForm.js';
+// import clsx from 'clsx';
+// import DatePicker, { registerLocale } from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
+// import uk from 'date-fns/locale/uk';
+// import en from 'date-fns/locale/en-US';
+// import { sendBookingRequest } from '../../../services/api.js';
+// import BaseButton from '../../Ui/Buttons/BaseButton/BaseButton.jsx';
+// import AtmosphereSelector from '../../../components/AtmosphereSelector/AtmosphereSelector.jsx';
+// import ModalCardAtmosphere from '../../Modal/ModalCardAtmosphere/ModalCardAtmosphere.jsx';
+// import ModalBookingSuccess from '../../Modal/ModalBookingSuccess/ModalBookingSuccess.jsx';
+// import {
+//   validateName,
+//   validateEmail,
+//   validatePhone,
+//   validateBookingDate,
+//   validateComment,
+// } from '../../../utils/index.js';
+// import css from './FormBooking.module.css';
+
+// registerLocale('uk', uk);
+// registerLocale('en', en);
+
+// const initialState = {
+//   name: '',
+//   email: '',
+//   phone: '',
+//   bookingStartDate: null,
+//   comment: '',
+//   selectedZone: '',
+// };
+
+// const FormBooking = () => {
+//   const { t, i18n } = useTranslation('form_booking');
+//   const [previewZone, setPreviewZone] = useState(null);
+//   const [isSuccess, setIsSuccess] = useState(false);
+
+//   const FORM_FIELDS = useMemo(
+//     () => [
+//       {
+//         id: 'user-name-input',
+//         name: 'name',
+//         label: 'name_label',
+//         type: 'text',
+//       },
+//       {
+//         id: 'user-email-input',
+//         name: 'email',
+//         label: 'email_label',
+//         type: 'email',
+//       },
+//       {
+//         id: 'user-phone-input',
+//         name: 'phone',
+//         label: 'phone_label',
+//         type: 'tel',
+//       },
+//     ],
+//     []
+//   );
+
+//   const currentLocale = i18n.language.startsWith('uk') ? 'uk' : 'en';
+
+//   const validationRules = useMemo(
+//     () => ({
+//       name: v => validateName(v, t),
+//       email: v => validateEmail(v, t),
+//       phone: v => validatePhone(v, t),
+//       bookingStartDate: v => validateBookingDate(v, t),
+//       comment: v => validateComment(v, t, true),
+//       selectedZone: () => null,
+//     }),
+//     [t]
+//   );
+
+//   const onSubmit = async currentFormData => {
+//     const translatedZone = currentFormData.selectedZone
+//       ? t(`atmosphere.zones.${currentFormData.selectedZone}`).replace(
+//           '<br />',
+//           ' '
+//         )
+//       : t('atmosphere.not_selected');
+
+//     const bookingData = {
+//       name: currentFormData.name.trim(),
+//       email: currentFormData.email.trim(),
+//       phone: currentFormData.phone.trim(),
+//       selectedZone: translatedZone,
+//       comment: currentFormData.comment.trim(),
+//       bookingStartDate:
+//         currentFormData.bookingStartDate?.toLocaleString() || null,
+//     };
+
+//     try {
+//       const response = await sendBookingRequest(bookingData);
+//       if (response) {
+//         resetForm();
+//         setIsSuccess(true);
+//       }
+//     } catch (error) {
+//       console.error('Submission error:', error.message);
+//       throw error;
+//     }
+//   };
+
+//   const {
+//     formData,
+//     errors,
+//     isSubmitting,
+//     hasAttemptedSubmit,
+//     submissionError,
+//     handleInputChange,
+//     handleDateChange,
+//     handleSubmit,
+//     resetForm,
+//   } = useForm(initialState, validationRules, onSubmit);
+
+//   const handleZoneSelect = useCallback(
+//     zoneId => {
+//       handleInputChange({ target: { name: 'selectedZone', value: zoneId } });
+//     },
+//     [handleInputChange]
+//   );
+
+//   const handleCloseSuccess = () => {
+//     setIsSuccess(false);
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+//   };
+
+//   return (
+//     <form className={css['form']} onSubmit={handleSubmit} noValidate>
+//       <h3 className={css['title-form']}>{t('title')}</h3>
+
+//       <AtmosphereSelector
+//         selectedZone={formData.selectedZone}
+//         onSelectClick={zone => setPreviewZone(zone)}
+//       />
+
+//       <div className={css['inputs-area-form']}>
+//         {FORM_FIELDS.map(field => (
+//           <div key={field.name} className={css['label-input-wrapper']}>
+//             <label htmlFor={field.id} className={css['label']}>
+//               {t(field.label)}*
+//             </label>
+//             <div className={css['field-input-and-field-error']}>
+//               <input
+//                 id={field.id}
+//                 name={field.name}
+//                 type={field.type}
+//                 className={clsx(
+//                   css['field-input'],
+//                   hasAttemptedSubmit && errors[field.name] && css['field-error']
+//                 )}
+//                 value={formData[field.name]}
+//                 onChange={handleInputChange}
+//                 onFocus={() => {
+//                   if (field.name === 'phone' && !formData.phone) {
+//                     handleInputChange({
+//                       target: { name: 'phone', value: '+380' },
+//                     });
+//                   }
+//                 }}
+//                 placeholder={t(`${field.name}_placeholder`)}
+//               />
+//               {hasAttemptedSubmit && errors[field.name] && (
+//                 <p className={css['error-popup']}>{errors[field.name]}</p>
+//               )}
+//             </div>
+//           </div>
+//         ))}
+
+//         <div className={css['label-input-wrapper']}>
+//           <label className={css['label']}>{t('date_label')}*</label>
+//           <div className={css['field-input-and-field-error']}>
+//             <DatePicker
+//               selected={formData.bookingStartDate}
+//               onChange={date => handleDateChange(date, 'bookingStartDate')}
+//               locale={currentLocale}
+//               showTimeSelect
+//               timeFormat="HH:mm"
+//               timeIntervals={15}
+//               dateFormat="yyyy-MM-dd HH:mm"
+//               placeholderText={t('date_placeholder')}
+//               className={clsx(
+//                 css['field-input'],
+//                 hasAttemptedSubmit &&
+//                   errors.bookingStartDate &&
+//                   css['field-error']
+//               )}
+//             />
+//             {hasAttemptedSubmit && errors.bookingStartDate && (
+//               <p className={css['error-popup']}>{errors.bookingStartDate}</p>
+//             )}
+//           </div>
+//         </div>
+
+//         <div className={css['label-area-wrapper']}>
+//           <label className={css['label']}>{t('comment_label')}*</label>
+//           <div className={css['field-area-and-field-error']}>
+//             <textarea
+//               name="comment"
+//               value={formData.comment}
+//               onChange={handleInputChange}
+//               placeholder={t('comment_placeholder')}
+//               className={clsx(
+//                 css['field-area'],
+//                 hasAttemptedSubmit && errors.comment && css['field-error']
+//               )}
+//             />
+//             {hasAttemptedSubmit && errors.comment && (
+//               <p className={css['error-popup']}>{errors.comment}</p>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className={css['element-sending']}>
+//         {submissionError && (
+//           <p className={css['general-error-popup']}>{t('submit_error')}</p>
+//         )}
+
+//         <div className={css['buttons-group']}>
+//           <BaseButton
+//             variant="primary"
+//             type="submit"
+//             disabled={isSubmitting}
+//             isFixedWidth={true}
+//           >
+//             {isSubmitting ? t('sending') : t('send')}
+//           </BaseButton>
+
+//           <BaseButton
+//             variant="primary"
+//             type="button"
+//             isFixedWidth={true}
+//             onClick={resetForm}
+//           >
+//             {t('clear_form_btn', 'Clear form')}
+//           </BaseButton>
+//         </div>
+//       </div>
+
+//       {previewZone && (
+//         <ModalCardAtmosphere
+//           isOpen={!!previewZone}
+//           onClose={() => setPreviewZone(null)}
+//           zone={previewZone}
+//           onConfirm={handleZoneSelect}
+//         />
+//       )}
+
+//       {/* Модальне вікно з Portal */}
+//       <ModalBookingSuccess isOpen={isSuccess} onClose={handleCloseSuccess} />
+//     </form>
+//   );
+// };
+
+// export default FormBooking;
+/**/
 import { useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import useForm from '../../../hooks/useForm.js';
@@ -32,6 +293,11 @@ const initialState = {
   selectedZone: '',
 };
 
+// Допоміжна функція для капіталізації першої літери кожного слова
+const capitalizeWords = str => {
+  return str.replace(/(?:^|\s)\p{L}/gu, match => match.toUpperCase());
+};
+
 const FormBooking = () => {
   const { t, i18n } = useTranslation('form_booking');
   const [previewZone, setPreviewZone] = useState(null);
@@ -44,18 +310,24 @@ const FormBooking = () => {
         name: 'name',
         label: 'name_label',
         type: 'text',
+        autoCapitalize: 'words',
+        autoComplete: 'new-password', // Блокує підказки з годинником
       },
       {
         id: 'user-email-input',
         name: 'email',
         label: 'email_label',
         type: 'email',
+        autoCapitalize: 'none',
+        autoComplete: 'new-password', // Блокує підказки з годинником
       },
       {
         id: 'user-phone-input',
         name: 'phone',
         label: 'phone_label',
         type: 'tel',
+        autoCapitalize: 'none',
+        autoComplete: 'new-password', // Блокує підказки з годинником
       },
     ],
     []
@@ -111,11 +383,36 @@ const FormBooking = () => {
     isSubmitting,
     hasAttemptedSubmit,
     submissionError,
-    handleInputChange,
+    handleInputChange: customHandleInputChange,
     handleDateChange,
     handleSubmit,
     resetForm,
   } = useForm(initialState, validationRules, onSubmit);
+
+  // Перехоплення введення для поля name з капіталізацією та збереженням курсора
+  const handleInputChange = useCallback(
+    e => {
+      const { name, value, selectionStart } = e.target;
+
+      if (name === 'name') {
+        const formattedValue = capitalizeWords(value);
+
+        customHandleInputChange({
+          target: { name, value: formattedValue },
+        });
+
+        // Відновлюємо позицію курсора
+        requestAnimationFrame(() => {
+          if (e.target) {
+            e.target.setSelectionRange(selectionStart, selectionStart);
+          }
+        });
+      } else {
+        customHandleInputChange(e);
+      }
+    },
+    [customHandleInputChange]
+  );
 
   const handleZoneSelect = useCallback(
     zoneId => {
@@ -130,7 +427,12 @@ const FormBooking = () => {
   };
 
   return (
-    <form className={css['form']} onSubmit={handleSubmit} noValidate>
+    <form
+      className={css['form']}
+      onSubmit={handleSubmit}
+      noValidate
+      autoComplete="off"
+    >
       <h3 className={css['title-form']}>{t('title')}</h3>
 
       <AtmosphereSelector
@@ -149,6 +451,8 @@ const FormBooking = () => {
                 id={field.id}
                 name={field.name}
                 type={field.type}
+                autoCapitalize={field.autoCapitalize}
+                autoComplete={field.autoComplete}
                 className={clsx(
                   css['field-input'],
                   hasAttemptedSubmit && errors[field.name] && css['field-error']
@@ -183,6 +487,7 @@ const FormBooking = () => {
               timeIntervals={15}
               dateFormat="yyyy-MM-dd HH:mm"
               placeholderText={t('date_placeholder')}
+              autoComplete="off"
               className={clsx(
                 css['field-input'],
                 hasAttemptedSubmit &&
@@ -204,6 +509,7 @@ const FormBooking = () => {
               value={formData.comment}
               onChange={handleInputChange}
               placeholder={t('comment_placeholder')}
+              autoComplete="off"
               className={clsx(
                 css['field-area'],
                 hasAttemptedSubmit && errors.comment && css['field-error']
@@ -234,6 +540,7 @@ const FormBooking = () => {
           <BaseButton
             variant="primary"
             type="button"
+            disabled={isSubmitting}
             isFixedWidth={true}
             onClick={resetForm}
           >
@@ -251,7 +558,6 @@ const FormBooking = () => {
         />
       )}
 
-      {/* Модальне вікно з Portal */}
       <ModalBookingSuccess isOpen={isSuccess} onClose={handleCloseSuccess} />
     </form>
   );

@@ -2,7 +2,7 @@
   "title": "Забронюйте столик зараз",
   "name_label": "Ім'я",
   "name_placeholder": "Ваше ім'я (2-20 символів)",
-  "email_label": "Email",
+  "email_label": "Електронна пошта",
   "email_placeholder": "example@gmail.com",
   "phone_label": "Телефон",
   "phone_placeholder": "+380XXXXXXXXX",

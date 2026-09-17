@@ -35,21 +35,26 @@ const HomePage = () => {
   const { t } = useTranslation('header');
   const { visible, scrollToTop } = useWindowScrollToTopButton(300);
 
+  // const NAV_ITEMS = [
+  //   { href: '#menu', labelKey: 'menu_header_link', defaultLabel: 'Menu' },
+  //   { href: '#about', labelKey: 'about_header_link', defaultLabel: 'About us' },
+  //   {
+  //     href: '#gallery',
+  //     labelKey: 'gallery_header_link',
+  //     defaultLabel: 'Gallery',
+  //   },
+  //   {
+  //     href: '#contacts',
+  //     labelKey: 'contacts_header_link',
+  //     defaultLabel: 'Contacts',
+  //   },
+  // ];
   const NAV_ITEMS = [
-    { href: '#menu', labelKey: 'menu_header_link', defaultLabel: 'Menu' },
-    { href: '#about', labelKey: 'about_header_link', defaultLabel: 'About us' },
-    {
-      href: '#gallery',
-      labelKey: 'gallery_header_link',
-      defaultLabel: 'Gallery',
-    },
-    {
-      href: '#contacts',
-      labelKey: 'contacts_header_link',
-      defaultLabel: 'Contacts',
-    },
+    { href: '#menu', labelKey: 'menu', defaultLabel: 'Меню' },
+    { href: '#about', labelKey: 'about', defaultLabel: 'Про нас' },
+    { href: '#gallery', labelKey: 'gallery', defaultLabel: 'Галерея' },
+    { href: '#contacts', labelKey: 'contacts', defaultLabel: 'Контакти' },
   ];
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCallbackOpen, setCallbackOpen] = useState(false);
   const [isReviewOpen, setReviewOpen] = useState(false);

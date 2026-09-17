@@ -9,12 +9,14 @@
   "placeholder_name": "Your name",
   "placeholder_phone": "Phone number",
   "pickup_time_label": "Preferred time:",
+  "asap": "As soon as possible",
+  "busy_slot": "(Busy ☕)",
+  "closest_time": "As soon as possible",
   "currency": "UAH",
   "total": "Total:",
   "sending": "Sending...",
   "place_order": "Place an order",
   "clear_cart_btn": "Empty cart",
-
   "decrease_quantity": "Decrease quantity",
   "increase_quantity": "Increase quantity",
   "active_orders_title": "Your active orders",
@@ -26,7 +28,6 @@
   "pickup_time_confirm": "Pickup Time",
   "pickup_time_info_label": "Time of receipt",
   "CLOSE_BTN": "Close",
-
   "errors": {
     "too_early": "Choose another time.",
     "working_hours": "Accepting orders from 08:00 to 21:00.",

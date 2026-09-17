@@ -75,3 +75,29 @@
   width: 100%;
   margin-top: 0.5rem;
 }
+
+/* Повне приховування іконок автозаповнення, дати та історії Chromium */
+.field-input::-webkit-calendar-picker-indicator,
+.field-input::-webkit-contacts-auto-fill-button,
+.field-input::-webkit-credentials-auto-fill-button,
+.field-input::-webkit-search-cancel-button,
+.field-input::-webkit-inner-spin-button {
+  position: absolute;
+  right: 0;
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Перекриваємо білий фон та стилі автозаповнення браузера */
+.field-input:-webkit-autofill,
+.field-input:-webkit-autofill:hover,
+.field-input:-webkit-autofill:focus,
+.field-area:-webkit-autofill,
+.field-area:-webkit-autofill:hover,
+.field-area:-webkit-autofill:focus {
+  box-shadow: 0 0 0 62.5rem var(--bg-block-secondary) inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: var(--text-block-secondary) !important;
+}

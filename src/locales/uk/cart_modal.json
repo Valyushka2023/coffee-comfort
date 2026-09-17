@@ -9,12 +9,14 @@
   "placeholder_name": "Ваше ім'я",
   "placeholder_phone": "Номер телефону",
   "pickup_time_label": "Бажаний час:",
+  "asap": "Якомога швидше",
+  "busy_slot": "(Зайнято ☕)",
+  "closest_time": "Найближчий час",
   "currency": "грн",
   "total": "Всього:",
   "sending": "Відправка...",
   "place_order": "Оформити замовлення",
   "clear_cart_btn": "Очистити кошик",
-
   "decrease_quantity": "Зменшити кількість",
   "increase_quantity": "Збільшити кількість",
   "active_orders_title": "Ваші активні замовлення",
@@ -26,7 +28,6 @@
   "pickup_time_confirm": "Час самовивозу",
   "pickup_time_info_label": "Час отримання",
   "CLOSE_BTN": "Закрити",
-
   "errors": {
     "too_early": "Виберіть інший час.",
     "working_hours": " Прийом замовлень з 08:00 до 21:00.",

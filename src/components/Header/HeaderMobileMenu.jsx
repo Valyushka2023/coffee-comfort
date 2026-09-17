@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import css from './HeaderMobileMenu.module.css';
 
-const HeaderMobileMenu = ({ isOpen, onClose, navItems, t }) => {
+// const HeaderMobileMenu = ({ isOpen, onClose, navItems, t }) => {
+//   const [isAnimated, setIsAnimated] = useState(false);
+
+const HeaderMobileMenu = ({ isOpen, onClose, navItems }) => {
+  // Підключаємо той самий простір назв 'header'
+  const { t } = useTranslation('header');
   const [isAnimated, setIsAnimated] = useState(false);
 
   useEffect(() => {
@@ -65,6 +71,18 @@ const HeaderMobileMenu = ({ isOpen, onClose, navItems, t }) => {
   );
 };
 
+// HeaderMobileMenu.propTypes = {
+//   isOpen: PropTypes.bool.isRequired,
+//   onClose: PropTypes.func.isRequired,
+//   navItems: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       href: PropTypes.string.isRequired,
+//       labelKey: PropTypes.string.isRequired,
+//       defaultLabel: PropTypes.string.isRequired,
+//     })
+//   ).isRequired,
+//   t: PropTypes.func.isRequired,
+// };
 HeaderMobileMenu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
@@ -75,7 +93,6 @@ HeaderMobileMenu.propTypes = {
       defaultLabel: PropTypes.string.isRequired,
     })
   ).isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 export default HeaderMobileMenu;

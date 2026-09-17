@@ -124,7 +124,7 @@ const Footer = ({ onOpenReview, onOpenCallback }) => {
       <div className={css['footer-bottom']}>
         <p className={css['copyright']}>
           © {currentYear}{' '}
-          {t('copyright', 'COFFEE-COMFORT. All rights reserved.')}
+          {t('copyright', 'Coffee-Comfort. All rights reserved.')}
         </p>
       </div>
     </footer>

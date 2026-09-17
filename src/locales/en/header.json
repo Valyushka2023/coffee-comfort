@@ -3,5 +3,7 @@
   "about": "About us",
   "gallery": "Gallery",
   "contacts": "Contacts",
-  "cta_booking": "Book a table"
+  "cta_booking": "Book a table",
+  "lang_en": "EN",
+  "lang_uk": "UK"
 }

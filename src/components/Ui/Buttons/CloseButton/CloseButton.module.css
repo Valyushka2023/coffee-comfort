@@ -26,12 +26,12 @@
 
 @media (max-width: 74.9375rem) {
   .base-close-button {
-    font-size: var(--close-btn-size-tablet, 1.5rem);
+    font-size: var(--close-btn-size-tablet);
   }
 }
 
 @media (max-width: 47.9375rem) {
   .base-close-button {
-    font-size: var(--close-btn-size-mobile, 1.2rem);
+    font-size: var(--close-btn-size-mobile);
   }
 }

@@ -18,7 +18,7 @@ import galleryEN from '../locales/en/gallery.json';
 import reviewsEN from '../locales/en/reviews.json';
 import footerEN from '../locales/en/footer.json';
 import fullScreenImageModalEN from '../locales/en/full_screen_image_modal.json';
-import callbackModalEN from '../locales/en/callback_modal.json';
+import callbackEN from '../locales/en/callback.json';
 import validationEN from '../locales/en/validation.json';
 import errorComponentEN from '../locales/en/error_component.json';
 
@@ -38,7 +38,7 @@ import galleryUK from '../locales/uk/gallery.json';
 import reviewsUK from '../locales/uk/reviews.json';
 import footerUK from '../locales/uk/footer.json';
 import fullScreenImageModalUK from '../locales/uk/full_screen_image_modal.json';
-import callbackModalUK from '../locales/uk/callback_modal.json';
+import callbackUK from '../locales/uk/callback.json';
 import validationUK from '../locales/uk/validation.json';
 import errorComponentUK from '../locales/uk/error_component.json';
 
@@ -59,7 +59,7 @@ const resources = {
     reviews: reviewsEN,
     footer: footerEN,
     full_screen_image_modal: fullScreenImageModalEN,
-    callback_modal: callbackModalEN,
+    callback: callbackEN,
     validation: validationEN,
     error_component: errorComponentEN,
   },
@@ -79,7 +79,7 @@ const resources = {
     reviews: reviewsUK,
     footer: footerUK,
     full_screen_image_modal: fullScreenImageModalUK,
-    callback_modal: callbackModalUK,
+    callback: callbackUK,
     validation: validationUK,
     error_component: errorComponentUK,
   },

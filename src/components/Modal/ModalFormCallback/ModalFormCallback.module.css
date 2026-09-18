@@ -1,20 +1,9 @@
-.success-modal {
+.success-content-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
-  /* Геометрія та адаптивність */
-  width: calc(100% - 2rem);
-  max-width: 26.25rem;
-  margin: 0 auto;
-  padding: 2.5rem 1.25rem 2rem;
-  box-sizing: border-box;
-
-  /* Оформлення картки */
-  background-color: var(--bg-block-primary);
-  border: 0.0625rem solid var(--border-block);
-  border-radius: 1.25rem;
+  width: 100%;
+  padding: 1rem 0 0;
   text-align: center;
 }
 
@@ -37,7 +26,6 @@
   margin-bottom: 0.75rem;
   font-size: 1.8rem;
   font-weight: 700;
-  text-align: center;
   color: var(--text-block-primary);
 }
 
@@ -47,7 +35,6 @@
   margin: 0 auto 2rem;
   font-size: 1.1rem;
   line-height: 1.6;
-  text-align: center;
   color: var(--text-block-primary);
 }
 
@@ -55,5 +42,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Розтягуємо контейнер на всю ширину для центрування кнопки */
+  width: 100%;
 }

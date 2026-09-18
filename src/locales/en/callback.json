@@ -1,0 +1,14 @@
+{
+  "callback_form_modal": {
+    "title": "Order a call",
+    "name_placeholder": "Your name (2-20 characters)",
+    "phone_placeholder": "+380XXXXXXXXX",
+    "submit_btn": "ORDER",
+    "processing": "PROCESSING..."
+  },
+  "callback_success_modal": {
+    "success_title": "Thank you!",
+    "success_message": " We will call you back shortly.",
+    "back_button": "Understood!"
+  }
+}

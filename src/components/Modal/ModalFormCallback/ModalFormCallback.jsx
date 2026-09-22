@@ -27,8 +27,7 @@ const ModalFormCallback = ({ isOpen, onClose, onSuccess, className }) => {
     <BaseModal
       isOpen={isOpen}
       onClose={handleCloseModal}
-      // Якщо це стан успіху, ховаємо стандартний заголовок BaseModal,
-      // оскільки ми намалюємо його всередині разом з іконкою
+      showCloseButton={!isSuccess} // <-- Хрестик є для форми, але зникає на екрані успіху
       title={isSuccess ? '' : t('callback_form_modal.title')}
       className={clsx(css['form-callback-modal'], className)}
     >
@@ -47,7 +46,7 @@ const ModalFormCallback = ({ isOpen, onClose, onSuccess, className }) => {
               onClick={handleCloseModal}
               isFixedWidth={true}
             >
-              {t('callback_success_modal.back_button')}
+              {t('callback_success_modal.back_button', 'Understood!')}
             </Button>
           </div>
         </div>

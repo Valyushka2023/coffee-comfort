@@ -142,17 +142,31 @@
 }
 
 /* Рух стрілки */
+
+/* @keyframes arrow-move {
+  from {
+    
+    transform: translateY(var(--arrow-offset, -1rem));
+    opacity: 0;
+
+    to {
+     
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+} */
 @keyframes arrow-move {
   from {
     /* Початкова точка зверху */
     transform: translateY(var(--arrow-offset, -1rem));
     opacity: 0;
+  }
 
-    to {
-      /* Кінцева точка на місці */
-      transform: translateY(0);
-      opacity: 1;
-    }
+  /* Кінцева точка на місці */
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 

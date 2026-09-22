@@ -1,0 +1,70 @@
+@import url('../../../styles/animate.css');
+
+.items-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid var(--sidebar-divider);
+}
+
+.item-image {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.item-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--sidebar-fg);
+}
+
+.item-price {
+  margin: 0.25rem 0;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--sidebar-fg);
+}
+
+.count-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: transparent;
+  border: 0.0625rem solid var(--sidebar-border);
+  border-radius: var(--radius-sm);
+  color: var(--sidebar-ic);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.count-btn:hover {
+  background-color: var(--sidebar-hover-bg);
+}

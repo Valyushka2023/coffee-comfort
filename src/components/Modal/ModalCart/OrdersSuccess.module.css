@@ -1,0 +1,68 @@
+@import url('../../../styles/animate.css');
+
+.success-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.success-icon {
+  color: var(--status-success);
+}
+
+.success-title {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  color: var(--sidebar-fg);
+}
+
+.order-number-badge {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--sidebar-bg);
+  border-radius: var(--radius-sm);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.pickup-time-info {
+  margin-bottom: 1rem;
+}
+
+.pickup-time-text {
+  font-size: 1.2rem;
+}
+
+.pickup-time-value {
+  font-size: 1.2rem;
+}
+
+.warning-text {
+  margin-bottom: 1rem;
+}
+
+.order-btn {
+  cursor: pointer;
+  width: 100%;
+  min-height: var(--btn-height);
+  background-color: var(--sidebar-btn-bg);
+  border: none;
+  border-radius: var(--btn-radius);
+  font-family: var(--btn-font-family);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  color: var(--sidebar-btn-fg);
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.order-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

@@ -5,22 +5,32 @@ export const generateAvailableSlots = (
   const slots = [];
   const now = new Date();
 
-  // Додаємо 10 хвилин до поточного часу для першого доступного слота
   const currentRunner = new Date(now.getTime() + 10 * 60 * 1000);
 
-  // Формуємо робочий час з 08:00 до 21:00
+  // Округлення
+  const remainder = currentRunner.getMinutes() % interval;
+  if (remainder !== 0) {
+    currentRunner.setMinutes(
+      currentRunner.getMinutes() + (interval - remainder)
+    );
+  }
+  currentRunner.setSeconds(0);
+  currentRunner.setMilliseconds(0);
+
   const openTime = new Date(now);
   openTime.setHours(8, 0, 0, 0);
 
+  const ORDER_LIFETIME_BUFFER = 20; // хвилин на видачу
   const closeTime = new Date(now);
   closeTime.setHours(21, 0, 0, 0);
+  closeTime.setMinutes(closeTime.getMinutes() - ORDER_LIFETIME_BUFFER);
+  // ----------------------
 
-  // Якщо поточний час раніше за відкриття — починаємо з 08:00
   if (currentRunner < openTime) {
     currentRunner.setTime(openTime.getTime());
   }
 
-  while (currentRunner < closeTime) {
+  while (currentRunner <= closeTime) {
     const hours = String(currentRunner.getHours()).padStart(2, '0');
     const minutes = String(currentRunner.getMinutes()).padStart(2, '0');
     const timeString = `${hours}:${minutes}`;

@@ -255,7 +255,6 @@
   transform: rotate(-45deg);
 }
 
-/* --- АДАПТИВНІ СТИЛІ --- */
 @media (max-width: 74.9375rem) {
   .reviews-section {
     padding: 4rem 1.5rem;

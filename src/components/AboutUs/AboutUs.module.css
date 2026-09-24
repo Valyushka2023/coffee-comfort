@@ -20,8 +20,6 @@
   gap: var(--gap-xl);
   width: 100%;
   max-width: 75rem;
-
-  /* padding-inline: 0; */
   padding: 0 1rem;
   margin-inline: auto;
 }
@@ -233,10 +231,6 @@
   opacity: 1;
 }
 
-/* ==========================================================================
-   АДАПТИВНІ СТИЛІ ТА ХОВЕРИ
-   ========================================================================== */
-
 @media (max-width: 74.9375rem) {
   .about-card {
     flex-direction: column;
@@ -304,20 +298,10 @@
 }
 
 @media (max-width: 47.9375rem) {
-  /* .about-section {
-    margin: 0;
-    padding: 0;
-  } */
-
   .about-container {
     margin: 0;
     padding: 0;
   }
-
-  /* .about-text-block {
-    margin: 0;
-    padding: 0;
-  } */
 
   .about-history {
     width: 100%;

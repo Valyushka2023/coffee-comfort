@@ -140,8 +140,6 @@ const CardOrderBarista = ({
             })}
           </ul>
         </section>
-        {/* 
-        <hr className={css['separator']} /> */}
 
         {/* Підблок суми замовлення */}
         <div className={css['total-price-block']}>

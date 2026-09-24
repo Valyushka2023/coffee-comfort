@@ -1,0 +1,6 @@
+.form-review-modal {
+  width: 100%;
+  max-width: 31.25rem; /* Обмежуємо максимальну ширину вікна */
+  padding: 1.5rem; /* Внутрішні відступи */
+  border-radius: 0.75rem;
+}

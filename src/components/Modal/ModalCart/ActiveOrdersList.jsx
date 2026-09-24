@@ -20,26 +20,26 @@ const ActiveOrdersList = ({ activeOrders, currentLang }) => {
             key={order.id || order.number}
             className={css['active-order-item']}
           >
-            {/* <div className={css['active-order-header']}> */}
-            <div className={css['active-order-info-block']}>
-              <div className={css['active-order-top-row']}>
-                <span className={css['active-order-number']}>
-                  {t('title', 'Замовлення')}{' '}
-                  <strong className={css['order-value']}>
-                    {'# '}
-                    {order.number}
-                  </strong>
-                </span>
-                <span className={css['active-order-time']}>{order.time}</span>
-              </div>
+            <div className={css['active-order-header']}>
+              <div className={css['active-order-info-block']}>
+                <div className={css['active-order-top-row']}>
+                  <span className={css['active-order-number']}>
+                    {t('title', 'Замовлення')}{' '}
+                    <strong className={css['order-value']}>
+                      {'# '}
+                      {order.number}
+                    </strong>
+                  </span>
+                  <span className={css['active-order-time']}>{order.time}</span>
+                </div>
 
-              {order.customerName && (
-                <span className={css['active-order-customer']}>
-                  {order.customerName}
-                </span>
-              )}
+                {order.customerName && (
+                  <span className={css['active-order-customer']}>
+                    {order.customerName}
+                  </span>
+                )}
+              </div>
             </div>
-            {/* </div> */}
             <ul className={css['active-order-subitems']}>
               {order.items.map((item, idx) => {
                 const itemTitle =

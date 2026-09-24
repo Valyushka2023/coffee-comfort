@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux';
 import { FiShoppingCart } from 'react-icons/fi';
+import PropTypes from 'prop-types';
 import css from './CartIcon.module.css';
 
-// eslint-disable-next-line react/prop-types
 const CartIcon = ({ onClick }) => {
-  const items = useSelector(state => state.cart.items); // Додано дужки (state)
+  const items = useSelector(state => state.cart.items);
   console.log('Products in Redux', items);
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <button
-      type="button" // Тепер це правильний семантичний елемент
+      type="button"
       className={css['btn-cart-icon']}
       onClick={() => {
         console.log('Click on the basket icon');
@@ -24,4 +24,7 @@ const CartIcon = ({ onClick }) => {
   );
 };
 
+CartIcon.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 export default CartIcon;

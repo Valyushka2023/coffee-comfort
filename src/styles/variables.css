@@ -298,50 +298,6 @@
   --color-placeholder-primary: rgb(var(--white-channels) / 80%);
   --color-placeholder-secondary: rgb(var(--brown-channels) / 80%);
 
-  /* --- Специфічний компонент секцій: Картки відгуків (Reviews) --- */
-
-  /* --text-atmosphere: rgb(var(--latte-channels)); */
-
-  /* --shadow-card-reviews: rgb(
-    var(--black-channels) / 20%
-  );  */
-
-  /* --- Специфічний компонент секцій: Форми (Booking / Contacts) --- */
-
-  /* --text-form-label: var(--text-block-dark); */
-
-  /* --text-form-booking: var(--text-block-dark); */
-
-  /* --text-form-input: var(--text-block-dark); */
-
-  /* --border-form-input: var(--bg-block); */
-
-  /* --color-placeholder-booking: var(--color-placeholder); */
-
-  /* --shadow-form-map: rgb(var(--black-channels) / 50%); */
-
-  /* --------------------------------------------------------------------------
-     2.4. МОДАЛЬНІ ВІКНА ТА ОВЕРЛЕЇ (Modals & Overlays)
-     -------------------------------------------------------------------------- */
-
-  /* --modal-bg: rgb(var(--light-beige-channels)); */
-
-  /* --modal-text-input: var(--text-block-dark); */
-
-  /* --modal-text-atmosphere: var(--text-block); */
-
-  /* --modal-icon-close: rgb(var(--white-channels)); */
-
-  /* --modal-icon-close-hover: rgb(var(--latte-channels)); */
-
-  /* --modal-shadow: rgb(var(--white-channels) / 20%); */
-
-  /* --mobile-menu-text: rgb(var(--light-brown-channels)); */
-
-  /* --------------------------------------------------------------------------
-     2.5. ГЛОБАЛЬНІ КНОПКИ ТА КОНТРОЛИ (Універсальні елементи UI)
-     -------------------------------------------------------------------------- */
-
   /* ==========================================================================
    2.4. КНОПКИ ТА ІНТЕРАКТИВНІ ЕЛЕМЕНТИ (Buttons & Controls)
    ========================================================================== */
@@ -351,66 +307,20 @@
   --btn-cta-fg: rgb(var(--dark-brown1-channels));
   --btn-cta-ic: rgb(var(--white-channels));
 
-  /* --- Специфічні кнопки (Кошик, Форми, Google, Фільтри тощо) --- */
-
-  /* --btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
-
-  /* --btn-cart-icon-color: rgb(var(--dark-brown1-channels)); */
-
-  /* --badge-cart-icon-bg: rgb(var(--accent-bright-channels)); */
-
-  /* --btn-form-bg: rgb(var(--latte-channels)); */
-
-  /* --btn-form-color: rgb(var(--brown-channels)); */
-
-  /* --btn-google-bg: rgb(var(--light-brown-channels)); */
-
-  /* --btn-google-color: rgb(var(--beige-channels)); */
-
-  /* --btn-filter-bg: rgb(var(--latte-channels)); */
-
-  /* --btn-filter-color: rgb(var(--light-brown-channels)); */
-
-  /* --btn-review-menu-bg: rgb(var(--latte-channels)); */
-
-  /* --btn-review-color: rgb(var(--brown-channels)); */
-
-  /* --btn-up-bg: rgb(var(--latte-channels)); */
-
-  /* --btn-up-color: rgb(var(--light-brown-channels)); */
-
   /* Зміни ховерів та станів */
   --hover-btn-bg: rgb(var(--light-brown-channels));
   --hover-btn-fg: rgb(var(--white-channels));
   --btn-close-hover: rgb(var(--latte-channels));
 
-  /* --btn-close-active: rgb(var(--latte-channels)); */
-
-  /* --hover-input-area-bg: rgb(var(--white-channels)); */
-
-  /* --hover-btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
-
-  /* --hover-export-btn-bg: rgb(var(--accent-bright-channels)); */
-
-  /* --state-active-global: rgb(var(--latte-channels)); */
-
   /* --- Межі, контури та тіні кнопок --- */
   --border-btn: rgb(var(--white-channels));
   --shadow-btn: rgb(var(--black-channels) / 50%);
-
-  /* --border-divider: rgb(var(--black-channels) / 20%); */
-
-  /* --border-accent-element: var(--accent-primary); */
 
   /* ==========================================================================
    2.5. ДЕКОРАТИВНІ ЕЛЕМЕНТИ, ІКОНКИ ТА БЕЙДЖІ (Icons, Badges & Avatars)
    ========================================================================== */
 
   /* --- Іконки та кругові контейнери --- */
-
-  /* --icon-map: var(--status-error); */
-
-  /* --icon-clock: rgb(var(--ochre-channels)); */
 
   --icon-circle-bg: rgb(var(--light-brown-channels));
   --icon-circle-color: rgb(var(--white-channels));
@@ -420,10 +330,6 @@
   --avatar-color: rgb(var(--dark-brown-channels));
   --label-circle-bg: rgb(var(--gold-channels));
   --label-circle-color: rgb(var(--white-channels));
-
-  /* --badge-top-bg: rgb(var(--latte-channels)); */
-
-  /* --badge-top-color: rgb(var(--light-brown-channels)); */
 
   /* --- Кругові межі (Borders) --- */
   --border-circle-big: rgb(var(--white-channels));
@@ -517,46 +423,7 @@
     --color-placeholder-primary: rgb(var(--dark-brown1-channels) / 80%);
     --color-placeholder-secondary: rgb(var(--beige-channels) / 80%);
 
-    /* Компонент: Картки відгуків у темній темі (інверсія) */
-
-    /* --bg-card-reviews: rgb(var(--latte-channels));
-    --text-card-reviews: rgb(var(--dark-brown1-channels)); */
-
-    /* --text-atmosphere: rgb(var(--white-channels)); */
-
-    /* --shadow-card-reviews: rgb(var(--white-channels) / 20%); */
-
-    /* --color-placeholder-review: rgb(var(--light-gray-channels) / 50%); */
-
-    /* Компонент: Форми у темній темі */
-
-    /* --bg-form-contact: rgb(var(--latte-channels)); */
-
-    /* --text-form-label: rgb(var(--white-channels)); */
-
-    /* --text-form-booking: rgb(var(--white-channels)); */
-
-    /* --text-form-input: rgb(var(--white-channels)); */
-
-    /* --color-placeholder-booking: rgb(var(--light-brown-channels) / 80%); */
-
-    /* --shadow-form-map: rgb(var(--white-channels) / 50%); */
-
     /* --- 2.4. МОДАЛЬНІ ВІКНА ТА ОВЕРЛЕЇ (Темна тема) --- */
-
-    /* --modal-bg: rgb(var(--dark-brown-channels)); */
-
-    /* --modal-text-input: rgb(var(--white-channels)); */
-
-    /* --modal-text-atmosphere: rgb(var(--light-brown-channels)); */
-
-    /* --modal-icon-close: rgb(var(--brown-channels)); */
-
-    /* --modal-icon-close-hover: rgb(var(--white-channels)); */
-
-    /* --modal-shadow: rgb(var(--white-channels) / 20%); */
-
-    /* --mobile-menu-text: rgb(var(--white-channels)); */
 
     /* --- 2.5. ГЛОБАЛЬНІ КНОПКИ ТА КОНТРОЛИ (Темна тема) --- */
 
@@ -565,48 +432,17 @@
     --btn-cta-fg: rgb(var(--beige-channels));
     --btn-cta-ic: rgb(var(--dark-brown1-channels));
 
-    /*  Інші кнопки */
-
-    /* --btn-cart-icon-bg: rgb(var(--accent-bright-channels)); */
-
-    /* --btn-cart-icon-color: rgb(var(--beige-channels)); */
-
-    /* --btn-form-bg: rgb(var(--light-brown-channels)); */
-
-    /* --btn-form-color: rgb(var(--white-channels)); */
-
-    /* --btn-google-bg: rgb(var(--latte-channels)); */
-
-    /* --btn-google-color: rgb(var(--brown-channels)); */
-
-    /* --btn-filter-bg: rgb(var(--light-brown-channels)); */
-
-    /* --btn-filter-color: rgb(var(--beige-channels)); */
-
-    /* --btn-review-menu-bg: rgb(var(--light-brown-channels)); */
-
-    /* --btn-review-color: rgb(var(--white-channels)); */
-
-    /* --btn-contact-submit-bg: rgb(var(--light-brown-channels)); */
-
     /* Зміни ховерів та станів */
     --hover-btn-bg: rgb(var(--latte-channels));
     --hover-btn-fg: rgb(var(--dark-brown-channels));
     --btn-close-hover: rgb(var(--beige-channels));
 
-    /* Межі та Тіні кнопок/контролів */
-
-    /* --border-divider: rgb(var(--white-channels) / 20%); */
-
     /* --- Межі, контури та тіні кнопок --- */
     --border-btn: rgb(var(--black-channels));
     --shadow-btn: rgb(var(--white-channels) / 80%);
 
-    /* --btn-close-active: rgb(var(--latte-channels)); */
-
     /* Глобальні іконки та ефекти свічення */
 
-    /* --icon-clock: rgb(var(--pure-gold-channels)); */
     --icon-circle-bg: rgb(var(--gold-channels));
     --icon-circle-color: rgb(var(--dark-brown-channels));
 

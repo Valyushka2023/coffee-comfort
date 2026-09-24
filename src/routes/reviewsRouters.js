@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', getReviews);
 
 // POST http://localhost:5001/api/reviews
-// ВИПРАВЛЕНО: прибрано зайвий префікс /reviews
+
 router.post('/', addReview);
 
 export default router;

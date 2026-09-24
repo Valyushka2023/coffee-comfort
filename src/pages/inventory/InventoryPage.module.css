@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Вирівнювання за верхнім краєм */
+  justify-content: flex-start;
   align-items: center;
   max-width: 50rem;
   min-height: 100vh;
@@ -231,29 +231,15 @@
   border-bottom: 0.0625rem solid var(--color-light-beige);
 }
 
-/* .inventory-table tbody tr:nth-child(even) {
-  background-color: var(--color-beige);
-} */
-
 /* Рядки парних порядкових номерів (2, 4, 6...) */
 .inventory-table tbody tr:nth-child(even) {
-  /* Задаємо легкий напівпрозорий темний колір (або трохи темніший бежевий) */
   background-color: var(--admin-bg-block);
 }
-
-/* Ефект при наведенні мишкою (hover) для зручності читання */
-
-/* .inventory-table tbody tr:hover {
-  background-color: rgb(0 0 0 / 6%);
-  transition: background-color 0.15s ease;
-} */
 
 /* 1. Товар: 40% (зліва) */
 .inventory-table th:nth-child(1) {
   width: 34%;
   padding-left: 2.6rem;
-
-  /* text-align: left; */
   text-align: start;
 }
 
@@ -280,7 +266,7 @@
 .inventory-table td:nth-child(3) {
   width: 33%;
   padding-right: 0.5rem;
-  text-align: right; /* Самі кнопки залишаємо вирівняними по правому краю */
+  text-align: right;
 }
 
 .product-name {
@@ -295,30 +281,10 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Центрування кнопок всередині чарунки дій */
-
-/* .actions-cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-} */
 .actions-cell {
   text-align: right;
 }
 
-/* Кнопки дій */
-
-/* .btn-plus,
-.btn-minus {
-  cursor: pointer;
-  padding: 0.375rem 0.75rem;
-  border: 0.125rem solid var(--border-accent);
-  border-radius: 0.25rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.1s ease;
-} */
 .btn-plus,
 .btn-minus {
   display: inline-flex;
@@ -375,7 +341,6 @@
   color: var(--error-color);
 }
 
-/* АДАПТИВНІСТЬ */
 @media (max-width: 47.9375rem) {
   .container {
     margin: 0.625rem;

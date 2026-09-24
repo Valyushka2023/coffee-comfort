@@ -20,8 +20,7 @@
   align-items: center;
   gap: var(--gap-xs);
   margin-bottom: 2rem;
-  padding-top: 1rem
-    /* border-bottom: 0.0625rem solid rgb(var(--black-channels) / 10%); */;
+  padding-top: 1rem;
   padding-bottom: 1rem;
   border-bottom: 0.0625rem solid var(--admin-border-color);
   flex-wrap: wrap;
@@ -44,8 +43,6 @@
   justify-content: center;
   align-items: center;
   gap: var(--gap-md);
-
-  /* gap: 2rem; */
   flex-wrap: wrap;
 }
 
@@ -124,8 +121,6 @@
 
 .finance-badge {
   padding: 0.625rem 1.25rem;
-
-  /* background-color: transparent; */
   background-color: var(--admin-bg-block);
   border-radius: var(--radius-md);
   font-size: 0.9rem;
@@ -162,20 +157,18 @@
 
 /* Колір для слова "ВСЬОГО:" */
 .badge-label {
-  color: var(--admin-fg-page); /* Наприклад, темний/основний колір */
+  color: var(--admin-fg-page);
 }
 
 /* Колір для числа РАЗОМ із "ГРН" */
 .badge-amount {
-  color: var(--accent-primary); /* Акцентний колір для всієї суми */
+  color: var(--accent-primary);
 }
 
 /* Кнопка експорту */
 .export-btn {
   cursor: pointer;
   padding: 0.695rem 2rem;
-
-  /* background-color: transparent;  */
   background-color: var(--admin-bg-block);
   border: 0.125rem solid var(--admin-border-color);
   border-radius: var(--radius-md);
@@ -217,7 +210,6 @@
 
 :global(.dark) .stats-table th,
 :global(.dark) .table th {
-  /* border-bottom-color: rgb(var(--white-channels) / 10%);  */
   border-bottom: 0.125rem solid var(--admin-border-color);
   color: rgb(var(--white-channels) / 60%);
 }
@@ -293,7 +285,6 @@
   transform: scale(0.98);
 }
 
-/* АДАПТИВНІСТЬ */
 @media (max-width: 47.9375rem) {
   .container {
     padding: var(--padding-xs);

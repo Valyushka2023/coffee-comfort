@@ -170,15 +170,6 @@ export const deleteOrderRequest = async orderId => {
 // HISTORY
 // ======================
 
-// export const fetchOrderHistoryRequest = async () => {
-//   try {
-//     const { data } = await api.get(ENDPOINTS.HISTORY);
-
-//     return data;
-//   } catch (error) {
-//     handleError(error, 'Error loading order history');
-//   }
-// };
 export const fetchOrderHistoryRequest = async (startDate, endDate) => {
   try {
     console.log('SEND TO HISTORY');
@@ -209,17 +200,6 @@ export const fetchBaristaDashboardRequest = async () => {
 // ANALYTICS (STATS)
 // ======================
 
-// export const fetchOrderStatsRequest = async date => {
-//   try {
-//     const { data } = await api.get(ENDPOINTS.STATS, {
-//       params: { date },
-//     });
-
-//     return data;
-//   } catch (error) {
-//     handleError(error, 'Error loading analytics data');
-//   }
-// };
 export const fetchOrderStatsRequest = async (startDate, endDate) => {
   try {
     console.log('SEND TO STATS');

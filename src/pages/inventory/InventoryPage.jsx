@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import api from '../../services/api.js';
 import * as XLSX from 'xlsx';
 import Loader from '../../components/Ui/Loader/Loader.jsx';
@@ -113,7 +114,6 @@ const InventoryPage = () => {
       t('excel.sheet_inventory', 'Inventory')
     );
 
-    // XLSX.writeFile(workbook, `Coffee_Comfort_Inventory_${selectedDate}.xlsx`);
     XLSX.writeFile(workbook, `Інвентаризація_Кав_ярні_${selectedDate}.xlsx`);
   };
 
@@ -145,7 +145,6 @@ const InventoryPage = () => {
                 type="button"
                 className={css['clear-search']}
                 onClick={() => setSearchQuery('')}
-                // title={t('clear_search', 'Clear search')}
               >
                 ✕
               </button>
@@ -237,6 +236,10 @@ const InventoryPage = () => {
       )}
     </div>
   );
+};
+
+InventoryPage.propTypes = {
+  className: PropTypes.string,
 };
 
 export default InventoryPage;

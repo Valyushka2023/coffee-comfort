@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import css from './CardMenu.module.css';
 
 const CardMenu = ({ item, formatPrice, onOpenModal }) => {
-  // const { i18n } = useTranslation('card_menu');
   const { t, i18n } = useTranslation('card_menu');
 
   const name = item.name?.[i18n.language] || item.name?.uk || item.key;
@@ -22,7 +21,7 @@ const CardMenu = ({ item, formatPrice, onOpenModal }) => {
     <div
       className={css['menu-card']}
       onClick={onOpenModal}
-      onKeyDown={handleKeyDown} // Додаємо цей рядок
+      onKeyDown={handleKeyDown}
       role="button"
       tabIndex="0"
       aria-label={t('view_details', { defaultValue: 'View details' })} // Покращуємо доступність

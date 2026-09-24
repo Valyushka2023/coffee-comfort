@@ -16,8 +16,8 @@ const menuSchema = new mongoose.Schema(
       en: { type: String, default: '' },
     },
     price: { type: Number, required: true },
-    categoryKey: { type: String, required: true }, // 'categoryKey' замість 'category'
-    img: { type: String }, // 'img' замість 'image'
+    categoryKey: { type: String, required: true },
+    img: { type: String },
     top: { type: Boolean, default: false },
   },
   { collection: 'menu' }

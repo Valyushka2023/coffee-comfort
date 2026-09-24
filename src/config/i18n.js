@@ -12,7 +12,7 @@ import cartModalEN from '../locales/en/cart_modal.json';
 import orderHistoryEN from '../locales/en/order_history.json';
 import baristadashboardEN from '../locales/en/baristadashboard.json';
 import inventoryEN from '../locales/en/inventory.json';
-// import cardMenuEN from '../locales/en/card_menu.json';
+
 import contactsEN from '../locales/en/contacts.json';
 import galleryEN from '../locales/en/gallery.json';
 import reviewsEN from '../locales/en/reviews.json';
@@ -32,7 +32,7 @@ import cartModalUK from '../locales/uk/cart_modal.json';
 import orderHistoryUK from '../locales/uk/order_history.json';
 import baristadashboardUK from '../locales/uk/baristadashboard.json';
 import inventoryUK from '../locales/uk/inventory.json';
-// import cardMenuUK from '../locales/uk/card_menu.json';
+
 import contactsUK from '../locales/uk/contacts.json';
 import galleryUK from '../locales/uk/gallery.json';
 import reviewsUK from '../locales/uk/reviews.json';

@@ -39,10 +39,6 @@
   border-radius: var(--radius-sm);
 }
 
-/* .active-order-header {
-  font-size: 1rem;
-} */
-
 .active-order-info-block {
   display: flex;
   flex-direction: column;

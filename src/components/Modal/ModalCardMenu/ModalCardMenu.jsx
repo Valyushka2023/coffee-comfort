@@ -59,15 +59,6 @@ const ModalCardMenu = ({ item, onClose, formatPrice }) => {
         onClick={e => e.stopPropagation()}
         style={{ display: isImageLoaded ? 'flex' : 'none' }}
       >
-        {/* <button
-          className={css['close-icon']}
-          onClick={onClose}
-          type="button"
-          aria-label="Close"
-        >
-          &times;
-        </button> */}
-
         <div className={css['modal-body']}>
           {/* Прихована картинка, яка тригерить стейт при повній готовності */}
           <img

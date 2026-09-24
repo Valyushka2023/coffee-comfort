@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import {
   fetchOrderHistoryRequest,
   fetchOrderStatsRequest,
@@ -18,6 +19,7 @@ const OrderHistoryPage = () => {
   const [cardRevenue, setCardRevenue] = useState(0);
   const [loading, setLoading] = useState(true);
   const [visibleChecksCount, setVisibleChecksCount] = useState(10);
+  const [visibleCancelledCount, setVisibleCancelledCount] = useState(5);
 
   const [startDate, setStartDate] = useState(
     new Date().toISOString().split('T')[0]
@@ -50,6 +52,7 @@ const OrderHistoryPage = () => {
         }
 
         setVisibleChecksCount(10);
+        setVisibleCancelledCount(5);
       } catch (error) {
         console.error('❌ Помилка завантаження даних:', error);
       } finally {
@@ -99,7 +102,6 @@ const OrderHistoryPage = () => {
         ? formattedStartDate
         : `${formattedStartDate} — ${formattedEndDate}`;
 
-    // ВИПРАВЛЕНО: Використовуємо ключ 'analytics_period' з доданим українським фолбеком 'Період:'
     const getHeaderInfo = sheetTitle => [
       [sheetTitle],
       [`${t('analytics_period', 'Період:')} ${periodString}`],
@@ -107,16 +109,20 @@ const OrderHistoryPage = () => {
       [],
     ];
 
-    // --- АРКУШ 1: ІСТОРІЯ ЧЕКІВ ---
+    // --- АРКУШ 1: ІСТОРІЯ ЧЕКІВ (Тільки активні/успішні) ---
     const historySheetTitle = t('excel.sheet-check-history', 'Історія чеків');
     const historyHeader = getHeaderInfo(historySheetTitle);
     const historySheet = XLSX.utils.aoa_to_sheet(historyHeader);
 
-    const historyFilteredByDate = history.filter(order => {
-      return isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt));
+    const activeOrders = history.filter(order => {
+      const isCancelled = order.status === 'cancelled' || order.isCancelled;
+      return (
+        !isCancelled &&
+        isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt))
+      );
     });
 
-    const historyData = historyFilteredByDate.map(order => {
+    const historyData = activeOrders.map(order => {
       let paymentStatusText = t('debt', 'Борг');
       if (order.isPaid) {
         paymentStatusText =
@@ -154,7 +160,6 @@ const OrderHistoryPage = () => {
     XLSX.utils.book_append_sheet(workbook, historySheet, historySheetTitle);
 
     // --- АРКУШ 2: ПІДСУМОК ЗА ПЕРІОД ---
-    // ВИПРАВЛЕНО: Замінено 'excel.sheet_day_summary' на 'excel.sheet_period_summary'
     const statsSheetTitle = t(
       'excel.sheet_period_summary',
       'Підсумок за період'
@@ -193,7 +198,6 @@ const OrderHistoryPage = () => {
       [t('excel.total_amount', 'Загальна сума')]:
         `${cardRevenue} ${t('currency', 'грн')}`,
     });
-
     statsData.push({
       [t('excel.dish_name', 'Назва страви')]:
         `🔥 ${t('excel.total_period_day', 'Разом за період')}:`,
@@ -224,6 +228,23 @@ const OrderHistoryPage = () => {
     startDate === endDate
       ? formattedStartDate
       : `${formattedStartDate} — ${formattedEndDate}`;
+
+  // Фільтрація списків за датою та статусом
+  const filteredActiveOrders = history.filter(order => {
+    const isCancelled = order.status === 'cancelled' || order.isCancelled;
+    return (
+      !isCancelled &&
+      isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt))
+    );
+  });
+
+  const filteredCancelledOrders = history.filter(order => {
+    const isCancelled = order.status === 'cancelled' || order.isCancelled;
+    return (
+      isCancelled &&
+      isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt))
+    );
+  });
 
   return (
     <div className={css['container']}>
@@ -313,7 +334,7 @@ const OrderHistoryPage = () => {
         </table>
       </section>
 
-      {/* ІСТОРІЯ ЧЕКІВ */}
+      {/* ІСТОРІЯ УСПІШНИХ ЧЕКІВ */}
       <section className={css['history-section']}>
         <div className={css['flex-header']}>
           <h2>📜 {t('latest_checks', 'Останні чеки')}</h2>
@@ -337,12 +358,8 @@ const OrderHistoryPage = () => {
             </tr>
           </thead>
           <tbody>
-            {history
-              .filter(order =>
-                isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt))
-              )
-              .slice(0, visibleChecksCount)
-              .map(order => (
+            {filteredActiveOrders.length > 0 ? (
+              filteredActiveOrders.slice(0, visibleChecksCount).map(order => (
                 <tr key={order._id}>
                   <td>{new Date(order.updatedAt).toLocaleString(localeStr)}</td>
                   <td>
@@ -371,13 +388,18 @@ const OrderHistoryPage = () => {
                     )}
                   </td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td colSpan={5}>
+                  {t('no_active_orders', 'Немає успішних замовлень')}
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
 
-        {history.filter(order =>
-          isOrderInSelectedRange(getOrderLocalDateString(order.updatedAt))
-        ).length > visibleChecksCount && (
+        {filteredActiveOrders.length > visibleChecksCount && (
           <div className={css['load-more-wrapper']}>
             <button
               type="button"
@@ -389,8 +411,94 @@ const OrderHistoryPage = () => {
           </div>
         )}
       </section>
+
+      {/* ОКРІМЕ СІРЕ СПОВІЩЕННЯ / ТАБЛИЦЯ ДЛЯ СКАСОВАНИХ ЗАМОВЛЕНЬ */}
+      {filteredCancelledOrders.length > 0 && (
+        <section
+          className={`${css['history-section']} ${css['cancelled-section']}`}
+        >
+          <div className={css['flex-header']}>
+            <h2>❌ {t('cancelled_checks', 'Скасовані замовлення')}</h2>
+          </div>
+
+          <table className={`${css['table']} ${css['cancelled-table-styles']}`}>
+            <thead>
+              <tr>
+                <th>{t('th_date', 'Дата')}</th>
+                <th>№</th>
+                <th>{t('th_dishes', 'Страви')}</th>
+                <th>{t('th_amount', 'Сума')}</th>
+                <th>{t('th_status', 'Статус')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredCancelledOrders
+                .slice(0, visibleCancelledCount)
+                .map(order => (
+                  <tr
+                    key={order._id}
+                    style={{
+                      opacity: 0.7,
+                      backgroundColor: 'rgba(240, 240, 240, 0.5)',
+                    }}
+                  >
+                    <td>
+                      {new Date(
+                        order.updatedAt || order.createdAt
+                      ).toLocaleString(localeStr)}
+                    </td>
+                    <td>
+                      #{order.orderNumber || order._id.slice(-4).toUpperCase()}
+                    </td>
+                    <td>
+                      {order.items.map((item, index) => (
+                        <div key={index}>
+                          {getDishName(item.name)} — {item.quantity}{' '}
+                          {t('pcs', 'шт')}.
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {order.totalPrice} {t('currency', 'грн')}
+                    </td>
+                    <td>
+                      <span
+                        style={{
+                          color: '#71717a',
+                          fontWeight: '600',
+                          backgroundColor: '#e4e4e7',
+                          padding: '4px 8px',
+                          borderRadius: '4px',
+                          fontSize: '0.85rem',
+                        }}
+                      >
+                        {t('status_cancelled', 'Скасовано')}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+
+          {filteredCancelledOrders.length > visibleCancelledCount && (
+            <div className={css['load-more-wrapper']}>
+              <button
+                type="button"
+                onClick={() => setVisibleCancelledCount(prev => prev + 5)}
+                className={css['load-more-btn']}
+              >
+                {t('show_more', 'Показати більше')}
+              </button>
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
+};
+
+OrderHistoryPage.propTypes = {
+  className: PropTypes.string,
 };
 
 export default OrderHistoryPage;
